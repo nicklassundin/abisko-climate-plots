@@ -1,0 +1,371 @@
+<!doctype html>
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/highcharts.js"></script>
+    <script src="regression.js"></script>
+    <script src="papaparse.min.js"></script>
+    <style type="text/css">
+        body {
+            text-align: center;
+        }
+
+        .figure {
+            min-width: 500px;
+            max-width: 800px;
+            height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="temperatureAverage" class="figure"></div>
+
+    <div id="temperatureDifference" class="figure"></div>
+
+    <div id="yearlyPrecipitation" class="figure"></div>
+
+    <div id="lakeIce" class="figure"></div>
+
+    <script type="text/javascript">
+        Papa.parse('http://127.0.0.1:8080/station.csv', {
+            header: true,
+            delimiter: ',',
+            download: true,
+            complete: function(results) {
+                console.log(results)
+            }
+        })
+
+        const rand = (min, max) => Math.random() * (max - min) + min;
+        const randVector = (length, min, max) => Array.apply(null, { length }).map(_ => rand(min, max));
+
+        let num = 100;
+        let year = 1910;
+        let years = [];
+        for (var i = 0; i < num; i++) {
+            years.push(year++);
+        }
+
+        let rising = 0;
+        const temperatures = randVector(num, -3, 2).map(T => {
+            rising += 0.02;
+            return T + rising;
+        });
+
+        const precipitation = randVector(num, 300, 350).map(mm => {
+            rising += 1;
+            const total = mm + rising;
+            const fractionSnow = rand(0.25, 0.30);
+            return {
+                total,
+                snow: fractionSnow * total,
+                rain: (1 - fractionSnow) * total,
+            };
+        });
+
+        /** START **/
+        var sum = function (values) {
+            return values.reduce(function (sum, current) {
+                return sum + current;
+            }, 0);
+        }
+
+        var average = function (values) {
+            if (values.length === 0) return 0;
+            return sum(values) / values.length;
+        };
+
+        var movingAverage = function (values, index, number) {
+            var startIndex = Math.max(index - number, 0);
+            return average(values.slice(startIndex, index));
+        };
+
+        var movingAverages = function (values, number) {
+            return values.map(function (_, index) {
+                return movingAverage(values, index, number);
+            });
+        };
+
+        var difference = function (values, baseline) {
+            return values.map(function (value) {
+                return value - baseline;
+            });
+        };
+
+        var combine = function (xs, ys) {
+            return xs.map(function (x, index) {
+                return {
+                    x: x,
+                    y: ys[index],
+                };
+            });
+        };
+
+        var linearRegression = function (xs, ys) {
+            var data = xs.map(function (x, index) {
+                return [x, ys[index]];
+            });
+
+            var result = regression.linear(data);
+            var gradient = result.equation[0];
+            var intercept = result.equation[1];
+            var linear = function (x) {
+                return gradient * x + intercept;
+            };
+            linear.toString = function() {
+                return gradient + ' x ' + (intercept >= 0 ? '+' : '-') + Math.abs(intercept);
+            }
+            return linear;
+        };
+
+        function totalPrecipitation(precipitation) {
+            return precipitation.total;
+        }
+
+        function precipitationFrowSnow(precipitation) {
+            return precipitation.snow;
+        }
+
+        function precipitationFrowRain(precipitation) {
+            return precipitation.rain;
+        }
+
+        var precipitationLinear = linearRegression(years, precipitation.map(totalPrecipitation));
+
+        Highcharts.setOptions({
+            credits: false,
+        });
+
+        Highcharts.chart('temperatureAverage', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'Average temperature in Abisko',
+            },
+            xAxis: {
+                title: {
+                    text: 'Year',
+                },
+                crosshair: true,
+            },
+            yAxis: {
+                title: {
+                    text: 'Temperature [C°]'
+                },
+                plotLines: [{
+                    value: 0,
+                    color: 'rgb(204, 214, 235)',
+                    width: 2,
+                }],
+                lineWidth: 1,
+            },
+            tooltip: {
+                shared: true,
+                valueSuffix: ' °C',
+                valueDecimals: 2,
+            },
+            series: [{
+                name: 'Temperature',
+                animation: false,
+                lineWidth: 0, // Fake scatter plot with 0 lineWidth so they can share tooltip
+                marker: {
+                    radius: 2,
+                },
+                states: {
+                    hover: {
+                        lineWidthPlus: 0, // Don't show line on hover
+                    },
+                },
+                color: 'red',
+                data: combine(years, temperatures),
+            }, {
+                name: 'Average',
+                color: '#888888',
+                marker: {
+                    radius: 0,
+                },
+                data: combine(years, movingAverages(temperatures, 10)).slice(10), // Remove the first 10
+            }]
+        });
+
+        Highcharts.chart('temperatureDifference', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Temperature difference for Abisko',
+            },
+            subtitle: {
+                text: 'Difference between yearly average and average for 1961-1990',
+            },
+            xAxis: {
+                title: {
+                    text: 'Year',
+                },
+                crosshair: true,
+            },
+            yAxis: {
+                title: {
+                    text: 'Temperature [C°]'
+                },
+                lineWidth: 1,
+            },
+            tooltip: {
+                shared: true,
+                valueSuffix: ' °C',
+                valueDecimals: 2,
+            },
+            legend: {
+                enabled: false,
+            },
+            series: [{
+                name: 'Difference',
+                data: combine(years, difference(temperatures, average(temperatures.slice(0, -10)))),
+                color: 'red',
+                negativeColor: 'blue',
+            }],
+        });
+
+        Highcharts.chart('yearlyPrecipitation', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'Yearly precipitation',
+            },
+            xAxis: {
+                title: {
+                    text: 'Year',
+                },
+                crosshair: true,
+            },
+            yAxis: {
+                title: {
+                    text: 'Total precipitation [mm]'
+                },
+                lineWidth: 1,
+                floor: 0, // Precipitation can never be negative
+            },
+            tooltip: {
+                shared: true,
+                valueSuffix: ' mm',
+                valueDecimals: 0,
+                headerFormat: '<span style="font-size: 10px">{point.key}</span><br/>' +
+                    '<span style="color: red">\u25CF</span> Linear regression: <b>' + precipitationLinear + '</b><br />' +
+                    '<span style="color: white; visibility: hidden">\u25CF</span> Total precipitation: <b>{point.total:.0f} mm</b><br />',
+            },
+            series: [{
+                name: 'Precipitation from snow',
+                type: 'column',
+                stack: 'precip',
+                stacking: 'normal',
+                data: combine(years, precipitation.map(precipitationFrowSnow)).slice(10),
+                color: '#eeeeff',
+                states: {
+                    hover: {
+                        color: '#aaaaff',
+                        animation: {
+                            duration: 0,
+                        },
+                    },
+                },
+            }, {
+                name: 'Precipitation from rain',
+                type: 'column',
+                stack: 'precip',
+                stacking: 'normal',
+                data: combine(years, precipitation.map(precipitationFrowRain)).slice(10),
+                color: '#ccccff',
+                states: {
+                    hover: {
+                        color: '#0000ff',
+                        animation: {
+                            duration: 0,
+                        },
+                    },
+                },
+            }, {
+                name: 'Average precipitation',
+                color: '#888888',
+                data: combine(years, movingAverages(precipitation.map(totalPrecipitation), 10)).slice(10), // Remove the first 10
+            }, {
+                name: 'Linear regression',
+                marker: {
+                    enabled: false, // Linear regression lines doesn't contain points
+                },
+                color: 'red',
+                states: {
+                    hover: {
+                        lineWidth: 0, // Do nothing on hover
+                    },
+                },
+                enableMouseTracking: false, // No interactivity
+                data: [
+                    { x: years[10], y: precipitationLinear(years[10]) },
+                    { x: years[years.length - 1], y: precipitationLinear(years[years.length - 1]) }
+                ],
+            }],
+        });
+
+         Highcharts.chart('lakeIce', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'Freeze up and break up of lake ice vs ice free time',
+            },
+            xAxis: {
+                title: {
+                    text: 'Year',
+                },
+                crosshair: true,
+            },
+            yAxis: [{
+                title: {
+                    text: 'Ice freeze / break up [date]',
+                },
+                lineWidth: 1,
+                floor: 0,
+                type: 'datetime',
+            }, {
+                title: {
+                    text: 'Ice free time [days]',
+                },
+                lineWidth: 1,
+                opposite: true,
+                floor: 0,
+            }],
+            tooltip: {
+                shared: true,
+                valueDecimals: 0,
+            },
+            series: [{
+                yAxis: 0,
+                name: 'Ice breaking',
+                color: '#ff0000',
+                data: combine(years, movingAverages(precipitation.map(totalPrecipitation), 10)).slice(10), // Remove the first 10
+            }, {
+                yAxis: 0,
+                name: 'Linear regression',
+                marker: {
+                    enabled: false, // Linear regression lines doesn't contain points
+                },
+                color: 'red',
+                states: {
+                    hover: {
+                        lineWidth: 0, // Do nothing on hover
+                    },
+                },
+                enableMouseTracking: false, // No interactivity
+                data: [
+                    { x: years[10], y: precipitationLinear(years[10]) },
+                    { x: years[years.length - 1], y: precipitationLinear(years[years.length - 1]) }
+                ],
+            }],
+        });
+    </script>
+</body>
+
+</html>
