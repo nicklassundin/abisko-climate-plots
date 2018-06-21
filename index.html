@@ -3,8 +3,10 @@
 
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/highcharts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/highcharts-more.js"></script>
     <script src="regression.js"></script>
     <script src="papaparse.min.js"></script>
+    <script src="helpers.js"></script>
     <style type="text/css">
         body {
             text-align: center;
@@ -13,29 +15,325 @@
         .figure {
             min-width: 500px;
             max-width: 800px;
-            height: 400px;
+            height: 340px;
         }
     </style>
 </head>
 
 <body>
-    <div id="temperatureAverage" class="figure"></div>
+    <div id="northernHemisphere" class="figure" style="height: 400px"></div>
+    <div id="globalTemperatures" class="figure" style="height: 400px"></div>
 
-    <div id="temperatureDifference" class="figure"></div>
+    <div id="temperatureDifference1" class="figure"></div>
+    <div id="temperatureDifference2" class="figure"></div>
+    <div id="temperatureDifference3" class="figure"></div>
 
     <div id="yearlyPrecipitation" class="figure"></div>
 
     <div id="lakeIce" class="figure"></div>
 
     <script type="text/javascript">
-        Papa.parse('http://127.0.0.1:8080/station.csv', {
+        Highcharts.setOptions({
+            credits: false,
+        });
+
+        var renderTemperatureGraph = function (temperatures, id, title) {
+            Highcharts.chart(id, {
+                chart: {
+                    type: 'line',
+                },
+                title: {
+                    text: title,
+                },
+                xAxis: {
+                    title: {
+                        text: 'Year',
+                    },
+                    crosshair: true,
+                },
+                yAxis: {
+                    title: {
+                        text: 'Temperature [C°]'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        color: 'rgb(204, 214, 235)',
+                        width: 2,
+                    }],
+                    max: 2,
+                    min: -2,
+                    tickInterval: 1,
+                    lineWidth: 1,
+                },
+                tooltip: {
+                    shared: true,
+                    valueSuffix: ' °C',
+                    valueDecimals: 2,
+                },
+                series: [{
+                    name: 'Max',
+                    lineWidth: 0,
+                    marker: { radius: 2 },
+                    states: { hover: { lineWidthPlus: 0 } },
+                    color: '#ff0000',
+                    data: temperatures.max,
+                }, {
+                    name: 'Min',
+                    lineWidth: 0,
+                    marker: { radius: 2 },
+                    states: { hover: { lineWidthPlus: 0 } },
+                    color: '#0000ff',
+                    data: temperatures.min,
+                }, {
+                    name: 'Average',
+                    color: '#888888',
+                    marker: { enabled: false },
+                    data: temperatures.movAvg,
+                }, {
+                    name: 'Confidence interval',
+                    type: 'arearange',
+                    color: '#7777ff',
+                    data: temperatures.ciMovAvg,
+                    zIndex: 0,
+                    fillOpacity: 0.3,
+                    lineWidth: 0,
+                    states: { hover: { lineWidthPlus: 0 } },
+                    marker: { enabled: false },
+                }],
+            });
+        };
+
+        var parseGISSTEMP = function (results) {
+            var fields = results.meta.fields;
+            var temperatures = [];
+            temperatures.globalMin = Infinity;
+            temperatures.globalMax = -Infinity;
+
+            results.data.forEach(function (row) {
+                var year = {
+                    min: Infinity,
+                    max: -Infinity,
+                    sum: 0,
+                    count: 0,
+                };
+
+                fields.forEach(function (field) {
+                    year[field.toLowerCase()] = validNumber(row[field]);
+                });
+
+                var months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+
+                var monthlyTemperatures = months.map(function (month) {
+                    return year[month];
+                }).filter(Number);
+
+                monthlyTemperatures.forEach(function (temperature) {
+                    year.min = Math.min(year.min, temperature);
+                    year.max = Math.max(year.max, temperature);
+                    year.sum += temperature;
+                    year.count++;
+                });
+
+                if (year.count > 0) {
+                    temperatures.globalMin = Math.min(temperatures.globalMin, year.min);
+                    temperatures.globalMax = Math.max(temperatures.globalMax, year.max);
+                    year.avg = year.sum / year.count;
+
+                    year.variance = 0;
+
+                    if (year.count > 1) {
+                        year.variance = variance(monthlyTemperatures);
+                    }
+
+
+                    var zs = [0, 12.706, 4.303, 3.182, 2.776, 2.571, 2.447, 2.365, 2.306, 2.262, 2.228, 2.201, 2.179];
+                    var ci = zs[year.count - 1] * Math.sqrt(year.variance / year.count);
+                    year.ci = { low: year.avg - ci, high: year.avg + ci };
+
+                    temperatures.push(year);
+                }
+            });
+
+            ['min', 'max', 'avg'].forEach(function (statistic) {
+                temperatures[statistic] = temperatures.map(function (temps) {
+                    return {
+                        x: temps.year,
+                        y: temps[statistic],
+                    };
+                }).slice(10);
+            });
+
+            temperatures.movAvg = movingAverages(temperatures.map(function (temps) {
+                return temps.avg;
+            }), 10).map(function (avg, index) {
+                return {
+                    x: temperatures[index].year,
+                    y: avg,
+                };
+            }).slice(10);
+
+            temperatures.ci = temperatures.map(function (temps) {
+                return {
+                    x: temps.year,
+                    low: temps.ci.low,
+                    high: temps.ci.high,
+                };
+            });
+
+            temperatures.ciMovAvg = temperatures.ci.map(function (each) {
+                return {
+                    x: each.x,
+                };
+            });
+
+            ['low', 'high'].forEach(function (bound) {
+                movingAverages(temperatures.ci.map(function (each) {
+                    return each[bound]
+                }), 10).forEach(function (value, index) {
+                    temperatures.ciMovAvg[index][bound] = value;
+                });
+            });
+
+            temperatures.ci = temperatures.ci.slice(10);
+            temperatures.ciMovAvg = temperatures.ciMovAvg.slice(10);
+
+            return temperatures;
+        };
+
+        var parseGISSTEMPzonalMeans = function (results) {
+            var fields = results.meta.fields;
+            var temperatures = [];
+            temperatures['sum64n-90n'] = 0;
+            temperatures['sumnhem'] = 0;
+            temperatures['sumglob'] = 0;
+            var count = 0;
+
+            results.data.forEach(function (row) {
+                var year = {};
+
+                fields.forEach(function (field) {
+                    year[field.toLowerCase()] = validNumber(row[field]);
+                })
+
+                if (year.year >= 1961 && year.year <= 1990) {
+                    temperatures['sum64n-90n'] += year['64n-90n'];
+                    temperatures['sumnhem'] += year['nhem'];
+                    temperatures['sumglob'] += year['glob'];
+                    count++;
+                }
+                if (year.year > 1913) {
+                    temperatures.push(year);
+                }
+            });
+
+            temperatures['avg64n-90n'] = temperatures['sum64n-90n'] / count;
+            temperatures['avgnhem'] = temperatures['sumnhem'] / count;
+            temperatures['avgglob'] = temperatures['sumglob'] / count;
+
+            var difference = function (region) {
+                return temperatures.map(function (each) {
+                    return {
+                        x: each.year,
+                        y: each[region] - temperatures['avg' + region],
+                    };
+                });
+            }
+
+            temperatures['64n-90n'] = difference('64n-90n');
+            temperatures['nhem'] = difference('nhem');
+            temperatures['glob'] = difference('glob');
+
+            return temperatures;
+        };
+
+        var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
+            Highcharts.chart(id, {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: title,
+                },
+                subtitle: {
+                    text: 'Difference between yearly average and average for 1961-1990',
+                },
+                xAxis: {
+                    title: {
+                        text: 'Year',
+                    },
+                    crosshair: true,
+                    plotBands: [{
+                        color: 'rgb(245, 245, 245)',
+                        from: 1961,
+                        to: 1990,
+                    }],
+                },
+                yAxis: {
+                    title: {
+                        text: 'Temperature [C°]'
+                    },
+                    lineWidth: 1,
+                    min: -1,
+                    max: 3,
+                    tickInterval: 1,
+                },
+                tooltip: {
+                    shared: true,
+                    valueSuffix: ' °C',
+                    valueDecimals: 2,
+                },
+                legend: {
+                    enabled: false,
+                },
+                series: [{
+                    name: 'Difference',
+                    data: temperatures,
+                    color: 'red',
+                    negativeColor: 'blue',
+                }],
+            });
+        };
+
+        Papa.parse(window.location + '/NH.Ts downloaded 21062018.csv', {
             header: true,
             delimiter: ',',
             download: true,
-            complete: function(results) {
-                console.log(results)
-            }
-        })
+            skipEmptyLines: true,
+            dynamicTyping: true,
+            comments: 'Station',
+            complete: function (result) {
+                var temperatures = parseGISSTEMP(result);
+                renderTemperatureGraph(temperatures, 'northernHemisphere', 'Northern hemispheric temperatures');
+            },
+        });
+
+        Papa.parse(window.location + '/GLB.Ts downloaded 21062018.csv', {
+            header: true,
+            delimiter: ',',
+            download: true,
+            skipEmptyLines: true,
+            dynamicTyping: true,
+            comments: 'Station',
+            complete: function (result) {
+                var temperatures = parseGISSTEMP(result);
+                renderTemperatureGraph(temperatures, 'globalTemperatures', 'Global temperatures');
+            },
+        });
+
+        Papa.parse(window.location + '/ZonAnn.Ts+dSST downloaded 21062018.csv', {
+            header: true,
+            delimiter: ',',
+            download: true,
+            skipEmptyLines: true,
+            dynamicTyping: true,
+            complete: function (result) {
+                var temperatures = parseGISSTEMPzonalMeans(result);
+                renderTemperatureDifferenceGraph(temperatures['64n-90n'], 'temperatureDifference1', 'Temperature difference for 64N-90N');
+                renderTemperatureDifferenceGraph(temperatures['nhem'], 'temperatureDifference2', 'Temperature difference for nordic hemisphere');
+                renderTemperatureDifferenceGraph(temperatures['glob'], 'temperatureDifference3', 'Global temperature difference');
+            },
+        });
+
 
         const rand = (min, max) => Math.random() * (max - min) + min;
         const randVector = (length, min, max) => Array.apply(null, { length }).map(_ => rand(min, max));
@@ -48,10 +346,6 @@
         }
 
         let rising = 0;
-        const temperatures = randVector(num, -3, 2).map(T => {
-            rising += 0.02;
-            return T + rising;
-        });
 
         const precipitation = randVector(num, 300, 350).map(mm => {
             rising += 1;
@@ -63,61 +357,6 @@
                 rain: (1 - fractionSnow) * total,
             };
         });
-
-        /** START **/
-        var sum = function (values) {
-            return values.reduce(function (sum, current) {
-                return sum + current;
-            }, 0);
-        }
-
-        var average = function (values) {
-            if (values.length === 0) return 0;
-            return sum(values) / values.length;
-        };
-
-        var movingAverage = function (values, index, number) {
-            var startIndex = Math.max(index - number, 0);
-            return average(values.slice(startIndex, index));
-        };
-
-        var movingAverages = function (values, number) {
-            return values.map(function (_, index) {
-                return movingAverage(values, index, number);
-            });
-        };
-
-        var difference = function (values, baseline) {
-            return values.map(function (value) {
-                return value - baseline;
-            });
-        };
-
-        var combine = function (xs, ys) {
-            return xs.map(function (x, index) {
-                return {
-                    x: x,
-                    y: ys[index],
-                };
-            });
-        };
-
-        var linearRegression = function (xs, ys) {
-            var data = xs.map(function (x, index) {
-                return [x, ys[index]];
-            });
-
-            var result = regression.linear(data);
-            var gradient = result.equation[0];
-            var intercept = result.equation[1];
-            var linear = function (x) {
-                return gradient * x + intercept;
-            };
-            linear.toString = function() {
-                return gradient + ' x ' + (intercept >= 0 ? '+' : '-') + Math.abs(intercept);
-            }
-            return linear;
-        };
 
         function totalPrecipitation(precipitation) {
             return precipitation.total;
@@ -132,101 +371,6 @@
         }
 
         var precipitationLinear = linearRegression(years, precipitation.map(totalPrecipitation));
-
-        Highcharts.setOptions({
-            credits: false,
-        });
-
-        Highcharts.chart('temperatureAverage', {
-            chart: {
-                type: 'line'
-            },
-            title: {
-                text: 'Average temperature in Abisko',
-            },
-            xAxis: {
-                title: {
-                    text: 'Year',
-                },
-                crosshair: true,
-            },
-            yAxis: {
-                title: {
-                    text: 'Temperature [C°]'
-                },
-                plotLines: [{
-                    value: 0,
-                    color: 'rgb(204, 214, 235)',
-                    width: 2,
-                }],
-                lineWidth: 1,
-            },
-            tooltip: {
-                shared: true,
-                valueSuffix: ' °C',
-                valueDecimals: 2,
-            },
-            series: [{
-                name: 'Temperature',
-                animation: false,
-                lineWidth: 0, // Fake scatter plot with 0 lineWidth so they can share tooltip
-                marker: {
-                    radius: 2,
-                },
-                states: {
-                    hover: {
-                        lineWidthPlus: 0, // Don't show line on hover
-                    },
-                },
-                color: 'red',
-                data: combine(years, temperatures),
-            }, {
-                name: 'Average',
-                color: '#888888',
-                marker: {
-                    radius: 0,
-                },
-                data: combine(years, movingAverages(temperatures, 10)).slice(10), // Remove the first 10
-            }]
-        });
-
-        Highcharts.chart('temperatureDifference', {
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'Temperature difference for Abisko',
-            },
-            subtitle: {
-                text: 'Difference between yearly average and average for 1961-1990',
-            },
-            xAxis: {
-                title: {
-                    text: 'Year',
-                },
-                crosshair: true,
-            },
-            yAxis: {
-                title: {
-                    text: 'Temperature [C°]'
-                },
-                lineWidth: 1,
-            },
-            tooltip: {
-                shared: true,
-                valueSuffix: ' °C',
-                valueDecimals: 2,
-            },
-            legend: {
-                enabled: false,
-            },
-            series: [{
-                name: 'Difference',
-                data: combine(years, difference(temperatures, average(temperatures.slice(0, -10)))),
-                color: 'red',
-                negativeColor: 'blue',
-            }],
-        });
 
         Highcharts.chart('yearlyPrecipitation', {
             chart: {
@@ -309,7 +453,7 @@
             }],
         });
 
-         Highcharts.chart('lakeIce', {
+        Highcharts.chart('lakeIce', {
             chart: {
                 type: 'line'
             },
