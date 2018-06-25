@@ -3,6 +3,7 @@
 
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/highcharts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/js/modules/annotations.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/highcharts-more.js"></script>
     <script src="regression.js"></script>
     <script src="papaparse.min.js"></script>
@@ -21,14 +22,28 @@
 </head>
 
 <body>
-    <div id="northernHemisphere" class="figure" style="height: 400px"></div>
-    <div id="globalTemperatures" class="figure" style="height: 400px"></div>
+    <div id="abiskoTemperatures" class="figure"></div>
+    <div id="northernHemisphere" class="figure"></div>
+    <div id="globalTemperatures" class="figure"></div>
 
+    <div id="temperatureDifferenceAbisko" class="figure"></div>
     <div id="temperatureDifference1" class="figure"></div>
     <div id="temperatureDifference2" class="figure"></div>
     <div id="temperatureDifference3" class="figure"></div>
 
     <div id="yearlyPrecipitation" class="figure"></div>
+    <div id="monthlyPrecipitation_jan" class="figure"></div>
+    <div id="monthlyPrecipitation_feb" class="figure"></div>
+    <div id="monthlyPrecipitation_mar" class="figure"></div>
+    <div id="monthlyPrecipitation_apr" class="figure"></div>
+    <div id="monthlyPrecipitation_may" class="figure"></div>
+    <div id="monthlyPrecipitation_jun" class="figure"></div>
+    <div id="monthlyPrecipitation_jul" class="figure"></div>
+    <div id="monthlyPrecipitation_aug" class="figure"></div>
+    <div id="monthlyPrecipitation_sep" class="figure"></div>
+    <div id="monthlyPrecipitation_oct" class="figure"></div>
+    <div id="monthlyPrecipitation_nov" class="figure"></div>
+    <div id="monthlyPrecipitation_dec" class="figure"></div>
 
     <div id="lakeIce" class="figure"></div>
 
@@ -41,6 +56,7 @@
             Highcharts.chart(id, {
                 chart: {
                     type: 'line',
+                    zoomType: 'xy',
                 },
                 title: {
                     text: title,
@@ -60,8 +76,8 @@
                         color: 'rgb(204, 214, 235)',
                         width: 2,
                     }],
-                    max: 2,
-                    min: -2,
+                    //max: 2,
+                    //min: -3,
                     tickInterval: 1,
                     lineWidth: 1,
                 },
@@ -85,7 +101,26 @@
                     color: '#0000ff',
                     data: temperatures.min,
                 }, {
-                    name: 'Average',
+                    name: 'Yearly average',
+                    lineWidth: 0,
+                    marker: { radius: 2 },
+                    states: { hover: { lineWidthPlus: 0 } },
+                    color: '#888888',
+                    data: temperatures.avg,
+                    visible: false,
+                }, {
+                    name: 'Confidence interval',
+                    type: 'arearange',
+                    color: '#888888',
+                    data: temperatures.ci,
+                    zIndex: 0,
+                    fillOpacity: 0.3,
+                    lineWidth: 0,
+                    states: { hover: { lineWidthPlus: 0 } },
+                    marker: { enabled: false },
+                    visible: false,
+                }, {
+                    name: 'Moving average',
                     color: '#888888',
                     marker: { enabled: false },
                     data: temperatures.movAvg,
@@ -106,8 +141,6 @@
         var parseGISSTEMP = function (results) {
             var fields = results.meta.fields;
             var temperatures = [];
-            temperatures.globalMin = Infinity;
-            temperatures.globalMax = -Infinity;
 
             results.data.forEach(function (row) {
                 var year = {
@@ -121,9 +154,7 @@
                     year[field.toLowerCase()] = validNumber(row[field]);
                 });
 
-                var months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
-
-                var monthlyTemperatures = months.map(function (month) {
+                var monthlyTemperatures = months().map(function (month) {
                     return year[month];
                 }).filter(Number);
 
@@ -135,8 +166,6 @@
                 });
 
                 if (year.count > 0) {
-                    temperatures.globalMin = Math.min(temperatures.globalMin, year.min);
-                    temperatures.globalMax = Math.max(temperatures.globalMax, year.max);
                     year.avg = year.sum / year.count;
 
                     year.variance = 0;
@@ -145,10 +174,7 @@
                         year.variance = variance(monthlyTemperatures);
                     }
 
-
-                    var zs = [0, 12.706, 4.303, 3.182, 2.776, 2.571, 2.447, 2.365, 2.306, 2.262, 2.228, 2.201, 2.179];
-                    var ci = zs[year.count - 1] * Math.sqrt(year.variance / year.count);
-                    year.ci = { low: year.avg - ci, high: year.avg + ci };
+                    year.ci = confidenceInterval(year.avg, year.variance, year.count);
 
                     temperatures.push(year);
                 }
@@ -200,6 +226,245 @@
             return temperatures;
         };
 
+        var parseAbiskoCsv = function (result) {
+            var rows = result.data;
+
+            var fields = {
+                time: result.meta.fields[0],
+                avg: result.meta.fields[1],
+                min: result.meta.fields[2],
+                max: result.meta.fields[3],
+                precip: result.meta.fields[4],
+            };
+
+            var data = {};
+
+            rows.forEach(function (row) {
+                var date = parseDate(row[fields.time]);
+                var avg = parseNumber(row[fields.avg]);
+                var min = parseNumber(row[fields.min]);
+                var max = parseNumber(row[fields.max]);
+                var precip = parseNumber(row[fields.precip]);
+                var year = data[date.year] = data[date.year] || {
+                    sum: 0,
+                    count: 0,
+                    precip: 0,
+                    precip_snow: 0,
+                    precip_rain: 0,
+                    data: [],
+                };
+                if (avg) {
+                    year.sum += avg;
+                    year.count++;
+                }
+                if (precip) {
+                    year.precip += precip;
+                    if (avg < 0) {
+                        year.precip_snow += precip;
+                    } else {
+                        year.precip_rain += precip;
+                    }
+                }
+                year.data.push({
+                    date: date,
+                    avg: avg,
+                    min: min,
+                    max, max,
+                    precip: precip,
+                    precip_snow: (avg < 0) ? precip : 0,
+                    precip_rain: (avg >= 0) ? precip : 0,
+                });
+            });
+
+            var baseline = {
+                sum: 0,
+                count: 0,
+            };
+
+            Object.entries(data).forEach(function (each) {
+                var year = each[1];
+                year.avg = year.sum / (year.count || 1);
+
+                if (isBaselinePeriod(each[0])) {
+                    baseline.sum += year.avg;
+                    baseline.count++;
+                }
+
+                var monthlyTemperatures = [];
+                var monthlyPrecipitation = [];
+
+                year.data.forEach(function (each) {
+                    var month = +each.date.month;
+                    var temperatures = monthlyTemperatures[month - 1] = monthlyTemperatures[month - 1] || {
+                        sum: 0,
+                        count: 0,
+                    };
+                    var precip = monthlyPrecipitation[month - 1] = monthlyPrecipitation[month - 1] || {
+                        sum: 0,
+                        rain: 0,
+                        snow: 0,
+                        count: 0,
+                    };
+                    if (each.avg) {
+                        temperatures.sum += each.avg;
+                        temperatures.count++;
+                    }
+                    if (each.precip) {
+                        precip.sum += each.precip;
+                        precip.snow += each.precip_snow;
+                        precip.rain += each.precip_rain;
+                        precip.count++;
+                    }
+                });
+
+                monthlyTemperatures = monthlyTemperatures.map(function (month) {
+                    return month.sum / month.count;
+                });
+
+                year.monthlyPrecipitation = monthlyPrecipitation.map(function (precip) {
+                    return {
+                        avg: precip.sum / precip.count,
+                        snow: precip.snow / precip.count,
+                        rain: precip.rain / precip.count,
+                    };
+                });
+
+                year.max = monthlyTemperatures.reduce(function (total, current) {
+                    return Math.max(total, current);
+                });
+
+                year.min = monthlyTemperatures.reduce(function (total, current) {
+                    return Math.min(total, current);
+                });
+
+                year.variance = 0;
+                year.ci = { low: -Infinity, high: Infinity };
+
+                if (monthlyTemperatures.length > 1) {
+                    year.variance = variance(monthlyTemperatures);
+                    year.ci = confidenceInterval(year.avg, year.variance, monthlyTemperatures.length);
+                }
+            });
+
+            baseline.avg = baseline.sum / baseline.count;
+
+            var yearly = function (statistic) {
+                return Object.entries(data).map(function (each) {
+                    return {
+                        x: +each[0],
+                        y: each[1][statistic],
+                    };
+                }).slice(10);
+            }
+
+            var years = Object.keys(data).map(Number);
+
+            var avg = yearly('avg');
+            var min = yearly('min');
+            var max = yearly('max');
+            var precip = yearly('precip');
+            var precip_snow = yearly('precip_snow');
+            var precip_rain = yearly('precip_rain');
+
+            var monthly = function (monthIndex, statistic) {
+                return Object.entries(data).map(function (each) {
+                    return {
+                        x: +each[0],
+                        y: each[1].monthlyPrecipitation[monthIndex][statistic]
+                    };
+                })
+            }
+
+            var monthlyPrecip = {};
+
+            months().forEach(function (month, index) {
+                var m = monthlyPrecip[month] = monthlyPrecip[month] || {};
+                m.years = years.slice(10);
+                m.avg = monthly(index, 'avg');
+                m.movAvg = movingAverages(m.avg.map(function (each) {
+                    return each.y;
+                }), 10).map(function (avg, index) {
+                    return {
+                        x: Object.keys(data)[index],
+                        y: avg,
+                    }
+                }).slice(10);
+                m.linear = linearRegression(m.years, m.movAvg.map(function (each) {
+                    return each.y
+                }));
+                m.avg = m.avg.slice(10);
+                m.rain = monthly(index, 'rain').slice(10);
+                m.snow = monthly(index, 'snow').slice(10);
+            });
+
+            var ci = Object.entries(data).map(function (each) {
+                return {
+                    x: +each[0],
+                    low: each[1].ci.low,
+                    high: each[1].ci.high,
+                };
+            });
+
+            var movAvg = movingAverages(Object.values(data).map(function (each) {
+                return each.avg;
+            }), 10).map(function (avg, index) {
+                return {
+                    x: Object.keys(data)[index],
+                    y: avg,
+                };
+            }).slice(10);
+
+            var precipMovAvg = movingAverages(Object.values(data).map(function (each) {
+                return each.precip;
+            }), 10).map(function (avg, index) {
+                return {
+                    x: Object.keys(data)[index],
+                    y: avg,
+                };
+            }).slice(10);
+
+            var precipitationLinear = linearRegression(years.slice(10), precipMovAvg.map(function (each) {
+                return each.y;
+            }));
+
+            var ciMovAvg = ci.map(function (each) {
+                return {
+                    x: each.x,
+                };
+            });
+
+            ['low', 'high'].forEach(function (bound) {
+                movingAverages(ci.map(function (each) {
+                    return each[bound]
+                }), 10).forEach(function (value, index) {
+                    ciMovAvg[index][bound] = value;
+                });
+            });
+
+            data.difference = avg.map(function (each) {
+                return {
+                    x: each.x,
+                    y: each.y - baseline.avg,
+                };
+            });
+
+            data.years = years;
+            data.avg = avg;
+            data.min = min;
+            data.max = max;
+            data.movAvg = movAvg;
+            data.ci = ci.slice(10);
+            data.ciMovAvg = ciMovAvg.slice(10);
+            data.precip = precip;
+            data.precip_snow = precip_snow;
+            data.precip_rain = precip_rain;
+            data.precip_movAvg = precipMovAvg;
+            data.precip_linear = precipitationLinear;
+            data.monthlyPrecip = monthlyPrecip;
+
+            return data;
+        };
+
         var parseGISSTEMPzonalMeans = function (results) {
             var fields = results.meta.fields;
             var temperatures = [];
@@ -215,7 +480,7 @@
                     year[field.toLowerCase()] = validNumber(row[field]);
                 })
 
-                if (year.year >= 1961 && year.year <= 1990) {
+                if (isBaselinePeriod(year.year)) {
                     temperatures['sum64n-90n'] += year['64n-90n'];
                     temperatures['sumnhem'] += year['nhem'];
                     temperatures['sumglob'] += year['glob'];
@@ -236,7 +501,7 @@
                         x: each.year,
                         y: each[region] - temperatures['avg' + region],
                     };
-                });
+                }).slice(9); // remove values missing from Abisko data
             }
 
             temperatures['64n-90n'] = difference('64n-90n');
@@ -273,7 +538,7 @@
                         text: 'Temperature [C°]'
                     },
                     lineWidth: 1,
-                    min: -1,
+                    min: -2,
                     max: 3,
                     tickInterval: 1,
                 },
@@ -285,6 +550,21 @@
                 legend: {
                     enabled: false,
                 },
+                annotations: [{
+                    labelOptions: {
+                        barkgroundColor: 'red',
+                        verticalAlign: 'top',
+                    },
+                    labels: [{
+                        point: {
+                            xAxis: 0,
+                            yAxis: 0,
+                            x: 1975,
+                            y: 2.4,
+                        },
+                        text: 'Baseline',
+                    }],
+                }],
                 series: [{
                     name: 'Difference',
                     data: temperatures,
@@ -294,6 +574,181 @@
             });
         };
 
+        var renderYearlyPrecipitationGraph = function (precipitation) {
+            Highcharts.chart('yearlyPrecipitation', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Yearly precipitation',
+                },
+                xAxis: {
+                    title: {
+                        text: 'Year',
+                    },
+                    crosshair: true,
+                },
+                yAxis: {
+                    title: {
+                        text: 'Total precipitation [mm]'
+                    },
+                    lineWidth: 1,
+                    floor: 0, // Precipitation can never be negative
+                },
+                tooltip: {
+                    shared: true,
+                    valueSuffix: ' mm',
+                    valueDecimals: 0,
+                    headerFormat: '<span style="font-size: 10px">{point.key}</span><br/>' +
+                        '<span style="color: red">\u25CF</span> Linear regression: <b>' + precipitation.precip_linear + '</b><br />' +
+                        '<span style="color: white; visibility: hidden">\u25CF</span> Total precipitation: <b>{point.total:.0f} mm</b><br />',
+                },
+                series: [{
+                    name: 'Precipitation from snow',
+                    type: 'column',
+                    stack: 'precip',
+                    stacking: 'normal',
+                    data: precipitation.precip_snow,
+                    color: '#eeeeff',
+                    states: {
+                        hover: {
+                            color: '#aaaaff',
+                            animation: {
+                                duration: 0,
+                            },
+                        },
+                    },
+                }, {
+                    name: 'Precipitation from rain',
+                    type: 'column',
+                    stack: 'precip',
+                    stacking: 'normal',
+                    data: precipitation.precip_rain,
+                    color: '#ccccff',
+                    states: {
+                        hover: {
+                            color: '#0000ff',
+                            animation: {
+                                duration: 0,
+                            },
+                        },
+                    },
+                }, {
+                    name: 'Average precipitation',
+                    color: '#888888',
+                    data: precipitation.precip_movAvg,
+                }, {
+                    name: 'Linear regression',
+                    marker: {
+                        enabled: false, // Linear regression lines doesn't contain points
+                    },
+                    color: 'red',
+                    states: {
+                        hover: {
+                            lineWidth: 0, // Do nothing on hover
+                        },
+                    },
+                    enableMouseTracking: false, // No interactivity
+                    data: [
+                        { x: precipitation.years[10], y: precipitation.precip_linear(precipitation.years[10]) },
+                        { x: precipitation.years[precipitation.years.length - 1], y: precipitation.precip_linear(precipitation.years[precipitation.years.length - 1]) }
+                    ],
+                }],
+            });
+        };
+
+        var renderMonthlyPrecipitationGraph = function (precipitation, month) {
+            console.log(precipitation.linear(1))
+            var titles = {
+                jan: 'January', feb: 'February', mar: 'March', apr: 'April', may: 'May', jun: 'June',
+                jul: 'July', aug: 'August', sep: 'September', oct: 'October', nov: 'November', dec: 'December'
+            };
+            Highcharts.chart('monthlyPrecipitation_' + month, {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Precipitation for ' + titles[month],
+                },
+                xAxis: {
+                    title: {
+                        text: 'Year',
+                    },
+                    crosshair: true,
+                },
+                yAxis: {
+                    title: {
+                        text: 'Total precipitation [mm]'
+                    },
+                    lineWidth: 1,
+                    max: 10,
+                    floor: 0, // Precipitation can never be negative
+                },
+                tooltip: {
+                    shared: true,
+                    valueSuffix: ' mm',
+                    valueDecimals: 0,
+                    headerFormat: '<span style="font-size: 10px">{point.key}</span><br/>' +
+                        '<span style="color: red">\u25CF</span> Linear regression: <b>' + precipitation.linear + '</b><br />' +
+                        '<span style="color: white; visibility: hidden">\u25CF</span> Total precipitation: <b>{point.total:.0f} mm</b><br />',
+                },
+                series: [{
+                    name: 'Precipitation from snow',
+                    type: 'column',
+                    stack: 'precip',
+                    stacking: 'normal',
+                    data: precipitation.snow,
+                    color: '#eeeeff',
+                    states: {
+                        hover: {
+                            color: '#aaaaff',
+                            animation: {
+                                duration: 0,
+                            },
+                        },
+                    },
+                }, {
+                    name: 'Precipitation from rain',
+                    type: 'column',
+                    stack: 'precip',
+                    stacking: 'normal',
+                    data: precipitation.rain,
+                    color: '#ccccff',
+                    states: {
+                        hover: {
+                            color: '#0000ff',
+                            animation: {
+                                duration: 0,
+                            },
+                        },
+                    },
+                }, {
+                    name: 'Average precipitation',
+                    color: '#888888',
+                    data: precipitation.movAvg,
+                }, {
+                    name: 'Linear regression',
+                    marker: {
+                        enabled: false, // Linear regression lines doesn't contain points
+                    },
+                    color: 'red',
+                    states: {
+                        hover: {
+                            lineWidth: 0, // Do nothing on hover
+                        },
+                    },
+                    enableMouseTracking: false, // No interactivity
+                    data: [
+                        { x: precipitation.years[0], y: precipitation.linear(precipitation.years[0]) },
+                        { x: precipitation.years[precipitation.years.length - 1], y: precipitation.linear(precipitation.years[precipitation.years.length - 1]) }
+                    ],
+                }],
+            });
+        };
+
+        /*******************************************/
+        /* THE ACTUAL LOADING OF DATA HAPPENS HERE */
+        /*******************************************/
         Papa.parse(window.location + '/NH.Ts downloaded 21062018.csv', {
             header: true,
             delimiter: ',',
@@ -334,124 +789,24 @@
             },
         });
 
-
-        const rand = (min, max) => Math.random() * (max - min) + min;
-        const randVector = (length, min, max) => Array.apply(null, { length }).map(_ => rand(min, max));
-
-        let num = 100;
-        let year = 1910;
-        let years = [];
-        for (var i = 0; i < num; i++) {
-            years.push(year++);
-        }
-
-        let rising = 0;
-
-        const precipitation = randVector(num, 300, 350).map(mm => {
-            rising += 1;
-            const total = mm + rising;
-            const fractionSnow = rand(0.25, 0.30);
-            return {
-                total,
-                snow: fractionSnow * total,
-                rain: (1 - fractionSnow) * total,
-            };
+        Papa.parse(window.location + '/ANS_Temp_Prec_1913-2017.csv', {
+            header: true,
+            //delimiter: ';',
+            download: true,
+            skipEmptyLines: true,
+            dynamicTyping: false,
+            complete: function (result) {
+                var data = parseAbiskoCsv(result);
+                renderTemperatureGraph(data, 'abiskoTemperatures', 'Abisko temperatures');
+                renderTemperatureDifferenceGraph(data.difference, 'temperatureDifferenceAbisko', 'Temperature difference for Abisko');
+                renderYearlyPrecipitationGraph(data);
+                months().forEach(function (month) {
+                    renderMonthlyPrecipitationGraph(data.monthlyPrecip[month], month)
+                });
+            },
         });
 
-        function totalPrecipitation(precipitation) {
-            return precipitation.total;
-        }
 
-        function precipitationFrowSnow(precipitation) {
-            return precipitation.snow;
-        }
-
-        function precipitationFrowRain(precipitation) {
-            return precipitation.rain;
-        }
-
-        var precipitationLinear = linearRegression(years, precipitation.map(totalPrecipitation));
-
-        Highcharts.chart('yearlyPrecipitation', {
-            chart: {
-                type: 'line'
-            },
-            title: {
-                text: 'Yearly precipitation',
-            },
-            xAxis: {
-                title: {
-                    text: 'Year',
-                },
-                crosshair: true,
-            },
-            yAxis: {
-                title: {
-                    text: 'Total precipitation [mm]'
-                },
-                lineWidth: 1,
-                floor: 0, // Precipitation can never be negative
-            },
-            tooltip: {
-                shared: true,
-                valueSuffix: ' mm',
-                valueDecimals: 0,
-                headerFormat: '<span style="font-size: 10px">{point.key}</span><br/>' +
-                    '<span style="color: red">\u25CF</span> Linear regression: <b>' + precipitationLinear + '</b><br />' +
-                    '<span style="color: white; visibility: hidden">\u25CF</span> Total precipitation: <b>{point.total:.0f} mm</b><br />',
-            },
-            series: [{
-                name: 'Precipitation from snow',
-                type: 'column',
-                stack: 'precip',
-                stacking: 'normal',
-                data: combine(years, precipitation.map(precipitationFrowSnow)).slice(10),
-                color: '#eeeeff',
-                states: {
-                    hover: {
-                        color: '#aaaaff',
-                        animation: {
-                            duration: 0,
-                        },
-                    },
-                },
-            }, {
-                name: 'Precipitation from rain',
-                type: 'column',
-                stack: 'precip',
-                stacking: 'normal',
-                data: combine(years, precipitation.map(precipitationFrowRain)).slice(10),
-                color: '#ccccff',
-                states: {
-                    hover: {
-                        color: '#0000ff',
-                        animation: {
-                            duration: 0,
-                        },
-                    },
-                },
-            }, {
-                name: 'Average precipitation',
-                color: '#888888',
-                data: combine(years, movingAverages(precipitation.map(totalPrecipitation), 10)).slice(10), // Remove the first 10
-            }, {
-                name: 'Linear regression',
-                marker: {
-                    enabled: false, // Linear regression lines doesn't contain points
-                },
-                color: 'red',
-                states: {
-                    hover: {
-                        lineWidth: 0, // Do nothing on hover
-                    },
-                },
-                enableMouseTracking: false, // No interactivity
-                data: [
-                    { x: years[10], y: precipitationLinear(years[10]) },
-                    { x: years[years.length - 1], y: precipitationLinear(years[years.length - 1]) }
-                ],
-            }],
-        });
 
         Highcharts.chart('lakeIce', {
             chart: {
@@ -489,7 +844,7 @@
                 yAxis: 0,
                 name: 'Ice breaking',
                 color: '#ff0000',
-                data: combine(years, movingAverages(precipitation.map(totalPrecipitation), 10)).slice(10), // Remove the first 10
+                //data: combine(years, movingAverages(precipitation.map(totalPrecipitation), 10)).slice(10), // Remove the first 10
             }, {
                 yAxis: 0,
                 name: 'Linear regression',
@@ -503,10 +858,10 @@
                     },
                 },
                 enableMouseTracking: false, // No interactivity
-                data: [
-                    { x: years[10], y: precipitationLinear(years[10]) },
-                    { x: years[years.length - 1], y: precipitationLinear(years[years.length - 1]) }
-                ],
+                //data: [
+                //    { x: years[10], y: precipitationLinear(years[10]) },
+                //    { x: years[years.length - 1], y: precipitationLinear(years[years.length - 1]) }
+                //],
             }],
         });
     </script>

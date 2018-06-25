@@ -1,3 +1,7 @@
+var months = function () {
+    return ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+};
+
 var sum = function (values) {
     return values.reduce(function (sum, value) {
         return sum + value;
@@ -37,9 +41,35 @@ var variance = function (values) {
     return sumSquareDistance(values, mean) / (values.length - 1)
 };
 
+var confidenceInterval = function (mean, variance, count) {
+    var zs = [0, 12.706, 4.303, 3.182, 2.776, 2.571, 2.447, 2.365, 2.306, 2.262, 2.228, 2.201, 2.179];
+    var ci = zs[count - 1] * Math.sqrt(variance / count);
+    return {
+        low: mean - ci,
+        high: mean + ci
+    };
+};
+
+var isBaselinePeriod = function (year) {
+    return year >= 1961 && year <= 1990;
+};
+
 var validNumber = function (string) {
     var number = +string;
     return (number) ? number : undefined;
+};
+
+var parseDate = function (string) {
+    var date = string.split('-');
+    return {
+        year: +date[0],
+        month: +date[1],
+        day: +date[2],
+    };
+};
+
+var parseNumber = function (string) {
+    return parseFloat(string.replace(',', '.')) || undefined;
 };
 
 var combine = function (xs, ys) {
