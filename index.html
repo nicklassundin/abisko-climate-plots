@@ -52,91 +52,23 @@
             credits: false,
         });
 
-        var renderTemperatureGraph = function (temperatures, id, title) {
-            Highcharts.chart(id, {
-                chart: {
-                    type: 'line',
-                    zoomType: 'xy',
-                },
-                title: {
-                    text: title,
-                },
-                xAxis: {
-                    title: {
-                        text: 'Year',
-                    },
-                    crosshair: true,
-                },
-                yAxis: {
-                    title: {
-                        text: 'Temperature [C°]'
-                    },
-                    plotLines: [{
-                        value: 0,
-                        color: 'rgb(204, 214, 235)',
-                        width: 2,
-                    }],
-                    //max: 2,
-                    //min: -3,
-                    tickInterval: 1,
-                    lineWidth: 1,
-                },
-                tooltip: {
-                    shared: true,
-                    valueSuffix: ' °C',
-                    valueDecimals: 2,
-                },
-                series: [{
-                    name: 'Max',
-                    lineWidth: 0,
-                    marker: { radius: 2 },
-                    states: { hover: { lineWidthPlus: 0 } },
-                    color: '#ff0000',
-                    data: temperatures.max,
-                }, {
-                    name: 'Min',
-                    lineWidth: 0,
-                    marker: { radius: 2 },
-                    states: { hover: { lineWidthPlus: 0 } },
-                    color: '#0000ff',
-                    data: temperatures.min,
-                }, {
-                    name: 'Yearly average',
-                    lineWidth: 0,
-                    marker: { radius: 2 },
-                    states: { hover: { lineWidthPlus: 0 } },
-                    color: '#888888',
-                    data: temperatures.avg,
-                    visible: false,
-                }, {
-                    name: 'Confidence interval',
-                    type: 'arearange',
-                    color: '#888888',
-                    data: temperatures.ci,
-                    zIndex: 0,
-                    fillOpacity: 0.3,
-                    lineWidth: 0,
-                    states: { hover: { lineWidthPlus: 0 } },
-                    marker: { enabled: false },
-                    visible: false,
-                }, {
-                    name: 'Moving average',
-                    color: '#888888',
-                    marker: { enabled: false },
-                    data: temperatures.movAvg,
-                }, {
-                    name: 'Confidence interval',
-                    type: 'arearange',
-                    color: '#7777ff',
-                    data: temperatures.ciMovAvg,
-                    zIndex: 0,
-                    fillOpacity: 0.3,
-                    lineWidth: 0,
-                    states: { hover: { lineWidthPlus: 0 } },
-                    marker: { enabled: false },
-                }],
-            });
+        var precipColor = '#550965';
+
+        var snowColor = {
+            color: '#CDD8F0',
+            borderColor: '#5F7CB9',
+            hover: '#eeeeff',
         };
+
+        var rainColor = {
+            color: '#1000FB',
+            borderColor: '#5F7CB9',
+            hover: '#3333ff',
+        };
+
+        /***************************************/
+        /* DATA TRANSFORMATIONS AND STATISTICS */
+        /***************************************/
 
         var parseGISSTEMP = function (results) {
             var fields = results.meta.fields;
@@ -511,6 +443,187 @@
             return temperatures;
         };
 
+        /*****************/
+        /* RENDER GRAPHS */
+        /*****************/
+
+        var renderTemperatureGraph = function (temperatures, id, title) {
+            Highcharts.chart(id, {
+                chart: {
+                    type: 'line',
+                    zoomType: 'xy',
+                },
+                title: {
+                    text: title,
+                },
+                xAxis: {
+                    title: {
+                        text: 'Year',
+                    },
+                    crosshair: true,
+                },
+                yAxis: {
+                    title: {
+                        text: 'Temperature [C°]'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        color: 'rgb(204, 214, 235)',
+                        width: 2,
+                    }],
+                    max: 2,
+                    min: -3,
+                    tickInterval: 1,
+                    lineWidth: 1,
+                },
+                tooltip: {
+                    shared: true,
+                    valueSuffix: ' °C',
+                    valueDecimals: 2,
+                },
+                series: [{
+                    name: 'Max',
+                    lineWidth: 0,
+                    marker: { radius: 2 },
+                    states: { hover: { lineWidthPlus: 0 } },
+                    color: '#ff0000',
+                    data: temperatures.max,
+                    visible: false,
+                }, {
+                    name: 'Min',
+                    lineWidth: 0,
+                    marker: { radius: 2 },
+                    states: { hover: { lineWidthPlus: 0 } },
+                    color: '#0000ff',
+                    data: temperatures.min,
+                    visible: false,
+                }, {
+                    name: 'Yearly average',
+                    lineWidth: 0,
+                    marker: { radius: 2 },
+                    states: { hover: { lineWidthPlus: 0 } },
+                    color: '#888888',
+                    data: temperatures.avg,
+                    visible: false,
+                }, {
+                    name: 'Confidence interval',
+                    type: 'arearange',
+                    color: '#888888',
+                    data: temperatures.ci,
+                    zIndex: 0,
+                    fillOpacity: 0.3,
+                    lineWidth: 0,
+                    states: { hover: { lineWidthPlus: 0 } },
+                    marker: { enabled: false },
+                    visible: false,
+                }, {
+                    name: 'Moving average',
+                    color: '#888888',
+                    marker: { enabled: false },
+                    data: temperatures.movAvg,
+                }, {
+                    name: 'Confidence interval',
+                    type: 'arearange',
+                    color: '#7777ff',
+                    data: temperatures.ciMovAvg,
+                    zIndex: 0,
+                    fillOpacity: 0.3,
+                    lineWidth: 0,
+                    states: { hover: { lineWidthPlus: 0 } },
+                    marker: { enabled: false },
+                }],
+            });
+        };
+
+        var renderAbiskoTemperatureGraph = function (temperatures, id, title) {
+            Highcharts.chart(id, {
+                chart: {
+                    type: 'line',
+                    zoomType: 'xy',
+                },
+                title: {
+                    text: title,
+                },
+                xAxis: {
+                    title: {
+                        text: 'Year',
+                    },
+                    crosshair: true,
+                },
+                yAxis: {
+                    title: {
+                        text: 'Temperature [C°]'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        color: 'rgb(204, 214, 235)',
+                        width: 2,
+                    }],
+                    //max: 2,
+                    //min: -3,
+                    tickInterval: 1,
+                    lineWidth: 1,
+                },
+                tooltip: {
+                    shared: true,
+                    valueSuffix: ' °C',
+                    valueDecimals: 2,
+                },
+                series: [{
+                    name: 'Max',
+                    lineWidth: 0,
+                    marker: { radius: 2 },
+                    states: { hover: { lineWidthPlus: 0 } },
+                    color: '#ff0000',
+                    data: temperatures.max,
+                    visible: false,
+                }, {
+                    name: 'Min',
+                    lineWidth: 0,
+                    marker: { radius: 2 },
+                    states: { hover: { lineWidthPlus: 0 } },
+                    color: '#0000ff',
+                    data: temperatures.min,
+                    visible: false,
+                }, {
+                    name: 'Yearly average',
+                    lineWidth: 0,
+                    marker: { radius: 2 },
+                    states: { hover: { lineWidthPlus: 0 } },
+                    color: '#888888',
+                    data: temperatures.avg,
+                    visible: true,
+                }, {
+                    name: 'Confidence interval',
+                    type: 'arearange',
+                    color: '#888888',
+                    data: temperatures.ci,
+                    zIndex: 0,
+                    fillOpacity: 0.3,
+                    lineWidth: 0,
+                    states: { hover: { lineWidthPlus: 0 } },
+                    marker: { enabled: false },
+                    visible: false,
+                }, {
+                    name: 'Moving average',
+                    color: '#888888',
+                    marker: { enabled: false },
+                    data: temperatures.movAvg,
+                }, {
+                    name: 'Confidence interval',
+                    type: 'arearange',
+                    color: '#7777ff',
+                    data: temperatures.ciMovAvg,
+                    zIndex: 0,
+                    fillOpacity: 0.3,
+                    lineWidth: 0,
+                    states: { hover: { lineWidthPlus: 0 } },
+                    marker: { enabled: false },
+                    visible: false,
+                }],
+            });
+        };
+
         var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
             Highcharts.chart(id, {
                 chart: {
@@ -609,10 +722,11 @@
                     stack: 'precip',
                     stacking: 'normal',
                     data: precipitation.precip_snow,
-                    color: '#eeeeff',
+                    color: snowColor.color,
+                    borderColor: snowColor.borderColor,
                     states: {
                         hover: {
-                            color: '#aaaaff',
+                            color: snowColor.hover,
                             animation: {
                                 duration: 0,
                             },
@@ -624,10 +738,11 @@
                     stack: 'precip',
                     stacking: 'normal',
                     data: precipitation.precip_rain,
-                    color: '#ccccff',
+                    color: rainColor.color,
+                    borderColor: rainColor.borderColor,
                     states: {
                         hover: {
-                            color: '#0000ff',
+                            color: rainColor.hover,
                             animation: {
                                 duration: 0,
                             },
@@ -635,7 +750,7 @@
                     },
                 }, {
                     name: 'Average precipitation',
-                    color: '#888888',
+                    color: precipColor,
                     data: precipitation.precip_movAvg,
                 }, {
                     name: 'Linear regression',
@@ -658,7 +773,6 @@
         };
 
         var renderMonthlyPrecipitationGraph = function (precipitation, month) {
-            console.log(precipitation.linear(1))
             var titles = {
                 jan: 'January', feb: 'February', mar: 'March', apr: 'April', may: 'May', jun: 'June',
                 jul: 'July', aug: 'August', sep: 'September', oct: 'October', nov: 'November', dec: 'December'
@@ -698,10 +812,11 @@
                     stack: 'precip',
                     stacking: 'normal',
                     data: precipitation.snow,
-                    color: '#eeeeff',
+                    color: snowColor.color,
+                    borderColor: snowColor.borderColor,
                     states: {
                         hover: {
-                            color: '#aaaaff',
+                            color: snowColor.hover,
                             animation: {
                                 duration: 0,
                             },
@@ -713,10 +828,11 @@
                     stack: 'precip',
                     stacking: 'normal',
                     data: precipitation.rain,
-                    color: '#ccccff',
+                    color: rainColor.color,
+                    borderColor: rainColor.borderColor,
                     states: {
                         hover: {
-                            color: '#0000ff',
+                            color: rainColor.hover,
                             animation: {
                                 duration: 0,
                             },
@@ -724,7 +840,7 @@
                     },
                 }, {
                     name: 'Average precipitation',
-                    color: '#888888',
+                    color: precipColor,
                     data: precipitation.movAvg,
                 }, {
                     name: 'Linear regression',
@@ -746,9 +862,10 @@
             });
         };
 
-        /*******************************************/
-        /* THE ACTUAL LOADING OF DATA HAPPENS HERE */
-        /*******************************************/
+        /*****************************/
+        /* LOADING DATA HAPPENS HERE */
+        /*****************************/
+
         Papa.parse(window.location + '/NH.Ts downloaded 21062018.csv', {
             header: true,
             delimiter: ',',
@@ -797,7 +914,7 @@
             dynamicTyping: false,
             complete: function (result) {
                 var data = parseAbiskoCsv(result);
-                renderTemperatureGraph(data, 'abiskoTemperatures', 'Abisko temperatures');
+                renderAbiskoTemperatureGraph(data, 'abiskoTemperatures', 'Abisko temperatures');
                 renderTemperatureDifferenceGraph(data.difference, 'temperatureDifferenceAbisko', 'Temperature difference for Abisko');
                 renderYearlyPrecipitationGraph(data);
                 months().forEach(function (month) {
@@ -805,7 +922,6 @@
                 });
             },
         });
-
 
 
         Highcharts.chart('lakeIce', {
