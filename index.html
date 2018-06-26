@@ -346,18 +346,30 @@
                 };
             }).slice(10);
 
-            var precipMovAvg = movingAverages(Object.values(data).map(function (each) {
-                return each.precip;
-            }), 10).map(function (avg, index) {
-                return {
+            var precipMovAvg = movingAverages(Object.values(data)
+                .map(each => each.precip), 10)
+                .map((avg, index) => ({
                     x: Object.keys(data)[index],
                     y: avg,
-                };
-            }).slice(10);
+            })).slice(10);
 
-            var precipitationLinear = linearRegression(years.slice(10), precipMovAvg.map(function (each) {
-                return each.y;
-            }));
+            var precipRainMovAvg = movingAverages(Object.values(data)
+                .map(each => each.precip_rain), 10)
+                .map((avg, index) => ({
+                    x: Object.keys(data)[index],
+                    y: avg,
+                })).slice(10);
+
+            var precipSnowMovAvg = movingAverages(Object.values(data)
+                .map(each => each.precip_snow), 10)
+                .map((avg, index) => ({
+                    x: Object.keys(data)[index],
+                    y: avg,
+                })).slice(10);
+
+            var precipitationLinear = linearRegression(years.slice(10), precipMovAvg.map(each => each.y));
+            var precipitationRainLinear = linearRegression(years.slice(10), precipRainMovAvg.map(each => each.y));
+            var precipitationSnowLinear = linearRegression(years.slice(10), precipSnowMovAvg.map(each => each.y));
 
             var ciMovAvg = ci.map(function (each) {
                 return {
@@ -391,7 +403,11 @@
             data.precip_snow = precip_snow;
             data.precip_rain = precip_rain;
             data.precip_movAvg = precipMovAvg;
+            data.precip_rain_movAvg = precipRainMovAvg;
+            data.precip_snow_movAvg = precipSnowMovAvg;
             data.precip_linear = precipitationLinear;
+            data.precip_rain_linear = precipitationRainLinear;
+            data.precip_snow_linear = precipitationSnowLinear;
             data.monthlyPrecip = monthlyPrecip;
 
             return data;
@@ -642,8 +658,8 @@
                     crosshair: true,
                     plotBands: [{
                         color: 'rgb(245, 245, 245)',
-                        from: 1961,
-                        to: 1990,
+                        from: baselineLower,
+                        to: baselineUpper,
                     }],
                 },
                 yAxis: {
@@ -672,7 +688,7 @@
                         point: {
                             xAxis: 0,
                             yAxis: 0,
-                            x: 1975,
+                            x: baselineLower + (baselineUpper - baselineLower) / 2,
                             y: 2.4,
                         },
                         text: 'Baseline',
@@ -767,6 +783,46 @@
                     data: [
                         { x: precipitation.years[10], y: precipitation.precip_linear(precipitation.years[10]) },
                         { x: precipitation.years[precipitation.years.length - 1], y: precipitation.precip_linear(precipitation.years[precipitation.years.length - 1]) }
+                    ],
+                }, {
+                    name: 'Average precipitation (rain)',
+                    color: 'black',
+                    data: precipitation.precip_rain_movAvg,
+                }, {
+                    name: 'Linear regression (rain)',
+                    marker: {
+                        enabled: false, // Linear regression lines doesn't contain points
+                    },
+                    color: 'red',
+                    states: {
+                        hover: {
+                            lineWidth: 0, // Do nothing on hover
+                        },
+                    },
+                    enableMouseTracking: false, // No interactivity
+                    data: [
+                        { x: precipitation.years[10], y: precipitation.precip_rain_linear(precipitation.years[10]) },
+                        { x: precipitation.years[precipitation.years.length - 1], y: precipitation.precip_rain_linear(precipitation.years[precipitation.years.length - 1]) }
+                    ],
+                }, {
+                    name: 'Average precipitation (snow)',
+                    color: 'green',
+                    data: precipitation.precip_snow_movAvg,
+                }, {
+                    name: 'Linear regression (snow)',
+                    marker: {
+                        enabled: false, // Linear regression lines doesn't contain points
+                    },
+                    color: 'red',
+                    states: {
+                        hover: {
+                            lineWidth: 0, // Do nothing on hover
+                        },
+                    },
+                    enableMouseTracking: false, // No interactivity
+                    data: [
+                        { x: precipitation.years[10], y: precipitation.precip_snow_linear(precipitation.years[10]) },
+                        { x: precipitation.years[precipitation.years.length - 1], y: precipitation.precip_snow_linear(precipitation.years[precipitation.years.length - 1]) }
                     ],
                 }],
             });
@@ -875,7 +931,7 @@
             comments: 'Station',
             complete: function (result) {
                 var temperatures = parseGISSTEMP(result);
-                renderTemperatureGraph(temperatures, 'northernHemisphere', 'Northern hemispheric temperatures');
+                renderTemperatureGraph(temperatures, 'northernHemisphere', 'Northern Hemisphere temperatures');
             },
         });
 
@@ -900,8 +956,8 @@
             dynamicTyping: true,
             complete: function (result) {
                 var temperatures = parseGISSTEMPzonalMeans(result);
-                renderTemperatureDifferenceGraph(temperatures['64n-90n'], 'temperatureDifference1', 'Temperature difference for 64N-90N');
-                renderTemperatureDifferenceGraph(temperatures['nhem'], 'temperatureDifference2', 'Temperature difference for nordic hemisphere');
+                renderTemperatureDifferenceGraph(temperatures['64n-90n'], 'temperatureDifference1', 'Temperature difference for Arctic (64N-90N)');
+                renderTemperatureDifferenceGraph(temperatures['nhem'], 'temperatureDifference2', 'Temperature difference for Northern Hemisphere');
                 renderTemperatureDifferenceGraph(temperatures['glob'], 'temperatureDifference3', 'Global temperature difference');
             },
         });

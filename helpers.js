@@ -50,8 +50,11 @@ var confidenceInterval = function (mean, variance, count) {
     };
 };
 
+var baselineLower = 1961;
+var baselineUpper = 1990;
+
 var isBaselinePeriod = function (year) {
-    return year >= 1961 && year <= 1990;
+    return year >= baselineLower && year <= baselineUpper;
 };
 
 var validNumber = function (string) {
