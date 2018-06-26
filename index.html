@@ -5,12 +5,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/highcharts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/js/modules/annotations.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/highcharts-more.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="regression.js"></script>
     <script src="papaparse.min.js"></script>
     <script src="helpers.js"></script>
     <style type="text/css">
-        body {
-            text-align: center;
+        form header {
+            font-weight: bold;
         }
 
         .figure {
@@ -22,7 +23,33 @@
 </head>
 
 <body>
-    <div id="abiskoTemperatures" class="figure"></div>
+    <form id="baseline">
+        <header>Year range for baseline</header>
+        <label for="baselineLower">Lower limit</label>
+        <input name="baselineLower" type="text" value="1961">
+        <br>
+        <label for="baselineUpper">Upper limit</label>
+        <input name="baselineUpper" type="text" value="1990">
+        <br>
+        <input type="submit">
+    </form>
+
+    <div id="AbiskoTemperatures" class="figure"></div>
+    <div id="AbiskoTemperaturesSummer" class="figure"></div>
+    <div id="AbiskoTemperaturesWinter" class="figure"></div>
+    <div id="monthlyAbiskoTemperatures_jan" class="figure"></div>
+    <div id="monthlyAbiskoTemperatures_feb" class="figure"></div>
+    <div id="monthlyAbiskoTemperatures_mar" class="figure"></div>
+    <div id="monthlyAbiskoTemperatures_apr" class="figure"></div>
+    <div id="monthlyAbiskoTemperatures_may" class="figure"></div>
+    <div id="monthlyAbiskoTemperatures_jun" class="figure"></div>
+    <div id="monthlyAbiskoTemperatures_jul" class="figure"></div>
+    <div id="monthlyAbiskoTemperatures_aug" class="figure"></div>
+    <div id="monthlyAbiskoTemperatures_sep" class="figure"></div>
+    <div id="monthlyAbiskoTemperatures_oct" class="figure"></div>
+    <div id="monthlyAbiskoTemperatures_nov" class="figure"></div>
+    <div id="monthlyAbiskoTemperatures_dec" class="figure"></div>
+
     <div id="northernHemisphere" class="figure"></div>
     <div id="globalTemperatures" class="figure"></div>
 
@@ -32,6 +59,8 @@
     <div id="temperatureDifference3" class="figure"></div>
 
     <div id="yearlyPrecipitation" class="figure"></div>
+    <div id="summerPrecipitation" class="figure"></div>
+    <div id="winterPrecipitation" class="figure"></div>
     <div id="monthlyPrecipitation_jan" class="figure"></div>
     <div id="monthlyPrecipitation_feb" class="figure"></div>
     <div id="monthlyPrecipitation_mar" class="figure"></div>
@@ -48,6 +77,30 @@
     <div id="lakeIce" class="figure"></div>
 
     <script type="text/javascript">
+        $('#baseline').submit((e) => {
+            e.preventDefault();
+            var lower = +e.target[0].value;
+            var upper = +e.target[1].value;
+            if (!lower || !upper) {
+                alert('Something went wrong!');
+                return;
+            } else if (lower < 1923) {
+                alert("Lower limit must be above 1923!");
+                return;
+            } else if (lower >= upper) {
+                alert("Lower limit cant be larger or equal to upper limit!");
+                return;
+            } else if (upper > 2017) {
+                alert("Upper limit must be below 2017!");
+                return;
+            }
+
+            baselineLower = lower;
+            baselineUpper = upper;
+            parseZonal();
+            parseAbisko();
+        });
+
         Highcharts.setOptions({
             credits: false,
         });
@@ -74,31 +127,19 @@
             var fields = results.meta.fields;
             var temperatures = [];
 
-            results.data.forEach(function (row) {
-                var year = {
-                    min: Infinity,
-                    max: -Infinity,
-                    sum: 0,
-                    count: 0,
-                };
+            results.data.forEach((row) => {
+                var year = {};
 
-                fields.forEach(function (field) {
-                    year[field.toLowerCase()] = validNumber(row[field]);
-                });
+                fields.forEach(field => year[field.toLowerCase()] = validNumber(row[field]));
 
-                var monthlyTemperatures = months().map(function (month) {
-                    return year[month];
-                }).filter(Number);
+                var monthlyTemperatures = months().map(month => year[month]).filter(Number);
 
-                monthlyTemperatures.forEach(function (temperature) {
-                    year.min = Math.min(year.min, temperature);
-                    year.max = Math.max(year.max, temperature);
-                    year.sum += temperature;
-                    year.count++;
-                });
+                year.min = min(monthlyTemperatures);
+                year.max = max(monthlyTemperatures);
+                year.count = monthlyTemperatures.length;
 
                 if (year.count > 0) {
-                    year.avg = year.sum / year.count;
+                    year.avg = mean(monthlyTemperatures);
 
                     year.variance = 0;
 
@@ -112,48 +153,74 @@
                 }
             });
 
-            ['min', 'max', 'avg'].forEach(function (statistic) {
-                temperatures[statistic] = temperatures.map(function (temps) {
-                    return {
-                        x: temps.year,
-                        y: temps[statistic],
-                    };
-                }).slice(10);
+            ['min', 'max', 'avg'].forEach((statistic) => {
+                temperatures[statistic] = temperatures.map(temps => ({
+                    x: temps.year,
+                    y: temps[statistic],
+                })).slice(10);
             });
 
-            temperatures.movAvg = movingAverages(temperatures.map(function (temps) {
-                return temps.avg;
-            }), 10).map(function (avg, index) {
-                return {
+            temperatures.movAvg = movingAverages(temperatures.map(temps => temps.avg), 10)
+                .map((avg, index) => ({
                     x: temperatures[index].year,
                     y: avg,
-                };
-            }).slice(10);
+                })).slice(10);
 
-            temperatures.ci = temperatures.map(function (temps) {
-                return {
-                    x: temps.year,
-                    low: temps.ci.low,
-                    high: temps.ci.high,
-                };
-            });
+            temperatures.ci = temperatures.map(temps => ({
+                x: temps.year,
+                low: temps.ci.low,
+                high: temps.ci.high,
+            }));
 
-            temperatures.ciMovAvg = temperatures.ci.map(function (each) {
-                return {
-                    x: each.x,
-                };
-            });
+            temperatures.ciMovAvg = temperatures.ci.map(each => ({ x: each.x }));
 
-            ['low', 'high'].forEach(function (bound) {
-                movingAverages(temperatures.ci.map(function (each) {
-                    return each[bound]
-                }), 10).forEach(function (value, index) {
-                    temperatures.ciMovAvg[index][bound] = value;
-                });
+            ['low', 'high'].forEach((bound) => {
+                movingAverages(temperatures.ci.map(each => each[bound]), 10)
+                    .forEach((value, index) => temperatures.ciMovAvg[index][bound] = value);
             });
 
             temperatures.ci = temperatures.ci.slice(10);
             temperatures.ciMovAvg = temperatures.ciMovAvg.slice(10);
+
+            return temperatures;
+        };
+
+        var parseGISSTEMPzonalMeans = function (results) {
+            var fields = results.meta.fields;
+            var temperatures = [];
+            temperatures['sum64n-90n'] = 0;
+            temperatures['sumnhem'] = 0;
+            temperatures['sumglob'] = 0;
+            var count = 0;
+
+            results.data.forEach((row) => {
+                var year = {};
+
+                fields.forEach(field => year[field.toLowerCase()] = validNumber(row[field]));
+
+                if (withinBaselinePeriod(year.year)) {
+                    temperatures['sum64n-90n'] += year['64n-90n'];
+                    temperatures['sumnhem'] += year['nhem'];
+                    temperatures['sumglob'] += year['glob'];
+                    count++;
+                }
+                if (year.year > 1913) {
+                    temperatures.push(year);
+                }
+            });
+
+            temperatures['avg64n-90n'] = temperatures['sum64n-90n'] / count;
+            temperatures['avgnhem'] = temperatures['sumnhem'] / count;
+            temperatures['avgglob'] = temperatures['sumglob'] / count;
+
+            var difference = region => temperatures.map(each => ({
+                x: each.year,
+                y: each[region] - temperatures['avg' + region],
+            })).slice(9); // remove values missing from Abisko data
+
+            temperatures['64n-90n'] = difference('64n-90n');
+            temperatures['nhem'] = difference('nhem');
+            temperatures['glob'] = difference('glob');
 
             return temperatures;
         };
@@ -171,12 +238,11 @@
 
             var data = {};
 
-            rows.forEach(function (row) {
+            rows.forEach((row) => {
                 var date = parseDate(row[fields.time]);
                 var avg = parseNumber(row[fields.avg]);
-                var min = parseNumber(row[fields.min]);
-                var max = parseNumber(row[fields.max]);
                 var precip = parseNumber(row[fields.precip]);
+
                 var year = data[date.year] = data[date.year] || {
                     sum: 0,
                     count: 0,
@@ -198,11 +264,10 @@
                     }
                 }
                 year.data.push({
-                    date: date,
-                    avg: avg,
-                    min: min,
-                    max, max,
-                    precip: precip,
+                    date, avg,
+                    min: parseNumber(row[fields.min]),
+                    max: parseNumber(row[fields.max]),
+                    precip,
                     precip_snow: (avg < 0) ? precip : 0,
                     precip_rain: (avg >= 0) ? precip : 0,
                 });
@@ -213,250 +278,168 @@
                 count: 0,
             };
 
-            Object.entries(data).forEach(function (each) {
-                var year = each[1];
+            var entries = () => Object.entries(data);
+            var keys = () => Object.keys(data);
+            var values = () => Object.values(data);
+
+            entries().forEach((entry) => {
+                var year = entry[1];
                 year.avg = year.sum / (year.count || 1);
 
-                if (isBaselinePeriod(each[0])) {
+                if (withinBaselinePeriod(entry[0])) {
                     baseline.sum += year.avg;
                     baseline.count++;
                 }
 
                 var monthlyTemperatures = [];
                 var monthlyPrecipitation = [];
+                var summerTemperatures = { sum: 0, count: 0 };
+                var winterTemperatures = { sum: 0, count: 0 };
 
-                year.data.forEach(function (each) {
+                year.data.forEach((each) => {
                     var month = +each.date.month;
-                    var temperatures = monthlyTemperatures[month - 1] = monthlyTemperatures[month - 1] || {
+                    var t = monthlyTemperatures[month - 1] = monthlyTemperatures[month - 1] || {
                         sum: 0,
                         count: 0,
                     };
-                    var precip = monthlyPrecipitation[month - 1] = monthlyPrecipitation[month - 1] || {
+                    var p = monthlyPrecipitation[month - 1] = monthlyPrecipitation[month - 1] || {
                         sum: 0,
                         rain: 0,
                         snow: 0,
                         count: 0,
                     };
                     if (each.avg) {
-                        temperatures.sum += each.avg;
-                        temperatures.count++;
+                        if (isSummerMonth(monthByIndex(month))) {
+                            summerTemperatures.sum += each.avg;
+                            summerTemperatures.count++;
+                        } else if (isWinterMonth(monthByIndex(month))) {
+                            winterTemperatures.sum += each.avg;
+                            winterTemperatures.count++;
+                        }
+                        t.sum += each.avg;
+                        t.count++;
                     }
                     if (each.precip) {
-                        precip.sum += each.precip;
-                        precip.snow += each.precip_snow;
-                        precip.rain += each.precip_rain;
-                        precip.count++;
+                        p.sum += each.precip;
+                        p.snow += each.precip_snow;
+                        p.rain += each.precip_rain;
+                        p.count++;
                     }
                 });
 
-                monthlyTemperatures = monthlyTemperatures.map(function (month) {
-                    return month.sum / month.count;
-                });
+                year.monthlyTemperatures = monthlyTemperatures.map(month => month.sum / month.count);
+                year.summerTemperature = summerTemperatures.sum / summerTemperatures.count;
+                year.winterTemperature = winterTemperatures.sum / winterTemperatures.count;
 
-                year.monthlyPrecipitation = monthlyPrecipitation.map(function (precip) {
-                    return {
-                        avg: precip.sum / precip.count,
-                        snow: precip.snow / precip.count,
-                        rain: precip.rain / precip.count,
-                    };
-                });
+                year.monthlyPrecipitation = monthlyPrecipitation.map((precip) => ({
+                    avg: precip.sum / precip.count,
+                    snow: precip.snow / precip.count,
+                    rain: precip.rain / precip.count,
+                }));
 
-                year.max = monthlyTemperatures.reduce(function (total, current) {
-                    return Math.max(total, current);
-                });
-
-                year.min = monthlyTemperatures.reduce(function (total, current) {
-                    return Math.min(total, current);
-                });
+                year.max = max(year.monthlyTemperatures);
+                year.min = min(year.monthlyTemperatures);
 
                 year.variance = 0;
                 year.ci = { low: -Infinity, high: Infinity };
 
-                if (monthlyTemperatures.length > 1) {
-                    year.variance = variance(monthlyTemperatures);
-                    year.ci = confidenceInterval(year.avg, year.variance, monthlyTemperatures.length);
+                if (year.monthlyTemperatures.length > 1) {
+                    year.variance = variance(year.monthlyTemperatures);
+                    year.ci = confidenceInterval(year.avg, year.variance, year.monthlyTemperatures.length);
                 }
             });
 
-            baseline.avg = baseline.sum / baseline.count;
-
-            var yearly = function (statistic) {
-                return Object.entries(data).map(function (each) {
-                    return {
-                        x: +each[0],
-                        y: each[1][statistic],
-                    };
-                }).slice(10);
-            }
-
-            var years = Object.keys(data).map(Number);
-
-            var avg = yearly('avg');
-            var min = yearly('min');
-            var max = yearly('max');
-            var precip = yearly('precip');
-            var precip_snow = yearly('precip_snow');
-            var precip_rain = yearly('precip_rain');
-
-            var monthly = function (monthIndex, statistic) {
-                return Object.entries(data).map(function (each) {
-                    return {
-                        x: +each[0],
-                        y: each[1].monthlyPrecipitation[monthIndex][statistic]
-                    };
-                })
-            }
-
-            var monthlyPrecip = {};
-
-            months().forEach(function (month, index) {
-                var m = monthlyPrecip[month] = monthlyPrecip[month] || {};
-                m.years = years.slice(10);
-                m.avg = monthly(index, 'avg');
-                m.movAvg = movingAverages(m.avg.map(function (each) {
-                    return each.y;
-                }), 10).map(function (avg, index) {
-                    return {
-                        x: Object.keys(data)[index],
-                        y: avg,
-                    }
-                }).slice(10);
-                m.linear = linearRegression(m.years, m.movAvg.map(function (each) {
-                    return each.y
-                }));
-                m.avg = m.avg.slice(10);
-                m.rain = monthly(index, 'rain').slice(10);
-                m.snow = monthly(index, 'snow').slice(10);
-            });
-
-            var ci = Object.entries(data).map(function (each) {
-                return {
-                    x: +each[0],
-                    low: each[1].ci.low,
-                    high: each[1].ci.high,
-                };
-            });
-
-            var movAvg = movingAverages(Object.values(data).map(function (each) {
-                return each.avg;
-            }), 10).map(function (avg, index) {
-                return {
-                    x: Object.keys(data)[index],
-                    y: avg,
-                };
-            }).slice(10);
-
-            var precipMovAvg = movingAverages(Object.values(data)
-                .map(each => each.precip), 10)
-                .map((avg, index) => ({
-                    x: Object.keys(data)[index],
-                    y: avg,
+            var yearly = statistic => entries().map(each => ({
+                x: +each[0],
+                y: each[1][statistic],
             })).slice(10);
 
-            var precipRainMovAvg = movingAverages(Object.values(data)
-                .map(each => each.precip_rain), 10)
-                .map((avg, index) => ({
-                    x: Object.keys(data)[index],
-                    y: avg,
-                })).slice(10);
+            var monthlyPrecipByStat = (monthIndex, statistic) => entries().map(each => ({
+                x: +each[0],
+                y: each[1].monthlyPrecipitation[monthIndex][statistic],
+            }));
 
-            var precipSnowMovAvg = movingAverages(Object.values(data)
-                .map(each => each.precip_snow), 10)
-                .map((avg, index) => ({
-                    x: Object.keys(data)[index],
-                    y: avg,
-                })).slice(10);
+            var monthlyTemp = monthIndex => entries().map(entry => ({
+                x: +entry[0],
+                y: entry[1].monthlyTemperatures[monthIndex],
+            }));
 
-            var precipitationLinear = linearRegression(years.slice(10), precipMovAvg.map(each => each.y));
-            var precipitationRainLinear = linearRegression(years.slice(10), precipRainMovAvg.map(each => each.y));
-            var precipitationSnowLinear = linearRegression(years.slice(10), precipSnowMovAvg.map(each => each.y));
+            var movingAveragesHighCharts = values => movingAverages(values, 10).map((avg, index) => ({
+                x: keys()[index],
+                y: avg,
+            })).slice(10);
 
-            var ciMovAvg = ci.map(function (each) {
-                return {
+            var years = keys().map(Number);
+            var monthlyPrecip = {};
+            var monthlyTemps = {};
+
+            months().forEach((month, index) => {
+                var p = monthlyPrecip[month] = monthlyPrecip[month] || {};
+                p.years = years.slice(10);
+                p.avg = monthlyPrecipByStat(index, 'avg');
+                p.movAvg = movingAveragesHighCharts(p.avg.map(each => each.y));
+                p.linear = linearRegression(p.years, p.movAvg.map(each => each.y));
+                p.avg = p.avg.slice(10);
+                p.rain = monthlyPrecipByStat(index, 'rain').slice(10);
+                p.snow = monthlyPrecipByStat(index, 'snow').slice(10);
+
+                var t = monthlyTemps[month] = {};
+                t.avg = monthlyTemp(index);
+                t.movAvg = movingAveragesHighCharts(t.avg.map(each => each.y));
+                t.avg = t.avg.slice(10);
+            });
+
+            var seasonal = season => entries().map(each => ({
+                x: +each[0],
+                y: each[1][season],
+            }));
+            var summerTemps = { avg: seasonal('summerTemperature') };
+            var winterTemps = { avg: seasonal('winterTemperature') };
+            summerTemps.movAvg = movingAveragesHighCharts(summerTemps.avg.map(each => each.y));
+            winterTemps.movAvg = movingAveragesHighCharts(winterTemps.avg.map(each => each.y));
+            summerTemps.avg = summerTemps.avg.slice(10);
+            winterTemps.avg = winterTemps.avg.slice(10);
+
+            var avg = yearly('avg');
+
+            var ci = entries().map((each) => ({
+                x: +each[0],
+                low: each[1].ci.low,
+                high: each[1].ci.high,
+            }));
+
+            var ciMovAvg = ci.map(each => ({ x: each.x }));
+            ['low', 'high'].forEach(bound =>
+                movingAverages(ci.map(each => each[bound]), 10)
+                    .forEach((value, index) => ciMovAvg[index][bound] = value));
+
+            var precipMovAvg = movingAveragesHighCharts(values().map(each => each.precip));
+
+            return {
+                years,
+                avg,
+                min: yearly('min'),
+                max: yearly('max'),
+                movAvg: movingAveragesHighCharts(values().map(each => each.avg)),
+                ci: ci.slice(10),
+                ciMovAvg: ciMovAvg.slice(10),
+
+                monthlyTemps,
+                summerTemps,
+                winterTemps,
+
+                difference: avg.map(each => ({
                     x: each.x,
-                };
-            });
+                    y: each.y - (baseline.sum / baseline.count),
+                })),
 
-            ['low', 'high'].forEach(function (bound) {
-                movingAverages(ci.map(function (each) {
-                    return each[bound]
-                }), 10).forEach(function (value, index) {
-                    ciMovAvg[index][bound] = value;
-                });
-            });
-
-            data.difference = avg.map(function (each) {
-                return {
-                    x: each.x,
-                    y: each.y - baseline.avg,
-                };
-            });
-
-            data.years = years;
-            data.avg = avg;
-            data.min = min;
-            data.max = max;
-            data.movAvg = movAvg;
-            data.ci = ci.slice(10);
-            data.ciMovAvg = ciMovAvg.slice(10);
-            data.precip = precip;
-            data.precip_snow = precip_snow;
-            data.precip_rain = precip_rain;
-            data.precip_movAvg = precipMovAvg;
-            data.precip_rain_movAvg = precipRainMovAvg;
-            data.precip_snow_movAvg = precipSnowMovAvg;
-            data.precip_linear = precipitationLinear;
-            data.precip_rain_linear = precipitationRainLinear;
-            data.precip_snow_linear = precipitationSnowLinear;
-            data.monthlyPrecip = monthlyPrecip;
-
-            return data;
-        };
-
-        var parseGISSTEMPzonalMeans = function (results) {
-            var fields = results.meta.fields;
-            var temperatures = [];
-            temperatures['sum64n-90n'] = 0;
-            temperatures['sumnhem'] = 0;
-            temperatures['sumglob'] = 0;
-            var count = 0;
-
-            results.data.forEach(function (row) {
-                var year = {};
-
-                fields.forEach(function (field) {
-                    year[field.toLowerCase()] = validNumber(row[field]);
-                })
-
-                if (isBaselinePeriod(year.year)) {
-                    temperatures['sum64n-90n'] += year['64n-90n'];
-                    temperatures['sumnhem'] += year['nhem'];
-                    temperatures['sumglob'] += year['glob'];
-                    count++;
-                }
-                if (year.year > 1913) {
-                    temperatures.push(year);
-                }
-            });
-
-            temperatures['avg64n-90n'] = temperatures['sum64n-90n'] / count;
-            temperatures['avgnhem'] = temperatures['sumnhem'] / count;
-            temperatures['avgglob'] = temperatures['sumglob'] / count;
-
-            var difference = function (region) {
-                return temperatures.map(function (each) {
-                    return {
-                        x: each.year,
-                        y: each[region] - temperatures['avg' + region],
-                    };
-                }).slice(9); // remove values missing from Abisko data
-            }
-
-            temperatures['64n-90n'] = difference('64n-90n');
-            temperatures['nhem'] = difference('nhem');
-            temperatures['glob'] = difference('glob');
-
-            return temperatures;
+                precip: yearly('precip'),
+                precip_snow: yearly('precip_snow'),
+                precip_rain: yearly('precip_rain'),
+                precip_movAvg: precipMovAvg,
+                precip_linear: linearRegression(years.slice(10), precipMovAvg.map(each => each.y)),
+                monthlyPrecip,
+            };
         };
 
         /*****************/
@@ -640,6 +623,57 @@
             });
         };
 
+        var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
+            Highcharts.chart(id, {
+                chart: {
+                    type: 'line',
+                    zoomType: 'xy',
+                },
+                title: {
+                    text: title,
+                },
+                xAxis: {
+                    title: {
+                        text: 'Year',
+                    },
+                    crosshair: true,
+                },
+                yAxis: {
+                    title: {
+                        text: 'Temperature [C°]'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        color: 'rgb(204, 214, 235)',
+                        width: 2,
+                    }],
+                    //max: 2,
+                    //min: -3,
+                    tickInterval: 1,
+                    lineWidth: 1,
+                },
+                tooltip: {
+                    shared: true,
+                    valueSuffix: ' °C',
+                    valueDecimals: 2,
+                },
+                series: [{
+                    name: 'Monthly average',
+                    lineWidth: 0,
+                    marker: { radius: 2 },
+                    states: { hover: { lineWidthPlus: 0 } },
+                    color: '#888888',
+                    data: temperatures.avg,
+                    visible: true,
+                }, {
+                    name: 'Moving average',
+                    color: '#888888',
+                    marker: { enabled: false },
+                    data: temperatures.movAvg,
+                }],
+            });
+        };
+
         var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
             Highcharts.chart(id, {
                 chart: {
@@ -784,61 +818,17 @@
                         { x: precipitation.years[10], y: precipitation.precip_linear(precipitation.years[10]) },
                         { x: precipitation.years[precipitation.years.length - 1], y: precipitation.precip_linear(precipitation.years[precipitation.years.length - 1]) }
                     ],
-                }, {
-                    name: 'Average precipitation (rain)',
-                    color: 'black',
-                    data: precipitation.precip_rain_movAvg,
-                }, {
-                    name: 'Linear regression (rain)',
-                    marker: {
-                        enabled: false, // Linear regression lines doesn't contain points
-                    },
-                    color: 'red',
-                    states: {
-                        hover: {
-                            lineWidth: 0, // Do nothing on hover
-                        },
-                    },
-                    enableMouseTracking: false, // No interactivity
-                    data: [
-                        { x: precipitation.years[10], y: precipitation.precip_rain_linear(precipitation.years[10]) },
-                        { x: precipitation.years[precipitation.years.length - 1], y: precipitation.precip_rain_linear(precipitation.years[precipitation.years.length - 1]) }
-                    ],
-                }, {
-                    name: 'Average precipitation (snow)',
-                    color: 'green',
-                    data: precipitation.precip_snow_movAvg,
-                }, {
-                    name: 'Linear regression (snow)',
-                    marker: {
-                        enabled: false, // Linear regression lines doesn't contain points
-                    },
-                    color: 'red',
-                    states: {
-                        hover: {
-                            lineWidth: 0, // Do nothing on hover
-                        },
-                    },
-                    enableMouseTracking: false, // No interactivity
-                    data: [
-                        { x: precipitation.years[10], y: precipitation.precip_snow_linear(precipitation.years[10]) },
-                        { x: precipitation.years[precipitation.years.length - 1], y: precipitation.precip_snow_linear(precipitation.years[precipitation.years.length - 1]) }
-                    ],
                 }],
             });
         };
 
         var renderMonthlyPrecipitationGraph = function (precipitation, month) {
-            var titles = {
-                jan: 'January', feb: 'February', mar: 'March', apr: 'April', may: 'May', jun: 'June',
-                jul: 'July', aug: 'August', sep: 'September', oct: 'October', nov: 'November', dec: 'December'
-            };
             Highcharts.chart('monthlyPrecipitation_' + month, {
                 chart: {
                     type: 'line'
                 },
                 title: {
-                    text: 'Precipitation for ' + titles[month],
+                    text: 'Precipitation for ' + monthName(month),
                 },
                 xAxis: {
                     title: {
@@ -898,22 +888,6 @@
                     name: 'Average precipitation',
                     color: precipColor,
                     data: precipitation.movAvg,
-                }, {
-                    name: 'Linear regression',
-                    marker: {
-                        enabled: false, // Linear regression lines doesn't contain points
-                    },
-                    color: 'red',
-                    states: {
-                        hover: {
-                            lineWidth: 0, // Do nothing on hover
-                        },
-                    },
-                    enableMouseTracking: false, // No interactivity
-                    data: [
-                        { x: precipitation.years[0], y: precipitation.linear(precipitation.years[0]) },
-                        { x: precipitation.years[precipitation.years.length - 1], y: precipitation.linear(precipitation.years[precipitation.years.length - 1]) }
-                    ],
                 }],
             });
         };
@@ -948,37 +922,62 @@
             },
         });
 
-        Papa.parse(window.location + '/ZonAnn.Ts+dSST downloaded 21062018.csv', {
-            header: true,
-            delimiter: ',',
-            download: true,
-            skipEmptyLines: true,
-            dynamicTyping: true,
-            complete: function (result) {
+        var parseZonal = function () {
+            var cached;
+
+            var complete = (result) => {
+                if (cached) result = cached;
+                else cached = result;
                 var temperatures = parseGISSTEMPzonalMeans(result);
                 renderTemperatureDifferenceGraph(temperatures['64n-90n'], 'temperatureDifference1', 'Temperature difference for Arctic (64N-90N)');
                 renderTemperatureDifferenceGraph(temperatures['nhem'], 'temperatureDifference2', 'Temperature difference for Northern Hemisphere');
                 renderTemperatureDifferenceGraph(temperatures['glob'], 'temperatureDifference3', 'Global temperature difference');
-            },
-        });
+            }
 
-        Papa.parse(window.location + '/ANS_Temp_Prec_1913-2017.csv', {
-            header: true,
-            //delimiter: ';',
-            download: true,
-            skipEmptyLines: true,
-            dynamicTyping: false,
-            complete: function (result) {
+            Papa.parse(window.location + '/ZonAnn.Ts+dSST downloaded 21062018.csv', {
+                header: true,
+                delimiter: ',',
+                download: true,
+                skipEmptyLines: true,
+                dynamicTyping: true,
+                complete,
+            });
+
+            return complete;
+        };
+        parseZonal();
+
+        var parseAbisko = function () {
+            var cached;
+
+            var complete = (result) => {
+                if (cached) result = cached;
+                else cached = result;
                 var data = parseAbiskoCsv(result);
-                renderAbiskoTemperatureGraph(data, 'abiskoTemperatures', 'Abisko temperatures');
+                renderAbiskoTemperatureGraph(data, 'AbiskoTemperatures', 'Abisko temperatures');
+                months().forEach(month =>
+                    renderAbiskoMonthlyTemperatureGraph(data.monthlyTemps[month], 'monthlyAbiskoTemperatures_' + month, 'Abisko temperatures for ' + monthName(month)));
+                renderAbiskoMonthlyTemperatureGraph(data.summerTemps, 'AbiskoTemperaturesSummer',
+                    'Abisko temperatures for ' + monthName(summerMonths[0]) + ' to ' + monthName(summerMonths[summerMonths.length - 1]))
+                renderAbiskoMonthlyTemperatureGraph(data.winterTemps, 'AbiskoTemperaturesWinter',
+                    'Abisko temperatures for ' + monthName(winterMonths[0]) + ' to ' + monthName(winterMonths[winterMonths.length - 1]))
                 renderTemperatureDifferenceGraph(data.difference, 'temperatureDifferenceAbisko', 'Temperature difference for Abisko');
                 renderYearlyPrecipitationGraph(data);
-                months().forEach(function (month) {
-                    renderMonthlyPrecipitationGraph(data.monthlyPrecip[month], month)
-                });
-            },
-        });
+                months().forEach(month => renderMonthlyPrecipitationGraph(data.monthlyPrecip[month], month));
+            }
 
+            Papa.parse(window.location + '/ANS_Temp_Prec_1913-2017.csv', {
+                header: true,
+                //delimiter: ';',
+                download: true,
+                skipEmptyLines: true,
+                dynamicTyping: false,
+                complete,
+            });
+
+            return complete;
+        };
+        parseAbisko();
 
         Highcharts.chart('lakeIce', {
             chart: {
