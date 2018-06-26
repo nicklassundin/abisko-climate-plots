@@ -74,6 +74,10 @@
     <div id="monthlyPrecipitation_nov" class="figure"></div>
     <div id="monthlyPrecipitation_dec" class="figure"></div>
 
+    <div id="yearlyPrecipitationDifference" class="figure"></div>
+    <div id="summerPrecipitationDifference" class="figure"></div>
+    <div id="winterPrecipitationDifference" class="figure"></div>
+
     <div id="lakeIce" class="figure"></div>
 
     <script type="text/javascript">
@@ -123,11 +127,11 @@
         /* DATA TRANSFORMATIONS AND STATISTICS */
         /***************************************/
 
-        var parseGISSTEMP = function (results) {
-            var fields = results.meta.fields;
+        var parseGISSTEMP = function (result) {
+            var fields = result.meta.fields;
             var temperatures = [];
 
-            results.data.forEach((row) => {
+            result.data.forEach((row) => {
                 var year = {};
 
                 fields.forEach(field => year[field.toLowerCase()] = validNumber(row[field]));
@@ -185,15 +189,15 @@
             return temperatures;
         };
 
-        var parseGISSTEMPzonalMeans = function (results) {
-            var fields = results.meta.fields;
+        var parseGISSTEMPzonalMeans = function (result) {
+            var fields = result.meta.fields;
             var temperatures = [];
             temperatures['sum64n-90n'] = 0;
             temperatures['sumnhem'] = 0;
             temperatures['sumglob'] = 0;
             var count = 0;
 
-            results.data.forEach((row) => {
+            result.data.forEach((row) => {
                 var year = {};
 
                 fields.forEach(field => year[field.toLowerCase()] = validNumber(row[field]));
@@ -273,10 +277,10 @@
                 });
             });
 
-            var baseline = {
-                sum: 0,
-                count: 0,
-            };
+            var temperatureBaseline = { sum: 0, count: 0 };
+            var precipitationBaselineYearly = { sum: 0, count: 0 };
+            var precipitationBaselineSummer = { sum: 0, count: 0 };
+            var precipitationBaselineWinter = { sum: 0, count: 0 };
 
             var entries = () => Object.entries(data);
             var keys = () => Object.keys(data);
@@ -287,8 +291,8 @@
                 year.avg = year.sum / (year.count || 1);
 
                 if (withinBaselinePeriod(entry[0])) {
-                    baseline.sum += year.avg;
-                    baseline.count++;
+                    temperatureBaseline.sum += year.avg;
+                    temperatureBaseline.count++;
                 }
 
                 var monthlyTemperatures = [];
@@ -337,22 +341,18 @@
                 year.summerTemperature = summerTemperatures.sum / summerTemperatures.count;
                 year.winterTemperature = winterTemperatures.sum / winterTemperatures.count;
 
-                year.monthlyPrecipitation = monthlyPrecipitation.map((precip) => ({
-                    total: precip.total,
-                    snow: precip.snow,
-                    rain: precip.rain,
-                }));
+                year.monthlyPrecipitation = monthlyPrecipitation;
+                year.summerPrecipitation = summerPrecipitation;
+                year.winterPrecipitation = winterPrecipitation;
 
-                year.summerPrecipitation = {
-                    total: summerPrecipitation.total,
-                    snow: summerPrecipitation.snow,
-                    rain: summerPrecipitation.rain,
-                };
-                year.winterPrecipitation = {
-                    total: winterPrecipitation.total,
-                    snow: winterPrecipitation.snow,
-                    rain: winterPrecipitation.rain,
-                };
+                if (withinBaselinePeriod(entry[0])) {
+                    precipitationBaselineSummer.sum += summerPrecipitation.total;
+                    precipitationBaselineSummer.count++;
+                    precipitationBaselineWinter.sum += winterPrecipitation.total;
+                    precipitationBaselineWinter.count++;
+                    precipitationBaselineYearly.sum += sum(monthlyPrecipitation.map(p => p.total));
+                    precipitationBaselineYearly.count++;
+                }
 
                 year.max = max(year.monthlyTemperatures);
                 year.min = min(year.monthlyTemperatures);
@@ -410,26 +410,33 @@
                 x: +each[0],
                 y: each[1][season],
             }));
-            var summerTemps = { total: seasonal('summerTemperature') };
-            var winterTemps = { total: seasonal('winterTemperature') };
-            summerTemps.movAvg = movingAveragesHighCharts(summerTemps.total.map(each => each.y));
-            winterTemps.movAvg = movingAveragesHighCharts(winterTemps.total.map(each => each.y));
-            summerTemps.total = summerTemps.total.slice(10);
-            winterTemps.total = winterTemps.total.slice(10);
+            var summerTemps = { avg: seasonal('summerTemperature') };
+            var winterTemps = { avg: seasonal('winterTemperature') };
+            summerTemps.movAvg = movingAveragesHighCharts(summerTemps.avg.map(each => each.y));
+            winterTemps.movAvg = movingAveragesHighCharts(winterTemps.avg.map(each => each.y));
+            summerTemps.avg = summerTemps.avg.slice(10);
+            winterTemps.avg = winterTemps.avg.slice(10);
 
             var seasonalPrecipByStat = (season, statistic) => entries().map(each => ({
                 x: +each[0],
                 y: each[1][season][statistic],
             }));
             var seasonalPrecipitation = { summerPrecipitation: {}, winterPrecipitation: {} };
-            ['summerPrecipitation', 'winterPrecipitation'].forEach((season) => {
-                var p = seasonalPrecipitation[season];
+            [
+                { season: 'summerPrecipitation', baseline: precipitationBaselineSummer },
+                { season: 'winterPrecipitation', baseline: precipitationBaselineWinter }
+            ].forEach((e) => {
+                var p = seasonalPrecipitation[e.season];
                 p.years = years.slice(10);
-                p.total = seasonalPrecipByStat(season, 'total');
-                p.snow = seasonalPrecipByStat(season, 'snow').slice(10);
-                p.rain = seasonalPrecipByStat(season, 'rain').slice(10);
+                p.total = seasonalPrecipByStat(e.season, 'total');
+                p.snow = seasonalPrecipByStat(e.season, 'snow').slice(10);
+                p.rain = seasonalPrecipByStat(e.season, 'rain').slice(10);
                 p.movAvg = movingAveragesHighCharts(p.total.map(each => each.y));
                 p.linear = linearRegression(p.years, p.movAvg.map(each => each.y));
+                p.difference = p.total.map(each => ({
+                    x: each.x,
+                    y: each.y - (e.baseline.sum / e.baseline.count),
+                }));
                 p.total = p.total.slice(10);
             });
 
@@ -463,7 +470,7 @@
 
                 difference: avg.map(each => ({
                     x: each.x,
-                    y: each.y - (baseline.sum / baseline.count),
+                    y: each.y - (temperatureBaseline.sum / temperatureBaseline.count),
                 })),
 
                 yearlyPrecipitation: {
@@ -473,6 +480,10 @@
                     rain: yearly('precip_rain'),
                     movAvg: precipMovAvg,
                     linear: linearRegression(years.slice(10), precipMovAvg.map(each => each.y)),
+                    difference: yearly('precip').map(each => ({
+                        x: each.x,
+                        y: each.y - (precipitationBaselineYearly.sum / precipitationBaselineYearly.count),
+                    })),
                 },
                 monthlyPrecipitation,
                 summerPrecipitation: seasonalPrecipitation.summerPrecipitation,
@@ -501,7 +512,7 @@
                 },
                 yAxis: {
                     title: {
-                        text: 'Temperature [C°]'
+                        text: 'Temperature [°C]'
                     },
                     plotLines: [{
                         value: 0,
@@ -589,7 +600,7 @@
                 },
                 yAxis: {
                     title: {
-                        text: 'Temperature [C°]'
+                        text: 'Temperature [°C]'
                     },
                     plotLines: [{
                         value: 0,
@@ -678,7 +689,7 @@
                 },
                 yAxis: {
                     title: {
-                        text: 'Temperature [C°]'
+                        text: 'Temperature [°C]'
                     },
                     plotLines: [{
                         value: 0,
@@ -736,7 +747,7 @@
                 },
                 yAxis: {
                     title: {
-                        text: 'Temperature [C°]'
+                        text: 'Temperature [°C]'
                     },
                     lineWidth: 1,
                     min: -2,
@@ -769,6 +780,69 @@
                 series: [{
                     name: 'Difference',
                     data: temperatures,
+                    color: 'red',
+                    negativeColor: 'blue',
+                }],
+            });
+        };
+
+        var renderPrecipitationDifferenceGraph = function (precipitation, id, title) {
+            Highcharts.chart(id, {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: title,
+                },
+                subtitle: {
+                    text: 'Difference between yearly average and average for 1961-1990',
+                },
+                xAxis: {
+                    title: {
+                        text: 'Year',
+                    },
+                    crosshair: true,
+                    plotBands: [{
+                        color: 'rgb(245, 245, 245)',
+                        from: baselineLower,
+                        to: baselineUpper,
+                    }],
+                },
+                yAxis: {
+                    title: {
+                        text: 'Precipitation [mm]'
+                    },
+                    lineWidth: 1,
+                    //min: -2,
+                    //max: 3,
+                    tickInterval: 1,
+                },
+                tooltip: {
+                    shared: true,
+                    valueSuffix: ' mm',
+                    valueDecimals: 2,
+                },
+                legend: {
+                    enabled: false,
+                },
+                annotations: [{
+                    labelOptions: {
+                        barkgroundColor: 'red',
+                        verticalAlign: 'top',
+                    },
+                    labels: [{
+                        point: {
+                            xAxis: 0,
+                            yAxis: 0,
+                            x: baselineLower + (baselineUpper - baselineLower) / 2,
+                            y: 100,
+                        },
+                        text: 'Baseline',
+                    }],
+                }],
+                series: [{
+                    name: 'Difference',
+                    data: precipitation,
                     color: 'red',
                     negativeColor: 'blue',
                 }],
@@ -1005,6 +1079,10 @@
                 renderYearlyPrecipitationGraph(data.winterPrecipitation, 'winterPrecipitation', 'Precipitation for ' + winterRange);
                 months().forEach(month =>
                     renderMonthlyPrecipitationGraph(data.monthlyPrecipitation[month], 'monthlyPrecipitation_' + month, 'Precipitation for ' + monthName(month)));
+
+                renderPrecipitationDifferenceGraph(data.yearlyPrecipitation.difference, 'yearlyPrecipitationDifference', 'Precipitation difference');
+                renderPrecipitationDifferenceGraph(data.summerPrecipitation.difference, 'summerPrecipitationDifference', 'Precipitation difference ' + summerRange);
+                renderPrecipitationDifferenceGraph(data.winterPrecipitation.difference, 'winterPrecipitationDifference', 'Precipitation difference ' + winterRange);
             }
 
             Papa.parse(window.location + '/ANS_Temp_Prec_1913-2017.csv', {
