@@ -156,6 +156,7 @@
                     temperatures.push(year);
                 }
             });
+            temperatures = temperatures.slice(33);
 
             ['min', 'max', 'avg'].forEach((statistic) => {
                 temperatures[statistic] = temperatures.map(temps => ({
@@ -433,11 +434,11 @@
                 p.rain = seasonalPrecipByStat(e.season, 'rain').slice(10);
                 p.movAvg = movingAveragesHighCharts(p.total.map(each => each.y));
                 p.linear = linearRegression(p.years, p.movAvg.map(each => each.y));
+                p.total = p.total.slice(10);
                 p.difference = p.total.map(each => ({
                     x: each.x,
                     y: each.y - (e.baseline.sum / e.baseline.count),
                 }));
-                p.total = p.total.slice(10);
             });
 
             var avg = yearly('avg');
