@@ -13,6 +13,9 @@ var winterMonths = ['oct', 'nov', 'dec', 'jan', 'feb', 'mar', 'apr'];
 var isSummerMonth = month => summerMonths.includes(month);
 var isWinterMonth = month => winterMonths.includes(month);
 
+var isSummerMonthByIndex = month => isSummerMonth(monthByIndex(month));
+var isWinterMonthByIndex = month => isWinterMonth(monthByIndex(month));
+
 var sum = values => values.reduce((sum, current) => sum + current, 0);
 
 var min = values => values.reduce((min, current) => Math.min(min, current), Infinity);
@@ -63,6 +66,15 @@ var parseDate = (string) => {
         day: +date[2],
     };
 };
+
+var weekNumber = (date) => {
+    var d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+    d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+    var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+    return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+};
+
+var weekNumberFromObj = date => weekNumber(new Date(date.year, date.month-1, date.day));
 
 var parseNumber = string => parseFloat(string.replace(',', '.')) || undefined;
 

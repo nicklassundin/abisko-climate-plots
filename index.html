@@ -53,6 +53,8 @@
     <div id="northernHemisphere" class="figure"></div>
     <div id="globalTemperatures" class="figure"></div>
 
+    <div id ="growingSeason" class="figure"></div>
+
     <div id="temperatureDifferenceAbisko" class="figure"></div>
     <div id="temperatureDifference1" class="figure"></div>
     <div id="temperatureDifference2" class="figure"></div>
@@ -88,8 +90,8 @@
             if (!lower || !upper) {
                 alert('Something went wrong!');
                 return;
-            } else if (lower < 1923) {
-                alert("Lower limit must be above 1923!");
+            } else if (lower < 1913) {
+                alert("Lower limit must be above 1913!");
                 return;
             } else if (lower >= upper) {
                 alert("Lower limit cant be larger or equal to upper limit!");
@@ -209,7 +211,7 @@
                     temperatures['sumglob'] += year['glob'];
                     count++;
                 }
-                if (year.year > 1913) {
+                if (year.year >= 1913) {
                     temperatures.push(year);
                 }
             });
@@ -221,7 +223,7 @@
             var difference = region => temperatures.map(each => ({
                 x: each.year,
                 y: each[region] - temperatures['avg' + region],
-            })).slice(9); // remove values missing from Abisko data
+            }));
 
             temperatures['64n-90n'] = difference('64n-90n');
             temperatures['nhem'] = difference('nhem');
@@ -255,10 +257,16 @@
                     precip_snow: 0,
                     precip_rain: 0,
                     data: [],
+                    weeklyTemperatures: [],
                 };
                 if (avg) {
                     year.sum += avg;
                     year.count++;
+
+                    var w = weekNumberFromObj(date);
+                    var weekly = year.weeklyTemperatures[w] = year.weeklyTemperatures[w] || { sum: 0, count: 0 };
+                    weekly.sum += avg;
+                    weekly.count++;
                 }
                 if (precip) {
                     year.precip += precip;
@@ -296,6 +304,23 @@
                     temperatureBaseline.count++;
                 }
 
+                year.weeklyTemperatures = year.weeklyTemperatures.map(t => t.sum / t.count);
+
+                var isWeekAboveZero = year.weeklyTemperatures.map(t => t > 0);
+                var longestPeriod = 0;
+
+                isWeekAboveZero.reduce((period, aboveZero) => {
+                    if (aboveZero) {
+                        period++;
+                        longestPeriod = Math.max(longestPeriod, period);
+                        return period;
+                    } else {
+                        return 0;
+                    }
+                }, 0);
+
+                year.growingSeason = longestPeriod;
+
                 var monthlyTemperatures = [];
                 var monthlyPrecipitation = [];
                 var summerTemperatures = { sum: 0, count: 0 };
@@ -312,10 +337,10 @@
                         total: 0, rain: 0, snow: 0,
                     };
                     if (each.avg) {
-                        if (isSummerMonth(monthByIndex(month))) {
+                        if (isSummerMonthByIndex(month)) {
                             summerTemperatures.sum += each.avg;
                             summerTemperatures.count++;
-                        } else if (isWinterMonth(monthByIndex(month))) {
+                        } else if (isWinterMonthByIndex(month)) {
                             winterTemperatures.sum += each.avg;
                             winterTemperatures.count++;
                         }
@@ -323,11 +348,11 @@
                         t.count++;
                     }
                     if (each.precip) {
-                        if (isSummerMonth(monthByIndex(month))) {
+                        if (isSummerMonthByIndex(month)) {
                             summerPrecipitation.total += each.precip;
                             summerPrecipitation.snow += each.precip_snow;
                             summerPrecipitation.rain += each.precip_rain;
-                        } else if (isWinterMonth(monthByIndex(month))) {
+                        } else if (isWinterMonthByIndex(month)) {
                             winterPrecipitation.total += each.precip;
                             winterPrecipitation.snow += each.precip_snow;
                             winterPrecipitation.rain += each.precip_rain;
@@ -370,7 +395,7 @@
             var yearly = statistic => entries().map(each => ({
                 x: +each[0],
                 y: each[1][statistic],
-            })).slice(10);
+            }));
 
             var monthlyPrecipByStat = (monthIndex, statistic) => entries().map(each => ({
                 x: +each[0],
@@ -434,14 +459,12 @@
                 p.rain = seasonalPrecipByStat(e.season, 'rain').slice(10);
                 p.movAvg = movingAveragesHighCharts(p.total.map(each => each.y));
                 p.linear = linearRegression(p.years, p.movAvg.map(each => each.y));
-                p.total = p.total.slice(10);
                 p.difference = p.total.map(each => ({
                     x: each.x,
                     y: each.y - (e.baseline.sum / e.baseline.count),
                 }));
+                p.total = p.total.slice(10);
             });
-
-            var avg = yearly('avg');
 
             var ci = entries().map((each) => ({
                 x: +each[0],
@@ -458,27 +481,32 @@
 
             return {
                 years,
-                avg,
-                min: yearly('min'),
-                max: yearly('max'),
+                avg: yearly('avg').slice(10),
+                min: yearly('min').slice(10),
+                max: yearly('max').slice(10),
                 movAvg: movingAveragesHighCharts(values().map(each => each.avg)),
                 ci: ci.slice(10),
                 ciMovAvg: ciMovAvg.slice(10),
+
+                growingSeason: {
+                    weeks: yearly('growingSeason').slice(10),
+                    movAvg: movingAveragesHighCharts(yearly('growingSeason').map(each => each.y)),
+                },
 
                 monthlyTemps,
                 summerTemps,
                 winterTemps,
 
-                difference: avg.map(each => ({
+                difference: yearly('avg').map(each => ({
                     x: each.x,
                     y: each.y - (temperatureBaseline.sum / temperatureBaseline.count),
                 })),
 
                 yearlyPrecipitation: {
                     years: years.slice(10),
-                    total: yearly('precip'),
-                    snow: yearly('precip_snow'),
-                    rain: yearly('precip_rain'),
+                    total: yearly('precip').slice(10),
+                    snow: yearly('precip_snow').slice(10),
+                    rain: yearly('precip_rain').slice(10),
                     movAvg: precipMovAvg,
                     linear: linearRegression(years.slice(10), precipMovAvg.map(each => each.y)),
                     difference: yearly('precip').map(each => ({
@@ -490,6 +518,16 @@
                 summerPrecipitation: seasonalPrecipitation.summerPrecipitation,
                 winterPrecipitation: seasonalPrecipitation.winterPrecipitation,
             };
+        };
+
+        var parseAbiskoIceData = function (result) {
+            var fields = result.meta.fields;
+            var data = result.data.slice(0,100);
+            //console.table(data)
+
+            data.forEach((row) => {
+
+            })
         };
 
         /*****************/
@@ -733,7 +771,7 @@
                     text: title,
                 },
                 subtitle: {
-                    text: 'Difference between yearly average and average for 1961-1990',
+                    //text: 'Difference between yearly average and average for 1961-1990',
                 },
                 xAxis: {
                     title: {
@@ -787,6 +825,57 @@
             });
         };
 
+        var renderGrowingSeasonGraph = function (season, id) {
+            Highcharts.chart(id, {
+                chart: {
+                    type: 'line',
+                    zoomType: 'xy',
+                },
+                title: {
+                    text: 'Growing season',
+                },
+                subtitle: {
+                    text: 'The maximum consecutive weeks with average temperature above freezing.',
+                },
+                xAxis: {
+                    title: {
+                        text: 'Year',
+                    },
+                    crosshair: true,
+                },
+                yAxis: {
+                    title: {
+                        text: 'Weeks'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        color: 'rgb(204, 214, 235)',
+                        width: 2,
+                    }],
+                    tickInterval: 1,
+                    lineWidth: 1,
+                },
+                tooltip: {
+                    shared: true,
+                    valueDecimals: 0,
+                },
+                series: [{
+                    name: 'Weeks',
+                    lineWidth: 0,
+                    marker: { radius: 2 },
+                    states: { hover: { lineWidthPlus: 0 } },
+                    color: '#00aa00',
+                    data: season.weeks,
+                    visible: true,
+                }, {
+                    name: 'Moving average',
+                    color: '#00aa00',
+                    marker: { enabled: false },
+                    data: season.movAvg,
+                }],
+            });
+        }
+
         var renderPrecipitationDifferenceGraph = function (precipitation, id, title) {
             Highcharts.chart(id, {
                 chart: {
@@ -796,7 +885,7 @@
                     text: title,
                 },
                 subtitle: {
-                    text: 'Difference between yearly average and average for 1961-1990',
+                    //text: 'Difference between yearly average and average for 1961-1990',
                 },
                 xAxis: {
                     title: {
@@ -1005,11 +1094,70 @@
             });
         };
 
+        var renderAbiskoIceGraph = function (ice, id, title) {
+            Highcharts.chart(id, {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: title,
+                },
+                xAxis: {
+                    title: {
+                        text: 'Year',
+                    },
+                    crosshair: true,
+                },
+                yAxis: [{
+                    title: {
+                        text: 'Ice freeze / break up [date]',
+                    },
+                    lineWidth: 1,
+                    floor: 0,
+                    type: 'datetime',
+                }, {
+                    title: {
+                        text: 'Ice free time [days]',
+                    },
+                    lineWidth: 1,
+                    opposite: true,
+                    floor: 0,
+                }],
+                tooltip: {
+                    shared: true,
+                    valueDecimals: 0,
+                },
+                series: [{
+                    yAxis: 0,
+                    name: 'Ice breaking',
+                    color: '#ff0000',
+                    //data: combine(years, movingAverages(precipitation.map(totalPrecipitation), 10)).slice(10), // Remove the first 10
+                }, {
+                    yAxis: 0,
+                    name: 'Linear regression',
+                    marker: {
+                        enabled: false, // Linear regression lines doesn't contain points
+                    },
+                    color: 'red',
+                    states: {
+                        hover: {
+                            lineWidth: 0, // Do nothing on hover
+                        },
+                    },
+                    enableMouseTracking: false, // No interactivity
+                    //data: [
+                    //    { x: years[10], y: precipitationLinear(years[10]) },
+                    //    { x: years[years.length - 1], y: precipitationLinear(years[years.length - 1]) }
+                    //],
+                }],
+            });
+        };
+
         /*****************************/
         /* LOADING DATA HAPPENS HERE */
         /*****************************/
 
-        Papa.parse('/NH.Ts downloaded 21062018.csv', {
+        Papa.parse('/data/NH.Ts downloaded 21062018.csv', {
             header: true,
             delimiter: ',',
             download: true,
@@ -1022,7 +1170,7 @@
             },
         });
 
-        Papa.parse('/GLB.Ts downloaded 21062018.csv', {
+        Papa.parse('/data/GLB.Ts downloaded 21062018.csv', {
             header: true,
             delimiter: ',',
             download: true,
@@ -1047,7 +1195,7 @@
                 renderTemperatureDifferenceGraph(temperatures['glob'], 'temperatureDifference3', 'Global temperature difference');
             }
 
-            Papa.parse('/ZonAnn.Ts+dSST downloaded 21062018.csv', {
+            Papa.parse('/data/ZonAnn.Ts+dSST downloaded 21062018.csv', {
                 header: true,
                 delimiter: ',',
                 download: true,
@@ -1075,6 +1223,9 @@
                 months().forEach(month =>
                     renderAbiskoMonthlyTemperatureGraph(data.monthlyTemps[month], 'monthlyAbiskoTemperatures_' + month, 'Abisko temperatures for ' + monthName(month)));
                 renderTemperatureDifferenceGraph(data.difference, 'temperatureDifferenceAbisko', 'Temperature difference for Abisko');
+
+                renderGrowingSeasonGraph(data.growingSeason, 'growingSeason');
+
                 renderYearlyPrecipitationGraph(data.yearlyPrecipitation, 'yearlyPrecipitation', 'Yearly precipitation');
                 renderYearlyPrecipitationGraph(data.summerPrecipitation, 'summerPrecipitation', 'Precipitation for ' + summerRange);
                 renderYearlyPrecipitationGraph(data.winterPrecipitation, 'winterPrecipitation', 'Precipitation for ' + winterRange);
@@ -1086,7 +1237,7 @@
                 renderPrecipitationDifferenceGraph(data.winterPrecipitation.difference, 'winterPrecipitationDifference', 'Precipitation difference ' + winterRange);
             }
 
-            Papa.parse('/ANS_Temp_Prec_1913-2017.csv', {
+            Papa.parse('/data/ANS_Temp_Prec_1913-2017.csv', {
                 header: true,
                 //delimiter: ';',
                 download: true,
@@ -1099,61 +1250,14 @@
         };
         parseAbisko();
 
-        Highcharts.chart('lakeIce', {
-            chart: {
-                type: 'line'
+        Papa.parse('/data/ANS_Torneträsk-data.csv', {
+            header: true,
+            download: true,
+            skipEmptyLines: true,
+            complete: (result) => {
+                var data = parseAbiskoIceData(result);
+                renderAbiskoIceGraph(data, 'lakeIce', 'Freeze up and break up of lake ice vs ice free time');
             },
-            title: {
-                text: 'Freeze up and break up of lake ice vs ice free time',
-            },
-            xAxis: {
-                title: {
-                    text: 'Year',
-                },
-                crosshair: true,
-            },
-            yAxis: [{
-                title: {
-                    text: 'Ice freeze / break up [date]',
-                },
-                lineWidth: 1,
-                floor: 0,
-                type: 'datetime',
-            }, {
-                title: {
-                    text: 'Ice free time [days]',
-                },
-                lineWidth: 1,
-                opposite: true,
-                floor: 0,
-            }],
-            tooltip: {
-                shared: true,
-                valueDecimals: 0,
-            },
-            series: [{
-                yAxis: 0,
-                name: 'Ice breaking',
-                color: '#ff0000',
-                //data: combine(years, movingAverages(precipitation.map(totalPrecipitation), 10)).slice(10), // Remove the first 10
-            }, {
-                yAxis: 0,
-                name: 'Linear regression',
-                marker: {
-                    enabled: false, // Linear regression lines doesn't contain points
-                },
-                color: 'red',
-                states: {
-                    hover: {
-                        lineWidth: 0, // Do nothing on hover
-                    },
-                },
-                enableMouseTracking: false, // No interactivity
-                //data: [
-                //    { x: years[10], y: precipitationLinear(years[10]) },
-                //    { x: years[years.length - 1], y: precipitationLinear(years[years.length - 1]) }
-                //],
-            }],
         });
     </script>
 </body>
