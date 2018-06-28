@@ -412,7 +412,7 @@
                 year.ci = { low: -Infinity, high: Infinity };
 
                 if (year.monthlyTemperatures.length > 1) {
-                    year.variance = variance(year.monthlyTemperatures);
+                    year.variance = variance(year.monthlyTemperatures.map(m => m.avg));
                     year.ci = confidenceInterval(year.avg, year.variance, year.monthlyTemperatures.length);
                 }
             });
@@ -1300,7 +1300,7 @@
         };
         parseAbisko();
 
-        Papa.parse('/data/ANS_Torneträsk-data.csv', {
+        Papa.parse('/data/Torneträsk isläggning_islossning.csv', {
             header: true,
             download: true,
             skipEmptyLines: true,
