@@ -79,14 +79,14 @@ var weekNumber = (date) => {
     return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
 };
 
-var weekNumberFromObj = date => weekNumber(new Date(date.year, date.month-1, date.day-1));
-
 var dayOfYear = (date) => {
     var start = new Date(date.getFullYear(), 0, 0);
     var diff = (date - start) + ((start.getTimezoneOffset() - date.getTimezoneOffset()) * 60 * 1000);
     var oneDay = 1000 * 60 * 60 * 24;
     return Math.floor(diff / oneDay);
 };
+
+var dateFromDayOfYear = (year, dayOfYear) => new Date(year, 0, dayOfYear);
 
 var parseNumber = string => parseFloat(string.replace(',', '.')) || undefined;
 
