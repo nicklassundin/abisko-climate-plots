@@ -68,6 +68,10 @@ var parseDate = (string) => {
     };
 };
 
+var isLeapYear = year => ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
+
+var createDate = date => new Date(date.year, date.month-1, date.day-1);
+
 var weekNumber = (date) => {
     var d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
     d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
@@ -75,7 +79,14 @@ var weekNumber = (date) => {
     return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
 };
 
-var weekNumberFromObj = date => weekNumber(new Date(date.year, date.month-1, date.day));
+var weekNumberFromObj = date => weekNumber(new Date(date.year, date.month-1, date.day-1));
+
+var dayOfYear = (date) => {
+    var start = new Date(date.getFullYear(), 0, 0);
+    var diff = (date - start) + ((start.getTimezoneOffset() - date.getTimezoneOffset()) * 60 * 1000);
+    var oneDay = 1000 * 60 * 60 * 24;
+    return Math.floor(diff / oneDay);
+};
 
 var parseNumber = string => parseFloat(string.replace(',', '.')) || undefined;
 

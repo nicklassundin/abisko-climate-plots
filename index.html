@@ -212,11 +212,11 @@
         <figcaption></figcaption>
     </figure>
     <figure>
-            <div id="abiskoSnowDepthPeriodMeans2"></div>
-            <figcaption></figcaption>
+        <div id="abiskoSnowDepthPeriodMeans2"></div>
+        <figcaption></figcaption>
     </figure>
     <figure>
-        <div id="abiskoLakeIce"></div>
+        <div id="abiskoLakeIce" style="height: 450px"></div>
         <figcaption></figcaption>
     </figure>
 
@@ -699,13 +699,19 @@
                 var springYear = +row[fields[1]] || undefined;
                 var freezeDate = parseDate(row[fields[2]]);
                 var freezeWeek = freezeDate.year > 0 ? weekNumberFromObj(freezeDate) : null;
+                var freezeDOY = freezeDate.year > 0 ? dayOfYear(createDate(freezeDate)) : null
                 var breakupDate = parseDate(row[fields[3]]);
                 var breakupWeek = breakupDate.year > 0 ? weekNumberFromObj(breakupDate) : null;
+                var breakupDOY = breakupDate.year > 0 ? dayOfYear(createDate(breakupDate)) : null
                 var iceTime = validNumber(row[fields[4]]) || null;
 
                 if (winterYear) {
                     iceData[winterYear] = {
+                        breakupDate: breakupDate.year > 0 ? createDate(breakupDate) : null,
+                        breakupDOY,
                         breakupWeek,
+                        freezeDate: freezeDate.year > 0 ? createDate(freezeDate) : null,
+                        freezeDOY: freezeDOY + (freezeDOY < 50 ? 365 : 0),
                         freezeWeek: freezeWeek + (freezeWeek < 20 ? 52 : 0),
                         iceTime,
                     };
@@ -717,23 +723,38 @@
                 y: each[statistic],
             })).filter(each => each.y).filter(each => each.x >= 1909);
 
+            var breakupDOY = iceData.map((each, year) => ({
+                x: +year,
+                y: each.breakupDOY,
+                name: each.breakupDate ? monthByIndex(each.breakupDate.getMonth()) + ' ' + (+each.breakupDate.getDay() + 1) : null,
+            })).filter(each => each.y).filter(each => each.x >= 1909);
 
-            var breakupWeek = yearly('breakupWeek');
-            var freezeWeek = yearly('freezeWeek');
+            var freezeDOY = iceData.map((each, year) => ({
+                x: +year,
+                y: each.freezeDOY,
+                name: each.freezeDate ? monthByIndex(each.freezeDate.getMonth()) + ' ' + (+each.freezeDate.getDay() + 1) : null,
+            })).filter(each => each.y).filter(each => each.x >= 1909);;
+
             var iceTime = yearly('iceTime');
 
-            var breakupLinear = linearRegression(breakupWeek.map(w => w.x), breakupWeek.map(w => w.y));
-            var freezeLinear = linearRegression(freezeWeek.map(w => w.x), freezeWeek.map(w => w.y));
-            var iceTimeLinear = linearRegression(iceTime.map(w => w.x), iceTime.map(w => w.y));
+            var calculateMovingAverages = (values) => movingAverages(values.map(v => v.y), 10).map((avg, i) => ({
+                x: values[i].x, y: avg,
+            })).slice(10);
+
+            var iceTimeMovAvg = calculateMovingAverages(iceTime);
 
             return {
                 yearMax: iceData.length - 1,
-                breakupWeek,
-                freezeWeek,
+                breakupDate: yearly('breakupDate'),
+                freezeDate: yearly('freezeDate'),
+                breakupDOY,
+                freezeDOY,
                 iceTime,
-                breakupLinear,
-                freezeLinear,
-                iceTimeLinear,
+                iceTimeMovAvg,
+                breakupLinear: linearRegression(breakupDOY.map(w => w.x), breakupDOY.map(w => w.y)),
+                freezeLinear: linearRegression(freezeDOY.map(w => w.x), freezeDOY.map(w => w.y)),
+                iceTimeLinear: linearRegression(iceTime.map(w => w.x), iceTime.map(w => w.y)),
+                iceTimeMovAvgLinear: linearRegression(iceTimeMovAvg.map(w => w.x), iceTimeMovAvg.map(w => w.y)),
             };
         };
 
@@ -1414,45 +1435,42 @@
                 },
                 yAxis: [{
                     title: {
-                        text: 'Ice freeze / break up [week]',
+                        text: 'Ice break-up / freeze-up [day of year]',
                     },
-                    tickInterval: 1,
                     lineWidth: 1,
-                    floor: 0,
                     labels: {
                         formatter: function () {
-                            return this.value > 52 ? this.value - 52 : this.value;
+                            return this.value > 365 ? this.value - 365 : this.value;
                         },
                     }
                 }, {
                     title: {
-                        text: 'Ice time [days]',
+                        text: 'Ice time [number of days]',
                     },
                     lineWidth: 1,
+                    max: 250,
+                    min: 80,
                     opposite: true,
-                    floor: 0,
                 }],
                 tooltip: {
                     shared: true,
                     valueDecimals: 0,
-                    pointFormatter: function () {
-                        var y = (this.series.dataMin > 35 && this.series.dataMax < 70 && this.y > 52) ? this.y - 52 : this.y;
-                        return '<span style="color:' + this.color + '">\u25CF</span> ' + this.series.name + ': <b>' + y + '</b><br/>';
-                    },
+                    pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y}</b> {point.name}<br/>',
                 },
                 series: [{
                     yAxis: 0,
-                    name: 'Freeze up week',
+                    name: 'Freeze-up',
                     color: '#0000ee',
                     lineWidth: 0,
                     marker: { radius: 2 },
                     states: { hover: { lineWidthPlus: 0 } },
-                    data: ice.freezeWeek,
+                    data: ice.freezeDOY,
                 }, {
                     yAxis: 0,
                     name: 'Linear regression (freezing)',
                     marker: { enabled: false },
                     color: '#0000ee',
+                    linkedTo: ':previous',
                     states: { hover: { lineWidth: 0, } },
                     enableMouseTracking: false,
                     data: [
@@ -1461,17 +1479,18 @@
                     ],
                 }, {
                     yAxis: 0,
-                    name: 'Breaking week',
+                    name: 'Break-up',
                     color: '#ee0000',
                     lineWidth: 0,
                     marker: { radius: 2 },
                     states: { hover: { lineWidthPlus: 0 } },
-                    data: ice.breakupWeek,
+                    data: ice.breakupDOY,
                 }, {
                     yAxis: 0,
                     name: 'Linear regression (breaking)',
                     marker: { enabled: false },
                     color: '#ee0000',
+                    linkedTo: ':previous',
                     states: { hover: { lineWidth: 0, } },
                     enableMouseTracking: false,
                     data: [
@@ -1491,11 +1510,29 @@
                     name: 'Linear regression (ice time)',
                     marker: { enabled: false },
                     color: '#00bb00',
+                    linkedTo: ':previous',
                     states: { hover: { lineWidth: 0, } },
                     enableMouseTracking: false,
                     data: [
                         { x: 1915, y: ice.iceTimeLinear(1915) },
                         { x: ice.yearMax, y: ice.iceTimeLinear(ice.yearMax) }
+                    ],
+                }, {
+                    yAxis: 1,
+                    name: 'Ice time (moving average)',
+                    color: '#cc00cc',
+                    data: ice.iceTimeMovAvg,
+                }, {
+                    yAxis: 1,
+                    name: 'Linear regression (ice time mov avg)',
+                    color: '#cc00cc',
+                    linkedTo: ':previous',
+                    marker: { enabled: false },
+                    states: { hover: { lineWidth: 0, } },
+                    enableMouseTracking: false,
+                    data: [
+                        { x: 1925, y: ice.iceTimeMovAvgLinear(1925) },
+                        { x: ice.yearMax, y: ice.iceTimeMovAvgLinear(ice.yearMax) }
                     ],
                 }],
             });
@@ -1639,7 +1676,7 @@
             skipEmptyLines: true,
             complete: (result) => {
                 var data = parseAbiskoIceData(result);
-                renderAbiskoIceGraph(data, 'abiskoLakeIce', 'Freeze up and break up of lake ice vs ice time');
+                renderAbiskoIceGraph(data, 'abiskoLakeIce', 'Freeze-up and break-up of lake ice vs ice time');
             },
         });
 
