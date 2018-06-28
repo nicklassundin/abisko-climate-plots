@@ -691,22 +691,50 @@
         var parseAbiskoIceData = function (result) {
             var fields = result.meta.fields;
             var data = result.data;
-            //console.table(data)
 
-            var ice = [];
+            var iceData = [];
 
             data.forEach((row) => {
                 var winterYear = +row[fields[0]] || undefined;
                 var springYear = +row[fields[1]] || undefined;
                 var freezeDate = parseDate(row[fields[2]]);
-                if (freezeDate.year === 0) freezeDate = undefined;
+                var freezeWeek = freezeDate.year > 0 ? weekNumberFromObj(freezeDate) : null;
                 var breakupDate = parseDate(row[fields[3]]);
-                if (breakupDate.year === 0) breakupDate = undefined;
-                var duration = validNumber(row[fields[4]]);
-                ice.push([winterYear, springYear, freezeDate, breakupDate, duration])
+                var breakupWeek = breakupDate.year > 0 ? weekNumberFromObj(breakupDate) : null;
+                var iceTime = validNumber(row[fields[4]]) || null;
+
+                if (winterYear) {
+                    iceData[winterYear] = {
+                        breakupWeek,
+                        freezeWeek: freezeWeek + (freezeWeek < 20 ? 52 : 0),
+                        iceTime,
+                    };
+                }
             });
 
-            //console.table(ice)
+            var yearly = (statistic) => iceData.map((each, year) => ({
+                x: +year,
+                y: each[statistic],
+            })).filter(each => each.y).filter(each => each.x >= 1909);
+
+
+            var breakupWeek = yearly('breakupWeek');
+            var freezeWeek = yearly('freezeWeek');
+            var iceTime = yearly('iceTime');
+
+            var breakupLinear = linearRegression(breakupWeek.map(w => w.x), breakupWeek.map(w => w.y));
+            var freezeLinear = linearRegression(freezeWeek.map(w => w.x), freezeWeek.map(w => w.y));
+            var iceTimeLinear = linearRegression(iceTime.map(w => w.x), iceTime.map(w => w.y));
+
+            return {
+                yearMax: iceData.length - 1,
+                breakupWeek,
+                freezeWeek,
+                iceTime,
+                breakupLinear,
+                freezeLinear,
+                iceTimeLinear,
+            };
         };
 
         var parseAbiskoSnowData = function (result) {
@@ -768,7 +796,7 @@
                         var start = means.period.start,
                             end = means.period.end;
                         if (key === 'allTime') return 'Entire period';
-                        return 'From ' + start + ' to ' + (end === Infinity) ? 'present' : end;
+                        return 'From ' + start + ' to ' + (end === Infinity ? 'present' : end);
                     };
                     snow.filter((_, year) => year >= period.start && year <= period.end).forEach((year) => {
                         year.forEach((depth, month) => {
@@ -1386,14 +1414,19 @@
                 },
                 yAxis: [{
                     title: {
-                        text: 'Ice freeze / break up [date]',
+                        text: 'Ice freeze / break up [week]',
                     },
+                    tickInterval: 1,
                     lineWidth: 1,
                     floor: 0,
-                    type: 'datetime',
+                    labels: {
+                        formatter: function () {
+                            return this.value > 52 ? this.value - 52 : this.value;
+                        },
+                    }
                 }, {
                     title: {
-                        text: 'Ice free time [days]',
+                        text: 'Ice time [days]',
                     },
                     lineWidth: 1,
                     opposite: true,
@@ -1402,29 +1435,68 @@
                 tooltip: {
                     shared: true,
                     valueDecimals: 0,
+                    pointFormatter: function () {
+                        var y = (this.series.dataMin > 35 && this.series.dataMax < 70 && this.y > 52) ? this.y - 52 : this.y;
+                        return '<span style="color:' + this.color + '">\u25CF</span> ' + this.series.name + ': <b>' + y + '</b><br/>';
+                    },
                 },
                 series: [{
                     yAxis: 0,
-                    name: 'Ice breaking',
-                    color: '#ff0000',
-                    //data: combine(years, movingAverages(precipitation.map(totalPrecipitation), 10)).slice(10), // Remove the first 10
+                    name: 'Freeze up week',
+                    color: '#0000ee',
+                    lineWidth: 0,
+                    marker: { radius: 2 },
+                    states: { hover: { lineWidthPlus: 0 } },
+                    data: ice.freezeWeek,
                 }, {
                     yAxis: 0,
-                    name: 'Linear regression',
-                    marker: {
-                        enabled: false, // Linear regression lines doesn't contain points
-                    },
-                    color: 'red',
-                    states: {
-                        hover: {
-                            lineWidth: 0, // Do nothing on hover
-                        },
-                    },
-                    enableMouseTracking: false, // No interactivity
-                    //data: [
-                    //    { x: years[10], y: precipitationLinear(years[10]) },
-                    //    { x: years[years.length - 1], y: precipitationLinear(years[years.length - 1]) }
-                    //],
+                    name: 'Linear regression (freezing)',
+                    marker: { enabled: false },
+                    color: '#0000ee',
+                    states: { hover: { lineWidth: 0, } },
+                    enableMouseTracking: false,
+                    data: [
+                        { x: 1909, y: ice.freezeLinear(1909) },
+                        { x: ice.yearMax, y: ice.freezeLinear(ice.yearMax) }
+                    ],
+                }, {
+                    yAxis: 0,
+                    name: 'Breaking week',
+                    color: '#ee0000',
+                    lineWidth: 0,
+                    marker: { radius: 2 },
+                    states: { hover: { lineWidthPlus: 0 } },
+                    data: ice.breakupWeek,
+                }, {
+                    yAxis: 0,
+                    name: 'Linear regression (breaking)',
+                    marker: { enabled: false },
+                    color: '#ee0000',
+                    states: { hover: { lineWidth: 0, } },
+                    enableMouseTracking: false,
+                    data: [
+                        { x: 1915, y: ice.breakupLinear(1915) },
+                        { x: ice.yearMax, y: ice.breakupLinear(ice.yearMax) }
+                    ],
+                }, {
+                    yAxis: 1,
+                    name: 'Ice time',
+                    color: '#00bb00',
+                    lineWidth: 0,
+                    marker: { radius: 2 },
+                    states: { hover: { lineWidthPlus: 0 } },
+                    data: ice.iceTime,
+                }, {
+                    yAxis: 1,
+                    name: 'Linear regression (ice time)',
+                    marker: { enabled: false },
+                    color: '#00bb00',
+                    states: { hover: { lineWidth: 0, } },
+                    enableMouseTracking: false,
+                    data: [
+                        { x: 1915, y: ice.iceTimeLinear(1915) },
+                        { x: ice.yearMax, y: ice.iceTimeLinear(ice.yearMax) }
+                    ],
                 }],
             });
         };
@@ -1567,7 +1639,7 @@
             skipEmptyLines: true,
             complete: (result) => {
                 var data = parseAbiskoIceData(result);
-                renderAbiskoIceGraph(data, 'abiskoLakeIce', 'Freeze up and break up of lake ice vs ice free time');
+                renderAbiskoIceGraph(data, 'abiskoLakeIce', 'Freeze up and break up of lake ice vs ice time');
             },
         });
 
