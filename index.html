@@ -212,6 +212,10 @@
         <figcaption></figcaption>
     </figure>
     <figure>
+            <div id="abiskoSnowDepthPeriodMeans2"></div>
+            <figcaption></figcaption>
+    </figure>
+    <figure>
         <div id="abiskoLakeIce"></div>
         <figcaption></figcaption>
     </figure>
@@ -686,12 +690,23 @@
 
         var parseAbiskoIceData = function (result) {
             var fields = result.meta.fields;
-            var data = result.data.slice(0, 100);
+            var data = result.data;
             //console.table(data)
 
-            data.forEach((row) => {
+            var ice = [];
 
+            data.forEach((row) => {
+                var winterYear = +row[fields[0]] || undefined;
+                var springYear = +row[fields[1]] || undefined;
+                var freezeDate = parseDate(row[fields[2]]);
+                if (freezeDate.year === 0) freezeDate = undefined;
+                var breakupDate = parseDate(row[fields[3]]);
+                if (breakupDate.year === 0) breakupDate = undefined;
+                var duration = validNumber(row[fields[4]]);
+                ice.push([winterYear, springYear, freezeDate, breakupDate, duration])
             });
+
+            //console.table(ice)
         };
 
         var parseAbiskoSnowData = function (result) {
@@ -719,47 +734,64 @@
             });
 
             var periods = [
-                { start: 1913, end: 1930 },
+                //{ start: 1913, end: 1930 },
                 { start: 1931, end: 1960 },
                 { start: 1961, end: 1990 },
                 { start: 1991, end: Infinity },
                 { start: -Infinity, end: Infinity },
             ];
 
+            var decades = [
+                //{ start: 1931, end: 1940, },
+                //{ start: 1941, end: 1950, },
+                //{ start: 1951, end: 1960, },
+                { start: 1961, end: 1970, },
+                { start: 1971, end: 1980, },
+                { start: 1981, end: 1990, },
+                { start: 1991, end: 2000, },
+                { start: 2001, end: 2010, },
+                { start: 2011, end: Infinity },
+                { start: -Infinity, end: Infinity }, // entire period
+            ];
+
             var periodMeans = {};
+            var decadeMeans = {};
 
-            periods.forEach((period) => {
-                var key = period.start === -Infinity ? 'allTime' : period.start.toString();
-                var means = periodMeans[key] = {
-                    period,
-                    means: [],
-                };
-                means.period.toString = () => {
-                    var start = means.period.start,
-                        end = means.period.end;
-                    if (start === -Infinity && end === Infinity) return 'All time';
-                    if (end === Infinity) return 'From ' + start + ' to present';
-                    return 'From ' + start + ' to ' + end;
-                };
-                snow.filter((_, year) => year >= period.start && year <= period.end).forEach((year) => {
-                    year.forEach((depth, month) => {
-                        if (depth) {
-                            var m = means.means[month - 1] = means.means[month - 1] || { sum: 0, count: 0 };
-                            m.sum += depth;
-                            m.count++;
-                        }
+            var calculateMeans = (periods, periodMeans) => {
+                periods.forEach((period) => {
+                    var key = period.start === -Infinity ? 'allTime' : period.start.toString();
+                    var means = periodMeans[key] = {
+                        period,
+                        means: [],
+                    };
+                    means.period.toString = () => {
+                        var start = means.period.start,
+                            end = means.period.end;
+                        if (key === 'allTime') return 'Entire period';
+                        return 'From ' + start + ' to ' + (end === Infinity) ? 'present' : end;
+                    };
+                    snow.filter((_, year) => year >= period.start && year <= period.end).forEach((year) => {
+                        year.forEach((depth, month) => {
+                            if (depth) {
+                                var m = means.means[month - 1] = means.means[month - 1] || { sum: 0, count: 0 };
+                                m.sum += depth;
+                                m.count++;
+                            }
+                        });
                     });
+                    for (var i = 0; i < 12; i++) {
+                        var m = means.means[i];
+                        means.means[i] = m ? m.sum / m.count : NaN;
+                    }
                 });
-                for (var i = 0; i < 12; i++) {
-                    var m = means.means[i];
-                    means.means[i] = m ? m.sum / m.count : NaN;
-                }
-            });
+            };
 
-            console.log(periodMeans)
+            calculateMeans(periods, periodMeans);
+            calculateMeans(decades, decadeMeans);
 
             return {
-                periodMeans
+                periodMeans,
+                decadeMeans,
             };
         };
 
@@ -1400,7 +1432,7 @@
         var renderAbiskoSnowGraph = function (snow, id, title) {
             var series = Object.values(snow).map(p => ({
                 name: p.period,
-                data: p.means.rotate(6),
+                data: p.means.rotate(6).slice(2),
             }));
             Highcharts.chart(id, {
                 chart: {
@@ -1410,7 +1442,7 @@
                     text: title,
                 },
                 xAxis: {
-                    categories: months().rotate(6),
+                    categories: months().rotate(6).slice(2),
                     title: {
                         text: 'Month',
                     },
@@ -1425,6 +1457,7 @@
                 },
                 tooltip: {
                     shared: true,
+                    valueSuffix: ' cm',
                     valueDecimals: 0,
                 },
                 series,
@@ -1435,7 +1468,7 @@
         /* LOADING DATA HAPPENS HERE */
         /*****************************/
 
-        Papa.parse('/data/NH.Ts downloaded 21062018.csv', {
+        Papa.parse('data/NH.Ts downloaded 21062018.csv', {
             header: true,
             delimiter: ',',
             download: true,
@@ -1448,7 +1481,7 @@
             },
         });
 
-        Papa.parse('/data/GLB.Ts downloaded 21062018.csv', {
+        Papa.parse('data/GLB.Ts downloaded 21062018.csv', {
             header: true,
             delimiter: ',',
             download: true,
@@ -1473,7 +1506,7 @@
                 renderTemperatureDifferenceGraph(temperatures['glob'], 'temperatureDifference3', 'Global temperature difference');
             }
 
-            Papa.parse('/data/ZonAnn.Ts+dSST downloaded 21062018.csv', {
+            Papa.parse('data/ZonAnn.Ts+dSST downloaded 21062018.csv', {
                 header: true,
                 delimiter: ',',
                 download: true,
@@ -1515,7 +1548,7 @@
                 renderPrecipitationDifferenceGraph(data.winterPrecipitation.difference, 'winterPrecipitationDifference', 'Precipitation difference ' + winterRange);
             }
 
-            Papa.parse('/data/ANS_Temp_Prec_1913-2017.csv', {
+            Papa.parse('data/ANS_Temp_Prec_1913-2017.csv', {
                 header: true,
                 //delimiter: ';',
                 download: true,
@@ -1528,7 +1561,7 @@
         };
         parseAbisko();
 
-        Papa.parse('/data/Torneträsk isläggning_islossning.csv', {
+        Papa.parse('data/Torneträsk isläggning_islossning.csv', {
             header: true,
             download: true,
             skipEmptyLines: true,
@@ -1538,13 +1571,14 @@
             },
         });
 
-        Papa.parse('/data/ANS_SnowDepth_1913-2017.csv', {
+        Papa.parse('data/ANS_SnowDepth_1913-2017.csv', {
             header: true,
             download: true,
             skipEmptyLines: true,
             complete: (result) => {
                 var data = parseAbiskoSnowData(result);
                 renderAbiskoSnowGraph(data.periodMeans, 'abiskoSnowDepthPeriodMeans', 'Monthly mean snow depth for Abisko');
+                renderAbiskoSnowGraph(data.decadeMeans, 'abiskoSnowDepthPeriodMeans2', 'Monthly mean snow depth for Abisko');
             },
         });
     </script>

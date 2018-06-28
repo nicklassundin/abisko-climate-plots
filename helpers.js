@@ -60,6 +60,7 @@ var validNumber = (string) => {
 
 var parseDate = (string) => {
     var date = string.split('-');
+    if (date.length < 3) date[1] = date[2] = 0;
     return {
         year: +date[0],
         month: +date[1],
