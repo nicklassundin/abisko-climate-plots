@@ -263,6 +263,8 @@
             hover: '#3333ff',
         };
 
+        var useWebWorker = true;
+
         /***************************************/
         /* DATA TRANSFORMATIONS AND STATISTICS */
         /***************************************/
@@ -726,13 +728,13 @@
             var breakupDOY = iceData.map((each, year) => ({
                 x: +year,
                 y: each.breakupDOY,
-                name: each.breakupDate ? monthByIndex(each.breakupDate.getMonth()) + ' ' + (+each.breakupDate.getDay() + 1) : null,
+                name: each.breakupDate ? monthName(monthByIndex(each.breakupDate.getMonth())) + ' ' + (+each.breakupDate.getDay() + 1) : null,
             })).filter(each => each.y).filter(each => each.x >= 1909);
 
             var freezeDOY = iceData.map((each, year) => ({
                 x: +year,
                 y: each.freezeDOY,
-                name: each.freezeDate ? monthByIndex(each.freezeDate.getMonth()) + ' ' + (+each.freezeDate.getDay() + 1) : null,
+                name: each.freezeDate ? monthName(monthByIndex(each.freezeDate.getMonth())) + ' ' + (+each.freezeDate.getDay() + 1) : null,
             })).filter(each => each.y).filter(each => each.x >= 1909);;
 
             var breakupLinear = linearRegression(breakupDOY.map(w => w.x), breakupDOY.map(w => w.y));
@@ -764,6 +766,7 @@
             var iceTimeMovAvgLinear = linearRegression(iceTimeMovAvg.map(w => w.x), iceTimeMovAvg.map(w => w.y));
 
             var yearMax = iceData.length - 1;
+
             return {
                 yearMax,
                 breakup,
@@ -1597,6 +1600,7 @@
         /*****************************/
 
         Papa.parse('data/NH.Ts downloaded 21062018.csv', {
+            worker: useWebWorker,
             header: true,
             delimiter: ',',
             download: true,
@@ -1610,6 +1614,7 @@
         });
 
         Papa.parse('data/GLB.Ts downloaded 21062018.csv', {
+            worker: useWebWorker,
             header: true,
             delimiter: ',',
             download: true,
@@ -1635,6 +1640,7 @@
             }
 
             Papa.parse('data/ZonAnn.Ts+dSST downloaded 21062018.csv', {
+                worker: useWebWorker,
                 header: true,
                 delimiter: ',',
                 download: true,
@@ -1677,6 +1683,7 @@
             }
 
             Papa.parse('data/ANS_Temp_Prec_1913-2017.csv', {
+                worker: useWebWorker,
                 header: true,
                 //delimiter: ';',
                 download: true,
@@ -1690,6 +1697,7 @@
         parseAbisko();
 
         Papa.parse('data/Tornetrask_islaggning_islossning.csv', {
+            worker: useWebWorker,
             header: true,
             download: true,
             skipEmptyLines: true,
@@ -1700,6 +1708,7 @@
         });
 
         Papa.parse('data/ANS_SnowDepth_1913-2017.csv', {
+            worker: useWebWorker,
             header: true,
             download: true,
             skipEmptyLines: true,
