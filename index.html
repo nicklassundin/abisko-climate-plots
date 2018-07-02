@@ -707,8 +707,8 @@
                 var breakupDOY = breakupDate.year > 0 ? dayOfYear(createDate(breakupDate)) : null
                 var iceTime = validNumber(row[fields[4]]) || null;
 
-                if (winterYear) {
-                    iceData[winterYear] = {
+                if (springYear) {
+                    iceData[springYear] = {
                         breakupDate: breakupDate.year > 0 ? createDate(breakupDate) : null,
                         breakupDOY,
                         breakupWeek,
@@ -725,16 +725,18 @@
                 y: each[statistic],
             })).filter(each => each.y).filter(each => each.x >= 1909);
 
+            var dateFormat = date => date.getFullYear() + ' ' + monthName(monthByIndex(date.getMonth())) + ' ' + (+date.getDay() + 1);
+
             var breakupDOY = iceData.map((each, year) => ({
                 x: +year,
                 y: each.breakupDOY,
-                name: each.breakupDate ? monthName(monthByIndex(each.breakupDate.getMonth())) + ' ' + (+each.breakupDate.getDay() + 1) : null,
+                name: each.breakupDate ? dateFormat(each.breakupDate) : null,
             })).filter(each => each.y).filter(each => each.x >= 1909);
 
             var freezeDOY = iceData.map((each, year) => ({
                 x: +year,
                 y: each.freezeDOY,
-                name: each.freezeDate ? monthName(monthByIndex(each.freezeDate.getMonth())) + ' ' + (+each.freezeDate.getDay() + 1) : null,
+                name: each.freezeDate ? dateFormat(each.freezeDate) : null,
             })).filter(each => each.y).filter(each => each.x >= 1909);;
 
             var breakupLinear = linearRegression(breakupDOY.map(w => w.x), breakupDOY.map(w => w.y));
@@ -1489,7 +1491,12 @@
                 tooltip: {
                     shared: true,
                     valueDecimals: 0,
-                    pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y}</b> {point.name}<br/>',
+                    formatter: function () {
+                        var tooltip = '<span style="font-size: 10px">' + (+this.x-1) + '/' + this.x + '</span><br/>';
+                        this.points.forEach(point =>
+                            tooltip += '<span style="color:' + point.color + '">\u25CF</span> ' + point.series.name + ': <b>' + (point.point.options.name || point.y) + '</b><br/>');
+                        return tooltip;
+                    },
                 },
                 series: [{
                     yAxis: 0,
