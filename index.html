@@ -263,6 +263,8 @@
             hover: '#3333ff',
         };
 
+        var useWebWorker = true;
+
         /***************************************/
         /* DATA TRANSFORMATIONS AND STATISTICS */
         /***************************************/
@@ -401,7 +403,7 @@
                     year.sum += avg;
                     year.count++;
 
-                    var w = weekNumberFromObj(date);
+                    var w = weekNumber(createDate(date));
                     var weekly = year.weeklyTemperatures[w] = year.weeklyTemperatures[w] || { sum: 0, count: 0 };
                     weekly.sum += avg;
                     weekly.count++;
@@ -698,10 +700,10 @@
                 var winterYear = +row[fields[0]] || undefined;
                 var springYear = +row[fields[1]] || undefined;
                 var freezeDate = parseDate(row[fields[2]]);
-                var freezeWeek = freezeDate.year > 0 ? weekNumberFromObj(freezeDate) : null;
+                var freezeWeek = freezeDate.year > 0 ? weekNumber(createDate(freezeDate)) : null;
                 var freezeDOY = freezeDate.year > 0 ? dayOfYear(createDate(freezeDate)) : null
                 var breakupDate = parseDate(row[fields[3]]);
-                var breakupWeek = breakupDate.year > 0 ? weekNumberFromObj(breakupDate) : null;
+                var breakupWeek = breakupDate.year > 0 ? weekNumber(createDate(breakupDate)) : null;
                 var breakupDOY = breakupDate.year > 0 ? dayOfYear(createDate(breakupDate)) : null
                 var iceTime = validNumber(row[fields[4]]) || null;
 
@@ -726,14 +728,32 @@
             var breakupDOY = iceData.map((each, year) => ({
                 x: +year,
                 y: each.breakupDOY,
-                name: each.breakupDate ? monthByIndex(each.breakupDate.getMonth()) + ' ' + (+each.breakupDate.getDay() + 1) : null,
+                name: each.breakupDate ? monthName(monthByIndex(each.breakupDate.getMonth())) + ' ' + (+each.breakupDate.getDay() + 1) : null,
             })).filter(each => each.y).filter(each => each.x >= 1909);
 
             var freezeDOY = iceData.map((each, year) => ({
                 x: +year,
                 y: each.freezeDOY,
-                name: each.freezeDate ? monthByIndex(each.freezeDate.getMonth()) + ' ' + (+each.freezeDate.getDay() + 1) : null,
+                name: each.freezeDate ? monthName(monthByIndex(each.freezeDate.getMonth())) + ' ' + (+each.freezeDate.getDay() + 1) : null,
             })).filter(each => each.y).filter(each => each.x >= 1909);;
+
+            var breakupLinear = linearRegression(breakupDOY.map(w => w.x), breakupDOY.map(w => w.y));
+            var freezeLinear = linearRegression(freezeDOY.map(w => w.x), freezeDOY.map(w => w.y));
+
+            var breakup = breakupDOY.map(each => ({
+                x: each.x,
+                y: weekNumber(dateFromDayOfYear(each.x, each.y)),
+                name: each.name,
+            }));
+
+            var freeze = freezeDOY.map(each => {
+                var weekNo = weekNumber(dateFromDayOfYear(each.x, each.y));
+                return {
+                    x: each.x,
+                    y: weekNo + (weekNo < 10 ? 52 : 0),
+                    name: each.name,
+                }
+            });
 
             var iceTime = yearly('iceTime');
 
@@ -742,19 +762,33 @@
             })).slice(10);
 
             var iceTimeMovAvg = calculateMovingAverages(iceTime);
+            var iceTimeLinear = linearRegression(iceTime.map(w => w.x), iceTime.map(w => w.y));
+            var iceTimeMovAvgLinear = linearRegression(iceTimeMovAvg.map(w => w.x), iceTimeMovAvg.map(w => w.y));
+
+            var yearMax = iceData.length - 1;
 
             return {
-                yearMax: iceData.length - 1,
-                breakupDate: yearly('breakupDate'),
-                freezeDate: yearly('freezeDate'),
-                breakupDOY,
-                freezeDOY,
+                yearMax,
+                breakup,
+                freeze,
                 iceTime,
                 iceTimeMovAvg,
-                breakupLinear: linearRegression(breakupDOY.map(w => w.x), breakupDOY.map(w => w.y)),
-                freezeLinear: linearRegression(freezeDOY.map(w => w.x), freezeDOY.map(w => w.y)),
-                iceTimeLinear: linearRegression(iceTime.map(w => w.x), iceTime.map(w => w.y)),
-                iceTimeMovAvgLinear: linearRegression(iceTimeMovAvg.map(w => w.x), iceTimeMovAvg.map(w => w.y)),
+                breakupLinear: [
+                    { x: 1915, y: weekNumber(dateFromDayOfYear(1915, Math.round(breakupLinear(1915)))) },
+                    { x: yearMax, y: weekNumber(dateFromDayOfYear(yearMax, Math.round(breakupLinear(yearMax)))) }
+                ],
+                freezeLinear: [
+                    { x: 1909, y: weekNumber(dateFromDayOfYear(1909, Math.round(freezeLinear(1909)))) },
+                    { x: yearMax, y: weekNumber(dateFromDayOfYear(yearMax, Math.round(freezeLinear(yearMax)))) }
+                ],
+                iceTimeLinear: [
+                    { x: 1915, y: iceTimeLinear(1915) },
+                    { x: yearMax, y: iceTimeLinear(yearMax) }
+                ],
+                iceTimeMovAvgLinear: [
+                    { x: 1925, y: iceTimeMovAvgLinear(1925) },
+                    { x: yearMax, y: iceTimeMovAvgLinear(yearMax) }
+                ],
             };
         };
 
@@ -1440,7 +1474,7 @@
                     lineWidth: 1,
                     labels: {
                         formatter: function () {
-                            return this.value > 365 ? this.value - 365 : this.value;
+                            return this.value > 52 ? this.value - 52 : this.value;
                         },
                     }
                 }, {
@@ -1464,7 +1498,7 @@
                     lineWidth: 0,
                     marker: { radius: 2 },
                     states: { hover: { lineWidthPlus: 0 } },
-                    data: ice.freezeDOY,
+                    data: ice.freeze,
                 }, {
                     yAxis: 0,
                     name: 'Linear regression (freezing)',
@@ -1473,10 +1507,7 @@
                     linkedTo: ':previous',
                     states: { hover: { lineWidth: 0, } },
                     enableMouseTracking: false,
-                    data: [
-                        { x: 1909, y: ice.freezeLinear(1909) },
-                        { x: ice.yearMax, y: ice.freezeLinear(ice.yearMax) }
-                    ],
+                    data: ice.freezeLinear,
                 }, {
                     yAxis: 0,
                     name: 'Break-up',
@@ -1484,7 +1515,7 @@
                     lineWidth: 0,
                     marker: { radius: 2 },
                     states: { hover: { lineWidthPlus: 0 } },
-                    data: ice.breakupDOY,
+                    data: ice.breakup,
                 }, {
                     yAxis: 0,
                     name: 'Linear regression (breaking)',
@@ -1493,10 +1524,7 @@
                     linkedTo: ':previous',
                     states: { hover: { lineWidth: 0, } },
                     enableMouseTracking: false,
-                    data: [
-                        { x: 1915, y: ice.breakupLinear(1915) },
-                        { x: ice.yearMax, y: ice.breakupLinear(ice.yearMax) }
-                    ],
+                    data: ice.breakupLinear,
                 }, {
                     yAxis: 1,
                     name: 'Ice time',
@@ -1513,15 +1541,21 @@
                     linkedTo: ':previous',
                     states: { hover: { lineWidth: 0, } },
                     enableMouseTracking: false,
-                    data: [
-                        { x: 1915, y: ice.iceTimeLinear(1915) },
-                        { x: ice.yearMax, y: ice.iceTimeLinear(ice.yearMax) }
-                    ],
+                    data: ice.iceTimeLinear,
                 }, {
                     yAxis: 1,
                     name: 'Ice time (moving average)',
                     color: '#cc00cc',
                     data: ice.iceTimeMovAvg,
+                }, {
+                    yAxis: 1,
+                    name: 'Linear regression (ice time mov avg)',
+                    color: '#cc00cc',
+                    linkedTo: ':previous',
+                    marker: { enabled: false },
+                    states: { hover: { lineWidth: 0, } },
+                    enableMouseTracking: false,
+                    data: ice.iceTimeMovAvgLinear,
                 }],
             });
         };
@@ -1566,6 +1600,7 @@
         /*****************************/
 
         Papa.parse('data/NH.Ts downloaded 21062018.csv', {
+            worker: useWebWorker,
             header: true,
             delimiter: ',',
             download: true,
@@ -1579,6 +1614,7 @@
         });
 
         Papa.parse('data/GLB.Ts downloaded 21062018.csv', {
+            worker: useWebWorker,
             header: true,
             delimiter: ',',
             download: true,
@@ -1604,6 +1640,7 @@
             }
 
             Papa.parse('data/ZonAnn.Ts+dSST downloaded 21062018.csv', {
+                worker: useWebWorker,
                 header: true,
                 delimiter: ',',
                 download: true,
@@ -1646,6 +1683,7 @@
             }
 
             Papa.parse('data/ANS_Temp_Prec_1913-2017.csv', {
+                worker: useWebWorker,
                 header: true,
                 //delimiter: ';',
                 download: true,
@@ -1659,6 +1697,7 @@
         parseAbisko();
 
         Papa.parse('data/Tornetrask_islaggning_islossning.csv', {
+            worker: useWebWorker,
             header: true,
             download: true,
             skipEmptyLines: true,
@@ -1669,6 +1708,7 @@
         });
 
         Papa.parse('data/ANS_SnowDepth_1913-2017.csv', {
+            worker: useWebWorker,
             header: true,
             download: true,
             skipEmptyLines: true,
