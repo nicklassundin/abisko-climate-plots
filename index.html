@@ -1547,15 +1547,6 @@
                     name: 'Ice time (moving average)',
                     color: '#cc00cc',
                     data: ice.iceTimeMovAvg,
-                }, {
-                    yAxis: 1,
-                    name: 'Linear regression (ice time mov avg)',
-                    color: '#cc00cc',
-                    linkedTo: ':previous',
-                    marker: { enabled: false },
-                    states: { hover: { lineWidth: 0, } },
-                    enableMouseTracking: false,
-                    data: ice.iceTimeMovAvgLinear,
                 }],
             });
         };
