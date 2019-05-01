@@ -3,8 +3,8 @@
 /* LOADING DATA HAPPENS HERE */
 /*****************************/
 
-var northernHemispher = function () {
-	Papa.parse('data/NH.Ts downloaded 21062018.csv', {
+var defaultLoader = function(file, id, title){
+	Papa.parse('data/'+file, {
 		worker: useWebWorker,
 		header: true,
 		delimiter: ',',
@@ -14,11 +14,12 @@ var northernHemispher = function () {
 		comments: 'Station',
 		complete: function (result) {
 			var temperatures = parseGISSTEMP(result);
-			renderTemperatureGraph(temperatures, 'northernHemisphere', 'Northern Hemisphere temperatures');
+			renderTemperatureGraph(temperatures, id, title);
 		},
 	});
 };
-// northernHemispher();
+
+
 
 var globalTemperatures = function () {
 	Papa.parse('data/GLB.Ts downloaded 21062018.csv', {

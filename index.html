@@ -3,10 +3,24 @@
 <html>
 
 	<head>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/highcharts.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/js/modules/annotations.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/highcharts-more.js"></script>
+
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/annotations.js"></script>
+		<script src="https://code.highcharts.com/highcharts-more.js"></script>
+		<script src="https://code.highcharts.com/modules/series-label.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+		<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/highcharts.js"></script> -->
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/js/modules/annotations.js"></script> -->
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/highcharts&#45;more.js"></script> -->
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/js/modules/series&#45;label.js"></script> -->
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/js/modules/exporting.js"></script> -->
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/js/modules/export&#45;data.js"></script> -->
+
+
 		<script src="regression.js"></script>
 		<script src="papaparse.min.js"></script>
 		<script src="helpers.js"></script>
@@ -227,12 +241,12 @@ form header {
 		<script src="loader.js"></script>
 
 		<script type="text/javascript">
-			northernHemispher();
-// globalTemperatures();
-// parseZonal();
-// parseAbisko();
-// parseTornetrask();
-// parseSnowDepth();
+			defaultLoader('NH.Ts downloaded 21062018.csv', 'northernHemisphere','Northern Hemisphere temperatures');
+globalTemperatures();
+parseZonal();
+parseAbisko();
+parseTornetrask();
+parseSnowDepth();
 		</script>
 	</body>
 

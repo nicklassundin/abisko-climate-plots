@@ -1,3 +1,5 @@
+
+
 /*****************/
 /* RENDER GRAPHS */
 /*****************/
@@ -87,6 +89,33 @@ var renderTemperatureGraph = function (temperatures, id, title) {
 			states: { hover: { lineWidthPlus: 0 } },
 			marker: { enabled: false },
 		}],
+
+
+		exporting: {
+			buttons: {
+				contextButton: {
+					menuItems: [{
+						textKey: 'downloadPDF',
+						onclick: function(){
+							this.exportChart({
+								type: 'application/pdf'
+							});
+						},
+					},{
+						separator: true
+					},{
+							textKey: 'downloadJPEG',
+						onclick: function(){
+							this.exportChart({
+								type: 'image/jpeg'
+							});
+						}
+					}],
+				},
+			},
+		},
+
+
 	});
 };
 
