@@ -114,7 +114,11 @@ var renderTemperatureGraph = function (temperatures, id, title) {
 				},
 			},
 		},
-
+		navigation: {
+			menuItemStyle: {
+				padding: '10px',
+			},
+		},
 
 	});
 };
