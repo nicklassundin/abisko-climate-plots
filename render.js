@@ -3,7 +3,7 @@ var l = 0;
 var LANG = ['Svenska','English'];
 
 // legend label constants
-var MAX = ["Min", "Min"];
+var MAX = ["Max", "Max"];
 var MIN = ["Min","Min"];
 var YRL_AVG = ["Yearly average", "Årligt genomsnitt"];
 var MNTH_AVG = ["Monthly average", "Månatlig genomsnitt"];
@@ -590,7 +590,31 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 			name: PRC_AVG[l],
 			color: precipColor,
 			data: precipitation.movAvg,
-		}, {
+		},
+			{
+			name: 'Average precipitation from rain',
+			color: 'red',
+			data: precipitation.rain_movAvg,
+		},
+			{
+			name: 'Linear regression from rain (moving average)',
+			marker: {
+				enable: false,
+			},
+			color: 'blue',
+			states: {
+				hober: {
+					lineWidth: 0,
+				},
+			},
+			enableMouseTracking: false,
+			data: [
+				{ x: precipitation.years[0],
+					y: precipitation.linear_rain(precipitation.years[0]) },
+				{ x: precipitation.years[precipitation.years.length -1],
+					y: precipitation.linear_rain(precipitation.years[precipitation.years.length-1]) }
+			],
+		},{
 			name: LNR_RGRSSN[l],
 			marker: {
 				enabled: false, // Linear regression lines doesn't contain points
@@ -603,8 +627,10 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 			},
 			enableMouseTracking: false, // No interactivity
 			data: [
-				{ x: precipitation.years[0], y: precipitation.linear(precipitation.years[0]) },
-				{ x: precipitation.years[precipitation.years.length - 1], y: precipitation.linear(precipitation.years[precipitation.years.length - 1]) }
+				{ x: precipitation.years[0], 
+					y: precipitation.linear(precipitation.years[0]) },
+				{ x: precipitation.years[precipitation.years.length - 1],
+					y: precipitation.linear(precipitation.years[precipitation.years.length - 1]) }
 			],
 		}],
 	});

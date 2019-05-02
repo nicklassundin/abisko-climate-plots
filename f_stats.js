@@ -319,7 +319,7 @@ var parseAbiskoCsv = function (result) {
 		p.total = p.total.slice(10);
 		p.rain = monthlyPrecipByStat(index, 'rain').slice(10);
 		p.movAvg_rain = movingAveragesHighCharts(p.rain.map(each => each.y)); // TODO REFORM Maybe
-		p.linear_rain = linearRegression(p.years,p.movAvg_rain.map(each => each.y));	// TODO new REFORM MAYBE
+		p.linear_rain = linearRegression(p.years, p.movAvg_rain.map(each => each.y));	// TODO new REFORM MAYBE
 		p.snow = monthlyPrecipByStat(index, 'snow').slice(10);
 
 		var t = monthlyTemps[month] = {};
@@ -362,6 +362,8 @@ var parseAbiskoCsv = function (result) {
 		p.total = seasonalPrecipByStat(e.season, 'total');
 		p.snow = seasonalPrecipByStat(e.season, 'snow').slice(10);
 		p.rain = seasonalPrecipByStat(e.season, 'rain').slice(10);
+		p.movAvg_rain = movingAveragesHighCharts(p.rain.map(each => each.y)); // TODO REFORM Maybe
+		p.linear_rain = linearRegression(p.years, p.movAvg_rain.map(each => each.y));	// TODO new REFORM MAYBE
 		p.movAvg = movingAveragesHighCharts(p.total.map(each => each.y));
 		p.linear = linearRegression(p.years, p.movAvg.map(each => each.y));
 		p.difference = p.total.map(each => ({
@@ -383,7 +385,14 @@ var parseAbiskoCsv = function (result) {
 		.forEach((value, index) => ciMovAvg[index][bound] = value));
 
 	var precipMovAvg = movingAveragesHighCharts(values().map(each => each.precip));
+	console.log(precipMovAvg);
 
+	// TODO Precipitation snow and rain
+	var precipMovAvg_rain = movingAveragesHighCharts(values().map(each => each.precip_rain)); // TODO REFORM Maybe
+	console.log(precipMovAvg_rain);
+	console.log(values());
+	
+	
 	return {
 		years,
 		avg: yearly('avg').slice(10),
@@ -412,8 +421,9 @@ var parseAbiskoCsv = function (result) {
 			total: yearly('precip').slice(10),
 			snow: yearly('precip_snow').slice(10),
 			rain: yearly('precip_rain').slice(10),
-			// rain_movAvg: yearly() TODO
+			rain_movAvg:  precipMovAvg_rain,// TODO
 			movAvg: precipMovAvg,
+			linear_rain: linearRegression(years.slice(10), precipMovAvg_rain.map(each => each.y)),	// TODO new REFORM MAYBE
 			linear: linearRegression(years.slice(10), precipMovAvg.map(each => each.y)),
 			difference: yearly('precip').map(each => ({
 				x: each.x,
