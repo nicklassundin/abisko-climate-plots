@@ -570,7 +570,27 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 					},
 				},
 			},
-		}, {
+		},{
+			name: 'Average precipitation from snow',
+			color: snowColor.color,
+			data: precipitation.snow_movAvg,
+		},{
+			name: 'Linear regression from Snow (moving average)',
+			marker: {
+				enable: false,
+			},
+			color: rainColor.color,
+			states: {
+				hober: {
+					lineWidth: 0,
+				},
+			},
+			enableMouseTracking: false,
+			data: [
+				{ x: precipitation.years[0], y: precipitation.linear_snow(precipitation.years[0]) },
+				{ x: precipitation.years[precipitation.years.length -1], y: precipitation.linear_snow(precipitation.years[precipitation.years.length-1]) }
+			],
+		},{
 			name: PRC_RN[l],
 			type: 'column',
 			stack: 'precip',
@@ -593,7 +613,7 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 		},
 			{
 			name: 'Average precipitation from rain',
-			color: 'red',
+			color: rainColor.color,
 			data: precipitation.rain_movAvg,
 		},
 			{
@@ -601,7 +621,7 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 			marker: {
 				enable: false,
 			},
-			color: 'blue',
+			color: rainColor.color,
 			states: {
 				hober: {
 					lineWidth: 0,

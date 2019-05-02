@@ -321,6 +321,8 @@ var parseAbiskoCsv = function (result) {
 		p.movAvg_rain = movingAveragesHighCharts(p.rain.map(each => each.y)); // TODO REFORM Maybe
 		p.linear_rain = linearRegression(p.years, p.movAvg_rain.map(each => each.y));	// TODO new REFORM MAYBE
 		p.snow = monthlyPrecipByStat(index, 'snow').slice(10);
+		p.movAvg_snow = movingAveragesHighCharts(p.snow.map(each => each.y)); // TODO REFORM
+		p.linear_rain = linearRegression(p.years, p.movAvg_snow.map(each => each.y));
 
 		var t = monthlyTemps[month] = {};
 		t.avg = monthlyTempByStat(index, 'avg');
@@ -361,9 +363,16 @@ var parseAbiskoCsv = function (result) {
 		p.years = years.slice(10);
 		p.total = seasonalPrecipByStat(e.season, 'total');
 		p.snow = seasonalPrecipByStat(e.season, 'snow').slice(10);
+
+		// TODO interlace dat from yearly into seasonal data structure
+		p.movAvg_snow = movingAveragesHighCharts(p.snow.map(each => each.precip_snow)); // TODO REFORM
+		p.linear_snow = linearRegression(p.years, p.movAvg_snow.map(each => each.y)); // TODO REFORM
 		p.rain = seasonalPrecipByStat(e.season, 'rain').slice(10);
+		
+		// TODO interlace data from yearly into seasonal data structure
 		p.movAvg_rain = movingAveragesHighCharts(p.rain.map(each => each.y)); // TODO REFORM Maybe
-		p.linear_rain = linearRegression(p.years, p.movAvg_rain.map(each => each.y));	// TODO new REFORM MAYBE
+		p.linear_rain = linearRegression(p.years, p.movAvg_rain.map(each => each.precip_rain));	// TODO new REFORM MAYBE
+		
 		p.movAvg = movingAveragesHighCharts(p.total.map(each => each.y));
 		p.linear = linearRegression(p.years, p.movAvg.map(each => each.y));
 		p.difference = p.total.map(each => ({
@@ -385,13 +394,10 @@ var parseAbiskoCsv = function (result) {
 		.forEach((value, index) => ciMovAvg[index][bound] = value));
 
 	var precipMovAvg = movingAveragesHighCharts(values().map(each => each.precip));
-	console.log(precipMovAvg);
 
 	// TODO Precipitation snow and rain
-	var precipMovAvg_rain = movingAveragesHighCharts(values().map(each => each.precip_rain)); // TODO REFORM Maybe
-	console.log(precipMovAvg_rain);
-	console.log(values());
-	
+	var precipMovAvg_rain = movingAveragesHighCharts(values().map(each => each.precip_rain)); // TODO REFORM
+	var precipMovAvg_snow = movingAveragesHighCharts(values().map(each => each.precip_snow)); // TODO REFORM
 	
 	return {
 		years,
@@ -420,6 +426,8 @@ var parseAbiskoCsv = function (result) {
 			years: years.slice(10),
 			total: yearly('precip').slice(10),
 			snow: yearly('precip_snow').slice(10),
+			snow_movAvg: precipMovAvg_snow, // TODO
+			linear_snow: linearRegression(years.slice(10), precipMovAvg_snow.map(each => each.y)),	// TODO new REFORM MAYBE
 			rain: yearly('precip_rain').slice(10),
 			rain_movAvg:  precipMovAvg_rain,// TODO
 			movAvg: precipMovAvg,
