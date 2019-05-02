@@ -1,11 +1,85 @@
+// language constant 
+var l = 0;
+var LANG = ['Svenska','English'];
 
+// legend label constants
+var MAX = ["Min", "Min"];
+var MIN = ["Min","Min"];
+var YRL_AVG = ["Yearly average", "Årligt genomsnitt"];
+var MNTH_AVG = ["Monthly average", "Månatlig genomsnitt"];
+var YRL_CNF_INT = ["Confidence interval (yearly avg.)", "Konfidence interval (Årligt genomsnitt)"];
+var WK = ["Weeks","veckor"];
+var MVNG_AVG = ["Moving average", "Rörligt genomsnitt"];
+var MVNG_AVG_CNF_INT = ["Confidence interval (moving avg.)","Konfidence interval (rörligt genomsnitt)"];
+
+// Percipitation
+var LNR_RGRSSN = ["Linear regression (moving avg.)", "Linjär regression (rörlig genomsnitt)"];
+var PRC_SNW = ["Precipitation from snow", "Utfällning från snö"];
+var PRC_RN = ["Precipitation from rain", "Utfällning från regn"];
+var PRC_AVG = ["Average precipitation", "Genomsnittlig utfällning"];
+// Freeze-up and Break-up
+var FRZ = ["Freeze-up","Freeze-up"];
+var BRK = ["Break-up", "Break-up"];
+var ICE_TIME = ["Ice time", "Ice time"];
+var ICE_TIME_MVNG_AVG = ["Ice time (moving average)", "Ice time (moving average)"];
+
+// Localization
+var SWE_OPTION = {
+	lang:{
+		shortMonths: ['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec'],
+		downloadJPEG: 'Ladda ner som JPEG',
+		downloadPDF: 'Ladda ner som PDF',
+		months: ['Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'],
+	}
+};
 
 /*****************/
 /* RENDER GRAPHS */
 /*****************/
 
+var global_chart_settings = {
+	exporting: {
+		buttons: {
+			contextButton: {
+				menuItems: [{
+					textKey: 'downloadPDF',
+					onclick: function(){
+						this.exportChart({
+							type: 'application/pdf'
+						});
+					},
+				},
+					// {
+					// separator: true
+					// },
+					{
+						textKey: 'downloadJPEG',
+						onclick: function(){
+							this.exportChart({
+								type: 'image/jpeg'
+							});
+						}
+					},{
+						separator: true,
+					},{
+						text: LANG[l],
+						onclick: function(){
+							if(l==0){
+								l=1;
+							}else{
+								l=0;
+							};
+							// TODO Lang switching
+						},
+					}],
+			},
+		},
+	},
+};
+Highcharts.setOptions(global_chart_settings);
+
 var renderTemperatureGraph = function (temperatures, id, title) {
-	Highcharts.chart(id, {
+	var chart = Highcharts.chart(id, {
 		chart: {
 			type: 'line',
 			zoomType: 'xy',
@@ -39,7 +113,7 @@ var renderTemperatureGraph = function (temperatures, id, title) {
 			valueDecimals: 2,
 		},
 		series: [{
-			name: 'Max',
+			name: MAX[l],
 			lineWidth: 0,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
@@ -47,7 +121,7 @@ var renderTemperatureGraph = function (temperatures, id, title) {
 			data: temperatures.max,
 			visible: false,
 		}, {
-			name: 'Min',
+			name: MIN[l],
 			lineWidth: 0,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
@@ -55,7 +129,7 @@ var renderTemperatureGraph = function (temperatures, id, title) {
 			data: temperatures.min,
 			visible: false,
 		}, {
-			name: 'Yearly average',
+			name: YRL_AVG[l],
 			lineWidth: 0,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
@@ -63,7 +137,7 @@ var renderTemperatureGraph = function (temperatures, id, title) {
 			data: temperatures.avg,
 			visible: false,
 		}, {
-			name: 'Confidence interval',
+			name: YRL_CNF_INT[l],
 			type: 'arearange',
 			color: '#888888',
 			data: temperatures.ci,
@@ -74,12 +148,12 @@ var renderTemperatureGraph = function (temperatures, id, title) {
 			marker: { enabled: false },
 			visible: false,
 		}, {
-			name: 'Moving average',
+			name: MVNG_AVG[l],
 			color: '#888888',
 			marker: { enabled: false },
 			data: temperatures.movAvg,
 		}, {
-			name: 'Confidence interval',
+			name: MVNG_AVG_CNF_INT[l],
 			type: 'arearange',
 			color: '#7777ff',
 			data: temperatures.ciMovAvg,
@@ -90,36 +164,36 @@ var renderTemperatureGraph = function (temperatures, id, title) {
 			marker: { enabled: false },
 		}],
 
-
-		exporting: {
-			buttons: {
-				contextButton: {
-					menuItems: [{
-						textKey: 'downloadPDF',
-						onclick: function(){
-							this.exportChart({
-								type: 'application/pdf'
-							});
-						},
-					},{
-						separator: true
-					},{
-							textKey: 'downloadJPEG',
-						onclick: function(){
-							this.exportChart({
-								type: 'image/jpeg'
-							});
-						}
-					}],
-				},
-			},
-		},
-		navigation: {
-			menuItemStyle: {
-				padding: '10px',
-			},
-		},
-
+		//
+		// 	exporting: {
+		// 		buttons: {
+		// 			contextButton: {
+		// 				menuItems: [{
+		// 					textKey: 'downloadPDF',
+		// 					onclick: function(){
+		// 						this.exportChart({
+		// 							type: 'application/pdf'
+		// 						});
+		// 					},
+		// 				},{
+		// 					separator: true
+		// 				},{
+		// 						textKey: 'downloadJPEG',
+		// 					onclick: function(){
+		// 						this.exportChart({
+		// 							type: 'image/jpeg'
+		// 						});
+		// 					}
+		// 				}],
+		// 			},
+		// 		},
+		// 	},
+		// 	navigation: {
+		// 		menuItemStyle: {
+		// 			padding: '10px',
+		// 		},
+		// 	},
+		//
 	});
 };
 
@@ -158,7 +232,7 @@ var renderAbiskoTemperatureGraph = function (temperatures, id, title) {
 			valueDecimals: 2,
 		},
 		series: [{
-			name: 'Max',
+			name: MAX[l],
 			lineWidth: 0,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
@@ -166,7 +240,7 @@ var renderAbiskoTemperatureGraph = function (temperatures, id, title) {
 			data: temperatures.max,
 			visible: false,
 		}, {
-			name: 'Min',
+			name: MIN[l],
 			lineWidth: 0,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
@@ -174,7 +248,7 @@ var renderAbiskoTemperatureGraph = function (temperatures, id, title) {
 			data: temperatures.min,
 			visible: false,
 		}, {
-			name: 'Yearly average',
+			name: YRL_AVG[l],
 			lineWidth: 0,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
@@ -182,7 +256,7 @@ var renderAbiskoTemperatureGraph = function (temperatures, id, title) {
 			data: temperatures.avg,
 			visible: true,
 		}, {
-			name: 'Confidence interval',
+			name: YRL_CNF_INT[l],
 			type: 'arearange',
 			color: '#888888',
 			data: temperatures.ci,
@@ -193,12 +267,12 @@ var renderAbiskoTemperatureGraph = function (temperatures, id, title) {
 			marker: { enabled: false },
 			visible: false,
 		}, {
-			name: 'Moving average',
+			name: MVNG_AVG[l],
 			color: '#888888',
 			marker: { enabled: false },
 			data: temperatures.movAvg,
 		}, {
-			name: 'Confidence interval',
+			name: MVNG_AVG_CNF_INT[l],
 			type: 'arearange',
 			color: '#7777ff',
 			data: temperatures.ciMovAvg,
@@ -247,7 +321,7 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
 			valueDecimals: 2,
 		},
 		series: [{
-			name: 'Max',
+			name: MAX[l],
 			lineWidth: 0,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
@@ -255,7 +329,7 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
 			data: temperatures.max,
 			visible: false,
 		}, {
-			name: 'Min',
+			name: MIN[l],
 			lineWidth: 0,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
@@ -263,7 +337,7 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
 			data: temperatures.min,
 			visible: false,
 		}, {
-			name: 'Monthly average',
+			name: MNTH_AVG[l],
 			lineWidth: 0,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
@@ -271,7 +345,7 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
 			data: temperatures.avg,
 			visible: true,
 		}, {
-			name: 'Moving average',
+			name: MVNG_AVG[l],
 			color: '#888888',
 			marker: { enabled: false },
 			data: temperatures.movAvg,
@@ -362,7 +436,7 @@ var renderGrowingSeasonGraph = function (season, id) {
 		},
 		yAxis: {
 			title: {
-				text: 'Weeks'
+				text: WK[l]
 			},
 			tickInterval: 1,
 			lineWidth: 1,
@@ -372,7 +446,7 @@ var renderGrowingSeasonGraph = function (season, id) {
 			valueDecimals: 0,
 		},
 		series: [{
-			name: 'Weeks',
+			name: WK[l],
 			lineWidth: 0,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
@@ -380,7 +454,7 @@ var renderGrowingSeasonGraph = function (season, id) {
 			data: season.weeks,
 			visible: true,
 		}, {
-			name: 'Moving average',
+			name: MVNG_AVG[l],
 			color: '#00aa00',
 			marker: { enabled: false },
 			data: season.movAvg,
@@ -481,7 +555,7 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 			'<span style="color: white; visibility: hidden">\u25CF</span> Total precipitation: <b>{point.total:.0f} mm</b><br />',
 		},
 		series: [{
-			name: 'Precipitation from snow',
+			name: PRC_SNW[l],
 			type: 'column',
 			stack: 'precip',
 			stacking: 'normal',
@@ -497,7 +571,7 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 				},
 			},
 		}, {
-			name: 'Precipitation from rain',
+			name: PRC_RN[l],
 			type: 'column',
 			stack: 'precip',
 			stacking: 'normal',
@@ -513,11 +587,11 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 				},
 			},
 		}, {
-			name: 'Average precipitation',
+			name: PRC_AVG[l],
 			color: precipColor,
 			data: precipitation.movAvg,
 		}, {
-			name: 'Linear regression',
+			name: LNR_RGRSSN[l],
 			marker: {
 				enabled: false, // Linear regression lines doesn't contain points
 			},
@@ -567,7 +641,7 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
 			'<span style="color: white; visibility: hidden">\u25CF</span> Total precipitation: <b>{point.total:.0f} mm</b><br />',
 		},
 		series: [{
-			name: 'Precipitation from snow',
+			name: PRC_SNW[l],
 			type: 'column',
 			stack: 'precip',
 			stacking: 'normal',
@@ -583,7 +657,7 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
 				},
 			},
 		}, {
-			name: 'Precipitation from rain',
+			name: PRC_RN[l],
 			type: 'column',
 			stack: 'precip',
 			stacking: 'normal',
@@ -599,7 +673,7 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
 				},
 			},
 		}, {
-			name: 'Average precipitation',
+			name: PRC_AVG[l],
 			color: precipColor,
 			data: precipitation.movAvg,
 		}],
@@ -651,7 +725,7 @@ var renderAbiskoIceGraph = function (ice, id, title) {
 		},
 		series: [{
 			yAxis: 0,
-			name: 'Freeze-up',
+			name: FRZ[l],
 			color: '#0000ee',
 			lineWidth: 0,
 			marker: { radius: 2 },
@@ -668,7 +742,7 @@ var renderAbiskoIceGraph = function (ice, id, title) {
 			data: ice.freezeLinear,
 		}, {
 			yAxis: 0,
-			name: 'Break-up',
+			name: BRK[l],
 			color: '#ee0000',
 			lineWidth: 0,
 			marker: { radius: 2 },
@@ -685,7 +759,7 @@ var renderAbiskoIceGraph = function (ice, id, title) {
 			data: ice.breakupLinear,
 		}, {
 			yAxis: 1,
-			name: 'Ice time',
+			name: ICE_TIME[l],
 			color: '#00bb00',
 			lineWidth: 0,
 			marker: { radius: 2 },
@@ -702,7 +776,7 @@ var renderAbiskoIceGraph = function (ice, id, title) {
 			data: ice.iceTimeLinear,
 		}, {
 			yAxis: 1,
-			name: 'Ice time (moving average)',
+			name: ICE_TIME_MVNG_AVG[l],
 			color: '#cc00cc',
 			data: ice.iceTimeMovAvg,
 		}],

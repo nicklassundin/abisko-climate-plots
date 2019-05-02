@@ -241,8 +241,10 @@
 		<script src="loader.js"></script>
 
 		<script type="text/javascript">
-			defaultLoader('NH.Ts downloaded 21062018.csv', 'northernHemisphere','Northern Hemisphere temperatures');
-globalTemperatures();
+			tempGraphBuilder('NH.Ts downloaded 21062018.csv', 'northernHemisphere','Northern Hemisphere temperatures');
+tempGraphBuilder('GLB.Ts downloaded 21062018.csv','globalTemperatures','Global temperatures');
+
+// globalTemperatures();
 parseZonal();
 parseAbisko();
 parseTornetrask();

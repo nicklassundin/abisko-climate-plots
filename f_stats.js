@@ -318,6 +318,8 @@ var parseAbiskoCsv = function (result) {
 		p.linear = linearRegression(p.years, p.movAvg.map(each => each.y));
 		p.total = p.total.slice(10);
 		p.rain = monthlyPrecipByStat(index, 'rain').slice(10);
+		p.movAvg_rain = movingAveragesHighCharts(p.rain.map(each => each.y)); // TODO REFORM Maybe
+		p.linear_rain = linearRegression(p.years,p.movAvg_rain.map(each => each.y));	// TODO new REFORM MAYBE
 		p.snow = monthlyPrecipByStat(index, 'snow').slice(10);
 
 		var t = monthlyTemps[month] = {};
@@ -327,7 +329,6 @@ var parseAbiskoCsv = function (result) {
 		t.movAvg = movingAveragesHighCharts(t.avg.map(each => each.y));
 		t.avg = t.avg.slice(10);
 	});
-
 	var seasonal = (season, statistic) => entries().map(each => ({
 		x: +each[0],
 		y: each[1][season][statistic],
@@ -411,6 +412,7 @@ var parseAbiskoCsv = function (result) {
 			total: yearly('precip').slice(10),
 			snow: yearly('precip_snow').slice(10),
 			rain: yearly('precip_rain').slice(10),
+			// rain_movAvg: yearly() TODO
 			movAvg: precipMovAvg,
 			linear: linearRegression(years.slice(10), precipMovAvg.map(each => each.y)),
 			difference: yearly('precip').map(each => ({
