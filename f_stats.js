@@ -317,20 +317,21 @@ var parseAbiskoCsv = function (result) {
 		p.years = years.slice(10);
 		p.total = monthlyPrecipByStat(index, 'total');
 		p.movAvg = movingAveragesHighCharts(p.total.map(each => each.y));
-		p.linear = linearRegression(p.years, p.movAvg.map(each => each.y));
+		p.linear = linearRegression(p.years, p.total.map(each => each.y));
 		p.total = p.total.slice(10);
 		
-		p.rain = monthlyPrecipByStat(index, 'rain');
-		// TODO ---
-		p.rain_movAvg = movingAveragesHighCharts(p.rain.map(each => each.y)); // TODO REFORM Maybe
-		p.linear_rain = linearRegression(p.years, p.rain_movAvg.map(each => each.y));	// TODO new REFORM MAYBE
+		p.rain = monthlyPrecipByStat(index, 'rain');	
+		p.rain_movAvg = movingAveragesHighCharts(p.rain.map(each => each.y)); 
+		p.linear_rain_movAvg = linearRegression(p.years, p.rain_movAvg.map(each => each.y));
+		p.linear_rain = linearRegression(p.years, p.rain.map(each => each.y));
 		p.rain = p.rain.slice(10);
 		
 
 		p.snow = monthlyPrecipByStat(index, 'snow');
 		// TODO
 		p.snow_movAvg = movingAveragesHighCharts(p.snow.map(each => each.y)); // TODO REFORM
-		p.linear_snow = linearRegression(p.years, p.snow_movAvg.map(each => each.y));
+		p.linear_snow = linearRegression(p.years, p.snow.map(each => each.y));
+		p.linear_snow_movAvg = linearRegression(p.years, p.snow_movAvg.map(each => each.y));
 		p.snow = p.snow.slice(10);
 
 
@@ -376,14 +377,17 @@ var parseAbiskoCsv = function (result) {
 		
 		
 		// TODO fix missing 10 data points
-		p.snow_movAvg = movingAveragesHighCharts(p.snow.map(each => each.y)); // TODO REFORM
-		p.linear_snow = linearRegression(p.years, p.snow_movAvg.map(each => each.y)); // TODO REFORM
+		p.linear_snow = linearRegression(p.years, p.snow.map(each => each.y)); // TODO REFORM
+		
+		// p.snow_movAvg = movingAveragesHighCharts(p.snow.map(each => each.y)); 
+		// p.linear_snow_movAvg = linearRegression(p.years, p.snow_movAvg.map(each => each.y)); 
 		p.snow = p.snow.slice(10);
 
-		// TODO fix missing 10 data points
 		p.rain = seasonalPrecipByStat(e.season, 'rain');	
-		p.rain_movAvg = movingAveragesHighCharts(p.rain.map(each => each.y)); // TODO REFORM Maybe
-		p.linear_rain = linearRegression(p.years, p.rain_movAvg.map(each => each.y));	// TODO new REFORM MAYBE
+		p.linear_rain = linearRegression(p.years, p.rain.map(each => each.y));
+		
+		// p.rain_movAvg = movingAveragesHighCharts(p.rain.map(each => each.y)); 
+		// p.linear_rain = linearRegression(p.years, p.rain_movAvg.map(each => each.y));
 		p.rain = p.rain.slice(10);	
 		
 		

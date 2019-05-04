@@ -572,14 +572,14 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 			},
 		},
 			// TODO discuss use fullness Moving averages
+			// {
+				// name: 'Average precipitation from snow (moving avg.)',
+				// color: snowColor.color,
+				// visible: false,
+				// data: precipitation.snow_movAvg,
+			// },
 			{
-				name: 'Average precipitation from snow (moving avg.)',
-				color: snowColor.color,
-				visible: false,
-				data: precipitation.snow_movAvg,
-			},
-			{
-				name: 'Linear regression from snow (moving avg.)',
+				name: 'Linear regression from snow',
 				visible: false,
 				marker: {
 					enable: false,
@@ -612,19 +612,15 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 						},
 					},
 				},
-			}, {
-				name: 'Total average precipitation (moving avg.)',
-				color: precipColor,
-				data: precipitation.movAvg,
-			},
+			}, 
+			// {
+				// name: 'Average precipitation from rain',
+				// color: rainColor.color,
+				// visible: false,
+				// data: precipitation.rain_movAvg,
+			// },
 			{
-				name: 'Average precipitation from rain (moving avg.)',
-				color: rainColor.color,
-				visible: false,
-				data: precipitation.rain_movAvg,
-			},
-			{
-				name: 'Linear regression from rain (moving average)',
+				name: 'Linear regression from rain',
 				visible: false,
 				marker: {
 					enable: false,
@@ -643,7 +639,7 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 						y: precipitation.linear_rain(precipitation.years[precipitation.years.length-1]) }
 				],
 			},{
-				name: 'Linear regression from all sources (moving avg.)',
+				name: 'Linear regression from all sources',
 				visible: false,
 				marker: {
 					enabled: false, // Linear regression lines doesn't contain points
@@ -728,11 +724,7 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
 				},
 			},
 		}, {
-			name: 'Total average precipitation (moving avg.)',
-			color: precipColor,
-			data: precipitation.movAvg,
-		},{
-			name: 'Linear regression from all sources (moving avg.)',
+			name: 'Linear regression from all sources',
 			visible: false,
 			marker: {
 				enabled: false, // Linear regression lines doesn't contain points
@@ -751,7 +743,7 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
 					y: precipitation.linear(precipitation.years[precipitation.years.length - 1]) }
 			],
 		},{
-			name: 'Linear regression from snow (moving avg.)',
+			name: 'Linear regression from snow',
 			visible: false,
 			marker: {
 				enabled: false 
@@ -772,7 +764,7 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
 					y: precipitation.linear_snow(precipitation.years[precipitation.years.length - 1]) }
 			],
 		},{
-			name: 'Linear regression from rain (moving avg.)',
+			name: 'Linear regression from rain',
 			visible: false,
 			marker: {
 				enabled: false 
