@@ -62,7 +62,7 @@ var parseGISSTEMP = function (result) {
 
 	temperatures.ci = temperatures.ci.slice(10);
 	temperatures.ciMovAvg = temperatures.ciMovAvg.slice(10);
-
+	console.log(temperatures);
 	return temperatures;
 };
 
