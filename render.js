@@ -389,7 +389,7 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 			valueDecimals: 2,
 		},
 		legend: {
-			enabled: false,
+			enabled: true,
 		},
 		annotations: [{
 			labelOptions: {
@@ -462,6 +462,7 @@ var renderGrowingSeasonGraph = function (season, id) {
 }
 
 var renderPrecipitationDifferenceGraph = function (precipitation, id, title) {
+	// console.log(precipitation);
 	Highcharts.chart(id, {
 		chart: {
 			type: 'column'
@@ -498,7 +499,7 @@ var renderPrecipitationDifferenceGraph = function (precipitation, id, title) {
 			valueDecimals: 2,
 		},
 		legend: {
-			enabled: false,
+			enabled: true,
 		},
 		annotations: [{
 			labelOptions: {
@@ -517,10 +518,35 @@ var renderPrecipitationDifferenceGraph = function (precipitation, id, title) {
 		}],
 		series: [{
 			name: 'Difference',
-			data: precipitation,
+			data: precipitation.difference,
 			color: 'red',
 			negativeColor: 'blue',
-		}],
+		},{
+				name: 'Linear regression',
+				type: 'line',
+				visible: false,
+				marker: {
+					enable: false,
+				},
+				color: rainColor.color,
+				states: {
+					hober: {
+						lineWidth: 0,
+					},
+				},
+				enableMouseTracking: false,
+//
+
+				data: [
+					{ x: precipitation.years[0], 
+						y: precipitation.linear_diff(precipitation.years[0]) },
+					{ x: precipitation.years[precipitation.years.length - 1],
+						y: precipitation.linear_diff(precipitation.years[precipitation.years.length - 1]) }
+				],
+
+//
+			},
+		],
 	});
 };
 

@@ -88,9 +88,9 @@ var parseAbisko = function () {
 		months().forEach(month =>
 			renderMonthlyPrecipitationGraph(data.monthlyPrecipitation[month], 'monthlyPrecipitation_' + month, 'Precipitation for ' + monthName(month)));
 
-		renderPrecipitationDifferenceGraph(data.yearlyPrecipitation.difference, 'yearlyPrecipitationDifference', 'Precipitation difference');
-		renderPrecipitationDifferenceGraph(data.summerPrecipitation.difference, 'summerPrecipitationDifference', 'Precipitation difference ' + summerRange);
-		renderPrecipitationDifferenceGraph(data.winterPrecipitation.difference, 'winterPrecipitationDifference', 'Precipitation difference ' + winterRange);
+		renderPrecipitationDifferenceGraph(data.yearlyPrecipitation, 'yearlyPrecipitationDifference', 'Precipitation difference');
+		renderPrecipitationDifferenceGraph(data.summerPrecipitation, 'summerPrecipitationDifference', 'Precipitation difference ' + summerRange);
+		renderPrecipitationDifferenceGraph(data.winterPrecipitation, 'winterPrecipitationDifference', 'Precipitation difference ' + winterRange);
 	}
 
 	Papa.parse('data/ANS_Temp_Prec_1913-2017.csv', {
