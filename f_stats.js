@@ -398,6 +398,7 @@ var parseAbiskoCsv = function (result) {
 		}));
 		p.total = p.total.slice(10);
 		p.linear_diff = linearRegression(years, p.difference.map(each => each.y));
+		p.difference = p.difference.slice(10);
 	});
 	
 	var ci = entries().map((each) => ({
@@ -459,7 +460,7 @@ var parseAbiskoCsv = function (result) {
 			// movAvg: precipMovAvg,
 			linear_rain: linearRegression(years.slice(10), yearly('precip_rain').map(each => each.y)),
 			linear: linearRegression(years.slice(10), yearly('precip').map(each => each.y)),
-			difference: yrly_diff,
+			difference: yrly_diff.slice(10),
 			linear_diff: linearRegression(years.slice(10), yrly_diff.map(each => each.y)),
 		},
 		monthlyPrecipitation,
