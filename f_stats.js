@@ -97,10 +97,19 @@ var parseGISSTEMPzonalMeans = function (result) {
 		x: each.year,
 		y: each[region] - temperatures['avg' + region],
 	}));
+	var linear_diff = function(data){
+		return {
+			difference: data,
+			linear_diff: linearRegression(data.map(each => each.x),data.map(each => each.y)),
+		};
+	}
 
-	temperatures['64n-90n'] = difference('64n-90n');
-	temperatures['nhem'] = difference('nhem');
-	temperatures['glob'] = difference('glob');
+
+	temperatures['64n-90n'] = linear_diff(difference('64n-90n'));
+	temperatures['nhem'] = linear_diff(difference('nhem'));
+	temperatures['glob'] = linear_diff(difference('glob'));
+	
+
 
 	return temperatures;
 };

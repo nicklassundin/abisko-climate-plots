@@ -58,7 +58,7 @@ var global_chart_settings = {
 								type: 'image/jpeg'
 							});
 						}
-					},{
+					},'downloadSVG',{
 						separator: true,
 					},{
 						text: LANG[l],
@@ -353,6 +353,8 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
 };
 
 var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
+	console.log(title);
+	console.log(temperatures);
 	Highcharts.chart(id, {
 		chart: {
 			type: 'column'
@@ -408,7 +410,7 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 		}],
 		series: [{
 			name: 'Difference',
-			data: temperatures,
+			data: temperatures.difference,
 			color: 'red',
 			negativeColor: 'blue',
 		}],

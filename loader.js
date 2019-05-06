@@ -78,7 +78,7 @@ var parseAbisko = function () {
 		renderAbiskoMonthlyTemperatureGraph(data.winterTemps, 'AbiskoTemperaturesWinter', 'Abisko temperatures for ' + winterRange);
 		months().forEach(month =>
 			renderAbiskoMonthlyTemperatureGraph(data.monthlyTemps[month], 'monthlyAbiskoTemperatures_' + month, 'Abisko temperatures for ' + monthName(month)));
-		renderTemperatureDifferenceGraph(data.difference, 'temperatureDifferenceAbisko', 'Temperature difference for Abisko');
+		renderTemperatureDifferenceGraph(data, 'temperatureDifferenceAbisko', 'Temperature difference for Abisko');
 
 		renderGrowingSeasonGraph(data.growingSeason, 'growingSeason');
 
