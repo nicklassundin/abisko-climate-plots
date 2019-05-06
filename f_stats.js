@@ -423,8 +423,8 @@ var parseAbiskoCsv = function (result) {
 				y: each.y - (precipitationBaselineYearly.sum / precipitationBaselineYearly.count),
 			}));
 
-	console.log(yearly('precip'));
-	console.log(yrly_diff);
+	// console.log(yearly('precip'));
+	// console.log(yrly_diff);
 	// console.log(monthlyPrecipitation);
 	return {
 		years,

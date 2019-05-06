@@ -871,7 +871,7 @@ var renderAbiskoIceGraph = function (ice, id, title) {
 			data: ice.freeze,
 		}, {
 			yAxis: 0,
-			name: 'Linear regression (freezing)',
+			name: 'Linear regression (freeze-up)',
 			marker: { enabled: false },
 			color: '#0000ee',
 			// linkedTo: ':previous',
@@ -888,7 +888,7 @@ var renderAbiskoIceGraph = function (ice, id, title) {
 			data: ice.breakup,
 		}, {
 			yAxis: 0,
-			name: 'Linear regression (breaking)',
+			name: 'Linear regression (break-up)',
 			marker: { enabled: false },
 			color: '#ee0000',
 			// linkedTo: ':previous',
