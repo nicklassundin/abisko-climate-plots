@@ -572,12 +572,12 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 			},
 		},
 			// TODO discuss use fullness Moving averages
-			// {
-				// name: 'Average precipitation from snow (moving avg.)',
-				// color: snowColor.color,
-				// visible: false,
-				// data: precipitation.snow_movAvg,
-			// },
+			{
+				name: 'Average precipitation from snow (moving avg.)',
+				color: snowColor.color,
+				visible: false,
+				data: precipitation.snow_movAvg,
+			},
 			{
 				name: 'Linear regression from snow',
 				visible: false,
@@ -613,12 +613,12 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 					},
 				},
 			}, 
-			// {
-				// name: 'Average precipitation from rain',
-				// color: rainColor.color,
-				// visible: false,
-				// data: precipitation.rain_movAvg,
-			// },
+			{
+				name: 'Average precipitation from rain',
+				color: rainColor.color,
+				visible: false,
+				data: precipitation.rain_movAvg,
+			},
 			{
 				name: 'Linear regression from rain',
 				visible: false,
