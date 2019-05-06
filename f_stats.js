@@ -99,6 +99,7 @@ var parseGISSTEMPzonalMeans = function (result) {
 	}));
 	var linear_diff = function(data){
 		return {
+			years: data.map(each => each.x),
 			difference: data,
 			linear_diff: linearRegression(data.map(each => each.x),data.map(each => each.y)),
 		};

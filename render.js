@@ -413,7 +413,37 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 			data: temperatures.difference,
 			color: 'red',
 			negativeColor: 'blue',
-		}],
+		}
+		//
+		//
+		// ,{
+		// 		name: 'Linear regression',
+		// 		type: 'line',
+		// 		visible: false,
+		// 		marker: {
+		// 			enable: false,
+		// 		},
+		// 		color: rainColor.color,
+		// 		states: {
+		// 			hober: {
+		// 				lineWidth: 0,
+		// 			},
+		// 		},
+		// 		enableMouseTracking: false,
+                //
+		// 		data: [
+		// 			{ x: temperatures.years[0], 
+		// 				y: temperatures.linear_diff(temperatures.years[0]) },
+		// 			{ x: temperatures.years[temperatures.years.length - 1],
+		// 				y: temperatures.linear_diff(temperatures.years[temperatures.years.length - 1]) }
+		// 		],
+                //
+		// 	},
+                //
+                //
+
+			//
+		],
 	});
 };
 
