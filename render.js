@@ -286,6 +286,8 @@ var renderAbiskoTemperatureGraph = function (temperatures, id, title) {
 };
 
 var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
+	console.log(title);
+	console.log(temperatures);
 	Highcharts.chart(id, {
 		chart: {
 			type: 'line',

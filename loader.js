@@ -73,24 +73,24 @@ var parseAbisko = function () {
 		var data = parseAbiskoCsv(result);
 		var summerRange = monthName(summerMonths[0]) + ' to ' + monthName(summerMonths[summerMonths.length - 1]);
 		var winterRange = monthName(winterMonths[0]) + ' to ' + monthName(winterMonths[winterMonths.length - 1]);
-		renderAbiskoTemperatureGraph(data, 'AbiskoTemperatures', 'Abisko temperatures');
-		renderAbiskoMonthlyTemperatureGraph(data.summerTemps, 'AbiskoTemperaturesSummer', 'Abisko temperatures for ' + summerRange);
-		renderAbiskoMonthlyTemperatureGraph(data.winterTemps, 'AbiskoTemperaturesWinter', 'Abisko temperatures for ' + winterRange);
+		renderAbiskoTemperatureGraph(data.temperatures, 'AbiskoTemperatures', 'Abisko temperatures');
+		renderAbiskoMonthlyTemperatureGraph(data.temperatures.summerTemps, 'AbiskoTemperaturesSummer', 'Abisko temperatures for ' + summerRange);
+		renderAbiskoMonthlyTemperatureGraph(data.temperatures.winterTemps, 'AbiskoTemperaturesWinter', 'Abisko temperatures for ' + winterRange);
 		months().forEach(month =>
-			renderAbiskoMonthlyTemperatureGraph(data.monthlyTemps[month], 'monthlyAbiskoTemperatures_' + month, 'Abisko temperatures for ' + monthName(month)));
-		renderTemperatureDifferenceGraph(data, 'temperatureDifferenceAbisko', 'Temperature difference for Abisko');
+			renderAbiskoMonthlyTemperatureGraph(data.temperatures.monthlyTemps[month], 'monthlyAbiskoTemperatures_' + month, 'Abisko temperatures for ' + monthName(month)));
+		renderTemperatureDifferenceGraph(data.temperatures, 'temperatureDifferenceAbisko', 'Temperature difference for Abisko');
 
 		renderGrowingSeasonGraph(data.growingSeason, 'growingSeason');
 
-		renderYearlyPrecipitationGraph(data.yearlyPrecipitation, 'yearlyPrecipitation', 'Yearly precipitation');
-		renderYearlyPrecipitationGraph(data.summerPrecipitation, 'summerPrecipitation', 'Precipitation for ' + summerRange);
-		renderYearlyPrecipitationGraph(data.winterPrecipitation, 'winterPrecipitation', 'Precipitation for ' + winterRange);
+		renderYearlyPrecipitationGraph(data.precipitation.yearlyPrecipitation, 'yearlyPrecipitation', 'Yearly precipitation');
+		renderYearlyPrecipitationGraph(data.precipitation.summerPrecipitation, 'summerPrecipitation', 'Precipitation for ' + summerRange);
+		renderYearlyPrecipitationGraph(data.precipitation.winterPrecipitation, 'winterPrecipitation', 'Precipitation for ' + winterRange);
 		months().forEach(month =>
-			renderMonthlyPrecipitationGraph(data.monthlyPrecipitation[month], 'monthlyPrecipitation_' + month, 'Precipitation for ' + monthName(month)));
+			renderMonthlyPrecipitationGraph(data.precipitation.monthlyPrecipitation[month], 'monthlyPrecipitation_' + month, 'Precipitation for ' + monthName(month)));
 
-		renderPrecipitationDifferenceGraph(data.yearlyPrecipitation, 'yearlyPrecipitationDifference', 'Precipitation difference');
-		renderPrecipitationDifferenceGraph(data.summerPrecipitation, 'summerPrecipitationDifference', 'Precipitation difference ' + summerRange);
-		renderPrecipitationDifferenceGraph(data.winterPrecipitation, 'winterPrecipitationDifference', 'Precipitation difference ' + winterRange);
+		renderPrecipitationDifferenceGraph(data.precipitation.yearlyPrecipitation, 'yearlyPrecipitationDifference', 'Precipitation difference');
+		renderPrecipitationDifferenceGraph(data.precipitation.summerPrecipitation, 'summerPrecipitationDifference', 'Precipitation difference ' + summerRange);
+		renderPrecipitationDifferenceGraph(data.precipitation.winterPrecipitation, 'winterPrecipitationDifference', 'Precipitation difference ' + winterRange);
 	}
 
 	Papa.parse('data/ANS_Temp_Prec_1913-2017.csv', {
