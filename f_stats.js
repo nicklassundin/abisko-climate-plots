@@ -487,7 +487,6 @@ var parseAbiskoIceData = function (result) {
 	var data = result.data;
 
 	var iceData = [];
-
 	data.forEach((row) => {
 		var winterYear = +row[fields[0]] || undefined;
 		var springYear = +row[fields[1]] || undefined;
@@ -523,14 +522,17 @@ var parseAbiskoIceData = function (result) {
 		x: +year,
 		y: each.breakupDOY,
 		name: each.breakupDate ? dateFormat(each.breakupDate) : null,
-	})).filter(each => each.y).filter(each => each.x >= 1909);
+		week: each.breakupDate ? weekNumber(each.breakupDate) : null,
+	})).filter(each => each.y).filter(each => each.x >= 1909).filter(each => each.name != null);
 
 	var freezeDOY = iceData.map((each, year) => ({
 		x: +year,
 		y: each.freezeDOY,
 		name: each.freezeDate ? dateFormat(each.freezeDate) : null,
-	})).filter(each => each.y).filter(each => each.x >= 1909);;
-
+		week: each.freezeDate ? weekNumber(each.freezeDate) : null,
+	})).filter(each => each.y).filter(each => each.x >= 1909).filter(each => each.name != null);
+	// console.log(breakupDOY);
+	// console.log(freezeDOY);
 	var breakupLinear = linearRegression(breakupDOY.map(w => w.x), breakupDOY.map(w => w.y));
 	var freezeLinear = linearRegression(freezeDOY.map(w => w.x), freezeDOY.map(w => w.y));
 
@@ -560,7 +562,8 @@ var parseAbiskoIceData = function (result) {
 	var iceTimeMovAvgLinear = linearRegression(iceTimeMovAvg.map(w => w.x), iceTimeMovAvg.map(w => w.y));
 
 	var yearMax = iceData.length - 1;
-
+	// console.log(data);
+	// console.log(freeze);
 	return {
 		yearMax,
 		breakup,
