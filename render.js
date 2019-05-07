@@ -58,7 +58,7 @@ var global_chart_settings = {
 								type: 'image/jpeg'
 							});
 						}
-					},'downloadSVG',{
+					},'downloadSVG','viewFullscreen','printChart',{
 						separator: true,
 					},{
 						text: LANG[l],
@@ -69,6 +69,11 @@ var global_chart_settings = {
 								l=0;
 							};
 							// TODO Lang switching
+						},
+					},{
+						text: 'Show data [DUMMY]',
+						onclick: function(){
+							// TODO CHANGE export:showTable: true
 						},
 					}],
 			},
@@ -630,6 +635,11 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 					},
 				},
 			},
+		},{
+			name: 'Moving average precipitation',
+			color: rainColor.color,
+			visible: false,
+			data: precipitation.movAvg,
 		},
 			// TODO discuss use fullness Moving averages
 			// {
@@ -783,6 +793,11 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
 					},
 				},
 			},
+		},{
+			name: 'Moving average precipitation',
+			visible: false,
+			color: rainColor.color,
+			data: precipitation.movAvg,
 		},{
 			name: 'Linear regression from all sources',
 			visible: false,

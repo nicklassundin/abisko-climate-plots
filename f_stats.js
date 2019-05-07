@@ -422,7 +422,7 @@ var parseAbiskoCsv = function (result) {
 		movingAverages(ci.map(each => each[bound]), 10)
 		.forEach((value, index) => ciMovAvg[index][bound] = value));
 
-	// var precipMovAvg = movingAveragesHighCharts(values().map(each => each.precip));
+	var precipMovAvg = movingAveragesHighCharts(values().map(each => each.precip));
 
 	// var precipMovAvg_rain = movingAveragesHighCharts(values().map(each => each.precip_rain)); // TODO CONTROL MATH
 	// var precipMovAvg_snow = movingAveragesHighCharts(values().map(each => each.precip_snow)); // TODO CONTROL MATH
@@ -469,7 +469,7 @@ var parseAbiskoCsv = function (result) {
 				linear_snow: linearRegression(years.slice(10), yearly('precip_snow').map(each => each.y)),
 				rain: yearly('precip_rain').slice(10),
 				// rain_movAvg:  precipMovAvg_rain,// TODO
-				// movAvg: precipMovAvg,
+				movAvg: precipMovAvg,
 				linear_rain: linearRegression(years.slice(10), yearly('precip_rain').map(each => each.y)),
 				linear: linearRegression(years.slice(10), yearly('precip').map(each => each.y)),
 				difference: yrly_diff.slice(10),
