@@ -209,7 +209,6 @@ var parseAbiskoCsv = function (result) {
 		var summerPrecipitation = { total: 0, rain: 0, snow: 0 };
 		var winterPrecipitation = { total: 0, rain: 0, snow: 0 };
 
-
 		// Sorts out data into seasonal data sets
 		year.data.forEach((each) => {
 			var month = +each.date.month;
@@ -225,12 +224,12 @@ var parseAbiskoCsv = function (result) {
 					summerTemperatures.count++;
 					summerTemperatures.min = Math.min(summerTemperatures.min, each.avg);
 					summerTemperatures.max = Math.max(summerTemperatures.max, each.avg);
-
 				} else if (isWinterMonthByIndex(month)) {
 					winterTemperatures.sum += each.avg;
 					winterTemperatures.count++;
 					winterTemperatures.min = Math.min(winterTemperatures.min, each.avg);
 					winterTemperatures.max = Math.max(winterTemperatures.max, each.avg);
+				
 				}
 				t.sum += each.avg;
 				t.count++;
@@ -252,7 +251,6 @@ var parseAbiskoCsv = function (result) {
 				p.rain += each.precip_rain;
 			}
 		});
-
 		year.monthlyTemperatures = monthlyTemperatures.map(month => ({
 			avg: month.sum / month.count,
 			min: month.min,
@@ -293,6 +291,8 @@ var parseAbiskoCsv = function (result) {
 			year.variance = variance(year.monthlyTemperatures.map(m => m.avg));
 			year.ci = confidenceInterval(year.avg, year.variance, year.monthlyTemperatures.length);
 		}
+	
+		// TODO monthly variance sort out from
 	});
 
 	var yearly = statistic => entries().map(each => ({
@@ -365,6 +365,13 @@ var parseAbiskoCsv = function (result) {
 	};
 	summerTemps.movAvg = movingAveragesHighCharts(summerTemps.avg.map(each => each.y));
 	winterTemps.movAvg = movingAveragesHighCharts(winterTemps.avg.map(each => each.y));
+	
+	// summerTemps.variance = variance(summerTemps.avg);
+	// winterTemps.variance = variance(winterTemps.avg);
+
+	// summerTemps.ci = confidenceInterval(summerTemps.avg, summerTemps.variance, summerTemps.count);
+
+
 	summerTemps.avg = summerTemps.avg.slice(10);
 	winterTemps.avg = winterTemps.avg.slice(10);
 

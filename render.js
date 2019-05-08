@@ -252,6 +252,12 @@ var renderAbiskoTemperatureGraph = function (temperatures, id, title) {
 			valueDecimals: 2,
 		},
 		series: [{
+			// regression: true,
+			// regressionSettings: {
+			// 	type: 'polynomial',
+			// 	color: '#ff0000',
+			// 	name: 'Polynomial regression (max)'
+			// },
 			name: MAX[l],
 			lineWidth: 0,
 			marker: { radius: 2 },
@@ -260,6 +266,12 @@ var renderAbiskoTemperatureGraph = function (temperatures, id, title) {
 			data: temperatures.max,
 			visible: false,
 		}, {
+			// regression: true,
+			// regressionSettings: {
+			// 	type: 'polynomial',
+			// 	color: '#0000ff',
+			// 	name: 'Polynomial regression (min)'
+			// },
 			name: MIN[l],
 			lineWidth: 0,
 			marker: { radius: 2 },
@@ -271,7 +283,9 @@ var renderAbiskoTemperatureGraph = function (temperatures, id, title) {
 			regression: true,
 			regressionSettings: {
 				type: 'linear',
-				color: '#aaaaaa',
+				color: '#888888',
+				name: 'Linear regression',
+				visible: false,
 			},
 			name: YRL_AVG[l],
 			lineWidth: 0,
@@ -280,7 +294,43 @@ var renderAbiskoTemperatureGraph = function (temperatures, id, title) {
 			color: '#888888',
 			data: temperatures.avg,
 			visible: true,
-		}, {
+		},{
+			regression: true,
+			regressionSettings: {
+				type: 'polynomial',
+				color: '#aaaaaa',
+				name: 'Polynomial regression',
+				dashStyle: 'ShortDash',
+				visible: false,
+			},
+			visible: false,
+			showInLegend: false,
+			enableMouseTracking: false,
+			name: YRL_AVG[l],
+			lineWidth: 0,
+			marker: { radius: 0 },
+			states: { hover: { lineWidthPlus: 0 } },
+			color: '#888888',
+			data: temperatures.avg,
+		},{
+			regression: true,
+			regressionSettings: {
+				type: 'loess',
+				color: '#aaaaaa',
+				name: 'Local regression',
+				dashStyle: 'ShortDot',
+				visible: false,
+			},
+			visible: false,
+			showInLegend: false,
+			enableMouseTracking: false,
+			name: YRL_AVG[l],
+			lineWidth: 0,
+			marker: { radius: 0 },
+			states: { hover: { lineWidthPlus: 0 } },
+			color: '#888888',
+			data: temperatures.avg,
+		},{
 			name: YRL_CNF_INT[l],
 			type: 'arearange',
 			color: '#888888',
@@ -368,6 +418,7 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
 			regressionSettings: {
 				type: 'linear',
 				color: '#aaaaaa',
+				name: 'linear regression',
 			},
 			name: MNTH_AVG[l],
 			lineWidth: 0,
@@ -446,6 +497,7 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 			regressionSettings: {
 				type: 'linear',
 				color: '#aa0000',
+				name: 'Linear regression', 
 			},
 			name: 'Difference',
 			data: temperatures.difference,
@@ -519,6 +571,7 @@ var renderGrowingSeasonGraph = function (season, id) {
 			regressionSettings: {
 				type: 'linear',
 				color: '#008800',
+				name: 'Linear regression',
 			},
 			name: WK[l],
 			lineWidth: 0,
@@ -592,35 +645,43 @@ var renderPrecipitationDifferenceGraph = function (precipitation, id, title) {
 			}],
 		}],
 		series: [{
+			regression: true,
 			name: 'Difference',
 			data: precipitation.difference,
 			color: 'red',
 			negativeColor: 'blue',
-		},{
-			name: 'Linear regression',
-			type: 'line',
-			visible: false,
-			marker: {
-				enable: false,
+			regressionSettings: {
+				type: 'linear',
+				color: rainColor.color,
+				name: 'Linear regression',
 			},
-			color: rainColor.color,
-			states: {
-				hober: {
-					lineWidth: 0,
-				},
-			},
-			enableMouseTracking: false,
-			//
-
-			data: [
-				{ x: precipitation.years[0], 
-					y: precipitation.linear_diff(precipitation.years[0]) },
-				{ x: precipitation.years[precipitation.years.length - 1],
-					y: precipitation.linear_diff(precipitation.years[precipitation.years.length - 1]) }
-			],
-
-			//
 		},
+			//	REST code
+		// 	{
+		// 	name: 'Linear regression',
+		// 	type: 'line',
+		// 	visible: false,
+		// 	marker: {
+		// 		enable: false,
+		// 	},
+		// 	color: rainColor.color,
+		// 	states: {
+		// 		hober: {
+		// 			lineWidth: 0,
+		// 		},
+		// 	},
+		// 	enableMouseTracking: false,
+		// 	//
+                //
+		// 	data: [
+		// 		{ x: precipitation.years[0], 
+		// 			y: precipitation.linear_diff(precipitation.years[0]) },
+		// 		{ x: precipitation.years[precipitation.years.length - 1],
+		// 			y: precipitation.linear_diff(precipitation.years[precipitation.years.length - 1]) }
+		// 	],
+                //
+		// 	//
+		// },
 		],
 	});
 };
@@ -655,6 +716,12 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 			'<span style="color: white; visibility: hidden">\u25CF</span> Total precipitation: <b>{point.total:.0f} mm</b><br />',
 		},
 		series: [{
+			regression: true,
+			regressionSettings: {
+				type: 'linear',
+				color: snowColor.color,
+				name: 'Linear regression of snow',
+			},
 			name: PRC_SNW[l],
 			type: 'column',
 			stack: 'precip',
@@ -676,6 +743,7 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 			color: rainColor.color,
 			visible: false,
 			data: precipitation.movAvg,
+			marker: { enabled: false },
 		},
 			// TODO discuss use fullness Moving averages
 			// {
@@ -684,24 +752,31 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 			// visible: false,
 			// data: precipitation.snow_movAvg,
 			// },
+			// {
+			// 	name: 'Linear regression from snow',
+			// 	visible: false,
+			// 	marker: {
+			// 		enable: false,
+			// 	},
+			// 	color: rainColor.color,
+			// 	states: {
+			// 		hober: {
+			// 			lineWidth: 0,
+			// 		},
+			// 	},
+			// 	enableMouseTracking: false,
+			// 	data: [
+			// 		{ x: precipitation.years[0], y: precipitation.linear_snow(precipitation.years[0]) },
+			// 		{ x: precipitation.years[precipitation.years.length -1], y: precipitation.linear_snow(precipitation.years[precipitation.years.length-1]) }
+			// 	],
+			// },
 			{
-				name: 'Linear regression from snow',
-				visible: false,
-				marker: {
-					enable: false,
+				regression: true,
+				regressionSettings: {
+					type: 'linear',
+					color: rainColor.color,
+					name: 'Linear regression of rain',
 				},
-				color: rainColor.color,
-				states: {
-					hober: {
-						lineWidth: 0,
-					},
-				},
-				enableMouseTracking: false,
-				data: [
-					{ x: precipitation.years[0], y: precipitation.linear_snow(precipitation.years[0]) },
-					{ x: precipitation.years[precipitation.years.length -1], y: precipitation.linear_snow(precipitation.years[precipitation.years.length-1]) }
-				],
-			},{
 				name: PRC_RN[l],
 				type: 'column',
 				stack: 'precip',
@@ -725,26 +800,27 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 			// visible: false,
 			// data: precipitation.rain_movAvg,
 			// },
+			// {
+			// 	name: 'Linear regression from rain',
+			// 	visible: false,
+			// 	marker: {
+			// 		enable: false,
+			// 	},
+			// 	color: rainColor.color,
+			// 	states: {
+			// 		hober: {
+			// 			lineWidth: 0,
+			// 		},
+			// 	},
+			// 	enableMouseTracking: false,
+			// 	data: [
+			// 		{ x: precipitation.years[0],
+			// 			y: precipitation.linear_rain(precipitation.years[0]) },
+			// 		{ x: precipitation.years[precipitation.years.length -1],
+			// 			y: precipitation.linear_rain(precipitation.years[precipitation.years.length-1]) }
+			// 	],
+			// },
 			{
-				name: 'Linear regression from rain',
-				visible: false,
-				marker: {
-					enable: false,
-				},
-				color: rainColor.color,
-				states: {
-					hober: {
-						lineWidth: 0,
-					},
-				},
-				enableMouseTracking: false,
-				data: [
-					{ x: precipitation.years[0],
-						y: precipitation.linear_rain(precipitation.years[0]) },
-					{ x: precipitation.years[precipitation.years.length -1],
-						y: precipitation.linear_rain(precipitation.years[precipitation.years.length-1]) }
-				],
-			},{
 				name: 'Linear regression from all sources',
 				visible: false,
 				marker: {
@@ -798,6 +874,12 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
 			'<span style="color: white; visibility: hidden">\u25CF</span> Total precipitation: <b>{point.total:.0f} mm</b><br />',
 		},
 		series: [{
+			regression: true,
+			regressionSettings: {
+				type: 'linear',
+				color: snowColor.color,
+				name: 'Linear regression (snow)',
+			},
 			name: PRC_SNW[l],
 			type: 'column',
 			stack: 'precip',
@@ -814,6 +896,12 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
 				},
 			},
 		}, {
+			regression: true,
+			regressionSettings: {
+				type: 'linear',
+				color:rainColor.color,
+				name: 'Linear regression (rain)',
+			},
 			name: PRC_RN[l],
 			type: 'column',
 			stack: 'precip',
@@ -834,8 +922,9 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
 			visible: false,
 			color: rainColor.color,
 			data: precipitation.movAvg,
+			marker: { enabled: false },
 		},{
-			name: 'Linear regression from all sources',
+			name: 'Linear regression (total)',
 			visible: false,
 			marker: {
 				enabled: false, // Linear regression lines doesn't contain points
@@ -853,49 +942,50 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
 				{ x: precipitation.years[precipitation.years.length - 1],
 					y: precipitation.linear(precipitation.years[precipitation.years.length - 1]) }
 			],
-		},{
-			name: 'Linear regression from snow',
-			visible: false,
-			marker: {
-				enabled: false 
-			},
-			color: rainColor.color,
-			states: {
-				hover: {
-					lineWidth: 0,	// do nothing on hover
-				},
-
-			},
-			enableMouseTracking: false,
-			data: [
-
-				{ x: precipitation.years[0], 
-					y: precipitation.linear_snow(precipitation.years[0]) },
-				{ x: precipitation.years[precipitation.years.length - 1],
-					y: precipitation.linear_snow(precipitation.years[precipitation.years.length - 1]) }
-			],
-		},{
-			name: 'Linear regression from rain',
-			visible: false,
-			marker: {
-				enabled: false 
-			},
-			color: rainColor.color,
-			states: {
-				hover: {
-					lineWidth: 0,	// do nothing on hover
-				},
-
-			},
-			enableMouseTracking: false,
-			data: [
-
-				{ x: precipitation.years[0], 
-					y: precipitation.linear_rain(precipitation.years[0]) },
-				{ x: precipitation.years[precipitation.years.length - 1],
-					y: precipitation.linear_rain(precipitation.years[precipitation.years.length - 1]) }
-			],
 		},
+		// {
+		// 	name: 'Linear regression (snow)',
+		// 	visible: false,
+		// 	marker: {
+		// 		enabled: false 
+		// 	},
+		// 	color: rainColor.color,
+		// 	states: {
+		// 		hover: {
+		// 			lineWidth: 0,	// do nothing on hover
+		// 		},
+                //
+		// 	},
+		// 	enableMouseTracking: false,
+		// 	data: [
+                //
+		// 		{ x: precipitation.years[0], 
+		// 			y: precipitation.linear_snow(precipitation.years[0]) },
+		// 		{ x: precipitation.years[precipitation.years.length - 1],
+		// 			y: precipitation.linear_snow(precipitation.years[precipitation.years.length - 1]) }
+		// 	],
+		// },{
+		// 	name: 'Linear regression (rain)',
+		// 	visible: false,
+		// 	marker: {
+		// 		enabled: false 
+		// 	},
+		// 	color: rainColor.color,
+		// 	states: {
+		// 		hover: {
+		// 			lineWidth: 0,	// do nothing on hover
+		// 		},
+                //
+		// 	},
+		// 	enableMouseTracking: false,
+		// 	data: [
+                //
+		// 		{ x: precipitation.years[0], 
+		// 			y: precipitation.linear_rain(precipitation.years[0]) },
+		// 		{ x: precipitation.years[precipitation.years.length - 1],
+		// 			y: precipitation.linear_rain(precipitation.years[precipitation.years.length - 1]) }
+		// 	],
+		// },
 
 
 
@@ -949,6 +1039,12 @@ var renderAbiskoIceGraph = function (ice, id, title) {
 			},
 		},
 		series: [{
+			regression: true,
+			regressionSettings: {
+					type: 'linear',
+					color: '#0000ee',
+					name: 'Linear regression (freeze-up)',
+			},
 			yAxis: 0,
 			name: 'Freeze-up',
 			color: '#0000ee',
@@ -956,16 +1052,24 @@ var renderAbiskoIceGraph = function (ice, id, title) {
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
 			data: ice.freeze,
-		}, {
-			yAxis: 0,
-			name: 'Linear regression (freeze-up)',
-			marker: { enabled: false },
-			color: '#0000ee',
-			// linkedTo: ':previous',
-			states: { hover: { lineWidth: 0, } },
-			enableMouseTracking: false,
-			data: ice.freezeLinear,
-		}, {
+		}, 
+		// {
+		// 	yAxis: 0,
+		// 	name: 'Linear regression (freeze-up)',
+		// 	marker: { enabled: false },
+		// 	color: '#0000ee',
+		// 	// linkedTo: ':previous',
+		// 	states: { hover: { lineWidth: 0, } },
+		// 	enableMouseTracking: false,
+		// 	data: ice.freezeLinear,
+		// }, 
+		{
+			regression: true,
+			regressionSettings: {
+					type: 'linear',
+					color: '#ee0000',
+					name: 'Linear regression (break-up)',
+			},
 			yAxis: 0,
 			name: 'Break',
 			color: '#ee0000',
@@ -973,16 +1077,24 @@ var renderAbiskoIceGraph = function (ice, id, title) {
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
 			data: ice.breakup,
-		}, {
-			yAxis: 0,
-			name: 'Linear regression (break-up)',
-			marker: { enabled: false },
-			color: '#ee0000',
-			// linkedTo: ':previous',
-			states: { hover: { lineWidth: 0, } },
-			enableMouseTracking: false,
-			data: ice.breakupLinear,
-		}, {
+		}, 
+		// 	{
+		// 	yAxis: 0,
+		// 	name: 'Linear regression (break-up)',
+		// 	marker: { enabled: false },
+		// 	color: '#ee0000',
+		// 	// linkedTo: ':previous',
+		// 	states: { hover: { lineWidth: 0, } },
+		// 	enableMouseTracking: false,
+		// 	data: ice.breakupLinear,
+		// },
+			{
+			regression: true,
+			regressionSettings: {
+				type: 'linear',
+				color: '#00bb00',
+				name: 'Linear regression (ice time)',
+			},
 			yAxis: 1,
 			name: 'Ice time',
 			color: '#00bb00',
@@ -990,20 +1102,23 @@ var renderAbiskoIceGraph = function (ice, id, title) {
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
 			data: ice.iceTime,
-		}, {
-			yAxis: 1,
-			name: 'Linear regression (ice time)',
-			marker: { enabled: false },
-			color: '#00bb00',
-			// linkedTo: ':previous',
-			states: { hover: { lineWidth: 0, } },
-			enableMouseTracking: false,
-			data: ice.iceTimeLinear,
-		}, {
+		}, 
+		// 	{
+		// 	yAxis: 1,
+		// 	name: 'Linear regression (ice time)',
+		// 	marker: { enabled: false },
+		// 	color: '#00bb00',
+		// 	// linkedTo: ':previous',
+		// 	states: { hover: { lineWidth: 0, } },
+		// 	enableMouseTracking: false,
+		// 	data: ice.iceTimeLinear,
+		// }, 
+			{
 			yAxis: 1,
 			name: 'Ice time (moving avg.)',
 			color: '#cc00cc',
 			data: ice.iceTimeMovAvg,
+			marker: { enabled: false },
 		}],
 	});
 };
