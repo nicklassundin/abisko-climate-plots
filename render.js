@@ -132,15 +132,17 @@ var renderTemperatureGraph = function (temperatures, id, title) {
 			color: '#0000ff',
 			data: temperatures.min,
 			visible: false,
-		}, {
-			name: YRL_AVG[l],
-			lineWidth: 0,
-			marker: { radius: 2 },
-			states: { hover: { lineWidthPlus: 0 } },
-			color: '#888888',
-			data: temperatures.avg,
-			visible: false,
-		}, {
+		}, 
+		// 	{
+		// 	name: YRL_AVG[l],
+		// 	lineWidth: 0,
+		// 	marker: { radius: 2 },
+		// 	states: { hover: { lineWidthPlus: 0 } },
+		// 	color: '#888888',
+		// 	data: temperatures.avg,
+		// 	visible: false,
+		// },
+			{
 			name: YRL_CNF_INT[l],
 			type: 'arearange',
 			color: '#888888',
@@ -166,7 +168,21 @@ var renderTemperatureGraph = function (temperatures, id, title) {
 			lineWidth: 0,
 			states: { hover: { lineWidthPlus: 0 } },
 			marker: { enabled: false },
-		}],
+		},
+			{
+				regression: true,
+				name: 'Yearly averages',
+				marker: {radius: 2},
+				states: {hover: { lineWidthPlus: 0 }},
+				lineWidth: 0,
+				color: '#888888',
+				regressionSettings: {
+					type: 'linear',
+					color: '#4444ff',
+					name: 'Linear regression',
+				},
+				data: temperatures.avg,
+			}],
 
 		//
 		// 	exporting: {
@@ -252,6 +268,11 @@ var renderAbiskoTemperatureGraph = function (temperatures, id, title) {
 			data: temperatures.min,
 			visible: false,
 		}, {
+			regression: true,
+			regressionSettings: {
+				type: 'linear',
+				color: '#aaaaaa',
+			},
 			name: YRL_AVG[l],
 			lineWidth: 0,
 			marker: { radius: 2 },
@@ -343,6 +364,11 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
 			data: temperatures.min,
 			visible: false,
 		}, {
+			regression: true,
+			regressionSettings: {
+				type: 'linear',
+				color: '#aaaaaa',
+			},
 			name: MNTH_AVG[l],
 			lineWidth: 0,
 			marker: { radius: 2 },
@@ -416,38 +442,43 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 			}],
 		}],
 		series: [{
+			regression: true,
+			regressionSettings: {
+				type: 'linear',
+				color: '#aa0000',
+			},
 			name: 'Difference',
 			data: temperatures.difference,
 			color: 'red',
 			negativeColor: 'blue',
 		}
-		//
-		//
-		// ,{
-		// 		name: 'Linear regression',
-		// 		type: 'line',
-		// 		visible: false,
-		// 		marker: {
-		// 			enable: false,
-		// 		},
-		// 		color: rainColor.color,
-		// 		states: {
-		// 			hober: {
-		// 				lineWidth: 0,
-		// 			},
-		// 		},
-		// 		enableMouseTracking: false,
-                //
-		// 		data: [
-		// 			{ x: temperatures.years[0], 
-		// 				y: temperatures.linear_diff(temperatures.years[0]) },
-		// 			{ x: temperatures.years[temperatures.years.length - 1],
-		// 				y: temperatures.linear_diff(temperatures.years[temperatures.years.length - 1]) }
-		// 		],
-                //
-		// 	},
-                //
-                //
+			//
+			//
+			// ,{
+			// 		name: 'Linear regression',
+			// 		type: 'line',
+			// 		visible: false,
+			// 		marker: {
+			// 			enable: false,
+			// 		},
+			// 		color: rainColor.color,
+			// 		states: {
+			// 			hober: {
+			// 				lineWidth: 0,
+			// 			},
+			// 		},
+			// 		enableMouseTracking: false,
+			//
+			// 		data: [
+			// 			{ x: temperatures.years[0], 
+			// 				y: temperatures.linear_diff(temperatures.years[0]) },
+			// 			{ x: temperatures.years[temperatures.years.length - 1],
+			// 				y: temperatures.linear_diff(temperatures.years[temperatures.years.length - 1]) }
+			// 		],
+			//
+			// 	},
+			//
+			//
 
 			//
 		],
@@ -484,6 +515,11 @@ var renderGrowingSeasonGraph = function (season, id) {
 			valueDecimals: 0,
 		},
 		series: [{
+			regression: true,
+			regressionSettings: {
+				type: 'linear',
+				color: '#008800',
+			},
 			name: WK[l],
 			lineWidth: 0,
 			marker: { radius: 2 },
@@ -561,30 +597,30 @@ var renderPrecipitationDifferenceGraph = function (precipitation, id, title) {
 			color: 'red',
 			negativeColor: 'blue',
 		},{
-				name: 'Linear regression',
-				type: 'line',
-				visible: false,
-				marker: {
-					enable: false,
-				},
-				color: rainColor.color,
-				states: {
-					hober: {
-						lineWidth: 0,
-					},
-				},
-				enableMouseTracking: false,
-//
-
-				data: [
-					{ x: precipitation.years[0], 
-						y: precipitation.linear_diff(precipitation.years[0]) },
-					{ x: precipitation.years[precipitation.years.length - 1],
-						y: precipitation.linear_diff(precipitation.years[precipitation.years.length - 1]) }
-				],
-
-//
+			name: 'Linear regression',
+			type: 'line',
+			visible: false,
+			marker: {
+				enable: false,
 			},
+			color: rainColor.color,
+			states: {
+				hober: {
+					lineWidth: 0,
+				},
+			},
+			enableMouseTracking: false,
+			//
+
+			data: [
+				{ x: precipitation.years[0], 
+					y: precipitation.linear_diff(precipitation.years[0]) },
+				{ x: precipitation.years[precipitation.years.length - 1],
+					y: precipitation.linear_diff(precipitation.years[precipitation.years.length - 1]) }
+			],
+
+			//
+		},
 		],
 	});
 };
@@ -643,10 +679,10 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 		},
 			// TODO discuss use fullness Moving averages
 			// {
-				// name: 'Average precipitation from snow (moving avg.)',
-				// color: snowColor.color,
-				// visible: false,
-				// data: precipitation.snow_movAvg,
+			// name: 'Average precipitation from snow (moving avg.)',
+			// color: snowColor.color,
+			// visible: false,
+			// data: precipitation.snow_movAvg,
 			// },
 			{
 				name: 'Linear regression from snow',
@@ -684,10 +720,10 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 				},
 			}, 
 			// {
-				// name: 'Average precipitation from rain',
-				// color: rainColor.color,
-				// visible: false,
-				// data: precipitation.rain_movAvg,
+			// name: 'Average precipitation from rain',
+			// color: rainColor.color,
+			// visible: false,
+			// data: precipitation.rain_movAvg,
 			// },
 			{
 				name: 'Linear regression from rain',

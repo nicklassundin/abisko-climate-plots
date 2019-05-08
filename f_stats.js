@@ -4,6 +4,7 @@
 /***************************************/
 
 var parseGISSTEMP = function (result) {
+	console.log(result);
 	var fields = result.meta.fields;
 	var temperatures = [];
 
@@ -33,14 +34,12 @@ var parseGISSTEMP = function (result) {
 		}
 	});
 	temperatures = temperatures.slice(33);
-
 	['min', 'max', 'avg'].forEach((statistic) => {
 		temperatures[statistic] = temperatures.map(temps => ({
 			x: temps.year,
 			y: temps[statistic],
 		})).slice(10);
 	});
-
 	temperatures.movAvg = movingAverages(temperatures.map(temps => temps.avg), 10)
 		.map((avg, index) => ({
 			x: temperatures[index].year,
