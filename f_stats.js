@@ -4,7 +4,6 @@
 /***************************************/
 
 var parseGISSTEMP = function (result) {
-	console.log(result);
 	var fields = result.meta.fields;
 	var temperatures = [];
 
