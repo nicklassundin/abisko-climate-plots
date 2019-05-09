@@ -83,6 +83,7 @@ var global_chart_settings = {
 Highcharts.setOptions(global_chart_settings);
 
 var renderTemperatureGraph = function (temperatures, id, title) {
+	// console.log(title);
 	var chart = Highcharts.chart(id, {
 		chart: {
 			type: 'line',
@@ -218,6 +219,7 @@ var renderTemperatureGraph = function (temperatures, id, title) {
 };
 
 var renderAbiskoTemperatureGraph = function (temperatures, id, title) {
+	// console.log(title);
 	Highcharts.chart(id, {
 		chart: {
 			type: 'line',
@@ -427,7 +429,30 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
 			color: '#888888',
 			data: temperatures.avg,
 			visible: true,
-		}, {
+		},{
+			name: 'Confidence interval',
+			type: 'arearange',
+			color: '#888888',
+			data: temperatures.ci,
+			zIndex: 0,
+			fillOpacity: 0.3,
+			lineWidth: 0,
+			states: { hover: { lineWidthPlus: 0 } },
+			marker: { enabled: false },
+			visible: false,
+
+		},{
+			name: 'Confidence interval (moving avg.)',
+			type: 'arearange',
+			color: '#7777ff',
+			data: temperatures.ciMovAvg,
+			zIndex: 0,
+			fillOpacity: 0.3,
+			lineWidth: 0,
+			states: { hover: { lineWidthPlus: 0 } },
+			marker: { enabled: false },
+
+		},{
 			name: MVNG_AVG[l],
 			color: '#888888',
 			marker: { enabled: false },
