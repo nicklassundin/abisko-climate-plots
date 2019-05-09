@@ -39,9 +39,12 @@ var sumSquareDistance = (values, mean) => values.reduce((sum, value) => sum + Ma
 
 var variance = values => sumSquareDistance(values, average(values)) / (values.length - 1);
 
+
+
 var confidenceInterval = (mean, variance, count) => {
     var zs = [0, 12.706, 4.303, 3.182, 2.776, 2.571, 2.447, 2.365, 2.306, 2.262, 2.228, 2.201, 2.179];
-    var ci = zs[count - 1] * Math.sqrt(variance / count);
+	var z = zs[count-1] || zs.pop();
+	var ci = z * Math.sqrt(variance / count);
     return {
         low: mean - ci,
         high: mean + ci

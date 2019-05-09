@@ -451,6 +451,7 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
 			lineWidth: 0,
 			states: { hover: { lineWidthPlus: 0 } },
 			marker: { enabled: false },
+			visible: false,
 
 		},{
 			name: MVNG_AVG[l],
