@@ -606,11 +606,35 @@ var renderGrowingSeasonGraph = function (season, id) {
 			color: '#00aa00',
 			data: season.weeks,
 			visible: true,
+		},{ 
+			name: 'Confidence interval',
+			type: 'arearange',
+			color: '#005500',
+			data: season.ci,
+			zIndex: 0,
+			fillOpacity: 0.3,
+			lineWidth: 0,
+			states: { hover: { lineWidthPlus: 0 } },
+			marker: { enabled: false },
+			visible: false,
+
 		}, {
 			name: MVNG_AVG[l],
 			color: '#00aa00',
 			marker: { enabled: false },
 			data: season.movAvg,
+		},{
+			name: 'Confidence interval (moving avg.)',
+			type: 'arearange',
+			color: '#006600',
+			data: season.ciMovAvg,
+			zIndex: 0,
+			fillOpacity: 0.3,
+			lineWidth: 0,
+			states: { hover: { lineWidthPlus: 0 } },
+			marker: { enabled: false },
+			visible: false,
+
 		}],
 	});
 }
