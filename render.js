@@ -1121,7 +1121,7 @@ var renderAbiskoIceGraph = function (ice, id, title) {
 					name: 'Linear regression (break-up)',
 			},
 			yAxis: 0,
-			name: 'Break',
+			name: 'Break-up',
 			color: '#ee0000',
 			lineWidth: 0,
 			marker: { radius: 2 },
