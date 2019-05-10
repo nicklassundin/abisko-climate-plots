@@ -203,16 +203,23 @@ var parseAbiskoCsv = function (result) {
 		year.weeklyTemperatures = year.weeklyTemperatures.map(t => t.sum.reduce((a,b) => a+b) / t.count);
 		var isWeekAboveZero = year.weeklyTemperatures.map(t => t > 0);
 		var longestPeriod = 0;
+		var periods = []
 		isWeekAboveZero.reduce((period, aboveZero) => {
 			if (aboveZero) {
 				period++;
 				longestPeriod = Math.max(longestPeriod, period);
 				return period;
 			} else {
+				periods.push(period);	
 				return 0;
 			}
 		}, 0);
-		year.growingSeason = longestPeriod;
+		year.growingSeason = {
+			max: longestPeriod,
+			variance: variance(periods),
+			count: periods.length,
+		}
+		// console.log(year.growingSeason);
 
 		var monthlyTemperatures = [];
 		var monthlyPrecipitation = [];
@@ -409,6 +416,8 @@ var parseAbiskoCsv = function (result) {
 		t.ciMovAvg = t.ciMovAvg.slice(10);
 		t.avg = t.avg.slice(10);
 	});
+
+	// Insert year for all season Temperatures
 	var seasonal = (season, statistic) => entries().map(each => ({
 		x: +each[0],
 		y: each[1][season][statistic],
@@ -449,7 +458,8 @@ var parseAbiskoCsv = function (result) {
 
 	summerTemps.avg = summerTemps.avg.slice(10);
 	winterTemps.avg = winterTemps.avg.slice(10);
-
+	
+	// Inserts x: year for all seasons
 	var seasonalPrecipByStat = (season, statistic) => entries().map(each => ({
 		x: +each[0],
 		y: each[1][season][statistic],
@@ -510,29 +520,40 @@ var parseAbiskoCsv = function (result) {
 		y: each.y - (precipitationBaselineYearly.sum / precipitationBaselineYearly.count),
 	}));
 
+
+
+	// Growing Season
+	var grwth_weeks = yearly('growingSeason').map(each => ({
+		x: each.x,
+		y: each.y.max,
+		variance: each.y.variance,
+		count: each.y.count,
+	}));
+	// console.log(yearly('growingSeason'));
+	console.log(grwth_weeks);
+	// TODO restructure dubble storage of weeks
 	var grwthSeason = {
-		weeks: yearly('growingSeason'),
-		movAvg: movingAveragesHighCharts(yearly('growingSeason').map(each => each.y)),
-		variance: variance(yearly('growingSeason').map(each => each.y)),
-		ci: null,
+		weeks: grwth_weeks,
+		movAvg: movingAveragesHighCharts(grwth_weeks),
+		ci: grwth_weeks.map(each => ({
+			x: each.x,
+			ci: confidenceInterval(each.y,each.variance,each.count),
+		})), 
 		ciMovAvg: [],
 	}
-		
-	grwthSeason.ci = grwthSeason.weeks.map(each => ({
-		x: each.x, 
-		ci: confidenceInterval(each.y, variance(grwthSeason.weeks.map(each => each.y)), each.y),
-	}));
 	grwthSeason.ci = grwthSeason.ci.map(each => ({
 		x: each.x,
 		low: each.ci.low,
 		high: each.ci.high,
-	}));
+	}))
+
+	console.log(grwthSeason);
 	grwthSeason.ciMovAvg = grwthSeason.ci.map(each => ({ x: each.x }));
 	['low', 'high'].forEach(bound =>
 		movingAverages(grwthSeason.ci.map(each => each[bound]), 10)
 		.forEach((value, index) => grwthSeason.ciMovAvg[index][bound] = value));
 
-	// console.log(yearly('growingSeason').map(each => each.y));
+	// // console.log(yearly('growingSeason').map(each => each.y));
 	// console.log(grwthSeason);
 	// console.log(totalvariance);
 
@@ -564,8 +585,8 @@ var parseAbiskoCsv = function (result) {
 			})),
 		},
 		growingSeason: {
-			weeks: yearly('growingSeason').slice(10),
-			movAvg: movingAveragesHighCharts(yearly('growingSeason').map(each => each.y)),
+			weeks: grwthSeason.weeks.slice(10),
+			movAvg: grwthSeason.movAvg,
 			ci: grwthSeason.ci.slice(10),
 			ciMovAvg: grwthSeason.ciMovAvg.slice(10),
 		},
