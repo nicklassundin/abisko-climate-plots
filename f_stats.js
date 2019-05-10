@@ -530,7 +530,7 @@ var parseAbiskoCsv = function (result) {
 		count: each.y.count,
 	}));
 	// console.log(yearly('growingSeason'));
-	console.log(grwth_weeks);
+	// console.log(grwth_weeks);
 	// TODO restructure dubble storage of weeks
 	var grwthSeason = {
 		weeks: grwth_weeks,
@@ -547,7 +547,7 @@ var parseAbiskoCsv = function (result) {
 		high: each.ci.high,
 	}))
 
-	console.log(grwthSeason);
+	// console.log(grwthSeason);
 	grwthSeason.ciMovAvg = grwthSeason.ci.map(each => ({ x: each.x }));
 	['low', 'high'].forEach(bound =>
 		movingAverages(grwthSeason.ci.map(each => each[bound]), 10)
