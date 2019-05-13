@@ -794,6 +794,18 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 			visible: false,
 			data: precipitation.movAvg,
 			marker: { enabled: false },
+		},{
+			name: 'Confidence interval (mov avg.)',
+			type: 'arearange',
+			color: '#000055',
+			data: precipitation.ciMovAvg,
+			zIndex: 0,
+			fillOpacity: 0.3,
+			lineWidth: 0,
+			states: { hover: { lineWidthPlus: 0 } },
+			marker: { enabled: false },
+			visible: false,
+
 		},
 			// TODO discuss use fullness Moving averages
 			// {
@@ -967,6 +979,18 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
 					},
 				},
 			},
+		},{
+			name: 'Confidence interval (mov avg.)',
+			type: 'arearange',
+			color: '#000055',
+			data: precipitation.ciMovAvg,
+			zIndex: 0,
+			fillOpacity: 0.3,
+			lineWidth: 0,
+			states: { hover: { lineWidthPlus: 0 } },
+			marker: { enabled: false },
+			visible: false,
+
 		},{
 			name: 'Moving average precipitation',
 			visible: false,
