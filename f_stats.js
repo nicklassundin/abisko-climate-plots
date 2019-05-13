@@ -534,7 +534,7 @@ var parseAbiskoCsv = function (result) {
 	// TODO restructure dubble storage of weeks
 	var grwthSeason = {
 		weeks: grwth_weeks,
-		movAvg: movingAveragesHighCharts(grwth_weeks),
+		movAvg: movingAveragesHighCharts(grwth_weeks.map(each => each.y)),
 		ci: grwth_weeks.map(each => ({
 			x: each.x,
 			ci: confidenceInterval(each.y,each.variance,each.count),
@@ -546,7 +546,7 @@ var parseAbiskoCsv = function (result) {
 		low: each.ci.low,
 		high: each.ci.high,
 	}))
-
+	console.log(grwthSeason);
 	// console.log(grwthSeason);
 	grwthSeason.ciMovAvg = grwthSeason.ci.map(each => ({ x: each.x }));
 	['low', 'high'].forEach(bound =>
@@ -554,7 +554,7 @@ var parseAbiskoCsv = function (result) {
 		.forEach((value, index) => grwthSeason.ciMovAvg[index][bound] = value));
 
 	// // console.log(yearly('growingSeason').map(each => each.y));
-	// console.log(grwthSeason);
+	console.log(grwthSeason);
 	// console.log(totalvariance);
 
 	// console.log(yearly('precip'));
