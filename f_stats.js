@@ -591,7 +591,6 @@ var parseAbiskoCsv = function (result) {
 	// precipitation moving average yearly
 	var precipMovAvg = movingAveragesHighCharts(values().map(each => each.precip));
 
-
 	yrly_diff = yearly('precip').map(each => ({
 		x: each.x,
 		y: each.y - (precipitationBaselineYearly.sum / precipitationBaselineYearly.count),
@@ -746,6 +745,7 @@ var parseAbiskoIceData = function (result) {
 		name: each.breakupDate ? dateFormat(each.breakupDate) : null,
 		week: each.breakupDate ? weekNumber(each.breakupDate) : null,
 	})).filter(each => each.y).filter(each => each.x >= 1909).filter(each => each.name != null);
+	// var breakupVar = variance(breakupDOY.map(each=>each.y));
 
 	var freezeDOY = iceData.map((each, year) => ({
 		x: +year,
@@ -753,6 +753,8 @@ var parseAbiskoIceData = function (result) {
 		name: each.freezeDate ? dateFormat(each.freezeDate) : null,
 		week: each.freezeDate ? weekNumber(each.freezeDate) : null,
 	})).filter(each => each.y).filter(each => each.x >= 1909).filter(each => each.name != null);
+	// var freezeVar = variance(freezeDOY.map(each=>each.y));
+
 	// console.log(breakupDOY);
 	// console.log(freezeDOY);
 	var breakupLinear = linearRegression(breakupDOY.map(w => w.x), breakupDOY.map(w => w.y));
@@ -772,14 +774,20 @@ var parseAbiskoIceData = function (result) {
 			name: each.name,
 		}
 	});
+	var calculateMovingAverages = (values) => movingAverages(values.map(v => v.y), 10).map((avg, i) => ({
+		x: values[i].x, 
+		y: avg,
+	}))
+
 
 	var iceTime = yearly('iceTime');
 
-	var calculateMovingAverages = (values) => movingAverages(values.map(v => v.y), 10).map((avg, i) => ({
-		x: values[i].x, y: avg,
-	})).slice(10);
-
-	var iceTimeMovAvg = calculateMovingAverages(iceTime);
+	// equal weighted confidence interval
+	var equal_weight = confidenceInterval_EQ_ND(iceTime, 10)	
+	
+	var iceTimeMovAvg = equal_weight.movAvg;
+	var iceTimeMovAvgVar = equal_weight.movAvgVar;
+	var iceTimeCIMovAvg = equal_weight.ciMovAvg;
 	var iceTimeLinear = linearRegression(iceTime.map(w => w.x), iceTime.map(w => w.y));
 	var iceTimeMovAvgLinear = linearRegression(iceTimeMovAvg.map(w => w.x), iceTimeMovAvg.map(w => w.y));
 
@@ -791,7 +799,8 @@ var parseAbiskoIceData = function (result) {
 		breakup,
 		freeze,
 		iceTime,
-		iceTimeMovAvg,
+		iceTimeMovAvg: iceTimeMovAvg.slice(10),
+		iceTimeCIMovAvg: iceTimeCIMovAvg.slice(10),
 		breakupLinear: [
 			{ x: 1915, y: weekNumber(dateFromDayOfYear(1915, Math.round(breakupLinear(1915)))) },
 			{ x: yearMax, y: weekNumber(dateFromDayOfYear(yearMax, Math.round(breakupLinear(yearMax)))) }

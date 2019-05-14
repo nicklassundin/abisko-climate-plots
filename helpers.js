@@ -33,6 +33,8 @@ var movingAverage = (values, index, number) => average(values.slice(Math.max(ind
 
 var movingAverages = (values, number) => values.map((_, index) => movingAverage(values, index, number));
 
+var varianceMovAvg = (values, number) => values.map((_, index) => variance(values.slice(Math.max(index - number,0)).map(each => each.y)));
+
 var difference = (values, baseline) => values.map(value => value - baseline);
 
 var sumSquareDistance = (values, mean) => values.reduce((sum, value) => sum + Math.pow(value - mean, 2), 0);
@@ -50,6 +52,31 @@ var confidenceInterval = (mean, variance, count) => {
         high: mean + ci
     };
 };
+
+// equally weighted averages normal distribution 
+var confidenceInterval_EQ_ND = (values, count) => {
+	var movAvg = movingAverages(values.map(each => each.y), count).map((avg, i) => ({
+		x: values[i].x,
+		y: avg,
+	}));
+	var movAvgVar = varianceMovAvg(values, count);
+	var ciMovAvg = movAvg.map((_,index) => ({
+		x: movAvg[index].x,
+		y: confidenceInterval(movAvg[index].y, movAvgVar[index], count),
+	})).map(each => ({
+		x: each.x,
+		low: each.y.low,
+		high: each.y.high,
+	}));
+	return ({
+		movAvg: movAvg,
+		movAvgVar: movAvgVar,
+		ciMovAvg: ciMovAvg,
+	})
+}
+
+
+
 
 var baselineLower = 1961;
 var baselineUpper = 1990;
