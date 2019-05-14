@@ -7,12 +7,11 @@
 		<script src="https://code.highcharts.com/modules/export-data.js"></script>
 		<script src="https://rawgit.com/phpepe/highcharts-regression/master/highcharts-regression.js"></script>
 
-<script src="loader.js"></script>
-<script src="f_stats.js"></script>
-<script src="helpers.js"></script>
-<script src="init.js"></script>
-<script src="papaparse.min.js"></script>
-
-<script src="regression.js"></script>
-<script src="render.js"></script>
+<script src="https://nicklassundin.github.io/abisko-climate-plots/loader.js"></script>
+<script src="https://nicklassundin.github.io/abisko-climate-plots/f_stats.js"></script>
+<script src="https://nicklassundin.github.io/abisko-climate-plots/helpers.js"></script>
+<script src="https://nicklassundin.github.io/abisko-climate-plots/init.js"></script>
+<script src="https://nicklassundin.github.io/abisko-climate-plots/papaparse.min.js"></script>
+<script src="https://nicklassundin.github.io/abisko-climate-plots/regression.js"></script>
+<script src="https://nicklassundin.github.io/abisko-climate-plots/render.js"></script>
 
