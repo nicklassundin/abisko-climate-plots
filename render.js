@@ -766,12 +766,12 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 			floor: 0, // Precipitation can never be negative
 		},
 		tooltip: {
-			shared: true,
-			// valueSuffix: ' mm',
-			// valueDecimals: 0,
-			// headerFormat: '<span style="font-size: 10px">{point.key}</span><br/>' +
-			// '<span style="color: red">\u25CF</span> Linear regression: <b>' + precipitation.linear + '</b><br />' +
-			// '<span style="color: white; visibility: hidden">\u25CF</span> Total precipitation: <b>{point.total:.0f} mm</b><br />',
+			// shared: true,
+			valueSuffix: ' mm',
+			valueDecimals: 0,
+			headerFormat: '<span style="font-size: 10px">{point.key}</span><br/>' +
+			'<span style="color: red">\u25CF</span> Linear regression: <b>' + precipitation.linear + '</b><br />' +
+			'<span style="color: white; visibility: hidden">\u25CF</span> Total precipitation: <b>{point.total:.0f} mm</b><br />',
 		},
 		series: [{
 			id: 'snow',
@@ -893,7 +893,7 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
 			valueSuffix: ' mm',
 			valueDecimals: 0,
 			headerFormat: '<span style="font-size: 10px">{point.key}</span><br/>' +
-			//'<span style="color: red">\u25CF</span> Linear regression: <b>' + precipitation.linear + '</b><br />' +
+			'<span style="color: red">\u25CF</span> Linear regression: <b>' + precipitation.linear + '</b><br />' +
 			'<span style="color: white; visibility: hidden">\u25CF</span> Total precipitation: <b>{point.total:.0f} mm</b><br />',
 		},
 		series: [{
