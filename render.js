@@ -70,7 +70,7 @@ var global_chart_settings = {
 						// TODO Lang switching
 					},
 				},{
-					text: 'Show data [DUMMY]',
+					text: 'Show data',
 					onclick: function(){
 						if(this.options.exporting.showTable) {
 							var element = this.dataTableDiv; 
