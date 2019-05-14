@@ -70,18 +70,24 @@ var global_chart_settings = {
 						// TODO Lang switching
 					},
 				},{
-					text: 'Show data',
+					text: 'Show/hide data',
 					onclick: function(){
 						if(this.options.exporting.showTable) {
 							var element = this.dataTableDiv; 
 							element.parentNode.removeChild(element);
 						};
+						var text;
+						if(this.options.exporting.showTable){
+							text = 'Hide data';
+						}else{
+							text = 'Show data';
+						}
 						this.update({
 							exporting: {
 								showTable: !this.options.exporting.showTable, 
 							},
 						});
-						// TODO CHANGE export:showTable: true
+						// TODO toggle between 'Show data' and 'Hide data'
 					},
 				}],
 			},
