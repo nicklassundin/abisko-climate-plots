@@ -310,25 +310,8 @@ var renderAbiskoTemperatureGraph = function (temperatures, id, title) {
 			color: '#888888',
 			data: temperatures.avg,
 			visible: true,
-		},{
-			regression: true,
-			regressionSettings: {
-				type: 'polynomial',
-				color: '#aaaaaa',
-				name: 'Polynomial regression',
-				dashStyle: 'ShortDash',
-				visible: false,
-			},
-			visible: false,
-			showInLegend: false,
-			enableMouseTracking: false,
-			name: YRL_AVG[l],
-			lineWidth: 0,
-			marker: { radius: 0 },
-			states: { hover: { lineWidthPlus: 0 } },
-			color: '#888888',
-			data: temperatures.avg,
-		},{
+		},
+			{
 			regression: true,
 			regressionSettings: {
 				type: 'loess',

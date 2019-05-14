@@ -6,7 +6,6 @@
 var parseGISSTEMP = function (result) {
 	var fields = result.meta.fields;
 	var temperatures = [];
-
 	result.data.forEach((row) => {
 		var year = {};
 
