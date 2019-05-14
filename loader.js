@@ -3,7 +3,7 @@
 /* LOADING DATA HAPPENS HERE */
 /*****************************/
 
-var tempGraphBuilder = function(file, id, title){
+var functorGISSTEMP = (file, renderF) => function(id, title){
 	Papa.parse('data/'+file, {
 		worker: useWebWorker,
 		header: true,
@@ -13,34 +13,14 @@ var tempGraphBuilder = function(file, id, title){
 		dynamicTyping: true,
 		comments: 'Station',
 		complete: function (result) {
-			var temperatures = parseGISSTEMP(result);
-			renderTemperatureGraph(temperatures, id, title);
+			var data = parseGISSTEMP(result);
+			renderF(data, id, title);
 		},
 	});
 };
 
-
-//
-// var globalTemperatures = function () {
-// 	Papa.parse('data/GLB.Ts downloaded 21062018.csv', {
-// 		worker: useWebWorker,
-// 		header: true,
-// 		delimiter: ',',
-// 		download: true,
-// 		skipEmptyLines: true,
-// 		dynamicTyping: true,
-// 		comments: 'Station',
-// 		complete: function (result) {
-// 			var temperatures = parseGISSTEMP(result);
-// 			renderTemperatureGraph(temperatures, 'globalTemperatures', 'Global temperatures');
-// 		},
-// 	});
-// };
-// // globalTemperatures();
-//
 var parseZonal = function () {
 	var cached;
-
 	var complete = (result) => {
 		if (cached) result = cached;
 		else cached = result;

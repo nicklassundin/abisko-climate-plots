@@ -312,33 +312,33 @@ var renderAbiskoTemperatureGraph = function (temperatures, id, title) {
 			visible: true,
 		},
 			{
-			name: YRL_CNF_INT[l],
-			type: 'arearange',
-			color: '#888888',
-			data: temperatures.ci,
-			zIndex: 0,
-			fillOpacity: 0.3,
-			lineWidth: 0,
-			states: { hover: { lineWidthPlus: 0 } },
-			marker: { enabled: false },
-			visible: false,
-		}, {
-			name: MVNG_AVG[l],
-			color: '#888888',
-			marker: { enabled: false },
-			data: temperatures.movAvg,
-		}, {
-			name: MVNG_AVG_CNF_INT[l],
-			type: 'arearange',
-			color: '#7777ff',
-			data: temperatures.ciMovAvg,
-			zIndex: 0,
-			fillOpacity: 0.3,
-			lineWidth: 0,
-			states: { hover: { lineWidthPlus: 0 } },
-			marker: { enabled: false },
-			visible: false,
-		}],
+				name: YRL_CNF_INT[l],
+				type: 'arearange',
+				color: '#888888',
+				data: temperatures.ci,
+				zIndex: 0,
+				fillOpacity: 0.3,
+				lineWidth: 0,
+				states: { hover: { lineWidthPlus: 0 } },
+				marker: { enabled: false },
+				visible: false,
+			}, {
+				name: MVNG_AVG[l],
+				color: '#888888',
+				marker: { enabled: false },
+				data: temperatures.movAvg,
+			}, {
+				name: MVNG_AVG_CNF_INT[l],
+				type: 'arearange',
+				color: '#7777ff',
+				data: temperatures.ciMovAvg,
+				zIndex: 0,
+				fillOpacity: 0.3,
+				lineWidth: 0,
+				states: { hover: { lineWidthPlus: 0 } },
+				marker: { enabled: false },
+				visible: false,
+			}],
 	});
 };
 
@@ -1164,3 +1164,66 @@ var renderAbiskoSnowGraph = function (snow, id, title) {
 		series,
 	});
 };
+
+
+var renderZoomableGraph = function(data, id, title){
+	// console.log(data);
+	Highcharts.chart(id, {
+		chart: {
+			zoomType: 'x'
+		},
+		title: {
+			text: title + ' [DUMMY/START]',
+		},
+		subtitle: {
+			text: document.ontouchstart === undefined ?
+			'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+		},
+		xAxis: {
+			title: {
+				text: 'Years'
+			}
+		},
+		yAxis: {
+			title: {
+				text: 'Temperatures'
+			}
+		},
+		legend: {
+			enabled: false
+		},
+		plotOptions: {
+			area: {
+				fillColor: {
+					linearGradient: {
+						x1: 0,
+						y1: 0,
+						x2: 0,
+						y2: 1
+					},
+					stops: [
+						[0, Highcharts.getOptions().colors[0]],
+						[1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+					]
+				},
+				marker: {
+					radius: 2
+				},
+				lineWidth: 1,
+				states: {
+					hover: {
+						lineWidth: 1
+					}
+				},
+				threshold: null
+			}
+		},
+
+		series: [{
+			type: 'area',
+			name: 'Average',
+			data: data.avg,
+		}]
+	});
+}
+

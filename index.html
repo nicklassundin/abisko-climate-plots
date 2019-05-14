@@ -280,6 +280,11 @@
 			<div id="abiskoLakeIce" style="height: 450px"></div>
 			<figcaption></figcaption>
 		</figure>
+		<figure>
+			<a>44</a>
+			<div id="zoomableTemperatures" style="height: 450px"></div>
+			<figcaption></figcaption>
+		</figure>
 
 		<script src="init.js"></script>
 		<script src="f_stats.js"></script>
@@ -287,14 +292,16 @@
 		<script src="loader.js"></script>
 
 		<script type="text/javascript">
-			tempGraphBuilder('NH.Ts downloaded 21062018.csv', 'northernHemisphere','Northern Hemisphere temperatures');
-tempGraphBuilder('GLB.Ts downloaded 21062018.csv','globalTemperatures','Global temperatures');
+			functorGISSTEMP('NH.Ts downloaded 21062018.csv',renderTemperatureGraph)('northernHemisphere','Northern Hemisphere temperatures');
+functorGISSTEMP('GLB.Ts downloaded 21062018.csv',renderTemperatureGraph)('globalTemperatures','Global temperatures');
 
 // globalTemperatures();
 parseZonal();
 parseAbisko();
 parseTornetrask();
 parseSnowDepth();
+
+functorGISSTEMP('GLB.Ts downloaded 21062018.csv',renderZoomableGraph)('zoomableTemperatures','[Zoomable] Global Temperatures');
 		</script>
 	</body>
 
