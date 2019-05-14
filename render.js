@@ -36,8 +36,11 @@ var SWE_OPTION = {
 /* RENDER GRAPHS */
 /*****************/
 
+
+
 var global_chart_settings = {
 	exporting: {
+		// showTable: true, // TODO DATA TABLE
 		buttons: {
 			contextButton: {
 				menuItems: [{
@@ -47,35 +50,40 @@ var global_chart_settings = {
 							type: 'application/pdf'
 						});
 					},
-				},
-					// {
-					// separator: true
-					// },
-					{
-						textKey: 'downloadJPEG',
-						onclick: function(){
-							this.exportChart({
-								type: 'image/jpeg'
-							});
-						}
-					},'downloadSVG','viewFullscreen','printChart',{
-						separator: true,
-					},{
-						text: LANG[l],
-						onclick: function(){
-							if(l==0){
-								l=1;
-							}else{
-								l=0;
-							};
-							// TODO Lang switching
-						},
-					},{
-						text: 'Show data [DUMMY]',
-						onclick: function(){
-							// TODO CHANGE export:showTable: true
-						},
-					}],
+				},{
+					textKey: 'downloadJPEG',
+					onclick: function(){
+						this.exportChart({
+							type: 'image/jpeg'
+						});
+					}
+				},'downloadSVG','viewFullscreen','printChart',{
+					separator: true,
+				},{
+					text: LANG[l],
+					onclick: function(){
+						if(l==0){
+							l=1;
+						}else{
+							l=0;
+						};
+						// TODO Lang switching
+					},
+				},{
+					text: 'Show data [DUMMY]',
+					onclick: function(){
+						if(this.options.exporting.showTable) {
+							var element = this.dataTableDiv; 
+							element.parentNode.removeChild(element);
+						};
+						this.update({
+							exporting: {
+								showTable: !this.options.exporting.showTable, 
+							},
+						});
+						// TODO CHANGE export:showTable: true
+					},
+				}],
 			},
 		},
 	},
