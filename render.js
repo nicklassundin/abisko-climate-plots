@@ -73,15 +73,9 @@ var global_chart_settings = {
 					text: 'Show/hide data',
 					onclick: function(){
 						if(this.options.exporting.showTable) {
-							var element = this.dataTableDiv; 
-							element.parentNode.removeChild(element);
+							var element = this.dataTableDiv;
+							element.innerHTML = '';
 						};
-						var text;
-						if(this.options.exporting.showTable){
-							text = 'Hide data';
-						}else{
-							text = 'Show data';
-						}
 						this.update({
 							exporting: {
 								showTable: !this.options.exporting.showTable, 
