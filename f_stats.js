@@ -269,7 +269,7 @@ var parseAbiskoCsv = function (result) {
 		});
 		var summerPrecVar = Math.sqrt(summerPrecipitation.total.length)*variance(summerPrecipitation.total);// TODO need check internal math
 		var summerPrecTotal = summerPrecipitation.total.reduce((a,b) => a+b,0);
-		var summerPrecCI = confidenceInterval(summerPrecTotal, summerPrecVar, 6); // TODO should not be a constant '6'
+		var summerPrecCI = confidenceInterval(summerPrecTotal, summerPrecVar, summerMonths.length); // TODO should not be a constant '6'
 		year.summerPrecipitation = {
 			total: summerPrecTotal,
 			snow: summerPrecipitation.snow,
@@ -285,7 +285,7 @@ var parseAbiskoCsv = function (result) {
 
 		var winterPrecVar = Math.sqrt(summerPrecipitation.total.length)*variance(winterPrecipitation.total); // TODO need check internal math
 		var winterPrecTotal = winterPrecipitation.total.reduce((a,b) => a+b,0);
-		var winterPrecCI = confidenceInterval(winterPrecTotal, winterPrecVar, 6); // TODO should not be a constant '6'
+		var winterPrecCI = confidenceInterval(winterPrecTotal, winterPrecVar, winterMonths.length); // TODO should not be a constant '6'
 		year.winterPrecipitation = {
 			total: winterPrecTotal,
 			snow: winterPrecipitation.snow,

@@ -7,8 +7,8 @@ var monthName = month => ({
     jul: 'July', aug: 'August', sep: 'September', oct: 'October', nov: 'November', dec: 'December'
 })[month];
 
-var summerMonths = ['may', 'jun', 'jul', 'aug', 'sep'];
-var winterMonths = ['oct', 'nov', 'dec', 'jan', 'feb', 'mar', 'apr'];
+var summerMonths = ['jun', 'jul', 'aug', 'sep'];
+var winterMonths = ['oct', 'nov', 'dec', 'jan', 'feb', 'mar', 'apr', 'may'];
 
 var isSummerMonth = month => summerMonths.includes(month);
 var isWinterMonth = month => winterMonths.includes(month);
