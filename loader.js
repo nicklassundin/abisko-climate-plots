@@ -19,7 +19,7 @@ var functorGISSTEMP = (file, renderF) => function(id, title){
 	});
 };
 
-var parseZonal = function () {
+var parseZonal = function (file) {
 	var cached;
 	var complete = (result) => {
 		if (cached) result = cached;
@@ -30,7 +30,7 @@ var parseZonal = function () {
 		renderTemperatureDifferenceGraph(temperatures['glob'], 'temperatureDifference3', 'Global temperature difference');
 	}
 
-	Papa.parse('data/ZonAnn.Ts+dSST downloaded 21062018.csv', {
+	Papa.parse(file, {
 		worker: useWebWorker,
 		header: true,
 		delimiter: ',',
@@ -39,7 +39,6 @@ var parseZonal = function () {
 		dynamicTyping: true,
 		complete,
 	});
-
 	return complete;
 };
 // parseZonal();

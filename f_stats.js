@@ -6,17 +6,14 @@
 var parseGISSTEMP = function (result) {
 	var fields = result.meta.fields;
 	var temperatures = [];
+	
+
 	result.data.forEach((row) => {
 		var year = {};
 
 		fields.forEach(field => year[field.toLowerCase()] = validNumber(row[field]));
 
 		var monthlyTemperatures = months().map(month => year[month]).filter(Number);
-		// console.log(monthlyTemperatures);
-		// var month = monthlyTemperatures.map(each => ({
-		// temp: each,
-		// variance(each),
-		// }));
 
 
 		year.min = min(monthlyTemperatures);
@@ -69,6 +66,7 @@ var parseGISSTEMP = function (result) {
 };
 
 var parseGISSTEMPzonalMeans = function (result) {
+	// console.log(result)
 	var fields = result.meta.fields;
 	var temperatures = [];
 	temperatures['sum64n-90n'] = 0;
@@ -78,13 +76,13 @@ var parseGISSTEMPzonalMeans = function (result) {
 
 	result.data.forEach((row) => {
 		var year = {};
-
 		fields.forEach(field => year[field.toLowerCase()] = validNumber(row[field]));
 
 		if (withinBaselinePeriod(year.year)) {
-			temperatures['sum64n-90n'] += year['64n-90n'];
-			temperatures['sumnhem'] += year['nhem'];
-			temperatures['sumglob'] += year['glob'];
+			temperatures['sum64n-90n'] += year['64n-90n']||0; // TODO resolve why .00 is undefined 
+			temperatures['sumnhem'] += year['nhem']||0; 
+			temperatures['sumglob'] += year['glob']||0;
+			
 			count++;
 		}
 		if (year.year >= 1913) {

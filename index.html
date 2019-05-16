@@ -292,16 +292,15 @@
 		<script src="loader.js"></script>
 
 		<script type="text/javascript">
-			functorGISSTEMP('NH.Ts downloaded 21062018.csv',renderTemperatureGraph)('northernHemisphere','Northern Hemisphere temperatures');
-functorGISSTEMP('GLB.Ts downloaded 21062018.csv',renderTemperatureGraph)('globalTemperatures','Global temperatures');
+			functorGISSTEMP('NH.Ts.csv',renderTemperatureGraph)('northernHemisphere','Northern Hemisphere temperatures');
+functorGISSTEMP('GLB.Ts.csv',renderTemperatureGraph)('globalTemperatures','Global temperatures');
 
-// globalTemperatures();
-parseZonal();
+parseZonal('data/ZonAnn.Ts.csv');
 parseAbisko();
 parseTornetrask();
 parseSnowDepth();
 
-functorGISSTEMP('GLB.Ts downloaded 21062018.csv',renderZoomableGraph)('zoomableTemperatures','[Zoomable] Global Temperatures');
+functorGISSTEMP('GLB.Ts.csv',renderZoomableGraph)('zoomableTemperatures','[Zoomable] Global Temperatures');
 		</script>
 	</body>
 
