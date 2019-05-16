@@ -23,22 +23,35 @@ var ICE_TIME = ["Ice time", "Ice time"];
 var ICE_TIME_MVNG_AVG = ["Ice time (moving average)", "Ice time (moving average)"];
 
 // Localization
-var SWE_OPTION = {
-	lang:{
-		shortMonths: ['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec'],
-		downloadJPEG: 'Ladda ner som JPEG',
-		downloadPDF: 'Ladda ner som PDF',
-		months: ['Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'],
-	}
-};
 
 /*****************/
 /* RENDER GRAPHS */
 /*****************/
 
-
-
-var global_chart_settings = {
+Highcharts.setOptions({
+	lang:{
+		showDataTable: 'Show/hide data',
+		langOption: 'Svenska',
+		shortMonths: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+		downloadJPEG: 'Download as JPEG',
+		downloadPDF: 'Download as PDF',
+		downloadSVG: 'Download as SVG',
+		months: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+		yearlyAvg: 'Yearly average',
+	},
+	otherLang:{
+			showDataTable: 'Visa/göm data',
+			langOption: 'English',
+			shortMonths: ['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec'],
+			downloadJPEG: 'Ladda ner som JPEG',
+			downloadPDF: 'Ladda ner som PDF',
+			downloadSVG: 'Ladda ner som SVG',
+			viewFullscreen: 'Visa i fullskärm',
+			resetZoom: 'Återställ zoom',
+			printChart: 'Skriv ut',
+			months: ['Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'],
+			yearlyAvg: 'Årligt genomsnitt',
+		},
 	exporting: {
 		// showTable: true, // TODO DATA TABLE
 		buttons: {
@@ -60,21 +73,23 @@ var global_chart_settings = {
 				},'downloadSVG','viewFullscreen','printChart',{
 					separator: true,
 				},{
-					text: LANG[l],
+					textKey: 'langOption',
 					onclick: function(){
-						if(l==0){
-							l=1;
-						}else{
-							l=0;
-						};
-						// TODO Lang switching
+						var lang = this.options.lang;
+						var otherLang = this.options.otherLang;
+						var options = this.options;
+						options.lang = otherLang;
+						options.otherLang = lang;
+						var id = this.container.id;
+						this.container.innerHTML = '';
+						Highcharts.chart(id, options);
+						// TODO bug both swedish 
 					},
 				},{
-					text: 'Show/hide data',
+					textKey: 'showDataTable',
 					onclick: function(){
 						if(this.options.exporting.showTable) {
-							var element = this.dataTableDiv;
-							element.innerHTML = '';
+							this.dataTableDiv.innerHTML = '';
 						};
 						this.update({
 							exporting: {
@@ -87,8 +102,7 @@ var global_chart_settings = {
 			},
 		},
 	},
-};
-Highcharts.setOptions(global_chart_settings);
+});
 
 var renderTemperatureGraph = function (temperatures, id, title) {
 	// console.log(title);
@@ -297,7 +311,7 @@ var renderAbiskoTemperatureGraph = function (temperatures, id, title) {
 				name: 'Linear regression',
 				visible: false,
 			},
-			name: YRL_AVG[l],
+			name: 'Yearly averages',
 			lineWidth: 0,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
