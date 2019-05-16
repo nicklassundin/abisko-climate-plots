@@ -12,7 +12,7 @@
 		<script src="https://code.highcharts.com/modules/exporting.js"></script>
 		<script src="https://code.highcharts.com/modules/export-data.js"></script>
 		<script src="https://rawgit.com/phpepe/highcharts-regression/master/highcharts-regression.js"></script> 
-		
+
 		<!-- TODO give creed to regression -->
 
 		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
@@ -39,17 +39,17 @@
 /* 		float: left; */
 /* 	} */
 /*  */
-	/* figure figcaption { */
-	/* 	min-width: 150px; */
-	/* 	max-width: 200px; */
-	/* 	padding: 40px 0 0 40px; */
-	/* 	float: left; */
-	/* } */
-        /*  */
-	/* figure { */
-	/* 	width: 100vw; */
-	/* 	clear: both; */
-	/* } */
+/* figure figcaption { */
+/* 	min-width: 150px; */
+/* 	max-width: 200px; */
+/* 	padding: 40px 0 0 40px; */
+/* 	float: left; */
+/* } */
+/*  */
+/* figure { */
+/* 	width: 100vw; */
+/* 	clear: both; */
+/* } */
 		</style>
 	</head>
 
@@ -176,6 +176,11 @@
 			<figcaption></figcaption>
 		</figure>
 		<figure>
+			<a>22</a>
+			<div id="temperatureDifference4"></div>
+			<figcaption></figcaption>
+		</figure>
+		<figure>
 			<a>23</a>
 			<div id="yearlyPrecipitation"></div>
 			<figcaption></figcaption>
@@ -292,15 +297,15 @@
 		<script src="loader.js"></script>
 
 		<script type="text/javascript">
-			functorGISSTEMP('NH.Ts.csv',renderTemperatureGraph)('northernHemisphere','Northern Hemisphere temperatures');
-functorGISSTEMP('GLB.Ts.csv',renderTemperatureGraph)('globalTemperatures','Global temperatures');
+			functorGISSTEMP('data/NH.Ts.csv',renderTemperatureGraph)('northernHemisphere','Northern Hemisphere temperatures');
+functorGISSTEMP('data/GLB.Ts.csv',renderTemperatureGraph)('globalTemperatures','Global temperatures');
 
 parseZonal('data/ZonAnn.Ts.csv');
 parseAbisko();
 parseTornetrask();
 parseSnowDepth();
 
-functorGISSTEMP('GLB.Ts.csv',renderZoomableGraph)('zoomableTemperatures','[Zoomable] Global Temperatures');
+functorGISSTEMP('data/GLB.Ts.csv',renderZoomableGraph)('zoomableTemperatures','[Zoomable] Global Temperatures');
 		</script>
 	</body>
 

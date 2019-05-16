@@ -4,7 +4,7 @@
 /*****************************/
 
 var functorGISSTEMP = (file, renderF) => function(id, title){
-	Papa.parse('data/'+file, {
+	Papa.parse(file, {
 		worker: useWebWorker,
 		header: true,
 		delimiter: ',',
