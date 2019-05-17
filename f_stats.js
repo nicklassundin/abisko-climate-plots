@@ -123,10 +123,6 @@ var parseGISSTEMPzonalMeans = function (result) {
 	var yearVar = variance(yrlyAvg.map(each => each.y));
 	var yearCI = yrlyAvg.map(each => confidenceInterval(each.y, yearVar, yrlyAvg.length));
 	
-
-	
-	
-	
 	temperatures.yrly = {
 		avg: yrlyAvg.slice(10),
 		movAvg: movAvg.slice(10),
