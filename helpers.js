@@ -1,5 +1,9 @@
 var months = () => ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
+var t = {
+	t05: [0, 12.706, 4.303, 3.182, 2.776, 2.571, 2.447, 2.365, 2.306, 2.262, 2.228, 2.201, 2.179, 2.160, 2.145 , 2.131, 2.120, 2.110, 2.101, 2.093, 2.086],
+}
+
 var monthByIndex = index => months()[index];
 
 var monthName = month => ({
@@ -42,9 +46,8 @@ var sumSquareDistance = (values, mean) => values.reduce((sum, value) => sum + Ma
 var variance = values => sumSquareDistance(values, average(values)) / (values.length - 1);
 
 
-
-var confidenceInterval = (mean, variance, count) => {
-    var zs = [0, 12.706, 4.303, 3.182, 2.776, 2.571, 2.447, 2.365, 2.306, 2.262, 2.228, 2.201, 2.179];
+var confidenceInterval = (mean, variance, count, td=t['t05']) => {
+    	var zs = td; 
 	var z = zs[count-1] || zs.pop();
 	var ci = z * Math.sqrt(variance / count);
     return {

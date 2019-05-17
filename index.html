@@ -147,7 +147,7 @@
 		</figure>
 		<figure>
 			<!-- <a>16.1</a> -->
-			<div id="articTemperatures"></div>
+			<div id="arcticTemperatures"></div>
 			<figcaption></figcaption>
 		</figure>
 		<figure>
@@ -300,7 +300,12 @@
 			functorGISSTEMP('data/NH.Ts.csv',renderTemperatureGraph)('northernHemisphere','Northern Hemisphere temperatures');
 functorGISSTEMP('data/GLB.Ts.csv',renderTemperatureGraph)('globalTemperatures','Global temperatures');
 
-parseZonal('data/ZonAnn.Ts.csv');
+// console.log(parseZonal_new('data/ZonAnn.Ts.csv'))
+var parseZ = parseZonal('data/ZonAnn.Ts.csv');
+parseZ(containerRender(renderTemperatureDifferenceGraph,'temperatureDifference1','Temperature difference for Arctic (64N-90N)'), '64n-90n');
+parseZ(containerRender(renderTemperatureDifferenceGraph,'temperatureDifference2','Temperature difference for Northern Hemisphere'),'nhem');
+parseZ(containerRender(renderTemperatureDifferenceGraph,'temperatureDifference3','Global temperature difference'), 'glob');
+parseZ(containerRender(renderTemperatureGraphZonal,'arcticTemperatures','Arctic (64N-90N) temperatures'), 'yrlyAvg');
 parseAbisko();
 parseTornetrask();
 parseSnowDepth();

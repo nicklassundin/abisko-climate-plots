@@ -3,6 +3,11 @@
 /* LOADING DATA HAPPENS HERE */
 /*****************************/
 
+// TODO cached parsing and generalization
+var containerRender = (renderF, id, title) => function(data){
+	renderF(data, id, title);
+}
+
 var functorGISSTEMP = (file, renderF) => function(id, title){
 	Papa.parse(file, {
 		worker: useWebWorker,
@@ -19,17 +24,17 @@ var functorGISSTEMP = (file, renderF) => function(id, title){
 	});
 };
 
-var parseZonal = function (file) {
-	var cached;
+var parseZonal = (file) => function (renderF, tag) {
 	var complete = (result) => {
-		if (cached) result = cached;
-		else cached = result;
+		// console.log(tag);
+		// console.log(result)
 		var temperatures = parseGISSTEMPzonalMeans(result);
-		renderTemperatureDifferenceGraph(temperatures['64n-90n'], 'temperatureDifference1', 'Temperature difference for Arctic (64N-90N)');
-		renderTemperatureDifferenceGraph(temperatures['nhem'], 'temperatureDifference2', 'Temperature difference for Northern Hemisphere');
-		renderTemperatureDifferenceGraph(temperatures['glob'], 'temperatureDifference3', 'Global temperature difference');
+		if(Array.isArray(renderF)){
+			renderF.forEach(each(temperatures[tag]));
+		}else{
+			renderF(temperatures[tag]);
+		}
 	}
-
 	Papa.parse(file, {
 		worker: useWebWorker,
 		header: true,
@@ -37,12 +42,34 @@ var parseZonal = function (file) {
 		download: true,
 		skipEmptyLines: true,
 		dynamicTyping: true,
-		complete,
+		complete, 
 	});
 	return complete;
 };
-// parseZonal();
-
+//
+// var parseZonal = function (file) {
+// 	var cached;
+// 	var complete = (result) => {
+// 		if (cached) result = cached;
+// 		else cached = result;
+// 		var temperatures = parseGISSTEMPzonalMeans(result);
+// 		renderTemperatureDifferenceGraph(temperatures['64n-90n'], 'temperatureDifference1', 'Temperature difference for Arctic (64N-90N)');
+// 		renderTemperatureDifferenceGraph(temperatures['nhem'], 'temperatureDifference2', 'Temperature difference for Northern Hemisphere');
+// 		renderTemperatureDifferenceGraph(temperatures['glob'], 'temperatureDifference3', 'Global temperature difference');
+// 	}
+//
+// 	Papa.parse(file, {
+// 		worker: useWebWorker,
+// 		header: true,
+// 		delimiter: ',',
+// 		download: true,
+// 		skipEmptyLines: true,
+// 		dynamicTyping: true,
+// 		complete,
+// 	});
+// 	return complete;
+// };
+//
 var parseAbisko = function () {
 	var cached;
 

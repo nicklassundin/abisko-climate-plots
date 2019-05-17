@@ -40,18 +40,18 @@ Highcharts.setOptions({
 		yearlyAvg: 'Yearly average',
 	},
 	otherLang:{
-			showDataTable: 'Visa/göm data',
-			langOption: 'English',
-			shortMonths: ['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec'],
-			downloadJPEG: 'Ladda ner som JPEG',
-			downloadPDF: 'Ladda ner som PDF',
-			downloadSVG: 'Ladda ner som SVG',
-			viewFullscreen: 'Visa i fullskärm',
-			resetZoom: 'Återställ zoom',
-			printChart: 'Skriv ut',
-			months: ['Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'],
-			yearlyAvg: 'Årligt genomsnitt',
-		},
+		showDataTable: 'Visa/göm data',
+		langOption: 'English',
+		shortMonths: ['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec'],
+		downloadJPEG: 'Ladda ner som JPEG',
+		downloadPDF: 'Ladda ner som PDF',
+		downloadSVG: 'Ladda ner som SVG',
+		viewFullscreen: 'Visa i fullskärm',
+		resetZoom: 'Återställ zoom',
+		printChart: 'Skriv ut',
+		months: ['Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'],
+		yearlyAvg: 'Årligt genomsnitt',
+	},
 	exporting: {
 		// showTable: true, // TODO DATA TABLE
 		buttons: {
@@ -104,8 +104,63 @@ Highcharts.setOptions({
 	},
 });
 
+var renderTemperatureGraphZonal = function (temperatures, id, title) {
+	// console.log(title);
+	// console.log(temperatures);
+	var chart = Highcharts.chart(id, {
+		chart: {
+			type: 'line',
+			zoomType: 'xy',
+		},
+		title: {
+			text: title,
+		},
+		xAxis: {
+			title: {
+				text: 'Year',
+			},
+			crosshair: true,
+		},
+		yAxis: {
+			title: {
+				text: 'Temperature [°C]'
+			},
+			plotLines: [{
+				value: 0,
+				color: 'rgb(204, 214, 235)',
+				width: 2,
+			}],
+			max: 2,
+			min: -3,
+			tickInterval: 1,
+			lineWidth: 1,
+		},
+		tooltip: {
+			shared: true,
+			valueSuffix: ' °C',
+			valueDecimals: 2,
+		},
+		series: [{
+			// regression: true,
+			name: 'Yearly averages',
+			marker: {radius: 2},
+			states: {hover: { lineWidthPlus: 0 }},
+			lineWidth: 0,
+			color: '#888888',
+			// regressionSettings: {
+				// type: 'linear',
+				// color: '#4444ff',
+				// name: 'Linear regression',
+			// },
+			data: temperatures,
+		}]
+
+	});
+}
+
 var renderTemperatureGraph = function (temperatures, id, title) {
 	// console.log(title);
+	// console.log(temperatures)
 	var chart = Highcharts.chart(id, {
 		chart: {
 			type: 'line',
@@ -155,43 +210,33 @@ var renderTemperatureGraph = function (temperatures, id, title) {
 			color: '#0000ff',
 			data: temperatures.min,
 			visible: false,
-		}, 
-			// 	{
-			// 	name: YRL_AVG[l],
-			// 	lineWidth: 0,
-			// 	marker: { radius: 2 },
-			// 	states: { hover: { lineWidthPlus: 0 } },
-			// 	color: '#888888',
-			// 	data: temperatures.avg,
-			// 	visible: false,
-			// },
-			{
-				name: YRL_CNF_INT[l],
-				type: 'arearange',
-				color: '#888888',
-				data: temperatures.ci,
-				zIndex: 0,
-				fillOpacity: 0.3,
-				lineWidth: 0,
-				states: { hover: { lineWidthPlus: 0 } },
-				marker: { enabled: false },
-				visible: false,
-			}, {
-				name: MVNG_AVG[l],
-				color: '#888888',
-				marker: { enabled: false },
-				data: temperatures.movAvg,
-			}, {
-				name: MVNG_AVG_CNF_INT[l],
-				type: 'arearange',
-				color: '#7777ff',
-				data: temperatures.ciMovAvg,
-				zIndex: 0,
-				fillOpacity: 0.3,
-				lineWidth: 0,
-				states: { hover: { lineWidthPlus: 0 } },
-				marker: { enabled: false },
-			},
+		},{
+			name: YRL_CNF_INT[l],
+			type: 'arearange',
+			color: '#888888',
+			data: temperatures.ci,
+			zIndex: 0,
+			fillOpacity: 0.3,
+			lineWidth: 0,
+			states: { hover: { lineWidthPlus: 0 } },
+			marker: { enabled: false },
+			visible: false,
+		}, {
+			name: MVNG_AVG[l],
+			color: '#888888',
+			marker: { enabled: false },
+			data: temperatures.movAvg,
+		}, {
+			name: MVNG_AVG_CNF_INT[l],
+			type: 'arearange',
+			color: '#7777ff',
+			data: temperatures.ciMovAvg,
+			zIndex: 0,
+			fillOpacity: 0.3,
+			lineWidth: 0,
+			states: { hover: { lineWidthPlus: 0 } },
+			marker: { enabled: false },
+		},
 			{
 				regression: true,
 				name: 'Yearly averages',
@@ -206,37 +251,6 @@ var renderTemperatureGraph = function (temperatures, id, title) {
 				},
 				data: temperatures.avg,
 			}],
-
-		//
-		// 	exporting: {
-		// 		buttons: {
-		// 			contextButton: {
-		// 				menuItems: [{
-		// 					textKey: 'downloadPDF',
-		// 					onclick: function(){
-		// 						this.exportChart({
-		// 							type: 'application/pdf'
-		// 						});
-		// 					},
-		// 				},{
-		// 					separator: true
-		// 				},{
-		// 						textKey: 'downloadJPEG',
-		// 					onclick: function(){
-		// 						this.exportChart({
-		// 							type: 'image/jpeg'
-		// 						});
-		// 					}
-		// 				}],
-		// 			},
-		// 		},
-		// 	},
-		// 	navigation: {
-		// 		menuItemStyle: {
-		// 			padding: '10px',
-		// 		},
-		// 	},
-		//
 	});
 };
 
@@ -456,6 +470,9 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 		chart: {
 			type: 'column'
 		},
+		// rangeSelector: {
+		// selected: 2
+		// },
 		title: {
 			text: title,
 		},

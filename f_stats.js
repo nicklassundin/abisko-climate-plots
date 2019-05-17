@@ -72,17 +72,20 @@ var parseGISSTEMPzonalMeans = function (result) {
 	temperatures['sum64n-90n'] = 0;
 	temperatures['sumnhem'] = 0;
 	temperatures['sumglob'] = 0;
+	temperatures.yrlyAvg = [];
 	var count = 0;
 
 	result.data.forEach((row) => {
 		var year = {};
 		fields.forEach(field => year[field.toLowerCase()] = validNumber(row[field]));
-
 		if (withinBaselinePeriod(year.year)) {
-			temperatures['sum64n-90n'] += year['64n-90n']||0; // TODO resolve why .00 is undefined 
-			temperatures['sumnhem'] += year['nhem']||0; 
-			temperatures['sumglob'] += year['glob']||0;
-			
+			temperatures.yrlyAvg.push({
+				x: year['year'],
+				y: year['64n-90n']
+			})
+			temperatures['sum64n-90n'] += year['64n-90n']||0.0; // TODO resolve why .00 is undefined 
+			temperatures['sumnhem'] += year['nhem']||0.0;
+			temperatures['sumglob'] += year['glob']||0.0;
 			count++;
 		}
 		if (year.year >= 1913) {
@@ -94,7 +97,9 @@ var parseGISSTEMPzonalMeans = function (result) {
 	temperatures['avgnhem'] = temperatures['sumnhem'] / count;
 	temperatures['avgglob'] = temperatures['sumglob'] / count;
 
-	var difference = region => temperatures.map(each => ({
+	var difference = region => temperatures.filter((value) => {
+		return value[region] != null;
+	}).map(each => ({
 		x: each.year,
 		y: each[region] - temperatures['avg' + region],
 	}));
@@ -106,13 +111,10 @@ var parseGISSTEMPzonalMeans = function (result) {
 		};
 	}
 
-
 	temperatures['64n-90n'] = linear_diff(difference('64n-90n'));
 	temperatures['nhem'] = linear_diff(difference('nhem'));
 	temperatures['glob'] = linear_diff(difference('glob'));
-
-
-
+	// console.log(temperatures)
 	return temperatures;
 };
 
