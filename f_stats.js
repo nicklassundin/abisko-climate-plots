@@ -78,11 +78,11 @@ var parseGISSTEMPzonalMeans = function (result) {
 	result.data.forEach((row) => {
 		var year = {};
 		fields.forEach(field => year[field.toLowerCase()] = validNumber(row[field]));
-		if (withinBaselinePeriod(year.year)) {
 			temperatures.yrlyAvg.push({
 				x: year['year'],
 				y: year['64n-90n']
 			})
+		if (withinBaselinePeriod(year.year)) {
 			temperatures['sum64n-90n'] += year['64n-90n']||0.0; // TODO resolve why .00 is undefined 
 			temperatures['sumnhem'] += year['nhem']||0.0;
 			temperatures['sumglob'] += year['glob']||0.0;
@@ -114,7 +114,7 @@ var parseGISSTEMPzonalMeans = function (result) {
 	temperatures['64n-90n'] = linear_diff(difference('64n-90n'));
 	temperatures['nhem'] = linear_diff(difference('nhem'));
 	temperatures['glob'] = linear_diff(difference('glob'));
-	// console.log(temperatures)
+	// console.log(temperatures.yrlyAvg)
 	return temperatures;
 };
 
