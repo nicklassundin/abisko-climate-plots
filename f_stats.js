@@ -72,13 +72,13 @@ var parseGISSTEMPzonalMeans = function (result) {
 	temperatures['sum64n-90n'] = 0;
 	temperatures['sumnhem'] = 0;
 	temperatures['sumglob'] = 0;
-	temperatures.yrlyAvg = [];
+	var yrlyAvg = [];
 	var count = 0;
 
 	result.data.forEach((row) => {
 		var year = {};
 		fields.forEach(field => year[field.toLowerCase()] = validNumber(row[field]));
-			temperatures.yrlyAvg.push({
+			yrlyAvg.push({
 				x: year['year'],
 				y: year['64n-90n']
 			})
@@ -114,6 +114,24 @@ var parseGISSTEMPzonalMeans = function (result) {
 	temperatures['64n-90n'] = linear_diff(difference('64n-90n'));
 	temperatures['nhem'] = linear_diff(difference('nhem'));
 	temperatures['glob'] = linear_diff(difference('glob'));
+	
+	var movAvg = movingAverages(yrlyAvg.map(temps => temps.y), 10)
+		.map((avg, index) => ({
+			x: yrlyAvg[index].x,
+			y: avg,
+		}))
+	var yearVar = variance(yrlyAvg.map(each => each.y));
+	var yearCI = yrlyAvg.map(each => confidenceInterval(each.y, yearVar, yrlyAvg.length));
+	
+
+	
+	
+	
+	temperatures.yrly = {
+		avg: yrlyAvg.slice(10),
+		movAvg: movAvg.slice(10),
+		// ciMovAvg: yearciMovAvg,
+	};
 	// console.log(temperatures.yrlyAvg)
 	return temperatures;
 };

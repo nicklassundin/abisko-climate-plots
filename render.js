@@ -141,19 +141,38 @@ var renderTemperatureGraphZonal = function (temperatures, id, title) {
 			valueDecimals: 2,
 		},
 		series: [{
-			// regression: true,
+			regression: true,
 			name: 'Yearly averages',
 			marker: {radius: 2},
 			states: {hover: { lineWidthPlus: 0 }},
 			lineWidth: 0,
 			color: '#888888',
-			// regressionSettings: {
-				// type: 'linear',
-				// color: '#4444ff',
-				// name: 'Linear regression',
-			// },
-			data: temperatures,
-		}]
+			regressionSettings: {
+				type: 'linear',
+				color: '#4444ff',
+				name: 'Linear regression',
+			},
+			data: temperatures.avg,
+		},{
+			name: 'Moving Averages',
+			color: '#888888',
+			marker: { enabled: false },
+			data: temperatures.movAvg,
+
+		},
+		// 	{
+		// 	name: YRL_CNF_INT[l],
+		// 	type: 'arearange',
+		// 	color: '#888888',
+		// 	data: temperatures.ciMovAvg,
+		// 	zIndex: 0,
+		// 	fillOpacity: 0.3,
+		// 	lineWidth: 0,
+		// 	states: { hover: { lineWidthPlus: 0 } },
+		// 	marker: { enabled: false },
+		// 	visible: false,
+		// }
+		]
 
 	});
 }
