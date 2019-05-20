@@ -6,18 +6,18 @@
 var parseGISSTEMP = function (result, src='') {
 	var fields = result.meta.fields;
 	var temperatures = [];
+	// console.log(result)
 	
 
 	result.data.forEach((row) => {
 		var year = {};
 
 		fields.forEach(field => year[field.toLowerCase()] = validNumber(row[field]));
-
-		var monthlyTemperatures = months().map(month => year[month]).filter(Number);
-
-
-		year.min = min(monthlyTemperatures);
-		year.max = max(monthlyTemperatures);
+		
+		var monthlyTemperatures = months().map(month => year[month]).filter(Number);		
+		// console.log(row)
+		year.min = Math.min.apply(null, monthlyTemperatures);
+		year.max = Math.max.apply(null, monthlyTemperatures);
 		year.count = monthlyTemperatures.length;
 
 		if (year.count > 0) {

@@ -116,8 +116,8 @@ Highcharts.setOptions({
 });
 
 var renderTemperatureGraphZonal = function (temperatures, id, title, src='') {
-	console.log(title);
-	console.log(temperatures);
+	// console.log(title);
+	// console.log(temperatures);
 	var chart = Highcharts.chart(id, {
 		chart: {
 			type: 'line',
