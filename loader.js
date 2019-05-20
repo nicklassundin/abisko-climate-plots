@@ -4,11 +4,11 @@
 /*****************************/
 
 // TODO cached parsing and generalization
-var containerRender = (renderF, id, title) => function(data){
-	renderF(data, id, title);
+var containerRender = (renderF, id, title, src) => function(data){
+	renderF(data, id, title, src);
 }
 
-var functorGISSTEMP = (file, renderF) => function(id, title){
+var functorGISSTEMP = (file, renderF, src='') => function(id, title){
 	Papa.parse(file, {
 		worker: useWebWorker,
 		header: true,
@@ -18,17 +18,17 @@ var functorGISSTEMP = (file, renderF) => function(id, title){
 		dynamicTyping: true,
 		comments: 'Station',
 		complete: function (result) {
-			var data = parseGISSTEMP(result);
+			var data = parseGISSTEMP(result, src);
 			renderF(data, id, title);
 		},
 	});
 };
 
-var parseZonal = (file) => function (renderF, tag) {
+var parseZonal = (file, src='') => function (renderF, tag) {
 	var complete = (result) => {
 		// console.log(tag);
 		// console.log(result)
-		var temperatures = parseGISSTEMPzonalMeans(result);
+		var temperatures = parseGISSTEMPzonalMeans(result, src);
 		if(Array.isArray(renderF)){
 			renderF.forEach(each(temperatures[tag]));
 		}else{
@@ -70,13 +70,13 @@ var parseZonal = (file) => function (renderF, tag) {
 // 	return complete;
 // };
 //
-var parseAbisko = function () {
+var parseAbisko = function (file='data/ANS_Temp_Prec_1913-2017.csv', src='') {
 	var cached;
 
 	var complete = (result) => {
 		if (cached) result = cached;
 		else cached = result;
-		var data = parseAbiskoCsv(result);
+		var data = parseAbiskoCsv(result, src);
 		var summerRange = monthName(summerMonths[0]) + ' to ' + monthName(summerMonths[summerMonths.length - 1]);
 		var winterRange = monthName(winterMonths[0]) + ' to ' + monthName(winterMonths[winterMonths.length - 1]);
 		renderAbiskoTemperatureGraph(data.temperatures, 'AbiskoTemperatures', 'Abisko temperatures');
@@ -99,7 +99,7 @@ var parseAbisko = function () {
 		renderPrecipitationDifferenceGraph(data.precipitation.winterPrecipitation, 'winterPrecipitationDifference', 'Precipitation difference ' + winterRange);
 	}
 
-	Papa.parse('data/ANS_Temp_Prec_1913-2017.csv', {
+	Papa.parse(file, {
 		worker: useWebWorker,
 		header: true,
 		//delimiter: ';',
@@ -113,27 +113,27 @@ var parseAbisko = function () {
 };
 // parseAbisko();
 
-var parseTornetrask = function () {
-	Papa.parse('data/Tornetrask_islaggning_islossning.csv', {
+var parseTornetrask = function (file='data/Tornetrask_islaggning_islossning.csv', src='') {
+	Papa.parse(file, {
 		worker: useWebWorker,
 		header: true,
 		download: true,
 		skipEmptyLines: true,
 		complete: (result) => {
-			var data = parseAbiskoIceData(result);
+			var data = parseAbiskoIceData(result, src);
 			renderAbiskoIceGraph(data, 'abiskoLakeIce', 'Torneträsk - Freeze-up and break-up of lake ice vs ice time');
 		},
 	});
 };
 
-var parseSnowDepth = function () {
-	Papa.parse('data/ANS_SnowDepth_1913-2017.csv', {
+var parseSnowDepth = function (file='data/ANS_SnowDepth_1913-2017.csv', src='') {
+	Papa.parse(file, {
 		worker: useWebWorker,
 		header: true,
 		download: true,
 		skipEmptyLines: true,
 		complete: (result) => {
-			var data = parseAbiskoSnowData(result);
+			var data = parseAbiskoSnowData(result,src);
 			renderAbiskoSnowGraph(data.periodMeans, 'abiskoSnowDepthPeriodMeans', 'Monthly mean snow depth for Abisko');
 			renderAbiskoSnowGraph(data.decadeMeans, 'abiskoSnowDepthPeriodMeans2', 'Monthly mean snow depth for Abisko');
 		},

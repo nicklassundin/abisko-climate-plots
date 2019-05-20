@@ -29,7 +29,9 @@ var ICE_TIME_MVNG_AVG = ["Ice time (moving average)", "Ice time (moving average)
 /*****************/
 
 Highcharts.setOptions({
+	dataSrc: '',
 	lang:{
+		dataCredit: 'Data source',
 		showDataTable: 'Show/hide data',
 		langOption: 'Svenska',
 		shortMonths: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
@@ -40,6 +42,7 @@ Highcharts.setOptions({
 		yearlyAvg: 'Yearly average',
 	},
 	otherLang:{
+		dataCredit: 'Data källa',
 		showDataTable: 'Visa/göm data',
 		langOption: 'English',
 		shortMonths: ['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec'],
@@ -98,20 +101,29 @@ Highcharts.setOptions({
 						});
 						// TODO toggle between 'Show data' and 'Hide data'
 					},
+				},{
+					textKey: 'dataCredit',
+					onclick: function(){
+						if(this.options.dataSrc){
+							window.location.href = this.options.dataSrc // TODO link to exact dataset with entry in data to href
+
+						}
+					},
 				}],
 			},
 		},
 	},
 });
 
-var renderTemperatureGraphZonal = function (temperatures, id, title) {
-	// console.log(title);
-	// console.log(temperatures);
+var renderTemperatureGraphZonal = function (temperatures, id, title, src='') {
+	console.log(title);
+	console.log(temperatures);
 	var chart = Highcharts.chart(id, {
 		chart: {
 			type: 'line',
 			zoomType: 'xy',
 		},
+		dataSrc: temperatures.src,
 		title: {
 			text: title,
 		},
@@ -185,6 +197,7 @@ var renderTemperatureGraph = function (temperatures, id, title) {
 			type: 'line',
 			zoomType: 'xy',
 		},
+		dataSrc: temperatures.src,
 		title: {
 			text: title,
 		},
@@ -280,6 +293,7 @@ var renderAbiskoTemperatureGraph = function (temperatures, id, title) {
 			type: 'line',
 			zoomType: 'xy',
 		},
+		dataSrc: temperatures.src,
 		title: {
 			text: title,
 		},
@@ -391,6 +405,7 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
 			type: 'line',
 			zoomType: 'xy',
 		},
+		dataSrc: temperatures.src,
 		title: {
 			text: title,
 		},
@@ -489,6 +504,7 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 		chart: {
 			type: 'column'
 		},
+		dataSrc: temperatures.src,
 		// rangeSelector: {
 		// selected: 2
 		// },
@@ -592,6 +608,7 @@ var renderGrowingSeasonGraph = function (season, id) {
 			type: 'line',
 			zoomType: 'xy',
 		},
+		dataSrc: season.src,
 		title: {
 			text: 'Growing season',
 		},
@@ -668,6 +685,7 @@ var renderPrecipitationDifferenceGraph = function (precipitation, id, title) {
 		chart: {
 			type: 'column'
 		},
+		dataSrc: precipitation.src,
 		title: {
 			text: title,
 		},
@@ -764,6 +782,7 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 		chart: {
 			type: 'line'
 		},
+		dataSrc: precipitation.src,
 		title: {
 			text: title,
 		},
@@ -886,6 +905,7 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
 		chart: {
 			type: 'line'
 		},
+		dataSrc: precipitation.src,
 		title: {
 			text: title,
 		},
@@ -1050,6 +1070,7 @@ var renderAbiskoIceGraph = function (ice, id, title) {
 		chart: {
 			type: 'line'
 		},
+		dataSrc: ice.src,
 		title: {
 			text: title,
 		},
@@ -1183,6 +1204,7 @@ var renderAbiskoSnowGraph = function (snow, id, title) {
 		chart: {
 			type: 'line'
 		},
+		dataSrc: snow.src,
 		title: {
 			text: title,
 		},
@@ -1216,6 +1238,7 @@ var renderZoomableGraph = function(data, id, title){
 		chart: {
 			zoomType: 'x'
 		},
+		dataSrc: data.src,
 		title: {
 			text: title + ' [DUMMY/START]',
 		},

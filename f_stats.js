@@ -3,7 +3,7 @@
 /* DATA TRANSFORMATIONS AND STATISTICS */
 /***************************************/
 
-var parseGISSTEMP = function (result) {
+var parseGISSTEMP = function (result, src='') {
 	var fields = result.meta.fields;
 	var temperatures = [];
 	
@@ -59,14 +59,15 @@ var parseGISSTEMP = function (result) {
 		movingAverages(temperatures.ci.map(each => each[bound]), 10)
 			.forEach((value, index) => temperatures.ciMovAvg[index][bound] = value);
 	});
-
+	temperatures.src = src;
 	temperatures.ci = temperatures.ci.slice(10);
 	temperatures.ciMovAvg = temperatures.ciMovAvg.slice(10);
 	return temperatures;
 };
 
-var parseGISSTEMPzonalMeans = function (result) {
+var parseGISSTEMPzonalMeans = function (result, src='') {
 	// console.log(result)
+	// console.log(src)
 	var fields = result.meta.fields;
 	var temperatures = [];
 	temperatures['sum64n-90n'] = 0;
@@ -128,12 +129,16 @@ var parseGISSTEMPzonalMeans = function (result) {
 		movAvg: movAvg.slice(10),
 		// ciMovAvg: yearciMovAvg,
 	};
-	// console.log(temperatures.yrlyAvg)
+	temperatures.yrly.src = src;
+	temperatures['64n-90n'].src = src;
+	temperatures['nhem'].src = src; 
+	temperatures['glob'].src = src; 
+	// console.log(temperatures)
 	return temperatures;
 };
 
 // 1-15
-var parseAbiskoCsv = function (result) {
+var parseAbiskoCsv = function (result, src='') {
 	var rows = result.data;
 
 	var fields = {
@@ -667,7 +672,9 @@ var parseAbiskoCsv = function (result) {
 	
 	
 	return {
+		src: src,
 		temperatures: {
+			src: src,
 			years,
 			avg: yearly('avg').slice(10),
 			min: yearly('min').slice(10),
@@ -687,12 +694,14 @@ var parseAbiskoCsv = function (result) {
 			})),
 		},
 		growingSeason: {
+			src: src,
 			weeks: grwthSeason.weeks.slice(10),
 			movAvg: grwthSeason.movAvg,
 			ci: grwthSeason.ci.slice(10),
 			ciMovAvg: grwthSeason.ciMovAvg.slice(10),
 		},
 		precipitation: {
+			src: src,
 			yearlyPrecipitation: {
 				years: years.slice(10),
 				total: yearly('precip').slice(10),
@@ -716,7 +725,7 @@ var parseAbiskoCsv = function (result) {
 	};
 };
 
-var parseAbiskoIceData = function (result) {
+var parseAbiskoIceData = function (result, src='') {
 	var fields = result.meta.fields;
 	var data = result.data;
 
@@ -808,6 +817,7 @@ var parseAbiskoIceData = function (result) {
 	// console.log(data);
 	// console.log(freeze);
 	return {
+		src: src,
 		yearMax,
 		breakup,
 		freeze,
@@ -833,7 +843,7 @@ var parseAbiskoIceData = function (result) {
 	};
 };
 
-var parseAbiskoSnowData = function (result) {
+var parseAbiskoSnowData = function (result, src='') {
 	var data = result.data;
 	var fields = result.meta.fields;
 
@@ -912,8 +922,8 @@ var parseAbiskoSnowData = function (result) {
 
 	calculateMeans(periods, periodMeans);
 	calculateMeans(decades, decadeMeans);
-
 	return {
+		src: src,
 		periodMeans,
 		decadeMeans,
 	};
