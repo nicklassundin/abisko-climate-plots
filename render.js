@@ -217,8 +217,8 @@ var renderTemperatureGraphZonal = function (temperatures, id, title, src='') {
 }
 
 var renderTemperatureGraph = function (temperatures, id, title) {
-	// console.log(title);
-	// console.log(temperatures)
+	console.log(title);
+	console.log(temperatures)
 	var chart = Highcharts.chart(id, {
 		chart: {
 			type: 'line',
@@ -260,7 +260,8 @@ var renderTemperatureGraph = function (temperatures, id, title) {
 			states: { hover: { lineWidthPlus: 0 } },
 			color: '#ff0000',
 			data: temperatures.max,
-			visible: false,
+			visible: !(typeof temperatures.min === 'undefined'),
+			showInLegend: !(typeof temperatures.min === 'undefined'),
 		}, {
 			name: MIN[l],
 			lineWidth: 0,
@@ -268,7 +269,8 @@ var renderTemperatureGraph = function (temperatures, id, title) {
 			states: { hover: { lineWidthPlus: 0 } },
 			color: '#0000ff',
 			data: temperatures.min,
-			visible: false,
+			visible: !(typeof temperatures.min === 'undefined'),
+			showInLegend: !(typeof temperatures.min === 'undefined'),
 		},{
 			name: YRL_CNF_INT[l],
 			type: 'arearange',

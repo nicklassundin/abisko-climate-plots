@@ -122,12 +122,23 @@ var parseGISSTEMPzonalMeans = function (result, src='') {
 			y: avg,
 		}))
 	var yearVar = variance(yrlyAvg.map(each => each.y));
-	var yearCI = yrlyAvg.map(each => confidenceInterval(each.y, yearVar, yrlyAvg.length));
-	
+	var yearCI = yrlyAvg.map(each => ({
+		x: each.x, 
+		ci: confidenceInterval(each.y, yearVar, yrlyAvg.length),
+	})).map(each => ({
+		x: each.x,
+		low: each.ci.low,
+		high: each.ci.high,
+	}))
+	var yearCIMovAvg = yearCI.map(each => ({ x: each.x }));
+		['low', 'high'].forEach(bound =>
+			movingAverages(yearCI.map(each => each[bound]), 10)
+			.forEach((value, index) => yearCIMovAvg[index][bound] = value));
 	temperatures.yrly = {
 		avg: yrlyAvg.slice(10),
 		movAvg: movAvg.slice(10),
-		// ciMovAvg: yearciMovAvg,
+		ciMovAvg: yearCIMovAvg.slice(10),
+		ci: yearCI.slice(10),
 	};
 	temperatures.yrly.src = src;
 	temperatures['64n-90n'].src = src;
