@@ -70,6 +70,29 @@ var parseZonal = (file, src='') => function (renderF, tag) {
 // 	return complete;
 // };
 //
+var parseAbiskoGen = (file, src='') => function (renderF, tag) {
+	var complete = (result) => {
+		// console.log(tag);
+		// console.log(result)
+		var temperatures = parseAbiskoCsv(result, src);
+		// console.log(temperatures)
+		if(Array.isArray(renderF)){
+			renderF.forEach(each(temperatures[tag]));
+		}else{
+			renderF(temperatures[tag]);
+		}
+	}
+	Papa.parse(file, {
+		worker: useWebWorker,
+		header: true,
+		//delimiter: ';',
+		download: true,
+		skipEmptyLines: true,
+		dynamicTyping: false,
+		complete,
+	});
+	return complete;
+};
 var parseAbisko = function (file='data/ANS_Temp_Prec_1913-2017.csv', src='') {
 	var cached;
 

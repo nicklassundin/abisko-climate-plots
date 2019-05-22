@@ -139,6 +139,7 @@ var parseGISSTEMPzonalMeans = function (result, src='') {
 
 // 1-15
 var parseAbiskoCsv = function (result, src='') {
+	// console.log(result)
 	var rows = result.data;
 
 	var fields = {
@@ -148,12 +149,15 @@ var parseAbiskoCsv = function (result, src='') {
 		max: result.meta.fields[3],
 		precip: result.meta.fields[4],
 	};
-
 	var data = {};
-	// var allTemperatures = [];
+	var days = [];
 	rows.forEach((row) => {
 		var date = parseDate(row[fields.time]);
 		var avg = parseNumber(row[fields.avg]);
+		if(avg)days.push({
+			x: Date.UTC(date.year,date.month-1, date.day),
+			y: avg,
+		})
 		var precip = parseNumber(row[fields.precip]);
 		var year = data[date.year] = data[date.year] || {
 			sum: 0,
@@ -258,19 +262,19 @@ var parseAbiskoCsv = function (result, src='') {
 				if (isSummerMonthByIndex(month)) {
 					summerTemperatures.sum.push(each.avg);
 					summerTemperatures.count++;
-					summerTemperatures.min = Math.min(summerTemperatures.min, each.avg);
-					summerTemperatures.max = Math.max(summerTemperatures.max, each.avg);
+					if(each.min) summerTemperatures.min = Math.min(summerTemperatures.min, each.min);
+					if(each.max) summerTemperatures.max = Math.max(summerTemperatures.max, each.max);
 				} else if (isWinterMonthByIndex(month)) {
 					winterTemperatures.sum.push(each.avg);
 					winterTemperatures.count++;
-					winterTemperatures.min = Math.min(winterTemperatures.min, each.avg);
-					winterTemperatures.max = Math.max(winterTemperatures.max, each.avg);
+					if(each.min) winterTemperatures.min = Math.min(winterTemperatures.min, each.min);
+					if(each.max) winterTemperatures.max = Math.max(winterTemperatures.max, each.max);
 
 				}
 				t.sum.push(each.avg);
 				t.count++;
-				t.min = Math.min(t.min, each.avg);
-				t.max = Math.max(t.max, each.avg);
+				if(each.min) t.min = Math.min(t.min, each.min);
+				if(each.max) t.max = Math.max(t.max, each.max);
 			}
 			if (each.precip) {
 				if (isSummerMonthByIndex(month)) {
@@ -673,6 +677,7 @@ var parseAbiskoCsv = function (result, src='') {
 	
 	return {
 		src: src,
+		'days': days,
 		temperatures: {
 			src: src,
 			years,

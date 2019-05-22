@@ -5,8 +5,8 @@ var LANG = ['Svenska','English'];
 // legend label constants
 var MAX = ["Max", "Max"];
 var MIN = ["Min","Min"];
-var YRL_AVG = ["Yearly average", "Årligt genomsnitt"];
-var MNTH_AVG = ["Monthly average", "Månatlig genomsnitt"];
+// var YRL_AVG = ["Yearly average", "Årligt genomsnitt"];
+// var MNTH_AVG = ["Monthly average", "Månatlig genomsnitt"];
 var YRL_CNF_INT = ["Confidence interval (yearly avg.)", "Konfidence interval (Årligt genomsnitt)"];
 var WK = ["Weeks","veckor"];
 var MVNG_AVG = ["Moving average", "Rörligt genomsnitt"];
@@ -40,6 +40,20 @@ Highcharts.setOptions({
 		downloadSVG: 'Download as SVG',
 		months: ['January','February','March','April','May','June','July','August','September','October','November','December'],
 		yearlyAvg: 'Yearly average',
+		monthlyAvg: 'Monthly average',
+		min: 'Min',
+		max: 'Max',
+		weeks: 'weeks',
+		yearlyCI: 'Confidence interval (yearly avg.)',
+		movAvg: 'Moving average',
+		movAvgCI: 'Confidence interval (moving avg.)',
+		precSnow: 'Precipitation from snow',
+		precRain: 'Precipitation from rain',
+		precAvg: 'Total average precipitation',
+		freezeup: 'Freeze-up',
+		breakup: 'Break-up',
+		iceTime: 'Ice time',
+		iceTimeMovAvg: 'Ice time (moving avg.)',
 	},
 	otherLang:{
 		dataCredit: 'Data källa',
@@ -53,7 +67,19 @@ Highcharts.setOptions({
 		resetZoom: 'Återställ zoom',
 		printChart: 'Skriv ut',
 		months: ['Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'],
-		yearlyAvg: 'Årligt genomsnitt',
+		yearlyAvg: 'Årligt medelvärde',
+		mnonthlyAvg: 'Månligt medelvärde',
+		weeks: 'veckor',
+		yearlyCI: 'Konfidence interval (rörligt medelvärde)',
+		movAvg: 'Rörligt medelvärde',
+		movAvgCI: 'Konfidence interval (rörligt medelvärde)',
+		precSnow: 'Utfällning från snö',
+		precRain: 'Utfällning från regn',
+		precAvg: 'Total genomsnittlig utfällning',
+		freezeup: 'Isläggning',
+		breakup: 'Islossning',
+		iceTime: 'Is tid',
+		iceTimeMovAvg: 'Is tid (rörligt medelvärde)',
 	},
 	exporting: {
 		// showTable: true, // TODO DATA TABLE
@@ -123,6 +149,7 @@ var renderTemperatureGraphZonal = function (temperatures, id, title, src='') {
 			type: 'line',
 			zoomType: 'xy',
 		},
+		lengend: { useHTML: true, },
 		dataSrc: temperatures.src,
 		title: {
 			text: title,
@@ -154,7 +181,7 @@ var renderTemperatureGraphZonal = function (temperatures, id, title, src='') {
 		},
 		series: [{
 			regression: true,
-			name: 'Yearly averages',
+			name: 'Yearly average',
 			marker: {radius: 2},
 			states: {hover: { lineWidthPlus: 0 }},
 			lineWidth: 0,
@@ -172,18 +199,18 @@ var renderTemperatureGraphZonal = function (temperatures, id, title, src='') {
 			data: temperatures.movAvg,
 
 		},
-		// 	{
-		// 	name: YRL_CNF_INT[l],
-		// 	type: 'arearange',
-		// 	color: '#888888',
-		// 	data: temperatures.ciMovAvg,
-		// 	zIndex: 0,
-		// 	fillOpacity: 0.3,
-		// 	lineWidth: 0,
-		// 	states: { hover: { lineWidthPlus: 0 } },
-		// 	marker: { enabled: false },
-		// 	visible: false,
-		// }
+			// 	{
+			// 	name: YRL_CNF_INT[l],
+			// 	type: 'arearange',
+			// 	color: '#888888',
+			// 	data: temperatures.ciMovAvg,
+			// 	zIndex: 0,
+			// 	fillOpacity: 0.3,
+			// 	lineWidth: 0,
+			// 	states: { hover: { lineWidthPlus: 0 } },
+			// 	marker: { enabled: false },
+			// 	visible: false,
+			// }
 		]
 
 	});
@@ -435,7 +462,7 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
 			valueDecimals: 2,
 		},
 		series: [{
-			name: MAX[l],
+			name: this.Highcharts.getOptions().lang.max,
 			lineWidth: 0,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
@@ -443,7 +470,7 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
 			data: temperatures.max,
 			visible: false,
 		}, {
-			name: MIN[l],
+			name: this.Highcharts.getOptions().lang.min,
 			lineWidth: 0,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
@@ -457,7 +484,7 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
 				color: '#aaaaaa',
 				name: 'linear regression',
 			},
-			name: MNTH_AVG[l],
+			name: this.Highcharts.getOptions().lang.monthlyAvg,
 			lineWidth: 0,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
@@ -1233,12 +1260,13 @@ var renderAbiskoSnowGraph = function (snow, id, title) {
 
 
 var renderZoomableGraph = function(data, id, title){
+	// console.log(title)
 	// console.log(data);
 	Highcharts.chart(id, {
 		chart: {
 			zoomType: 'x'
 		},
-		dataSrc: data.src,
+		// dataSrc: data.src,
 		title: {
 			text: title + ' [DUMMY/START]',
 		},
@@ -1247,8 +1275,13 @@ var renderZoomableGraph = function(data, id, title){
 			'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
 		},
 		xAxis: {
+			type: 'datetime',
+			dateTimeLabelFormats: { // don't display the dummy year
+				month: '%e. %b',
+				year: '%b'
+			},
 			title: {
-				text: 'Years'
+				text: 'Date'
 			}
 		},
 		yAxis: {
@@ -1287,9 +1320,9 @@ var renderZoomableGraph = function(data, id, title){
 		},
 
 		series: [{
-			type: 'area',
+			type: 'line',
 			name: 'Average',
-			data: data.avg,
+			data: data,
 		}]
 	});
 }
