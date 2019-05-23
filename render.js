@@ -22,6 +22,32 @@ var BRK = ["Break-up", "Break-up"];
 var ICE_TIME = ["Ice time", "Ice time"];
 var ICE_TIME_MVNG_AVG = ["Ice time (moving average)", "Ice time (moving average)"];
 
+var preSetMeta = {
+	'abiskoTemp': {
+		src: 'https://www.arcticcirc.net/',
+		vis: {
+			movAvgCI: false,
+			max: false,
+			min: false,
+		},
+		color: {
+			yrlyReg: '#888888',	
+		},
+	},
+	'default': {
+		src: undefined,
+		vis: {
+			movAvgCI: true,
+			max: true,
+			min: true,
+		},
+		color: {
+			yrlyReg: '#4444ff',
+		},
+
+	}
+}
+
 // Localization
 
 /*****************/
@@ -141,16 +167,17 @@ Highcharts.setOptions({
 	},
 });
 
-var renderTemperatureGraphZonal = function (temperatures, id, title, src='') {
+
+var renderTemperatureGraph = function (data, id, title) {
 	// console.log(title);
-	// console.log(temperatures);
+	// console.log(data)
+	var meta = data.meta;
 	var chart = Highcharts.chart(id, {
 		chart: {
 			type: 'line',
 			zoomType: 'xy',
 		},
-		lengend: { useHTML: true, },
-		dataSrc: temperatures.src,
+		dataSrc: meta.src,
 		title: {
 			text: title,
 		},
@@ -169,82 +196,8 @@ var renderTemperatureGraphZonal = function (temperatures, id, title, src='') {
 				color: 'rgb(204, 214, 235)',
 				width: 2,
 			}],
-			max: 2,
-			min: -3,
-			tickInterval: 1,
-			lineWidth: 1,
-		},
-		tooltip: {
-			shared: true,
-			valueSuffix: ' °C',
-			valueDecimals: 2,
-		},
-		series: [{
-			regression: true,
-			name: 'Yearly average',
-			marker: {radius: 2},
-			states: {hover: { lineWidthPlus: 0 }},
-			lineWidth: 0,
-			color: '#888888',
-			regressionSettings: {
-				type: 'linear',
-				color: '#4444ff',
-				name: 'Linear regression',
-			},
-			data: temperatures.avg,
-		},{
-			name: 'Moving Averages',
-			color: '#888888',
-			marker: { enabled: false },
-			data: temperatures.movAvg,
-
-		},
-			// 	{
-			// 	name: YRL_CNF_INT[l],
-			// 	type: 'arearange',
-			// 	color: '#888888',
-			// 	data: temperatures.ciMovAvg,
-			// 	zIndex: 0,
-			// 	fillOpacity: 0.3,
-			// 	lineWidth: 0,
-			// 	states: { hover: { lineWidthPlus: 0 } },
-			// 	marker: { enabled: false },
-			// 	visible: false,
-			// }
-		]
-
-	});
-}
-
-var renderTemperatureGraph = function (temperatures, id, title) {
-	console.log(title);
-	console.log(temperatures)
-	var chart = Highcharts.chart(id, {
-		chart: {
-			type: 'line',
-			zoomType: 'xy',
-		},
-		dataSrc: temperatures.src,
-		title: {
-			text: title,
-		},
-		xAxis: {
-			title: {
-				text: 'Year',
-			},
-			crosshair: true,
-		},
-		yAxis: {
-			title: {
-				text: 'Temperature [°C]'
-			},
-			plotLines: [{
-				value: 0,
-				color: 'rgb(204, 214, 235)',
-				width: 2,
-			}],
-			max: 2,
-			min: -3,
+			// max: 2,
+			// min: -3,
 			tickInterval: 1,
 			lineWidth: 1,
 		},
@@ -259,23 +212,23 @@ var renderTemperatureGraph = function (temperatures, id, title) {
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
 			color: '#ff0000',
-			data: temperatures.max,
-			visible: !(typeof temperatures.min === 'undefined'),
-			showInLegend: !(typeof temperatures.min === 'undefined'),
+			data: data.max,
+			visible: meta.vis.max,
+			showInLegend: !(typeof data.min === 'undefined'),
 		}, {
 			name: MIN[l],
 			lineWidth: 0,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
 			color: '#0000ff',
-			data: temperatures.min,
-			visible: !(typeof temperatures.min === 'undefined'),
-			showInLegend: !(typeof temperatures.min === 'undefined'),
+			data: data.min,
+			visible: meta.vis.min, 
+			showInLegend: !(typeof data.min === 'undefined'),
 		},{
 			name: YRL_CNF_INT[l],
 			type: 'arearange',
 			color: '#888888',
-			data: temperatures.ci,
+			data: data.ci,
 			zIndex: 0,
 			fillOpacity: 0.3,
 			lineWidth: 0,
@@ -286,145 +239,38 @@ var renderTemperatureGraph = function (temperatures, id, title) {
 			name: MVNG_AVG[l],
 			color: '#888888',
 			marker: { enabled: false },
-			data: temperatures.movAvg,
+			data: data.movAvg,
 		}, {
 			name: MVNG_AVG_CNF_INT[l],
 			type: 'arearange',
 			color: '#7777ff',
-			data: temperatures.ciMovAvg,
+			data: data.ciMovAvg,
 			zIndex: 0,
 			fillOpacity: 0.3,
 			lineWidth: 0,
 			states: { hover: { lineWidthPlus: 0 } },
 			marker: { enabled: false },
-		},
-			{
-				regression: true,
-				name: 'Yearly averages',
-				marker: {radius: 2},
-				states: {hover: { lineWidthPlus: 0 }},
-				lineWidth: 0,
-				color: '#888888',
-				regressionSettings: {
-					type: 'linear',
-					color: '#4444ff',
-					name: 'Linear regression',
-				},
-				data: temperatures.avg,
-			}],
+			visible: meta.vis.movAvgCI
+		},{
+			name: 'Yearly averages',
+			regression: true,
+			marker: {radius: 2},
+			states: {hover: { lineWidthPlus: 0 }},
+			lineWidth: 0,
+			color: '#888888',
+			regressionSettings: {
+				type: 'linear',
+				color: meta.color.yrlyReg,
+				// color: '#4444ff',
+				// '#888888'
+				name: 'Linear regression',
+			},
+			data: data.avg,
+		}],
 	});
 };
 
-var renderAbiskoTemperatureGraph = function (temperatures, id, title) {
-	// console.log(title);
-	Highcharts.chart(id, {
-		chart: {
-			type: 'line',
-			zoomType: 'xy',
-		},
-		dataSrc: temperatures.src,
-		title: {
-			text: title,
-		},
-		xAxis: {
-			title: {
-				text: 'Year',
-			},
-			crosshair: true,
-		},
-		yAxis: {
-			title: {
-				text: 'Temperature [°C]'
-			},
-			plotLines: [{
-				value: 0,
-				color: 'rgb(204, 214, 235)',
-				width: 2,
-			}],
-			//max: 2,
-			//min: -3,
-			tickInterval: 1,
-			lineWidth: 1,
-		},
-		tooltip: {
-			shared: true,
-			valueSuffix: ' °C',
-			valueDecimals: 2,
-		},
-		series: [{
-			// regression: true,
-			// regressionSettings: {
-			// 	type: 'polynomial',
-			// 	color: '#ff0000',
-			// 	name: 'Polynomial regression (max)'
-			// },
-			name: MAX[l],
-			lineWidth: 0,
-			marker: { radius: 2 },
-			states: { hover: { lineWidthPlus: 0 } },
-			color: '#ff0000',
-			data: temperatures.max,
-			visible: false,
-		}, {
-			// regression: true,
-			// regressionSettings: {
-			// 	type: 'polynomial',
-			// 	color: '#0000ff',
-			// 	name: 'Polynomial regression (min)'
-			// },
-			name: MIN[l],
-			lineWidth: 0,
-			marker: { radius: 2 },
-			states: { hover: { lineWidthPlus: 0 } },
-			color: '#0000ff',
-			data: temperatures.min,
-			visible: false,
-		}, {
-			regression: true,
-			regressionSettings: {
-				type: 'linear',
-				color: '#888888',
-				name: 'Linear regression',
-				visible: false,
-			},
-			name: 'Yearly averages',
-			lineWidth: 0,
-			marker: { radius: 2 },
-			states: { hover: { lineWidthPlus: 0 } },
-			color: '#888888',
-			data: temperatures.avg,
-			visible: true,
-		},
-			{
-				name: YRL_CNF_INT[l],
-				type: 'arearange',
-				color: '#888888',
-				data: temperatures.ci,
-				zIndex: 0,
-				fillOpacity: 0.3,
-				lineWidth: 0,
-				states: { hover: { lineWidthPlus: 0 } },
-				marker: { enabled: false },
-				visible: false,
-			}, {
-				name: MVNG_AVG[l],
-				color: '#888888',
-				marker: { enabled: false },
-				data: temperatures.movAvg,
-			}, {
-				name: MVNG_AVG_CNF_INT[l],
-				type: 'arearange',
-				color: '#7777ff',
-				data: temperatures.ciMovAvg,
-				zIndex: 0,
-				fillOpacity: 0.3,
-				lineWidth: 0,
-				states: { hover: { lineWidthPlus: 0 } },
-				marker: { enabled: false },
-				visible: false,
-			}],
-	});
-};
+
 
 var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
 	// console.log(title);
@@ -597,37 +443,7 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 			data: temperatures.difference,
 			color: 'red',
 			negativeColor: 'blue',
-		}
-			//
-			//
-			// ,{
-			// 		name: 'Linear regression',
-			// 		type: 'line',
-			// 		visible: false,
-			// 		marker: {
-			// 			enable: false,
-			// 		},
-			// 		color: rainColor.color,
-			// 		states: {
-			// 			hober: {
-			// 				lineWidth: 0,
-			// 			},
-			// 		},
-			// 		enableMouseTracking: false,
-			//
-			// 		data: [
-			// 			{ x: temperatures.years[0], 
-			// 				y: temperatures.linear_diff(temperatures.years[0]) },
-			// 			{ x: temperatures.years[temperatures.years.length - 1],
-			// 				y: temperatures.linear_diff(temperatures.years[temperatures.years.length - 1]) }
-			// 		],
-			//
-			// 	},
-			//
-			//
-
-			//
-		],
+		}],
 	});
 };
 
@@ -908,7 +724,7 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 			id: 'linear',
 			name: 'Linear regression from all sources',
 			visible: false,
-			linkedTo: ':previous',
+			// linkedTo: ':previous',
 			marker: {
 				enabled: false, // Linear regression lines doesn't contain points
 			},

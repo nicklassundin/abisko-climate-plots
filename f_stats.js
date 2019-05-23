@@ -5,6 +5,8 @@
 
 var parseGISSTEMP = function (result, src='') {
 	var fields = result.meta.fields;
+	var meta = preSetMeta['default'];
+	meta.src = src;
 	var temperatures = [];
 	// console.log(result)
 	
@@ -59,6 +61,7 @@ var parseGISSTEMP = function (result, src='') {
 		movingAverages(temperatures.ci.map(each => each[bound]), 10)
 			.forEach((value, index) => temperatures.ciMovAvg[index][bound] = value);
 	});
+	temperatures.meta = meta;
 	temperatures.src = src;
 	temperatures.ci = temperatures.ci.slice(10);
 	temperatures.ciMovAvg = temperatures.ciMovAvg.slice(10);
@@ -135,15 +138,18 @@ var parseGISSTEMPzonalMeans = function (result, src='') {
 			movingAverages(yearCI.map(each => each[bound]), 10)
 			.forEach((value, index) => yearCIMovAvg[index][bound] = value));
 	temperatures.yrly = {
-		avg: yrlyAvg.slice(10),
-		movAvg: movAvg.slice(10),
-		ciMovAvg: yearCIMovAvg.slice(10),
-		ci: yearCI.slice(10),
+		avg: yrlyAvg.slice(43), // TODO nicer alignment with Ab charts
+		movAvg: movAvg.slice(43),
+		ciMovAvg: yearCIMovAvg.slice(43),
+		ci: yearCI.slice(43),
 	};
-	temperatures.yrly.src = src;
-	temperatures['64n-90n'].src = src;
-	temperatures['nhem'].src = src; 
-	temperatures['glob'].src = src; 
+	var meta = preSetMeta['default'];
+	meta.src = src;
+	temperatures.meta = meta;
+	temperatures.yrly.meta = meta;
+	temperatures['64n-90n'].meta = meta;
+	temperatures['nhem'].meta = meta; 
+	temperatures['glob'].meta = meta;
 	// console.log(temperatures)
 	return temperatures;
 };
@@ -152,7 +158,7 @@ var parseGISSTEMPzonalMeans = function (result, src='') {
 var parseAbiskoCsv = function (result, src='') {
 	// console.log(result)
 	var rows = result.data;
-
+	var meta = preSetMeta['abiskoTemp'];
 	var fields = {
 		time: result.meta.fields[0],
 		avg: result.meta.fields[1],
@@ -684,13 +690,14 @@ var parseAbiskoCsv = function (result, src='') {
 	['low', 'high'].forEach(bound =>
 		movingAverages(precipCI.map(each => each[bound]), 10)
 		.forEach((value, index) => precipCIMovAvg[index][bound] = value));
-	
-	
+	summerTemps.meta = meta;
+	winterTemps.meta = meta;
+
 	return {
-		src: src,
+		meta,
 		'days': days,
 		temperatures: {
-			src: src,
+			meta,
 			years,
 			avg: yearly('avg').slice(10),
 			min: yearly('min').slice(10),
@@ -717,6 +724,7 @@ var parseAbiskoCsv = function (result, src='') {
 			ciMovAvg: grwthSeason.ciMovAvg.slice(10),
 		},
 		precipitation: {
+			meta,
 			src: src,
 			yearlyPrecipitation: {
 				years: years.slice(10),

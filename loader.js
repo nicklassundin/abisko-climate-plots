@@ -9,6 +9,8 @@ var containerRender = (renderF, id, title, src) => function(data){
 }
 
 var functorGISSTEMP = (file, renderF, src='') => function(id, title){
+	// console.log(title);
+	// console.log(file)
 	Papa.parse(file, {
 		worker: useWebWorker,
 		header: true,
@@ -19,6 +21,8 @@ var functorGISSTEMP = (file, renderF, src='') => function(id, title){
 		comments: 'Station',
 		complete: function (result) {
 			var data = parseGISSTEMP(result, src);
+			// console.log(result)
+			// console.log(data)
 			renderF(data, id, title);
 		},
 	});
@@ -75,6 +79,7 @@ var parseAbiskoGen = (file, src='') => function (renderF, tag) {
 		// console.log(tag);
 		// console.log(result)
 		var temperatures = parseAbiskoCsv(result, src);
+
 		// console.log(temperatures)
 		if(Array.isArray(renderF)){
 			renderF.forEach(each(temperatures[tag]));
@@ -93,6 +98,9 @@ var parseAbiskoGen = (file, src='') => function (renderF, tag) {
 	});
 	return complete;
 };
+
+
+
 var parseAbisko = function (file='data/ANS_Temp_Prec_1913-2017.csv', src='') {
 	var cached;
 
@@ -102,7 +110,9 @@ var parseAbisko = function (file='data/ANS_Temp_Prec_1913-2017.csv', src='') {
 		var data = parseAbiskoCsv(result, src);
 		var summerRange = monthName(summerMonths[0]) + ' to ' + monthName(summerMonths[summerMonths.length - 1]);
 		var winterRange = monthName(winterMonths[0]) + ' to ' + monthName(winterMonths[winterMonths.length - 1]);
-		renderAbiskoTemperatureGraph(data.temperatures, 'AbiskoTemperatures', 'Abisko temperatures');
+		
+		renderTemperatureGraph(data.temperatures, 'AbiskoTemperatures', 'Abisko temperatures');
+		
 		renderAbiskoMonthlyTemperatureGraph(data.temperatures.summerTemps, 'AbiskoTemperaturesSummer', 'Abisko temperatures for ' + summerRange);
 		renderAbiskoMonthlyTemperatureGraph(data.temperatures.winterTemps, 'AbiskoTemperaturesWinter', 'Abisko temperatures for ' + winterRange);
 		months().forEach(month =>
