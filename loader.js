@@ -11,97 +11,97 @@ var containerRender = (renderF, id, title, src) => function(data){
 var functorGISSTEMP = (file, renderF, src='') => function(id, title){
 	// console.log(title);
 	// console.log(file)
-	Papa.parse(file, {
-		worker: useWebWorker,
-		header: true,
-		delimiter: ',',
-		download: true,
-		skipEmptyLines: true,
-		dynamicTyping: true,
-		comments: 'Station',
-		complete: function (result) {
-			var data = parseGISSTEMP(result, src);
-			// console.log(result)
-			// console.log(data)
-			renderF(data, id, title);
-		},
-	});
+	var cached;
+	var complete = (result) => {
+		var data = parseGISSTEMP(result, src)
+		cached = data;
+		renderF(data, id, title)
+	};
+	if (cached) renderF(cached, id, title)
+	else {
+
+		Papa.parse(file, {
+			worker: useWebWorker,
+			header: true,
+			delimiter: ',',
+			download: true,
+			skipEmptyLines: true,
+			dynamicTyping: true,
+			comments: 'Station',
+			complete: function (result) {
+				// console.log(title)
+				// console.log(result)
+				var data = parseGISSTEMP(result, src);
+				// console.log(data)
+				renderF(data, id, title);
+			},
+		});
+	}
 };
 
 var parseZonal = (file, src='') => function (renderF, tag) {
-	var complete = (result) => {
-		// console.log(tag);
-		// console.log(result)
-		var temperatures = parseGISSTEMPzonalMeans(result, src);
+	var complete = (data) => {
 		if(Array.isArray(renderF)){
-			renderF.forEach(each(temperatures[tag]));
+			renderF.forEach(each(data[tag]));
 		}else{
-			renderF(temperatures[tag]);
+			renderF(data[tag]);
 		}
 	}
-	Papa.parse(file, {
-		worker: useWebWorker,
-		header: true,
-		delimiter: ',',
-		download: true,
-		skipEmptyLines: true,
-		dynamicTyping: true,
-		complete, 
-	});
-	return complete;
-};
-//
-// var parseZonal = function (file) {
-// 	var cached;
-// 	var complete = (result) => {
-// 		if (cached) result = cached;
-// 		else cached = result;
-// 		var temperatures = parseGISSTEMPzonalMeans(result);
-// 		renderTemperatureDifferenceGraph(temperatures['64n-90n'], 'temperatureDifference1', 'Temperature difference for Arctic (64N-90N)');
-// 		renderTemperatureDifferenceGraph(temperatures['nhem'], 'temperatureDifference2', 'Temperature difference for Northern Hemisphere');
-// 		renderTemperatureDifferenceGraph(temperatures['glob'], 'temperatureDifference3', 'Global temperature difference');
-// 	}
-//
-// 	Papa.parse(file, {
-// 		worker: useWebWorker,
-// 		header: true,
-// 		delimiter: ',',
-// 		download: true,
-// 		skipEmptyLines: true,
-// 		dynamicTyping: true,
-// 		complete,
-// 	});
-// 	return complete;
-// };
-//
-var parseAbiskoGen = (file, src='') => function (renderF, tag) {
-	var complete = (result) => {
-		// console.log(tag);
-		// console.log(result)
-		var temperatures = parseAbiskoCsv(result, src);
-
-		// console.log(temperatures)
-		if(Array.isArray(renderF)){
-			renderF.forEach(each(temperatures[tag]));
-		}else{
-			renderF(temperatures[tag]);
-		}
+	var cached;
+	if(cached){
+		return complete(cached);
+	}else{
+		Papa.parse(file, {
+			worker: useWebWorker,
+			header: true,
+			delimiter: ',',
+			download: true,
+			skipEmptyLines: true,
+			dynamicTyping: true,
+			complete: function(result) {
+				var data = parseGISSTEMPzonalMeans(result, src);
+				var cached = data;
+				complete(data);
+			}, 
+		});
 	}
-	Papa.parse(file, {
-		worker: useWebWorker,
-		header: true,
-		//delimiter: ';',
-		download: true,
-		skipEmptyLines: true,
-		dynamicTyping: false,
-		complete,
-	});
 	return complete;
 };
 
+var parseAbiskoGen = (file, src='') => function (renderF, id, title, tag) {
+	var cached;
+	var complete = (data) => {
+		var rend = containerRender(renderF, id, title);
+
+		// console.log(data)
+		if(Array.isArray(renderF)){
+			rend.forEach(each(data[tag]));
+		}else{
+			rend(data[tag]);
+		}
+	}
+	if (cached) complete(cached)
+	else {
+
+		Papa.parse(file, {
+			worker: useWebWorker,
+			header: true,
+			//delimiter: ';',
+			download: true,
+			skipEmptyLines: true,
+			dynamicTyping: false,
+			complete: function(result){
+				var data = parseAbiskoCsv(result, src);
+				var cached = data;
+				complete(data)
+			}
+		});
+		return complete;
+	}
+};
 
 
-var parseAbisko = function (file='data/ANS_Temp_Prec_1913-2017.csv', src='') {
+var parseAbisko = function (file, src='') {
 	var cached;
 
 	var complete = (result) => {
@@ -110,26 +110,15 @@ var parseAbisko = function (file='data/ANS_Temp_Prec_1913-2017.csv', src='') {
 		var data = parseAbiskoCsv(result, src);
 		var summerRange = monthName(summerMonths[0]) + ' to ' + monthName(summerMonths[summerMonths.length - 1]);
 		var winterRange = monthName(winterMonths[0]) + ' to ' + monthName(winterMonths[winterMonths.length - 1]);
-		
-		renderTemperatureGraph(data.temperatures, 'AbiskoTemperatures', 'Abisko temperatures');
-		
-		renderAbiskoMonthlyTemperatureGraph(data.temperatures.summerTemps, 'AbiskoTemperaturesSummer', 'Abisko temperatures for ' + summerRange);
-		renderAbiskoMonthlyTemperatureGraph(data.temperatures.winterTemps, 'AbiskoTemperaturesWinter', 'Abisko temperatures for ' + winterRange);
+
 		months().forEach(month =>
-			renderAbiskoMonthlyTemperatureGraph(data.temperatures.monthlyTemps[month], 'monthlyAbiskoTemperatures_' + month, 'Abisko temperatures for ' + monthName(month)));
-		renderTemperatureDifferenceGraph(data.temperatures, 'temperatureDifferenceAbisko', 'Temperature difference for Abisko');
+			renderAbiskoMonthlyTemperatureGraph(data.monthlyTemps[month], 'monthlyAbiskoTemperatures_' + month, 'Abisko temperatures for ' + monthName(month)));
 
 		renderGrowingSeasonGraph(data.growingSeason, 'growingSeason');
 
-		renderYearlyPrecipitationGraph(data.precipitation.yearlyPrecipitation, 'yearlyPrecipitation', 'Yearly precipitation');
-		renderYearlyPrecipitationGraph(data.precipitation.summerPrecipitation, 'summerPrecipitation', 'Precipitation for ' + summerRange);
-		renderYearlyPrecipitationGraph(data.precipitation.winterPrecipitation, 'winterPrecipitation', 'Precipitation for ' + winterRange);
 		months().forEach(month =>
-			renderMonthlyPrecipitationGraph(data.precipitation.monthlyPrecipitation[month], 'monthlyPrecipitation_' + month, 'Precipitation for ' + monthName(month)));
+			renderMonthlyPrecipitationGraph(data.monthlyPrecipitation[month], 'monthlyPrecipitation_' + month, 'Precipitation for ' + monthName(month)));
 
-		renderPrecipitationDifferenceGraph(data.precipitation.yearlyPrecipitation, 'yearlyPrecipitationDifference', 'Precipitation difference');
-		renderPrecipitationDifferenceGraph(data.precipitation.summerPrecipitation, 'summerPrecipitationDifference', 'Precipitation difference ' + summerRange);
-		renderPrecipitationDifferenceGraph(data.precipitation.winterPrecipitation, 'winterPrecipitationDifference', 'Precipitation difference ' + winterRange);
 	}
 
 	Papa.parse(file, {
@@ -144,7 +133,6 @@ var parseAbisko = function (file='data/ANS_Temp_Prec_1913-2017.csv', src='') {
 
 	return complete;
 };
-// parseAbisko();
 
 var parseTornetrask = function (file='data/Tornetrask_islaggning_islossning.csv', src='') {
 	Papa.parse(file, {

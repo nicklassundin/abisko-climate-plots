@@ -9,13 +9,13 @@ var parseGISSTEMP = function (result, src='') {
 	meta.src = src;
 	var temperatures = [];
 	// console.log(result)
-	
+
 
 	result.data.forEach((row) => {
 		var year = {};
 
 		fields.forEach(field => year[field.toLowerCase()] = validNumber(row[field]));
-		
+
 		var monthlyTemperatures = months().map(month => year[month]).filter(Number);		
 		// console.log(row)
 		year.min = Math.min.apply(null, monthlyTemperatures);
@@ -30,7 +30,7 @@ var parseGISSTEMP = function (result, src='') {
 			if (year.count > 1) {
 				year.variance = variance(monthlyTemperatures);
 			}
-			
+
 			year.ci = confidenceInterval(year.avg, year.variance, year.count);
 
 			temperatures.push(year);
@@ -82,10 +82,10 @@ var parseGISSTEMPzonalMeans = function (result, src='') {
 	result.data.forEach((row) => {
 		var year = {};
 		fields.forEach(field => year[field.toLowerCase()] = validNumber(row[field]));
-			yrlyAvg.push({
-				x: year['year'],
-				y: year['64n-90n']
-			})
+		yrlyAvg.push({
+			x: year['year'],
+			y: year['64n-90n']
+		})
 		if (withinBaselinePeriod(year.year)) {
 			temperatures['sum64n-90n'] += year['64n-90n']||0.0; // TODO resolve why .00 is undefined 
 			temperatures['sumnhem'] += year['nhem']||0.0;
@@ -118,7 +118,7 @@ var parseGISSTEMPzonalMeans = function (result, src='') {
 	temperatures['64n-90n'] = linear_diff(difference('64n-90n'));
 	temperatures['nhem'] = linear_diff(difference('nhem'));
 	temperatures['glob'] = linear_diff(difference('glob'));
-	
+
 	var movAvg = movingAverages(yrlyAvg.map(temps => temps.y), 10)
 		.map((avg, index) => ({
 			x: yrlyAvg[index].x,
@@ -134,9 +134,9 @@ var parseGISSTEMPzonalMeans = function (result, src='') {
 		high: each.ci.high,
 	}))
 	var yearCIMovAvg = yearCI.map(each => ({ x: each.x }));
-		['low', 'high'].forEach(bound =>
-			movingAverages(yearCI.map(each => each[bound]), 10)
-			.forEach((value, index) => yearCIMovAvg[index][bound] = value));
+	['low', 'high'].forEach(bound =>
+		movingAverages(yearCI.map(each => each[bound]), 10)
+		.forEach((value, index) => yearCIMovAvg[index][bound] = value));
 	temperatures.yrly = {
 		avg: yrlyAvg.slice(43), // TODO nicer alignment with Ab charts
 		movAvg: movAvg.slice(43),
@@ -340,8 +340,8 @@ var parseAbiskoCsv = function (result, src='') {
 			low: winterPrecCI['low'],
 			high: winterPrecCI['high'],
 		};
-		
-			
+
+
 		year.monthlyPrecipitation = monthlyPrecipitation.map(month => ({
 			total: month.total.reduce((a,b) => a+b),
 			rain: month.rain,
@@ -359,8 +359,8 @@ var parseAbiskoCsv = function (result, src='') {
 
 		// yearly precipitation
 		year.precipCI = confidenceInterval(year.precip, year.monthlyPrecipitation.map(each => each.variance).reduce((a,b)=>a+b), year.monthlyPrecipitation.length);
-		
-		
+
+
 		//
 		////
 
@@ -414,7 +414,7 @@ var parseAbiskoCsv = function (result, src='') {
 			high: winterTempsCI['high'],
 		};
 
-		
+
 		// year.monthlyPrecipitation = monthlyPrecipitation;
 		// year.summerPrecipitation = summerPrecipitation;
 		// year.winterPrecipitation = winterPrecipitation;
@@ -437,7 +437,7 @@ var parseAbiskoCsv = function (result, src='') {
 			year.variance = variance(year.monthlyTemperatures.map(m => m.avg));
 			year.ci = confidenceInterval(year.avg, year.variance, year.monthlyTemperatures.length);
 		}
-		
+
 
 	});
 
@@ -478,7 +478,7 @@ var parseAbiskoCsv = function (result, src='') {
 		p.linear_rain_movAvg = linearRegression(p.years, p.rain_movAvg.map(each => each.y));
 		p.linear_rain = linearRegression(p.years, p.rain.map(each => each.y));
 		p.rain = p.rain.slice(10);
-		
+
 		// in pregress
 		p.variance = monthlyPrecipByStat(index, 'variance');
 		p.ci = monthlyPrecipByStat(index, 'ci');
@@ -565,7 +565,7 @@ var parseAbiskoCsv = function (result, src='') {
 
 	summerTemps.avg = summerTemps.avg.slice(10);
 	winterTemps.avg = winterTemps.avg.slice(10);
-	
+
 	// Inserts x: year for all seasons
 	var seasonalPrecipByStat = (season, statistic) => entries().map(each => ({
 		x: +each[0],
@@ -583,9 +583,9 @@ var parseAbiskoCsv = function (result, src='') {
 		p.ci = seasonalPrecipByStat(e.season, 'ci').map(each => each.y);
 		p.ciMovAvg = p.ci.map(each => ({ x: each.x }));
 		['low', 'high'].forEach(bound =>
-		movingAverages(p.ci.map(each => each[bound]), 10)
-		.forEach((value, index) => p.ciMovAvg[index][bound] = value));
-		
+			movingAverages(p.ci.map(each => each[bound]), 10)
+			.forEach((value, index) => p.ciMovAvg[index][bound] = value));
+
 		p.ci = p.ci.slice(10);
 		p.ciMovAvg = p.ciMovAvg.slice(10);
 		// TODO fix missing 10 data points
@@ -680,7 +680,7 @@ var parseAbiskoCsv = function (result, src='') {
 	// console.log(monthlyTemps);
 	// console.log(ci);
 	//
-	
+
 	var precipCI = yearly('precipCI').map(each => ({
 		x: each.x,
 		low: each.y.low,
@@ -707,15 +707,16 @@ var parseAbiskoCsv = function (result, src='') {
 			ciMovAvg: ciMovAvg.slice(10),
 
 
-			monthlyTemps,
-			summerTemps,
-			winterTemps,
 
 			difference: yearly('avg').map(each => ({
 				x: each.x,
 				y: each.y - (temperatureBaseline.sum / temperatureBaseline.count),
 			})),
 		},
+		monthlyTemps,
+		summerTemps,
+		winterTemps,
+
 		growingSeason: {
 			src: src,
 			weeks: grwthSeason.weeks.slice(10),
@@ -723,29 +724,25 @@ var parseAbiskoCsv = function (result, src='') {
 			ci: grwthSeason.ci.slice(10),
 			ciMovAvg: grwthSeason.ciMovAvg.slice(10),
 		},
-		precipitation: {
-			meta,
-			src: src,
-			yearlyPrecipitation: {
-				years: years.slice(10),
-				total: yearly('precip').slice(10),
-				snow: yearly('precip_snow').slice(10),
-				// snow_movAvg: precipMovAvg_snow, // TODO
-				linear_snow: linearRegression(years.slice(10), yearly('precip_snow').map(each => each.y)),
-				rain: yearly('precip_rain').slice(10),
-				// rain_movAvg:  precipMovAvg_rain,// TODO
-				movAvg: precipMovAvg,
-				linear_rain: linearRegression(years.slice(10), yearly('precip_rain').map(each => each.y)),
-				linear: linearRegression(years.slice(10), yearly('precip').map(each => each.y)),
-				difference: yrly_diff.slice(10),
-				linear_diff: linearRegression(years.slice(10), yrly_diff.map(each => each.y)),
-				ci: precipCI.slice(10),
-				ciMovAvg: precipCIMovAvg.slice(10),
-			},
-			monthlyPrecipitation,
-			summerPrecipitation: seasonalPrecipitation.summerPrecipitation,
-			winterPrecipitation: seasonalPrecipitation.winterPrecipitation,
-		}
+		yearlyPrecipitation: {
+			years: years.slice(10),
+			total: yearly('precip').slice(10),
+			snow: yearly('precip_snow').slice(10),
+			// snow_movAvg: precipMovAvg_snow, // TODO
+			linear_snow: linearRegression(years.slice(10), yearly('precip_snow').map(each => each.y)),
+			rain: yearly('precip_rain').slice(10),
+			// rain_movAvg:  precipMovAvg_rain,// TODO
+			movAvg: precipMovAvg,
+			linear_rain: linearRegression(years.slice(10), yearly('precip_rain').map(each => each.y)),
+			linear: linearRegression(years.slice(10), yearly('precip').map(each => each.y)),
+			difference: yrly_diff.slice(10),
+			linear_diff: linearRegression(years.slice(10), yrly_diff.map(each => each.y)),
+			ci: precipCI.slice(10),
+			ciMovAvg: precipCIMovAvg.slice(10),
+		},
+		monthlyPrecipitation,
+		summerPrecipitation: seasonalPrecipitation.summerPrecipitation,
+		winterPrecipitation: seasonalPrecipitation.winterPrecipitation,
 	};
 };
 
@@ -830,7 +827,7 @@ var parseAbiskoIceData = function (result, src='') {
 
 	// equal weighted confidence interval
 	var equal_weight = confidenceInterval_EQ_ND(iceTime, 10)	
-	
+
 	var iceTimeMovAvg = equal_weight.movAvg;
 	var iceTimeMovAvgVar = equal_weight.movAvgVar;
 	var iceTimeCIMovAvg = equal_weight.ciMovAvg;

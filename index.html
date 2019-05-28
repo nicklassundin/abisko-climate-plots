@@ -285,35 +285,48 @@
 			<div id="abiskoLakeIce" style="height: 450px"></div>
 			<figcaption></figcaption>
 		</figure>
-		<figure>
-			<a>44</a>
-			<div id="zoomableTemperatures" style="height: 450px"></div>
-			<figcaption></figcaption>
-		</figure>
-
+		<!-- <figure> -->
+		<!-- 	<a>44</a> -->
+		<!-- 	<div id="zoomableTemperatures" style="height: 450px"></div> -->
+		<!-- 	<figcaption></figcaption> -->
+		<!-- </figure> -->
+                <!--  -->
 		<script src="init.js"></script>
 		<script src="f_stats.js"></script>
 		<script src="render.js"></script>
 		<script src="loader.js"></script>
+		<script src="lib.js"></script>
 
 		<script type="text/javascript">
-			functorGISSTEMP('data/NH.Ts.csv',renderTemperatureGraph,'https://data.giss.nasa.gov/gistemp/')('northernHemisphere','Northern Hemisphere temperatures');
-functorGISSTEMP('data/GLB.Ts.csv',renderTemperatureGraph, 'https://data.giss.nasa.gov/gistemp/')('globalTemperatures','Global temperatures');
 
+nhTemp();
+glbTemp();
 // console.log(parseZonal_new('data/ZonAnn.Ts.csv'))
-var parseZ = parseZonal('data/ZonAnn.Ts.csv', 'https://data.giss.nasa.gov/gistemp/');
-parseZ(containerRender(renderTemperatureDifferenceGraph,'temperatureDifference1','Temperature difference for Arctic (64N-90N)'), '64n-90n');
-parseZ(containerRender(renderTemperatureDifferenceGraph,'temperatureDifference2','Temperature difference for Northern Hemisphere'),'nhem');
-parseZ(containerRender(renderTemperatureDifferenceGraph,'temperatureDifference3','Global temperature difference'), 'glob');
-parseZ(containerRender(renderTemperatureGraph,'arcticTemperatures','Arctic (64N-90N) temperatures'), 'yrly');
+var zonTemp = zonalTemp();
+zonTemp.diff.arctic();
+zonTemp.diff.nh();
+zonTemp.diff.glob();
+zonTemp.arctic();
 
+PLACEHOLDER_abisko();
+tornetrask();
 
-parseAbisko('data/ANS_Temp_Prec_1913-2017.csv','https://www.arcticcirc.net/');
-parseTornetrask('data/Tornetrask_islaggning_islossning.csv','https://www.arcticcirc.net/');
-parseSnowDepth('data/ANS_SnowDepth_1913-2017.csv','https://www.arcticcirc.net/');
-var parseAb = parseAbiskoGen('data/ANS_Temp_Prec_1913-2017.csv','https://www.arcticcirc.net/');
+abiskoSnowDepth();
 
-parseAb(containerRender(renderZoomableGraph, 'zoomableTemperatures',  '[Zoomable] Temperatures'), 'days');
+var abisko = parseAb();
+
+abisko.temps.yrly();
+abisko.temps.summer();
+abisko.temps.winter();
+abisko.temps.diff.yrly();
+abisko.percip.yrly();
+abisko.percip.summer();
+abisko.percip.winter();
+abisko.percip.diff.yrly();
+abisko.percip.diff.summer();
+abisko.percip.diff.winter();
+
+// parseAb(containerRender(renderZoomableGraph, 'zoomableTemperatures',  '[Zoomable] Temperatures'), 'days');
 		</script>
 	</body>
 

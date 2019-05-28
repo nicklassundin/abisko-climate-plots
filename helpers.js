@@ -16,6 +16,8 @@ var monthName = month => ({
 
 var summerMonths = ['jun', 'jul', 'aug', 'sep'];
 var winterMonths = ['oct', 'nov', 'dec', 'jan', 'feb', 'mar', 'apr', 'may'];
+var summerRange = monthName(summerMonths[0]) + ' to ' + monthName(summerMonths[summerMonths.length-1]);
+var winterRange = monthName(winterMonths[0]) + ' to ' + monthName(winterMonths[summerMonths.length-1]);
 
 var isSummerMonth = month => summerMonths.includes(month);
 var isWinterMonth = month => winterMonths.includes(month);
