@@ -107,8 +107,7 @@ cached(renderPrecipitationDifferenceGraph, 'winterPrecipitationDifference', 'Pre
 }
 
 var rendF = {
-	'northernHemisphere': rendF: nhTemp,
-		// div: 
+	'northernHemisphere': nhTemp,
 	'globalTemperatures': zonalTemp().globTemp,
 	'temperatuteDifference1': zonalTemp().diff.artic, 	// TODO opt
 	'temperatureDifference2': zonalTemp().diff.nh,    	// 
