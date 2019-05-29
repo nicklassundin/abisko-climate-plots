@@ -44,13 +44,10 @@ var copy = function() {
 	form.setAttribute("id","baseline");
 	document.body.appendChild(form);
 	$( "#baseline" ).load( "index.html #baseline" ); // TODO should be taken from preset in rendF
-	
-	var div = document.createElement("div");
-	div.setAttribute('id', id);
-	document.body.appendChild(div);
-	$( "#"+id ).load( "index.html #"+id );  // TODO should be taken from preset in rendF
+	var div = rendF[id].html();
+	// $( "#"+id ).load( "index.html #"+id );  // TODO should be taken from preset in rendF
 
-	rendF[id]();
+	rendF[id].func();
 
 	var input = document.createElement("input");
 	input.setAttribute('id', 'input');
