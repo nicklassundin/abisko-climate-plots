@@ -30,19 +30,38 @@
 		<script src="loader.js"></script>
 		<script src="lib.js"></script>
 		<script type="text/javascript">
-	const urlParams = new URLSearchParams(window.location.search);
+var copy = function() {
+  var copyText = document.getElementById("input");
+  copyText.select();
+  document.execCommand("copy");
+  alert("Copied the text: " + copyText.value);
+} 	
+			
+			
+			const urlParams = new URLSearchParams(window.location.search);
 	const id = urlParams.get('id');
 	var form = document.createElement("FORM");
 	form.setAttribute("id","baseline");
 	document.body.appendChild(form);
-	$( "#baseline" ).load( "index.html #baseline" );
+	$( "#baseline" ).load( "index.html #baseline" ); // TODO should be taken from preset in rendF
 	
 	var div = document.createElement("div");
 	div.setAttribute('id', id);
 	document.body.appendChild(div);
-	$( "#"+id ).load( "index.html #"+id );
+	$( "#"+id ).load( "index.html #"+id );  // TODO should be taken from preset in rendF
 
 	rendF[id]();
+
+	var input = document.createElement("input");
+	input.setAttribute('id', 'input');
+	input.setAttribute('type', 'text');
+	input.setAttribute('value', window.location)
+	document.body.appendChild(input);
+	var cp = document.createElement("button");
+	cp.innerHTML = 'Copy link';
+	cp.setAttribute('onclick', "copy()");
+	document.body.appendChild(cp);
+
 		</script>
 	</body>
 </html>
