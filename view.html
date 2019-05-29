@@ -1,0 +1,48 @@
+<!doctype html>
+<meta charset="utf-8"/>
+<html>
+
+	<head>
+		<script src="jquery.js"></script>
+
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/annotations.js"></script>
+		<script src="https://code.highcharts.com/highcharts-more.js"></script>
+		<script src="https://code.highcharts.com/modules/series-label.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+		<script src="https://code.highcharts.com/modules/export-data.js"></script>
+		<script src="https://rawgit.com/phpepe/highcharts-regression/master/highcharts-regression.js"></script> 
+
+		<script src="regression.js"></script>
+		<script src="papaparse.min.js"></script>
+		<script src="helpers.js"></script>
+		<script src="init.js"></script>
+		<style type="text/css">
+		</style>
+	</head>
+
+	<body>
+
+		<!-- <button onclick="click()">"DUMMY"</button> -->
+
+		<script src="f_stats.js"></script>
+		<script src="render.js"></script>
+		<script src="loader.js"></script>
+		<script src="lib.js"></script>
+		<script type="text/javascript">
+	const urlParams = new URLSearchParams(window.location.search);
+	const id = urlParams.get('id');
+	var form = document.createElement("FORM");
+	form.setAttribute("id","baseline");
+	document.body.appendChild(form);
+	$( "#baseline" ).load( "index.html #baseline" );
+	
+	var div = document.createElement("div");
+	div.setAttribute('id', id);
+	document.body.appendChild(div);
+	$( "#"+id ).load( "index.html #"+id );
+
+	rendF[id]();
+		</script>
+	</body>
+</html>
