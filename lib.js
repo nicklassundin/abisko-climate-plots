@@ -1,15 +1,26 @@
+// function makeDocument() {
+//   var div = document.getElementById("render");
+//   div.innerHTML = "<div id='render'></div><figcaption></figcaption><script type=text/javascript>functorGISSTEMP('data/NH.Ts.csv',renderTemperatureGraph,'https://data.giss.nasa.gov/gistemp/')('div','Northern Hemisphere temperatures');</script>";
+// }
+
 
 var nhTemp = function() {
 	functorGISSTEMP('data/NH.Ts.csv',renderTemperatureGraph,'https://data.giss.nasa.gov/gistemp/')('northernHemisphere','Northern Hemisphere temperatures');
-
 }
 var glbTemp = function(){
 	functorGISSTEMP('data/GLB.Ts.csv',renderTemperatureGraph, 'https://data.giss.nasa.gov/gistemp/')('globalTemperatures','Global temperatures');
 
 }
 
+
+var zCached = null;
 var zonalTemp = function(){
-	var cached = parseZonal('data/ZonAnn.Ts.csv', 'https://data.giss.nasa.gov/gistemp/');
+	var cached;
+	if(zCached){
+		cached = zCached;
+	}else{
+		var cached = parseZonal('data/ZonAnn.Ts.csv', 'https://data.giss.nasa.gov/gistemp/');
+	}
 	var result = {
 
 	cached, 
@@ -46,8 +57,12 @@ var abiskoSnowDepth = function() {
 	
 }
 
+
+var cached = null;
 var parseAb = function(){
-	var cached = parseAbiskoGen('data/ANS_Temp_Prec.csv','https://www.arcticcirc.net/');
+	if(!cached){
+		var cached = parseAbiskoGen('data/ANS_Temp_Prec.csv','https://www.arcticcirc.net/');
+	}
 	var result = {
 		temps: {
 			yrly: function(){
@@ -90,6 +105,32 @@ cached(renderPrecipitationDifferenceGraph, 'winterPrecipitationDifference', 'Pre
 	};
 	return result;
 }
+
+var rendF = {
+	'northernHemisphere': {
+		rendF: nhTemp,
+		// div: 
+	},
+	'globalTemperatures': zonalTemp().globTemp,
+	'temperatuteDifference1': zonalTemp().diff.artic, 	// TODO opt
+	'temperatureDifference2': zonalTemp().diff.nh,    	// 
+	'temperatureDifference3': zonalTemp().diff.glob,	//
+	'arcticTemperatures': zonalTemp().arctic, 
+	'abiskoLakeIce': tornetrask,
+	'abiskoSnowDepthMeans': abiskoSnowDepth,
+	'AbiskoTemperatures': parseAb().temps.yrly,
+	'AbiskoTemperaturesSummer': parseAb().temps.summer,
+	'AbiskoTemperaturesWinter': parseAb().temps.winter,
+	'monthlyTemperatures': PLACEHOLDER_abisko,
+	'yearlyPrecipitation': parseAb().percip.yrly,
+	'summerPrecipitation': parseAb().percip.summer,
+	'winterPrecipitation': parseAb().percip.winter,
+	'yearlyPrecipitationDifference': parseAb().percip.diff.yrly,
+	'summerPrecipitationDifference': parseAb().percip.diff.summer,
+	'winterPrecipitationDifference': parseAb().percip.diff.winter,
+	'monthlyPrecipitation': PLACEHOLDER_abisko,
+}
+
 
 // var parseAb = parseAbiskoGen('data/ANS_Temp_Prec.csv','https://www.arcticcirc.net/');
 
