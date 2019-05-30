@@ -1,5 +1,4 @@
-<!doctype html>
-<meta charset="utf-8"/>
+
 <html>
 
 	<head>
@@ -306,14 +305,12 @@
 		<script type="text/javascript">
 nhTemp();
 glbTemp();
-// console.log(parseZonal_new('data/ZonAnn.Ts.csv'))
 var zonTemp = zonalTemp();
 zonTemp.diff.arctic();
 zonTemp.diff.nh();
 zonTemp.diff.glob();
 zonTemp.arctic();
 
-PLACEHOLDER_abisko();
 tornetrask();
 
 abiskoSnowDepth();
@@ -323,13 +320,16 @@ var abisko = parseAb();
 abisko.temps.yrly();
 abisko.temps.summer();
 abisko.temps.winter();
+abisko.temps.monthly();
 abisko.temps.diff.yrly();
-abisko.percip.yrly();
-abisko.percip.summer();
-abisko.percip.winter();
-abisko.percip.diff.yrly();
-abisko.percip.diff.summer();
-abisko.percip.diff.winter();
+abisko.precip.yrly();
+abisko.precip.summer();
+abisko.precip.winter();
+abisko.precip.monthly();
+abisko.precip.diff.yrly();
+abisko.precip.diff.summer();
+abisko.precip.diff.winter();
+abisko.growingSeason();
 
 // parseAb(containerRender(renderZoomableGraph, 'zoomableTemperatures',  '[Zoomable] Temperatures'), 'days');
 		</script>

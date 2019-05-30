@@ -40,19 +40,19 @@ var copy = function() {
 			
 			const urlParams = new URLSearchParams(window.location.search);
 	const id = urlParams.get('id');
+	const debug = urlParams.get('debug');
 	var form = document.createElement("FORM");
 	form.setAttribute("id","baseline");
 	document.body.appendChild(form);
 	$( "#baseline" ).load( "index.html #baseline" ); // TODO should be taken from preset in rendF
 	var div = rendF[id].html();
 	// $( "#"+id ).load( "index.html #"+id );  // TODO should be taken from preset in rendF
-
 	rendF[id].func();
 
 	var input = document.createElement("input");
 	input.setAttribute('id', 'input');
 	input.setAttribute('type', 'text');
-	input.setAttribute('value', window.location)
+	input.setAttribute('value', window.location) // TODO ifram
 	document.body.appendChild(input);
 	var cp = document.createElement("button");
 	cp.innerHTML = 'Copy link';

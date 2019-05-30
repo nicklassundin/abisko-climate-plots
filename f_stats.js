@@ -156,6 +156,7 @@ var parseGISSTEMPzonalMeans = function (result, src='') {
 
 // 1-15
 var parseAbiskoCsv = function (result, src='') {
+	// console.log('parseAbiskoCsv')
 	// console.log(result)
 	var rows = result.data;
 	var meta = preSetMeta['abiskoTemp'];
@@ -260,7 +261,7 @@ var parseAbiskoCsv = function (result, src='') {
 		// console.log(year.growingSeason);
 
 		var monthlyTemperatures = [];
-		var monthlyPrecipitation = [];
+		var monthlyPrecip = [];
 		var summerTemperatures = { sum: [], count: 0, min: Infinity, max: -Infinity };
 		var winterTemperatures = { sum: [], count: 0, min: Infinity, max: -Infinity };
 		var summerPrecipitation = { total: [], rain: 0, snow: 0, variance: null, ci: null};
@@ -272,7 +273,7 @@ var parseAbiskoCsv = function (result, src='') {
 			var t = monthlyTemperatures[month - 1] = monthlyTemperatures[month - 1] || {
 				sum: [], count: 0, min: Infinity, max: -Infinity, temp: [],
 			};
-			var p = monthlyPrecipitation[month - 1] = monthlyPrecipitation[month - 1] || {
+			var p = monthlyPrecip[month - 1] = monthlyPrecip[month - 1] || {
 				total: [], rain: 0, snow: 0, count: 0,
 			};
 			if (each.avg) {
@@ -342,7 +343,7 @@ var parseAbiskoCsv = function (result, src='') {
 		};
 
 
-		year.monthlyPrecipitation = monthlyPrecipitation.map(month => ({
+		year.monthlyPrecip = monthlyPrecip.map(month => ({
 			total: month.total.reduce((a,b) => a+b),
 			rain: month.rain,
 			snow: month.snow,
@@ -358,7 +359,7 @@ var parseAbiskoCsv = function (result, src='') {
 		}));
 
 		// yearly precipitation
-		year.precipCI = confidenceInterval(year.precip, year.monthlyPrecipitation.map(each => each.variance).reduce((a,b)=>a+b), year.monthlyPrecipitation.length);
+		year.precipCI = confidenceInterval(year.precip, year.monthlyPrecip.map(each => each.variance).reduce((a,b)=>a+b), year.monthlyPrecip.length);
 
 
 		//
@@ -415,15 +416,12 @@ var parseAbiskoCsv = function (result, src='') {
 		};
 
 
-		// year.monthlyPrecipitation = monthlyPrecipitation;
-		// year.summerPrecipitation = summerPrecipitation;
-		// year.winterPrecipitation = winterPrecipitation;
 		if (withinBaselinePeriod(entry[0])) {
 			precipitationBaselineSummer.sum += summerPrecTotal;
 			precipitationBaselineSummer.count++;
 			precipitationBaselineWinter.sum += winterPrecTotal;
 			precipitationBaselineWinter.count++;
-			precipitationBaselineYearly.sum += sum(monthlyPrecipitation.map(p => sum(p.total))); // TODO fix nicer tangle
+			precipitationBaselineYearly.sum += sum(monthlyPrecip.map(p => sum(p.total))); // TODO fix nicer tangle
 			precipitationBaselineYearly.count++;
 		}
 
@@ -448,7 +446,7 @@ var parseAbiskoCsv = function (result, src='') {
 
 	var monthlyPrecipByStat = (monthIndex, statistic) => entries().map(each => ({
 		x: +each[0],
-		y: each[1].monthlyPrecipitation[monthIndex][statistic],
+		y: each[1].monthlyPrecip[monthIndex][statistic],
 	}));
 
 	var monthlyTempByStat = (monthIndex, statistic) => entries().map(entry => ({
@@ -462,11 +460,11 @@ var parseAbiskoCsv = function (result, src='') {
 	})).slice(10);
 
 	var years = keys().map(Number);
-	var monthlyPrecipitation = {};
+	var monthlyPrecip = {};
 	var monthlyTemps = {};
 
 	months().forEach((month, index) => {
-		var p = monthlyPrecipitation[month] = monthlyPrecipitation[month] || {};
+		var p = monthlyPrecip[month] = monthlyPrecip[month] || {};
 		p.years = years.slice(10);
 		p.total = monthlyPrecipByStat(index, 'total');
 		p.movAvg = movingAveragesHighCharts(p.total.map(each => each.y));
@@ -667,20 +665,6 @@ var parseAbiskoCsv = function (result, src='') {
 		movingAverages(grwthSeason.ci.map(each => each[bound]), 10)
 		.forEach((value, index) => grwthSeason.ciMovAvg[index][bound] = value));
 
-	// // console.log(yearly('growingSeason').map(each => each.y));
-	// console.log(grwthSeason);
-	// console.log(totalvariance);
-
-	// console.log(yearly('precip'));
-	// console.log(yrly_diff);
-	// console.log(monthlyPrecipitation);
-	// console.log(seasonalPrecipitation.summerPrecipitation);
-	// console.log(winterTemps);
-	// console.log(summerTemps);
-	// console.log(monthlyTemps);
-	// console.log(ci);
-	//
-
 	var precipCI = yearly('precipCI').map(each => ({
 		x: each.x,
 		low: each.y.low,
@@ -740,7 +724,7 @@ var parseAbiskoCsv = function (result, src='') {
 			ci: precipCI.slice(10),
 			ciMovAvg: precipCIMovAvg.slice(10),
 		},
-		monthlyPrecipitation,
+		monthlyPrecip,
 		summerPrecipitation: seasonalPrecipitation.summerPrecipitation,
 		winterPrecipitation: seasonalPrecipitation.winterPrecipitation,
 	};

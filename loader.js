@@ -68,21 +68,25 @@ var parseZonal = (file, src='') => function (renderF, tag) {
 	return complete;
 };
 
-var parseAbiskoGen = (file, src='') => function (renderF, id, title, tag) {
+var parseAbisko = (file, src='') => function (renderF, id, title, tag) {
 	var cached;
+	// console.log("parseAbiskoGen")
+	// console.log(file)
+	// console.log(id)
 	var complete = (data) => {
 		var rend = containerRender(renderF, id, title);
 
-		// console.log(data)
+		// console.log(data[tag])
 		if(Array.isArray(renderF)){
 			rend.forEach(each(data[tag]));
 		}else{
 			rend(data[tag]);
 		}
 	}
-	if (cached) complete(cached)
-	else {
+	if (cached) {
+	complete(cached);
 
+	}else {
 		Papa.parse(file, {
 			worker: useWebWorker,
 			header: true,
@@ -96,42 +100,13 @@ var parseAbiskoGen = (file, src='') => function (renderF, id, title, tag) {
 				complete(data)
 			}
 		});
-		return complete;
 	}
+	return complete;
 };
 
-
-var parseAbisko = function (file, src='') {
-	var cached;
-
-	var complete = (result) => {
-		if (cached) result = cached;
-		else cached = result;
-		var data = parseAbiskoCsv(result, src);
-		var summerRange = monthName(summerMonths[0]) + ' to ' + monthName(summerMonths[summerMonths.length - 1]);
-		var winterRange = monthName(winterMonths[0]) + ' to ' + monthName(winterMonths[winterMonths.length - 1]);
-
-		months().forEach(month =>
-			renderAbiskoMonthlyTemperatureGraph(data.monthlyTemps[month], 'monthlyAbiskoTemperatures_' + month, 'Abisko temperatures for ' + monthName(month)));
-
-		renderGrowingSeasonGraph(data.growingSeason, 'growingSeason');
-
-		months().forEach(month =>
-			renderMonthlyPrecipitationGraph(data.monthlyPrecipitation[month], 'monthlyPrecipitation_' + month, 'Precipitation for ' + monthName(month)));
-
-	}
-
-	Papa.parse(file, {
-		worker: useWebWorker,
-		header: true,
-		//delimiter: ';',
-		download: true,
-		skipEmptyLines: true,
-		dynamicTyping: false,
-		complete,
-	});
-
-	return complete;
+var monthlyFunc = (render) => function(data, id, title, src="") {
+		months().forEach(month =>  
+		render(data[month], id+"_"+month, title+" "+monthName(month)));
 };
 
 var parseTornetrask = function (file='data/Tornetrask_islaggning_islossning.csv', src='') {

@@ -447,7 +447,7 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 	});
 };
 
-var renderGrowingSeasonGraph = function (season, id) {
+var renderGrowingSeasonGraph = function (season, id, title='Growing season') {
 	Highcharts.chart(id, {
 		chart: {
 			type: 'line',
