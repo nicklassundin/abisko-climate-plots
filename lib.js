@@ -101,6 +101,9 @@ var parseAb = function(){
 					cached(renderPrecipitationDifferenceGraph, 'winterPrecipitationDifference', 'Precipitation difference '+winterRange, 'winterPrecipitation');
 				},
 			},
+		},
+		growingSeason: function(){
+			// cached(renderGrowingSeasonGraph,'growingSeason, )
 		}
 	};
 	return result;
@@ -232,6 +235,8 @@ var rendF = {
 				document.body.appendChild(createDiv('monthlyPrecipitation_'+month));
 			})
 		},
+		'growingSeason': {
+		}
 	}, 
 }
 
