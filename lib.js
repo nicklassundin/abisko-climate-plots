@@ -111,6 +111,44 @@ var parseAb = function(){
 	return result;
 }
 
+var createBaseline = function(){
+	var form = document.createElement('form');
+	form.setAttribute("id",baseline);
+	var header = document.createElement('header');
+	header.innerHTML = "Year range for baseline";
+	
+	var lowLabel = document.createElement('label');
+	lowLabel.setAttribute("for","baselineLower");
+	lowLabel.innerHTML = "Lower limit";
+	var lowInput = document.createElement('input');
+	lowInput.setAttribute("name","baselineLower");
+	lowInput.setAttribute("type","text");
+	lowInput.setAttribute("value","1961")
+	
+	var br1 = document.createElement('br');
+
+	var upperLabel = document.createElement('label');
+	upperLabel.setAttribute("for","baselineUpper");
+	upperLabel.innerHTML = "Upper limit";
+	var upperInput = document.createElement('input');
+	upperInput.setAttribute("name","baselineUpper");
+	upperInput.setAttribute("type","text");
+	upperInput.setAttribute("value","1990")
+	
+	var br2 = document.createElement('br');
+	var input = document.createElement('input');
+	input.setAttribute("type","submit")
+	form.appendChild(header)
+	form.appendChild(lowLabel)
+	form.appendChild(lowInput)
+	form.appendChild(br1)
+	form.appendChild(upperLabel)
+	form.appendChild(upperInput)
+	form.appendChild(br2)
+	form.appendChild(input)
+	return form;
+}
+
 var createDiv = function(id, no=null){
 	var div = document.createElement('div');
 	div.setAttribute("id",id);
@@ -216,6 +254,14 @@ var rendF = {
 			var no = 3;
 			if(!false) no = debug;
 			document.body.appendChild(createDiv('AbiskoTemperatures', no));
+		},
+	},
+	'temperatureDifferenceAbisko': {
+		func: parseAb().temps.diff.yrly,
+		html: function(debug=false){
+			var no = 19;
+			if(!false) no = debug;
+			document.body.appendChild(createDiv('yearlyPrecipitationDifference', no));
 		},
 	},
 	'monthlyAbiskoTemperatures': {
