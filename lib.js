@@ -152,12 +152,12 @@ var createDiv = function(id, no=null){
 	var div = document.createElement('div');
 	div.setAttribute("id",id);
 	var fig = document.createElement('figure');
-	fig.appendChild(div);
 	if(no){
 		var a = document.createElement('a');
 		a.innerHTML = no;
 		fig.appendChild(a);
 	}
+	fig.appendChild(div);
 	return fig
 }
 
@@ -223,10 +223,10 @@ var rendF = {
 		html: function(debug=false){
 			var no = 41;
 			if(!debug) no = debug;
-			document.body.appendChild(createDiv('abiskoSnowDepthPeriodMeans'))
+			document.body.appendChild(createDiv('abiskoSnowDepthPeriodMeans',no))
 			no = 42;
 			if(!debug) no = debug;
-			document.body.appendChild(createDiv('abiskoSnowDepthPeriodMeans2'))
+			document.body.appendChild(createDiv('abiskoSnowDepthPeriodMeans2',no))
 		},
 	},
 	'AbiskoTemperatures':{
@@ -259,7 +259,7 @@ var rendF = {
 		html: function(debug=false){
 			var no = 19;
 			if(!debug) no = debug;
-			document.body.appendChild(createDiv('yearlyPrecipitationDifference', no));
+			document.body.appendChild(createDiv('temperatureDifferenceAbisko', no));
 		},
 	},
 	'monthlyAbiskoTemperatures': {
