@@ -50,7 +50,6 @@ var tornetrask = function(){
 
 var abiskoSnowDepth = function() {
 	parseSnowDepth('data/ANS_SnowDepth.csv','https://www.arcticcirc.net/');
-
 }
 
 
@@ -119,7 +118,7 @@ var createBaseline = function(){
 	
 	var lowLabel = document.createElement('label');
 	lowLabel.setAttribute("for","baselineLower");
-	lowLabel.innerHTML = "Lower limit";
+	lowLabel.innerHTML = "Lower limit ";
 	var lowInput = document.createElement('input');
 	lowInput.setAttribute("name","baselineLower");
 	lowInput.setAttribute("type","text");
@@ -129,7 +128,7 @@ var createBaseline = function(){
 
 	var upperLabel = document.createElement('label');
 	upperLabel.setAttribute("for","baselineUpper");
-	upperLabel.innerHTML = "Upper limit";
+	upperLabel.innerHTML = "Upper limit ";
 	var upperInput = document.createElement('input');
 	upperInput.setAttribute("name","baselineUpper");
 	upperInput.setAttribute("type","text");
@@ -152,15 +151,14 @@ var createBaseline = function(){
 var createDiv = function(id, no=null){
 	var div = document.createElement('div');
 	div.setAttribute("id",id);
+	var fig = document.createElement('figure');
+	fig.appendChild(div);
 	if(no){
-		var div2 = document.createElement('div');
 		var a = document.createElement('a');
 		a.innerHTML = no;
-		div2.appendChild(a);
-		div2.appendChild(div)
-		return div2
+		fig.appendChild(a);
 	}
-	return div
+	return fig
 }
 
 var rendF = {
@@ -168,7 +166,7 @@ var rendF = {
 		func: nhTemp,
 		html: function(debug=false){
 			var no = 16;
-			if(!false) no = debug;
+			if(!debug) no = debug;
 			document.body.appendChild(createDiv('northernHemisphere', no));
 		},
 	},
@@ -176,15 +174,15 @@ var rendF = {
 		func: zonalTemp().globTemp,
 		html: function(debug=false){
 			var no = 17;
-			if(!false) no = debug;
+			if(!debug) no = debug;
 			document.body.appendChild(createDiv('globalTemperatures', no));
 		},
 	},
 	'temperatureDifference1': {
-		func: zonalTemp().diff.artic, 	// TODO opt
+		func: zonalTemp().diff.arctic, 	// TODO opt
 		html: function(debug=false){
 			var no = 20;
-			if(!false) no = debug;
+			if(!debug) no = debug;
 			document.body.appendChild(createDiv('temperatureDifference1', no));
 		},
 	},
@@ -192,7 +190,7 @@ var rendF = {
 		func: zonalTemp().diff.nh,    	// 
 		html: function(debug=false){
 			var no = 21;
-			if(!false) no = debug;
+			if(!debug) no = debug;
 			document.body.appendChild(createDiv('temperatureDifference2', no));
 		},
 	},
@@ -200,7 +198,7 @@ var rendF = {
 		func: zonalTemp().diff.glob,	//
 		html: function(debug=false){
 			var no = 22;
-			if(!false) no = debug;
+			if(!debug) no = debug;
 			document.body.appendChild(createDiv('temperatureDifference3', no));
 		},
 	},
@@ -208,7 +206,7 @@ var rendF = {
 		func: zonalTemp().arctic, 
 		html: function(debug=false){
 			var no = 16.1;
-			if(!false) no = debug;
+			if(!debug) no = debug;
 			document.body.appendChild(createDiv('arcticTemperatures', no));
 		},
 	},
@@ -216,7 +214,7 @@ var rendF = {
 		func: tornetrask,
 		html: function(debug=false){
 			var no = 43;
-			if(!false) no = debug;
+			if(!debug) no = debug;
 			document.body.appendChild(createDiv('abiskoLakeIce', no));
 		},
 	}, 
@@ -224,18 +222,18 @@ var rendF = {
 		func: abiskoSnowDepth,
 		html: function(debug=false){
 			var no = 41;
-			if(!false) no = debug;
-			document.body.appendChild(createDiv('abiskoSnowDepthMeans'))
+			if(!debug) no = debug;
+			document.body.appendChild(createDiv('abiskoSnowDepthPeriodMeans'))
 			no = 42;
-			if(!false) no = debug;
-			document.body.appendChild(createDiv('abiskoSnowDepthMeans2'))
+			if(!debug) no = debug;
+			document.body.appendChild(createDiv('abiskoSnowDepthPeriodMeans2'))
 		},
 	},
 	'AbiskoTemperatures':{
 		func: parseAb().temps.yrly,
 		html: function(debug=false){
 			var no = 1;
-			if(!false) no = debug;
+			if(!debug) no = debug;
 			document.body.appendChild(createDiv('AbiskoTemperatures', no));
 		},
 
@@ -244,7 +242,7 @@ var rendF = {
 		func: parseAb().temps.summer,
 		html: function(debug=false){
 			var no = 2;
-			if(!false) no = debug;
+			if(!debug) no = debug;
 			document.body.appendChild(createDiv('AbiskoTemperaturesSummer', no));
 		},
 	}, 
@@ -252,15 +250,15 @@ var rendF = {
 		func: parseAb().temps.winter,
 		html: function(debug=false){
 			var no = 3;
-			if(!false) no = debug;
-			document.body.appendChild(createDiv('AbiskoTemperatures', no));
+			if(!debug) no = debug;
+			document.body.appendChild(createDiv('AbiskoTemperaturesWinter', no));
 		},
 	},
 	'temperatureDifferenceAbisko': {
 		func: parseAb().temps.diff.yrly,
 		html: function(debug=false){
 			var no = 19;
-			if(!false) no = debug;
+			if(!debug) no = debug;
 			document.body.appendChild(createDiv('yearlyPrecipitationDifference', no));
 		},
 	},
@@ -268,9 +266,9 @@ var rendF = {
 		func: parseAb().temps.monthly,
 		html: function(debug=false){
 			var no = 4;
-			if(!false) no = debug;
+			if(!debug) no = debug;
 			months().forEach((month, index) => {
-				document.body.appendChild(createDiv('monthlyAbiskoTemperatures_'+month, no));
+				document.body.appendChild(createDiv('monthlyAbiskoTemperatures_'+month, no+index));
 			})
 		},
 	}, 
@@ -278,7 +276,7 @@ var rendF = {
 		func: parseAb().precip.yrly,
 		html: function(debug=false){
 			var no = 23;
-			if(!false) no = debug;
+			if(!debug) no = debug;
 			document.body.appendChild(createDiv('yearlyPrecipitation', no));
 		},
 	}, 
@@ -286,7 +284,7 @@ var rendF = {
 		func: parseAb().precip.summer,
 		html: function(debug=false){
 			var no = 24;
-			if(!false) no = debug;
+			if(!debug) no = debug;
 			document.body.appendChild(createDiv('summerPrecipitation', no));
 		},
 	}, 
@@ -294,7 +292,7 @@ var rendF = {
 		func: parseAb().precip.winter,
 		html: function(debug=false){
 			var no = 25;
-			if(!false) no = debug;
+			if(!debug) no = debug;
 			document.body.appendChild(createDiv('winterPrecipitation', no));
 		},
 	}, 
@@ -302,7 +300,7 @@ var rendF = {
 		func: parseAb().precip.diff.yrly,
 		html: function(debug=false){
 			var no = 38;
-			if(!false) no = debug;
+			if(!debug) no = debug;
 			document.body.appendChild(createDiv('yearlyPrecipitationDifference', no));
 		},
 	}, 
@@ -310,7 +308,7 @@ var rendF = {
 		func: parseAb().precip.diff.summer,
 		html: function(debug=false){
 			var no = 39;
-			if(!false) no = debug;
+			if(!debug) no = debug;
 			document.body.appendChild(createDiv('summerPrecipitationDifference', no));
 		},
 	}, 
@@ -318,17 +316,17 @@ var rendF = {
 		func: parseAb().precip.diff.winter,
 		html: function(debug=false){
 			var no = 40;
-			if(!false) no = debug;
-			document.body.appendChild(createDiv('winterPrecipitationDifference', 25, no));
+			if(!debug) no = debug;
+			document.body.appendChild(createDiv('winterPrecipitationDifference',no));
 		},
 	}, 
 	'monthlyPrecipitation': {
 		func: parseAb().precip.monthly,
 		html: function(debug=false){
-		var no = 0;
-			if(!false) no = debug;
-			months().forEach(month => {
-				document.body.appendChild(createDiv('monthlyPrecipitation_'+month, no));
+		var no = 26;
+			if(!debug) no = debug;
+			months().forEach((month, index) => {
+				document.body.appendChild(createDiv('monthlyPrecipitation_'+month, no+index));
 			})
 		},
 	}, 
@@ -336,7 +334,7 @@ var rendF = {
 		func: parseAb().growingSeason,
 		html: function(debug=false){
 			var no = 18;
-			if(!false) no = debug;
+			if(!debug) no = debug;
 			document.body.appendChild(createDiv('growingSeason', no));
 		}
 	}
