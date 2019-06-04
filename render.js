@@ -58,6 +58,7 @@ Highcharts.setOptions({
 	dataSrc: '',
 	lang:{
 		dataCredit: 'Data source',
+		contribute: 'Contribute - Github [dummy]',
 		showDataTable: 'Show/hide data',
 		langOption: 'Svenska',
 		shortMonths: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
@@ -83,6 +84,7 @@ Highcharts.setOptions({
 	},
 	otherLang:{
 		dataCredit: 'Data källa',
+		contribute: 'Bidra mjukvara - Github [dummy]',
 		showDataTable: 'Visa/göm data',
 		langOption: 'English',
 		shortMonths: ['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec'],
@@ -160,6 +162,11 @@ Highcharts.setOptions({
 							window.location.href = this.options.dataSrc // TODO link to exact dataset with entry in data to href
 
 						}
+					},
+				},{
+					textKey: 'contribute',
+					onclick: function(){
+						window.location.href = 'https://github.com/nicklassundin/abisko-climate-plots';
 					},
 				}],
 			},

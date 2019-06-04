@@ -3,6 +3,44 @@
 //   div.innerHTML = "<div id='render'></div><figcaption></figcaption><script type=text/javascript>functorGISSTEMP('data/NH.Ts.csv',renderTemperatureGraph,'https://data.giss.nasa.gov/gistemp/')('div','Northern Hemisphere temperatures');</script>";
 // }
 
+var createBaseline = function(){
+	var form = document.createElement('form');
+	form.setAttribute("id",baseline);
+	var header = document.createElement('header');
+	header.innerHTML = "Year range for baseline";
+
+	var lowLabel = document.createElement('label');
+	lowLabel.setAttribute("for","baselineLower");
+	lowLabel.innerHTML = "Lower limit ";
+	var lowInput = document.createElement('input');
+	lowInput.setAttribute("name","baselineLower");
+	lowInput.setAttribute("type","text");
+	lowInput.setAttribute("value","1961")
+
+	var br1 = document.createElement('br');
+
+	var upperLabel = document.createElement('label');
+	upperLabel.setAttribute("for","baselineUpper");
+	upperLabel.innerHTML = "Upper limit ";
+	var upperInput = document.createElement('input');
+	upperInput.setAttribute("name","baselineUpper");
+	upperInput.setAttribute("type","text");
+	upperInput.setAttribute("value","1990")
+
+	var br2 = document.createElement('br');
+	var input = document.createElement('input');
+	input.setAttribute("type","submit")
+	form.appendChild(header)
+	form.appendChild(lowLabel)
+	form.appendChild(lowInput)
+	form.appendChild(br1)
+	form.appendChild(upperLabel)
+	form.appendChild(upperInput)
+	form.appendChild(br2)
+	form.appendChild(input)
+	return form;
+}
+
 var copy = function() {
 	var body = document.body,
 		html = document.documentElement;
@@ -16,7 +54,17 @@ var copy = function() {
 	alert(copyText.value);
 }
 const urlParams = new URLSearchParams(window.location.search);
-var id = urlParams.get('id').split(',');
+var id = null;
+try{
+ id = urlParams.get('id');
+}catch{
+
+}
+if(id){
+	id = urlParams.get('id').split(',');
+}else{
+	id = 'all';
+}
 
 if(id=='all'){
 	id = ['AbiskoTemperatures',
@@ -38,7 +86,7 @@ const baseline = urlParams.get('baseline');
 const share = urlParams.get('share');
 
 
-var bpage = function(){
+var bpage = function(doc=document.body){
 	document.body.appendChild(createBaseline());
 
 	id.forEach(each => {
@@ -168,44 +216,6 @@ var parseAb = function(){
 		}
 	};
 	return result;
-}
-
-var createBaseline = function(){
-	var form = document.createElement('form');
-	form.setAttribute("id",baseline);
-	var header = document.createElement('header');
-	header.innerHTML = "Year range for baseline";
-
-	var lowLabel = document.createElement('label');
-	lowLabel.setAttribute("for","baselineLower");
-	lowLabel.innerHTML = "Lower limit ";
-	var lowInput = document.createElement('input');
-	lowInput.setAttribute("name","baselineLower");
-	lowInput.setAttribute("type","text");
-	lowInput.setAttribute("value","1961")
-
-	var br1 = document.createElement('br');
-
-	var upperLabel = document.createElement('label');
-	upperLabel.setAttribute("for","baselineUpper");
-	upperLabel.innerHTML = "Upper limit ";
-	var upperInput = document.createElement('input');
-	upperInput.setAttribute("name","baselineUpper");
-	upperInput.setAttribute("type","text");
-	upperInput.setAttribute("value","1990")
-
-	var br2 = document.createElement('br');
-	var input = document.createElement('input');
-	input.setAttribute("type","submit")
-	form.appendChild(header)
-	form.appendChild(lowLabel)
-	form.appendChild(lowInput)
-	form.appendChild(br1)
-	form.appendChild(upperLabel)
-	form.appendChild(upperInput)
-	form.appendChild(br2)
-	form.appendChild(input)
-	return form;
 }
 
 var createDiv = function(id, no=null){
