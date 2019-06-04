@@ -40,7 +40,7 @@
 				var copyText = document.getElementById("input");
 				copyText.select();
 				document.execCommand("copy");
-				alert("Copied the text: " + copyText.value);
+				alert(copyText.value);
 			}
 const urlParams = new URLSearchParams(window.location.search);
 var id = urlParams.get('id').split(',');
