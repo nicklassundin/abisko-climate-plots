@@ -3,6 +3,66 @@
 //   div.innerHTML = "<div id='render'></div><figcaption></figcaption><script type=text/javascript>functorGISSTEMP('data/NH.Ts.csv',renderTemperatureGraph,'https://data.giss.nasa.gov/gistemp/')('div','Northern Hemisphere temperatures');</script>";
 // }
 
+var copy = function() {
+	var body = document.body,
+		html = document.documentElement;
+	var height = Math.max( body.scrollHeight, body.offsetHeight, 
+		html.clientHeight, html.scrollHeight, html.offsetHeight );
+	var href = (""+window.location).split('share=true').join('share=false');
+	input.setAttribute('value', "<iframe src='"+href+"' width='100%' height='"+height+"' frameBorder=''0'></iframe>") // TODO ifram
+	var copyText = document.getElementById("input");
+	copyText.select();
+	document.execCommand("copy");
+	alert(copyText.value);
+}
+const urlParams = new URLSearchParams(window.location.search);
+var id = urlParams.get('id').split(',');
+
+if(id=='all'){
+	id = ['AbiskoTemperatures',
+		'AbiskoTemperaturesSummer',
+		'AbiskoTemperaturesWinter',
+		'monthlyAbiskoTemperatures',
+		'growingSeason',
+		'temperatureDifferenceAbisko',
+		'temperatureDifference1',
+		'temperatureDifference2',
+		'temperatureDifference3','yearlyPrecipitation','summerPrecipitation',
+		'winterPrecipitation','monthlyPrecipitation','yearlyPrecipitationDifference',
+		'summerPrecipitationDifference','winterPrecipitationDifference','abiskoSnowDepthMeans','abiskoLakeIce'];
+}
+
+
+const debug = urlParams.get('debug');
+const baseline = urlParams.get('baseline');
+const share = urlParams.get('share');
+
+
+var bpage = function(){
+	document.body.appendChild(createBaseline());
+
+	id.forEach(each => {
+		rendF[each].html(debug);	
+		rendF[each].func();
+	})
+
+	if(share=='true'){
+		var input = document.createElement("input");
+		input.setAttribute('id', 'input');
+		input.setAttribute('type', 'text');
+		var body = document.body,
+			html = document.documentElement;
+		var height = Math.max( body.scrollHeight, body.offsetHeight, 
+			html.clientHeight, html.scrollHeight, html.offsetHeight );
+		input.setAttribute('value', "<iframe src='"+window.location+"&share=false"+"' width='100%' height='"+height+"'></iframe>") // TODO ifram
+		document.body.appendChild(input);
+		var cp = document.createElement("button");
+		cp.innerHTML = 'Copy link';
+		cp.setAttribute('onclick', "copy()");
+		document.body.appendChild(cp);
+	}
+}
+
 
 var nhTemp = function() {
 	functorGISSTEMP('data/NH.Ts.csv',renderTemperatureGraph,'https://data.giss.nasa.gov/gistemp/')('northernHemisphere','Northern Hemisphere temperatures');
@@ -115,7 +175,7 @@ var createBaseline = function(){
 	form.setAttribute("id",baseline);
 	var header = document.createElement('header');
 	header.innerHTML = "Year range for baseline";
-	
+
 	var lowLabel = document.createElement('label');
 	lowLabel.setAttribute("for","baselineLower");
 	lowLabel.innerHTML = "Lower limit ";
@@ -123,7 +183,7 @@ var createBaseline = function(){
 	lowInput.setAttribute("name","baselineLower");
 	lowInput.setAttribute("type","text");
 	lowInput.setAttribute("value","1961")
-	
+
 	var br1 = document.createElement('br');
 
 	var upperLabel = document.createElement('label');
@@ -133,7 +193,7 @@ var createBaseline = function(){
 	upperInput.setAttribute("name","baselineUpper");
 	upperInput.setAttribute("type","text");
 	upperInput.setAttribute("value","1990")
-	
+
 	var br2 = document.createElement('br');
 	var input = document.createElement('input');
 	input.setAttribute("type","submit")
@@ -272,15 +332,15 @@ var rendF = {
 			var no = 4;
 			if(debug){
 				months().forEach((month, index) => {
-				document.body.appendChild(createDiv('monthlyAbiskoTemperatures_'+month, no+index));
-			})
+					document.body.appendChild(createDiv('monthlyAbiskoTemperatures_'+month, no+index));
+				})
 
 			}else{
 				months().forEach((month, index) => {
-				document.body.appendChild(createDiv('monthlyAbiskoTemperatures_'+month));
-			})
-				
-		}
+					document.body.appendChild(createDiv('monthlyAbiskoTemperatures_'+month));
+				})
+
+			}
 		},
 	}, 
 	'yearlyPrecipitation': {
@@ -334,16 +394,16 @@ var rendF = {
 	'monthlyPrecipitation': {
 		func: parseAb().precip.monthly,
 		html: function(debug=false){
-		var no = 26;
+			var no = 26;
 			if(debug){
-			months().forEach((month, index) => {
-				document.body.appendChild(createDiv('monthlyPrecipitation_'+month, no+index));
-			})
+				months().forEach((month, index) => {
+					document.body.appendChild(createDiv('monthlyPrecipitation_'+month, no+index));
+				})
 
 			}else{
-			months().forEach((month, index) => {
-				document.body.appendChild(createDiv('monthlyPrecipitation_'+month));
-			})
+				months().forEach((month, index) => {
+					document.body.appendChild(createDiv('monthlyPrecipitation_'+month));
+				})
 
 			}
 		},

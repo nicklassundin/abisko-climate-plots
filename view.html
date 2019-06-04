@@ -30,65 +30,7 @@
 		<script src="loader.js"></script>
 		<script src="lib.js"></script>
 		<script type="text/javascript">
-			var copy = function() {
-				var body = document.body,
-					html = document.documentElement;
-				var height = Math.max( body.scrollHeight, body.offsetHeight, 
-					html.clientHeight, html.scrollHeight, html.offsetHeight );
-				var href = (""+window.location).split('share=true').join('share=false');
-				input.setAttribute('value', "<iframe src='"+href+"' width='100%' height='"+height+"' frameBorder=''0'></iframe>") // TODO ifram
-				var copyText = document.getElementById("input");
-				copyText.select();
-				document.execCommand("copy");
-				alert(copyText.value);
-			}
-const urlParams = new URLSearchParams(window.location.search);
-var id = urlParams.get('id').split(',');
-
-if(id=='all'){
-	id = ['AbiskoTemperatures',
-		'AbiskoTemperaturesSummer',
-		'AbiskoTemperaturesWinter',
-		'monthlyAbiskoTemperatures',
-		'growingSeason',
-		'temperatureDifferenceAbisko',
-		'temperatureDifference1',
-		'temperatureDifference2',
-		'temperatureDifference3','yearlyPrecipitation','summerPrecipitation',
-		'winterPrecipitation','monthlyPrecipitation','yearlyPrecipitationDifference',
-		'summerPrecipitationDifference','winterPrecipitationDifference','abiskoSnowDepthMeans','abiskoLakeIce'];
-}
-
-
-const debug = urlParams.get('debug');
-const baseline = urlParams.get('baseline');
-const share = urlParams.get('share');
-
-
-
-document.body.appendChild(createBaseline());
-
-id.forEach(each => {
-	rendF[each].html(debug);	
-	rendF[each].func();
-})
-
-if(share=='true'){
-	var input = document.createElement("input");
-	input.setAttribute('id', 'input');
-	input.setAttribute('type', 'text');
-	var body = document.body,
-		html = document.documentElement;
-	var height = Math.max( body.scrollHeight, body.offsetHeight, 
-		html.clientHeight, html.scrollHeight, html.offsetHeight );
-	input.setAttribute('value', "<iframe src='"+window.location+"&share=false"+"' width='100%' height='"+height+"'></iframe>") // TODO ifram
-	document.body.appendChild(input);
-	var cp = document.createElement("button");
-	cp.innerHTML = 'Copy link';
-	cp.setAttribute('onclick', "copy()");
-	document.body.appendChild(cp);
-}
-
+		bpage();
 		</script>
 	</body>
 </html>
