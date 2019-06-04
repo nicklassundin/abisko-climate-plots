@@ -36,7 +36,7 @@
 				var height = Math.max( body.scrollHeight, body.offsetHeight, 
 					html.clientHeight, html.scrollHeight, html.offsetHeight );
 				var href = (""+window.location).split('share=true').join('share=false');
-				input.setAttribute('value', "<iframe src='"+href+"' width='100%' height='"+height+"'></iframe>") // TODO ifram
+				input.setAttribute('value', "<iframe src='"+href+"' width='100%' height='"+height+"' frameBorder=''0'></iframe>") // TODO ifram
 				var copyText = document.getElementById("input");
 				copyText.select();
 				document.execCommand("copy");
