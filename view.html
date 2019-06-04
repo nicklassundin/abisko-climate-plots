@@ -35,7 +35,8 @@
 					html = document.documentElement;
 				var height = Math.max( body.scrollHeight, body.offsetHeight, 
 					html.clientHeight, html.scrollHeight, html.offsetHeight );
-				input.setAttribute('value', "<iframe src='"+window.location+"' width='100%' height='"+height+"'></iframe>") // TODO ifram
+				var href = (""+window.location).split('share=true').join('share=false');
+				input.setAttribute('value', "<iframe src='"+href+"' width='100%' height='"+height+"'></iframe>") // TODO ifram
 				var copyText = document.getElementById("input");
 				copyText.select();
 				document.execCommand("copy");
@@ -61,7 +62,7 @@ if(id=='all'){
 
 const debug = urlParams.get('debug');
 const baseline = urlParams.get('baseline');
-
+const share = urlParams.get('share');
 
 
 
@@ -71,19 +72,22 @@ id.forEach(each => {
 	rendF[each].html(debug);	
 	rendF[each].func();
 })
-var input = document.createElement("input");
-input.setAttribute('id', 'input');
-input.setAttribute('type', 'text');
-var body = document.body,
-	html = document.documentElement;
-var height = Math.max( body.scrollHeight, body.offsetHeight, 
-	html.clientHeight, html.scrollHeight, html.offsetHeight );
-input.setAttribute('value', "<iframe src='"+window.location+"' width='100%' height='"+height+"'></iframe>") // TODO ifram
-document.body.appendChild(input);
-var cp = document.createElement("button");
-cp.innerHTML = 'Copy link';
-cp.setAttribute('onclick', "copy()");
-document.body.appendChild(cp);
+
+if(share=='true'){
+	var input = document.createElement("input");
+	input.setAttribute('id', 'input');
+	input.setAttribute('type', 'text');
+	var body = document.body,
+		html = document.documentElement;
+	var height = Math.max( body.scrollHeight, body.offsetHeight, 
+		html.clientHeight, html.scrollHeight, html.offsetHeight );
+	input.setAttribute('value', "<iframe src='"+window.location+"&share=false"+"' width='100%' height='"+height+"'></iframe>") // TODO ifram
+	document.body.appendChild(input);
+	var cp = document.createElement("button");
+	cp.innerHTML = 'Copy link';
+	cp.setAttribute('onclick', "copy()");
+	document.body.appendChild(cp);
+}
 
 		</script>
 	</body>
