@@ -81,6 +81,7 @@ Highcharts.setOptions({
 		breakup: 'Break-up',
 		iceTime: 'Ice time',
 		iceTimeMovAvg: 'Ice time (moving avg.)',
+		githubwiki: 'https://github.com/nicklassundin/abisko-climate-plots/wiki',
 	},
 	otherLang:{
 		dataCredit: 'Data källa',
@@ -108,6 +109,7 @@ Highcharts.setOptions({
 		breakup: 'Islossning',
 		iceTime: 'Is tid',
 		iceTimeMovAvg: 'Is tid (rörligt medelvärde)',
+		githubwiki: 'https://github.com/nicklassundin/abisko-climate-plots/wiki',
 	},
 	exporting: {
 		// showTable: true, // TODO DATA TABLE
@@ -166,7 +168,7 @@ Highcharts.setOptions({
 				},{
 					textKey: 'contribute',
 					onclick: function(){
-						window.location.href = 'https://github.com/nicklassundin/abisko-climate-plots';
+						window.location.href = 'https://github.com/nicklassundin/abisko-climate-plots/wiki';
 					},
 				}],
 			},
