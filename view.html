@@ -31,6 +31,11 @@
 		<script src="lib.js"></script>
 		<script type="text/javascript">
 			var copy = function() {
+				var body = document.body,
+					html = document.documentElement;
+				var height = Math.max( body.scrollHeight, body.offsetHeight, 
+					html.clientHeight, html.scrollHeight, html.offsetHeight );
+				input.setAttribute('value', "<iframe src='"+window.location+"' width='100%' height='"+height+"'></iframe>") // TODO ifram
 				var copyText = document.getElementById("input");
 				copyText.select();
 				document.execCommand("copy");
@@ -66,11 +71,14 @@ id.forEach(each => {
 	rendF[each].html(debug);	
 	rendF[each].func();
 })
-
 var input = document.createElement("input");
 input.setAttribute('id', 'input');
 input.setAttribute('type', 'text');
-input.setAttribute('value', window.location) // TODO ifram
+var body = document.body,
+	html = document.documentElement;
+var height = Math.max( body.scrollHeight, body.offsetHeight, 
+	html.clientHeight, html.scrollHeight, html.offsetHeight );
+input.setAttribute('value', "<iframe src='"+window.location+"' width='100%' height='"+height+"'></iframe>") // TODO ifram
 document.body.appendChild(input);
 var cp = document.createElement("button");
 cp.innerHTML = 'Copy link';
