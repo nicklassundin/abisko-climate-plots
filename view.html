@@ -63,8 +63,8 @@ const baseline = urlParams.get('baseline');
 document.body.appendChild(createBaseline());
 
 id.forEach(each => {
-	rendF[each].html(true);	
-	rendF[each].func(true);
+	rendF[each].html(debug);	
+	rendF[each].func();
 })
 
 var input = document.createElement("input");

@@ -154,8 +154,12 @@ var createDiv = function(id, no=null){
 	var fig = document.createElement('figure');
 	if(no){
 		var a = document.createElement('a');
-		a.innerHTML = no;
+		a.innerHTML = 'no: '+no;
 		fig.appendChild(a);
+
+		var aID = document.createElement('a');
+		aID.innerHTML = ' id: '+id;
+		fig.appendChild(aID);
 	}
 	fig.appendChild(div);
 	return fig
@@ -266,10 +270,17 @@ var rendF = {
 		func: parseAb().temps.monthly,
 		html: function(debug=false){
 			var no = 4;
-			if(!debug) no = debug;
-			months().forEach((month, index) => {
+			if(debug){
+				months().forEach((month, index) => {
 				document.body.appendChild(createDiv('monthlyAbiskoTemperatures_'+month, no+index));
 			})
+
+			}else{
+				months().forEach((month, index) => {
+				document.body.appendChild(createDiv('monthlyAbiskoTemperatures_'+month));
+			})
+				
+		}
 		},
 	}, 
 	'yearlyPrecipitation': {
@@ -324,10 +335,17 @@ var rendF = {
 		func: parseAb().precip.monthly,
 		html: function(debug=false){
 		var no = 26;
-			if(!debug) no = debug;
+			if(debug){
 			months().forEach((month, index) => {
 				document.body.appendChild(createDiv('monthlyPrecipitation_'+month, no+index));
 			})
+
+			}else{
+			months().forEach((month, index) => {
+				document.body.appendChild(createDiv('monthlyPrecipitation_'+month));
+			})
+
+			}
 		},
 	}, 
 	'growingSeason': {
