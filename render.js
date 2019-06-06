@@ -430,16 +430,29 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 			labelOptions: {
 				barkgroundColor: 'red',
 				verticalAlign: 'top',
+				crop: false,
+				y: 0
 			},
+			draggable: 'x',
 			labels: [{
+				text: 'Baseline: ['+baselineLower+','+baselineUpper+']',
 				point: {
 					xAxis: 0,
 					yAxis: 0,
-					x: baselineLower + (baselineUpper - baselineLower) / 2,
-					y: 2.4,
+					x: baselineLower - (baselineLower-baselineUpper)/2,
+					y: 2,
 				},
-				text: 'Baseline',
+				// useHTML: true,
 			}],
+			events: {
+				afterUpdate: function(e){
+					var mov = parseInt(e.target.options.labels[0].x/12);
+					baselineLower = baselineLower + mov;
+					baselineUpper = baselineUpper + mov;
+					document.getElementById('container').innerHTML = '';
+					bpage();	
+				}	
+			}
 		}],
 		series: [{
 			regression: true,
@@ -578,16 +591,29 @@ var renderPrecipitationDifferenceGraph = function (precipitation, id, title) {
 			labelOptions: {
 				barkgroundColor: 'red',
 				verticalAlign: 'top',
+				crop: false,
+				y: 0
 			},
+			draggable: 'x',
 			labels: [{
+				text: 'Baseline: ['+baselineLower+','+baselineUpper+']',
 				point: {
 					xAxis: 0,
 					yAxis: 0,
-					x: baselineLower + (baselineUpper - baselineLower) / 2,
+					x: baselineLower - (baselineLower-baselineUpper)/2,
 					y: 100,
 				},
-				text: 'Baseline',
+				// useHTML: true,
 			}],
+			events: {
+				afterUpdate: function(e){
+					var mov = parseInt(e.target.options.labels[0].x/12);
+					baselineLower = baselineLower + mov;
+					baselineUpper = baselineUpper + mov;
+					document.getElementById('container').innerHTML = '';
+					bpage();	
+				}	
+			}
 		}],
 		series: [{
 			regression: true,

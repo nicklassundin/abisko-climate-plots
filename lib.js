@@ -15,7 +15,7 @@ var createBaseline = function(){
 	var lowInput = document.createElement('input');
 	lowInput.setAttribute("name","baselineLower");
 	lowInput.setAttribute("type","text");
-	lowInput.setAttribute("value","1961")
+	lowInput.setAttribute("value",baselineLower)
 
 	var br1 = document.createElement('br');
 
@@ -25,11 +25,9 @@ var createBaseline = function(){
 	var upperInput = document.createElement('input');
 	upperInput.setAttribute("name","baselineUpper");
 	upperInput.setAttribute("type","text");
-	upperInput.setAttribute("value","1990")
+	upperInput.setAttribute("value",baselineUpper)
 
 	var br2 = document.createElement('br');
-	var input = document.createElement('input');
-	input.setAttribute("type","submit")
 	form.appendChild(header)
 	form.appendChild(lowLabel)
 	form.appendChild(lowInput)
@@ -37,6 +35,26 @@ var createBaseline = function(){
 	form.appendChild(upperLabel)
 	form.appendChild(upperInput)
 	form.appendChild(br2)
+
+	// Hidden option because magic
+	var id = document.createElement('input');
+	id.setAttribute("type","hidden");
+	id.setAttribute("name", "id");
+	id.setAttribute("value",''+urlParams.get('id'));
+	form.appendChild(id);
+	var debug = document.createElement('input');
+	debug.setAttribute("type","hidden");
+	debug.setAttribute("name", "debug");
+	debug.setAttribute("value",''+urlParams.get('debug'));
+	form.appendChild(debug);
+	var share = document.createElement('input');
+	share.setAttribute("type","hidden");
+	share.setAttribute("name", "share");
+	share.setAttribute("value",''+urlParams.get('share'));
+	form.appendChild(share);
+
+	var input = document.createElement('input');
+	input.setAttribute("type","submit")
 	form.appendChild(input)
 	return form;
 }
@@ -56,14 +74,15 @@ var copy = function() {
 const urlParams = new URLSearchParams(window.location.search);
 var id = null;
 try{
- id = urlParams.get('id');
-}catch{
-
-}
-if(id){
 	id = urlParams.get('id').split(',');
-}else{
-	id = 'all';
+}catch{
+	id = 'all';	
+}
+
+var baseline = null;
+if(urlParams.get('baselineLower')){
+	baselineLower = parseInt(urlParams.get('baselineLower'));
+	baselineUpper = parseInt(urlParams.get('baselineUpper'));
 }
 
 if(id=='all'){
@@ -82,7 +101,6 @@ if(id=='all'){
 
 
 const debug = urlParams.get('debug');
-const baseline = urlParams.get('baseline');
 const share = urlParams.get('share');
 
 
@@ -147,6 +165,9 @@ var zonalTemp = function(){
 		arctic: function(){
 			this.cached(containerRender(renderTemperatureGraph,'arcticTemperatures','Arctic (64N-90N) temperatures'), 'yrly');
 		},
+		// globTemp: function(){
+		// this.cached(containerRender(renderTemperature))
+		// },
 	}
 	return result;
 };
@@ -242,14 +263,16 @@ var rendF = {
 			var no = 16;
 			if(!debug) no = debug;
 			doc.appendChild(createDiv('northernHemisphere', no));
+			if(debug)console.log(no)
 		},
 	},
 	'globalTemperatures': {
-		func: zonalTemp().globTemp,
+		func: glbTemp,
 		html: function(debug=false, doc){
 			var no = 17;
 			if(!debug) no = debug;
 			doc.appendChild(createDiv('globalTemperatures', no));
+			if(debug)console.log(no)
 		},
 	},
 	'temperatureDifference1': {
@@ -258,6 +281,7 @@ var rendF = {
 			var no = 20;
 			if(!debug) no = debug;
 			doc.appendChild(createDiv('temperatureDifference1', no));
+			if(debug)console.log(no)
 		},
 	},
 	'temperatureDifference2': {
@@ -266,6 +290,7 @@ var rendF = {
 			var no = 21;
 			if(!debug) no = debug;
 			doc.appendChild(createDiv('temperatureDifference2', no));
+			if(debug)console.log(no)
 		},
 	},
 	'temperatureDifference3': {
@@ -274,6 +299,7 @@ var rendF = {
 			var no = 22;
 			if(!debug) no = debug;
 			doc.appendChild(createDiv('temperatureDifference3', no));
+			if(debug)console.log(no)
 		},
 	},
 	'arcticTemperatures': {
@@ -282,6 +308,7 @@ var rendF = {
 			var no = 16.1;
 			if(!debug) no = debug;
 			doc.appendChild(createDiv('arcticTemperatures', no));
+			if(debug)console.log(no)
 		},
 	},
 	'abiskoLakeIce':{
@@ -290,6 +317,7 @@ var rendF = {
 			var no = 43;
 			if(!debug) no = debug;
 			doc.appendChild(createDiv('abiskoLakeIce', no));
+			if(debug)console.log(no)
 		},
 	}, 
 	'abiskoSnowDepthMeans':{
@@ -298,9 +326,11 @@ var rendF = {
 			var no = 41;
 			if(!debug) no = debug;
 			doc.appendChild(createDiv('abiskoSnowDepthPeriodMeans',no))
+			if(debug)console.log(no)
 			no = 42;
 			if(!debug) no = debug;
 			doc.appendChild(createDiv('abiskoSnowDepthPeriodMeans2',no))
+			if(debug)console.log(no)
 		},
 	},
 	'AbiskoTemperatures':{
@@ -309,6 +339,7 @@ var rendF = {
 			var no = 1;
 			if(!debug) no = debug;
 			doc.appendChild(createDiv('AbiskoTemperatures', no));
+			if(debug)console.log(no)
 		},
 
 	}, 
@@ -318,6 +349,7 @@ var rendF = {
 			var no = 2;
 			if(!debug) no = debug;
 			doc.appendChild(createDiv('AbiskoTemperaturesSummer', no));
+			if(debug)console.log(no)
 		},
 	}, 
 	'AbiskoTemperaturesWinter': {
@@ -326,6 +358,7 @@ var rendF = {
 			var no = 3;
 			if(!debug) no = debug;
 			doc.appendChild(createDiv('AbiskoTemperaturesWinter', no));
+			if(debug)console.log(no)
 		},
 	},
 	'temperatureDifferenceAbisko': {
@@ -334,6 +367,7 @@ var rendF = {
 			var no = 19;
 			if(!debug) no = debug;
 			doc.appendChild(createDiv('temperatureDifferenceAbisko', no));
+			if(debug)console.log(no)
 		},
 	},
 	'monthlyAbiskoTemperatures': {
@@ -351,6 +385,7 @@ var rendF = {
 				})
 
 			}
+			if(debug)console.log(no)
 		},
 	}, 
 	'yearlyPrecipitation': {
@@ -359,6 +394,7 @@ var rendF = {
 			var no = 23;
 			if(!debug) no = debug;
 			doc.appendChild(createDiv('yearlyPrecipitation', no));
+			if(debug)console.log(no)
 		},
 	}, 
 	'summerPrecipitation': {
@@ -367,6 +403,7 @@ var rendF = {
 			var no = 24;
 			if(!debug) no = debug;
 			doc.appendChild(createDiv('summerPrecipitation', no));
+			if(debug)console.log(no)
 		},
 	}, 
 	'winterPrecipitation': {
@@ -375,6 +412,7 @@ var rendF = {
 			var no = 25;
 			if(!debug) no = debug;
 			doc.appendChild(createDiv('winterPrecipitation', no));
+			if(debug)console.log(no)
 		},
 	}, 
 	'yearlyPrecipitationDifference': {
@@ -383,6 +421,7 @@ var rendF = {
 			var no = 38;
 			if(!debug) no = debug;
 			doc.appendChild(createDiv('yearlyPrecipitationDifference', no));
+			if(debug)console.log(no)
 		},
 	}, 
 	'summerPrecipitationDifference': {
@@ -391,6 +430,7 @@ var rendF = {
 			var no = 39;
 			if(!debug) no = debug;
 			doc.appendChild(createDiv('summerPrecipitationDifference', no));
+			if(debug)console.log(no)
 		},
 	}, 
 	'winterPrecipitationDifference': {
@@ -399,6 +439,7 @@ var rendF = {
 			var no = 40;
 			if(!debug) no = debug;
 			doc.appendChild(createDiv('winterPrecipitationDifference',no));
+			if(debug)console.log(no)
 		},
 	}, 
 	'monthlyPrecipitation': {
@@ -416,6 +457,7 @@ var rendF = {
 				})
 
 			}
+			if(debug)console.log(no)
 		},
 	}, 
 	'growingSeason': {
@@ -424,6 +466,7 @@ var rendF = {
 			var no = 18;
 			if(!debug) no = debug;
 			doc.appendChild(createDiv('growingSeason', no));
+			if(debug)console.log(no)
 		}
 	}
 }
