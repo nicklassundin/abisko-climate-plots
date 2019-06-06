@@ -3,6 +3,10 @@
 /* LOADING DATA HAPPENS HERE */
 /*****************************/
 
+var url = function(){
+		return 'https://nicklassundin.github.io/abisko-climate-plots/';
+}
+
 // TODO cached parsing and generalization
 var containerRender = (renderF, id, title, src) => function(data){
 	renderF(data, id, title, src);
@@ -19,8 +23,7 @@ var functorGISSTEMP = (file, renderF, src='') => function(id, title){
 	};
 	if (cached) renderF(cached, id, title)
 	else {
-
-		Papa.parse(file, {
+		Papa.parse(url()+''+file, {
 			// //worker: useWebWorker,
 			header: true,
 			delimiter: ',',
@@ -51,7 +54,7 @@ var parseZonal = (file, src='') => function (renderF, tag) {
 	if(cached){
 		return complete(cached);
 	}else{
-		Papa.parse(file, {
+		Papa.parse(url()+''+file, {
 			//worker: useWebWorker,
 			header: true,
 			delimiter: ',',
@@ -84,10 +87,10 @@ var parseAbisko = (file, src='') => function (renderF, id, title, tag) {
 		}
 	}
 	if (cached) {
-	complete(cached);
+		complete(cached);
 
 	}else {
-		Papa.parse(file, {
+		Papa.parse(url()+''+file, {
 			//worker: useWebWorker,
 			header: true,
 			//delimiter: ';',
@@ -105,12 +108,12 @@ var parseAbisko = (file, src='') => function (renderF, id, title, tag) {
 };
 
 var monthlyFunc = (render) => function(data, id, title, src="") {
-		months().forEach(month =>  
+	months().forEach(month =>  
 		render(data[month], id+"_"+month, title+" "+monthName(month)));
 };
 
 var parseTornetrask = function (file='data/Tornetrask_islaggning_islossning.csv', src='') {
-	Papa.parse(file, {
+	Papa.parse(url()+''+file, {
 		//worker: useWebWorker,
 		header: true,
 		download: true,
@@ -123,7 +126,7 @@ var parseTornetrask = function (file='data/Tornetrask_islaggning_islossning.csv'
 };
 
 var parseSnowDepth = function (file='data/ANS_SnowDepth_1913-2017.csv', src='') {
-	Papa.parse(file, {
+	Papa.parse(url()+''+file, {
 		//worker: useWebWorker,
 		header: true,
 		download: true,
