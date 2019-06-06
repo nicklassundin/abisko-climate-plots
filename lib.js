@@ -37,22 +37,30 @@ var createBaseline = function(){
 	form.appendChild(br2)
 
 	// Hidden option because magic
-	var id = document.createElement('input');
-	id.setAttribute("type","hidden");
-	id.setAttribute("name", "id");
-	id.setAttribute("value",''+urlParams.get('id'));
-	form.appendChild(id);
-	var debug = document.createElement('input');
-	debug.setAttribute("type","hidden");
-	debug.setAttribute("name", "debug");
-	debug.setAttribute("value",''+urlParams.get('debug'));
-	form.appendChild(debug);
-	var share = document.createElement('input');
-	share.setAttribute("type","hidden");
-	share.setAttribute("name", "share");
-	share.setAttribute("value",''+urlParams.get('share'));
-	form.appendChild(share);
-
+	var value = urlParams.get('id');
+	if(value){
+		var id = document.createElement('input');
+		id.setAttribute("type","hidden");
+		id.setAttribute("name", "id");
+		id.setAttribute("value",''+urlParams.get('id'));
+		form.appendChild(id);
+	}	
+	value = urlParams.get('debug');
+	if(value){
+		var debug = document.createElement('input');
+		debug.setAttribute("type","hidden");
+		debug.setAttribute("name", "debug");
+		debug.setAttribute("value",''+ value);
+		form.appendChild(debug);
+	}
+	value = urlParams.get('share');
+	if(value){
+		var share = document.createElement('input');
+		share.setAttribute("type","hidden");
+		share.setAttribute("name", "share");
+		share.setAttribute("value",''+urlParams.get('share'));
+		form.appendChild(share);
+	}
 	var input = document.createElement('input');
 	input.setAttribute("type","submit")
 	form.appendChild(input)
