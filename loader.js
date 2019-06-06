@@ -21,7 +21,7 @@ var functorGISSTEMP = (file, renderF, src='') => function(id, title){
 	else {
 
 		Papa.parse(file, {
-			worker: useWebWorker,
+			// //worker: useWebWorker,
 			header: true,
 			delimiter: ',',
 			download: true,
@@ -52,7 +52,7 @@ var parseZonal = (file, src='') => function (renderF, tag) {
 		return complete(cached);
 	}else{
 		Papa.parse(file, {
-			worker: useWebWorker,
+			//worker: useWebWorker,
 			header: true,
 			delimiter: ',',
 			download: true,
@@ -88,7 +88,7 @@ var parseAbisko = (file, src='') => function (renderF, id, title, tag) {
 
 	}else {
 		Papa.parse(file, {
-			worker: useWebWorker,
+			//worker: useWebWorker,
 			header: true,
 			//delimiter: ';',
 			download: true,
@@ -111,7 +111,7 @@ var monthlyFunc = (render) => function(data, id, title, src="") {
 
 var parseTornetrask = function (file='data/Tornetrask_islaggning_islossning.csv', src='') {
 	Papa.parse(file, {
-		worker: useWebWorker,
+		//worker: useWebWorker,
 		header: true,
 		download: true,
 		skipEmptyLines: true,
@@ -124,7 +124,7 @@ var parseTornetrask = function (file='data/Tornetrask_islaggning_islossning.csv'
 
 var parseSnowDepth = function (file='data/ANS_SnowDepth_1913-2017.csv', src='') {
 	Papa.parse(file, {
-		worker: useWebWorker,
+		//worker: useWebWorker,
 		header: true,
 		download: true,
 		skipEmptyLines: true,
