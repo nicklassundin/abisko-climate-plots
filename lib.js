@@ -87,7 +87,6 @@ const share = urlParams.get('share');
 
 
 var bpage = function(doc=document.getElementById("container")){
-	console.log(doc);
 	doc.appendChild(createBaseline());
 
 	id.forEach(each => {
