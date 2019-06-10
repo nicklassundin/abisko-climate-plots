@@ -1,7 +1,3 @@
-// function makeDocument() {
-//   var div = document.getElementById("render");
-//   div.innerHTML = "<div id='render'></div><figcaption></figcaption><script type=text/javascript>functorGISSTEMP('data/NH.Ts.csv',renderTemperatureGraph,'https://data.giss.nasa.gov/gistemp/')('div','Northern Hemisphere temperatures');</script>";
-// }
 
 var createBaseline = function(){
 	var form = document.createElement('form');
@@ -42,7 +38,7 @@ var createBaseline = function(){
 		var id = document.createElement('input');
 		id.setAttribute("type","hidden");
 		id.setAttribute("name", "id");
-		id.setAttribute("value",''+urlParams.get('id'));
+		id.setAttribute("value",''+value);
 		form.appendChild(id);
 	}	
 	value = urlParams.get('debug');
@@ -58,9 +54,10 @@ var createBaseline = function(){
 		var share = document.createElement('input');
 		share.setAttribute("type","hidden");
 		share.setAttribute("name", "share");
-		share.setAttribute("value",''+urlParams.get('share'));
+		share.setAttribute("value",''+value);
 		form.appendChild(share);
 	}
+	var input = document.createElement('input');
 	var input = document.createElement('input');
 	input.setAttribute("type","submit")
 	form.appendChild(input)
@@ -80,42 +77,63 @@ var copy = function() {
 	alert(copyText.value);
 }
 const urlParams = new URLSearchParams(window.location.search);
-var id = null;
-try{
-	id = urlParams.get('id').split(',');
-}catch{
-	id = 'all';	
+
+var getID = function(){
+
+	var id = null;
+	try{
+		id = urlParams.get('id').split(',');
+		if(id=='all'){fail()}
+	}catch{
+		id = ['AbiskoTemperatures',
+			'AbiskoTemperaturesSummer',
+			'AbiskoTemperaturesWinter',
+			'monthlyAbiskoTemperatures',
+			'growingSeason',
+			'temperatureDifferenceAbisko',
+			'temperatureDifference1',
+			'temperatureDifference2',
+			'temperatureDifference3','yearlyPrecipitation','summerPrecipitation',
+			'winterPrecipitation','monthlyPrecipitation','yearlyPrecipitationDifference',
+			'summerPrecipitationDifference','winterPrecipitationDifference','abiskoSnowDepthMeans','abiskoLakeIce'];
+	}
+	return id
 }
+var ids = getID();
 
 var baseline = null;
 if(urlParams.get('baselineLower')){
 	baselineLower = parseInt(urlParams.get('baselineLower'));
 	baselineUpper = parseInt(urlParams.get('baselineUpper'));
 }
+const baselineForm = (urlParams.get('baselineForm')=='true')||(urlParams.get('baselineForm')==undefined)
 
-if(id=='all'){
-	id = ['AbiskoTemperatures',
-		'AbiskoTemperaturesSummer',
-		'AbiskoTemperaturesWinter',
-		'monthlyAbiskoTemperatures',
-		'growingSeason',
-		'temperatureDifferenceAbisko',
-		'temperatureDifference1',
-		'temperatureDifference2',
-		'temperatureDifference3','yearlyPrecipitation','summerPrecipitation',
-		'winterPrecipitation','monthlyPrecipitation','yearlyPrecipitationDifference',
-		'summerPrecipitationDifference','winterPrecipitationDifference','abiskoSnowDepthMeans','abiskoLakeIce'];
-}
 
 
 const debug = urlParams.get('debug');
 const share = urlParams.get('share');
 
+var getUrl = function(uid=urlParams.get('id'),debug=urlParams.get('debug'),share=urlParams.get('share'),baselineForm=urlParams.get('baselineForm'),baselineLower=urlParams.get('baselineLower'),baselineUpper=urlParams.get('baselineUpper')){
+	var addparams = function(p, v, rest='?'){
+		if(v) return rest+p+'='+v;
+		return rest;
+	}
+
+	var params = addparams('id',uid);
+	params = addparams('debug',debug,params+'&');
+	params = addparams('share',share,params+'&');
+	params = addparams('baselineForm',baselineForm,params+'&');
+	params = addparams('baselineLower',baselineLower,params+'&');
+	params = addparams('baselineUpper',baselineUpper,params+'&');
+	return ((''+window.location).split('?')[0]+params)
+
+}
+// console.log(getUrl())
 
 var bpage = function(doc=document.getElementById("container")){
-	doc.appendChild(createBaseline());
+	if(baselineForm) doc.appendChild(createBaseline());
 
-	id.forEach(each => {
+	ids.forEach(each => {
 		rendF[each].html(debug, doc);	
 		rendF[each].func();
 	})
@@ -135,6 +153,7 @@ var bpage = function(doc=document.getElementById("container")){
 		cp.setAttribute('onclick', "copy()");
 		doc.appendChild(cp);
 	}
+	return doc
 }
 
 
@@ -252,6 +271,14 @@ var createDiv = function(id, no=null){
 	div.setAttribute("id",id);
 	var fig = document.createElement('figure');
 	if(no){
+		var remove = getID().filter(each => each!=id.split('_')[0]);
+		if(remove){
+			var del = document.createElement('a');
+			del.setAttribute('href', getUrl(uid=remove))
+			del.innerHTML = 'remove ';
+			fig.appendChild(del);
+		}
+
 		var a = document.createElement('a');
 		a.innerHTML = 'no: '+no;
 		fig.appendChild(a);

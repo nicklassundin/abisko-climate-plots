@@ -3,6 +3,12 @@ var SMHI_STATION_NAME_URL = "https://opendata-download-metobs.smhi.se/api/versio
 var SMHI_STATION_URL = ["https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/","/period/","/data.json"];
 
 
+const smhi = {
+	archive: 'corrected-archive',
+	months: 'latest-months',
+	days: 'latest-day',
+	hour: 'latest-hour'
+}
 
 // return array of all TODO generalize with WMO, currently only accept SMHI_STATION_NAME_URL
 // TODO input generalize function for different html documents
@@ -28,7 +34,7 @@ function getName(url,i) {
 			console.log( "Get JSON complete" );
 		})
 }
-$(document).ready(getName(SMHI_STATION_NAME_URL, 0));
+// $(document).ready(getName(SMHI_STATION_NAME_URL, 0));
 
 // // input ID from station and period currently string "latest-months"
 function get_smhi_station_url(ID, period){
@@ -57,7 +63,14 @@ function getTempSMHI(url){
 	var res = $.getJSON(url, function(json) {
 		var values = json.value;
 		var item = [];
+		values = values.map(each => ({
+			'date': new Date(each['date']),
+			'value': each['value'],
+			'quality': each['quality']
+		}))
+		console.log(values)
 		item.push("<li>"+values[0].value+"</li>") // only picks out one point TODO transform to pick out all
+
 		$("<ul/>", {
 			"class": "station temperature",
 			html: item
@@ -71,7 +84,7 @@ function getTempSMHI(url){
 	});
 }
 
-$(document).ready(getTempSMHI(get_smhi_station_url(159880, "latest-months")));
+$(document).ready(getTempSMHI(get_smhi_station_url(159880, smhi.months)));
 
 
 function csv_smhi_json(url){
