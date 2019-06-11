@@ -1,14 +1,17 @@
 
-var createBaseline = function(){
+// TODO Seperate them to one constructor with general input for reuse
+var createBaseline = function(ver=true){
 	var form = document.createElement('form');
 	form.setAttribute("id",baseline);
 	var header = document.createElement('header');
-	header.innerHTML = "Year range for baseline";
+	if(ver) header.innerHTML = "Year range for baseline";
 
 	var lowLabel = document.createElement('label');
 	lowLabel.setAttribute("for","baselineLower");
 	lowLabel.innerHTML = "Lower limit ";
 	var lowInput = document.createElement('input');
+	lowInput.setAttribute("size","4")
+	lowInput.setAttribute("maxlength","4")
 	lowInput.setAttribute("name","baselineLower");
 	lowInput.setAttribute("type","text");
 	lowInput.setAttribute("value",baselineLower)
@@ -19,6 +22,8 @@ var createBaseline = function(){
 	upperLabel.setAttribute("for","baselineUpper");
 	upperLabel.innerHTML = "Upper limit ";
 	var upperInput = document.createElement('input');
+	upperInput.setAttribute("size","4")
+	upperInput.setAttribute("maxlength","4")
 	upperInput.setAttribute("name","baselineUpper");
 	upperInput.setAttribute("type","text");
 	upperInput.setAttribute("value",baselineUpper)
@@ -27,7 +32,7 @@ var createBaseline = function(){
 	form.appendChild(header)
 	form.appendChild(lowLabel)
 	form.appendChild(lowInput)
-	form.appendChild(br1)
+	if(ver) form.appendChild(br1)
 	form.appendChild(upperLabel)
 	form.appendChild(upperInput)
 	form.appendChild(br2)
@@ -60,7 +65,7 @@ var createBaseline = function(){
 	var input = document.createElement('input');
 	var input = document.createElement('input');
 	input.setAttribute("type","submit")
-	form.appendChild(input)
+	if(ver)form.appendChild(input)
 	return form;
 }
 

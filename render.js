@@ -380,11 +380,61 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
 		}],
 	});
 };
+baselineUI = function(id) {
+	return annotations = [{
+		labelOptions: {
+			verticalAlign: 'top',
+			crop: false,
+			// shape: 'connector',
+			y: 0,
+			borderRadius: 5,
+			backgroundColor: 'rgb(225, 225, 225)',
+			borderWidth: 1,
+			borderColor: '#AAA'
 
+			// distance: 20,
+		},
+		draggable: 'x',
+		labels: [{
+			text: createBaseline(false).innerHTML,
+			// 'Baseline: ['+baselineLower+','+baselineUpper+']',
+			point: {
+				xAxis: 0,
+				yAxis: 10,
+				x: baselineLower - (baselineLower-baselineUpper)/2,
+				y: 2,
+			},
+			useHTML: true,
+			style: {
+                		// width: '300%',
+				// fontSize: '70%'
+            		},
+		}],
+		events: {
+			afterUpdate: function(e){
+				var mov = parseInt(e.target.options.labels[0].x/12);
+				var dif = baselineUpper-baselineLower;
+				var mid = baselineLower +dif/2+mov;
+				console.log(mid)
+				console.log(dif/2)
+				if(2019-dif/2 < mid) mid = 2019-dif/2;
+				if(1913+dif/2 > mid) mid = 1913+dif/2;
+				console.log(mid)	
+				baselineLower = mid - dif/2;
+				baselineUpper = mid + dif/2;	
+
+				document.getElementById(id).innerHTML = '';
+				bpage();	
+			}	
+		}
+	}];
+}
 var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 	// console.log(title);
 	// console.log(temperatures);
-	Highcharts.chart(id, {
+
+
+	var chart = Highcharts.chart(id, {
 		chart: {
 			type: 'column'
 		},
@@ -404,7 +454,7 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 			},
 			crosshair: true,
 			plotBands: [{
-				color: 'rgb(245, 245, 245)',
+				color: 'rgb(225, 225, 225)',
 				from: baselineLower,
 				to: baselineUpper,
 			}],
@@ -426,34 +476,7 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 		legend: {
 			enabled: true,
 		},
-		annotations: [{
-			labelOptions: {
-				barkgroundColor: 'red',
-				verticalAlign: 'top',
-				crop: false,
-				y: 0
-			},
-			draggable: 'x',
-			labels: [{
-				text: 'Baseline: ['+baselineLower+','+baselineUpper+']',
-				point: {
-					xAxis: 0,
-					yAxis: 0,
-					x: baselineLower - (baselineLower-baselineUpper)/2,
-					y: 2,
-				},
-				// useHTML: true,
-			}],
-			events: {
-				afterUpdate: function(e){
-					var mov = parseInt(e.target.options.labels[0].x/12);
-					baselineLower = baselineLower + mov;
-					baselineUpper = baselineUpper + mov;
-					document.getElementById('container').innerHTML = '';
-					bpage();	
-				}	
-			}
-		}],
+		annotations: baselineUI(id),
 		series: [{
 			regression: true,
 			regressionSettings: {
@@ -587,34 +610,7 @@ var renderPrecipitationDifferenceGraph = function (precipitation, id, title) {
 		legend: {
 			enabled: true,
 		},
-		annotations: [{
-			labelOptions: {
-				barkgroundColor: 'red',
-				verticalAlign: 'top',
-				crop: false,
-				y: 0
-			},
-			draggable: 'x',
-			labels: [{
-				text: 'Baseline: ['+baselineLower+','+baselineUpper+']',
-				point: {
-					xAxis: 0,
-					yAxis: 0,
-					x: baselineLower - (baselineLower-baselineUpper)/2,
-					y: 100,
-				},
-				// useHTML: true,
-			}],
-			events: {
-				afterUpdate: function(e){
-					var mov = parseInt(e.target.options.labels[0].x/12);
-					baselineLower = baselineLower + mov;
-					baselineUpper = baselineUpper + mov;
-					document.getElementById('container').innerHTML = '';
-					bpage();	
-				}	
-			}
-		}],
+		annotations: baselineUI(id),
 		series: [{
 			regression: true,
 			name: 'Difference',
