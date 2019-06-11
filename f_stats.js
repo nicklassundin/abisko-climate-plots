@@ -41,13 +41,13 @@ var parseGISSTEMP = function (result, src='') {
 		temperatures[statistic] = temperatures.map(temps => ({
 			x: temps.year,
 			y: temps[statistic],
-		})).slice(10);
+		}));
 	});
 	temperatures.movAvg = movingAverages(temperatures.map(temps => temps.avg), 10)
 		.map((avg, index) => ({
 			x: temperatures[index].year,
 			y: avg,
-		})).slice(10);
+		}));
 
 	temperatures.ci = temperatures.map(temps => ({
 		x: temps.year,
@@ -63,7 +63,7 @@ var parseGISSTEMP = function (result, src='') {
 	});
 	temperatures.meta = meta;
 	temperatures.src = src;
-	temperatures.ci = temperatures.ci.slice(10);
+	temperatures.ci = temperatures.ci;
 	temperatures.ciMovAvg = temperatures.ciMovAvg.slice(10);
 	return temperatures;
 };
@@ -465,17 +465,17 @@ var parseAbiskoCsv = function (result, src='') {
 
 	months().forEach((month, index) => {
 		var p = monthlyPrecip[month] = monthlyPrecip[month] || {};
-		p.years = years.slice(10);
+		p.years = years;
 		p.total = monthlyPrecipByStat(index, 'total');
 		p.movAvg = movingAveragesHighCharts(p.total.map(each => each.y));
 		p.linear = linearRegression(p.years, p.total.map(each => each.y));
-		p.total = p.total.slice(10);
+		p.total = p.total;
 
 		p.rain = monthlyPrecipByStat(index, 'rain');	
 		p.rain_movAvg = movingAveragesHighCharts(p.rain.map(each => each.y)); 
 		p.linear_rain_movAvg = linearRegression(p.years, p.rain_movAvg.map(each => each.y));
 		p.linear_rain = linearRegression(p.years, p.rain.map(each => each.y));
-		p.rain = p.rain.slice(10);
+		p.rain = p.rain;
 
 		// in pregress
 		p.variance = monthlyPrecipByStat(index, 'variance');
@@ -490,7 +490,7 @@ var parseAbiskoCsv = function (result, src='') {
 		['low', 'high'].forEach(bound =>
 			movingAverages(p.ci.map(each => each[bound]), 10)
 			.forEach((value, index) => p.ciMovAvg[index][bound] = value));
-		p.ci = p.ci.slice(10);
+		p.ci = p.ci;
 		p.ciMovAvg = p.ciMovAvg.slice(10);
 
 		p.snow = monthlyPrecipByStat(index, 'snow');
@@ -498,13 +498,13 @@ var parseAbiskoCsv = function (result, src='') {
 		p.snow_movAvg = movingAveragesHighCharts(p.snow.map(each => each.y)); // TODO REFORM
 		p.linear_snow = linearRegression(p.years, p.snow.map(each => each.y));
 		p.linear_snow_movAvg = linearRegression(p.years, p.snow_movAvg.map(each => each.y));
-		p.snow = p.snow.slice(10);
+		p.snow = p.snow;
 
 
 		var t = monthlyTemps[month] = {};
 		t.avg = monthlyTempByStat(index, 'avg');
-		t.min = monthlyTempByStat(index, 'min').slice(10);
-		t.max = monthlyTempByStat(index, 'max').slice(10);
+		t.min = monthlyTempByStat(index, 'min');
+		t.max = monthlyTempByStat(index, 'max');
 		t.movAvg = movingAveragesHighCharts(t.avg.map(each => each.y));
 		t.variance = monthlyTempByStat(index, 'variance');
 		t.ci = monthlyTempByStat(index, 'ci');
@@ -517,9 +517,9 @@ var parseAbiskoCsv = function (result, src='') {
 		['low', 'high'].forEach(bound =>
 			movingAverages(t.ci.map(each => each[bound]), 10)
 			.forEach((value, index) => t.ciMovAvg[index][bound] = value));
-		t.ci = t.ci.slice(10);
+		t.ci = t.ci;
 		t.ciMovAvg = t.ciMovAvg.slice(10);
-		t.avg = t.avg.slice(10);
+		t.avg = t.avg;
 	});
 
 	// Insert year for all season Temperatures
@@ -531,8 +531,8 @@ var parseAbiskoCsv = function (result, src='') {
 
 	var summerTemps = {
 		avg: seasonal('summerTemperature', 'avg'),
-		min: seasonal('summerTemperature', 'min').slice(10),
-		max: seasonal('summerTemperature', 'max').slice(10),
+		min: seasonal('summerTemperature', 'min'),
+		max: seasonal('summerTemperature', 'max'),
 		ci: seasonal('summerTemperature','ci').map((each) => (each.y)),
 		ciMovAvg: null,
 	};
@@ -544,8 +544,8 @@ var parseAbiskoCsv = function (result, src='') {
 
 	var winterTemps = {
 		avg: seasonal('winterTemperature', 'avg'),
-		min: seasonal('winterTemperature', 'min').slice(10),
-		max: seasonal('winterTemperature', 'max').slice(10),
+		min: seasonal('winterTemperature', 'min'),
+		max: seasonal('winterTemperature', 'max'),
 		ci: seasonal('winterTemperature','ci').map((each) => (each.y)),
 		ciMovAvg: null,
 	};
@@ -561,8 +561,8 @@ var parseAbiskoCsv = function (result, src='') {
 
 
 
-	summerTemps.avg = summerTemps.avg.slice(10);
-	winterTemps.avg = winterTemps.avg.slice(10);
+	summerTemps.avg = summerTemps.avg;
+	winterTemps.avg = winterTemps.avg;
 
 	// Inserts x: year for all seasons
 	var seasonalPrecipByStat = (season, statistic) => entries().map(each => ({
@@ -575,7 +575,7 @@ var parseAbiskoCsv = function (result, src='') {
 		{ season: 'winterPrecipitation', baseline: precipitationBaselineWinter }
 	].forEach((e) => {
 		var p = seasonalPrecipitation[e.season];
-		p.years = years.slice(10);
+		p.years = years;
 		p.total = seasonalPrecipByStat(e.season, 'total');
 		p.snow = seasonalPrecipByStat(e.season, 'snow');
 		p.ci = seasonalPrecipByStat(e.season, 'ci').map(each => each.y);
@@ -584,21 +584,21 @@ var parseAbiskoCsv = function (result, src='') {
 			movingAverages(p.ci.map(each => each[bound]), 10)
 			.forEach((value, index) => p.ciMovAvg[index][bound] = value));
 
-		p.ci = p.ci.slice(10);
+		p.ci = p.ci;
 		p.ciMovAvg = p.ciMovAvg.slice(10);
 		// TODO fix missing 10 data points
 		p.linear_snow = linearRegression(p.years, p.snow.map(each => each.y)); // TODO REFORM
 
 		p.snow_movAvg = movingAveragesHighCharts(p.snow.map(each => each.y)); 
 		// p.linear_snow_movAvg = linearRegression(p.years, p.snow_movAvg.map(each => each.y)); 
-		p.snow = p.snow.slice(10);
+		p.snow = p.snow;
 
 		p.rain = seasonalPrecipByStat(e.season, 'rain');	
 		p.linear_rain = linearRegression(p.years, p.rain.map(each => each.y));
 
 		p.rain_movAvg = movingAveragesHighCharts(p.rain.map(each => each.y)); 
 		// p.linear_rain = linearRegression(p.years, p.rain_movAvg.map(each => each.y));
-		p.rain = p.rain.slice(10);	
+		p.rain = p.rain;	
 
 
 		p.movAvg = movingAveragesHighCharts(p.total.map(each => each.y));
@@ -607,9 +607,9 @@ var parseAbiskoCsv = function (result, src='') {
 			x: each.x,
 			y: each.y - (e.baseline.sum / e.baseline.count),
 		}));
-		p.total = p.total.slice(10);
+		p.total = p.total;
 		p.linear_diff = linearRegression(years, p.difference.map(each => each.y));
-		p.difference = p.difference.slice(10); 
+		p.difference = p.difference; 
 
 	});
 
@@ -683,11 +683,11 @@ var parseAbiskoCsv = function (result, src='') {
 		temperatures: {
 			meta,
 			years,
-			avg: yearly('avg').slice(10),
-			min: yearly('min').slice(10),
-			max: yearly('max').slice(10),
+			avg: yearly('avg'),
+			min: yearly('min'),
+			max: yearly('max'),
 			movAvg: movingAveragesHighCharts(values().map(each => each.avg)),
-			ci: ci.slice(10),
+			ci: ci,
 			ciMovAvg: ciMovAvg.slice(10),
 
 
@@ -703,25 +703,25 @@ var parseAbiskoCsv = function (result, src='') {
 
 		growingSeason: {
 			src: src,
-			weeks: grwthSeason.weeks.slice(10),
+			weeks: grwthSeason.weeks,
 			movAvg: grwthSeason.movAvg,
-			ci: grwthSeason.ci.slice(10),
+			ci: grwthSeason.ci,
 			ciMovAvg: grwthSeason.ciMovAvg.slice(10),
 		},
 		yearlyPrecipitation: {
-			years: years.slice(10),
-			total: yearly('precip').slice(10),
-			snow: yearly('precip_snow').slice(10),
+			years: years,
+			total: yearly('precip'),
+			snow: yearly('precip_snow'),
 			// snow_movAvg: precipMovAvg_snow, // TODO
-			linear_snow: linearRegression(years.slice(10), yearly('precip_snow').map(each => each.y)),
-			rain: yearly('precip_rain').slice(10),
+			linear_snow: linearRegression(years, yearly('precip_snow').map(each => each.y)),
+			rain: yearly('precip_rain'),
 			// rain_movAvg:  precipMovAvg_rain,// TODO
 			movAvg: precipMovAvg,
-			linear_rain: linearRegression(years.slice(10), yearly('precip_rain').map(each => each.y)),
-			linear: linearRegression(years.slice(10), yearly('precip').map(each => each.y)),
-			difference: yrly_diff.slice(10),
-			linear_diff: linearRegression(years.slice(10), yrly_diff.map(each => each.y)),
-			ci: precipCI.slice(10),
+			linear_rain: linearRegression(years, yearly('precip_rain').map(each => each.y)),
+			linear: linearRegression(years, yearly('precip').map(each => each.y)),
+			difference: yrly_diff,
+			linear_diff: linearRegression(years, yrly_diff.map(each => each.y)),
+			ci: precipCI,
 			ciMovAvg: precipCIMovAvg.slice(10),
 		},
 		monthlyPrecip,
