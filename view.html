@@ -25,15 +25,16 @@
 	</head>
 
 	<body>
-		<div id="mark"></div>
+		<div id="container"></div>
 		<script src="f_stats.js"></script>
 		<script src="render.js"></script>
 		<script src="loader.js"></script>
 		<script src="lib.js"></script>
 		<script type="text/javascript">
 			window.onload = function() {
-				var container = document.createElement('div');
-				document.getElementById("mark").parentNode.appendChild(bpage(container,par=window.location.search));
+				var container = document.getElementById("container")
+				container.setAttribute('id','cont'+window.location.search);
+				bpage(container,par=window.location.search);
 			}
 		</script>
 	</body>
