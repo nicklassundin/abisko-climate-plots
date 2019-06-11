@@ -33,7 +33,7 @@
 		<script type="text/javascript">
 			window.onload = function() {
 				var container = document.getElementById("container")
-				container.setAttribute('id','cont'+window.location.search);
+				container.setAttribute('id','cont'+(''+window.location.search));
 				bpage(container,par=window.location.search);
 			}
 		</script>
