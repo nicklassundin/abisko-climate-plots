@@ -25,16 +25,17 @@
 	</head>
 
 	<body>
-		<div id="container"></div>
+		<div id="mark"></div>
 		<script src="f_stats.js"></script>
 		<script src="render.js"></script>
 		<script src="loader.js"></script>
 		<script src="lib.js"></script>
 		<script type="text/javascript">
 			window.onload = function() {
-				var container = document.getElementById("container")
+				var container = document.createElement("div")
 				container.setAttribute('id','cont'+(''+window.location.search));
-				bpage(container,par=window.location.search);
+				document.getElementById("mark").parentNode.appendChild(bpage(container,par=window.location.search));
+				document.getElementById("mark").parentNode.removeChild(document.getElementById("mark"))
 			}
 		</script>
 	</body>
