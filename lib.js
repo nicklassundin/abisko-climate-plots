@@ -130,8 +130,8 @@ var getUrl = function(uid=urlParams.get('id'),debug=urlParams.get('debug'),share
 }
 // console.log(getUrl())
 
-var bpage = function(doc=document.createElement('div'), url=window.location.search){
-	urlParams = new URLSearchParams(url);
+var bpage = function(doc=document.createElement('div'), par=window.location.search){
+	urlParams = new URLSearchParams(par);
 	if(baselineForm) doc.appendChild(createBaseline());
 
 	ids.forEach(each => {
