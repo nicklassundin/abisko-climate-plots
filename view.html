@@ -25,6 +25,7 @@
 	</head>
 
 	<body>
+		<div id="mark"></div>
 		<script src="f_stats.js"></script>
 		<script src="render.js"></script>
 		<script src="loader.js"></script>
@@ -32,7 +33,7 @@
 		<script type="text/javascript">
 			window.onload = function() {
 				var container = document.createElement('div');
-				document.body.appendChild(bpage(container));
+				document.getElementById("mark").parentNode.appendChild(bpage(container));
 			}
 		</script>
 	</body>
