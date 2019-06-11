@@ -77,7 +77,7 @@ var copy = function() {
 	alert(copyText.value);
 }
 var urlParams = new URLSearchParams(window.location.search);
-console.log(urlParams)
+
 var getID = function(){
 
 	var id = null;
@@ -130,7 +130,7 @@ var getUrl = function(uid=urlParams.get('id'),debug=urlParams.get('debug'),share
 }
 // console.log(getUrl())
 
-var bpage = function(doc=document.getElementById("container"), url=window.location.search){
+var bpage = function(doc=document.createElement('div'), url=window.location.search){
 	urlParams = new URLSearchParams(url);
 	if(baselineForm) doc.appendChild(createBaseline());
 
