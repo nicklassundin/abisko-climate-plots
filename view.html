@@ -32,10 +32,14 @@
 		<script src="lib.js"></script>
 		<script type="text/javascript">
 			window.onload = function() {
+				var param = (''+window.location.search);
+				var mark = document.getElementById("mark"+param);
+				if(!mark) mark = document.getElementById("mark");
+
 				var container = document.createElement("div")
-				container.setAttribute('id','cont'+(''+window.location.search));
-				document.getElementById("mark").parentNode.appendChild(bpage(container,par=window.location.search));
-				document.getElementById("mark").parentNode.removeChild(document.getElementById("mark"))
+				container.setAttribute('id','cont'+param);
+				mark.parentNode.appendChild(bpage(container,par=window.location.search));
+				mark.parentNode.removeChild(mark)
 			}
 		</script>
 	</body>
