@@ -76,8 +76,8 @@ var copy = function() {
 	document.execCommand("copy");
 	alert(copyText.value);
 }
-const urlParams = new URLSearchParams(window.location.search);
-
+var urlParams = new URLSearchParams(window.location.search);
+console.log(urlParams)
 var getID = function(){
 
 	var id = null;
@@ -130,7 +130,8 @@ var getUrl = function(uid=urlParams.get('id'),debug=urlParams.get('debug'),share
 }
 // console.log(getUrl())
 
-var bpage = function(doc=document.getElementById("container")){
+var bpage = function(doc=document.getElementById("container"), url=window.location.search){
+	urlParams = new URLSearchParams(url);
 	if(baselineForm) doc.appendChild(createBaseline());
 
 	ids.forEach(each => {
