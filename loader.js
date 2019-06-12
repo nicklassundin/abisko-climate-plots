@@ -114,7 +114,7 @@ var monthlyFunc = (render) => function(data, id, title, src="") {
 
 var parseTornetrask = function (file='data/Tornetrask_islaggning_islossning.csv', src='') {
 	Papa.parse(url()+''+file, {
-		//worker: useWebWorker,
+		//worker: useWebWorker, TODO BUG waiting for response
 		header: true,
 		download: true,
 		skipEmptyLines: true,
@@ -125,9 +125,9 @@ var parseTornetrask = function (file='data/Tornetrask_islaggning_islossning.csv'
 	});
 };
 
-var parseSnowDepth = function (file='data/ANS_SnowDepth_1913-2017.csv', src='') {
+var parseSnowDepth = function (file='data/ANS_SnowDepth.csv', src='') {
 	Papa.parse(url()+''+file, {
-		//worker: useWebWorker,
+		//worker: useWebWorker, TODO BUG waiting for response
 		header: true,
 		download: true,
 		skipEmptyLines: true,

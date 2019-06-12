@@ -733,9 +733,10 @@ var parseAbiskoCsv = function (result, src='') {
 var parseAbiskoIceData = function (result, src='') {
 	var fields = result.meta.fields;
 	var data = result.data;
-
+	// console.log(data)
 	var iceData = [];
 	data.forEach((row) => {
+		// console.log(row)
 		var winterYear = +row[fields[0]] || undefined;
 		var springYear = +row[fields[1]] || undefined;
 		var freezeDate = parseDate(row[fields[2]]);
@@ -820,7 +821,7 @@ var parseAbiskoIceData = function (result, src='') {
 
 	var yearMax = iceData.length - 1;
 	// console.log(data);
-	// console.log(freeze);
+	// console.log(breakup);
 	return {
 		src: src,
 		yearMax,
