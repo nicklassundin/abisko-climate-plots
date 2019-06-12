@@ -388,7 +388,7 @@ baselineUI = function(id) {
 			// shape: 'connector',
 			y: 0,
 			borderRadius: 5,
-			backgroundColor: 'rgb(225, 225, 225)',
+			backgroundColor: 'rgb(245, 245, 245)',
 			borderWidth: 1,
 			borderColor: '#AAA'
 
@@ -420,8 +420,8 @@ baselineUI = function(id) {
 				if(2019-dif/2 < mid) mid = 2019-dif/2;
 				if(1913+dif/2 > mid) mid = 1913+dif/2;
 				console.log(mid)	
-				baselineLower = mid - dif/2;
-				baselineUpper = mid + dif/2;	
+				baselineLower = parseInt(mid - dif/2);
+				baselineUpper = parseInt(mid + dif/2);	
 
 				document.getElementById(id).innerHTML = '';
 				bpage();	
@@ -454,7 +454,7 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 			},
 			crosshair: true,
 			plotBands: [{
-				color: 'rgb(225, 225, 225)',
+				color: 'rgb(245, 245, 245)',
 				from: baselineLower,
 				to: baselineUpper,
 			}],
