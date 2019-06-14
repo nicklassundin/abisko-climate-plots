@@ -1,41 +1,47 @@
 
+var selectText = function(e){
+		e.focus();
+		e.select();
+};
 // TODO Seperate them to one constructor with general input for reuse
-var createBaseline = function(ver=true){
+var createBaseline = function(ver=true, change){
+	var createInput = function(name, value, div=document.createElement('div')){
+		var submit = change;
+		if(submit){
+			submit = submit+"('baseline"+name+"')"
+		}else{
+			submit = "submit(this)"
+		}
+		var label = document.createElement('label');
+		label.setAttribute("for","baselineLower");
+		label.innerHTML = name+" limit ";
+		var input = document.createElement('input');
+		input.setAttribute("size","4")
+		input.setAttribute("maxlength","4")
+		input.setAttribute("name","baseline"+name);
+		input.setAttribute("type","text");
+		input.setAttribute("value",value);
+		input.setAttribute("onClick",onclick="selectText(this)")
+		input.setAttribute("onChange",onchange=submit+'(this.value)')
+		div.appendChild(label)
+		div.appendChild(input)
+		return div;
+	}
 	var form = document.createElement('form');
 	form.setAttribute("id",baseline);
 	var header = document.createElement('header');
-	if(ver) header.innerHTML = "Year range for baseline";
+	header.innerHTML = "Year range for baseline";
 
-	var lowLabel = document.createElement('label');
-	lowLabel.setAttribute("for","baselineLower");
-	lowLabel.innerHTML = "Lower limit ";
-	var lowInput = document.createElement('input');
-	lowInput.setAttribute("size","4")
-	lowInput.setAttribute("maxlength","4")
-	lowInput.setAttribute("name","baselineLower");
-	lowInput.setAttribute("type","text");
-	lowInput.setAttribute("value",baselineLower)
-
-	var br1 = document.createElement('br');
-
-	var upperLabel = document.createElement('label');
-	upperLabel.setAttribute("for","baselineUpper");
-	upperLabel.innerHTML = "Upper limit ";
-	var upperInput = document.createElement('input');
-	upperInput.setAttribute("size","4")
-	upperInput.setAttribute("maxlength","4")
-	upperInput.setAttribute("name","baselineUpper");
-	upperInput.setAttribute("type","text");
-	upperInput.setAttribute("value",baselineUpper)
+	var lower = createInput("Lower", baselineLower);
+	if(ver) lower.appendChild(document.createElement('br'));
+	
+	var upper = createInput("Upper", baselineUpper,lower);
 
 	var br2 = document.createElement('br');
 	form.appendChild(header)
-	form.appendChild(lowLabel)
-	form.appendChild(lowInput)
-	if(ver) form.appendChild(br1)
-	form.appendChild(upperLabel)
-	form.appendChild(upperInput)
-	form.appendChild(br2)
+	form.appendChild(lower)
+	form.appendChild(upper)
+	if(ver)form.appendChild(br2)
 
 	// Hidden option because magic
 	var value = urlParams.get('id');
@@ -137,7 +143,7 @@ var getUrl = function(uid=urlParams.get('id'),debug=urlParams.get('debug'),share
 
 var bpage = function(doc=document.createElement('div'), par=window.location.search){
 	urlParams = new URLSearchParams(par);
-	if(baselineForm) doc.appendChild(createBaseline());
+	if(baselineForm=='true') doc.appendChild(createBaseline());
 
 	ids.forEach(each => {
 		rendF[each].html(debug, doc);	

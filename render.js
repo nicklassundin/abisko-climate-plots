@@ -380,6 +380,31 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
 		}],
 	});
 };
+var resetPlot = function(id){
+	return function(a){
+		return function(b){
+			console.log(a)
+			switch(a){
+				case "baselineLower": 
+					console.log("Lower")
+					baselineLower=b;
+				break;
+				case "baselineUpper": 
+					console.log("Upper")
+					baselineUpper=b;
+				break;	
+				default: 
+				break;
+			}
+			console.log(baselineUpper)
+			console.log(baselineLower)
+			id.innerHTML='';
+			bpage();
+		}
+	}
+}
+
+
 baselineUI = function(id) {
 	return annotations = [{
 		labelOptions: {
@@ -391,13 +416,11 @@ baselineUI = function(id) {
 			backgroundColor: 'rgb(245, 245, 245)',
 			borderWidth: 1,
 			borderColor: '#AAA'
-
 			// distance: 20,
 		},
 		draggable: 'x',
 		labels: [{
-			text: createBaseline(false).innerHTML,
-			// 'Baseline: ['+baselineLower+','+baselineUpper+']',
+			text: createBaseline(false,submit="resetPlot("+id+")").innerHTML,
 			point: {
 				xAxis: 0,
 				yAxis: 10,
@@ -406,26 +429,71 @@ baselineUI = function(id) {
 			},
 			useHTML: true,
 			style: {
-                		// width: '300%',
+				// width: '100%',
 				// fontSize: '70%'
-            		},
+				opacity: .4,
+			},
 		}],
 		events: {
 			afterUpdate: function(e){
 				var mov = parseInt(e.target.options.labels[0].x/12);
+				if(!mov) mov = 0; 
 				var dif = baselineUpper-baselineLower;
 				var mid = baselineLower +dif/2+mov;
-				console.log(mid)
-				console.log(dif/2)
 				if(2019-dif/2 < mid) mid = 2019-dif/2;
 				if(1913+dif/2 > mid) mid = 1913+dif/2;
-				console.log(mid)	
 				baselineLower = parseInt(mid - dif/2);
 				baselineUpper = parseInt(mid + dif/2);	
 
 				document.getElementById(id).innerHTML = '';
 				bpage();	
-			}	
+			},
+			// TODO events for filling out form
+			mouseover: function(e){
+				// console.log(e.target.options.labels[0])
+			}
+		}
+	}];
+}
+var baselineUI_new = function(id){
+	return plotBands = [{
+		color: 'rgb(245, 245, 245)',
+		from: baselineLower,
+		to: baselineUpper,
+		label: {
+			text: createBaseline(false,submit="resetPlot("+id+")").innerHTML,
+			point: {
+				xAxis: 0,
+				yAxis: 10,
+				x: baselineLower - (baselineLower-baselineUpper)/2,
+				y: 2,
+			},
+			useHTML: true,
+			style: {
+				// width: '300%',
+				// fontSize: '70%'
+				opacity: .6,
+			},
+		},
+	}];
+}
+
+// TODO experiment
+var plotLines = function(id){
+	return plotLines = [{
+		color: 'rgb(205, 205, 205)',
+		value: baselineUpper,
+		width: 2,
+		useHTML: true,
+	},{
+		color: 'rgb(205, 205, 205)',
+		value: baselineLower,
+		width: 2,
+		useHTML: true,
+		events: {
+			click: function(e){
+				console.log(e)
+			}
 		}
 	}];
 }
@@ -453,11 +521,12 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 				text: 'Year',
 			},
 			crosshair: true,
-			plotBands: [{
-				color: 'rgb(245, 245, 245)',
-				from: baselineLower,
-				to: baselineUpper,
-			}],
+			// plotLines: plotLines(id),
+			plotBands: {
+		color: 'rgb(245, 245, 245)',
+		from: baselineLower,
+		to: baselineUpper,
+			}
 		},
 		yAxis: {
 			title: {
@@ -490,6 +559,9 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 			negativeColor: 'blue',
 		}],
 	});
+	// $('.highcharts-annotations-labels text').bind('mouseover',function(e){
+	// alert("You hover on "+$(this).text())
+	// });
 };
 
 var renderGrowingSeasonGraph = function (season, id, title='Growing season') {
