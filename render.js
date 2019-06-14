@@ -386,11 +386,9 @@ var resetPlot = function(id){
 			console.log(a)
 			switch(a){
 				case "baselineLower": 
-					console.log("Lower")
 					baselineLower=b;
 				break;
 				case "baselineUpper": 
-					console.log("Upper")
 					baselineUpper=b;
 				break;	
 				default: 
