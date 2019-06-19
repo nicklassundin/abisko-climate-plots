@@ -91,6 +91,17 @@ var baselineUpper = 1990;
 
 var withinBaselinePeriod = year => year >= baselineLower && year <= baselineUpper;
 
+
+// TODO currying
+var getDiff = function(values){
+	var result = values.filter(each => withinBaselinePeriod(each.x));
+	var count = result.length;
+	console.log(result)
+	var sum = result.map(each => each.y).reduce((a,b) => a+b,0);
+	return sum/count;
+}
+
+
 var validNumber = (string) => {
     var number = +string;
     return (number) ? number : undefined;

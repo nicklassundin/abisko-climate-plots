@@ -1,7 +1,23 @@
 
+const csv = {
+	nasa: {
+		nh: "data/NH.Ts.csv",
+		glb: "data/GLB.Ts.csv",
+		zon:"data/ZoneAnn.Ts.csv",
+		src: "https://data.giss.nasa.gov/gistemp/",
+	},
+	abisko: {
+		temp: "data/ANS_Temp_Prec.csv",
+		snow: "data/ANS_SnowDepth.csv",
+		tornetrask: "data/Tornetrask_islaggning_islossning.csv",
+		src: "https://www.arcticcirc.net/",
+
+	}
+}
+
 var selectText = function(e){
-		e.focus();
-		e.select();
+	e.focus();
+	e.select();
 };
 // TODO Seperate them to one constructor with general input for reuse
 var createBaseline = function(ver=true, change){
@@ -34,7 +50,7 @@ var createBaseline = function(ver=true, change){
 
 	var lower = createInput("Lower", baselineLower);
 	if(ver) lower.appendChild(document.createElement('br'));
-	
+
 	var upper = createInput("Upper", baselineUpper,lower);
 
 	var br2 = document.createElement('br');
@@ -89,7 +105,7 @@ var copy = function() {
 }
 var urlParams = new URLSearchParams(window.location.search);
 
-var getID = function(){
+var getID = function(urlParams){
 
 	var id = null;
 	try{
@@ -104,13 +120,20 @@ var getID = function(){
 			'temperatureDifferenceAbisko',
 			'temperatureDifference1',
 			'temperatureDifference2',
-			'temperatureDifference3','yearlyPrecipitation','summerPrecipitation',
-			'winterPrecipitation','monthlyPrecipitation','yearlyPrecipitationDifference',
-			'summerPrecipitationDifference','winterPrecipitationDifference','abiskoSnowDepthMeans','abiskoLakeIce'];
+			'temperatureDifference3',
+			'yearlyPrecipitation',
+			'summerPrecipitation',
+			'winterPrecipitation',
+			'monthlyPrecipitation',
+			'yearlyPrecipitationDifference',
+			'summerPrecipitationDifference',
+			'winterPrecipitationDifference',
+			'abiskoSnowDepthPeriodMeans',
+			'abiskoSnowDepthPeriodMeans2',
+			'abiskoLakeIce'];
 	}
 	return id
 }
-var ids = getID();
 
 var baseline = null;
 if(urlParams.get('baselineLower')){
@@ -141,14 +164,23 @@ var getUrl = function(uid=urlParams.get('id'),debug=urlParams.get('debug'),share
 }
 // console.log(getUrl())
 
-var bpage = function(doc=document.createElement('div'), par=window.location.search){
+var bpage = function(doc=document.createElement('div'), par=window.location.search, ids=getID(new URLSearchParams(par))){
+	doc.innerHTML = "";
 	urlParams = new URLSearchParams(par);
 	if(baselineForm=='true') doc.appendChild(createBaseline());
-
-	ids.forEach(each => {
-		rendF[each].html(debug, doc);	
-		rendF[each].func();
-	})
+	if(Array.isArray(ids)) {
+		ids.forEach(each => {
+			try{
+				doc.appendChild(rendF[each].html(debug, doc));	
+				rendF[each].func();
+			}catch(e){
+				console.log("failed to render: "+each)
+			}
+		})
+	}else{
+		doc.appendChild(rendF[ids].html(debug, doc));	
+		rendF[ids].func();
+	}
 
 	if(share=='true'){
 		var input = document.createElement("input");
@@ -168,115 +200,6 @@ var bpage = function(doc=document.createElement('div'), par=window.location.sear
 	return doc
 }
 
-
-var nhTemp = function() {
-	functorGISSTEMP('data/NH.Ts.csv',renderTemperatureGraph,'https://data.giss.nasa.gov/gistemp/')('northernHemisphere','Northern Hemisphere temperatures');
-}
-var glbTemp = function(){
-	functorGISSTEMP('data/GLB.Ts.csv',renderTemperatureGraph, 'https://data.giss.nasa.gov/gistemp/')('globalTemperatures','Global temperatures');
-
-}
-
-
-var zCached = null;
-var zonalTemp = function(){
-	var cached;
-	if(zCached){
-		cached = zCached;
-	}else{
-		var cached = parseZonal('data/ZonAnn.Ts.csv', 'https://data.giss.nasa.gov/gistemp/');
-	}
-	var result = {
-
-		cached, 
-		diff: {
-
-			arctic: function(){
-				cached(containerRender(renderTemperatureDifferenceGraph,'temperatureDifference1','Temperature difference for Arctic (64N-90N)'), '64n-90n');
-			},
-			nh: function(){
-				cached(containerRender(renderTemperatureDifferenceGraph,'temperatureDifference2','Temperature difference for Northern Hemisphere'),'nhem');
-			},
-			glob: function(){
-				cached(containerRender(renderTemperatureDifferenceGraph,'temperatureDifference3','Global temperature difference'), 'glob');
-			},
-		},
-		arctic: function(){
-			this.cached(containerRender(renderTemperatureGraph,'arcticTemperatures','Arctic (64N-90N) temperatures'), 'yrly');
-		},
-		// globTemp: function(){
-		// this.cached(containerRender(renderTemperature))
-		// },
-	}
-	return result;
-};
-
-
-var tornetrask = function(){
-	parseTornetrask('data/Tornetrask_islaggning_islossning.csv','https://www.arcticcirc.net/');
-}
-
-var abiskoSnowDepth = function() {
-	parseSnowDepth('data/ANS_SnowDepth.csv','https://www.arcticcirc.net/');
-}
-
-
-var cached = null;
-var parseAb = function(){
-	if(!cached){
-		var cached = parseAbisko('data/ANS_Temp_Prec.csv','https://www.arcticcirc.net/');
-	}
-	var result = {
-		temps: {
-			yrly: function(){
-				cached(renderTemperatureGraph, 'AbiskoTemperatures', 'Abisko temperatures', 'temperatures');
-			},
-			summer: function(){
-				cached(renderAbiskoMonthlyTemperatureGraph, 'AbiskoTemperaturesSummer', 'Abisko temperatures for '+summerRange, 'summerTemps');
-			},
-			winter: function(){
-				cached(renderAbiskoMonthlyTemperatureGraph, 'AbiskoTemperaturesWinter', 'Abisko temperatures for '+winterRange, 'winterTemps');
-			},
-			monthly: function(){
-				cached(monthlyFunc(renderAbiskoMonthlyTemperatureGraph), 'monthlyAbiskoTemperatures', 'Abisko temperatures for', 'monthlyTemps')
-			},
-			diff: {
-				yrly: function(){
-					cached(renderTemperatureDifferenceGraph, 'temperatureDifferenceAbisko', 'Temperature difference for Abisko', 'temperatures')
-				},
-			}
-		},
-		precip: {
-			yrly: function(){
-				cached(renderYearlyPrecipitationGraph, 'yearlyPrecipitation','Yearly precipitation', 'yearlyPrecipitation')
-			},
-			summer: function(){
-				cached(renderYearlyPrecipitationGraph, 'summerPrecipitation','Precipitation for '+summerRange, 'summerPrecipitation')
-			},
-			winter: function(){
-				cached(renderYearlyPrecipitationGraph, 'winterPrecipitation','Precipitation for '+winterRange, 'winterPrecipitation')
-			},
-			monthly: function(){
-				cached(monthlyFunc(renderMonthlyPrecipitationGraph), 'monthlyPrecipitation', 'Abisko Precipitation for', 'monthlyPrecip')
-			},
-			diff: {
-				yrly: function(){
-					cached(renderPrecipitationDifferenceGraph, 'yearlyPrecipitationDifference', 'Precipitation difference', 'yearlyPrecipitation');
-				},
-				summer: function(){
-					cached(renderPrecipitationDifferenceGraph, 'summerPrecipitationDifference', 'Precipitation difference '+summerRange, 'summerPrecipitation');
-				},
-				winter: function(){
-					cached(renderPrecipitationDifferenceGraph, 'winterPrecipitationDifference', 'Precipitation difference '+winterRange, 'winterPrecipitation');
-				},
-			},
-		},
-		growingSeason: function(){
-			cached(renderGrowingSeasonGraph,'growingSeason', 'Growing season', 'growingSeason')
-		}
-	};
-	return result;
-}
 
 var createDiv = function(id, no=null){
 	var div = document.createElement('div');
@@ -305,215 +228,265 @@ var createDiv = function(id, no=null){
 
 var rendF = {
 	'northernHemisphere': {
-		func: nhTemp,
+		func: function() {
+			functorGISSTEMP('data/NH.Ts.csv',renderTemperatureGraph,'https://data.giss.nasa.gov/gistemp/')('northernHemisphere','Northern Hemisphere temperatures');
+		},
 		html: function(debug=false, doc){
 			var no = 16;
 			if(!debug) no = debug;
-			doc.appendChild(createDiv('northernHemisphere', no));
-			if(debug)console.log(no)
+			return createDiv('northernHemisphere', no);
+			
 		},
 	},
 	'globalTemperatures': {
-		func: glbTemp,
+		func: function(){
+			functorGISSTEMP('data/GLB.Ts.csv',renderTemperatureGraph, 'https://data.giss.nasa.gov/gistemp/')('globalTemperatures','Global temperatures');
+		},
 		html: function(debug=false, doc){
 			var no = 17;
 			if(!debug) no = debug;
-			doc.appendChild(createDiv('globalTemperatures', no));
-			if(debug)console.log(no)
+			return createDiv('globalTemperatures', no);
+			
 		},
 	},
 	'temperatureDifference1': {
-		func: zonalTemp().diff.arctic, 	// TODO opt
+		func: function(){
+			contFunc('zonal', 'data/ZonAnn.Ts.csv','https:data.giss.nasa.gov/gistemp/')('temperatureDifference1', 'Temperature difference for Arctic (64N-90N)','64n-90n')
+		},
 		html: function(debug=false, doc){
 			var no = 20;
 			if(!debug) no = debug;
-			doc.appendChild(createDiv('temperatureDifference1', no));
-			if(debug)console.log(no)
+			return createDiv('temperatureDifference1', no);
+			
 		},
 	},
 	'temperatureDifference2': {
-		func: zonalTemp().diff.nh,    	// 
+		func: function(){
+			contFunc('zonal', 'data/ZonAnn.Ts.csv','https:data.giss.nasa.gov/gistemp/')('temperatureDifference2','Temperature difference for Northern Hemisphere','nhem');
+		},
 		html: function(debug=false, doc){
 			var no = 21;
 			if(!debug) no = debug;
-			doc.appendChild(createDiv('temperatureDifference2', no));
-			if(debug)console.log(no)
+			return createDiv('temperatureDifference2', no);
+			
 		},
 	},
 	'temperatureDifference3': {
-		func: zonalTemp().diff.glob,	//
+		func: function(){
+			contFunc('zonal', 'data/ZonAnn.Ts.csv','https:data.giss.nasa.gov/gistemp/')('temperatureDifference3','Global temperature difference', 'glob');
+		},
 		html: function(debug=false, doc){
 			var no = 22;
 			if(!debug) no = debug;
-			doc.appendChild(createDiv('temperatureDifference3', no));
-			if(debug)console.log(no)
+			return createDiv('temperatureDifference3', no);
+			
 		},
 	},
 	'arcticTemperatures': {
-		func: zonalTemp().arctic, 
+		func: function(){alert("PLACE HOLDER")}, 
 		html: function(debug=false, doc){
 			var no = 16.1;
 			if(!debug) no = debug;
-			doc.appendChild(createDiv('arcticTemperatures', no));
-			if(debug)console.log(no)
+			return createDiv('arcticTemperatures', no);
+			
 		},
 	},
 	'abiskoLakeIce':{
-		func: tornetrask,
+		func: function(){
+			contFunc('tornetrask', "data/Tornetrask_islaggning_islossning.csv", "https://www.arcticcirc.net/")('abiskoLakeIce','Torneträsk Freeze-up and break-up of lake ice vs ice time')
+		},
 		html: function(debug=false, doc){
 			var no = 43;
 			if(!debug) no = debug;
-			doc.appendChild(createDiv('abiskoLakeIce', no));
-			if(debug)console.log(no)
+			return createDiv('abiskoLakeIce', no);
+			
 		},
 	}, 
-	'abiskoSnowDepthMeans':{
-		func: abiskoSnowDepth,
+	'abiskoSnowDepthPeriodMeans':{
+		func: function() {
+			contFunc('abiskoSnowDepth',"data/ANS_SnowDepth.csv", "https://www.arcticcirc.net/")("abiskoSnowDepthPeriodMeans", "Monthly mean snow depth for Abisko","periodMeans")
+		},
+
 		html: function(debug=false, doc){
 			var no = 41;
 			if(!debug) no = debug;
-			doc.appendChild(createDiv('abiskoSnowDepthPeriodMeans',no))
-			if(debug)console.log(no)
-			no = 42;
+			return createDiv('abiskoSnowDepthPeriodMeans', no)
+		},
+	},
+	'abiskoSnowDepthPeriodMeans2':{
+		func: function() {
+			contFunc('abiskoSnowDepth',"data/ANS_SnowDepth.csv", "https://www.arcticcirc.net/")("abiskoSnowDepthPeriodMeans2", "Monthly mean snow depth for Abisko","decadeMeans")
+		},
+		html: function(debug=false, doc){
+			var no = 42;
 			if(!debug) no = debug;
-			doc.appendChild(createDiv('abiskoSnowDepthPeriodMeans2',no))
-			if(debug)console.log(no)
+			return createDiv('abiskoSnowDepthPeriodMeans2',no)
 		},
 	},
 	'AbiskoTemperatures':{
-		func: parseAb().temps.yrly,
+		func: function(){
+			contFunc("abisko",csv.abisko.temp,csv.abisko.src)('AbiskoTemperatures', 'Abisko temperatures', ['temperatures','yrly']);
+		},
 		html: function(debug=false, doc){
 			var no = 1;
 			if(!debug) no = debug;
-			doc.appendChild(createDiv('AbiskoTemperatures', no));
-			if(debug)console.log(no)
+			return createDiv('AbiskoTemperatures', no);
 		},
 
 	}, 
 	'AbiskoTemperaturesSummer': {
-		func: parseAb().temps.summer,
+		func: function(){
+			contFunc("abisko",csv.abisko.temp,csv.abisko.src)('AbiskoTemperaturesSummer', 'Abisko temperatures for '+summerRange, ['temperatures','summerTemps']);
+		},
 		html: function(debug=false, doc){
 			var no = 2;
 			if(!debug) no = debug;
-			doc.appendChild(createDiv('AbiskoTemperaturesSummer', no));
-			if(debug)console.log(no)
+			return createDiv('AbiskoTemperaturesSummer', no);
 		},
 	}, 
 	'AbiskoTemperaturesWinter': {
-		func: parseAb().temps.winter,
+		func: function(){
+			contFunc("abisko",csv.abisko.temp,csv.abisko.src)('AbiskoTemperaturesWinter', 'Abisko temperatures for '+winterRange, ['temperatures','winterTemps']);
+		},
 		html: function(debug=false, doc){
 			var no = 3;
 			if(!debug) no = debug;
-			doc.appendChild(createDiv('AbiskoTemperaturesWinter', no));
-			if(debug)console.log(no)
+			return createDiv('AbiskoTemperaturesWinter', no);
+			
 		},
 	},
 	'temperatureDifferenceAbisko': {
-		func: parseAb().temps.diff.yrly,
+		func: function(){
+			contFunc("abisko",csv.abisko.temp,csv.abisko.src)('temperatureDifferenceAbisko', 'Temperature difference for Abisko', ['temperatures','yrly'],['temperatures','difference'])
+		},
 		html: function(debug=false, doc){
 			var no = 19;
 			if(!debug) no = debug;
-			doc.appendChild(createDiv('temperatureDifferenceAbisko', no));
-			if(debug)console.log(no)
+			return createDiv('temperatureDifferenceAbisko', no);
+			
 		},
 	},
 	'monthlyAbiskoTemperatures': {
-		func: parseAb().temps.monthly,
+		func: function(){
+			contFunc("abisko",csv.abisko.temp,csv.abisko.src)('monthlyAbiskoTemperatures', 'Abisko temperatures for', ['temperatures','monthlyTemps'])
+		},
 		html: function(debug=false, doc){
 			var no = 4;
+			var div = document.createElement("div");
+			div.setAttribute("id","monthlyAbiskoTemperatures");
 			if(debug){
 				months().forEach((month, index) => {
-					doc.appendChild(createDiv('monthlyAbiskoTemperatures_'+month, no+index));
+					div.appendChild(createDiv('monthlyAbiskoTemperatures_'+month, no+index))
 				})
 
 			}else{
 				months().forEach((month, index) => {
-					doc.appendChild(createDiv('monthlyAbiskoTemperatures_'+month));
+					div.appendChild(createDiv('monthlyAbiskoTemperatures_'+month));
 				})
 
 			}
-			if(debug)console.log(no)
+			return div;
+			
 		},
 	}, 
 	'yearlyPrecipitation': {
-		func: parseAb().precip.yrly,
+		func: function(){
+			contFunc("abisko",csv.abisko.temp,csv.abisko.src)('yearlyPrecipitation','Yearly precipitation', ['precipitation','yrly'])
+		},
 		html: function(debug=false, doc){
 			var no = 23;
 			if(!debug) no = debug;
-			doc.appendChild(createDiv('yearlyPrecipitation', no));
-			if(debug)console.log(no)
+			return createDiv('yearlyPrecipitation', no);
+			
 		},
 	}, 
 	'summerPrecipitation': {
-		func: parseAb().precip.summer,
+		func: function(){
+			contFunc("abisko",csv.abisko.temp,csv.abisko.src)('summerPrecipitation','Precipitation for '+summerRange, ['precipitation','summerPrecipitation'])
+		},
 		html: function(debug=false, doc){
 			var no = 24;
 			if(!debug) no = debug;
-			doc.appendChild(createDiv('summerPrecipitation', no));
-			if(debug)console.log(no)
+			return createDiv('summerPrecipitation', no);
+			
 		},
 	}, 
 	'winterPrecipitation': {
-		func: parseAb().precip.winter,
+		func: function(){
+			contFunc("abisko",csv.abisko.temp,csv.abisko.src)('winterPrecipitation','Precipitation for '+winterRange, ['precipitation','winterPrecipitation'])
+		},
 		html: function(debug=false, doc){
 			var no = 25;
 			if(!debug) no = debug;
-			doc.appendChild(createDiv('winterPrecipitation', no));
-			if(debug)console.log(no)
+			return createDiv('winterPrecipitation', no);
+			
 		},
 	}, 
 	'yearlyPrecipitationDifference': {
-		func: parseAb().precip.diff.yrly,
+		func: function(){
+			contFunc("abisko",csv.abisko.temp,csv.abisko.src)('yearlyPrecipitationDifference', 'Precipitation difference', ['precipitation','yrly'], ['precipitation','difference']);
+		},
 		html: function(debug=false, doc){
 			var no = 38;
 			if(!debug) no = debug;
-			doc.appendChild(createDiv('yearlyPrecipitationDifference', no));
-			if(debug)console.log(no)
+			return createDiv('yearlyPrecipitationDifference', no);
+			
 		},
 	}, 
 	'summerPrecipitationDifference': {
-		func: parseAb().precip.diff.summer,
+		func: function(){
+			contFunc("abisko",csv.abisko.temp,csv.abisko.src)('summerPrecipitationDifference', 'Precipitation difference '+summerRange, ['precipitation','summerPrecipitation'], ['precipitation','difference']);
+		},
 		html: function(debug=false, doc){
 			var no = 39;
 			if(!debug) no = debug;
-			doc.appendChild(createDiv('summerPrecipitationDifference', no));
-			if(debug)console.log(no)
+			return createDiv('summerPrecipitationDifference', no);
+			
 		},
 	}, 
 	'winterPrecipitationDifference': {
-		func: parseAb().precip.diff.winter,
+		func: function(){
+			contFunc("abisko",csv.abisko.temp,csv.abisko.src)('winterPrecipitationDifference', 'Precipitation difference '+winterRange, ['precipitation','winterPrecipitation'],['precipitation','difference']);
+		},
 		html: function(debug=false, doc){
 			var no = 40;
 			if(!debug) no = debug;
-			doc.appendChild(createDiv('winterPrecipitationDifference',no));
-			if(debug)console.log(no)
+			return createDiv('winterPrecipitationDifference', no);
+			
 		},
 	}, 
 	'monthlyPrecipitation': {
-		func: parseAb().precip.monthly,
+		func: function(){
+			contFunc("abisko",csv.abisko.temp,csv.abisko.src)('monthlyPrecipitation', 'Abisko Precipitation for', ['precipitation','monthlyPrecip'])
+		},
 		html: function(debug=false, doc){
 			var no = 26;
+			var div = document.createElement('div');
+			div.setAttribute("id", "monthlyPrecipitation")
 			if(debug){
 				months().forEach((month, index) => {
-					doc.appendChild(createDiv('monthlyPrecipitation_'+month, no+index));
+					div.appendChild(createDiv('monthlyPrecipitation_'+month, no+index));
 				})
 
 			}else{
 				months().forEach((month, index) => {
-					doc.appendChild(createDiv('monthlyPrecipitation_'+month));
+					div.appendChild(createDiv('monthlyPrecipitation_'+month))
 				})
 
 			}
-			if(debug)console.log(no)
+			return div
+			
 		},
 	}, 
 	'growingSeason': {
-		func: parseAb().growingSeason,
+		func: function(){
+			contFunc("abisko",csv.abisko.temp,csv.abisko.src)('growingSeason', 'Growing season', 'growingSeason')
+		},
 		html: function(debug=false, doc){
 			var no = 18;
 			if(!debug) no = debug;
-			doc.appendChild(createDiv('growingSeason', no));
-			if(debug)console.log(no)
+			return createDiv('growingSeason', no);
+			
 		}
 	}
 }

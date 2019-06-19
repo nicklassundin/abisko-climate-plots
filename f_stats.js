@@ -681,25 +681,25 @@ var parseAbiskoCsv = function (result, src='') {
 		meta,
 		'days': days,
 		temperatures: {
-			meta,
-			years,
-			avg: yearly('avg'),
-			min: yearly('min'),
-			max: yearly('max'),
-			movAvg: movingAveragesHighCharts(values().map(each => each.avg)),
-			ci: ci,
-			ciMovAvg: ciMovAvg.slice(10),
+			yrly: {
 
-
-
-			difference: yearly('avg').map(each => ({
-				x: each.x,
-				y: each.y - (temperatureBaseline.sum / temperatureBaseline.count),
-			})),
+				meta,
+				years,
+				avg: yearly('avg'),
+				min: yearly('min'),
+				max: yearly('max'),
+				movAvg: movingAveragesHighCharts(values().map(each => each.avg)),
+				ci: ci,
+				ciMovAvg: ciMovAvg.slice(10),
+				difference: yearly('avg').map(each => ({
+					x: each.x,
+					y: each.y - (temperatureBaseline.sum / temperatureBaseline.count),
+				})),
+			},
+			monthlyTemps,
+			summerTemps,
+			winterTemps,
 		},
-		monthlyTemps,
-		summerTemps,
-		winterTemps,
 
 		growingSeason: {
 			src: src,
@@ -708,25 +708,28 @@ var parseAbiskoCsv = function (result, src='') {
 			ci: grwthSeason.ci,
 			ciMovAvg: grwthSeason.ciMovAvg.slice(10),
 		},
-		yearlyPrecipitation: {
-			years: years,
-			total: yearly('precip'),
-			snow: yearly('precip_snow'),
-			// snow_movAvg: precipMovAvg_snow, // TODO
-			linear_snow: linearRegression(years, yearly('precip_snow').map(each => each.y)),
-			rain: yearly('precip_rain'),
-			// rain_movAvg:  precipMovAvg_rain,// TODO
-			movAvg: precipMovAvg,
-			linear_rain: linearRegression(years, yearly('precip_rain').map(each => each.y)),
-			linear: linearRegression(years, yearly('precip').map(each => each.y)),
-			difference: yrly_diff,
-			linear_diff: linearRegression(years, yrly_diff.map(each => each.y)),
-			ci: precipCI,
-			ciMovAvg: precipCIMovAvg.slice(10),
+		precipitation: {
+			yrly: {
+				years: years,
+				total: yearly('precip'),
+				snow: yearly('precip_snow'),
+				// snow_movAvg: precipMovAvg_snow, // TODO
+				linear_snow: linearRegression(years, yearly('precip_snow').map(each => each.y)),
+				rain: yearly('precip_rain'),
+				// rain_movAvg:  precipMovAvg_rain,// TODO
+				movAvg: precipMovAvg,
+
+				linear_rain: linearRegression(years, yearly('precip_rain').map(each => each.y)),
+				linear: linearRegression(years, yearly('precip').map(each => each.y)),
+				ci: precipCI,
+				ciMovAvg: precipCIMovAvg.slice(10),
+				difference: yrly_diff,
+				linear_diff: linearRegression(years, yrly_diff.map(each => each.y)),
+			},
+			monthlyPrecip,
+			summerPrecipitation: seasonalPrecipitation.summerPrecipitation,
+			winterPrecipitation: seasonalPrecipitation.winterPrecipitation,
 		},
-		monthlyPrecip,
-		summerPrecipitation: seasonalPrecipitation.summerPrecipitation,
-		winterPrecipitation: seasonalPrecipitation.winterPrecipitation,
 	};
 };
 

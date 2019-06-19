@@ -380,26 +380,9 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
 		}],
 	});
 };
-var resetPlot = function(id){
-	return function(a){
-		return function(b){
-			console.log(a)
-			switch(a){
-				case "baselineLower": 
-					baselineLower=b;
-				break;
-				case "baselineUpper": 
-					baselineUpper=b;
-				break;	
-				default: 
-				break;
-			}
-			console.log(baselineUpper)
-			console.log(baselineLower)
-			id.innerHTML='';
-			bpage();
-		}
-	}
+var updatePlot = function(id,div){
+			
+			return bpage(div,window.location.search,ids=id)
 }
 
 
@@ -441,52 +424,31 @@ baselineUI = function(id) {
 				if(2019-dif/2 < mid) mid = 2019-dif/2;
 				if(1913+dif/2 > mid) mid = 1913+dif/2;
 				baselineLower = parseInt(mid - dif/2);
-				baselineUpper = parseInt(mid + dif/2);	
-
-				document.getElementById(id).innerHTML = '';
-				bpage();	
+				baselineUpper = parseInt(mid + dif/2);
+				var div = document.getElementById(id);
+				this.destroy();
+				updatePlot(id,div);
 			},
 			// TODO events for filling out form
 			mouseover: function(e){
 				// console.log(e.target.options.labels[0])
+			},
+			mouseclick: function(e){
+				console.log(e)
 			}
 		}
 	}];
 }
-var baselineUI_new = function(id){
-	return plotBands = [{
-		color: 'rgb(245, 245, 245)',
-		from: baselineLower,
-		to: baselineUpper,
-		label: {
-			text: createBaseline(false,submit="resetPlot("+id+")").innerHTML,
-			point: {
-				xAxis: 0,
-				yAxis: 10,
-				x: baselineLower - (baselineLower-baselineUpper)/2,
-				y: 2,
-			},
-			useHTML: true,
-			style: {
-				// width: '300%',
-				// fontSize: '70%'
-				opacity: .6,
-			},
-		},
-	}];
-}
-
-// TODO experiment
-var plotLines = function(id){
+var plotlines = function(id){
 	return plotLines = [{
-		color: 'rgb(205, 205, 205)',
+		color: 'rgb(160, 160, 160)',
 		value: baselineUpper,
-		width: 2,
+		width: 1,
 		useHTML: true,
 	},{
-		color: 'rgb(205, 205, 205)',
+		color: 'rgb(160, 160, 160)',
 		value: baselineLower,
-		width: 2,
+		width: 1,
 		useHTML: true,
 		events: {
 			click: function(e){
@@ -495,11 +457,11 @@ var plotLines = function(id){
 		}
 	}];
 }
+
 var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
+	// console.log('#renderTemperatureGraph')
 	// console.log(title);
 	// console.log(temperatures);
-
-
 	var chart = Highcharts.chart(id, {
 		chart: {
 			type: 'column'
@@ -514,12 +476,13 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 		subtitle: {
 			//text: 'Difference between yearly average and average for 1961-1990',
 		},
+		annotations: baselineUI(id),
 		xAxis: {
 			title: {
 				text: 'Year',
 			},
 			crosshair: true,
-			// plotLines: plotLines(id),
+			plotLines: plotlines(id),
 			plotBands: {
 		color: 'rgb(245, 245, 245)',
 		from: baselineLower,
@@ -543,7 +506,6 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 		legend: {
 			enabled: true,
 		},
-		annotations: baselineUI(id),
 		series: [{
 			regression: true,
 			regressionSettings: {
@@ -640,6 +602,7 @@ var renderGrowingSeasonGraph = function (season, id, title='Growing season') {
 }
 
 var renderPrecipitationDifferenceGraph = function (precipitation, id, title) {
+	// console.log(id)
 	// console.log(precipitation);
 	Highcharts.chart(id, {
 		chart: {
@@ -1142,6 +1105,8 @@ var renderAbiskoIceGraph = function (ice, id, title) {
 };
 
 var renderAbiskoSnowGraph = function (snow, id, title) {
+	// console.log(id)
+	// console.log(Object.values(snow))
 	var series = Object.values(snow).map(p => ({
 		name: p.period,
 		data: p.means.rotate(6).slice(2),
