@@ -38,8 +38,8 @@
 
 				var container = document.createElement("div")
 				container.setAttribute('id','cont'+param);
-				mark.parentNode.appendChild(bpage(container,par=window.location.seach));
-				mark.parentNode.removeChild(mark)
+				mark.appendChild(bpage(container,par=window.location.seach));
+				// mark.parentNode.removeChild(mark)
 			}
 
 			if(document.getElementById("mark")) window.onload = build();
