@@ -4,7 +4,6 @@
 /*****************************/
 
 // TODO cached parsing and generalization
-
 var url = function(){
 	return 'https://nicklassundin.github.io/abisko-climate-plots/';
 }
@@ -36,6 +35,7 @@ var papaF = {
 	// 	parser: parseGISSTEMP,
 	// },
 	zonal: {
+		src: 'https://nicklassundin.github.io/abisko-climate-plots/', // TODO place holder for later database
 		preset: {
 			//worker: useWebWorker,
 			header: true,
@@ -108,7 +108,7 @@ var papaF = {
 		}
 	}
 }
-
+// wander down the data structure with tag input example: [high, medium, low]
 var tagApply = function(data, tag){
 	var result = data;
 	try{
