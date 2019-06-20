@@ -22,6 +22,8 @@ var BRK = ["Break-up", "Break-up"];
 var ICE_TIME = ["Ice time", "Ice time"];
 var ICE_TIME_MVNG_AVG = ["Ice time (moving average)", "Ice time (moving average)"];
 
+var charts = {};
+
 var preSetMeta = {
 	'abiskoTemp': {
 		src: 'https://www.arcticcirc.net/',
@@ -187,7 +189,7 @@ var renderTemperatureGraph = function (data, id, title) {
 	// console.log(title);
 	// console.log(data)
 	var meta = data.meta;
-	var chart = Highcharts.chart(id, {
+	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'line',
 			zoomType: 'xy',
@@ -290,7 +292,7 @@ var renderTemperatureGraph = function (data, id, title) {
 var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
 	// console.log(title);
 	// console.log(temperatures);
-	Highcharts.chart(id, {
+	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'line',
 			zoomType: 'xy',
@@ -394,7 +396,6 @@ var updatePlot = (chart) => function(id){
 var resetPlot = function(id){
 	return function(a){
 		return function(b){
-			console.log(a)
 			switch(a){
 				case "baselineLower": 
 					console.log("Lower")
@@ -407,10 +408,7 @@ var resetPlot = function(id){
 				default: 
 				break;
 			}
-			console.log(baselineUpper)
-			console.log(baselineLower)
-			id.innerHTML='';
-			bpage();
+			updatePlot(charts[id.id])(id.id);
 		}
 	}
 }
@@ -490,7 +488,7 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 	// console.log('#renderTemperatureGraph')
 	// console.log(title);
 	// console.log(temperatures);
-	var chart = Highcharts.chart(id, {
+	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'column'
 		},
@@ -553,7 +551,7 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 };
 
 var renderGrowingSeasonGraph = function (season, id, title='Growing season') {
-	Highcharts.chart(id, {
+	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'line',
 			zoomType: 'xy',
@@ -632,7 +630,7 @@ var renderGrowingSeasonGraph = function (season, id, title='Growing season') {
 var renderPrecipitationDifferenceGraph = function (precipitation, id, title) {
 	// console.log(id)
 	// console.log(precipitation);
-	Highcharts.chart(id, {
+	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'column'
 		},
@@ -715,7 +713,7 @@ var renderPrecipitationDifferenceGraph = function (precipitation, id, title) {
 };
 
 var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
-	Highcharts.chart(id, {
+	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'line'
 		},
@@ -838,7 +836,7 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 };
 
 var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
-	Highcharts.chart(id, {
+	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'line'
 		},
@@ -1003,7 +1001,7 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
 var renderAbiskoIceGraph = function (ice, id, title) {
 	// console.log(title);
 	// console.log(ice);
-	Highcharts.chart(id, {
+	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'line'
 		},
@@ -1139,7 +1137,7 @@ var renderAbiskoSnowGraph = function (snow, id, title) {
 		name: p.period,
 		data: p.means.rotate(6).slice(2),
 	}));
-	Highcharts.chart(id, {
+	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'line'
 		},
@@ -1174,7 +1172,7 @@ var renderAbiskoSnowGraph = function (snow, id, title) {
 var renderZoomableGraph = function(data, id, title){
 	// console.log(title)
 	// console.log(data);
-	Highcharts.chart(id, {
+	charts[id] = Highcharts.chart(id, {
 		chart: {
 			zoomType: 'x'
 		},
