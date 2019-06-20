@@ -82,6 +82,9 @@ Highcharts.setOptions({
 		iceTime: 'Ice time',
 		iceTimeMovAvg: 'Ice time (moving avg.)',
 		githubwiki: 'https://github.com/nicklassundin/abisko-climate-plots/wiki',
+		titles: {
+				
+		}
 	},
 	otherLang:{
 		dataCredit: 'Data källa',
@@ -110,6 +113,9 @@ Highcharts.setOptions({
 		iceTime: 'Is tid',
 		iceTimeMovAvg: 'Is tid (rörligt medelvärde)',
 		githubwiki: 'https://github.com/nicklassundin/abisko-climate-plots/wiki',
+		titles: {
+				
+		}
 	},
 	exporting: {
 		// showTable: true, // TODO DATA TABLE
@@ -380,9 +386,33 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
 		}],
 	});
 };
-var updatePlot = function(id,div){
-			
+var updatePlot = (chart) => function(id){
+			var div = document.getElementById(id);
+			chart.destroy();
 			return bpage(div,window.location.search,ids=id)
+}
+var resetPlot = function(id){
+	return function(a){
+		return function(b){
+			console.log(a)
+			switch(a){
+				case "baselineLower": 
+					console.log("Lower")
+					baselineLower=b;
+				break;
+				case "baselineUpper": 
+					console.log("Upper")
+					baselineUpper=b;
+				break;	
+				default: 
+				break;
+			}
+			console.log(baselineUpper)
+			console.log(baselineLower)
+			id.innerHTML='';
+			bpage();
+		}
+	}
 }
 
 
@@ -425,9 +455,7 @@ baselineUI = function(id) {
 				if(1913+dif/2 > mid) mid = 1913+dif/2;
 				baselineLower = parseInt(mid - dif/2);
 				baselineUpper = parseInt(mid + dif/2);
-				var div = document.getElementById(id);
-				this.destroy();
-				updatePlot(id,div);
+				updatePlot(this)(id);
 			},
 			// TODO events for filling out form
 			mouseover: function(e){

@@ -178,7 +178,8 @@ var bpage = function(doc=document.createElement('div'), par=window.location.sear
 			}
 		})
 	}else{
-		doc.appendChild(rendF[ids].html(debug, doc));	
+		console.log(ids)
+		doc.appendChild(rendF[ids].html(debug, doc));
 		rendF[ids].func();
 	}
 
