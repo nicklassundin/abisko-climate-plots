@@ -391,7 +391,8 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
 var updatePlot = (chart) => function(id){
 			var div = document.getElementById(id);
 			chart.destroy();
-			return bpage(div,window.location.search,ids=id)
+			console.log(baselineLower)
+			return bpage(div,window.location.search,ids=id,reset=true)
 }
 var resetPlot = function(id){
 	return function(a){
