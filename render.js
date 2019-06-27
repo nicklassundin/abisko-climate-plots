@@ -1,27 +1,3 @@
-// language constant 
-var l = 0;
-var LANG = ['Svenska','English'];
-
-// legend label constants
-var MAX = ["Max", "Max"];
-var MIN = ["Min","Min"];
-// var YRL_AVG = ["Yearly average", "Årligt genomsnitt"];
-// var MNTH_AVG = ["Monthly average", "Månatlig genomsnitt"];
-var YRL_CNF_INT = ["Confidence interval (yearly avg.)", "Konfidence interval (Årligt genomsnitt)"];
-var WK = ["Weeks","veckor"];
-var MVNG_AVG = ["Moving average", "Rörligt genomsnitt"];
-var MVNG_AVG_CNF_INT = ["Confidence interval (moving avg.)","Konfidence interval (rörligt genomsnitt)"];
-
-// Percipitation
-var PRC_SNW = ["Precipitation from snow", "Utfällning från snö"];
-var PRC_RN = ["Precipitation from rain", "Utfällning från regn"];
-var PRC_AVG = ["Total average precipitation", "Genomsnittlig utfällning"];
-// Freeze-up and Break-up
-var FRZ = ["Freeze-up","Freeze-up"];
-var BRK = ["Break-up", "Break-up"];
-var ICE_TIME = ["Ice time", "Ice time"];
-var ICE_TIME_MVNG_AVG = ["Ice time (moving average)", "Ice time (moving average)"];
-
 var charts = {};
 
 var preSetMeta = {
@@ -50,15 +26,47 @@ var preSetMeta = {
 	}
 }
 
+var updatePlot = (chart) => function(id){
+	if(id.split('_')[1]) id = id.split('_')[0]
+	var div = document.getElementById(id);
+	chart.destroy();
+	console.log(baselineLower)
+	return bpage(div,window.location.search,ids=id,reset=true)
+}
+var resetPlot = function(id){
+	return function(a){
+		return function(b){
+			switch(a){
+				case "baselineLower": 
+					// console.log("Lower")
+					baselineLower=b;
+					break;
+				case "baselineUpper": 
+					// console.log("Upper")
+					baselineUpper=b;
+					break;	
+				default: 
+					break;
+			}
+			updatePlot(charts[id.id])(id.id);
+		}
+	}
+}
+
+
 // Localization
 
 /*****************/
 /* RENDER GRAPHS */
 /*****************/
 
-Highcharts.setOptions({
-	dataSrc: '',
-	lang:{
+const language = {
+	en: {
+		baselineform: {
+			title: "Range for baseline",
+			lower: 'Lower limit',
+			upper: 'Upper limit',
+		},
 		dataCredit: 'Data source',
 		contribute: 'Contribute - Github [dummy]',
 		showDataTable: 'Show/hide data',
@@ -67,28 +75,99 @@ Highcharts.setOptions({
 		downloadJPEG: 'Download as JPEG',
 		downloadPDF: 'Download as PDF',
 		downloadSVG: 'Download as SVG',
-		months: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+		diff: 'Difference',
+		months: (month) => ({
+			jan: 'January',
+			feb: 'February',
+			mar: 'March',
+			apr: 'April',
+			may: 'May',
+			jun: 'June',
+			jul: 'July',
+			aug: 'August',
+			sep: 'September',
+			oct: 'October',
+			nov: 'November',
+			dec: 'December'
+		})[month],
 		yearlyAvg: 'Yearly average',
 		monthlyAvg: 'Monthly average',
+		ci: 'Confidence interval',
 		min: 'Min',
 		max: 'Max',
 		weeks: 'weeks',
+		years: 'years',
+		temp: 'Temperature [°C]',
 		yearlyCI: 'Confidence interval (yearly avg.)',
 		movAvg: 'Moving average',
 		movAvgCI: 'Confidence interval (moving avg.)',
+		precMovAvg: 'Moving average precipitation',
 		precSnow: 'Precipitation from snow',
 		precRain: 'Precipitation from rain',
 		precAvg: 'Total average precipitation',
+		prec: 'Precipitation [mm]',
+		tprec: 'Total Precipitation [mm]',
 		freezeup: 'Freeze-up',
 		breakup: 'Break-up',
 		iceTime: 'Ice time',
 		iceTimeMovAvg: 'Ice time (moving avg.)',
 		githubwiki: 'https://github.com/nicklassundin/abisko-climate-plots/wiki',
+		linReg: 'Linear regression',
+		linRegSnow: 'Linear regression (snow)',
+		linRegAll: 'Linear regression (all)',
+		linRegRain: 'Linear regression (rain)',
+		linFrz: 'Linear regression (freeze-up)',
+		linBrk: 'Linear regression (break-up)',
+		linIceTime: 'Linear regression (ice time)',
+		iceSub: 'Ice break-up / freeze-up [day of year]',
+		iceTime: 'Ice time [number of days]',
+		movAvgIceTime: 'Ice time (moving avg.)',
+		iceTime2: 'Ice time',
+		snowDepth: 'Snow depth [cm]',
+		month: 'Month',
 		titles: {
-				
+			northernHemisphere: 'Northern Hemisphere temperatures',
+			globalTemperatures: 'Global temperatures',
+			temperatureDifference1: 'Temperature difference for Arctic (64N-90N)',
+			temperatureDifference2: 'Temperature difference for Northern Hemisphere',
+			temperatureDifference3: 'Global teperature difference',
+			arcticTemperatures: 'PLACE HOLDER',
+			abiskoLakeIce: 'Torneträsk Freeze-up and break-up of lake ice vs ice time',
+			abiskoSnowDepthPeriodMeans: 'Monthly mean snow depth for Abisko',
+			abiskoSnowDepthPeriodMeans2: 'Monthly mean snow depth for Abisko',
+			AbiskoTemperatures: 'Abisko temperatures',
+			AbiskoTemperaturesSummer: function(){
+				return 'Abisko temperatures for '+summerRange;
+			},
+			AbiskoTemperaturesWinter: function(){
+				return 'Abisko temperatures for '+winterRange;
+			},
+			temperatureDifferenceAbisko: 'Temperature difference for Abisko',
+			monthlyAbiskoTemperatures: function(month){
+				return 'Abisko temperatures for '+month
+			},
+			yearlyPrecipitation: 'Yearly precipitation',
+			summerPrecipitation: function(){
+				return 'Precipitation for '+summerRange;
+			},
+			winterPrecipitation: function(){
+				return 'Precipitation for '+winterRange;
+			},
+			yearlyPrecipitationDifference: 'Precipitation difference',
+			summerPrecipitationDifference: 'Precipitation difference '+summerRange,
+			winterPrecipitationDifference: 'Precipitation difference '+winterRange,
+			monthlyPrecipitation: function(monthy){
+				return 'Abisko Precipitation for '+monthy
+			},
+			growingSeason: 'Growing season',
 		}
 	},
-	otherLang:{
+	sv:{
+		baselineform: {
+			title: "Intervalet för baslinjen",
+			lower: 'Lägre gränsen',
+			upper: 'Övre gränsen',
+		},
 		dataCredit: 'Data källa',
 		contribute: 'Bidra mjukvara - Github [dummy]',
 		showDataTable: 'Visa/göm data',
@@ -97,28 +176,102 @@ Highcharts.setOptions({
 		downloadJPEG: 'Ladda ner som JPEG',
 		downloadPDF: 'Ladda ner som PDF',
 		downloadSVG: 'Ladda ner som SVG',
+		diff: 'Skillnad',
 		viewFullscreen: 'Visa i fullskärm',
 		resetZoom: 'Återställ zoom',
 		printChart: 'Skriv ut',
 		months: ['Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'],
+		months: (month) => ({
+			jan: 'Januari',
+			feb: 'Februari',
+			mar: 'Mars',
+			apr: 'April',
+			may: 'Maj',
+			jun: 'Juni',
+			jul: 'Juli',
+			aug: 'Augusti',
+			sep: 'September',
+			oct: 'Oktober',
+			nov: 'November',
+			dec: 'December'
+		})[month],
 		yearlyAvg: 'Årligt medelvärde',
-		mnonthlyAvg: 'Månligt medelvärde',
+		monthlyAvg: 'Månligt medelvärde',
+		ci: 'Konfidence interval',
 		weeks: 'veckor',
-		yearlyCI: 'Konfidence interval (rörligt medelvärde)',
+		years: 'År',
+		temp: 'Temperatur [°C]',
+		yearlyCI: 'Konfidence interval (Årligt medelvärde)',
 		movAvg: 'Rörligt medelvärde',
 		movAvgCI: 'Konfidence interval (rörligt medelvärde)',
+		precMovAvg: 'Rörligt medelvärde utfällning',
+		prec: 'Utfällning [mm]',
 		precSnow: 'Utfällning från snö',
 		precRain: 'Utfällning från regn',
 		precAvg: 'Total genomsnittlig utfällning',
+		tprec: 'Total Utfällning [mm]',
 		freezeup: 'Isläggning',
 		breakup: 'Islossning',
 		iceTime: 'Is tid',
 		iceTimeMovAvg: 'Is tid (rörligt medelvärde)',
 		githubwiki: 'https://github.com/nicklassundin/abisko-climate-plots/wiki',
+		linReg: 'Linjär regression',
+		linRegSnow: 'Linjär regression av snö',
+		linRegAll: 'Linjär regression alla källor',
+		linRegRain: 'Linjär regression av regn',
+		linFrz: 'Linjär regression (isläggning)',
+		linBrk: 'Linjär regression (islossning)',
+		linIceTime: 'Linjär regression (is tid)',
+		iceSub: 'Islossning / Isläggning [dag om året]',
+		iceTime: 'Is tider [antal dagar per år]',
+		movAvgIceTime: 'Is tid (rörligt genomsnitt)',
+		iceTime2: 'Is tid',
+		snowDepth: 'Snö djup [cm]',
+		month: 'Månad',
 		titles: {
-				
+			northernHemisphere: 'Northern Hemisphere temperatures',
+			globalTemperatures: 'Global temperaturer',
+			temperatureDifference1: 'Temperatur skillnaden för Arctic (64N-90N)',
+			temperatureDifference2: 'Temperatur skillnaden för Nordliga Hemisfären',
+			temperatureDifference3: 'Global temperatur skillnaden',
+			arcticTemperatures: 'PLACE HOLDER',
+			abiskoLakeIce: 'Torneträsk isläggning och islossning',
+			abiskoSnowDepthPeriodMeans: 'Månatlig genomsnittligt snö djup för Abisko',
+			abiskoSnowDepthPeriodMeans2: 'Månatlig genomsnittligt snö djup för Abisko',
+			AbiskoTemperatures: 'Abisko temperaturer',		
+			AbiskoTemperaturesSummer: function(){
+				return 'Abisko temperaturer för '+summerRange;
+			},
+			AbiskoTemperaturesWinter: function(){
+				return 'Abisko temperaturer för '+winterRange;
+			},
+			temperatureDifferenceAbisko: 'Temperatur skillnad för Abisko',
+			monthlyAbiskoTemperatures: function(month){
+				return 'Abisko temperaturer för '+month
+			},
+			yearlyPrecipitation: 'Årligt utfällning',
+			summerPrecipitation: function(){
+				return 'Utfällning för '+summerRange;
+			},
+			winterPrecipitation: function(){
+				return 'Utfällning för '+winterRange;
+			},
+			yearlyPrecipitationDifference: 'Utfällnings skillnaden',
+			summerPrecipitationDifference: 'Precipitation skillnaden för '+summerRange,
+			winterPrecipitationDifference: 'Precipitation skillnaden för '+winterRange,
+			monthlyPrecipitation: function(month){
+				return 'Abisko utfällning för '+month
+			},
+			growingSeason: 'Växande säsonger',
 		}
 	},
+}
+
+var nav_lang = navigator.language.split('-')[0];
+
+Highcharts.setOptions({
+	dataSrc: '',
+	lang: language[nav_lang],
 	exporting: {
 		// showTable: true, // TODO DATA TABLE
 		buttons: {
@@ -142,15 +295,13 @@ Highcharts.setOptions({
 				},{
 					textKey: 'langOption',
 					onclick: function(){
-						var lang = this.options.lang;
-						var otherLang = this.options.otherLang;
-						var options = this.options;
-						options.lang = otherLang;
-						options.otherLang = lang;
-						var id = this.container.id;
-						this.container.innerHTML = '';
-						Highcharts.chart(id, options);
-						// TODO bug both swedish 
+						if(nav_lang=='en') nav_lang='sv';
+						else nav_lang='en';
+						Highcharts.setOptions({
+							lang: language[nav_lang],
+						})	
+						var id = this.renderTo.id.split('_')[0];
+						updatePlot(this)(this.renderTo.id);
 					},
 				},{
 					textKey: 'showDataTable',
@@ -170,7 +321,6 @@ Highcharts.setOptions({
 					onclick: function(){
 						if(this.options.dataSrc){
 							window.location.href = this.options.dataSrc // TODO link to exact dataset with entry in data to href
-
 						}
 					},
 				},{
@@ -194,19 +344,19 @@ var renderTemperatureGraph = function (data, id, title) {
 			type: 'line',
 			zoomType: 'xy',
 		},
-		dataSrc: meta.src,
 		title: {
-			text: title,
+			text: this.Highcharts.getOptions().lang.titles[id]
 		},
+		dataSrc: meta.src,
 		xAxis: {
 			title: {
-				text: 'Year',
+				text: this.Highcharts.getOptions().lang.years, 
 			},
 			crosshair: true,
 		},
 		yAxis: {
 			title: {
-				text: 'Temperature [°C]'
+				text: this.Highcharts.getOptions().lang.temp, 
 			},
 			plotLines: [{
 				value: 0,
@@ -224,7 +374,7 @@ var renderTemperatureGraph = function (data, id, title) {
 			valueDecimals: 2,
 		},
 		series: [{
-			name: MAX[l],
+			name: this.Highcharts.getOptions().lang.max,
 			lineWidth: 0,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
@@ -233,7 +383,7 @@ var renderTemperatureGraph = function (data, id, title) {
 			visible: meta.vis.max,
 			showInLegend: !(typeof data.min === 'undefined'),
 		}, {
-			name: MIN[l],
+			name: this.Highcharts.getOptions().lang.min,
 			lineWidth: 0,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
@@ -242,7 +392,7 @@ var renderTemperatureGraph = function (data, id, title) {
 			visible: meta.vis.min, 
 			showInLegend: !(typeof data.min === 'undefined'),
 		},{
-			name: YRL_CNF_INT[l],
+			name: 	this.Highcharts.getOptions().lang.yearlyCI,
 			type: 'arearange',
 			color: '#888888',
 			data: data.ci,
@@ -253,12 +403,12 @@ var renderTemperatureGraph = function (data, id, title) {
 			marker: { enabled: false },
 			visible: false,
 		}, {
-			name: MVNG_AVG[l],
+			name: this.Highcharts.getOptions().lang.movAvg,
 			color: '#888888',
 			marker: { enabled: false },
 			data: data.movAvg,
 		}, {
-			name: MVNG_AVG_CNF_INT[l],
+			name: 	this.Highcharts.getOptions().lang.movAvgCI,
 			type: 'arearange',
 			color: '#7777ff',
 			data: data.ciMovAvg,
@@ -269,7 +419,7 @@ var renderTemperatureGraph = function (data, id, title) {
 			marker: { enabled: false },
 			visible: meta.vis.movAvgCI
 		},{
-			name: 'Yearly averages',
+			name: language[nav_lang].yearlyAvg,
 			regression: true,
 			marker: {radius: 2},
 			states: {hover: { lineWidthPlus: 0 }},
@@ -280,7 +430,7 @@ var renderTemperatureGraph = function (data, id, title) {
 				color: meta.color.yrlyReg,
 				// color: '#4444ff',
 				// '#888888'
-				name: 'Linear regression',
+				name: this.Highcharts.getOptions().lang.linReg,
 			},
 			data: data.avg,
 		}],
@@ -292,128 +442,102 @@ var renderTemperatureGraph = function (data, id, title) {
 var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
 	// console.log(title);
 	// console.log(temperatures);
-	charts[id] = Highcharts.chart(id, {
-		chart: {
-			type: 'line',
-			zoomType: 'xy',
-		},
-		dataSrc: temperatures.src,
-		title: {
-			text: title,
-		},
-		xAxis: {
-			title: {
-				text: 'Year',
+		charts[id] = Highcharts.chart(id, {
+			chart: {
+				type: 'line',
+				zoomType: 'xy',
 			},
-			crosshair: true,
-		},
-		yAxis: {
+			dataSrc: temperatures.src,
 			title: {
-				text: 'Temperature [°C]'
+				text: this.Highcharts.getOptions().lang.titles[id.split('_')[0]](this.Highcharts.getOptions().lang.months(id.split('_')[1])),
 			},
-			plotLines: [{
-				value: 0,
-				color: 'rgb(204, 214, 235)',
-				width: 2,
+			xAxis: {
+				title: {
+					text: this.Highcharts.getOptions().lang.years,
+				},
+				crosshair: true,
+			},
+			yAxis: {
+				title: {
+					text: language[nav_lang].temp,
+				},
+				plotLines: [{
+					value: 0,
+					color: 'rgb(204, 214, 235)',
+					width: 2,
+				}],
+				//max: 2,
+				//min: -3,
+				tickInterval: 1,
+				lineWidth: 1,
+			},
+			tooltip: {
+				shared: true,
+				valueSuffix: ' °C',
+				valueDecimals: 2,
+			},
+			series: [{
+				name: this.Highcharts.getOptions().lang.max,
+				lineWidth: 0,
+				marker: { radius: 2 },
+				states: { hover: { lineWidthPlus: 0 } },
+				color: '#ff0000',
+				data: temperatures.max,
+				visible: false,
+			}, {
+				name: this.Highcharts.getOptions().lang.min,
+				lineWidth: 0,
+				marker: { radius: 2 },
+				states: { hover: { lineWidthPlus: 0 } },
+				color: '#0000ff',
+				data: temperatures.min,
+				visible: false,
+			}, {
+				regression: true,
+				regressionSettings: {
+					type: 'linear',
+					color: '#aaaaaa',
+					name: 'linear regression',
+				},
+				name: this.Highcharts.getOptions().lang.monthlyAvg,
+				lineWidth: 0,
+				marker: { radius: 2 },
+				states: { hover: { lineWidthPlus: 0 } },
+				color: '#888888',
+				data: temperatures.avg,
+				visible: true,
+			},{
+				name: this.Highcharts.getOptions().lang.ci,
+				type: 'arearange',
+				color: '#888888',
+				data: temperatures.ci,
+				zIndex: 0,
+				fillOpacity: 0.3,
+				lineWidth: 0,
+				states: { hover: { lineWidthPlus: 0 } },
+				marker: { enabled: false },
+				visible: false,
+
+			},{
+				name: this.Highcharts.getOptions().lang.movAvgCI,
+				type: 'arearange',
+				color: '#7777ff',
+				data: temperatures.ciMovAvg,
+				zIndex: 0,
+				fillOpacity: 0.3,
+				lineWidth: 0,
+				states: { hover: { lineWidthPlus: 0 } },
+				marker: { enabled: false },
+				visible: false,
+
+			},{
+				name: this.Highcharts.getOptions().lang.movAvg,
+				color: '#888888',
+				marker: { enabled: false },
+				data: temperatures.movAvg,
 			}],
-			//max: 2,
-			//min: -3,
-			tickInterval: 1,
-			lineWidth: 1,
-		},
-		tooltip: {
-			shared: true,
-			valueSuffix: ' °C',
-			valueDecimals: 2,
-		},
-		series: [{
-			name: this.Highcharts.getOptions().lang.max,
-			lineWidth: 0,
-			marker: { radius: 2 },
-			states: { hover: { lineWidthPlus: 0 } },
-			color: '#ff0000',
-			data: temperatures.max,
-			visible: false,
-		}, {
-			name: this.Highcharts.getOptions().lang.min,
-			lineWidth: 0,
-			marker: { radius: 2 },
-			states: { hover: { lineWidthPlus: 0 } },
-			color: '#0000ff',
-			data: temperatures.min,
-			visible: false,
-		}, {
-			regression: true,
-			regressionSettings: {
-				type: 'linear',
-				color: '#aaaaaa',
-				name: 'linear regression',
-			},
-			name: this.Highcharts.getOptions().lang.monthlyAvg,
-			lineWidth: 0,
-			marker: { radius: 2 },
-			states: { hover: { lineWidthPlus: 0 } },
-			color: '#888888',
-			data: temperatures.avg,
-			visible: true,
-		},{
-			name: 'Confidence interval',
-			type: 'arearange',
-			color: '#888888',
-			data: temperatures.ci,
-			zIndex: 0,
-			fillOpacity: 0.3,
-			lineWidth: 0,
-			states: { hover: { lineWidthPlus: 0 } },
-			marker: { enabled: false },
-			visible: false,
-
-		},{
-			name: 'Confidence interval (moving avg.)',
-			type: 'arearange',
-			color: '#7777ff',
-			data: temperatures.ciMovAvg,
-			zIndex: 0,
-			fillOpacity: 0.3,
-			lineWidth: 0,
-			states: { hover: { lineWidthPlus: 0 } },
-			marker: { enabled: false },
-			visible: false,
-
-		},{
-			name: MVNG_AVG[l],
-			color: '#888888',
-			marker: { enabled: false },
-			data: temperatures.movAvg,
-		}],
-	});
+		});
 };
-var updatePlot = (chart) => function(id){
-			var div = document.getElementById(id);
-			chart.destroy();
-			console.log(baselineLower)
-			return bpage(div,window.location.search,ids=id,reset=true)
-}
-var resetPlot = function(id){
-	return function(a){
-		return function(b){
-			switch(a){
-				case "baselineLower": 
-					console.log("Lower")
-					baselineLower=b;
-				break;
-				case "baselineUpper": 
-					console.log("Upper")
-					baselineUpper=b;
-				break;	
-				default: 
-				break;
-			}
-			updatePlot(charts[id.id])(id.id);
-		}
-	}
-}
-
 
 baselineUI = function(id) {
 	return annotations = [{
@@ -498,7 +622,7 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 		// selected: 2
 		// },
 		title: {
-			text: title,
+			text: this.Highcharts.getOptions().lang.titles[id],
 		},
 		subtitle: {
 			//text: 'Difference between yearly average and average for 1961-1990',
@@ -506,19 +630,19 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 		annotations: baselineUI(id),
 		xAxis: {
 			title: {
-				text: 'Year',
+				text: this.Highcharts.getOptions().lang.years,
 			},
 			crosshair: true,
 			plotLines: plotlines(id),
 			plotBands: {
-		color: 'rgb(245, 245, 245)',
-		from: baselineLower,
-		to: baselineUpper,
+				color: 'rgb(245, 245, 245)',
+				from: baselineLower,
+				to: baselineUpper,
 			}
 		},
 		yAxis: {
 			title: {
-				text: 'Temperature [°C]'
+				text: this.Highcharts.getOptions().lang.temp,
 			},
 			lineWidth: 1,
 			min: -2,
@@ -538,9 +662,9 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 			regressionSettings: {
 				type: 'linear',
 				color: '#aa0000',
-				name: 'Linear regression', 
+				name: this.Highcharts.getOptions().lang.linReg,
 			},
-			name: 'Difference',
+			name: this.Highcharts.getOptions().lang.diff,
 			data: temperatures.difference,
 			color: 'red',
 			negativeColor: 'blue',
@@ -559,20 +683,20 @@ var renderGrowingSeasonGraph = function (season, id, title='Growing season') {
 		},
 		dataSrc: season.src,
 		title: {
-			text: 'Growing season',
+			text: this.Highcharts.getOptions().lang.titles[id],
 		},
 		subtitle: {
 			text: 'The maximum consecutive weeks with average temperature above freezing.',
 		},
 		xAxis: {
 			title: {
-				text: 'Year',
+				text: this.Highcharts.getOptions().lang.years,
 			},
 			crosshair: true,
 		},
 		yAxis: {
 			title: {
-				text: WK[l]
+				text: this.Highcharts.getOptions().lang.weeks,
 			},
 			tickInterval: 1,
 			lineWidth: 1,
@@ -586,9 +710,9 @@ var renderGrowingSeasonGraph = function (season, id, title='Growing season') {
 			regressionSettings: {
 				type: 'linear',
 				color: '#008800',
-				name: 'Linear regression',
+				name: this.Highcharts.getOptions().lang.linReg,
 			},
-			name: WK[l],
+			name: this.Highcharts.getOptions().lang.weeks,
 			lineWidth: 0,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
@@ -596,7 +720,7 @@ var renderGrowingSeasonGraph = function (season, id, title='Growing season') {
 			data: season.weeks,
 			visible: true,
 		},{ 
-			name: 'Confidence interval',
+			name: this.Highcharts.getOptions().lang.ci,
 			type: 'arearange',
 			color: '#005500',
 			data: season.ci,
@@ -608,12 +732,12 @@ var renderGrowingSeasonGraph = function (season, id, title='Growing season') {
 			visible: false,
 
 		}, {
-			name: MVNG_AVG[l],
+			name: this.Highcharts.getOptions().lang.movAvg,
 			color: '#00aa00',
 			marker: { enabled: false },
 			data: season.movAvg,
 		},{
-			name: 'Confidence interval (moving avg.)',
+			name: this.Highcharts.getOptions().lang.movAvgCI,
 			type: 'arearange',
 			color: '#006600',
 			data: season.ciMovAvg,
@@ -637,7 +761,7 @@ var renderPrecipitationDifferenceGraph = function (precipitation, id, title) {
 		},
 		dataSrc: precipitation.src,
 		title: {
-			text: title,
+			text: this.Highcharts.getOptions().lang.titles[id],
 		},
 		subtitle: {
 			//text: 'Difference between yearly average and average for 1961-1990',
@@ -655,7 +779,7 @@ var renderPrecipitationDifferenceGraph = function (precipitation, id, title) {
 		},
 		yAxis: {
 			title: {
-				text: 'Precipitation [mm]'
+				text: this.Highcharts.getOptions().lang.prec,
 			},
 			lineWidth: 1,
 			//min: -2,
@@ -673,14 +797,14 @@ var renderPrecipitationDifferenceGraph = function (precipitation, id, title) {
 		annotations: baselineUI(id),
 		series: [{
 			regression: true,
-			name: 'Difference',
+			name: this.Highcharts.getOptions().lang.diff,
 			data: precipitation.difference,
 			color: 'red',
 			negativeColor: 'blue',
 			regressionSettings: {
 				type: 'linear',
 				color: rainColor.color,
-				name: 'Linear regression',
+				name: this.Highcharts.getOptions().lang.linReg,
 			},
 		},
 			//	REST code
@@ -720,17 +844,17 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 		},
 		dataSrc: precipitation.src,
 		title: {
-			text: title,
+			text: language[nav_lang].titles[id],
 		},
 		xAxis: {
 			title: {
-				text: 'Year',
+				text: this.Highcharts.getOptions().lang.years,
 			},
 			crosshair: true,
 		},
 		yAxis: {
 			title: {
-				text: 'Total precipitation [mm]'
+				text: this.Highcharts.getOptions().lang.tprec,
 			},
 			lineWidth: 1,
 			floor: 0, // Precipitation can never be negative
@@ -750,8 +874,9 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 				type: 'linear',
 				color: snowColor.color,
 				name: 'Linear regression of snow',
+				name: this.Highcharts.getOptions().lang.linRegSnow,
 			},
-			name: PRC_SNW[l],
+			name: this.Highcharts.getOptions().lang.precSnow,
 			type: 'column',
 			stack: 'precip',
 			stacking: 'normal',
@@ -769,7 +894,7 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 			},
 		},{
 			id: 'movAvg',
-			name: 'Moving average precipitation',
+			name: this.Highcharts.getOptions().lang.precMovAvg,
 			color: rainColor.color,
 			visible: false,
 			data: precipitation.movAvg,
@@ -777,7 +902,7 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 			states: { hover: { lineWidthPlus: 0 } },
 		},{
 			id: 'ciMovAvg',
-			name: 'Confidence interval (mov avg.)',
+			name: this.Highcharts.getOptions().lang.movAvgCI,
 			type: 'arearange',
 			color: '#000055',
 			data: precipitation.ciMovAvg,
@@ -794,8 +919,9 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 				type: 'linear',
 				color: rainColor.color,
 				name: 'Linear regression of rain',
+				name: this.Highcharts.getOptions().lang.linRegRain,
 			},
-			name: PRC_RN[l],
+			name: this.Highcharts.getOptions().lang.precRain,
 			type: 'column',
 			stack: 'precip',
 			stacking: 'normal',
@@ -813,7 +939,7 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 			},
 		},{
 			id: 'linear',
-			name: 'Linear regression from all sources',
+			name: this.Highcharts.getOptions().lang.linRegAll,
 			visible: false,
 			// linkedTo: ':previous',
 			marker: {
@@ -843,17 +969,17 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
 		},
 		dataSrc: precipitation.src,
 		title: {
-			text: title,
+			text: this.Highcharts.getOptions().lang.titles[id.split('_')[0]](this.Highcharts.getOptions().lang.months(id.split('_')[1])),
 		},
 		xAxis: {
 			title: {
-				text: 'Year',
+				text: this.Highcharts.getOptions().lang.years,
 			},
 			crosshair: true,
 		},
 		yAxis: {
 			title: {
-				text: 'Total precipitation [mm]'
+				text: this.Highcharts.getOptions().lang.tprec,
 			},
 			lineWidth: 1,
 			max: 150,
@@ -872,9 +998,9 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
 			regressionSettings: {
 				type: 'linear',
 				color: snowColor.color,
-				name: 'Linear regression (snow)',
+				name: this.Highcharts.getOptions().lang.linRegSnow,
 			},
-			name: PRC_SNW[l],
+			name: this.Highcharts.getOptions().lang.precSnow,
 			type: 'column',
 			stack: 'precip',
 			stacking: 'normal',
@@ -894,9 +1020,9 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
 			regressionSettings: {
 				type: 'linear',
 				color:rainColor.color,
-				name: 'Linear regression (rain)',
+				name: this.Highcharts.getOptions().lang.linRegRain,
 			},
-			name: PRC_RN[l],
+			name: this.Highcharts.getOptions().lang.precRain,
 			type: 'column',
 			stack: 'precip',
 			stacking: 'normal',
@@ -912,7 +1038,7 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
 				},
 			},
 		},{
-			name: 'Confidence interval (mov avg.)',
+			name: this.Highcharts.getOptions().lang.movAvgCI,
 			type: 'arearange',
 			color: '#000055',
 			data: precipitation.ciMovAvg,
@@ -924,13 +1050,14 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
 			visible: false,
 
 		},{
-			name: 'Moving average precipitation',
+			name: this.Highcharts.getOptions().lang.precMovAvg,
 			visible: false,
 			color: rainColor.color,
 			data: precipitation.movAvg,
 			marker: { enabled: false },
 		},{
-			name: 'Linear regression (total)',
+			name: this.Highcharts.getOptions().lang.linRegAll,
+			visible: false,
 			visible: false,
 			marker: {
 				enabled: false, // Linear regression lines doesn't contain points
@@ -1008,17 +1135,17 @@ var renderAbiskoIceGraph = function (ice, id, title) {
 		},
 		dataSrc: ice.src,
 		title: {
-			text: title,
+			text: this.Highcharts.getOptions().lang.titles[id],
 		},
 		xAxis: {
 			title: {
-				text: 'Year',
+				text: this.Highcharts.getOptions().lang.years,
 			},
 			crosshair: true,
 		},
 		yAxis: [{
 			title: {
-				text: 'Ice break-up / freeze-up [day of year]',
+				text: this.Highcharts.getOptions().lang.iceSub,
 			},
 			lineWidth: 1,
 			labels: {
@@ -1028,7 +1155,7 @@ var renderAbiskoIceGraph = function (ice, id, title) {
 			}
 		}, {
 			title: {
-				text: 'Ice time [number of days]',
+				text: this.Highcharts.getOptions().lang.iceTime,
 			},
 			lineWidth: 1,
 			max: 250,
@@ -1050,10 +1177,10 @@ var renderAbiskoIceGraph = function (ice, id, title) {
 			regressionSettings: {
 				type: 'linear',
 				color: '#0000ee',
-				name: 'Linear regression (freeze-up)',
+				name: this.Highcharts.getOptions().lang.linFrz,
 			},
 			yAxis: 0,
-			name: 'Freeze-up',
+			name: this.Highcharts.getOptions().lang.freezeup,
 			color: '#0000ee',
 			lineWidth: 0,
 			marker: { radius: 2 },
@@ -1075,17 +1202,17 @@ var renderAbiskoIceGraph = function (ice, id, title) {
 				regressionSettings: {
 					type: 'linear',
 					color: '#ee0000',
-					name: 'Linear regression (break-up)',
+					name: this.Highcharts.getOptions().lang.linBrk,
 				},
 				yAxis: 0,
-				name: 'Break-up',
+				name: this.Highcharts.getOptions().lang.breakup,
 				color: '#ee0000',
 				lineWidth: 0,
 				marker: { radius: 2 },
 				states: { hover: { lineWidthPlus: 0 } },
 				data: ice.breakup,
 			},{
-				name: 'Confidence Interval (moving avg.)',
+				name: this.Highcharts.getOptions().lang.movAvgCI,
 				type: 'arearange',
 				color: '#7777ff',
 				data: ice.iceTimeCIMovAvg,
@@ -1112,10 +1239,10 @@ var renderAbiskoIceGraph = function (ice, id, title) {
 				regressionSettings: {
 					type: 'linear',
 					color: '#00bb00',
-					name: 'Linear regression (ice time)',
+					name: this.Highcharts.getOptions().lang.linIceTime,
 				},
 				yAxis: 1,
-				name: 'Ice time',
+				name: this.Highcharts.getOptions().lang.iceTime2,
 				color: '#00bb00',
 				lineWidth: 0,
 				marker: { radius: 2 },
@@ -1123,7 +1250,7 @@ var renderAbiskoIceGraph = function (ice, id, title) {
 				data: ice.iceTime,
 			},{
 				yAxis: 1,
-				name: 'Ice time (moving avg.)',
+				name: this.Highcharts.getOptions().lang.movAgIceTime,
 				color: '#cc00cc',
 				data: ice.iceTimeMovAvg,
 				marker: { enabled: false },
@@ -1144,18 +1271,18 @@ var renderAbiskoSnowGraph = function (snow, id, title) {
 		},
 		dataSrc: snow.src,
 		title: {
-			text: title,
+			text: this.Highcharts.getOptions().lang.titles[id],
 		},
 		xAxis: {
 			categories: months().rotate(6).slice(2),
 			title: {
-				text: 'Month',
+				text: this.Highcharts.getOptions().lang.month,
 			},
 			crosshair: true,
 		},
 		yAxis: {
 			title: {
-				text: 'Snow depth [cm]',
+				text: this.Highcharts.getOptions().lang.snowDepth,
 			},
 			lineWidth: 1,
 			floor: 0,

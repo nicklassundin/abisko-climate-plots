@@ -3,6 +3,20 @@
 /* DATA TRANSFORMATIONS AND STATISTICS */
 /***************************************/
 
+//
+// var struct = {
+// 		values: 	undefined,
+// 		variance: 	undefined,
+// 		ci:		undefined,
+// 		movAvg: 	undefined,
+// 		movAvgCI: 	undefined,	
+// };
+//
+// var values = 
+
+
+
+
 var parseGISSTEMP = function (result, src='') {
 	var fields = result.meta.fields;
 	var meta = preSetMeta['default'];
@@ -63,7 +77,6 @@ var parseGISSTEMP = function (result, src='') {
 	});
 	temperatures.meta = meta;
 	temperatures.src = src;
-	temperatures.ci = temperatures.ci;
 	temperatures.ciMovAvg = temperatures.ciMovAvg.slice(10);
 	return temperatures;
 };

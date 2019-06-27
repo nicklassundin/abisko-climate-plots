@@ -168,6 +168,7 @@ var selectText = function(e){
 };
 // TODO Seperate them to one constructor with general input for reuse
 var createBaseline = function(ver=true, change){
+	var text = language[nav_lang]['baselineform'];
 	var createInput = function(name, value, div=document.createElement('div')){
 		var submit = change;
 		if(submit){
@@ -177,7 +178,7 @@ var createBaseline = function(ver=true, change){
 		}
 		var label = document.createElement('label');
 		label.setAttribute("for","baselineLower");
-		label.innerHTML = name+" limit ";
+		label.innerHTML = text[name.toLowerCase()];
 		var input = document.createElement('input');
 		input.setAttribute("size","4")
 		input.setAttribute("maxlength","4")
@@ -193,7 +194,7 @@ var createBaseline = function(ver=true, change){
 	var form = document.createElement('form');
 	form.setAttribute("id",baseline);
 	var header = document.createElement('header');
-	header.innerHTML = "Year range for baseline";
+	header.innerHTML = text.title;
 
 	var lower = createInput("Lower", baselineLower);
 	if(ver) lower.appendChild(document.createElement('br'));
@@ -288,9 +289,6 @@ if(urlParams.get('baselineLower')){
 	baselineUpper = parseInt(urlParams.get('baselineUpper'));
 }
 const baselineForm = (urlParams.get('baselineForm')=='true')||(urlParams.get('baselineForm')==undefined)
-
-
-
 const debug = urlParams.get('debug');
 const share = urlParams.get('share');
 
@@ -325,7 +323,6 @@ var bpage = function(doc=document.createElement('div'), par=window.location.sear
 			}
 		})
 	}else{
-		console.log(ids)
 		doc.appendChild(rendF[ids].html(debug, doc));
 		rendF[ids].func(reset);
 	}
