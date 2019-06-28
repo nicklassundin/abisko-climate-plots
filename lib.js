@@ -114,7 +114,7 @@ var tagApply = function(data, tag){
 		tag.forEach(each => {
 			result = result[each];
 		})	
-	}catch{
+	}catch(e){
 		result = result[tag]
 	}
 	return result;
