@@ -251,7 +251,6 @@ var copy = function() {
 	document.execCommand("copy");
 	alert(copyText.value);
 }
-var urlParams = new URLSearchParams(window.location.search);
 
 var getID = function(urlParams){
 
@@ -283,6 +282,7 @@ var getID = function(urlParams){
 	return id
 }
 
+var urlParams = new URLSearchParams(window.location.search);
 var baseline = null;
 if(urlParams.get('baselineLower')){
 	baselineLower = parseInt(urlParams.get('baselineLower'));
@@ -307,7 +307,6 @@ var getUrl = function(uid=urlParams.get('id'),debug=urlParams.get('debug'),share
 	return ((''+window.location).split('?')[0]+params)
 
 }
-// console.log(getUrl())
 
 var bpage = function(doc=document.createElement('div'), par=window.location.search, ids=getID(new URLSearchParams(par)), reset=false){
 	doc.innerHTML = "";
