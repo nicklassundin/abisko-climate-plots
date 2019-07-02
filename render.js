@@ -335,7 +335,7 @@ Highcharts.setOptions({
 });
 
 
-var renderTemperatureGraph = function (data, id, title) {
+var renderTemperatureGraph = function (data, id) {
 	// console.log(title);
 	// console.log(data)
 	var meta = data.meta;
@@ -439,7 +439,7 @@ var renderTemperatureGraph = function (data, id, title) {
 
 
 
-var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id, title) {
+var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id) {
 	// console.log(title);
 	// console.log(temperatures);
 		charts[id] = Highcharts.chart(id, {
@@ -609,7 +609,7 @@ var plotlines = function(id){
 	}];
 }
 
-var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
+var renderTemperatureDifferenceGraph = function (temperatures, id) {
 	// console.log('#renderTemperatureGraph')
 	// console.log(title);
 	// console.log(temperatures);
@@ -675,7 +675,7 @@ var renderTemperatureDifferenceGraph = function (temperatures, id, title) {
 	// });
 };
 
-var renderGrowingSeasonGraph = function (season, id, title='Growing season') {
+var renderGrowingSeasonGraph = function (season, id) {
 	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'line',
@@ -752,7 +752,7 @@ var renderGrowingSeasonGraph = function (season, id, title='Growing season') {
 	});
 }
 
-var renderPrecipitationDifferenceGraph = function (precipitation, id, title) {
+var renderPrecipitationDifferenceGraph = function (precipitation, id) {
 	// console.log(id)
 	// console.log(precipitation);
 	charts[id] = Highcharts.chart(id, {
@@ -837,7 +837,7 @@ var renderPrecipitationDifferenceGraph = function (precipitation, id, title) {
 	});
 };
 
-var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
+var renderYearlyPrecipitationGraph = function (precipitation, id) {
 	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'line'
@@ -962,7 +962,7 @@ var renderYearlyPrecipitationGraph = function (precipitation, id, title) {
 	});
 };
 
-var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
+var renderMonthlyPrecipitationGraph = function (precipitation, id) {
 	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'line'
@@ -1126,7 +1126,7 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id, title) {
 	});
 };
 
-var renderAbiskoIceGraph = function (ice, id, title) {
+var renderAbiskoIceGraph = function (ice, id) {
 	// console.log(title);
 	// console.log(ice);
 	charts[id] = Highcharts.chart(id, {
@@ -1258,7 +1258,7 @@ var renderAbiskoIceGraph = function (ice, id, title) {
 	});
 };
 
-var renderAbiskoSnowGraph = function (snow, id, title) {
+var renderAbiskoSnowGraph = function (snow, id) {
 	// console.log(id)
 	// console.log(Object.values(snow))
 	var series = Object.values(snow).map(p => ({
