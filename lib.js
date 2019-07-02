@@ -3,6 +3,17 @@
 /*****************************/
 
 // TODO cached parsing and generalization
+
+var build = function(id="mark",par=window.location.search) {
+	var param = (''+par);
+	var mark = document.getElementById(id+param);
+	if(!mark) mark = document.getElementById(id);
+
+	var container = document.createElement("div")
+	container.setAttribute('id','cont'+param);
+	mark.appendChild(bpage(container,par=window.location.seach));
+}
+
 var url = function(){
 	return 'https://nicklassundin.github.io/abisko-climate-plots/';
 }
@@ -123,8 +134,8 @@ var tagApply = function(data, tag){
 var contFunc = (reset=false, type,file, src) => function(id, title, tag, renderTag=tag){
 	if(reset) papaF[type].cached = undefined;
 	var op = papaF[type];
-		// console.log(tag)
-		// console.log(op)
+	// console.log(tag)
+	// console.log(op)
 	if(op.cached){
 		var render = tagApply(op.render, renderTag);
 		var data = tagApply(op.cached,tag);
@@ -379,7 +390,7 @@ var rendF = {
 			var no = 16;
 			if(!debug) no = debug;
 			return createDiv('northernHemisphere', no);
-			
+
 		},
 	},
 	'globalTemperatures': {
@@ -390,7 +401,7 @@ var rendF = {
 			var no = 17;
 			if(!debug) no = debug;
 			return createDiv('globalTemperatures', no);
-			
+
 		},
 	},
 	'temperatureDifference1': {
@@ -401,7 +412,7 @@ var rendF = {
 			var no = 20;
 			if(!debug) no = debug;
 			return createDiv('temperatureDifference1', no);
-			
+
 		},
 	},
 	'temperatureDifference2': {
@@ -412,7 +423,7 @@ var rendF = {
 			var no = 21;
 			if(!debug) no = debug;
 			return createDiv('temperatureDifference2', no);
-			
+
 		},
 	},
 	'temperatureDifference3': {
@@ -423,7 +434,7 @@ var rendF = {
 			var no = 22;
 			if(!debug) no = debug;
 			return createDiv('temperatureDifference3', no);
-			
+
 		},
 	},
 	'arcticTemperatures': {
@@ -432,7 +443,7 @@ var rendF = {
 			var no = 16.1;
 			if(!debug) no = debug;
 			return createDiv('arcticTemperatures', no);
-			
+
 		},
 	},
 	'abiskoLakeIce':{
@@ -443,7 +454,7 @@ var rendF = {
 			var no = 43;
 			if(!debug) no = debug;
 			return createDiv('abiskoLakeIce', no);
-			
+
 		},
 	}, 
 	'abiskoSnowDepthPeriodMeans':{
@@ -496,7 +507,7 @@ var rendF = {
 			var no = 3;
 			if(!debug) no = debug;
 			return createDiv('AbiskoTemperaturesWinter', no);
-			
+
 		},
 	},
 	'temperatureDifferenceAbisko': {
@@ -507,7 +518,7 @@ var rendF = {
 			var no = 19;
 			if(!debug) no = debug;
 			return createDiv('temperatureDifferenceAbisko', no);
-			
+
 		},
 	},
 	'monthlyAbiskoTemperatures': {
@@ -530,7 +541,7 @@ var rendF = {
 
 			}
 			return div;
-			
+
 		},
 	}, 
 	'yearlyPrecipitation': {
@@ -541,7 +552,7 @@ var rendF = {
 			var no = 23;
 			if(!debug) no = debug;
 			return createDiv('yearlyPrecipitation', no);
-			
+
 		},
 	}, 
 	'summerPrecipitation': {
@@ -552,7 +563,7 @@ var rendF = {
 			var no = 24;
 			if(!debug) no = debug;
 			return createDiv('summerPrecipitation', no);
-			
+
 		},
 	}, 
 	'winterPrecipitation': {
@@ -563,7 +574,7 @@ var rendF = {
 			var no = 25;
 			if(!debug) no = debug;
 			return createDiv('winterPrecipitation', no);
-			
+
 		},
 	}, 
 	'yearlyPrecipitationDifference': {
@@ -574,7 +585,7 @@ var rendF = {
 			var no = 38;
 			if(!debug) no = debug;
 			return createDiv('yearlyPrecipitationDifference', no);
-			
+
 		},
 	}, 
 	'summerPrecipitationDifference': {
@@ -585,7 +596,7 @@ var rendF = {
 			var no = 39;
 			if(!debug) no = debug;
 			return createDiv('summerPrecipitationDifference', no);
-			
+
 		},
 	}, 
 	'winterPrecipitationDifference': {
@@ -596,7 +607,7 @@ var rendF = {
 			var no = 40;
 			if(!debug) no = debug;
 			return createDiv('winterPrecipitationDifference', no);
-			
+
 		},
 	}, 
 	'monthlyPrecipitation': {
@@ -619,7 +630,7 @@ var rendF = {
 
 			}
 			return div
-			
+
 		},
 	}, 
 	'growingSeason': {
@@ -630,7 +641,7 @@ var rendF = {
 			var no = 18;
 			if(!debug) no = debug;
 			return createDiv('growingSeason', no);
-			
+
 		}
 	}
 }

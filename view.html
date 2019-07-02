@@ -29,16 +29,6 @@
 		<script src="render.js"></script>
 		<script src="lib.js"></script>
 		<script type="text/javascript">
-			var build = function(id="mark",par=window.location.search) {
-				var param = (''+par);
-				var mark = document.getElementById(id+param);
-				if(!mark) mark = document.getElementById(id);
-
-				var container = document.createElement("div")
-				container.setAttribute('id','cont'+param);
-				mark.appendChild(bpage(container,par=window.location.seach));
-			}
-
 			if(document.getElementById("mark")) window.onload = build();
 		</script>
 	</body>
