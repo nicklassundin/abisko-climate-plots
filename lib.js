@@ -131,7 +131,7 @@ var tagApply = function(data, tag){
 	return result;
 }
 
-var contFunc = (reset=false, type,file, src) => function(id, tag, renderTag=tag){
+var contFunc = (reset=false, type, file, src) => function(id, tag, renderTag=tag){
 	if(reset) papaF[type].cached = undefined;
 	var op = papaF[type];
 	// console.log(tag)

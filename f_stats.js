@@ -3,7 +3,7 @@
 /* DATA TRANSFORMATIONS AND STATISTICS */
 /***************************************/
 
-//
+
 // var struct = {
 // 		values: 	undefined,
 // 		variance: 	undefined,
@@ -11,8 +11,7 @@
 // 		movAvg: 	undefined,
 // 		movAvgCI: 	undefined,	
 // };
-//
-// var values = 
+
 
 
 
