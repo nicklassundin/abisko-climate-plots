@@ -329,7 +329,14 @@ var bpage = function(doc=document.createElement('div'), par=window.location.sear
 			try{
 				doc.appendChild(rendF[each].html(debug, doc));	
 				rendF[each].func(reset);
-			}catch(e){
+			}catch(err){
+				// TODO Improve quality
+				var div = document.createElement("div");
+				div.innerHTML = "[PLACEHOLDER ERROR] - Sorry we couldn't deliver the graph you deserved, if you have block adder on try turning in off. "
+				var error = document.createElement("div");
+				error.innerHTML = err;
+				doc.appendChild(div)
+				doc.appendChild(error)
 				console.log("failed to render: "+each)
 			}
 		})

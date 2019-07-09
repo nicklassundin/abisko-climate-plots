@@ -65,8 +65,6 @@ var rainColor = {
 
 var useWebWorker = true;
 
-
-
 var months = () => ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
 var t = {
