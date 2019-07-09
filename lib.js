@@ -269,7 +269,7 @@ var getID = function(urlParams){
 	try{
 		id = urlParams.get('id').split(',');
 		if(id=='all'){fail()}
-	}catch{
+	}catch(err){
 		id = ['AbiskoTemperatures',
 			'AbiskoTemperaturesSummer',
 			'AbiskoTemperaturesWinter',
@@ -295,13 +295,7 @@ var getID = function(urlParams){
 
 var urlParams = new URLSearchParams(window.location.search);
 var baseline = null;
-if(urlParams.get('baselineLower')){
-	baselineLower = parseInt(urlParams.get('baselineLower'));
-	baselineUpper = parseInt(urlParams.get('baselineUpper'));
-}
-const baselineForm = (urlParams.get('baselineForm')=='true')||(urlParams.get('baselineForm')==undefined)
-const debug = urlParams.get('debug');
-const share = urlParams.get('share');
+var baselineForm = undefined;
 
 var getUrl = function(uid=urlParams.get('id'),debug=urlParams.get('debug'),share=urlParams.get('share'),baselineForm=urlParams.get('baselineForm'),baselineLower=urlParams.get('baselineLower'),baselineUpper=urlParams.get('baselineUpper')){
 	var addparams = function(p, v, rest='?'){
@@ -322,8 +316,15 @@ var getUrl = function(uid=urlParams.get('id'),debug=urlParams.get('debug'),share
 var bpage = function(doc=document.createElement('div'), par=window.location.search, ids=getID(new URLSearchParams(par)), reset=false){
 	doc.innerHTML = "";
 	urlParams = new URLSearchParams(par);
+	if(urlParams.get('baselineLower')){
+		baselineLower = parseInt(urlParams.get('baselineLower'));
+		baselineUpper = parseInt(urlParams.get('baselineUpper'));
+	}
+	baselineForm = (urlParams.get('baselineForm')=='true')||(urlParams.get('baselineForm')==undefined)
+	// var share = urlParams.get('share');
 	if(baselineForm=='true') doc.appendChild(createBaseline());
 	if(Array.isArray(ids)) {
+		var debug = urlParams.get('debug');
 		ids.forEach(each => {
 			try{
 				doc.appendChild(rendF[each].html(debug, doc));	
@@ -337,12 +338,12 @@ var bpage = function(doc=document.createElement('div'), par=window.location.sear
 		rendF[ids].func(reset);
 	}
 
-	if(share=='true'){
+	if(urlParams.get('share')=='true'){
 		var input = document.createElement("input");
 		input.setAttribute('id', 'input');
 		input.setAttribute('type', 'text');
-		var body = doc,
-			html = document.documentElement;
+		var body = doc;
+		var html = document.documentElement;
 		var height = Math.max( body.scrollHeight, body.offsetHeight, 
 			html.clientHeight, html.scrollHeight, html.offsetHeight );
 		input.setAttribute('value', "<iframe src='"+window.location+"&share=false"+"' width='100%' height='"+height+"'></iframe>") // TODO ifram
