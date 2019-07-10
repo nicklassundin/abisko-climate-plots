@@ -15,6 +15,7 @@ var build = function(id="mark",par=window.location.search) {
 }
 
 var url = function(file=''){
+	return 'https://nicklassundin.github.io/abisko-climate-plots/'+file;
 	var result = window.location.href.split('?')[0].replace('view.html',file);
 	$.ajax({
 		url: result, 
