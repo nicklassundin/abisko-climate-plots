@@ -361,6 +361,61 @@ Highcharts.setOptions({
 	// }
 // }
 
+var renderCO2 = function(data, id){
+	// console.log(id)
+	// console.log(data)
+	var meta = data.meta;
+	charts[id] = Highcharts.chart(id, {
+		chart: {
+			type: 'line',
+			zoomType: 'xy',
+		},
+		title: {
+			text: this.Highcharts.getOptions().lang.titles[id]
+		},
+		dataSrc: undefined,
+		xAxis: {
+			type: 'datetime',
+			title: {
+				text: this.Highcharts.getOptions().lang.years, 
+			},
+			crosshair: true,
+			lineWidth: 1,
+			// gridLineWidth: 1,
+			minorTickInterval: "auto",
+		},
+		yAxis: {
+			title: {
+				text: "CO2", // TODO localization 
+			},
+			plotLines: [{
+				value: 0,
+				color: 'rgb(204, 214, 235)',
+				width: 2,
+			}],
+			// max: 2,
+			// min: -3,
+			tickInterval: 1,
+			lineWidth: 1,
+		},
+		tooltip: {
+			shared: true,
+			valueSuffix: ' ppm',
+			valueDecimals: 2,
+		},
+		series: [{
+			name: "CO2",
+			lineWidth: 2,
+			marker: { radius: 2 },
+			states: { hover: { lineWidthPlus: 0 } },
+			color: '#ff0000',
+			data: data,
+			showInLegend: !(typeof data.min === 'undefined'),
+			turboThreshold: 4000,
+		}, {
+		}]
+	})
+}
 
 
 var renderTemperatureGraph = function (data, id) {

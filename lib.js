@@ -14,18 +14,22 @@ var build = function(id="mark",par=window.location.search) {
 	mark.appendChild(bpage(container,par=window.location.seach));
 }
 
-var url = function(){
-	return 'https://nicklassundin.github.io/abisko-climate-plots/';
+var url = function(file=''){
+	var result = window.location.href.split('?')[0].replace('view.html',file);
+	$.ajax({
+		url: result, 
+		type: 'HEAD',
+		error: function(){
+		 result = 'https://nicklassundin.github.io/abisko-climate-plots/'+file;
+		},
+		success: function(){}
+	});
+	return result
 }
 var monthlyFunc = (render) => function(data, id, title, src="") {
 	months().forEach(month =>  
 		render(data[month], id+"_"+month, title+" "+monthName(month)));
 };
-
-
-var containerRender = (renderF, id, title, src) => function(data){
-	renderF(data, id, title, src);
-}
 
 var papaF = {
 	// gisstemp:{
@@ -116,7 +120,19 @@ var papaF = {
 			// 'periodMeans': renderAbiskoSnowGraph,
 			'decadeMeans': renderAbiskoSnowGraph,
 		}
-	}
+	},
+	scrippsCO2: {
+		preset: {
+			download: true,
+			skipEmptyLines: true,
+		},
+		cached: undefined,
+		parser: parseSCRIPPS_CO2,
+		render: {
+			'weekly': renderCO2,
+			'monthly': renderCO2,
+		} 
+	},
 }
 // wander down the data structure with tag input example: [high, medium, low]
 var tagApply = function(data, tag){
@@ -125,23 +141,32 @@ var tagApply = function(data, tag){
 		tag.forEach(each => {
 			result = result[each];
 		})	
-	}catch(e){
+	}catch(err){
 		result = result[tag]
 	}
 	return result;
 }
 
-var contFunc = (reset=false, type, file, src) => function(id, tag, renderTag=tag){
+var contFunc = (reset=false, type, file, src) => function(id, tag, renderTag=tag){	
 	if(reset) papaF[type].cached = undefined;
 	var op = papaF[type];
+	var URL = url(file);
+	// console.log(op)
+	// console.log(type)
+	// console.log(file)
+	// console.log(id)
 	// console.log(tag)
 	// console.log(op)
+	// op.preset.complete = function(result){
+	// console.log(op.parser(result.data))
+	// }
+	// console.log(Papa.parse(url(file), op.preset))
+	// console.log(url(file))
 	if(op.cached){
 		var render = tagApply(op.render, renderTag);
 		var data = tagApply(op.cached,tag);
 		render(data,id)
-
-	}else{	
+	}else{
 		op.preset.complete = function(result){
 			var data = op.parser(result);
 			papaF[type].cached = data;
@@ -153,7 +178,7 @@ var contFunc = (reset=false, type, file, src) => function(id, tag, renderTag=tag
 			// TODO render all when tag=true
 			render(data,id)
 		};
-		Papa.parse(url()+''+file, op.preset)
+		Papa.parse(URL, op.preset)
 	}
 }
 
@@ -170,7 +195,11 @@ const csv = {
 		tornetrask: "data/Tornetrask_islaggning_islossning.csv",
 		src: "https://www.arcticcirc.net/",
 
-	}
+	},
+	scripps: {
+		weekly: "data/weekly_in_situ_co2_mlo.csv",
+		monthly: "data/monthly_in_situ_co2_mlo.csv",
+	},
 }
 
 var selectText = function(e){
@@ -264,7 +293,6 @@ var copy = function() {
 }
 
 var getID = function(urlParams){
-
 	var id = null;
 	try{
 		id = urlParams.get('id').split(',');
@@ -323,27 +351,24 @@ var bpage = function(doc=document.createElement('div'), par=window.location.sear
 	baselineForm = (urlParams.get('baselineForm')=='true')||(urlParams.get('baselineForm')==undefined)
 	// var share = urlParams.get('share');
 	if(baselineForm=='true') doc.appendChild(createBaseline());
-	if(Array.isArray(ids)) {
-		var debug = urlParams.get('debug');
-		ids.forEach(each => {
-			try{
-				doc.appendChild(rendF[each].html(debug, doc));	
-				rendF[each].func(reset);
-			}catch(err){
-				// TODO Improve quality
-				var div = document.createElement("div");
-				div.innerHTML = "[PLACEHOLDER ERROR] - Sorry we couldn't deliver the graph you deserved, if you have block adder on try turning in off. "
-				var error = document.createElement("div");
-				error.innerHTML = err;
-				doc.appendChild(div)
-				doc.appendChild(error)
-				console.log("failed to render: "+each)
-			}
-		})
-	}else{
-		doc.appendChild(rendF[ids].html(debug, doc));
-		rendF[ids].func(reset);
-	}
+
+	var debug = urlParams.get('debug');
+	if(!Array.isArray(ids)) ids = [ids];
+	ids.forEach(each => {
+		try{
+			doc.appendChild(rendF[each].html(debug, doc));	
+			rendF[each].func(reset);
+		}catch(err){
+			// TODO Improve quality
+			var div = document.createElement("div");
+			div.innerHTML = "[PLACEHOLDER ERROR] - Sorry we couldn't deliver the graph you deserved, if you have block adder on try turning in off. "
+			var error = document.createElement("div");
+			error.innerHTML = err;
+			doc.appendChild(div)
+			doc.appendChild(error)
+			console.log("failed to render: "+each)
+		}
+	})
 
 	if(urlParams.get('share')=='true'){
 		var input = document.createElement("input");
@@ -650,6 +675,16 @@ var rendF = {
 			if(!debug) no = debug;
 			return createDiv('growingSeason', no);
 
+		}
+	},
+	'weeklyCO2': {
+		func: function(reset=false){
+			contFunc(reset,"scrippsCO2",csv.scripps.weekly,'')('scrippsCO2', 'weekly')
+		},
+		html: function(debug=false, doc){
+			var no = 18;
+			if(!debug) no = debug;
+			return createDiv('scrippsCO2', no);
 		}
 	}
 }

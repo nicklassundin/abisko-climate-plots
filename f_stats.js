@@ -13,7 +13,22 @@
 // };
 
 
-
+var parseSCRIPPS_CO2 = function(result, src=''){
+	// TODO
+	var parse = function(entry){
+		var x = (new Date(entry[0]));
+		var y = parseFloat(entry[1]);
+		return {
+			x: x,
+			y: y
+		}
+	}
+	var data = result.data.slice(44)
+	data = data.map(each => parse(each)) 
+	return {
+		weekly: data
+	}
+}
 
 
 var parseGISSTEMP = function (result, src='') {
