@@ -16,17 +16,28 @@
 var parseSCRIPPS_CO2 = function(result, src=''){
 	// TODO
 	var parse = function(entry){
-		var x = (new Date(entry[0]));
+		var x = (new Date(entry[0])).getTime();
 		var y = parseFloat(entry[1]);
 		return {
 			x: x,
-			y: y
+			y: y,
 		}
 	}
 	var data = result.data.slice(44)
-	data = data.map(each => parse(each)) 
+	data = data.map(each => parse(each))
+	var linReg = regression.linear(data.map((each,index) => [index, each.y]))
+	var predict = linReg.predict;
+	linReg.predict = function(x){
+		var index = data.map(each => each.x).indexOf(x)
+		var result = predict(index);
+		result[0] = x;
+		return result
+	}
 	return {
-		weekly: data
+		weekly: {
+			week: data,
+			linReg, 
+		}
 	}
 }
 

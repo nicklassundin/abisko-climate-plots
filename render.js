@@ -393,8 +393,8 @@ var renderCO2 = function(data, id){
 				color: 'rgb(204, 214, 235)',
 				width: 2,
 			}],
-			// max: 2,
-			// min: -3,
+			max: data.week[data.week.length-1].y+30,
+			min: data.week[0].y-20,
 			tickInterval: 1,
 			lineWidth: 1,
 		},
@@ -408,11 +408,18 @@ var renderCO2 = function(data, id){
 			lineWidth: 2,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
-			color: '#ff0000',
-			data: data,
-			showInLegend: !(typeof data.min === 'undefined'),
+			color: '#aaaaaa',
+			data: data.week,
 			turboThreshold: 4000,
-		}, {
+		},{
+			name: this.Highcharts.getOptions().lang.linReg,
+			data: data.linReg.predict,
+			type: 'line',
+			lineWidth: 2,
+			marker: { radius: 2 },
+			states: { hover: { lineWidthPlus: 0 } },
+			color: '#aaaacc',
+			data: [data.linReg.predict(data.week[0].x),data.linReg.predict(data.week[data.week.length-1].x)],
 		}]
 	})
 }
@@ -580,7 +587,7 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id) {
 			regressionSettings: {
 				type: 'linear',
 				color: '#aaaaaa',
-				name: 'linear regression',
+				name: this.Highcharts.getOptions().lang.linReg,
 			},
 			name: this.Highcharts.getOptions().lang.monthlyAvg,
 			lineWidth: 0,

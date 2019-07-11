@@ -317,7 +317,8 @@ var getID = function(urlParams){
 			'winterPrecipitationDifference',
 			'abiskoSnowDepthPeriodMeans',
 			'abiskoSnowDepthPeriodMeans2',
-			'abiskoLakeIce'];
+			'abiskoLakeIce',
+			'weeklyCO2'];
 	}
 	return id
 }
