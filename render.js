@@ -385,21 +385,32 @@ var renderCO2 = function(data, id){
 			},
 			crosshair: true,
 			lineWidth: 1,
-			// gridLineWidth: 1,
-			minorTickInterval: "auto",
+			gridLineWidth: 1,
+			minorTickInterval: null,
 		},
 		yAxis: {
 			title: {
 				text: "CO2", // TODO localization 
 			},
-			plotLines: [{
-				value: 0,
-				color: 'rgb(204, 214, 235)',
+			// plotLines: [{
+				// value: 0,
+				// color: 'rgb(204, 214, 235)',
+				// width: 2,
+			// }],
+			plotLines:[{
+				color: '#555555',
+				dashStyle: 'Dash',
+				value: 350,
+				width: 2,
+			},{
+				color: '#555555',
+				dashStyle: 'Dash',
+				value: 400,
 				width: 2,
 			}],
 			max: data.week[data.week.length-1].y+30,
 			min: data.week[0].y-20,
-			tickInterval: 1,
+			tickInterval: 10,
 			lineWidth: 1,
 		},
 		tooltip: {
@@ -1316,12 +1327,12 @@ var renderZoomableGraph = function(data, id, title){
 			},
 			title: {
 				text: 'Date'
-			}
+			},
 		},
 		yAxis: {
 			title: {
 				text: 'Temperatures'
-			}
+			},
 		},
 		legend: {
 			enabled: false

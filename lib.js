@@ -122,7 +122,7 @@ var papaF = {
 			'decadeMeans': renderAbiskoSnowGraph,
 		}
 	},
-	scrippsCO2: {
+	weeklyCO2: {
 		preset: {
 			download: true,
 			skipEmptyLines: true,
@@ -681,12 +681,12 @@ var rendF = {
 	},
 	'weeklyCO2': {
 		func: function(reset=false){
-			contFunc(reset,"scrippsCO2",csv.scripps.weekly,'')('scrippsCO2', 'weekly')
+			contFunc(reset,"weeklyCO2",csv.scripps.weekly,'')('weeklyCO2', 'weekly')
 		},
 		html: function(debug=false, doc){
 			var no = 18;
 			if(!debug) no = debug;
-			return createDiv('scrippsCO2', no);
+			return createDiv('weeklyCO2', no);
 		}
 	}
 }
