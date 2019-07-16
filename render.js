@@ -1246,7 +1246,7 @@ var renderAbiskoIceGraph = function (ice, id) {
 			data: ice.iceTime,
 		},{
 			yAxis: 1,
-			name: this.Highcharts.getOptions().lang.movAgIceTime,
+			name: this.Highcharts.getOptions().lang.movAvgIceTime,
 			color: '#cc00cc',
 			data: ice.iceTimeMovAvg,
 			marker: { enabled: false },
