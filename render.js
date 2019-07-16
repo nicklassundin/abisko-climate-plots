@@ -291,6 +291,10 @@ Highcharts.setOptions({
 	dataSrc: '',
 	lang: language[nav_lang],
 	exporting: {
+		chartOptions: {
+            		annotationsOptions: undefined,
+			annotations: undefined,
+		},
 		// showTable: true, // TODO DATA TABLE
 		buttons: {
 			contextButton: {
