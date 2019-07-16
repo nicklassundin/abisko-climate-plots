@@ -371,7 +371,7 @@ var renderCO2 = function(data, id){
 	var meta = data.meta;
 	charts[id] = Highcharts.chart(id, {
 		chart: {
-			type: 'line',
+			type: 'area',
 			zoomType: 'xy',
 		},
 		title: {
@@ -409,7 +409,7 @@ var renderCO2 = function(data, id){
 				width: 2,
 			}],
 			max: data.week[data.week.length-1].y+30,
-			min: data.week[0].y-20,
+			min: data.week[0].y-10,
 			tickInterval: 10,
 			lineWidth: 1,
 		},
@@ -423,9 +423,10 @@ var renderCO2 = function(data, id){
 			lineWidth: 2,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
-			color: '#aaaaaa',
+			color: '#5555bb',
 			data: data.week,
 			turboThreshold: 4000,
+			fillOpacity: 0.2,
 		},{
 			name: this.Highcharts.getOptions().lang.linReg,
 			data: data.linReg.predict,
@@ -433,8 +434,9 @@ var renderCO2 = function(data, id){
 			lineWidth: 2,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
-			color: '#aaaacc',
+			color: '#333377',
 			data: [data.linReg.predict(data.week[0].x),data.linReg.predict(data.week[data.week.length-1].x)],
+			visible: false,
 		}]
 	})
 }
