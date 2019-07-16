@@ -430,7 +430,7 @@ var renderCO2 = function(data, id){
 
 
 var renderTemperatureGraph = function (data, id) {
-	// console.log(title);
+	// console.log('renderTemperatureGraph')
 	// console.log(data)
 	var meta = data.meta;
 	charts[id] = Highcharts.chart(id, {
@@ -534,7 +534,7 @@ var renderTemperatureGraph = function (data, id) {
 
 
 var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id) {
-	// console.log(title);
+	// console.log('renderAbiskoMonthlyTemperatureGraph');
 	// console.log(temperatures);
 	charts[id] = Highcharts.chart(id, {
 		chart: {
@@ -905,13 +905,16 @@ var renderPrecipitationDifferenceGraph = function (precipitation, id) {
 };
 
 var renderYearlyPrecipitationGraph = function (precipitation, id) {
+	// console.log('renderYearlyPrecipitationGraph')
+	var title = language[nav_lang].titles[id];
+	if(typeof title == 'function') title = title();
 	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'line'
 		},
 		dataSrc: precipitation.src,
 		title: {
-			text: language[nav_lang].titles[id],
+			text: title 
 		},
 		xAxis: {
 			title: {
@@ -1027,6 +1030,7 @@ var renderYearlyPrecipitationGraph = function (precipitation, id) {
 };
 
 var renderMonthlyPrecipitationGraph = function (precipitation, id) {
+	// console.log('renderMonthlyPrecipitationGraph')
 	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'line'
