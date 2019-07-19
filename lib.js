@@ -4,6 +4,7 @@
 
 // TODO cached parsing and generalization
 
+
 var build = function(id="mark",par=window.location.search) {
 	var param = (''+par);
 	var mark = document.getElementById(id+param);
@@ -387,6 +388,10 @@ var bpage = function(doc=document.createElement('div'), par=window.location.sear
 		cp.setAttribute('onclick', "copy()");
 		doc.appendChild(cp);
 	}
+	// disable context menu TODO event handler maybe
+	doc.oncontextmenu = function(){
+		return false;
+	};
 	return doc
 }
 
@@ -394,6 +399,9 @@ var bpage = function(doc=document.createElement('div'), par=window.location.sear
 var createDiv = function(id, no=null){
 	var div = document.createElement('div');
 	div.setAttribute("id",id);
+	var overlay = document.createElement('div');
+	overlay.setAttribute("id", id+"overlay");
+	overlay.setAttribute("class","overlay");
 	var fig = document.createElement('figure');
 	if(no){
 		var remove = getID().filter(each => each!=id.split('_')[0]);
@@ -413,6 +421,7 @@ var createDiv = function(id, no=null){
 		fig.appendChild(aID);
 	}
 	fig.appendChild(div);
+	fig.appendChild(overlay);
 	return fig
 }
 

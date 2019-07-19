@@ -169,6 +169,7 @@ const language = {
 				return 'Abisko Precipitation for '+monthy
 			},
 			growingSeason: 'Growing season',
+			weeklyCO2: "Averages global CO"+("2".sub())+" in atmosphere",
 		}
 	},
 	sv:{
@@ -281,6 +282,7 @@ const language = {
 				return 'Abisko utfällning för '+month
 			},
 			growingSeason: 'Växande säsonger',
+			weeklyCO2: "Globalt genomsnittligt CO"+("2".sub())+" i atmosfären",
 		}
 	},
 }
@@ -290,12 +292,26 @@ var nav_lang = navigator.language.split('-')[0];
 Highcharts.setOptions({
 	dataSrc: '',
 	lang: language[nav_lang],
+	chart: {
+		events: {
+			// dblclick: function () {
+			// console.log('dbclick on chart')
+			// },
+			click: function () {
+				console.log('click on chart')
+			},
+			contextmenu: function () {
+				console.log('right click on chart')
+			}
+		},
+	},
 	exporting: {
 		chartOptions: {
-            		annotationsOptions: undefined,
+			annotationsOptions: undefined,
 			annotations: undefined,
 		},
 		// showTable: true, // TODO DATA TABLE
+
 		buttons: {
 			contextButton: {
 				menuItems: [{
@@ -359,23 +375,68 @@ Highcharts.setOptions({
 
 // TODO generalize render function
 // var renderGraph = function(options){
-	// return function(data, id){
-		// var meta = data.meta;
-		// return Highcharts.chart(id, options);
-	// }
+// return function(data, id){
+// var meta = data.meta;
+// return Highcharts.chart(id, options);
 // }
+// }
+
+var addInput = function(){	
+	var input = document.createElement("input");
+	input.setAttribute("type", "date");
+	return input;
+}
+var appendChild = function(parentId,element){
+	return function(){
+		document.getElementById(id).appendChild(element);
+	}
+}
 
 var renderCO2 = function(data, id){
 	// console.log(id)
 	// console.log(data)
 	var meta = data.meta;
+
+
+	var overlay = document.getElementById(id+"overlay");
+	var form = document.createElement("form");
+	var div = document.createElement("div");
+	div.setAttribute("id", id+"overlay"+"-input");
+	div.appendChild(addInput());
+
+	// var add = document.createElement("button")
+	// add.innerHTML = "add"
+	// add.setAttribute("onclick","appendChild("+id+"overlay"+"-input,addInput())");
+
+	var submit = document.createElement("input")
+	submit.setAttribute("type", "submit");
+	var br = document.createElement("br");
+
+	form.appendChild(div);
+	form.appendChild(br);
+	form.appendChild(br);
+	form.appendChild(submit);
+	// overlay.appendChild(add);
+	overlay.appendChild(form);
 	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'area',
-			zoomType: 'xy',
+			zoomType: 'x',
 		},
 		title: {
-			text: this.Highcharts.getOptions().lang.titles[id]
+			text: this.Highcharts.getOptions().lang.titles[id],
+			useHTML: true,
+		},
+		plotOptions: {
+			series: {
+				point: {
+					events: {
+						dblclick: function(e){
+							// document.getElementById(id+"overlay").style.display = "block";
+						}
+					}
+				}
+			}
 		},
 		dataSrc: undefined,
 		xAxis: {
@@ -390,12 +451,13 @@ var renderCO2 = function(data, id){
 		},
 		yAxis: {
 			title: {
-				text: "CO2", // TODO localization 
+				text: "CO"+("2".sub()), // TODO localization
+				useHTML: true,
 			},
 			// plotLines: [{
-				// value: 0,
-				// color: 'rgb(204, 214, 235)',
-				// width: 2,
+			// value: 0,
+			// color: 'rgb(204, 214, 235)',
+			// width: 2,
 			// }],
 			plotLines:[{
 				color: '#555555',
@@ -419,7 +481,7 @@ var renderCO2 = function(data, id){
 			valueDecimals: 2,
 		},
 		series: [{
-			name: "CO2",
+			name: "CO"+("2".sub()),
 			lineWidth: 2,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
@@ -449,7 +511,7 @@ var renderTemperatureGraph = function (data, id) {
 	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'line',
-			zoomType: 'xy',
+			zoomType: 'x',
 		},
 		title: {
 			text: this.Highcharts.getOptions().lang.titles[id]
@@ -552,7 +614,7 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id) {
 	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'line',
-			zoomType: 'xy',
+			zoomType: 'x',
 		},
 		dataSrc: temperatures.src,
 		title: {
@@ -786,7 +848,7 @@ var renderGrowingSeasonGraph = function (season, id) {
 	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'line',
-			zoomType: 'xy',
+			zoomType: 'x',
 		},
 		dataSrc: season.src,
 		title: {
