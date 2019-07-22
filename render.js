@@ -30,7 +30,6 @@ var updatePlot = (chart) => function(id){
 	if(id.split('_')[1]) id = id.split('_')[0]
 	var div = document.getElementById(id);
 	chart.destroy();
-	console.log(baselineLower)
 	return bpage(div,window.location.search,ids=id,reset=true)
 }
 var resetPlot = function(id){
@@ -429,13 +428,49 @@ var renderCO2 = function(data, id){
 		},
 		plotOptions: {
 			series: {
+				marker: {
+					enabledThreshold: 0,
+					radius: 1,
+					states: {
+						select: {
+							lineColor: "#6666bb",
+							lineWidth: 1,
+							radius: 5,
+						},
+						hover: {
+							radiusPlus: 5,
+						},
+
+					}
+				},
+				allowPointSelect: true,
 				point: {
 					events: {
-						dblclick: function(e){
-							// document.getElementById(id+"overlay").style.display = "block";
-						}
+						select: function () {
+							var date = new Date(this.category);
+							var text = "Date: "+ date.getFullYear() +"-"+ date.getMonth()+"-"+date.getDate() +"<br/>CO"+ ("2".sub())+": " + this.y + ' ppm';
+							var chart = this.series.chart;
+							if (!chart.lbl) {
+								chart.lbl = chart.renderer.label(text, 100, 70,"callout", this.catergory, this.y, useHTML=true)
+									.attr({
+										padding: 10,
+										r: 5,
+										fill: Highcharts.getOptions().colors[1],
+										zIndex: 5
+									})
+									.css({
+										color: '#FFFFFF'
+									})
+									.add();
+							} else {
+								chart.lbl.attr({
+									text: text
+								});
+							}
+						},
 					}
 				}
+
 			}
 		},
 		dataSrc: undefined,
@@ -483,12 +518,20 @@ var renderCO2 = function(data, id){
 		series: [{
 			name: "CO"+("2".sub()),
 			lineWidth: 2,
-			marker: { radius: 2 },
+			// marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
 			color: '#5555bb',
 			data: data.week,
 			turboThreshold: 4000,
 			fillOpacity: 0.2,
+			marker: {
+				states: {
+					select: {
+						fillColor: 'red',
+						lineWidth: 3
+					}
+				}
+			},
 		},{
 			name: this.Highcharts.getOptions().lang.linReg,
 			data: data.linReg.predict,

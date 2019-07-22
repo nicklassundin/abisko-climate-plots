@@ -693,7 +693,7 @@ var rendF = {
 			contFunc(reset,"weeklyCO2",csv.scripps.weekly,'')('weeklyCO2', 'weekly')
 		},
 		html: function(debug=false, doc){
-			var no = 18;
+			var no = 44;
 			if(!debug) no = debug;
 			return createDiv('weeklyCO2', no);
 		}

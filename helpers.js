@@ -2,19 +2,19 @@
 
 (function (w) {
 
-    w.URLSearchParams = w.URLSearchParams || function (searchString) {
-        var self = this;
-        self.searchString = searchString;
-        self.get = function (name) {
-            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(self.searchString);
-            if (results == null) {
-                return null;
-            }
-            else {
-                return decodeURI(results[1]) || 0;
-            }
-        };
-    }
+	w.URLSearchParams = w.URLSearchParams || function (searchString) {
+		var self = this;
+		self.searchString = searchString;
+		self.get = function (name) {
+			var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(self.searchString);
+			if (results == null) {
+				return null;
+			}
+			else {
+				return decodeURI(results[1]) || 0;
+			}
+		};
+	}
 
 })(window)
 
@@ -79,8 +79,8 @@ var t = {
 var monthByIndex = index => months()[index];
 
 var monthName = month => ({
-    jan: 'January', feb: 'February', mar: 'March', apr: 'April', may: 'May', jun: 'June',
-    jul: 'July', aug: 'August', sep: 'September', oct: 'October', nov: 'November', dec: 'December'
+	jan: 'January', feb: 'February', mar: 'March', apr: 'April', may: 'May', jun: 'June',
+	jul: 'July', aug: 'August', sep: 'September', oct: 'October', nov: 'November', dec: 'December'
 })[month];
 
 var summerMonths = ['jun', 'jul', 'aug', 'sep'];
@@ -101,8 +101,8 @@ var min = values => values.reduce((min, current) => Math.min(min, current), Infi
 var max = values => values.reduce((max, current) => Math.max(max, current), -Infinity);
 
 var average = (values) => {
-    if (values.length === 0) return 0;
-    return sum(values) / values.length;
+	if (values.length === 0) return 0;
+	return sum(values) / values.length;
 };
 
 var mean = average;
@@ -121,13 +121,13 @@ var variance = values => sumSquareDistance(values, average(values)) / (values.le
 
 
 var confidenceInterval = (mean, variance, count, td=t['t05']) => {
-    	var zs =[0, 12.706, 4.303, 3.182, 2.776, 2.571, 2.447, 2.365, 2.306, 2.262, 2.228, 2.201, 2.179, 2.160, 2.145 , 2.131, 2.120, 2.110, 2.101, 2.093, 2.086];
+	var zs =[0, 12.706, 4.303, 3.182, 2.776, 2.571, 2.447, 2.365, 2.306, 2.262, 2.228, 2.201, 2.179, 2.160, 2.145 , 2.131, 2.120, 2.110, 2.101, 2.093, 2.086];
 	var z = zs[count-1] || zs.pop();
 	var ci = z * Math.sqrt(variance / count);
-    return {
-        low: mean - ci,
-        high: mean + ci
-    };
+	return {
+		low: mean - ci,
+		high: mean + ci
+	};
 };
 
 // equally weighted averages normal distribution 
@@ -172,18 +172,18 @@ var getDiff = function(values){
 
 
 var validNumber = (string) => {
-    var number = +string;
-    return (number) ? number : undefined;
+	var number = +string;
+	return (number) ? number : undefined;
 };
 
 var parseDate = (string) => {
-    var date = string.split('-');
-    if (date.length < 3) date[1] = date[2] = 0;
-    return {
-        year: +date[0],
-        month: +date[1],
-        day: +date[2],
-    };
+	var date = string.split('-');
+	if (date.length < 3) date[1] = date[2] = 0;
+	return {
+		year: +date[0],
+		month: +date[1],
+		day: +date[2],
+	};
 };
 
 var isLeapYear = year => ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
@@ -191,17 +191,17 @@ var isLeapYear = year => ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 =
 var createDate = date => new Date(date.year, date.month-1, date.day-1);
 
 var weekNumber = (date) => {
-    var d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-    d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
-    var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-    return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+	var d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+	d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+	var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+	return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
 };
 
 var dayOfYear = (date) => {
-    var start = new Date(date.getFullYear(), 0, 0);
-    var diff = (date - start) + ((start.getTimezoneOffset() - date.getTimezoneOffset()) * 60 * 1000);
-    var oneDay = 1000 * 60 * 60 * 24;
-    return Math.floor(diff / oneDay);
+	var start = new Date(date.getFullYear(), 0, 0);
+	var diff = (date - start) + ((start.getTimezoneOffset() - date.getTimezoneOffset()) * 60 * 1000);
+	var oneDay = 1000 * 60 * 60 * 24;
+	return Math.floor(diff / oneDay);
 };
 
 var dateFromDayOfYear = (year, dayOfYear) => new Date(year, 0, dayOfYear);
@@ -209,24 +209,25 @@ var dateFromDayOfYear = (year, dayOfYear) => new Date(year, 0, dayOfYear);
 var parseNumber = string => parseFloat(string.replace(',', '.')) || undefined;
 
 var linearRegression = (xs, ys) => {
-    var data = xs.map((x, index) => [x, ys[index]]);
-    var result = regression.linear(data);
-    var gradient = result.equation[0];
-    var intercept = result.equation[1];
-    var linear = x => gradient * x + intercept;
-    linear.toString = () => gradient + ' x ' + (intercept >= 0 ? '+' : '-') + Math.abs(intercept);
-    return linear;
+	var data = xs.map((x, index) => [x, ys[index]]);
+	var result = regression.linear(data);
+	var gradient = result.equation[0];
+	var intercept = result.equation[1];
+	var linear = x => gradient * x + intercept;
+	linear.toString = () => gradient + ' x ' + (intercept >= 0 ? '+' : '-') + Math.abs(intercept);
+	linear.r2 = result.r2;
+	return linear;
 };
 
 Array.prototype.rotate = (function () {
-    var unshift = Array.prototype.unshift,
-        splice = Array.prototype.splice;
+	var unshift = Array.prototype.unshift,
+		splice = Array.prototype.splice;
 
-    return function (count) {
-        var len = this.length >>> 0,
-            count = count >> 0;
+	return function (count) {
+		var len = this.length >>> 0,
+			count = count >> 0;
 
-        unshift.apply(this, splice.call(this, count % len, len));
-        return this;
-    };
+		unshift.apply(this, splice.call(this, count % len, len));
+		return this;
+	};
 })();
