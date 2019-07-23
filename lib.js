@@ -135,6 +135,15 @@ var papaF = {
 			'monthly': renderCO2,
 		} 
 	},
+	permaHistogramCALM: {
+		preset: {
+			download: true,
+			skipEmptyLines: true,
+		},
+		cached: undefined,
+		parser: parseCALM,
+		render: renderPerma,
+	}
 }
 // wander down the data structure with tag input example: [high, medium, low]
 var tagApply = function(data, tag){
@@ -153,7 +162,6 @@ var contFunc = (reset=false, type, file, src) => function(id, tag, renderTag=tag
 	if(reset) papaF[type].cached = undefined;
 	var op = papaF[type];
 	var URL = url(file);
-	// console.log(op)
 	// console.log(type)
 	// console.log(file)
 	// console.log(id)
@@ -202,6 +210,7 @@ const csv = {
 		weekly: "data/weekly_in_situ_co2_mlo.csv",
 		monthly: "data/monthly_in_situ_co2_mlo.csv",
 	},
+	calm: "data/CALM.csv",
 }
 
 var selectText = function(e){
@@ -696,6 +705,16 @@ var rendF = {
 			var no = 44;
 			if(!debug) no = debug;
 			return createDiv('weeklyCO2', no);
+		}
+	},
+	'permaHistogramCALM': {
+		func: function(reset=false){
+			contFunc(reset, "permaHistogramCALM", csv.calm,'')('permaHistogramCALM','')
+		},
+		html: function(debug=false, doc){
+			var no = 45;
+			if(!debug) no = debug;
+			return createDiv("permaHistogramCALM", no);
 		}
 	}
 }

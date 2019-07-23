@@ -1479,3 +1479,49 @@ var renderZoomableGraph = function(data, id, title){
 	});
 }
 
+
+var renderPerma = function(data, id, title){
+	charts[id] = Highcharts.chart(id, {
+		chart: {
+			zoomType: 'x'
+		},
+		// dataSrc: data.src,
+		title: {
+			text: title + ' [DUMMY/START]',
+		},
+		subtitle: {
+			text: document.ontouchstart === undefined ?
+			'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+		},
+		xAxis: {
+			type: 'datetime',
+			dateTimeLabelFormats: { // don't display the dummy year
+				month: '%e. %b',
+				year: '%b'
+			},
+			title: {
+				text: 'Date'
+			},
+		},
+		yAxis: {
+			title: {
+				text: 'Temperatures'
+			},
+		},
+		legend: {
+			enabled: false
+		},
+		plotOptions: {
+			area: {
+			
+			}
+		},
+
+		series: [{
+			type: 'histogram',
+			name: 'Average',
+			data: data,
+		}]
+	});
+}
+

@@ -13,6 +13,12 @@
 // };
 
 
+var parseCALM = function(result, src=''){
+	var data = result;
+	console.log(data)
+	return data;
+}
+
 var parseSCRIPPS_CO2 = function(result, src=''){
 	// TODO
 	var parse = function(entry){
