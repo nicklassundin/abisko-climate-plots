@@ -393,7 +393,7 @@ var appendChild = function(parentId,element){
 
 var renderCO2 = function(data, id){
 	// console.log(id)
-	// console.log(data)
+	console.log(data)
 	var meta = data.meta;
 
 
@@ -1480,47 +1480,50 @@ var renderZoomableGraph = function(data, id, title){
 }
 
 
-var renderPerma = function(data, id, title){
+var renderPerma = function(data, id){
+	// console.log(data)
 	charts[id] = Highcharts.chart(id, {
 		chart: {
-			zoomType: 'x'
+			zoomType: 'x',
+			// plotBackgroundColor: "#ddddff",
 		},
 		// dataSrc: data.src,
 		title: {
-			text: title + ' [DUMMY/START]',
-		},
-		subtitle: {
-			text: document.ontouchstart === undefined ?
-			'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+			text:  "Permafrost melt depth by year",
 		},
 		xAxis: {
-			type: 'datetime',
-			dateTimeLabelFormats: { // don't display the dummy year
-				month: '%e. %b',
-				year: '%b'
-			},
 			title: {
-				text: 'Date'
+				text: 'Year'
 			},
 		},
 		yAxis: {
 			title: {
-				text: 'Temperatures'
+				text: 'meters'
 			},
+			reversed: true,
+			plotLines: [{
+				color: "#88dd88",
+				width: 2,
+				value: 0,
+				zIndex: 5,
+				label: {
+					text: "Ground level",
+				}
+			}]
 		},
 		legend: {
 			enabled: false
 		},
-		plotOptions: {
-			area: {
-			
-			}
-		},
 
 		series: [{
+			data: data.map(each => ({
+				x: each.x,
+				y: each.y,
+			})),
+			name: 'Histogram',
 			type: 'histogram',
-			name: 'Average',
-			data: data,
+			color: "#bb9999",
+			opacity: 0.5,
 		}]
 	});
 }

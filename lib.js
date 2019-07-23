@@ -137,6 +137,7 @@ var papaF = {
 	},
 	permaHistogramCALM: {
 		preset: {
+			header: true,
 			download: true,
 			skipEmptyLines: true,
 		},

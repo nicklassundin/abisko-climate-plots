@@ -14,8 +14,21 @@
 
 
 var parseCALM = function(result, src=''){
-	var data = result;
-	console.log(data)
+	var fields = result.meta.fields;
+	fields.shift()
+	var data = result.data;
+	data.splice(0,4)
+	data = data.map(function(each){
+		each = Object.keys(each).map(key => each[key]);
+		var x = parseInt(each.shift());
+		var y = mean(each.map(each => parseFloat(each)).filter(function(value){
+			return !Number.isNaN(value)
+		}));
+		return {
+			x,
+			y,
+		}
+	})
 	return data;
 }
 
