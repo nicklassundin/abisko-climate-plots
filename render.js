@@ -26,12 +26,18 @@ var preSetMeta = {
 	}
 }
 
-var updatePlot = (chart) => function(id){
+var updatePlot = function(id, bl=document.getElementById(id.id+"lowLabel").value, bu=document.getElementById(id.id+"uppLabel").value){
+	if(typeof id!='string') id = id.id // TODO resove why gets div HOTFIX
+	if(bl<bu && bl>1913) baselineLower=bl;
+	if(bu>bl && bu<2019) baselineUpper=bu;
+	var chart = charts[id]
 	if(id.split('_')[1]) id = id.split('_')[0]
 	var div = document.getElementById(id);
 	chart.destroy();
 	return bpage(div,window.location.search,ids=id,reset=true)
 }
+
+
 var resetPlot = function(id){
 	return function(a){
 		return function(b){
@@ -47,7 +53,8 @@ var resetPlot = function(id){
 				default: 
 					break;
 			}
-			updatePlot(charts[id.id])(id.id);
+			document.getElementById(id.id+"overlay").style.display = "none";
+			updatePlot(id.id);
 		}
 	}
 }
@@ -169,6 +176,9 @@ const language = {
 			},
 			growingSeason: 'Growing season',
 			weeklyCO2: "Averages global CO"+("2".sub())+" in atmosphere",
+		},
+		subtitles: {
+			baseline: 'Difference between yearly average and average for '+baselineLower+"-"+baselineUpper,
 		}
 	},
 	sv:{
@@ -282,6 +292,9 @@ const language = {
 			},
 			growingSeason: 'Växande säsonger',
 			weeklyCO2: "Globalt genomsnittligt CO"+("2".sub())+" i atmosfären",
+		},
+		subtitles: {
+			baseline: 'Skillnad mellan årligt genomsnitt och genomsnitt för perioden '+baselineLower+"-"+baselineUpper,
 		}
 	},
 }
@@ -296,9 +309,9 @@ Highcharts.setOptions({
 			// dblclick: function () {
 			// console.log('dbclick on chart')
 			// },
-			click: function () {
-				console.log('click on chart')
-			},
+			// click: function () {
+				// console.log('click on chart')
+			// },
 			contextmenu: function () {
 				console.log('right click on chart')
 			}
@@ -306,8 +319,8 @@ Highcharts.setOptions({
 	},
 	exporting: {
 		chartOptions: {
-			annotationsOptions: undefined,
-			annotations: undefined,
+			// annotationsOptions: undefined,
+			// annotations: undefined,
 		},
 		// showTable: true, // TODO DATA TABLE
 
@@ -393,7 +406,7 @@ var appendChild = function(parentId,element){
 
 var renderCO2 = function(data, id){
 	// console.log(id)
-	console.log(data)
+	// console.log(data)
 	var meta = data.meta;
 
 
@@ -825,23 +838,55 @@ var plotlines = function(id){
 		value: baselineUpper,
 		width: 1,
 		useHTML: true,
+		label: {
+			useHTML: true,
+			text: "<input id="+id+"uppLabel type=text class=input value="+baselineUpper+" maxlength=4 onclick=selectText(this) onchange=updatePlot("+id+")></input>",
+			rotation: 0,
+			y: 12,
+		},
+		zIndex: 1,
 	},{
 		color: 'rgb(160, 160, 160)',
 		value: baselineLower,
 		width: 1,
 		useHTML: true,
+		label: {
+			useHTML: true,
+			text: "<input id="+id+"lowLabel type=text class=input value="+baselineLower+" maxlength=4 onclick=selectText(this) onchange=updatePlot("+id+")></input>",
+			rotation: 0,
+			textAlign: 'left',
+			x: -40,
+			y: 12,
+		},
+		zIndex: 5,
+	}];
+}
+var plotBandsDiff = function(id){
+	return {
+		color: 'rgb(245, 245, 245)',
+		from: baselineLower,
+		to: baselineUpper,
+		label: {
+			useHTML: true,
+			text: "<div id="+id+"-plotBands-Label>Baseline</div>",
+		},
 		events: {
 			click: function(e){
-				console.log(e)
-			}
+				var lowLabel = document.getElementById(id+"lowLabel");
+				var uppLabel = document.getElementById(id+"uppLabel");
+				selectText(lowLabel);
+				// document.getElementById(id+"overlay").style.display = "block";
+			},
 		}
-	}];
+	};
 }
 
 var renderTemperatureDifferenceGraph = function (temperatures, id) {
 	// console.log('#renderTemperatureGraph')
 	// console.log(title);
 	// console.log(temperatures);
+	var overlay = document.getElementById(id+"overlay");
+	overlay.appendChild(createBaseline(false,submit="resetPlot("+id+")"));
 	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'column'
@@ -854,20 +899,16 @@ var renderTemperatureDifferenceGraph = function (temperatures, id) {
 			text: this.Highcharts.getOptions().lang.titles[id],
 		},
 		subtitle: {
-			//text: 'Difference between yearly average and average for 1961-1990',
+			text: this.Highcharts.getOptions().lang.subtitles.baseline,
 		},
-		annotations: baselineUI(id),
+		// annotations: baselineUI(id),
 		xAxis: {
 			title: {
 				text: this.Highcharts.getOptions().lang.years,
 			},
 			crosshair: true,
 			plotLines: plotlines(id),
-			plotBands: {
-				color: 'rgb(245, 245, 245)',
-				from: baselineLower,
-				to: baselineUpper,
-			}
+			plotBands: plotBandsDiff(id),
 		},
 		yAxis: {
 			title: {
@@ -993,18 +1034,15 @@ var renderPrecipitationDifferenceGraph = function (precipitation, id) {
 			text: this.Highcharts.getOptions().lang.titles[id],
 		},
 		subtitle: {
-			//text: 'Difference between yearly average and average for 1961-1990',
+			text: this.Highcharts.getOptions().lang.subtitles.baseline,
 		},
 		xAxis: {
 			title: {
 				text: 'Year',
 			},
 			crosshair: true,
-			plotBands: [{
-				color: 'rgb(245, 245, 245)',
-				from: baselineLower,
-				to: baselineUpper,
-			}],
+			plotBands: plotBandsDiff(id),
+			plotLines: plotlines(id),
 		},
 		yAxis: {
 			title: {
@@ -1023,7 +1061,7 @@ var renderPrecipitationDifferenceGraph = function (precipitation, id) {
 		legend: {
 			enabled: true,
 		},
-		annotations: baselineUI(id),
+		// annotations: baselineUI(id),
 		series: [{
 			regression: true,
 			name: this.Highcharts.getOptions().lang.diff,

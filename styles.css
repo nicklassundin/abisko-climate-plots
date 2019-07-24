@@ -27,6 +27,17 @@
 	cursor: pointer; 
 	text-align: center;
 }
+.input{
+	text-align: center;
+	box-shadow: none;
+	border: none;
+	padding: 0px 0px;
+	width: 35px;
+	background-color: transparent;
+}
+.input:focus{
+	border: solid;
+}
 #text{
   position: absolute;
   top: 50%;

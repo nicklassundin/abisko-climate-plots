@@ -215,8 +215,12 @@ const csv = {
 }
 
 var selectText = function(e){
-	e.focus();
-	e.select();
+	if(e === document.activeElement){
+		e.blur();
+	}else{
+		e.focus();
+		e.select();
+	}
 };
 // TODO Seperate them to one constructor with general input for reuse
 var createBaseline = function(ver=true, change){
