@@ -563,14 +563,14 @@ var renderCO2 = function(data, id){
 			},
 			zIndex: 6,
 		},{
-			name: this.Highcharts.getOptions().lang.linReg,
-			data: data.linReg.predict,
+			name: this.Highcharts.getOptions().lang.linReg+"<br/>( R2: "+data.linReg.r2+" )",
+			useHTML: true,
+			data: data.week.map(each => (data.linReg.predict(each.x))), 
 			type: 'line',
 			lineWidth: 2,
-			marker: { radius: 2 },
+			marker: {enabled: false,},
 			states: { hover: { lineWidthPlus: 0 } },
 			color: '#333377',
-			data: [data.linReg.predict(data.week[0].x),data.linReg.predict(data.week[data.week.length-1].x)],
 			visible: false,
 		}]
 	})
@@ -672,7 +672,7 @@ var renderTemperatureGraph = function (data, id) {
 				color: meta.color.yrlyReg,
 				// color: '#4444ff',
 				// '#888888'
-				name: this.Highcharts.getOptions().lang.linReg,
+				name: this.Highcharts.getOptions().lang.linReg+" "+this.series[5].options.regressionOutputs.rSquared,
 			},
 			data: data.avg,
 		}],
@@ -1295,7 +1295,6 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id) {
 			marker: { enabled: false },
 		},{
 			name: this.Highcharts.getOptions().lang.linRegAll,
-			visible: false,
 			visible: false,
 			marker: {
 				enabled: false, // Linear regression lines doesn't contain points
