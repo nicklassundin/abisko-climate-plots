@@ -495,15 +495,31 @@ var renderCO2 = function(data, id){
 			// width: 2,
 			// }],
 			plotLines:[{
-				color: '#555555',
-				dashStyle: 'Dash',
+				color: '#aaaaaa',
+				dashStyle: 'shortDash',
 				value: 350,
 				width: 2,
+				label: {
+					text: "350 ppm",
+					style: {
+						color: '#aaaaaa',
+						fontWeight: 'bold',
+					}
+				},
+				zIndex: 2,
 			},{
-				color: '#555555',
-				dashStyle: 'Dash',
+				color: '#aaaaaa',
+				dashStyle: 'shortDash',
 				value: 400,
 				width: 2,
+				label: {
+					text: "400 ppm",
+					style: {
+						color: '#aaaaaa',
+						fontWeight: 'bold',
+					}
+				},
+				zIndex: 1,
 			}],
 			max: data.week[data.week.length-1].y+30,
 			min: data.week[0].y-10,
@@ -532,6 +548,7 @@ var renderCO2 = function(data, id){
 					}
 				}
 			},
+			zIndex: 6,
 		},{
 			name: this.Highcharts.getOptions().lang.linReg,
 			data: data.linReg.predict,
