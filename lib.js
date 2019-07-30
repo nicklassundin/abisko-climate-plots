@@ -180,6 +180,8 @@ var contFunc = (reset=false, type, file, src) => function(id, tag, renderTag=tag
 	}else{
 		op.preset.complete = function(result){
 			var data = op.parser(result);
+			// console.log(id)
+			// console.log(data)
 			papaF[type].cached = data;
 			if(tag) data = tagApply(data, tag);
 			var render = op.render;
@@ -333,7 +335,9 @@ var getID = function(urlParams){
 			'abiskoSnowDepthPeriodMeans',
 			'abiskoSnowDepthPeriodMeans2',
 			'abiskoLakeIce',
-			'weeklyCO2'];
+			'weeklyCO2',
+			'permaHistogramCALM',
+			];
 	}
 	return id
 }

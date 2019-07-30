@@ -13,7 +13,71 @@
 // };
 
 
-var parseCALM = function(result, src=''){
+var templet = {
+	precipitation: {
+		daily: undefined,
+		monthly: undefined, // TODO monthly
+		summer: undefined, // TODO summer
+		winter: undefined,	// TODO winter
+		yearly: undefined,		// TODO yearly
+		build: function(key='daily'){
+			var yearly;
+			this.precipitation[key].forEach((entry) => {
+					
+			})
+		},
+	},
+	temperatures: {
+		daily: undefined,
+		monthlyTemps: undefined,	// TODO monthly
+		summerTemps: undefined,		// TODO summer
+		winterTemps: undefined,		// TODO winter
+		yrly: undefined,		// TODO yearly
+	},
+	// days: undefined, // TODO old structure from AbiskoTemperatures
+
+	// TODO Ice chart
+	ice: {
+		breakup: undefined,
+		breakupLinear: undefined,
+		freeze: undefined,
+		freezeLinear: undefined,
+		iceTime: undefined,
+		iceTimeCIMovAvg: undefined,
+		iceTimeLinear: undefined,
+		iceTimeMovAvg: undefined,
+		iceTimeMovAvgLinear: undefined,
+	},
+	perma: {
+		yearly: undefined,
+	},
+	// TODO Abisko snow mean
+	snowdepth: {
+		decadeMeans: undefined,
+		periodMeans: undefined,
+	},
+
+	// TODO CO2
+	carbondioxide: {
+		atmosphere: {
+			daily: undefined,
+			weekly: undefined,
+			monthly: undefined,
+			yearly: undefined,
+		},
+		ocean: {
+			daily: undefined,
+			weekly: undefined,
+			monthly: undefined,
+			yearly: undefined,
+		}
+	},
+	clone: function(){
+		return JSON.parse(JSON.stringify(this));
+	}
+}
+
+var parseCALM = function(result, src='',dstr=templet.clone()){
 	var fields = result.meta.fields;
 	fields.shift()
 	var data = result.data;
@@ -29,7 +93,8 @@ var parseCALM = function(result, src=''){
 			y,
 		}
 	})
-	return data;
+	dstr.perma.yearly = data;
+	return dstr;
 }
 
 var parseSCRIPPS_CO2 = function(result, src=''){

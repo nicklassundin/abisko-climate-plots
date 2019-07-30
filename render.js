@@ -672,7 +672,7 @@ var renderTemperatureGraph = function (data, id) {
 				color: meta.color.yrlyReg,
 				// color: '#4444ff',
 				// '#888888'
-				name: this.Highcharts.getOptions().lang.linReg+" "+this.series[5].options.regressionOutputs.rSquared,
+				name: this.Highcharts.getOptions().lang.linReg,
 			},
 			data: data.avg,
 		}],
@@ -1570,7 +1570,7 @@ var renderPerma = function(data, id){
 		},
 
 		series: [{
-			data: data.map(each => ({
+			data: data.perma.yearly.map(each => ({
 				x: each.x,
 				y: each.y,
 			})),
