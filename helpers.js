@@ -1,4 +1,10 @@
-
+Date.prototype.getWeekNumber = function(date=this){
+  var d = new Date(Date.UTC(date.getFullYear(), this.getMonth(), this.getDate()));
+  var dayNum = d.getUTCDay() || 7;
+  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+  var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+  return Math.ceil((((d - yearStart) / 86400000) + 1)/7)
+};
 
 (function (w) {
 
@@ -72,9 +78,6 @@ var months = () => ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep
 var t = {
 	t05: [0, 12.706, 4.303, 3.182, 2.776, 2.571, 2.447, 2.365, 2.306, 2.262, 2.228, 2.201, 2.179, 2.160, 2.145 , 2.131, 2.120, 2.110, 2.101, 2.093, 2.086],
 }
-var t = {
-	t05: [0, 12.706, 4.303, 3.182, 2.776, 2.571, 2.447, 2.365, 2.306, 2.262, 2.228, 2.201],
-}
 
 var monthByIndex = index => months()[index];
 
@@ -122,7 +125,7 @@ var variance = values => sumSquareDistance(values, average(values)) / (values.le
 
 var confidenceInterval = (mean, variance, count, td=t['t05']) => {
 	var zs =[0, 12.706, 4.303, 3.182, 2.776, 2.571, 2.447, 2.365, 2.306, 2.262, 2.228, 2.201, 2.179, 2.160, 2.145 , 2.131, 2.120, 2.110, 2.101, 2.093, 2.086];
-	var z = zs[count-1] || zs.pop();
+	var z = zs[count-1]||zs[zs.length-1]
 	var ci = z * Math.sqrt(variance / count);
 	return {
 		low: mean - ci,

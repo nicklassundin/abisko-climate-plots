@@ -26,6 +26,14 @@ var preSetMeta = {
 	}
 }
 
+var dateToYear = function(entries){
+	console.log(entries)
+	return entries.map(each => ({
+		y: each.y,
+		x: each.x.getFullYear(),
+	}))
+}
+
 var updatePlot = function(id, bl=document.getElementById(id.id+"lowLabel").value, bu=document.getElementById(id.id+"uppLabel").value){
 	if(typeof id!='string') id = id.id // TODO resove why gets div HOTFIX
 	if(bl<bu && bl>1913) baselineLower=bl;
@@ -534,8 +542,8 @@ var renderCO2 = function(data, id){
 				},
 				zIndex: 1,
 			}],
-			max: data.week[data.week.length-1].y+30,
-			min: data.week[0].y-10,
+			max: data.values[data.values.length-1].y+30,
+			min: data.values[0].y-10,
 			tickInterval: 10,
 			lineWidth: 1,
 		},
@@ -550,7 +558,7 @@ var renderCO2 = function(data, id){
 			// marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
 			color: '#5555bb',
-			data: data.week,
+			data: data.values,
 			turboThreshold: 4000,
 			fillOpacity: 0.2,
 			marker: {
@@ -565,7 +573,7 @@ var renderCO2 = function(data, id){
 		},{
 			name: this.Highcharts.getOptions().lang.linReg+"<br/>( R2: "+data.linReg.r2+" )",
 			useHTML: true,
-			data: data.week.map(each => (data.linReg.predict(each.x))), 
+			data: data.linReg.points, 
 			type: 'line',
 			lineWidth: 2,
 			marker: {enabled: false,},
@@ -589,7 +597,7 @@ var renderTemperatureGraph = function (data, id) {
 		title: {
 			text: this.Highcharts.getOptions().lang.titles[id]
 		},
-		dataSrc: meta.src,
+		// dataSrc: meta.src,
 		xAxis: {
 			title: {
 				text: this.Highcharts.getOptions().lang.years, 
@@ -621,8 +629,8 @@ var renderTemperatureGraph = function (data, id) {
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
 			color: '#ff0000',
-			data: data.max,
-			visible: meta.vis.max,
+			data: data.max.values,
+			visible: false,
 			showInLegend: !(typeof data.min === 'undefined'),
 		}, {
 			name: this.Highcharts.getOptions().lang.min,
@@ -630,14 +638,14 @@ var renderTemperatureGraph = function (data, id) {
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
 			color: '#0000ff',
-			data: data.min,
-			visible: meta.vis.min, 
+			data: data.min.values,
+			visible: false,
 			showInLegend: !(typeof data.min === 'undefined'),
 		},{
 			name: 	this.Highcharts.getOptions().lang.yearlyCI,
 			type: 'arearange',
 			color: '#888888',
-			data: data.ci,
+			data: data.avg.plotCI(),
 			zIndex: 0,
 			fillOpacity: 0.3,
 			lineWidth: 0,
@@ -648,18 +656,18 @@ var renderTemperatureGraph = function (data, id) {
 			name: this.Highcharts.getOptions().lang.movAvg,
 			color: '#888888',
 			marker: { enabled: false },
-			data: data.movAvg,
+			data: data.avg.plotMovAvg(),
 		}, {
 			name: 	this.Highcharts.getOptions().lang.movAvgCI,
 			type: 'arearange',
 			color: '#7777ff',
-			data: data.ciMovAvg,
+			data: data.avg.plotMovAvgCI(),
 			zIndex: 0,
 			fillOpacity: 0.3,
 			lineWidth: 0,
 			states: { hover: { lineWidthPlus: 0 } },
 			marker: { enabled: false },
-			visible: meta.vis.movAvgCI
+			visible: false,
 		},{
 			name: language[nav_lang].yearlyAvg,
 			regression: true,
@@ -669,12 +677,12 @@ var renderTemperatureGraph = function (data, id) {
 			color: '#888888',
 			regressionSettings: {
 				type: 'linear',
-				color: meta.color.yrlyReg,
+				color: '#888888',
 				// color: '#4444ff',
 				// '#888888'
 				name: this.Highcharts.getOptions().lang.linReg,
 			},
-			data: data.avg,
+			data: data.avg.values,
 		}],
 	});
 };
@@ -684,12 +692,14 @@ var renderTemperatureGraph = function (data, id) {
 var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id) {
 	// console.log('renderAbiskoMonthlyTemperatureGraph');
 	// console.log(temperatures);
+	// console.log(temperatures.avg.variance());
+	// console.log(temperatures.avg.plotMovAvgCI());
 	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'line',
 			zoomType: 'x',
 		},
-		dataSrc: temperatures.src,
+		dataSrc: temperatures.avg.meta.src,
 		title: {
 			text: this.Highcharts.getOptions().lang.titles[id.split('_')[0]](this.Highcharts.getOptions().lang.months(id.split('_')[1])),
 		},
@@ -698,6 +708,7 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id) {
 				text: this.Highcharts.getOptions().lang.years,
 			},
 			crosshair: true,
+			// type: 'datetime'
 		},
 		yAxis: {
 			title: {
@@ -724,7 +735,7 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id) {
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
 			color: '#ff0000',
-			data: temperatures.max,
+			data: temperatures.max.max(),
 			visible: false,
 		}, {
 			name: this.Highcharts.getOptions().lang.min,
@@ -732,7 +743,7 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id) {
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
 			color: '#0000ff',
-			data: temperatures.min,
+			data: temperatures.min.max(),
 			visible: false,
 		}, {
 			regression: true,
@@ -746,13 +757,13 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id) {
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
 			color: '#888888',
-			data: temperatures.avg,
+			data: temperatures.avg.values,
 			visible: true,
 		},{
 			name: this.Highcharts.getOptions().lang.ci,
 			type: 'arearange',
 			color: '#888888',
-			data: temperatures.ci,
+			data: temperatures.avg.plotCI(),
 			zIndex: 0,
 			fillOpacity: 0.3,
 			lineWidth: 0,
@@ -764,7 +775,7 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id) {
 			name: this.Highcharts.getOptions().lang.movAvgCI,
 			type: 'arearange',
 			color: '#7777ff',
-			data: temperatures.ciMovAvg,
+			data: temperatures.avg.plotMovAvgCI(),
 			zIndex: 0,
 			fillOpacity: 0.3,
 			lineWidth: 0,
@@ -776,7 +787,7 @@ var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id) {
 			name: this.Highcharts.getOptions().lang.movAvg,
 			color: '#888888',
 			marker: { enabled: false },
-			data: temperatures.movAvg,
+			data: temperatures.avg.plotMovAvg(),
 		}],
 	});
 };
@@ -883,8 +894,9 @@ var plotBandsDiff = function(id){
 
 var renderTemperatureDifferenceGraph = function (temperatures, id) {
 	// console.log('#renderTemperatureGraph')
-	// console.log(title);
 	// console.log(temperatures);
+	// console.log(temperatures.difference());
+		
 	var overlay = document.getElementById(id+"overlay");
 	overlay.appendChild(createBaseline(false,submit="resetPlot("+id+")"));
 	charts[id] = Highcharts.chart(id, {
@@ -909,6 +921,7 @@ var renderTemperatureDifferenceGraph = function (temperatures, id) {
 			crosshair: true,
 			plotLines: plotlines(id),
 			plotBands: plotBandsDiff(id),
+			min: 1913,
 		},
 		yAxis: {
 			title: {
@@ -935,7 +948,7 @@ var renderTemperatureDifferenceGraph = function (temperatures, id) {
 				name: this.Highcharts.getOptions().lang.linReg,
 			},
 			name: this.Highcharts.getOptions().lang.diff,
-			data: temperatures.difference,
+			data: (temperatures.difference!=undefined) ? temperatures.difference() : temperatures.avg.difference(),
 			color: 'red',
 			negativeColor: 'blue',
 		}],
@@ -946,6 +959,11 @@ var renderTemperatureDifferenceGraph = function (temperatures, id) {
 };
 
 var renderGrowingSeasonGraph = function (season, id) {
+	// console.log("renderGrowingSeasonGraph")
+	// console.log(season)
+	// console.log(season.max())
+	// console.log(season.variance())
+	// console.log(season.plotCI())
 	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'line',
@@ -987,13 +1005,13 @@ var renderGrowingSeasonGraph = function (season, id) {
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
 			color: '#00aa00',
-			data: season.weeks,
+			data: season.values,
 			visible: true,
 		},{ 
 			name: this.Highcharts.getOptions().lang.ci,
 			type: 'arearange',
 			color: '#005500',
-			data: season.ci,
+			data: season.plotCI(),
 			zIndex: 0,
 			fillOpacity: 0.3,
 			lineWidth: 0,
@@ -1005,12 +1023,12 @@ var renderGrowingSeasonGraph = function (season, id) {
 			name: this.Highcharts.getOptions().lang.movAvg,
 			color: '#00aa00',
 			marker: { enabled: false },
-			data: season.movAvg,
+			data: season.plotMovAvg(),
 		},{
 			name: this.Highcharts.getOptions().lang.movAvgCI,
 			type: 'arearange',
 			color: '#006600',
-			data: season.ciMovAvg,
+			data: season.plotMovAvgCI(),
 			zIndex: 0,
 			fillOpacity: 0.3,
 			lineWidth: 0,
@@ -1025,6 +1043,7 @@ var renderGrowingSeasonGraph = function (season, id) {
 var renderPrecipitationDifferenceGraph = function (precipitation, id) {
 	// console.log(id)
 	// console.log(precipitation);
+	// console.log(precipitation.total.difference())
 	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'column'
@@ -1065,7 +1084,7 @@ var renderPrecipitationDifferenceGraph = function (precipitation, id) {
 		series: [{
 			regression: true,
 			name: this.Highcharts.getOptions().lang.diff,
-			data: precipitation.difference,
+			data: precipitation.total.difference(),
 			color: 'red',
 			negativeColor: 'blue',
 			regressionSettings: {
@@ -1079,6 +1098,7 @@ var renderPrecipitationDifferenceGraph = function (precipitation, id) {
 
 var renderYearlyPrecipitationGraph = function (precipitation, id) {
 	// console.log('renderYearlyPrecipitationGraph')
+	// console.log(precipitation)
 	var title = language[nav_lang].titles[id];
 	if(typeof title == 'function') title = title();
 	charts[id] = Highcharts.chart(id, {
@@ -1120,7 +1140,7 @@ var renderYearlyPrecipitationGraph = function (precipitation, id) {
 			type: 'column',
 			stack: 'precip',
 			stacking: 'normal',
-			data: precipitation.snow,
+			data: precipitation.snow.values,
 			color: snowColor.color,
 			visible: true,
 			borderColor: snowColor.borderColor,
@@ -1137,7 +1157,7 @@ var renderYearlyPrecipitationGraph = function (precipitation, id) {
 			name: this.Highcharts.getOptions().lang.precMovAvg,
 			color: rainColor.color,
 			visible: false,
-			data: precipitation.movAvg,
+			data: precipitation.total.plotMovAvg(),
 			marker: { enabled: false },
 			states: { hover: { lineWidthPlus: 0 } },
 		},{
@@ -1145,7 +1165,7 @@ var renderYearlyPrecipitationGraph = function (precipitation, id) {
 			name: this.Highcharts.getOptions().lang.movAvgCI,
 			type: 'arearange',
 			color: '#000055',
-			data: precipitation.ciMovAvg,
+			data: precipitation.total.plotMovAvgCI(),
 			zIndex: 0,
 			fillOpacity: 0.3,
 			lineWidth: 0,
@@ -1166,7 +1186,7 @@ var renderYearlyPrecipitationGraph = function (precipitation, id) {
 			stack: 'precip',
 			stacking: 'normal',
 			visible: true,
-			data: precipitation.rain,
+			data: precipitation.rain.values,
 			color: rainColor.color,
 			borderColor: rainColor.borderColor,
 			states: {
@@ -1192,18 +1212,14 @@ var renderYearlyPrecipitationGraph = function (precipitation, id) {
 				},
 			},
 			enableMouseTracking: false, // No interactivity
-			data: [
-				{ x: precipitation.years[0], 
-					y: precipitation.linear(precipitation.years[0]) },
-				{ x: precipitation.years[precipitation.years.length - 1],
-					y: precipitation.linear(precipitation.years[precipitation.years.length - 1]) }
-			],
+			data: precipitation.total.values,
 		}],
 	});
 };
 
 var renderMonthlyPrecipitationGraph = function (precipitation, id) {
 	// console.log('renderMonthlyPrecipitationGraph')
+	// console.log(precipitation)
 	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'line'
@@ -1232,7 +1248,7 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id) {
 			valueDecimals: 0,
 		},
 		series: [{
-			regression: true,
+			// regression: true,
 			regressionSettings: {
 				type: 'linear',
 				color: snowColor.color,
@@ -1242,7 +1258,7 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id) {
 			type: 'column',
 			stack: 'precip',
 			stacking: 'normal',
-			data: precipitation.snow,
+			data: precipitation.snow.values,
 			color: snowColor.color,
 			borderColor: snowColor.borderColor,
 			states: {
@@ -1253,18 +1269,25 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id) {
 					},
 				},
 			},
-		}, {
-			regression: true,
+		},{
+			type: 'line',
+			color: snowColor.color,
+			name: this.Highcharts.getOptions().lang.linRegSnow,
+			data: precipitation.snow.linReg.points,
+			marker: { enabled: false },
+		},{
+			// regression: true,
 			regressionSettings: {
 				type: 'linear',
 				color:rainColor.color,
 				name: this.Highcharts.getOptions().lang.linRegRain,
+				marker: { enabled: false },
 			},
 			name: this.Highcharts.getOptions().lang.precRain,
 			type: 'column',
 			stack: 'precip',
 			stacking: 'normal',
-			data: precipitation.rain,
+			data: precipitation.rain.values,
 			color: rainColor.color,
 			borderColor: rainColor.borderColor,
 			states: {
@@ -1276,10 +1299,16 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id) {
 				},
 			},
 		},{
+				type: 'line',
+				color:rainColor.color,
+				name: this.Highcharts.getOptions().lang.linRegRain,
+				data: precipitation.rain.linReg.points,
+			marker: { enabled: false },
+		},{
 			name: this.Highcharts.getOptions().lang.movAvgCI,
 			type: 'arearange',
 			color: '#000055',
-			data: precipitation.ciMovAvg,
+			data: precipitation.total.plotMovAvgCI(),
 			zIndex: 0,
 			fillOpacity: 0.3,
 			lineWidth: 0,
@@ -1291,7 +1320,7 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id) {
 			name: this.Highcharts.getOptions().lang.precMovAvg,
 			visible: false,
 			color: rainColor.color,
-			data: precipitation.movAvg,
+			data: precipitation.total.plotMovAvg(),
 			marker: { enabled: false },
 		},{
 			name: this.Highcharts.getOptions().lang.linRegAll,
@@ -1306,12 +1335,7 @@ var renderMonthlyPrecipitationGraph = function (precipitation, id) {
 				},
 			},
 			enableMouseTracking: false, // No interactivity
-			data: [
-				{ x: precipitation.years[0], 
-					y: precipitation.linear(precipitation.years[0]) },
-				{ x: precipitation.years[precipitation.years.length - 1],
-					y: precipitation.linear(precipitation.years[precipitation.years.length - 1]) }
-			],
+			data: precipitation.total.linReg.points,
 		}],
 	});
 };
@@ -1568,9 +1592,8 @@ var renderPerma = function(data, id){
 		legend: {
 			enabled: false
 		},
-
 		series: [{
-			data: data.perma.yearly.map(each => ({
+			data: data.map(each => ({
 				x: each.x,
 				y: each.y,
 			})),

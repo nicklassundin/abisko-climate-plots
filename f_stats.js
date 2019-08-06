@@ -4,80 +4,166 @@
 /***************************************/
 
 
-// var struct = {
-// 		values: 	undefined,
-// 		variance: 	undefined,
-// 		ci:		undefined,
-// 		movAvg: 	undefined,
-// 		movAvgCI: 	undefined,	
-// };
 
-
-var templet = {
-	precipitation: {
-		daily: undefined,
-		monthly: undefined, // TODO monthly
-		summer: undefined, // TODO summer
-		winter: undefined,	// TODO winter
-		yearly: undefined,		// TODO yearly
-		build: function(key='daily'){
-			var yearly;
-			this.precipitation[key].forEach((entry) => {
-					
-			})
-		},
+var struct = {
+	type: 'mean',
+	meta: 		{
+		fields: [],
+		src: '',
 	},
-	temperatures: {
-		daily: undefined,
-		monthlyTemps: undefined,	// TODO monthly
-		summerTemps: undefined,		// TODO summer
-		winterTemps: undefined,		// TODO winter
-		yrly: undefined,		// TODO yearly
+	values: 	[],
+	x: 		undefined,
+	y: 		undefined,
+	count:		undefined,
+	min:		function(){
+		var min = {};
+		var submind = [];
+		this.values.forEach(entry => {
+			if(entry.min == undefined){
+				min = {
+					x: this.y,
+					y: Math.min(this.values.map(each => each.y)),
+				}
+				return min;
+			}else{
+				var tmp = entry.min()
+				submin.push(tmp);
+			}
+		})
+		min = Math.min(...submin)
+		return min;
 	},
-	// days: undefined, // TODO old structure from AbiskoTemperatures
-
-	// TODO Ice chart
-	ice: {
-		breakup: undefined,
-		breakupLinear: undefined,
-		freeze: undefined,
-		freezeLinear: undefined,
-		iceTime: undefined,
-		iceTimeCIMovAvg: undefined,
-		iceTimeLinear: undefined,
-		iceTimeMovAvg: undefined,
-		iceTimeMovAvgLinear: undefined,
-	},
-	perma: {
-		yearly: undefined,
-	},
-	// TODO Abisko snow mean
-	snowdepth: {
-		decadeMeans: undefined,
-		periodMeans: undefined,
-	},
-
-	// TODO CO2
-	carbondioxide: {
-		atmosphere: {
-			daily: undefined,
-			weekly: undefined,
-			monthly: undefined,
-			yearly: undefined,
-		},
-		ocean: {
-			daily: undefined,
-			weekly: undefined,
-			monthly: undefined,
-			yearly: undefined,
+	max: function(){
+		var max = {};
+		var submax = [];
+		this.values.forEach(entry => {
+			if(entry.max == undefined){
+				max = {
+					x: this.y,
+					y: Math.max(this.values.map(each => each.y)),
+				}
+				return max;
+			}else{
+				var tmp = entry.max()
+				submax.push(tmp);
+			}
+		})
+		max = Math.min(...submax)
+		return max;
+	},		
+	variance: function(){
+		switch(this.type){
+			case "sum":
+				return this.count*variance(this.values.map(each => each.y))	
+				break;
+			default:
+				return variance(this.values.map(each => each.y))
 		}
 	},
-	clone: function(){
-		return JSON.parse(JSON.stringify(this));
-	}
-}
+	ci: function(){
+		return confidenceInterval(this.y, this.variance(), this.count);
+	},
+	plotCI: function(){
+		var result = [];
+		var e = this.ci()
+		var y = this.y;
+		this.values.forEach(each => {
+			if(each.ci) {
+				e = each.ci();
+				y = each.y
+			}
+			result.push({
+				x: each.x,
+				high: e.high+(each.y-y),
+				low: e.low+(each.y-y),
+			})
+		})
+		return result;
+	},
+	movAvg: undefined,
+	plotMovAvg: function(){
+		if(this.movAvg!=undefined) return this.movAvg
+		var movAvg = movingAverages(this.values.map(each => each.y), 10);
+		var result = [];
+		var variance = this.variance();
+		var count = this.count;
+		this.values.forEach((each, index) => {
+			if(each.variance) variance = each.variance();
+			if(each.count) count = each.count;
+			var e = confidenceInterval(movAvg[index], variance, count);
+			result.push({
+				y: movAvg[index],
+				x: each.x,
+				high: e.high,
+				low: e.low,
+			})
+		})
+		return result.slice(10);
+	},
+	plotMovAvgCI: function(){
+		if(this.movAvg==undefined) this.movAvg = this.plotMovAvg();
+		return this.movAvg;				
+	},
+	linReg: 	undefined,
+	difference: function(lower=baselineLower, upper=baselineUpper){
+		// console.log([lower, upper])
+		var basevalue = mean(this.values.filter(value => 
+			(value.x >= lower && value.x <= upper)).map(each => each.y))
+		return Array.from(this.values.map(each => ([each.x, each.y - basevalue])))
+	},
+	build: function(type='mean', lower=baselineLower, upper=baselineUpper){
+		var result = this;
+		result.type = type;
+		var values = result.values.filter(entry => (!isNaN(entry.y) || $.isNumeric(entry.y)));
 
-var parseCALM = function(result, src='',dstr=templet.clone()){
+		result.values = values;
+		var count = values.length;
+		
+		var y;
+		if(result.y==undefined){
+			switch(type){
+				case "mean":
+					y = sum(values.map(each => each.y));
+					y = y/count;
+					break;
+				case "max":
+					y = Math.max(...values.map(each => each.y))
+					break;
+				case "min":
+					// TODO
+					break;
+				case "sum":
+					y = sum(values.map(each => each.y));
+					break;
+				default:
+					console.log("default")
+
+			}
+			result.y = y;
+		}
+		
+		result.count = count;
+		result.linReg = regression.linear(values.map((each,index) => [index, each.y]))
+		result.linReg.points = values.map((each, index) => ([each.x, result.linReg.points[index][1]]))
+		return result;
+	},
+	clone: function(){
+		return Object.assign({values: []},this);
+	},
+	create: function(values, x=undefined, src=''){
+		var result = struct.clone();
+		result.meta.src = src;
+		values = values.filter(entry => !isNaN(entry.y) && $.isNumeric(entry.y));
+		result.values = values.filter(each => each.y);
+		result.x = x;
+		return result;
+	},
+	map: function(F){
+		return struct.create(F(this.values), this.x);	
+	}
+};
+
+var parseCALM = function(result, src=''){
 	var fields = result.meta.fields;
 	fields.shift()
 	var data = result.data;
@@ -93,8 +179,7 @@ var parseCALM = function(result, src='',dstr=templet.clone()){
 			y,
 		}
 	})
-	dstr.perma.yearly = data;
-	return dstr;
+	return data;
 }
 
 var parseSCRIPPS_CO2 = function(result, src=''){
@@ -107,21 +192,10 @@ var parseSCRIPPS_CO2 = function(result, src=''){
 			y: y,
 		}
 	}
-	var data = result.data.slice(44)
-	data = data.map(each => parse(each))
-	var linReg = regression.linear(data.map((each,index) => [index, each.y]))
-	var predict = linReg.predict;
-	linReg.predict = function(x){
-		var index = data.map(each => each.x).indexOf(x)
-		var result = predict(index);
-		result[0] = x;
-		return result
-	}
+	var data = struct;
+	data.values = Object.values(result.data.slice(44).map(each => parse(each)));
 	return {
-		weekly: {
-			week: data,
-			linReg, 
-		}
+		weekly: data.build(),
 	}
 }
 
@@ -191,669 +265,250 @@ var parseGISSTEMP = function (result, src='') {
 };
 
 var parseGISSTEMPzonalMeans = function (result, src='') {
-	// console.log(result)
-	// console.log(src)
-	var fields = result.meta.fields;
-	var temperatures = [];
-	temperatures['sum64n-90n'] = 0;
-	temperatures['sumnhem'] = 0;
-	temperatures['sumglob'] = 0;
-	var yrlyAvg = [];
-	var count = 0;
-
-	result.data.forEach((row) => {
-		var year = {};
-		fields.forEach(field => year[field.toLowerCase()] = validNumber(row[field]));
-		yrlyAvg.push({
-			x: year['year'],
-			y: year['64n-90n']
-		})
-		if (withinBaselinePeriod(year.year)) {
-			temperatures['sum64n-90n'] += year['64n-90n']||0.0; // TODO resolve why .00 is undefined 
-			temperatures['sumnhem'] += year['nhem']||0.0;
-			temperatures['sumglob'] += year['glob']||0.0;
-			count++;
-		}
-		if (year.year >= 1913) {
-			temperatures.push(year);
-		}
-	});
-
-	temperatures['avg64n-90n'] = temperatures['sum64n-90n'] / count;
-	temperatures['avgnhem'] = temperatures['sumnhem'] / count;
-	temperatures['avgglob'] = temperatures['sumglob'] / count;
-
-	var difference = region => temperatures.filter((value) => {
-		return value[region] != null;
-	}).map(each => ({
-		x: each.year,
-		y: each[region] - temperatures['avg' + region],
-	}));
-	var linear_diff = function(data){
-		return {
-			years: data.map(each => each.x),
-			difference: data,
-			linear_diff: linearRegression(data.map(each => each.x),data.map(each => each.y)),
-		};
-	}
-
-	temperatures['64n-90n'] = linear_diff(difference('64n-90n'));
-	temperatures['nhem'] = linear_diff(difference('nhem'));
-	temperatures['glob'] = linear_diff(difference('glob'));
-
-	var movAvg = movingAverages(yrlyAvg.map(temps => temps.y), 10)
-		.map((avg, index) => ({
-			x: yrlyAvg[index].x,
-			y: avg,
+	var fields = result.meta.fields.map((each) => (each));
+	var keys = fields.slice(0);
+	var year = keys.shift();
+	var data = result.data;
+	var build = function(key){
+		var str = struct;
+		str.values = data.map(each => ({
+			x: each['Year'],
+			y: each[key],
 		}))
-	var yearVar = variance(yrlyAvg.map(each => each.y));
-	var yearCI = yrlyAvg.map(each => ({
-		x: each.x, 
-		ci: confidenceInterval(each.y, yearVar, yrlyAvg.length),
-	})).map(each => ({
-		x: each.x,
-		low: each.ci.low,
-		high: each.ci.high,
-	}))
-	var yearCIMovAvg = yearCI.map(each => ({ x: each.x }));
-	['low', 'high'].forEach(bound =>
-		movingAverages(yearCI.map(each => each[bound]), 10)
-		.forEach((value, index) => yearCIMovAvg[index][bound] = value));
-	temperatures.yrly = {
-		avg: yrlyAvg.slice(43), // TODO nicer alignment with Ab charts
-		movAvg: movAvg.slice(43),
-		ciMovAvg: yearCIMovAvg.slice(43),
-		ci: yearCI.slice(43),
-	};
-	var meta = preSetMeta['default'];
-	meta.src = src;
-	temperatures.meta = meta;
-	temperatures.yrly.meta = meta;
-	temperatures['64n-90n'].meta = meta;
-	temperatures['nhem'].meta = meta; 
-	temperatures['glob'].meta = meta;
-	// console.log(temperatures)
+		return str;
+	}
+	temperatures = {
+		'64n-90n': build('64N-90N'),
+		'nhem': build('NHem'),
+		'glob': build('Glob') 
+	}
+	temperatures.src = src;
 	return temperatures;
 };
 
-// 1-15
 var parseAbiskoCsv = function (result, src='') {
 	// console.log('parseAbiskoCsv')
+	// console.log(new Date('1950-09-03').getYear())
 	// console.log(result)
-	var rows = result.data;
-	var meta = preSetMeta['abiskoTemp'];
-	var fields = {
-		time: result.meta.fields[0],
-		avg: result.meta.fields[1],
-		min: result.meta.fields[2],
-		max: result.meta.fields[3],
-		precip: result.meta.fields[4],
-	};
-	var data = {};
-	var days = [];
-	rows.forEach((row) => {
-		var date = parseDate(row[fields.time]);
-		var avg = parseNumber(row[fields.avg]);
-		if(avg)days.push({
-			x: Date.UTC(date.year,date.month-1, date.day),
-			y: avg,
-		})
-		var precip = parseNumber(row[fields.precip]);
-		var year = data[date.year] = data[date.year] || {
-			sum: 0,
-			count: 0,
-			precip: 0,
-			precip_snow: 0,
-			precip_rain: 0,
-			data: [],
-			weeklyTemperatures: [],
-			// dailyTemperatures: [],
-		};
-		if (avg) {
-			// allTemperatures.push(avg);
-			year.sum += avg;
-			year.count++;
-
-			var w = weekNumber(createDate(date));
-			var weekly = year.weeklyTemperatures[w] = year.weeklyTemperatures[w] || { sum: [], count: 0 };
-			weekly.sum.push(avg);
-			weekly.count++;
-		}
-		if (precip) {
-			year.precip += precip;
-			if (avg < 0) {
-				year.precip_snow += precip;
-			} else {
-				year.precip_rain += precip;
-			}
-		}
-		year.data.push({
-			date, avg,
-			min: parseNumber(row[fields.min]),
-			max: parseNumber(row[fields.max]),
-			precip,
-			precip_snow: (avg < 0) ? precip : 0,
-			precip_rain: (avg >= 0) ? precip : 0,
-		});
-	});
-
-	// console.log(allTemperatures);
-	// console.log(data);
-
-	var temperatureBaseline = { sum: 0, count: 0 };
-	var precipitationBaselineYearly = { sum: 0, count: 0 };
-	var precipitationBaselineSummer = { sum: 0, count: 0 };
-	var precipitationBaselineWinter = { sum: 0, count: 0 };
-
-	var entries = () => Object.entries(data);
-	var keys = () => Object.keys(data);
-	var values = () => Object.values(data);
-
-	entries().forEach((entry) => {
-		var year = entry[1];
-		year.avg = year.sum / (year.count || 1);
-
-		if (withinBaselinePeriod(entry[0])) {
-			temperatureBaseline.sum += year.avg;
-			temperatureBaseline.count++;
-		}
-		// pre work for weekly variances
-		// var weeklyTemps = year.weeklyTemperatures.map(t => t.sum);
-		// var weeklyTempsVar = weeklyTemps.map(t => variance(t));
-
-		year.weeklyTemperatures = year.weeklyTemperatures.map(t => t.sum.reduce((a,b) => a+b) / t.count);
-		var isWeekAboveZero = year.weeklyTemperatures.map(t => t > 0);
-		var longestPeriod = 0;
-		var periods = []
-		isWeekAboveZero.reduce((period, aboveZero) => {
-			if (aboveZero) {
-				period++;
-				longestPeriod = Math.max(longestPeriod, period);
-				return period;
-			} else {
-				periods.push(period);	
-				return 0;
-			}
-		}, 0);
-		year.growingSeason = {
-			max: longestPeriod,
-			variance: variance(periods),
-			count: periods.length,
-		}
-		// console.log(year.growingSeason);
-
-		var monthlyTemperatures = [];
-		var monthlyPrecip = [];
-		var summerTemperatures = { sum: [], count: 0, min: Infinity, max: -Infinity };
-		var winterTemperatures = { sum: [], count: 0, min: Infinity, max: -Infinity };
-		var summerPrecipitation = { total: [], rain: 0, snow: 0, variance: null, ci: null};
-		var winterPrecipitation = { total: [], rain: 0, snow: 0, variance: null, ci: null};
-
-		// Sorts out data into seasonal data sets
-		year.data.forEach((each) => {
-			var month = +each.date.month;
-			var t = monthlyTemperatures[month - 1] = monthlyTemperatures[month - 1] || {
-				sum: [], count: 0, min: Infinity, max: -Infinity, temp: [],
-			};
-			var p = monthlyPrecip[month - 1] = monthlyPrecip[month - 1] || {
-				total: [], rain: 0, snow: 0, count: 0,
-			};
-			if (each.avg) {
-				if (isSummerMonthByIndex(month)) {
-					summerTemperatures.sum.push(each.avg);
-					summerTemperatures.count++;
-					if(each.min) summerTemperatures.min = Math.min(summerTemperatures.min, each.min);
-					if(each.max) summerTemperatures.max = Math.max(summerTemperatures.max, each.max);
-				} else if (isWinterMonthByIndex(month)) {
-					winterTemperatures.sum.push(each.avg);
-					winterTemperatures.count++;
-					if(each.min) winterTemperatures.min = Math.min(winterTemperatures.min, each.min);
-					if(each.max) winterTemperatures.max = Math.max(winterTemperatures.max, each.max);
-
-				}
-				t.sum.push(each.avg);
-				t.count++;
-				if(each.min) t.min = Math.min(t.min, each.min);
-				if(each.max) t.max = Math.max(t.max, each.max);
-			}
-			if (each.precip) {
-				if (isSummerMonthByIndex(month)) {
-					summerPrecipitation.total.push(each.precip);
-					summerPrecipitation.snow += each.precip_snow;
-					summerPrecipitation.rain += each.precip_rain;
-				} else if (isWinterMonthByIndex(month)) {
-					winterPrecipitation.total.push(each.precip);
-					winterPrecipitation.snow += each.precip_snow;
-					winterPrecipitation.rain += each.precip_rain;
-				}
-				p.total.push(each.precip);
-				p.snow += each.precip_snow;
-				p.rain += each.precip_rain;
-				p.count++;
-			}
-		});
-		var summerPrecVar = Math.sqrt(summerPrecipitation.total.length)*variance(summerPrecipitation.total);// TODO need check internal math
-		var summerPrecTotal = summerPrecipitation.total.reduce((a,b) => a+b,0);
-		var summerPrecCI = confidenceInterval(summerPrecTotal, summerPrecVar, summerMonths.length); // TODO should not be a constant '6'
-		year.summerPrecipitation = {
-			total: summerPrecTotal,
-			snow: summerPrecipitation.snow,
-			rain: summerPrecipitation.rain,
-			variance: summerPrecVar,
-			ci: null, 
-		};
-		year.summerPrecipitation.ci = {
-			x: entry[0],
-			low: summerPrecCI['low'],
-			high: summerPrecCI['high'],
-		};
-
-		var winterPrecVar = Math.sqrt(summerPrecipitation.total.length)*variance(winterPrecipitation.total); // TODO need check internal math
-		var winterPrecTotal = winterPrecipitation.total.reduce((a,b) => a+b,0);
-		var winterPrecCI = confidenceInterval(winterPrecTotal, winterPrecVar, winterMonths.length); // TODO should not be a constant '6'
-		year.winterPrecipitation = {
-			total: winterPrecTotal,
-			snow: winterPrecipitation.snow,
-			rain: winterPrecipitation.rain,
-			variance: winterTempsVar,
-			ci: null, 
-		};
-		year.winterPrecipitation.ci = {
-			x: entry[0],
-			low: winterPrecCI['low'],
-			high: winterPrecCI['high'],
-		};
-
-
-		year.monthlyPrecip = monthlyPrecip.map(month => ({
-			total: month.total.reduce((a,b) => a+b),
-			rain: month.rain,
-			snow: month.snow,
-			variance: Math.sqrt(month.total.length)*variance(month.total),// TODO need check internal math
-			ci: null,
-			n: month.total.length,
-		})).map(month => ({
-			total: month.total,
-			rain: month.rain,
-			snow: month.snow,
-			variance: month.variance,
-			ci: confidenceInterval(month.total, month.variance, month.n),
-		}));
-
-		// yearly precipitation
-		year.precipCI = confidenceInterval(year.precip, year.monthlyPrecip.map(each => each.variance).reduce((a,b)=>a+b), year.monthlyPrecip.length);
-
-
-		//
-		////
-
-		year.monthlyTemperatures = monthlyTemperatures.map(month => ({
-			avg: month.sum.reduce((a,b) => a+b) / month.count,
-			min: month.min,
-			max: month.max,
-			variance: variance(month.sum),
-			ci: null,
-			n: month.sum.length
-		})).map(month => ({
-			avg: month.avg,
-			min: month.min,
-			max: month.max,
-			variance: month.variance,
-			ci: confidenceInterval(month.avg, month.variance, month.n),
-		}));
-
-
-		var summerTempsAvg = summerTemperatures.sum.reduce((a,b) => a+b,0) / summerTemperatures.count;
-		var summerTempsVar = variance(summerTemperatures.sum);
-		var summerTempsCI = confidenceInterval(summerTempsAvg, summerTempsVar, 6); // TODO should not be a constant '6'
-		year.summerTemperature = {
-			avg: summerTempsAvg,
-			min: summerTemperatures.min,
-			max: summerTemperatures.max,
-			variance: summerTempsVar,
-			ci: null, 
-		};
-		year.summerTemperature.ci = {
-			x: entry[0],
-			low: summerTempsCI['low'],
-			high: summerTempsCI['high'],
-		};
-
-		var winterTempsAvg = winterTemperatures.sum.reduce((a,b) => a+b,0) / winterTemperatures.count;
-		var winterTempsVar = variance(summerTemperatures.sum);
-		// console.log(winterTempsAvg);
-		// console.log(winterTempsVar);
-		var winterTempsCI = confidenceInterval(winterTempsAvg, winterTempsVar, 6); // TODO should not be a constant '6'
-		year.winterTemperature = {
-			avg: winterTemperatures.sum.reduce((a,b) => a+b,0)/ winterTemperatures.count,
-			min: winterTemperatures.min,
-			max: winterTemperatures.max,
-			variance: winterTempsVar,
-			ci: null,
-		};
-		year.winterTemperature.ci = {
-			x: entry[0],
-			low: winterTempsCI['low'],
-			high: winterTempsCI['high'],
-		};
-
-
-		if (withinBaselinePeriod(entry[0])) {
-			precipitationBaselineSummer.sum += summerPrecTotal;
-			precipitationBaselineSummer.count++;
-			precipitationBaselineWinter.sum += winterPrecTotal;
-			precipitationBaselineWinter.count++;
-			precipitationBaselineYearly.sum += sum(monthlyPrecip.map(p => sum(p.total))); // TODO fix nicer tangle
-			precipitationBaselineYearly.count++;
-		}
-
-		year.max = max(year.monthlyTemperatures.map(m => m.avg));
-		year.min = min(year.monthlyTemperatures.map(m => m.avg));
-
-		year.variance = 0;
-		year.ci = { low: -Infinity, high: Infinity };
-
-		if (year.monthlyTemperatures.length > 1) {
-			year.variance = variance(year.monthlyTemperatures.map(m => m.avg));
-			year.ci = confidenceInterval(year.avg, year.variance, year.monthlyTemperatures.length);
-		}
-
-
-	});
-
-	var yearly = statistic => entries().map(each => ({
-		x: +each[0],
-		y: each[1][statistic],
-	}));
-
-	var monthlyPrecipByStat = (monthIndex, statistic) => entries().map(each => ({
-		x: +each[0],
-		y: each[1].monthlyPrecip[monthIndex][statistic],
-	}));
-
-	var monthlyTempByStat = (monthIndex, statistic) => entries().map(entry => ({
-		x: +entry[0],
-		y: entry[1].monthlyTemperatures[monthIndex][statistic],
-	}));
-
-	var movingAveragesHighCharts = values => movingAverages(values, 10).map((avg, index) => ({
-		x: keys()[index],
-		y: avg,
-	})).slice(10);
-
-	var years = keys().map(Number);
-	var monthlyPrecip = {};
-	var monthlyTemps = {};
-
-	months().forEach((month, index) => {
-		var p = monthlyPrecip[month] = monthlyPrecip[month] || {};
-		p.years = years;
-		p.total = monthlyPrecipByStat(index, 'total');
-		p.movAvg = movingAveragesHighCharts(p.total.map(each => each.y));
-		p.linear = linearRegression(p.years, p.total.map(each => each.y));
-		p.total = p.total;
-
-		p.rain = monthlyPrecipByStat(index, 'rain');	
-		p.rain_movAvg = movingAveragesHighCharts(p.rain.map(each => each.y)); 
-		p.linear_rain_movAvg = linearRegression(p.years, p.rain_movAvg.map(each => each.y));
-		p.linear_rain = linearRegression(p.years, p.rain.map(each => each.y));
-		p.rain = p.rain;
-
-		// in pregress
-		p.variance = monthlyPrecipByStat(index, 'variance');
-		p.ci = monthlyPrecipByStat(index, 'ci');
-		p.ci = p.ci.map((each) => ({
-			x: each.x, 
-			low: each.y.low,
-			high: each.y.high,
-		}));
-		p.variance = monthlyPrecipByStat(index, 'variance');
-		p.ciMovAvg = p.ci.map(each => ({ x: each.x }));
-		['low', 'high'].forEach(bound =>
-			movingAverages(p.ci.map(each => each[bound]), 10)
-			.forEach((value, index) => p.ciMovAvg[index][bound] = value));
-		p.ci = p.ci;
-		p.ciMovAvg = p.ciMovAvg.slice(10);
-
-		p.snow = monthlyPrecipByStat(index, 'snow');
-		// TODO
-		p.snow_movAvg = movingAveragesHighCharts(p.snow.map(each => each.y)); // TODO REFORM
-		p.linear_snow = linearRegression(p.years, p.snow.map(each => each.y));
-		p.linear_snow_movAvg = linearRegression(p.years, p.snow_movAvg.map(each => each.y));
-		p.snow = p.snow;
-
-
-		var t = monthlyTemps[month] = {};
-		t.avg = monthlyTempByStat(index, 'avg');
-		t.min = monthlyTempByStat(index, 'min');
-		t.max = monthlyTempByStat(index, 'max');
-		t.movAvg = movingAveragesHighCharts(t.avg.map(each => each.y));
-		t.variance = monthlyTempByStat(index, 'variance');
-		t.ci = monthlyTempByStat(index, 'ci');
-		t.ci = t.ci.map((each) => ({
-			x: each.x,
-			low: each.y.low,
-			high: each.y.high,
-		}));
-		t.ciMovAvg = t.ci.map(each => ({ x: each.x }));
-		['low', 'high'].forEach(bound =>
-			movingAverages(t.ci.map(each => each[bound]), 10)
-			.forEach((value, index) => t.ciMovAvg[index][bound] = value));
-		t.ci = t.ci;
-		t.ciMovAvg = t.ciMovAvg.slice(10);
-		t.avg = t.avg;
-	});
-
-	// Insert year for all season Temperatures
-	var seasonal = (season, statistic) => entries().map(each => ({
-		x: +each[0],
-		y: each[1][season][statistic],
-	}));
-
-
-	var summerTemps = {
-		avg: seasonal('summerTemperature', 'avg'),
-		min: seasonal('summerTemperature', 'min'),
-		max: seasonal('summerTemperature', 'max'),
-		ci: seasonal('summerTemperature','ci').map((each) => (each.y)),
-		ciMovAvg: null,
-	};
-
-	summerTemps.ciMovAvg = summerTemps.ci.map(each => ({ x: each.x }));
-	['low', 'high'].forEach(bound =>
-		movingAverages(summerTemps.ci.map(each => each[bound]), 10)
-		.forEach((value, index) => summerTemps.ciMovAvg[index][bound] = value));
-
-	var winterTemps = {
-		avg: seasonal('winterTemperature', 'avg'),
-		min: seasonal('winterTemperature', 'min'),
-		max: seasonal('winterTemperature', 'max'),
-		ci: seasonal('winterTemperature','ci').map((each) => (each.y)),
-		ciMovAvg: null,
-	};
-	winterTemps.ciMovAvg = winterTemps.ci.map(each => ({ x: each.x }));
-	['low', 'high'].forEach(bound =>
-		movingAverages(winterTemps.ci.map(each => each[bound]), 10)
-		.forEach((value, index) => winterTemps.ciMovAvg[index][bound] = value));
-
-
-
-	summerTemps.movAvg = movingAveragesHighCharts(summerTemps.avg.map(each => each.y));
-	winterTemps.movAvg = movingAveragesHighCharts(winterTemps.avg.map(each => each.y));
-
-
-
-	summerTemps.avg = summerTemps.avg;
-	winterTemps.avg = winterTemps.avg;
-
-	// Inserts x: year for all seasons
-	var seasonalPrecipByStat = (season, statistic) => entries().map(each => ({
-		x: +each[0],
-		y: each[1][season][statistic],
-	}));
-	var seasonalPrecipitation = { summerPrecipitation: {}, winterPrecipitation: {} };
-	[
-		{ season: 'summerPrecipitation', baseline: precipitationBaselineSummer },
-		{ season: 'winterPrecipitation', baseline: precipitationBaselineWinter }
-	].forEach((e) => {
-		var p = seasonalPrecipitation[e.season];
-		p.years = years;
-		p.total = seasonalPrecipByStat(e.season, 'total');
-		p.snow = seasonalPrecipByStat(e.season, 'snow');
-		p.ci = seasonalPrecipByStat(e.season, 'ci').map(each => each.y);
-		p.ciMovAvg = p.ci.map(each => ({ x: each.x }));
-		['low', 'high'].forEach(bound =>
-			movingAverages(p.ci.map(each => each[bound]), 10)
-			.forEach((value, index) => p.ciMovAvg[index][bound] = value));
-
-		p.ci = p.ci;
-		p.ciMovAvg = p.ciMovAvg.slice(10);
-		// TODO fix missing 10 data points
-		p.linear_snow = linearRegression(p.years, p.snow.map(each => each.y)); // TODO REFORM
-
-		p.snow_movAvg = movingAveragesHighCharts(p.snow.map(each => each.y)); 
-		// p.linear_snow_movAvg = linearRegression(p.years, p.snow_movAvg.map(each => each.y)); 
-		p.snow = p.snow;
-
-		p.rain = seasonalPrecipByStat(e.season, 'rain');	
-		p.linear_rain = linearRegression(p.years, p.rain.map(each => each.y));
-
-		p.rain_movAvg = movingAveragesHighCharts(p.rain.map(each => each.y)); 
-		// p.linear_rain = linearRegression(p.years, p.rain_movAvg.map(each => each.y));
-		p.rain = p.rain;	
-
-
-		p.movAvg = movingAveragesHighCharts(p.total.map(each => each.y));
-		p.linear = linearRegression(p.years, p.total.map(each => each.y));
-		p.difference = p.total.map(each => ({
-			x: each.x,
-			y: each.y - (e.baseline.sum / e.baseline.count),
-		}));
-		p.total = p.total;
-		p.linear_diff = linearRegression(years, p.difference.map(each => each.y));
-		p.difference = p.difference; 
-
-	});
-
-	var ci = entries().map((each) => ({
-		x: +each[0],
-		low: each[1].ci.low,
-		high: each[1].ci.high,
-	}));
-
-	var ciMovAvg = ci.map(each => ({ x: each.x }));
-	['low', 'high'].forEach(bound =>
-		movingAverages(ci.map(each => each[bound]), 10)
-		.forEach((value, index) => ciMovAvg[index][bound] = value));
-
-
-	// precipitation moving average yearly
-	var precipMovAvg = movingAveragesHighCharts(values().map(each => each.precip));
-
-	yrly_diff = yearly('precip').map(each => ({
-		x: each.x,
-		y: each.y - (precipitationBaselineYearly.sum / precipitationBaselineYearly.count),
-	}));
-
-
-
-	// Growing Season
-	var grwth_weeks = yearly('growingSeason').map(each => ({
-		x: each.x,
-		y: each.y.max,
-		variance: each.y.variance,
-		count: each.y.count,
-	}));
-	// console.log(yearly('growingSeason'));
-	// console.log(grwth_weeks);
-	// TODO restructure dubble storage of weeks
-	var grwthSeason = {
-		weeks: grwth_weeks,
-		movAvg: movingAveragesHighCharts(grwth_weeks.map(each => each.y)),
-		ci: grwth_weeks.map(each => ({
-			x: each.x,
-			ci: confidenceInterval(each.y,each.variance,each.count),
-		})), 
-		ciMovAvg: [],
-	}
-	grwthSeason.ci = grwthSeason.ci.map(each => ({
-		x: each.x,
-		low: each.ci.low,
-		high: each.ci.high,
-	}))
-	// console.log(grwthSeason);
-	grwthSeason.ciMovAvg = grwthSeason.ci.map(each => ({ x: each.x }));
-	['low', 'high'].forEach(bound =>
-		movingAverages(grwthSeason.ci.map(each => each[bound]), 10)
-		.forEach((value, index) => grwthSeason.ciMovAvg[index][bound] = value));
-
-	var precipCI = yearly('precipCI').map(each => ({
-		x: each.x,
-		low: each.y.low,
-		high: each.y.high,
-	}));
-	var precipCIMovAvg = precipCI.map(each => ({ x: each.x }));
-	['low', 'high'].forEach(bound =>
-		movingAverages(precipCI.map(each => each[bound]), 10)
-		.forEach((value, index) => precipCIMovAvg[index][bound] = value));
-	summerTemps.meta = meta;
-	winterTemps.meta = meta;
-
-	return {
-		meta,
-		'days': days,
-		temperatures: {
-			yrly: {
-
-				meta,
-				years,
-				avg: yearly('avg'),
-				min: yearly('min'),
-				max: yearly('max'),
-				movAvg: movingAveragesHighCharts(values().map(each => each.avg)),
-				ci: ci,
-				ciMovAvg: ciMovAvg.slice(10),
-				difference: yearly('avg').map(each => ({
-					x: each.x,
-					y: each.y - (temperatureBaseline.sum / temperatureBaseline.count),
-				})),
-			},
-			monthlyTemps,
-			summerTemps,
-			winterTemps,
-		},
-
-		growingSeason: {
+	var frame = {
+		// weeks: {},
+		yrly: {},
+		monthly: {},
+		weekly: {},
+		summer: {}, 
+		winter: {},	
+		meta: {
 			src: src,
-			weeks: grwthSeason.weeks,
-			movAvg: grwthSeason.movAvg,
-			ci: grwthSeason.ci,
-			ciMovAvg: grwthSeason.ciMovAvg.slice(10),
-		},
+		}
+	}
+	var clone = function(obj){
+		return Object.assign({},obj);
+	}
+	const data = {
 		precipitation: {
-			yrly: {
-				years: years,
-				total: yearly('precip'),
-				snow: yearly('precip_snow'),
-				// snow_movAvg: precipMovAvg_snow, // TODO
-				linear_snow: linearRegression(years, yearly('precip_snow').map(each => each.y)),
-				rain: yearly('precip_rain'),
-				// rain_movAvg:  precipMovAvg_rain,// TODO
-				movAvg: precipMovAvg,
-
-				linear_rain: linearRegression(years, yearly('precip_rain').map(each => each.y)),
-				linear: linearRegression(years, yearly('precip').map(each => each.y)),
-				ci: precipCI,
-				ciMovAvg: precipCIMovAvg.slice(10),
-				difference: yrly_diff,
-				linear_diff: linearRegression(years, yrly_diff.map(each => each.y)),
-			},
-			monthlyPrecip,
-			summerPrecipitation: seasonalPrecipitation.summerPrecipitation,
-			winterPrecipitation: seasonalPrecipitation.winterPrecipitation,
+			weeks: {},
+			yrly: {},
+			monthly: {},
+			weekly: {},
+			summer: {}, 
+			winter: {},	
+			meta: {
+				src: src,
+			}
+		}, 
+		temperatures: {
+			weeks: {},
+			yrly: {},
+			monthly: {},
+			weekly: {},
+			summer: {}, 
+			winter: {},	
+			meta: {
+				src: src,
+			}
 		},
-	};
-};
+		growingSeason: [],
+		insert: function(entries){
+			var year = {}
+			var result = Object.assign({}, this);
+			result.precipitation = {
+				// weeks: {},
+				yrly: {},
+				monthly: {},
+				weekly: {},
+				summer: {}, 
+				winter: {},	
+			}
+			result.temperatures = {
+				// weeks: {},
+				yrly: {},
+				monthly: {},
+				weekly: {},
+				summer: {}, 
+				winter: {},	
+			}
+			var set = function(input, key, e, year, month, week, mean=true){
+				var result = input;
+				const entry = e;
+
+				if(!result.yrly[key]) result.yrly[key] = {};
+				if(!result.yrly[key][year]){
+					const cont = struct.create([],year,mean);
+					result.yrly[key][year] = cont;
+				}
+				result.yrly[key][year].values.push(entry);
+
+				if(isSummerMonthByIndex(month)) {
+					if(!result.summer[key]) result.summer[key] = {};
+					if(!result.summer[key][year]){
+						const cont = struct.create([],year, mean);
+						result.summer[key][year] = cont; 
+					} 
+					result.summer[key][year].values.push(entry);
+				}
+				if(isWinterMonthByIndex(month)) {
+					if(!result.winter[key]) result.winter[key] = {};
+					if(!result.winter[key][year]){
+						const cont = struct.create([],year, mean);
+						result.winter[key][year] = cont;
+					}
+					result.winter[key][year].values.push(entry);
+				}
+
+				// if(!result.weeks[key]) result.weeks[key] = {};
+				// if(!result.weeks[key][year]){
+				// 	result.weeks[key][year] = []; 
+				// }
+				// result.weeks[key][year].push(week)
+
+				// Monthly
+				if(!result.monthly[month]) result.monthly[month] = {}
+				if(!result.monthly[month][key]) result.monthly[month][key] = {};
+				if(!result.monthly[month][key][year]){
+					const cont = struct.create([],year, mean);
+					result.monthly[month][key][year] = cont;
+				} 
+				result.monthly[month][key][year].values.push(entry);
+				// Weekly
+				if(!result.weekly[key]) result.weekly[key] = {};
+				if(!result.weekly[key][year]) result.weekly[key][year] = {}; 
+				if(!result.weekly[key][year][week]) result.weekly[key][year][week] = struct.create([],week,mean);
+				result.weekly[key][year][week].values.push(entry);
+													
+				return result;					
+			}
+			var years = []
+			var build = function(entries){
+				entries.forEach(entry => {
+					var date = new Date(entry['Time']);
+					var year = date.getFullYear();
+					var month = date.getMonth()+1;
+					var week = date.getWeekNumber();
+					if(!years[year+'']) years[year] = year+'';
+
+					var avg =  {
+						x: date,
+						y: parseFloat(entry['Temp_avg']),
+					}
+					var min = {
+						x: date,
+						y: parseFloat(entry['Temp_min']),
+					} 
+					var max = {
+						x: date,
+						y: parseFloat(entry['Temp_max']),
+					}
+					var total = {
+						x: date,
+						y: parseFloat(entry['Precipitation'].replace(",","."))
+					}
+					var zero = 0;
+					if(total.y==undefined) zero = undefined
+					var snow = {
+						x: date,
+						y: (avg.y < 0) ? total.y : zero
+					}
+					var rain = {
+						x: date,
+						y: (avg.y >= 0) ? total.y : zero
+					}
+					result.precipitation = set(result.precipitation, 'total', total, year, month, week, false);
+					result.precipitation = set(result.precipitation, 'snow', snow, year, month, week, false);
+					result.precipitation = set(result.precipitation, 'rain', rain, year, month, week, false);
+					result.temperatures = set(result.temperatures, 'avg', avg, year, month, week)	
+					result.temperatures = set(result.temperatures, 'min', min, year, month, week)	
+					result.temperatures = set(result.temperatures, 'max', max, year, month, week)
+					return result
+				})
+
+				var construct = function(entries, type='mean'){
+					const str = [];
+					Object.keys(entries).forEach(key => {
+						const entry = entries[key];
+						str.push(entry.build(type))		
+					})
+					return struct.create(str).build(type);
+				}
+
+
+				Object.keys(frame).forEach(key => {
+					switch(key){
+						case 'monthly':
+						Object.keys(result.precipitation[key]).forEach(month => {
+							result.precipitation[key][month].total = construct(result.precipitation[key][month].total,'sum')
+							result.precipitation[key][month].rain = construct(result.precipitation[key][month].rain, 'sum')
+							result.precipitation[key][month].snow = construct(result.precipitation[key][month].snow, 'sum')
+							result.temperatures[key][month].avg = construct(result.temperatures[key][month].avg)
+							result.temperatures[key][month].min = construct(result.temperatures[key][month].min)
+							result.temperatures[key][month].max = construct(result.temperatures[key][month].max)
+						})
+						break;
+						case 'weekly':
+						var growingSeason = struct.create([],undefined)
+						Object.keys(result.temperatures[key].avg).forEach(year => {
+							var cons = construct(result.temperatures[key].avg[year]);
+							var values = cons.values.map(each => each.y)
+							var max = [];
+							var t = 0;
+							values.forEach(e => {
+								if(t > 0 && e < 0){
+									max.push(t);
+									t = 0;
+								}else{
+									t = t+1;
+								}
+							})
+							max = max.map(each => ({
+								x: parseInt(year),
+								y: each
+							}))
+							growingSeason.values.push(struct.create(max,parseInt(year)).build('max'))
+						})
+						result.growingSeason = growingSeason.build('max');
+						break;
+						case 'meta':
+							break;
+						default:
+						result.precipitation[key].total = construct(result.precipitation[key].total, 'sum')
+						result.precipitation[key].rain = construct(result.precipitation[key].rain, 'sum')
+						result.precipitation[key].snow = construct(result.precipitation[key].snow, 'sum')
+						result.temperatures[key].avg = construct(result.temperatures[key].avg)
+						result.temperatures[key].min = construct(result.temperatures[key].min)
+						result.temperatures[key].max = construct(result.temperatures[key].max)
+					}
+				})
+				return result
+			}
+			var answer = build(entries);
+			return answer
+		}
+	}
+
+	var respones = undefined 
+	response = data.insert(result.data);
+	return response
+}
+
 
 var parseAbiskoIceData = function (result, src='') {
 	var fields = result.meta.fields;
