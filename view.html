@@ -33,7 +33,8 @@
 		<script src="render.js"></script>
 		<script src="lib.js"></script>
 		<script type="text/javascript">
-			if(document.getElementById("mark")) window.onload = build();
+			var id = urlParams.get('id');
+			if(document.getElementById("mark")) window.onload = mark();
 		</script>
 	</body>
 </html>

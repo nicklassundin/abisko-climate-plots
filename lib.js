@@ -4,8 +4,7 @@
 
 // TODO cached parsing and generalization
 
-
-var build = function(id="mark",par=window.location.search) {
+var mark = function(id="mark",par=window.location.search) {
 	var param = (''+par);
 	var mark = document.getElementById(id+param);
 	if(!mark) mark = document.getElementById(id);
@@ -15,9 +14,8 @@ var build = function(id="mark",par=window.location.search) {
 	mark.appendChild(bpage(container,par=window.location.seach));
 }
 
-var url = function(file=''){
-	return 'https://nicklassundin.github.io/abisko-climate-plots/'+file;
-	var result = window.location.href.split('?')[0].replace('view.html',file);
+var url = function(file='', src='view.html'){
+	var result = window.location.href.split('?')[0].replace(src,file);
 	$.ajax({
 		url: result, 
 		type: 'HEAD',
@@ -312,12 +310,12 @@ var copy = function() {
 	alert(copyText.value);
 }
 
-var getID = function(urlParams){
-	var id = null;
-	try{
+var getID = function(){
+	var id = urlParams.get('id');
+	if(id){
 		id = urlParams.get('id').split(',');
 		if(id=='all'){fail()}
-	}catch(err){
+	}else{
 		id = ['AbiskoTemperatures',
 			'AbiskoTemperaturesSummer',
 			'AbiskoTemperaturesWinter',
@@ -349,17 +347,22 @@ var baseline = null;
 var baselineForm = undefined;
 
 var getUrl = function(uid=urlParams.get('id'),debug=urlParams.get('debug'),share=urlParams.get('share'),baselineForm=urlParams.get('baselineForm'),baselineLower=urlParams.get('baselineLower'),baselineUpper=urlParams.get('baselineUpper')){
-	var addparams = function(p, v, rest='?'){
+	var addparams = function(p, v, rest){
+		if(!rest){
+			rest = '?';
+		}else{
+			rest = '&'+rest;
+		}
 		if(v) return rest+p+'='+v;
-		return rest;
+		return '';
 	}
-
+	if(!uid) uid = getID();
 	var params = addparams('id',uid);
-	params = addparams('debug',debug,params+'&');
-	params = addparams('share',share,params+'&');
-	params = addparams('baselineForm',baselineForm,params+'&');
-	params = addparams('baselineLower',baselineLower,params+'&');
-	params = addparams('baselineUpper',baselineUpper,params+'&');
+	params = addparams('debug',debug,params);
+	params = addparams('share',share,params);
+	params = addparams('baselineForm',baselineForm,params);
+	params = addparams('baselineLower',baselineLower,params);
+	params = addparams('baselineUpper',baselineUpper,params);
 	return ((''+window.location).split('?')[0]+params)
 
 }
@@ -377,10 +380,12 @@ var bpage = function(doc=document.createElement('div'), par=window.location.sear
 
 	var debug = urlParams.get('debug');
 	if(!Array.isArray(ids)) ids = [ids];
+	var deref0 = true;
 	ids.forEach(each => {
+		var deref = deref0;
 		try{
 			doc.appendChild(rendF[each].html(debug, doc));	
-			rendF[each].func(reset);
+			$.when(deref).done(() => deref0 = rendF[each].func(reset));
 		}catch(err){
 			// TODO Improve quality
 			var div = document.createElement("div");
