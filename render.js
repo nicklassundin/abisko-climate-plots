@@ -27,15 +27,21 @@ var preSetMeta = {
 }
 
 var dateToYear = function(entries){
-	console.log(entries)
 	return entries.map(each => ({
 		y: each.y,
 		x: each.x.getFullYear(),
 	}))
 }
 
-var updatePlot = function(id, bl=document.getElementById(id.id+"lowLabel").value, bu=document.getElementById(id.id+"uppLabel").value){
-	if(typeof id!='string') id = id.id // TODO resove why gets div HOTFIX
+var updatePlot = function(id, bl, bu){
+	if(id.id) id=id;
+	if(id.renderTo) id=id.renderTo.id;
+	var low = document.getElementById(id+"lowLabel") 
+	var upp = document.getElementById(id+"uppLabel") 
+	if(low){
+		if(!bl) bl = low.value;
+		if(!bu) bl = upp.value;
+	} 
 	if(bl<bu && bl>1913) baselineLower=bl;
 	if(bu>bl && bu<2019) baselineUpper=bu;
 	var chart = charts[id]
@@ -359,7 +365,7 @@ Highcharts.setOptions({
 							lang: language[nav_lang],
 						})	
 						var id = this.renderTo.id.split('_')[0];
-						updatePlot(this)(this.renderTo.id);
+						updatePlot(this);
 					},
 				},{
 					textKey: 'showDataTable',
@@ -586,8 +592,8 @@ var renderCO2 = function(data, id){
 
 
 var renderTemperatureGraph = function (data, id) {
-	// console.log('renderTemperatureGraph')
-	// console.log(data)
+	console.log('renderTemperatureGraph')
+	console.log(data)
 	var meta = data.meta;
 	charts[id] = Highcharts.chart(id, {
 		chart: {
