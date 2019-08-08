@@ -4,9 +4,8 @@
 	<head>
 		<script type="text/javascript">
 			var url = window.location.href;
-			url = url.replace("index.html","view.html?debug=true");
 			console.log(url)
-			window.location.replace(url);
+			window.location.replace(url.replace("index.html","view.html?debug=true"));
 		</script>
 	</head>
 	<body>
