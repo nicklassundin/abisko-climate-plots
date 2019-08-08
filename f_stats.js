@@ -512,9 +512,9 @@ var parseAbiskoCsv = function (result, src='') {
 		}
 	}
 
-	var respones = data.insert(result.data);
-	console.log(respones)
-	return responses
+	var respons = data.insert(result.data);
+	console.log(respons)
+	return respons
 }
 
 
