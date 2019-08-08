@@ -1585,7 +1585,7 @@ var renderPerma = function(data, id){
 		},
 		// dataSrc: data.src,
 		title: {
-			text:  "Permafrost melt depth by year",
+			text:  "Permafrost thaws depth by year",
 		},
 		xAxis: {
 			title: {
