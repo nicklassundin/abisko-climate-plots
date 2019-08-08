@@ -15,12 +15,13 @@ var mark = function(id="mark",par=window.location.search) {
 }
 
 var url = function(file='', src='view.html'){
+	return 'https://nicklassundin.github.io/abisko-climate-plots/'+file;
 	var result = window.location.href.split('?')[0].replace(src,file);
 	$.ajax({
 		url: result, 
 		type: 'HEAD',
 		error: function(){
-		 result = 'https://nicklassundin.github.io/abisko-climate-plots/'+file;
+			result = 'https://nicklassundin.github.io/abisko-climate-plots/'+file;
 		},
 		success: function(){}
 	});
