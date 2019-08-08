@@ -314,10 +314,10 @@ var copy = function() {
 	alert(copyText.value);
 }
 
-var getID = function(){
-	var id = urlParams.get('id');
+var getID = function(param=urlParams){
+	var id = param.get('id');
 	if(id){
-		id = urlParams.get('id').split(',');
+		id = id.get('id').split(',');
 	}else{
 		id = ['AbiskoTemperatures',
 			'AbiskoTemperaturesSummer',
