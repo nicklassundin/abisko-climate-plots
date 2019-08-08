@@ -406,22 +406,30 @@ var parseAbiskoCsv = function (result, src='') {
 					var week = date.getWeekNumber();
 					if(!years[year+'']) years[year] = year+'';
 
+					var parseEntry = function(e){
+						if(e.y) e.y = parseFloat(e.y).replace(",",".");
+						return e;
+					}
 					var avg =  {
 						x: date,
-						y: parseFloat(entry['Temp_avg']),
+						y: entry['Temp_avg'],
 					}
+					avg = parseEntry(avg);
 					var min = {
 						x: date,
-						y: parseFloat(entry['Temp_min']),
+						y: entry['Temp_min'],
 					} 
+					min = parseEntry(min);
 					var max = {
 						x: date,
-						y: parseFloat(entry['Temp_max']),
+						y: entry['Temp_max'],
 					}
+					max = parseEntry(max);
 					var total = {
 						x: date,
-						y: parseFloat(entry['Precipitation'].replace(",","."))
+						y: entry['Precipitation']
 					}
+					total = parseEntry(total);
 					var zero = 0;
 					if(total.y==undefined) zero = undefined
 					var snow = {
