@@ -314,7 +314,6 @@ var getID = function(){
 	var id = urlParams.get('id');
 	if(id){
 		id = urlParams.get('id').split(',');
-		if(id=='all'){fail()}
 	}else{
 		id = ['AbiskoTemperatures',
 			'AbiskoTemperaturesSummer',
