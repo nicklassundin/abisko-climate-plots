@@ -317,7 +317,7 @@ var copy = function() {
 var getID = function(param=urlParams){
 	var id = param.get('id');
 	if(id){
-		id = id.get('id').split(',');
+		id = id.split(',');
 	}else{
 		id = ['AbiskoTemperatures',
 			'AbiskoTemperaturesSummer',
