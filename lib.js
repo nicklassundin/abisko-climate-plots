@@ -172,6 +172,8 @@ var contFunc = (reset=false, type, file, src) => function(id, tag, renderTag=tag
 	// }
 	// console.log(Papa.parse(url(file), op.preset))
 	// console.log(url(file))
+	
+	$.when(op.parser).done(() => { 
 	if(op.cached){
 		var render = tagApply(op.render, renderTag);
 		var data = tagApply(op.cached,tag);
@@ -194,6 +196,7 @@ var contFunc = (reset=false, type, file, src) => function(id, tag, renderTag=tag
 		};
 		Papa.parse(URL, op.preset)
 	}
+	});
 }
 
 const csv = {

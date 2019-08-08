@@ -286,7 +286,9 @@ var parseGISSTEMPzonalMeans = function (result, src='') {
 	return temperatures;
 };
 
+var parseAbiskoCached = undefined;
 var parseAbiskoCsv = function (result, src='') {
+	if(parseAbiskoCached) return parseAbiskoCached;
 	// console.log('parseAbiskoCsv')
 	// console.log(new Date('1950-09-03').getYear())
 	// console.log(result)
@@ -407,7 +409,11 @@ var parseAbiskoCsv = function (result, src='') {
 					if(!years[year+'']) years[year] = year+'';
 
 					var parseEntry = function(e){
-						if(e.y) e.y = parseFloat(e.y.replace(",","."));
+						if(e.y || e.y!=""){
+							e.y = parseFloat(e.y.replace(",","."));
+						}else{
+							e.y = undefined;
+						}
 						return e;
 					}
 					var avg =  {
@@ -513,7 +519,9 @@ var parseAbiskoCsv = function (result, src='') {
 	}
 
 	var respons = data.insert(result.data);
-	console.log(respons)
+	//console.log("resolved Abisko");
+	//console.log(respons)
+	parseAbiskoCached = respons;
 	return respons
 }
 
