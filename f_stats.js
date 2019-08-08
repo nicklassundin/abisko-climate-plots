@@ -407,7 +407,7 @@ var parseAbiskoCsv = function (result, src='') {
 					if(!years[year+'']) years[year] = year+'';
 
 					var parseEntry = function(e){
-						if(e.y) e.y = parseFloat(e.y).replace(",",".");
+						if(e.y) e.y = parseFloat(e.y.replace(",","."));
 						return e;
 					}
 					var avg =  {
