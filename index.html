@@ -3,9 +3,8 @@
 
 	<head>
 		<script type="text/javascript">
-			var url = window.location.href;
-			console.log(url)
-			window.location.replace(url.replace("index.html","view.html?debug=true"));
+			var url = window.location.href.replace("index.html","view.html?debug=true");
+			window.location = url
 		</script>
 	</head>
 	<body>
