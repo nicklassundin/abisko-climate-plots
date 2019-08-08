@@ -592,8 +592,8 @@ var renderCO2 = function(data, id){
 
 
 var renderTemperatureGraph = function (data, id) {
-	console.log('renderTemperatureGraph')
-	console.log(data)
+	//console.log('renderTemperatureGraph')
+	//console.log(data)
 	var meta = data.meta;
 	charts[id] = Highcharts.chart(id, {
 		chart: {
@@ -1135,13 +1135,6 @@ var renderYearlyPrecipitationGraph = function (precipitation, id) {
 		},
 		series: [{
 			id: 'snow',
-			regression: true,
-			regressionSettings: {
-				type: 'linear',
-				color: snowColor.color,
-				name: 'Linear regression of snow',
-				name: this.Highcharts.getOptions().lang.linRegSnow,
-			},
 			name: this.Highcharts.getOptions().lang.precSnow,
 			type: 'column',
 			stack: 'precip',
@@ -1156,6 +1149,19 @@ var renderYearlyPrecipitationGraph = function (precipitation, id) {
 					animation: {
 						duration: 0,
 					},
+				},
+			},
+		},{
+			data: precipitation.snow.linReg.points,
+			type: 'line',
+			color: snowColor.color,
+			name: this.Highcharts.getOptions().lang.linRegSnow,
+			marker: {
+				enabled: false, // Linear regression lines doesn't contain points
+			},
+			states: {
+				hover: {
+					lineWidth: 0, // Do nothing on hover
 				},
 			},
 		},{
@@ -1180,13 +1186,6 @@ var renderYearlyPrecipitationGraph = function (precipitation, id) {
 			visible: false,
 		},{
 			id: 'rain',
-			regression: true,
-			regressionSettings: {
-				type: 'linear',
-				color: rainColor.color,
-				name: 'Linear regression of rain',
-				name: this.Highcharts.getOptions().lang.linRegRain,
-			},
 			name: this.Highcharts.getOptions().lang.precRain,
 			type: 'column',
 			stack: 'precip',
@@ -1204,21 +1203,34 @@ var renderYearlyPrecipitationGraph = function (precipitation, id) {
 				},
 			},
 		},{
-			id: 'linear',
-			name: this.Highcharts.getOptions().lang.linRegAll,
-			visible: false,
-			// linkedTo: ':previous',
+			data: precipitation.rain.linReg.points,
+			type: 'line',
+			color: rainColor.color,
+			name: this.Highcharts.getOptions().lang.linRegRain,
 			marker: {
 				enabled: false, // Linear regression lines doesn't contain points
 			},
+			states: {
+				hover: {
+					lineWidth: 0, // Do nothing on hover
+				},
+			},
+		},{
+			type: 'line',
+			name: this.Highcharts.getOptions().lang.linRegAll,
+			visible: false,
+			// linkedTo: ':previous',
 			color: 'red',
+			marker: {
+				enabled: false, // Linear regression lines doesn't contain points
+			},
 			states: {
 				hover: {
 					lineWidth: 0, // Do nothing on hover
 				},
 			},
 			enableMouseTracking: false, // No interactivity
-			data: precipitation.total.values,
+			data: precipitation.total.linReg.points,
 		}],
 	});
 };
