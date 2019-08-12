@@ -478,7 +478,7 @@ var renderCO2 = function(data, id){
 							var text = "Date: "+ date.getFullYear() +"-"+ date.getMonth()+"-"+date.getDate() +"<br/>CO"+ ("2".sub())+": " + this.y + ' ppm';
 							var chart = this.series.chart;
 							if (!chart.lbl) {
-								chart.lbl = chart.renderer.label(text, 100, 70,"callout", this.catergory, this.y, useHTML=true)
+								chart.lbl = chart.renderer.label(text, 200, 70,"callout", this.catergory, this.y, useHTML=true)
 									.attr({
 										padding: 10,
 										r: 5,
