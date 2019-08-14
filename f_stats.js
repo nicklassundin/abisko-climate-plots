@@ -160,7 +160,53 @@ var struct = {
 	},
 	map: function(F){
 		return struct.create(F(this.values), this.x);	
-	}
+	},
+	// formated as date yyyy-mm-dd
+	set: function(input, key, e, year, month, week, mean=true){
+				var result = input;
+				const entry = e;
+
+				if(!result.yrly[key]) result.yrly[key] = {};
+				if(!result.yrly[key][year]){
+					const cont = struct.create([],year,mean);
+					result.yrly[key][year] = cont;
+				}
+				result.yrly[key][year].values.push(entry);
+
+				if(isSummerMonthByIndex(month)) {
+					if(!result.summer[key]) result.summer[key] = {};
+					if(!result.summer[key][year]){
+						const cont = struct.create([],year, mean);
+						result.summer[key][year] = cont; 
+					} 
+					result.summer[key][year].values.push(entry);
+				}
+				if(isWinterMonthByIndex(month)) {
+					if(!result.winter[key]) result.winter[key] = {};
+					if(!result.winter[key][year]){
+						const cont = struct.create([],year, mean);
+						result.winter[key][year] = cont;
+					}
+					result.winter[key][year].values.push(entry);
+				}
+
+
+				// Monthly
+				if(!result.monthly[month]) result.monthly[month] = {}
+				if(!result.monthly[month][key]) result.monthly[month][key] = {};
+				if(!result.monthly[month][key][year]){
+					const cont = struct.create([],year, mean);
+					result.monthly[month][key][year] = cont;
+				} 
+				result.monthly[month][key][year].values.push(entry);
+				// Weekly
+				if(!result.weekly[key]) result.weekly[key] = {};
+				if(!result.weekly[key][year]) result.weekly[key][year] = {}; 
+				if(!result.weekly[key][year][week]) result.weekly[key][year][week] = struct.create([],week,mean);
+				result.weekly[key][year][week].values.push(entry);
+													
+				return result;
+	},
 };
 
 var parseCALM = function(result, src=''){
@@ -349,6 +395,8 @@ var parseAbiskoCsv = function (result, src='') {
 				summer: {}, 
 				winter: {},	
 			}
+
+			// TODO build to general function to be use for all functions
 			var set = function(input, key, e, year, month, week, mean=true){
 				var result = input;
 				const entry = e;
@@ -377,11 +425,6 @@ var parseAbiskoCsv = function (result, src='') {
 					result.winter[key][year].values.push(entry);
 				}
 
-				// if(!result.weeks[key]) result.weeks[key] = {};
-				// if(!result.weeks[key][year]){
-				// 	result.weeks[key][year] = []; 
-				// }
-				// result.weeks[key][year].push(week)
 
 				// Monthly
 				if(!result.monthly[month]) result.monthly[month] = {}
@@ -529,7 +572,7 @@ var parseAbiskoCsv = function (result, src='') {
 var parseAbiskoIceData = function (result, src='') {
 	var fields = result.meta.fields;
 	var data = result.data;
-	// console.log(data)
+	console.log(data)
 	var iceData = [];
 	data.forEach((row) => {
 		// console.log(row)
