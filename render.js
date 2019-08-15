@@ -899,8 +899,8 @@ var plotBandsDiff = function(id){
 }
 
 var renderTemperatureDifferenceGraph = function (temperatures, id) {
-	console.log('#renderTemperatureGraph')
-	console.log(temperatures);
+	// console.log('#renderTemperatureGraph')
+	// console.log(temperatures);
 	// console.log(temperatures.difference());
 		
 	var overlay = document.getElementById(id+"overlay");
