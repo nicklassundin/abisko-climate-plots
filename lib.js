@@ -162,16 +162,6 @@ var contFunc = (reset=false, type, file, src) => function(id, tag, renderTag=tag
 	if(reset) papaF[type].cached = undefined;
 	var op = papaF[type];
 	var URL = url(file);
-	// console.log(type)
-	// console.log(file)
-	// console.log(id)
-	// console.log(tag)
-	// console.log(op)
-	// op.preset.complete = function(result){
-	// console.log(op.parser(result.data))
-	// }
-	// console.log(Papa.parse(url(file), op.preset))
-	// console.log(url(file))
 	
 	$.when(op.parser).done(() => { 
 	if(op.cached){
@@ -181,17 +171,12 @@ var contFunc = (reset=false, type, file, src) => function(id, tag, renderTag=tag
 	}else{
 		op.preset.complete = function(result){
 			var data = op.parser(result);
-			// console.log(id)
-			// console.log(data)
 			papaF[type].cached = data;
-			// console.log(tag)
 			if(tag) data = tagApply(data, tag);
 			var render = op.render;
-			// console.log(data)
 			if(tag){
 				render = tagApply(render, renderTag);
 			}
-			// TODO render all when tag=true
 			render(data,id)
 		};
 		Papa.parse(URL, op.preset)

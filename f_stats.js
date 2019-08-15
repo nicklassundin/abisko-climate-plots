@@ -311,17 +311,17 @@ var parseGISSTEMP = function (result, src='') {
 };
 
 var parseGISSTEMPzonalMeans = function (result, src='') {
+	console.log(result)
 	var fields = result.meta.fields.map((each) => (each));
 	var keys = fields.slice(0);
 	var year = keys.shift();
 	var data = result.data;
 	var build = function(key){
-		var str = struct;
-		str.values = data.map(each => ({
+		var str = struct.create;
+		return struct.create(data.map(each => ({
 			x: each['Year'],
 			y: each[key],
-		}))
-		return str;
+		}))).build()
 	}
 	temperatures = {
 		'64n-90n': build('64N-90N'),
@@ -329,6 +329,7 @@ var parseGISSTEMPzonalMeans = function (result, src='') {
 		'glob': build('Glob') 
 	}
 	temperatures.src = src;
+	console.log(temperatures)
 	return temperatures;
 };
 
