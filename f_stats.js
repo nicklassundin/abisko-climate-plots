@@ -573,7 +573,7 @@ var parseAbiskoCsv = function (result, src='') {
 var parseAbiskoIceData = function (result, src='') {
 	var fields = result.meta.fields;
 	var data = result.data;
-	console.log(data)
+	// console.log(data)
 	var iceData = [];
 	data.forEach((row) => {
 		// console.log(row)

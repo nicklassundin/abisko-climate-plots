@@ -34,7 +34,7 @@ var dateToYear = function(entries){
 }
 
 var updatePlot = function(id, bl, bu){
-	if(id.id) id=id;
+	if(id.id) id=id.id; // TODO fix why this it gets a div not id
 	if(id.renderTo) id=id.renderTo.id;
 	var low = document.getElementById(id+"lowLabel") 
 	var upp = document.getElementById(id+"uppLabel") 
@@ -857,7 +857,7 @@ var plotlines = function(id){
 		useHTML: true,
 		label: {
 			useHTML: true,
-			text: "<input id="+id+"uppLabel type=text class=input value="+baselineUpper+" maxlength=4 onclick=selectText(this) onchange=updatePlot("+id+")></input>",
+			text: "<input id="+id+"uppLabel type=text class=input value="+baselineUpper+" maxlength=4 onclick=selectText(this) onchange=updatePlot("+id+","+baselineLower+",this.value)></input>",
 			rotation: 0,
 			y: 12,
 		},
@@ -869,7 +869,7 @@ var plotlines = function(id){
 		useHTML: true,
 		label: {
 			useHTML: true,
-			text: "<input id="+id+"lowLabel type=text class=input value="+baselineLower+" maxlength=4 onclick=selectText(this) onchange=updatePlot("+id+")></input>",
+			text: "<input id="+id+"lowLabel type=text class=input value="+baselineLower+" maxlength=4 onclick=selectText(this) onchange=updatePlot("+id+",this.value,"+baselineUpper+")></input>",
 			rotation: 0,
 			textAlign: 'left',
 			x: -40,

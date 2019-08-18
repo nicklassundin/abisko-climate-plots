@@ -145,6 +145,7 @@ var papaF = {
 		render: renderPerma,
 	}
 }
+
 // wander down the data structure with tag input example: [high, medium, low]
 var tagApply = function(data, tag){
 	var result = data;
