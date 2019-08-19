@@ -1,7 +1,5 @@
 /*****************************/
 /* LOADING DATA HAPPENS HERE */
-/*****************************/
-
 // TODO cached parsing and generalization
 
 var mark = function(id="mark",par=window.location.search) {
@@ -163,12 +161,12 @@ var contFunc = (reset=false, type, file, src) => function(id, tag, renderTag=tag
 	if(reset) papaF[type].cached = undefined;
 	var op = papaF[type];
 	var URL = url(file);
-	
-	$.when(op.parser).done(() => { 
+
 	if(op.cached){
 		var render = tagApply(op.render, renderTag);
 		var data = tagApply(op.cached,tag);
 		render(data,id)
+		console.log('cached')
 	}else{
 		op.preset.complete = function(result){
 			var data = op.parser(result);
@@ -182,7 +180,6 @@ var contFunc = (reset=false, type, file, src) => function(id, tag, renderTag=tag
 		};
 		Papa.parse(URL, op.preset)
 	}
-	});
 }
 
 const csv = {
@@ -326,7 +323,7 @@ var getID = function(param=urlParams){
 			'abiskoLakeIce',
 			'weeklyCO2',
 			'permaHistogramCALM',
-			];
+		];
 	}
 	return id
 }
@@ -366,26 +363,38 @@ var bpage = function(doc=document.createElement('div'), par=window.location.sear
 	baselineForm = (urlParams.get('baselineForm')=='true')||(urlParams.get('baselineForm')==undefined)
 	// var share = urlParams.get('share');
 	if(baselineForm=='true') doc.appendChild(createBaseline());
-
+	var call = function(id){
+		return new Promise(function(resolve,reject){
+			try{
+				resolve(true);
+				doc.appendChild(rendF[id].html(debug, doc));	
+				rendF[id].func(reset);
+			}catch(err){
+				reject(err)
+			}
+		})
+	}
+	
+	var sequence = function(array){
+		var target = array.shift();
+		if(target){
+			call(target).then(function(){
+				sequence(array);
+			}).catch(function(err){
+				// TODO Improve quality
+				var div = document.createElement("div");
+				div.innerHTML = "[PLACEHOLDER ERROR] - Sorry we couldn't deliver the graph you deserved, if you have block adder on try turning in off. "
+				var error = document.createElement("div");
+				error.innerHTML = err;
+				doc.appendChild(div)
+				doc.appendChild(error)
+				console.log("failed to render: "+target)
+			})
+		}
+	};	
 	var debug = urlParams.get('debug');
 	if(!Array.isArray(ids)) ids = [ids];
-	var deref0 = true;
-	ids.forEach(each => {
-		var deref = deref0;
-		try{
-			doc.appendChild(rendF[each].html(debug, doc));	
-			$.when(deref).done(() => deref0 = rendF[each].func(reset));
-		}catch(err){
-			// TODO Improve quality
-			var div = document.createElement("div");
-			div.innerHTML = "[PLACEHOLDER ERROR] - Sorry we couldn't deliver the graph you deserved, if you have block adder on try turning in off. "
-			var error = document.createElement("div");
-			error.innerHTML = err;
-			doc.appendChild(div)
-			doc.appendChild(error)
-			console.log("failed to render: "+each)
-		}
-	})
+	sequence(ids)
 
 	if(urlParams.get('share')=='true'){
 		var input = document.createElement("input");

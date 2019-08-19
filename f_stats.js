@@ -336,7 +336,7 @@ var parseGISSTEMPzonalMeans = function (result, src='') {
 var parseAbiskoCached = undefined;
 var parseAbiskoCsv = function (result, src='') {
 	if(parseAbiskoCached) return parseAbiskoCached;
-	// console.log('parseAbiskoCsv')
+	console.log('parseAbiskoCsv')
 	// console.log(new Date('1950-09-03').getYear())
 	// console.log(result)
 	var frame = {
