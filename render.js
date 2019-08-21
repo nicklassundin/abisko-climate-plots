@@ -164,7 +164,9 @@ const language = {
 			abiskoLakeIce: 'Torneträsk Freeze-up and break-up of lake ice vs ice time',
 			abiskoSnowDepthPeriodMeans: 'Monthly mean snow depth for Abisko',
 			abiskoSnowDepthPeriodMeans2: 'Monthly mean snow depth for Abisko',
-			AbiskoTemperatures: 'Abisko temperatures',
+			AbiskoTemperatures: function(){
+				return 'Abisko temperatures';
+			},
 			AbiskoTemperaturesSummer: function(){
 				return 'Abisko temperatures for '+summerRange;
 			},
@@ -280,7 +282,9 @@ const language = {
 			abiskoLakeIce: 'Torneträsk isläggning och islossning',
 			abiskoSnowDepthPeriodMeans: 'Månatlig genomsnittligt snö djup för Abisko',
 			abiskoSnowDepthPeriodMeans2: 'Månatlig genomsnittligt snö djup för Abisko',
-			AbiskoTemperatures: 'Abisko temperaturer',		
+			AbiskoTemperatures: function(){
+				return 'Abisko temperaturer';	
+			},
 			AbiskoTemperaturesSummer: function(){
 				return 'Abisko temperaturer för '+summerRange;
 			},
@@ -592,16 +596,19 @@ var renderCO2 = function(data, id){
 
 
 var renderTemperatureGraph = function (data, id) {
-	//console.log('renderTemperatureGraph')
-	//console.log(data)
+	// console.log('renderTemperatureGraph')
+	// console.log(data)
+	var title = id.split('_');
+	var div_id = id;
+	var id = title[0];
 	var meta = data.meta;
-	charts[id] = Highcharts.chart(id, {
+	charts[div_id] = Highcharts.chart(div_id, {
 		chart: {
 			type: 'line',
 			zoomType: 'x',
 		},
 		title: {
-			text: this.Highcharts.getOptions().lang.titles[id]
+			text: this.Highcharts.getOptions().lang.titles[id](this.Highcharts.getOptions().lang.months(title[1]))
 		},
 		// dataSrc: meta.src,
 		xAxis: {
@@ -689,111 +696,6 @@ var renderTemperatureGraph = function (data, id) {
 				name: this.Highcharts.getOptions().lang.linReg,
 			},
 			data: data.avg.values,
-		}],
-	});
-};
-
-
-
-var renderAbiskoMonthlyTemperatureGraph = function (temperatures, id) {
-	// console.log('renderAbiskoMonthlyTemperatureGraph');
-	// console.log(temperatures);
-	// console.log(temperatures.avg.variance());
-	// console.log(temperatures.avg.plotMovAvgCI());
-	charts[id] = Highcharts.chart(id, {
-		chart: {
-			type: 'line',
-			zoomType: 'x',
-		},
-		dataSrc: temperatures.avg.meta.src,
-		title: {
-			text: this.Highcharts.getOptions().lang.titles[id.split('_')[0]](this.Highcharts.getOptions().lang.months(id.split('_')[1])),
-		},
-		xAxis: {
-			title: {
-				text: this.Highcharts.getOptions().lang.years,
-			},
-			crosshair: true,
-			// type: 'datetime'
-		},
-		yAxis: {
-			title: {
-				text: language[nav_lang].temp,
-			},
-			plotLines: [{
-				value: 0,
-				color: 'rgb(204, 214, 235)',
-				width: 2,
-			}],
-			//max: 2,
-			//min: -3,
-			tickInterval: 1,
-			lineWidth: 1,
-		},
-		tooltip: {
-			shared: true,
-			valueSuffix: ' °C',
-			valueDecimals: 2,
-		},
-		series: [{
-			name: this.Highcharts.getOptions().lang.max,
-			lineWidth: 0,
-			marker: { radius: 2 },
-			states: { hover: { lineWidthPlus: 0 } },
-			color: '#ff0000',
-			data: temperatures.max.max(),
-			visible: false,
-		}, {
-			name: this.Highcharts.getOptions().lang.min,
-			lineWidth: 0,
-			marker: { radius: 2 },
-			states: { hover: { lineWidthPlus: 0 } },
-			color: '#0000ff',
-			data: temperatures.min.max(),
-			visible: false,
-		}, {
-			regression: true,
-			regressionSettings: {
-				type: 'linear',
-				color: '#aaaaaa',
-				name: this.Highcharts.getOptions().lang.linReg,
-			},
-			name: this.Highcharts.getOptions().lang.monthlyAvg,
-			lineWidth: 0,
-			marker: { radius: 2 },
-			states: { hover: { lineWidthPlus: 0 } },
-			color: '#888888',
-			data: temperatures.avg.values,
-			visible: true,
-		},{
-			name: this.Highcharts.getOptions().lang.ci,
-			type: 'arearange',
-			color: '#888888',
-			data: temperatures.avg.plotCI(),
-			zIndex: 0,
-			fillOpacity: 0.3,
-			lineWidth: 0,
-			states: { hover: { lineWidthPlus: 0 } },
-			marker: { enabled: false },
-			visible: false,
-
-		},{
-			name: this.Highcharts.getOptions().lang.movAvgCI,
-			type: 'arearange',
-			color: '#7777ff',
-			data: temperatures.avg.plotMovAvgCI(),
-			zIndex: 0,
-			fillOpacity: 0.3,
-			lineWidth: 0,
-			states: { hover: { lineWidthPlus: 0 } },
-			marker: { enabled: false },
-			visible: false,
-
-		},{
-			name: this.Highcharts.getOptions().lang.movAvg,
-			color: '#888888',
-			marker: { enabled: false },
-			data: temperatures.avg.plotMovAvg(),
 		}],
 	});
 };

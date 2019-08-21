@@ -79,9 +79,9 @@ var papaF = {
 		render: {
 			'temperatures': {
 				'yrly': renderTemperatureGraph,
-				'summer': renderAbiskoMonthlyTemperatureGraph,
-				'winter': renderAbiskoMonthlyTemperatureGraph,
-				'monthly': monthlyFunc(renderAbiskoMonthlyTemperatureGraph),
+				'summer': renderTemperatureGraph,
+				'winter': renderTemperatureGraph,
+				'monthly': monthlyFunc(renderTemperatureGraph),
 				'difference': renderTemperatureDifferenceGraph,
 			},
 
