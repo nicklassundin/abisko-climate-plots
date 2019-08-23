@@ -25,7 +25,7 @@ var struct = {
 				});
 			}
 		})
-		return value 
+		return struct.create(value, this.c).build(this.type);
 	},
 	min:		function(){
 		return this.filter(Math.min);
@@ -284,12 +284,12 @@ var parseByDate = function (values, type='mean', src='') {
 							break;
 						case 'summer':
 							keys.forEach(tkey => {
-							values[key][tkey] = construct(values[key][tkey])
+								values[key][tkey] = construct(values[key][tkey])
 							})
 							break;
 						case 'winter':
 							keys.forEach(tkey => {
-							values[key][tkey] = construct(values[key][tkey])
+								values[key][tkey] = construct(values[key][tkey])
 							})
 							break;
 						default:
@@ -352,7 +352,7 @@ var parseGISSTEMP = function (result, src='') {
 	var meta = preSetMeta['default'];
 	meta.src = src;
 	var temperatures = [];
-	// console.log(result)
+	console.log(result)
 
 
 	result.data.forEach((row) => {
@@ -487,7 +487,7 @@ var parseAbiskoCsv = function (result, src='') {
 	blocks.temperatures = parseByDate(blocks.temperatures);
 	blocks.precipitation = parseByDate(blocks.precipitation, 'sum');
 	blocks.growingSeason = struct.create(Object.keys(blocks.temperatures.weekly).map(year =>  blocks.temperatures.weekly[year].avg.sequence())).build();
-	
+
 	parseAbiskoCached = blocks
 	return blocks
 }
@@ -615,6 +615,30 @@ var parseAbiskoIceData = function (result, src='') {
 var parseAbiskoSnowData = function (result, src='') {
 	var data = result.data;
 	var fields = result.meta.fields;
+
+	// console.log(result.data)
+	// var values = data.map((row) => {
+	// 	var date;
+	// 	var entry = {};
+	// 	Object.keys(row).forEach(key => {
+	// 		switch(key){
+	// 			case 'Time':
+	// 				date = row[key];
+	// 				break;
+	// 			default:
+	// 				if(key!='Time'){
+	// 					entry[key] = {
+	// 						x: date,
+	// 						y: row[key],
+	// 					}
+
+	// 				}
+	// 		}	
+	// 	})
+	// 	return entry;
+	// })
+	// console.log(values)
+
 
 	var snow = [];
 

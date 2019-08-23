@@ -116,7 +116,7 @@ var papaF = {
 		cached: undefined,
 		parser: parseAbiskoSnowData,
 		render: {
-			// 'periodMeans': renderAbiskoSnowGraph,
+			'periodMeans': renderAbiskoSnowGraph,
 			'decadeMeans': renderAbiskoSnowGraph,
 		}
 	},
@@ -526,7 +526,7 @@ var rendF = {
 	}, 
 	'abiskoSnowDepthPeriodMeans':{
 		func: function(reset=false) {
-			contFunc(reset,'abiskoSnowDepth',"data/ANS_SnowDepth.csv", "https://www.arcticcirc.net/")("abiskoSnowDepthPeriodMeans", "decadeMeans")
+			contFunc(reset,'abiskoSnowDepth',"data/ANS_SnowDepth.csv", "https://www.arcticcirc.net/")("abiskoSnowDepthPeriodMeans", "periodMeans")
 		},
 
 		html: function(debug=false, doc){
