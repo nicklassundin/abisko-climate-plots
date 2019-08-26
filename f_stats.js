@@ -27,6 +27,15 @@ var struct = {
 		})
 		return struct.create(value, this.c).build(this.type);
 	},
+	split: function(f){
+		if(this.values[0].split){
+			return struct.create(this.values.map(each => {
+				return each.split(f);
+			}), this.x, src)
+		}else{
+			return struct.create(f(this.values), this.x, src)	
+		}
+	},
 	min:		function(){
 		return this.filter(Math.min);
 	},
@@ -115,7 +124,13 @@ var struct = {
 		var result = this;
 		result.type = type;
 		var values = result.values.filter(entry => (!isNaN(entry.y) || $.isNumeric(entry.y)));
-
+		this.values = this.values.map(each => {
+			if(each.build){
+				return each.build(type, lower, upper);
+			}else{
+				return each;
+			}
+		})
 		result.values = values;
 		var count = values.length;
 
@@ -136,7 +151,7 @@ var struct = {
 					y = sum(values.map(each => each.y));
 					break;
 				default:
-					console.log("default")
+					console.log("default: "+type)
 
 			}
 			result.y = y;
@@ -163,15 +178,18 @@ var struct = {
 	},
 };
 
-var parseByDate = function (values, type='mean', src='') {
+var parseByDate = function (values, type='mean', src='', custom) {
+	console.log(values)
 	var keys = Object.keys(values[0])
 	var frame = {
 		weeks: {},
 		yrly: {},
+		decades: {},
 		monthly: {},
 		weekly: {},
 		summer: {}, 
-		winter: {},	
+		winter: {},
+		customPeriod: {},
 		meta: {
 			src: src,
 		}
@@ -179,17 +197,20 @@ var parseByDate = function (values, type='mean', src='') {
 	const data = {
 		weeks: {},
 		yrly: {},
+		decades: {},
 		monthly: {},
 		weekly: {},
 		summer: {}, 
 		winter: {},	
+		customPeriod: {},
 		meta: {
 			src: src,
 		},
 		insert: function(entries){
 			var result = Object.assign({}, frame);
 			// TODO build to general function to be use for all functions
-			var set = function(entry, key, year, month, week){
+			var set = function(entry, key, date, year, month, week){
+				var decade = year - year % 10;
 				if(!result.yrly) result.yrly = {};
 				if(!result.yrly[key]) result.yrly[key] = {};
 				if(!result.yrly[key][year]){
@@ -234,6 +255,23 @@ var parseByDate = function (values, type='mean', src='') {
 				if(!result.weekly[year][key]) result.weekly[year][key] = {}; 
 				if(!result.weekly[year][key][week]) result.weekly[year][key][week] = struct.create([],week,type);
 				result.weekly[year][key][week].values.push(entry);
+				// Decades
+				if(!result.decades) result.decades = {};
+				if(!result.decades[key]) result.decades[key] = {};
+				if(!result.decades[key][decade]) result.decades[key][decade] = struct.create([],decade,type);
+				result.decades[key][decade].values.push(entry);
+
+				// custom period
+				if(custom){
+					if(!result.customPeriod) result.customPeriod = {};
+					if(!result.customPeriod[key]) result.customPeriod[key] = {};
+					var pkey = custom(date);
+					if(pkey) {
+						if(!result.customPeriod[key][pkey]) result.customPeriod[key][pkey] = struct.create([],pkey,type);
+						result.customPeriod[key][pkey].values.push(entry);
+					}
+				}
+
 				return result;					
 			}
 			var years = []
@@ -247,7 +285,7 @@ var parseByDate = function (values, type='mean', src='') {
 						var week = date.getWeekNumber();
 						if(!years[year+'']) years[year] = year+'';
 
-						values = set(entry[key], key, year, month, week);
+						values = set(entry[key], key, date, year, month, week);
 					})
 				})
 				var construct = function(entries, x){
@@ -259,6 +297,7 @@ var parseByDate = function (values, type='mean', src='') {
 					})
 					return struct.create(str, x).build(type);
 				}
+				console.log(values.decades)
 				Object.keys(frame).forEach(key => {
 					switch(key){
 						case 'monthly':
@@ -278,6 +317,20 @@ var parseByDate = function (values, type='mean', src='') {
 						case 'yrly':
 							keys.forEach(tkey => {
 								values[key][tkey] = construct(values[key][tkey])
+							})
+							break;
+						case 'decades':
+							Object.keys(values[key]).forEach(tkey => {
+								values[key][tkey] = struct.create(Object.keys(values[key][tkey]).map(decade => {
+									return values[key][tkey][decade] = values[key][tkey][decade].build(type);
+								})).build(type);
+							}) 
+							break;
+						case 'customPeriod': 
+							Object.keys(values[key]).forEach(tkey => {
+								values[key][tkey] = struct.create(Object.keys(values[key][tkey]).map(decade => {
+									return values[key][tkey][decade] = values[key][tkey][decade].build(type);
+								})).build(type);
 							})
 							break;
 						case 'meta':
@@ -612,53 +665,68 @@ var parseAbiskoIceData = function (result, src='') {
 	};
 };
 
+var AbiskoSnowCached = undefined;
 var parseAbiskoSnowData = function (result, src='') {
+	if(AbiskoSnowCached) return AbiskoSnowCached; 	
 	var data = result.data;
 	var fields = result.meta.fields;
 
-	// console.log(result.data)
-	// var values = data.map((row) => {
-	// 	var date;
-	// 	var entry = {};
-	// 	Object.keys(row).forEach(key => {
-	// 		switch(key){
-	// 			case 'Time':
-	// 				date = row[key];
-	// 				break;
-	// 			default:
-	// 				if(key!='Time'){
-	// 					entry[key] = {
-	// 						x: date,
-	// 						y: row[key],
-	// 					}
+//	var custom = function(date){
+//		var tmp = [
+//			//{ start: 1931, end: 1940, },
+//			//{ start: 1941, end: 1950, },
+//			//{ start: 1951, end: 1960, },
+//			{ start: 1961, end: 1970, },
+//			{ start: 1971, end: 1980, },
+//			{ start: 1981, end: 1990, },
+//			{ start: 1991, end: 2000, },
+//			{ start: 2001, end: 2010, },
+//			{ start: 2011, end: Infinity },
+//			// { start: -Infinity, end: Infinity }, // entire period
+//		];
+//		var year = parseInt(date.getFullYear());
+//		var p = undefined;
+//		tmp.forEach(period => {
+//			if(parseInt(period.start) <= year && parseInt(period.end) >= year){
+//				p = ("From "+period.start+" to "+period.end); 
+//			} 
+//		})
+//		return p;
+//	}
+//	var values = parseByDate(data.map((row) => {
+//		var date;
+//		var entry = {};
+//		Object.keys(row).forEach(key => {
+//			switch(key){
+//				case 'Time':
+//					date = new Date(row[key]);
+//					break;
+//				default:
+//					if(key!="" && key!='Time'){
+//						entry[key] = {
+//							x: date,
+//							y: parseFloat(row[key]),
+//						}
 
-	// 				}
-	// 		}	
-	// 	})
-	// 	return entry;
-	// })
-	// console.log(values)
+//					}
+//			}	
+//		})
+//		return entry;
+//	}), 'mean', '', custom=custom)
+//	console.log(values)
+//	var result = {
+//		periods: [],
+//		decades: [],
+//	};
 
 
-	var snow = [];
-
-	data.forEach((row) => {
-		var date = parseDate(row[fields[0]]);
-		var depthSingleStake = validNumber(row[fields[1]]);
-		if (date.year && depthSingleStake) {
-			var year = snow[date.year] = snow[date.year] || [];
-			var month = year[date.month] = year[date.month] || { sum: 0, count: 0 };
-			month.sum += depthSingleStake;
-			month.count++;
-		}
-	});
-
-	snow.forEach((year) => {
-		for (var i = 1; i <= 12; i++) {
-			var m = year[i];
-			year[i] = m ? m.sum / m.count : null;
-		}
-	});
+//	///
+//	//
+//	//
+//	//
+//	//
+//	//
+	//
 
 	var periods = [
 		//{ start: 1913, end: 1930 },
@@ -680,6 +748,27 @@ var parseAbiskoSnowData = function (result, src='') {
 		{ start: 2011, end: Infinity },
 		{ start: -Infinity, end: Infinity }, // entire period
 	];
+
+	var snow = [];
+
+	data.forEach((row) => {
+		var date = parseDate(row[fields[0]]);
+		var depthSingleStake = validNumber(row[fields[1]]);
+		if (date.year && depthSingleStake) {
+			var year = snow[date.year] = snow[date.year] || [];
+			var month = year[date.month] = year[date.month] || { sum: 0, count: 0 };
+			month.sum += depthSingleStake;
+			month.count++;
+		}
+	});
+
+	snow.forEach((year) => {
+		for (var i = 1; i <= 12; i++) {
+			var m = year[i];
+			year[i] = m ? m.sum / m.count : null;
+		}
+	});
+
 
 	var periodMeans = {};
 	var decadeMeans = {};
@@ -715,6 +804,8 @@ var parseAbiskoSnowData = function (result, src='') {
 
 	calculateMeans(periods, periodMeans);
 	calculateMeans(decades, decadeMeans);
+	// console.log({periodMeans, decadeMeans})
+	AbiskoSnowCached = {src: src, periodMeans, decadeMeans,}
 	return {
 		src: src,
 		periodMeans,

@@ -152,7 +152,10 @@ const language = {
 			'From 1991 to 2000': "From 1991 to 2000",
 			'From 2001 to 2010': "From 2001 to 2010",
 			'From 2011 to present': "From 2011 to present",
-			'Entire period': "Entire period"
+			'Entire period': "Entire period",
+			'From 1931 to 1960': "From 1931 to 1960",
+			'From 1961 to 1990': "From 1961 to 1990",
+			'From 1991 to present' : "From 1991 to present",
 		},
 		titles: {
 			northernHemisphere: 'Northern Hemisphere temperatures',
@@ -270,7 +273,10 @@ const language = {
 			'From 1991 to 2000': "Från 1991 till 2000",
 			'From 2001 to 2010': "Från 2001 till 2010",
 			'From 2011 to present': "Från 2011 till nutid",
-			'Entire period': "Hela perioden"
+			'Entire period': "Hela perioden",
+			'From 1931 to 1960' : "Från 1931 till 1960",
+			'From 1961 to 1990' : "Från 1961 till 1990",
+			'From 1991 to present' : "Från 1991 till nutid",
 		},
 		titles: {
 			northernHemisphere: 'Northern Hemisphere temperatures',
