@@ -124,13 +124,13 @@ var struct = {
 		var result = this;
 		result.type = type;
 		var values = result.values.filter(entry => (!isNaN(entry.y) || $.isNumeric(entry.y)));
-		this.values = this.values.map(each => {
-			if(each.build){
-				return each.build(type, lower, upper);
-			}else{
-				return each;
-			}
-		})
+		// this.values = this.values.map(each => {
+			// if(each.build){
+				// return each.build(type, lower, upper);
+			// }else{
+				// return each;
+			// }
+		// })
 		result.values = values;
 		var count = values.length;
 
