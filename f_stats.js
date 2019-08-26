@@ -297,7 +297,7 @@ var parseByDate = function (values, type='mean', src='', custom) {
 					})
 					return struct.create(str, x).build(type);
 				}
-				console.log(values.decades)
+				// console.log(values.decades)
 				Object.keys(frame).forEach(key => {
 					switch(key){
 						case 'monthly':
