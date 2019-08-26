@@ -179,7 +179,7 @@ var struct = {
 };
 
 var parseByDate = function (values, type='mean', src='', custom) {
-	console.log(values)
+	// console.log(values)
 	var keys = Object.keys(values[0])
 	var frame = {
 		weeks: {},
