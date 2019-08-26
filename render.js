@@ -604,6 +604,7 @@ var renderCO2 = function(data, id){
 var renderTemperatureGraph = function (data, id) {
 	// console.log('renderTemperatureGraph')
 	// console.log(data)
+	// console.log(data.max.max())
 	var title = id.split('_');
 	var div_id = id;
 	var id = title[0];
@@ -648,7 +649,7 @@ var renderTemperatureGraph = function (data, id) {
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
 			color: '#ff0000',
-			data: data.max.values,
+			data: data.max.max(),
 			visible: false,
 			showInLegend: !(typeof data.min === 'undefined'),
 		}, {
@@ -657,7 +658,7 @@ var renderTemperatureGraph = function (data, id) {
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
 			color: '#0000ff',
-			data: data.min.values,
+			data: data.min.min(),
 			visible: false,
 			showInLegend: !(typeof data.min === 'undefined'),
 		},{

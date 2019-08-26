@@ -12,20 +12,22 @@ var struct = {
 	x: 		undefined,
 	y: 		undefined,
 	count:		undefined,
-	filter:		function(f){
+	filter:		function(f, type=this.type){
 		var value = [];
-		this.values.forEach(entry => {
-			if(entry.filter == undefined){
-				value.push(entry);
-			}else{
-				var tmp = entry.filter(f)
-				value.push({
-					y: f(...tmp.map(each => each.y)),
-					x: entry.x
-				});
+		if(this.values[0].filter){
+			this.values.forEach(entry => {
+				value.push(entry.filter(f, type));
+			})
+			return value;
+
+		}else{
+			return  {
+				y: f(...this.values.map(each => each.y)),
+				x: this.x,
 			}
-		})
-		return struct.create(value, this.c).build(this.type);
+
+		}
+		// return struct.create(value, this.x, this.meta.src ).build(type);
 	},
 	split: function(f){
 		if(this.values[0].split){
@@ -37,10 +39,10 @@ var struct = {
 		}
 	},
 	min:		function(){
-		return this.filter(Math.min);
+		return this.filter(Math.min, 'min');
 	},
 	max: function(){
-		return this.filter(Math.max);
+		return this.filter(Math.max, 'max');
 	},
 	sequence: function(f=(e)=>{ return e < 0 }){
 		var values = this.values.map(each => each.y)
@@ -125,11 +127,11 @@ var struct = {
 		result.type = type;
 		var values = result.values.filter(entry => (!isNaN(entry.y) || $.isNumeric(entry.y)));
 		// this.values = this.values.map(each => {
-			// if(each.build){
-				// return each.build(type, lower, upper);
-			// }else{
-				// return each;
-			// }
+		// if(each.build){
+		// return each.build(type, lower, upper);
+		// }else{
+		// return each;
+		// }
 		// })
 		result.values = values;
 		var count = values.length;
@@ -168,7 +170,11 @@ var struct = {
 	create: function(values, x=undefined, src=''){
 		var result = struct.clone();
 		result.meta.src = src;
-		values = values.filter(entry => !isNaN(entry.y) && $.isNumeric(entry.y));
+		try{
+			values = values.filter(entry => !isNaN(entry.y) && $.isNumeric(entry.y));
+		}catch(err){
+			return undefined;
+		}
 		result.values = values.filter(each => each.y);
 		result.x = x;
 		return result;
@@ -671,61 +677,61 @@ var parseAbiskoSnowData = function (result, src='') {
 	var data = result.data;
 	var fields = result.meta.fields;
 
-//	var custom = function(date){
-//		var tmp = [
-//			//{ start: 1931, end: 1940, },
-//			//{ start: 1941, end: 1950, },
-//			//{ start: 1951, end: 1960, },
-//			{ start: 1961, end: 1970, },
-//			{ start: 1971, end: 1980, },
-//			{ start: 1981, end: 1990, },
-//			{ start: 1991, end: 2000, },
-//			{ start: 2001, end: 2010, },
-//			{ start: 2011, end: Infinity },
-//			// { start: -Infinity, end: Infinity }, // entire period
-//		];
-//		var year = parseInt(date.getFullYear());
-//		var p = undefined;
-//		tmp.forEach(period => {
-//			if(parseInt(period.start) <= year && parseInt(period.end) >= year){
-//				p = ("From "+period.start+" to "+period.end); 
-//			} 
-//		})
-//		return p;
-//	}
-//	var values = parseByDate(data.map((row) => {
-//		var date;
-//		var entry = {};
-//		Object.keys(row).forEach(key => {
-//			switch(key){
-//				case 'Time':
-//					date = new Date(row[key]);
-//					break;
-//				default:
-//					if(key!="" && key!='Time'){
-//						entry[key] = {
-//							x: date,
-//							y: parseFloat(row[key]),
-//						}
+	//	var custom = function(date){
+	//		var tmp = [
+	//			//{ start: 1931, end: 1940, },
+	//			//{ start: 1941, end: 1950, },
+	//			//{ start: 1951, end: 1960, },
+	//			{ start: 1961, end: 1970, },
+	//			{ start: 1971, end: 1980, },
+	//			{ start: 1981, end: 1990, },
+	//			{ start: 1991, end: 2000, },
+	//			{ start: 2001, end: 2010, },
+	//			{ start: 2011, end: Infinity },
+	//			// { start: -Infinity, end: Infinity }, // entire period
+	//		];
+	//		var year = parseInt(date.getFullYear());
+	//		var p = undefined;
+	//		tmp.forEach(period => {
+	//			if(parseInt(period.start) <= year && parseInt(period.end) >= year){
+	//				p = ("From "+period.start+" to "+period.end); 
+	//			} 
+	//		})
+	//		return p;
+	//	}
+	//	var values = parseByDate(data.map((row) => {
+	//		var date;
+	//		var entry = {};
+	//		Object.keys(row).forEach(key => {
+	//			switch(key){
+	//				case 'Time':
+	//					date = new Date(row[key]);
+	//					break;
+	//				default:
+	//					if(key!="" && key!='Time'){
+	//						entry[key] = {
+	//							x: date,
+	//							y: parseFloat(row[key]),
+	//						}
 
-//					}
-//			}	
-//		})
-//		return entry;
-//	}), 'mean', '', custom=custom)
-//	console.log(values)
-//	var result = {
-//		periods: [],
-//		decades: [],
-//	};
+	//					}
+	//			}	
+	//		})
+	//		return entry;
+	//	}), 'mean', '', custom=custom)
+	//	console.log(values)
+	//	var result = {
+	//		periods: [],
+	//		decades: [],
+	//	};
 
 
-//	///
-//	//
-//	//
-//	//
-//	//
-//	//
+	//	///
+	//	//
+	//	//
+	//	//
+	//	//
+	//	//
 	//
 
 	var periods = [
