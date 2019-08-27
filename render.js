@@ -96,6 +96,7 @@ const language = {
 		downloadPDF: 'Download as PDF',
 		downloadSVG: 'Download as SVG',
 		diff: 'Difference',
+		groundlevel: "Ground level",
 		months: (month) => ({
 			jan: 'January',
 			feb: 'February',
@@ -195,6 +196,7 @@ const language = {
 			},
 			growingSeason: 'Growing season',
 			weeklyCO2: "Averages global CO"+("2".sub())+" in atmosphere",
+			permaHistogramCALM: 'Permafrost active layer depth',
 		},
 		subtitles: {
 			baseline: 'Difference between yearly average and average for '+baselineLower+"-"+baselineUpper,
@@ -219,6 +221,7 @@ const language = {
 		resetZoom: 'Återställ zoom',
 		printChart: 'Skriv ut',
 		months: ['Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'],
+		groundlevel: "Mark nivå",
 		months: (month) => ({
 			jan: 'Januari',
 			feb: 'Februari',
@@ -316,6 +319,7 @@ const language = {
 			},
 			growingSeason: 'Växande säsonger',
 			weeklyCO2: "Globalt genomsnittligt CO"+("2".sub())+" i atmosfären",
+			permaHistogramCALM: 'Permafrost aktivt lager djup',
 		},
 		subtitles: {
 			baseline: 'Skillnad mellan årligt genomsnitt och genomsnitt för perioden '+baselineLower+"-"+baselineUpper,
@@ -1486,6 +1490,7 @@ var renderZoomableGraph = function(data, id, title){
 
 
 var renderPerma = function(data, id){
+	// console.log(id)
 	// console.log(data)
 	charts[id] = Highcharts.chart(id, {
 		chart: {
@@ -1494,11 +1499,12 @@ var renderPerma = function(data, id){
 		},
 		// dataSrc: data.src,
 		title: {
-			text:  'Permafrost active layer depth'
+			text: this.Highcharts.getOptions().lang.titles[id],
 		},
 		xAxis: {
 			title: {
-				text: 'Year'
+				// text: 'Year'
+				text: this.Highcharts.getOptions().lang.years,
 			},
 		},
 		yAxis: {
@@ -1512,7 +1518,7 @@ var renderPerma = function(data, id){
 				value: 0,
 				zIndex: 5,
 				label: {
-					text: "Ground level",
+					text: this.Highcharts.getOptions().lang.groundlevel
 				}
 			}]
 		},
