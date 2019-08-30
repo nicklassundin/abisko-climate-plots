@@ -42,7 +42,7 @@ var updatePlot = function(id, bl, bu){
 		if(!bl) bl = low.value;
 		if(!bu) bl = upp.value;
 	} 
-	if(bl<bu && bl>1913) baselineLower=bl;
+	if(bl<bu && bl>=1913) baselineLower=bl;
 	if(bu>bl && bu<2019) baselineUpper=bu;
 	var chart = charts[id]
 	if(id.split('_')[1]) id = id.split('_')[0]
@@ -199,7 +199,9 @@ const language = {
 			permaHistogramCALM: 'Permafrost active layer depth',
 		},
 		subtitles: {
-			baseline: 'Difference between yearly average and average for '+baselineLower+"-"+baselineUpper,
+			baseline: function(){
+				return 'Difference between yearly average and average for '+baselineLower+"-"+baselineUpper;
+			}
 		}
 	},
 	sv:{
@@ -322,7 +324,9 @@ const language = {
 			permaHistogramCALM: 'Permafrost aktivt lager djup',
 		},
 		subtitles: {
-			baseline: 'Skillnad mellan årligt genomsnitt och genomsnitt för perioden '+baselineLower+"-"+baselineUpper,
+			baseline: function(){
+				return 'Skillnad mellan årligt genomsnitt och genomsnitt för perioden '+baselineLower+"-"+baselineUpper;
+			} 
 		}
 	},
 }
@@ -830,7 +834,7 @@ var renderTemperatureDifferenceGraph = function (temperatures, id) {
 			text: this.Highcharts.getOptions().lang.titles[id],
 		},
 		subtitle: {
-			text: this.Highcharts.getOptions().lang.subtitles.baseline,
+			text: this.Highcharts.getOptions().lang.subtitles.baseline(),
 		},
 		// annotations: baselineUI(id),
 		xAxis: {
@@ -972,7 +976,7 @@ var renderPrecipitationDifferenceGraph = function (precipitation, id) {
 			text: this.Highcharts.getOptions().lang.titles[id],
 		},
 		subtitle: {
-			text: this.Highcharts.getOptions().lang.subtitles.baseline,
+			text: this.Highcharts.getOptions().lang.subtitles.baseline(),
 		},
 		xAxis: {
 			title: {
