@@ -1,13 +1,13 @@
-﻿Stationsnamn;Klimatnummer;Mäthöjd (meter över marken)
-Umeå;140500;2.0
+﻿/* Stationsnamn;Klimatnummer;Mäthöjd (meter över marken) */
+/* Umeå;140500;2.0 */
 
-Parameternamn;Beskrivning;Enhet
-Lufttemperatur;min, 1 gång per dygn;degree celsius
-Lufttemperatur;max, 1 gång per dygn;degree celsius
+/* Parameternamn;Beskrivning;Enhet */
+/* Lufttemperatur;min, 1 gång per dygn;degree celsius */
+/* Lufttemperatur;max, 1 gång per dygn;degree celsius */
 
-Tidsperiod (fr.o.m);Tidsperiod (t.o.m);Höjd (meter över havet);Latitud (decimalgrader);Longitud (decimalgrader)
-1962-09-01 00:00:00;1979-09-30 23:59:59;10.0;63.8302;20.2901
-1882-01-01 00:00:00;1962-08-31 23:59:59;10.0;63.8333;20.2833
+/* Tidsperiod (fr.o.m);Tidsperiod (t.o.m);Höjd (meter över havet);Latitud (decimalgrader);Longitud (decimalgrader) */
+/* 1962-09-01 00:00:00;1979-09-30 23:59:59;10.0;63.8302;20.2901 */
+/* 1882-01-01 00:00:00;1962-08-31 23:59:59;10.0;63.8333;20.2833 */
 
 Från Datum Tid (UTC);Till Datum Tid (UTC);Representativt dygn;Lufttemperatur;Kvalitet;Lufttemperatur;Kvalitet;;Tidsutsnitt:
 1881-12-31 20:00:01;1882-01-01 20:00:00;1882-01-01;-13.5;G;;;;Kvalitetskontrollerade historiska data (utom de senaste 3 mån)
