@@ -56,10 +56,10 @@ function temp_prec_csv_row(Time,Temp_avg,Temp_min,Temp_max,Percipitation) {
 function buildCSVFile(){
 	
 }
-
 // TEMP get temprature from SMHI 
 // TODO generalize function for WMO
-function getTempSMHI(url){
+function getTempSMHI(id, type){
+	url = get_smhi_station_url(id, smhi[type]);
 	var res = $.getJSON(url, function(json) {
 		var values = json.value;
 		var item = [];
@@ -68,41 +68,43 @@ function getTempSMHI(url){
 			'value': each['value'],
 			'quality': each['quality']
 		}))
-		console.log(values)
-		item.push("<li>"+values[0].value+"</li>") // only picks out one point TODO transform to pick out all
+		// console.log(values)
+		// item.push("<li>"+values[0].value+"</li>") // only picks out one point TODO transform to pick out all
 
-		$("<ul/>", {
-			"class": "station temperature",
-			html: item
-		}).appendTo("body");
+		// $("<ul/>", {
+		// 	"class": "station temperature",
+		// 	html: item
+		// }).appendTo("body");
 	}).done(function() {
 		console.log("get JSON getTempSMHI done");
 	}).fail(function(jqxhr, textStatus,error) {
 		console.log("get JSON error");
 	}).always(function() {
-		console.log("get JSON complete");
+		console.log("get JSON finished");
 	});
+	return res
 }
 
-$(document).ready(getTempSMHI(get_smhi_station_url(159880, smhi.months)));
+// $(document).ready(getTempSMHI(get_smhi_station_url(159880, smhi.months)));
 
 
-function csv_smhi_json(url){
-	var res = $.getJSON(url, function(json) {
+function csv_smhi_json(id, type){
+	url = get_smhi_station_url(id, smhi[type]);
+	result = $.getJSON(url, function(json) {
 		var values = json.value;
 		var item = [];
-		item.push("<li>"+values[0].value+"</li>") // only picks out one point TODO transform to pick out all
-		$("<ul/>", {
-			"class": "station temperature",
-			html: item
-		}).appendTo("body");
+		// item.push("<li>"+values[0].value+"</li>") // only picks out one point TODO transform to pick out all
+		// $("<ul/>", {
+		// 	"class": "station temperature",
+		// 	html: item
+		// }).appendTo("body");
 	}).done(function() {
 		console.log("get JSON getTempSMHI done");
 	}).fail(function(jqxhr, textStatus,error) {
 		console.log("get JSON error");
 	}).always(function() {
-		console.log("get JSON complete");
+		console.log("get JSON finished");
 	});
+	return result
 }
-
-$(document).ready(getTempSMHI(get_smhi_station_url(159880, "latest-months")));
+// $(document).ready(getTempSMHI(get_smhi_station_url(159880, "latest-months")));

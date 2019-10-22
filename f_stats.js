@@ -819,3 +819,9 @@ var parseAbiskoSnowData = function (result, src='') {
 	};
 };
 
+
+var smhiTemp = function(result, src=''){
+	console.log(result);
+	data = result;
+	return data;
+}

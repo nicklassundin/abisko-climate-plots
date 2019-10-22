@@ -2,6 +2,12 @@
 /* LOADING DATA HAPPENS HERE */
 // TODO cached parsing and generalization
 
+// TODO
+// console.log(getTempSMHI(159880, "months"));
+// test = csv_smhi_json(159880, "archive");
+// console.log(test)
+////////////
+
 var mark = function(id="mark",par=window.location.search) {
 	var param = (''+par);
 	var mark = document.getElementById(id+param);
@@ -141,6 +147,16 @@ var papaF = {
 		cached: undefined,
 		parser: parseCALM,
 		render: renderPerma,
+	},
+	smhiTemp: {
+		preset:{
+			header: true,
+			download: true,
+			skipEmptyLines: true,
+		},
+		chached: undefined,
+		parser: smhiTemp,
+		render: renderTemperatureGraph,
 	}
 }
 
@@ -201,6 +217,7 @@ const csv = {
 		monthly: "data/monthly_in_situ_co2_mlo.csv",
 	},
 	calm: "data/CALM.csv",
+	smhiTemp: "data/smhi-opendata_19_20_140500_20191021_085425.csv",
 }
 
 var selectText = function(e){
@@ -729,6 +746,16 @@ var rendF = {
 			var no = 45;
 			if(!debug) no = debug;
 			return createDiv("permaHistogramCALM", no);
+		}
+	},
+	'smhiTemp': {
+		func: function(reset=false){
+			contFunc(reset, "smhiTemp", csv.smhiTemp, '')('smhiTemp','')
+		},
+		html: function(debug=false, doc){
+			var no = 46;
+			if(!debug) no = debug;
+			return createDiv("smhiTemp", no);
 		}
 	}
 }
