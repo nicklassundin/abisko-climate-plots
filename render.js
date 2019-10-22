@@ -197,6 +197,9 @@ const language = {
 			growingSeason: 'Growing season',
 			weeklyCO2: "Averages global CO"+("2".sub())+" in atmosphere",
 			permaHistogramCALM: 'Permafrost active layer depth',
+			smhiTemp: function(name){
+				return name +" SMHI TEST";
+			} 
 		},
 		subtitles: {
 			baseline: function(){
@@ -322,6 +325,10 @@ const language = {
 			growingSeason: 'Växande säsonger',
 			weeklyCO2: "Globalt genomsnittligt CO"+("2".sub())+" i atmosfären",
 			permaHistogramCALM: 'Permafrost aktivt lager djup',
+
+			smhiTemp: function(name){
+				return name +" SMHI TEST";
+			},
 		},
 		subtitles: {
 			baseline: function(){
@@ -613,8 +620,9 @@ var renderCO2 = function(data, id){
 
 
 var renderTemperatureGraph = function (data, id) {
-	// console.log('renderTemperatureGraph')
-	// console.log(data)
+	console.log('renderTemperatureGraph')
+	console.log(id)
+	console.log(data)
 	// console.log(data.max.max())
 	var title = id.split('_');
 	var div_id = id;

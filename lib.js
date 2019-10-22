@@ -153,11 +153,18 @@ var papaF = {
 			header: true,
 			download: true,
 			skipEmptyLines: true,
-			comments: true,
+			beforeFirstChunk: function(result){
+				result = result.split("\n")
+				result.splice(0,11);
+				result = result.join("\r\n");
+				return result
+			}
 		},
 		chached: undefined,
 		parser: smhiTemp,
-		render: renderTemperatureGraph,
+		render: {
+			yrly: renderTemperatureGraph,
+		} 
 	}
 }
 
@@ -751,7 +758,7 @@ var rendF = {
 	},
 	'smhiTemp': {
 		func: function(reset=false){
-			contFunc(reset, "smhiTemp", csv.smhiTemp, '')('smhiTemp','')
+			contFunc(reset, "smhiTemp", csv.smhiTemp, '')('smhiTemp','yrly')
 		},
 		html: function(debug=false, doc){
 			var no = 46;

@@ -38,7 +38,7 @@ var struct = {
 			return struct.create(f(this.values), this.x, src)	
 		}
 	},
-	min:		function(){
+	min: function(){
 		return this.filter(Math.min, 'min');
 	},
 	max: function(){
@@ -821,7 +821,34 @@ var parseAbiskoSnowData = function (result, src='') {
 
 
 var smhiTemp = function(result, src=''){
-	console.log(result);
-	data = result;
-	return data;
+	var parse = function(entry){
+
+		// var x = (new Date(entry[0])).getTime();
+		var x = entry[0];
+		var y = parseFloat(entry[1]);
+		return {
+			avg: {
+				x: x,
+				y: y,
+			},
+			max: {
+				x: x,
+				y: y,
+			},
+			min: {
+				x: x,
+				y: y,
+			},
+		}
+	}
+	var values = Object.values(result.data.map(each => {
+		temp = [each["Representativt dygn"], each["Lufttemperatur"]]
+		return parse(temp);
+	}));
+	
+	var temperatures = parseByDate(values)
+
+	// console.log(temperatures)
+	return temperatures
+	
 }
