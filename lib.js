@@ -153,6 +153,7 @@ var papaF = {
 			header: true,
 			download: true,
 			skipEmptyLines: true,
+			comments: true,
 		},
 		chached: undefined,
 		parser: smhiTemp,
