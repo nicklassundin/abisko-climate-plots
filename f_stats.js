@@ -495,6 +495,7 @@ var parseGISSTEMPzonalMeans = function (result, src='') {
 
 var parseAbiskoCached = undefined;
 var parseAbiskoCsv = function (result, src='') {
+	// console.log(result)
 	if(parseAbiskoCached) return parseAbiskoCached;
 	var blocks = { precipitation: [], temperatures: [] };
 	result.data.forEach(entry => {
@@ -821,6 +822,7 @@ var parseAbiskoSnowData = function (result, src='') {
 
 
 var smhiTemp = function(result, src=''){
+	// console.log(result)
 	var parse = function(entry){
 
 		// var x = (new Date(entry[0])).getTime();

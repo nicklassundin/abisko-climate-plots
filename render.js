@@ -620,9 +620,9 @@ var renderCO2 = function(data, id){
 
 
 var renderTemperatureGraph = function (data, id) {
-	console.log('renderTemperatureGraph')
-	console.log(id)
-	console.log(data)
+	// console.log('renderTemperatureGraph')
+	// console.log(id)
+	// console.log(data)
 	// console.log(data.max.max())
 	var title = id.split('_');
 	var div_id = id;
