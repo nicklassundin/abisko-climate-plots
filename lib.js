@@ -48,19 +48,27 @@ var dataset_struct = {
 	parser: undefined, 
 	render: undefined,
 	reader: Papa.parse,
-	contFunc: async function(reset=false){	
+	contFunc: function(reset=false){	
 		if(reset) this.cached = {}; 
 		var ref = this;
 		this.file.forEach(file => {
 			async function data(file){
+				addr = file; 
 				return new Promise(function(resolve, reject){
 					ref.preset.complete = function(result){
 						resolve(ref.parser(result, ref.src));
 					};
 					ref.reader(url(file), ref.preset)
-				});
-			}; 
-			this.rawData[Object.keys(this.cached).length] = data(file);
+				}).catch(function(error){
+					console.log("Failed to fetch data");
+					console.log(error);
+					var er_div = document.createElement("div");
+					er_div.innerHTML = paste("Something went wrong, if you have adblocker try closing it, reload the page.    ERROR MESSAGE: ", error.message);	
+					// document.getElementById(id).append(er_div);
+					// TODO add to all relavent divs
+				})
+			};
+			this.rawData[file] = data(file); 
 		})
 	},
 	init: function(id, tag, renderTag=tag){
@@ -68,21 +76,32 @@ var dataset_struct = {
 		// console.log(tag)
 		// console.log(this)
 		var render = this.render;
-		var promise = this.rawData['0'];
-		// console.log(promise)
+		console.log(this)
+		var rawData = this.rawData;
+		
+		// TODO
+		function pack(){
+			return new Promise(function(resolve, reject){
+				var result = {};
+				console.log("test")
+				Object.keys(rawData).forEach(key => {
+					rawData[key].then(function(result){
+						result[key] = result
+					})
+				})
+				resolve(result)
+			})
+		}
+		// var promise = path();
+		var promise = rawData[Object.keys(rawData)[0]];
+		console.log(promise)
 		promise.then(function(data){
+			console.log(data)
 			if(tag){
 				render = tagApply(render, renderTag);
 				data = tagApply(data, tag);
 			} 
 			render(data, id);
-		}).catch(function(error){
-			console.log("Failed to fetch data");
-			console.log(paste("ID: ", [id]));
-			console.log(error);
-			var er_div = document.createElement("div");
-			er_div.innerHTML = paste("Something went wrong, if you have adblocker try closing it, reload the page.    ERROR MESSAGE: ", error.message);	
-			document.getElementById(id).append(er_div);
 		})
 	},
 	clone: function(){
@@ -226,8 +245,12 @@ var config = {
 		reader = Papa.parse),
 	smhiTemp: dataset_struct.create(
 		src = '',
-		file = ["data/smhi-opendata_19_20_140500_20191021_085425.csv"
-			// , "data/smhi-opendata_19_20_140480_20191022_164727.csv",
+		file = [
+			"data/smhi-opendata_umea.csv"
+			// "data/smhi-opendata_19_20_140500_20191021_085425.csv"
+			// , 
+			// "data/smhi-opendata_19_20_140480_20191022_164727.csv"
+			// ,
 			// "data/smhi-opendata_19_20_140490_20191022_164733.csv"
 		],
 		preset = {
@@ -258,30 +281,6 @@ var tagApply = function(data, tag){
 		result = result[tag]
 	}
 	return result;
-}
-
-var contFunc = (reset=false, type, file, src) => function(id, tag, renderTag=tag){	
-	if(reset) papaF[type].cached = undefined;
-	var op = papaF[type];
-
-	if(op.cached){
-		var render = tagApply(op.render, renderTag);
-		var data = tagApply(op.cached,tag);
-		render(data,id)
-		console.log('cached')
-	}else{
-		op.preset.complete = function(result){
-			var data = op.parser(result);
-			papaF[type].cached = data;
-			if(tag) data = tagApply(data, tag);
-			var render = op.render;
-			if(tag){
-				render = tagApply(render, renderTag);
-			}
-			render(data,id)
-		};
-		op.reader(URL, op.preset)
-	}
 }
 
 var selectText = function(e){

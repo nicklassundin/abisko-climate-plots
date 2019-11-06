@@ -822,7 +822,7 @@ var parseAbiskoSnowData = function (result, src='') {
 
 
 var smhiTemp = function(result, src=''){
-	// console.log(result)
+	console.log(result)
 	var parse = function(entry){
 
 		// var x = (new Date(entry[0])).getTime();
