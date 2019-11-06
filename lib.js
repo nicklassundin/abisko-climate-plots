@@ -76,14 +76,14 @@ var dataset_struct = {
 		// console.log(tag)
 		// console.log(this)
 		var render = this.render;
-		console.log(this)
+		// console.log(this)
 		var rawData = this.rawData;
 		
 		// TODO
 		function pack(){
 			return new Promise(function(resolve, reject){
 				var result = {};
-				console.log("test")
+				// console.log("test")
 				Object.keys(rawData).forEach(key => {
 					rawData[key].then(function(result){
 						result[key] = result
@@ -94,9 +94,9 @@ var dataset_struct = {
 		}
 		// var promise = path();
 		var promise = rawData[Object.keys(rawData)[0]];
-		console.log(promise)
+		// console.log(promise)
 		promise.then(function(data){
-			console.log(data)
+			// console.log(data)
 			if(tag){
 				render = tagApply(render, renderTag);
 				data = tagApply(data, tag);
@@ -246,7 +246,8 @@ var config = {
 	smhiTemp: dataset_struct.create(
 		src = '',
 		file = [
-			"data/smhi-opendata_umea.csv"
+			// "data/smhi-opendata_umea.csv"
+			"data/smhi-opendata_19_20_53430_20191106_082848.csv"
 			// "data/smhi-opendata_19_20_140500_20191021_085425.csv"
 			// , 
 			// "data/smhi-opendata_19_20_140480_20191022_164727.csv"
@@ -259,7 +260,8 @@ var config = {
 			skipEmptyLines: true,
 			beforeFirstChunk: function(result){
 				result = result.split("\n")
-				result.splice(0,11);
+				var line = result.findIndex(x => x.indexOf("Tidsutsnitt:") > -1)  
+				result.splice(0,line);
 				result = result.join("\r\n");
 				return result
 			}
