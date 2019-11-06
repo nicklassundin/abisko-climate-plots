@@ -68,7 +68,7 @@ var dataset_struct = {
 					// TODO add to all relavent divs
 				})
 			};
-			this.rawData[file] = data(file); 
+			if(!this.rawData[file]) this.rawData[file] = data(file); 
 		})
 	},
 	init: function(id, tag, renderTag=tag){
@@ -78,7 +78,7 @@ var dataset_struct = {
 		var render = this.render;
 		// console.log(this)
 		var rawData = this.rawData;
-		
+		// console.log(rawData)	
 		// TODO
 		function pack(){
 			return new Promise(function(resolve, reject){
@@ -109,6 +109,8 @@ var dataset_struct = {
 	},
 	create: function(src, file, preset, parser, render, reader = Papa.parse){
 		var res = this.clone();
+		res.rawData = {};
+		res.cached = {};
 		if(Array.isArray(file)){
 			res.file = file;
 		}else{
