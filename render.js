@@ -198,7 +198,8 @@ const language = {
 			weeklyCO2: "Averages global CO"+("2".sub())+" in atmosphere",
 			permaHistogramCALM: 'Permafrost active layer depth',
 			smhiTemp: function(name){
-				return name +" SMHI TEST";
+				return "Lund temperatures"
+				// return name +" SMHI TEST";
 			} 
 		},
 		subtitles: {
@@ -327,7 +328,8 @@ const language = {
 			permaHistogramCALM: 'Permafrost aktivt lager djup',
 
 			smhiTemp: function(name){
-				return name +" SMHI TEST";
+				return "Lund temperaturer"
+				// return name +" [SMHI Example plots]";
 			},
 		},
 		subtitles: {
@@ -622,7 +624,7 @@ var renderCO2 = function(data, id){
 var renderTemperatureGraph = function (data, id) {
 	// console.log('renderTemperatureGraph')
 	// console.log(id)
-	// console.log(data)
+	console.log(data)
 	// console.log(data.max.max())
 	var title = id.split('_');
 	var div_id = id;
@@ -642,6 +644,7 @@ var renderTemperatureGraph = function (data, id) {
 				text: this.Highcharts.getOptions().lang.years, 
 			},
 			crosshair: true,
+			min: 1912
 		},
 		yAxis: {
 			title: {
@@ -653,7 +656,7 @@ var renderTemperatureGraph = function (data, id) {
 				width: 2,
 			}],
 			// max: 2,
-			// min: -3,
+			// min: -4,
 			tickInterval: 1,
 			lineWidth: 1,
 		},
@@ -1552,4 +1555,3 @@ var renderPerma = function(data, id){
 		}]
 	});
 }
-

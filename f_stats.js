@@ -822,9 +822,8 @@ var parseAbiskoSnowData = function (result, src='') {
 
 
 var smhiTemp = function(result, src=''){
-	console.log(result)
+	// console.log(result)
 	var parse = function(entry){
-
 		// var x = (new Date(entry[0])).getTime();
 		var x = entry[0];
 		var y = parseFloat(entry[1]);
@@ -847,7 +846,7 @@ var smhiTemp = function(result, src=''){
 		temp = [each["Representativt dygn"], each["Lufttemperatur"]]
 		return parse(temp);
 	}));
-	
+	// console.log(values)
 	var temperatures = parseByDate(values)
 
 	// console.log(temperatures)
