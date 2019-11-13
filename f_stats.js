@@ -847,9 +847,11 @@ var smhiTemp = function(result, src=''){
 		return parse(temp);
 	}));
 	// console.log(values)
-	var temperatures = parseByDate(values)
+	// var temperatures = parseByDate(values)
 
 	// console.log(temperatures)
-	return temperatures
+	return new Promise(function(resolve, reject){
+		resolve(parseByDate(values))
+	})
 	
 }

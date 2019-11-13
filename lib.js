@@ -34,9 +34,13 @@ var url = function(file='', src='view.html'){
 	// console.log(result)
 	return result
 }
-var monthlyFunc = (render) => function(data, id, title, src="") {
+var monthlyFunc = (render) => function(id, title, src="") {
+	var result = [];
 	months().forEach((month, index) =>  
-		render(data[index+1+''], id+"_"+month, title+" "+monthName(month)));
+		result.push(render(id+"_"+month, title+" "+monthName(month))));	
+	return function(data){
+		result.forEach((func, index) => func(data[index+1+'']));	
+	}
 };
 
 var dataset_struct = {
@@ -49,10 +53,12 @@ var dataset_struct = {
 	render: undefined,
 	reader: Papa.parse,
 	contFunc: function(reset=false){	
-		if(reset) this.cached = {}; 
+		if(Object.keys(this.rawData).length > 0) return false
+		if(reset) this.cached = {};
+		if(this.rawData)
 		var ref = this;
 		this.file.forEach(file => {
-			async function data(file){
+			function data(file){
 				addr = file; 
 				return new Promise(function(resolve, reject){
 					ref.preset.complete = function(result){
@@ -79,30 +85,24 @@ var dataset_struct = {
 		// console.log(this)
 		var rawData = this.rawData;
 		// console.log(rawData)	
-		// TODO
-		function pack(){
-			return new Promise(function(resolve, reject){
-				var result = {};
-				// console.log("test")
-				Object.keys(rawData).forEach(key => {
-					rawData[key].then(function(result){
-						result[key] = result
-					})
-				})
-				resolve(result)
-			})
-		}
 		// var promise = path();
 		var promise = rawData[Object.keys(rawData)[0]];
 		// console.log(promise)
-		promise.then(function(data){
-			// console.log(data)
-			if(tag){
-				render = tagApply(render, renderTag);
-				data = tagApply(data, tag);
-			} 
-			render(data, id);
-		})
+
+		new Promise(function(resolve, reject){
+			if(tag) render = tagApply(render, renderTag);
+			resolve(render);
+		}).then(function(result){
+			render = result(id);
+			promise.then(function(data){
+				var result = data
+				if(tag){
+					result = tagApply(data, tag);
+				}
+				render(result);
+				return data
+			})
+		});
 	},
 	clone: function(){
 		return Object.assign({}, this);
@@ -282,6 +282,7 @@ var tagApply = function(data, tag){
 			result = result[each];
 		})	
 	}catch(err){
+		// console.log(err)
 		result = result[tag]
 	}
 	return result;
