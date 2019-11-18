@@ -251,7 +251,7 @@ const language = {
 		linFrz: 'Linear regression (freeze-up)',
 		linBrk: 'Linear regression (break-up)',
 		linIceTime: 'Linear regression (ice time)',
-		iceSub: 'Ice break-up / freeze-up [week of year]',
+		iceSub: 'Ice break-up / freeze-up [day of year]',
 		iceTime: 'Ice time [number of days]',
 		movAvgIceTime: 'Ice time (moving avg.)',
 		iceTime2: 'Ice time',
@@ -380,7 +380,7 @@ const language = {
 		linFrz: 'Linjär regression (isläggning)',
 		linBrk: 'Linjär regression (islossning)',
 		linIceTime: 'Linjär regression (is tid)',
-		iceSub: 'Islossning / Isläggning [vecka om året]',
+		iceSub: 'Islossning / Isläggning [dag om året]',
 		iceTime: 'Is tider [antal dagar per år]',
 		movAvgIceTime: 'Is tid (rörligt genomsnitt)',
 		iceTime2: 'Is tid',
@@ -723,17 +723,19 @@ var renderCO2 = function(id){
 				}
 			},
 			zIndex: 6,
-		},{
-			name: this.Highcharts.getOptions().lang.linReg+"<br/>( R2: "+data.linReg.r2+" )",
-			useHTML: true,
-			data: data.linReg.points, 
-			type: 'line',
-			lineWidth: 2,
-			marker: {enabled: false,},
-			states: { hover: { lineWidthPlus: 0 } },
-			color: '#333377',
-			visible: false,
-		}]
+		},
+			// {
+			// name: this.Highcharts.getOptions().lang.linReg+"<br/>( R2: "+data.linReg.r2+" )",
+			// useHTML: true,
+			// data: data.linReg.points, 
+			// type: 'line',
+			// lineWidth: 2,
+			// marker: {enabled: false,},
+			// states: { hover: { lineWidthPlus: 0 } },
+			// color: '#333377',
+			// visible: false,
+		// }
+		]
 	})
 	
 	}
@@ -794,15 +796,15 @@ var renderTemperatureGraph = function (id) {
 			{
 				data: [null, null],
 			},
-			{
-				data: [null, null],
-			},
-			{
-				data: [null, null],
-			},
-			{
-				data: [null, null],
-			},
+			// {
+			// 	data: [null, null],
+			// },
+			// {
+			// 	data: [null, null],
+			// },
+			// {
+			// 	data: [null, null],
+			// },
 		]
 	});
 	charts[div_id].showLoading();
@@ -832,34 +834,38 @@ var renderTemperatureGraph = function (id) {
 				data: data.min.min(),
 				visible: false,
 				showInLegend: !(typeof data.min === 'undefined'),
-			},{
-				name: 	this.Highcharts.getOptions().lang.yearlyCI,
-				type: 'arearange',
-				color: '#888888',
-				data: data.avg.plotCI(),
-				zIndex: 0,
-				fillOpacity: 0.3,
-				lineWidth: 0,
-				states: { hover: { lineWidthPlus: 0 } },
-				marker: { enabled: false },
-				visible: false,
-			}, {
-				name: this.Highcharts.getOptions().lang.movAvg,
-				color: '#888888',
-				marker: { enabled: false },
-				data: data.avg.plotMovAvg(),
-			}, {
-				name: 	this.Highcharts.getOptions().lang.movAvgCI,
-				type: 'arearange',
-				color: '#7777ff',
-				data: data.avg.plotMovAvgCI(),
-				zIndex: 0,
-				fillOpacity: 0.3,
-				lineWidth: 0,
-				states: { hover: { lineWidthPlus: 0 } },
-				marker: { enabled: false },
-				visible: false,
-			},{
+			},
+				// {
+				// name: 	this.Highcharts.getOptions().lang.yearlyCI,
+				// type: 'arearange',
+				// color: '#888888',
+				// data: data.avg.plotCI(),
+				// zIndex: 0,
+				// fillOpacity: 0.3,
+				// lineWidth: 0,
+				// states: { hover: { lineWidthPlus: 0 } },
+				// marker: { enabled: false },
+				// visible: false,
+			// },
+				// {
+				// name: this.Highcharts.getOptions().lang.movAvg,
+				// color: '#888888',
+				// marker: { enabled: false },
+				// data: data.avg.plotMovAvg(),
+			// }, 
+				// {
+				// name: 	this.Highcharts.getOptions().lang.movAvgCI,
+				// type: 'arearange',
+				// color: '#7777ff',
+				// data: data.avg.plotMovAvgCI(),
+				// zIndex: 0,
+				// fillOpacity: 0.3,
+				// lineWidth: 0,
+				// states: { hover: { lineWidthPlus: 0 } },
+				// marker: { enabled: false },
+				// visible: false,
+			// },
+				{
 				name: language[nav_lang].yearlyAvg,
 				regression: true,
 				marker: {radius: 2},
@@ -937,7 +943,7 @@ var renderTemperatureDifferenceGraph = function (id) {
 		},
 		dataSrc: temperatures.src,
 		series: [{
-			regression: true,
+			regression: false, // TODO adv options 
 			regressionSettings: {
 				type: 'linear',
 				color: '#aa0000',
@@ -992,7 +998,11 @@ var renderGrowingSeasonGraph = function (id) {
 		legend: {
 			enabled: false,
 		},
-		series: [{data: [null, null]},{data: [null, null]},{data: [null, null]},{data: [null, null]}]
+		series: [
+			// {data: [null, null]},
+			// {data: [null, null]},
+			// {data: [null, null]},
+			{data: [null, null]}]
 	});
 	charts[id].showLoading();
 	return function(season){
@@ -1004,7 +1014,7 @@ var renderGrowingSeasonGraph = function (id) {
 		},
 		dataSrc: season.src,
 		series: [{
-			regression: true,
+			regression: false,
 			regressionSettings: {
 				type: 'linear',
 				color: '#008800',
@@ -1017,36 +1027,38 @@ var renderGrowingSeasonGraph = function (id) {
 			color: '#00aa00',
 			data: season.values,
 			visible: true,
-		},{ 
-			name: this.Highcharts.getOptions().lang.ci,
-			type: 'arearange',
-			color: '#005500',
-			data: season.plotCI(),
-			zIndex: 0,
-			fillOpacity: 0.3,
-			lineWidth: 0,
-			states: { hover: { lineWidthPlus: 0 } },
-			marker: { enabled: false },
-			visible: false,
-
-		}, {
-			name: this.Highcharts.getOptions().lang.movAvg,
-			color: '#00aa00',
-			marker: { enabled: false },
-			data: season.plotMovAvg(),
-		},{
-			name: this.Highcharts.getOptions().lang.movAvgCI,
-			type: 'arearange',
-			color: '#006600',
-			data: season.plotMovAvgCI(),
-			zIndex: 0,
-			fillOpacity: 0.3,
-			lineWidth: 0,
-			states: { hover: { lineWidthPlus: 0 } },
-			marker: { enabled: false },
-			visible: false,
-
-		}],
+		},
+			// { 
+			// name: this.Highcharts.getOptions().lang.ci,
+			// type: 'arearange',
+			// color: '#005500',
+			// data: season.plotCI(),
+			// zIndex: 0,
+			// fillOpacity: 0.3,
+			// lineWidth: 0,
+			// states: { hover: { lineWidthPlus: 0 } },
+			// marker: { enabled: false },
+			// visible: false,
+		// }, 
+			// {
+			// name: this.Highcharts.getOptions().lang.movAvg,
+			// color: '#00aa00',
+			// marker: { enabled: false },
+			// data: season.plotMovAvg(),
+		// },
+			// {
+			// name: this.Highcharts.getOptions().lang.movAvgCI,
+			// type: 'arearange',
+			// color: '#006600',
+			// data: season.plotMovAvgCI(),
+			// zIndex: 0,
+			// fillOpacity: 0.3,
+			// lineWidth: 0,
+			// states: { hover: { lineWidthPlus: 0 } },
+			// marker: { enabled: false },
+			// visible: false,
+		// }
+		],
 	});
 	}
 }
@@ -1102,11 +1114,11 @@ var renderPrecipitationDifferenceGraph = function (id) {
 		dataSrc: precipitation.src,
 		// annotations: baselineUI(id),
 		series: [{
-			regression: true,
 			name: this.Highcharts.getOptions().lang.diff,
 			data: precipitation.total.difference(),
 			color: 'red',
 			negativeColor: 'blue',
+			regression: false,
 			regressionSettings: {
 				type: 'linear',
 				color: rainColor.color,
@@ -1151,11 +1163,11 @@ var renderYearlyPrecipitationGraph = function (id) {
 			enabled: false,
 		},
 		series: [{data: [null, null]},
-			{data: [null, null]},
-			{data: [null, null]},
-			{data: [null, null]},
-			{data: [null, null]},
-			{data: [null, null]},
+			// {data: [null, null]},
+			// {data: [null, null]},
+			// {data: [null, null]},
+			// {data: [null, null]},
+			// {data: [null, null]},
 			{data: [null, null]}],
 	})
 	charts[id].showLoading();
@@ -1184,40 +1196,44 @@ var renderYearlyPrecipitationGraph = function (id) {
 					},
 				},
 			},
-		},{
-			data: precipitation.snow.linReg.points,
-			type: 'line',
-			color: snowColor.color,
-			name: this.Highcharts.getOptions().lang.linRegSnow,
-			marker: {
-				enabled: false, // Linear regression lines doesn't contain points
-			},
-			states: {
-				hover: {
-					lineWidth: 0, // Do nothing on hover
-				},
-			},
-		},{
-			id: 'movAvg',
-			name: this.Highcharts.getOptions().lang.precMovAvg,
-			color: rainColor.color,
-			visible: false,
-			data: precipitation.total.plotMovAvg(),
-			marker: { enabled: false },
-			states: { hover: { lineWidthPlus: 0 } },
-		},{
-			id: 'ciMovAvg',
-			name: this.Highcharts.getOptions().lang.movAvgCI,
-			type: 'arearange',
-			color: '#000055',
-			data: precipitation.total.plotMovAvgCI(),
-			zIndex: 0,
-			fillOpacity: 0.3,
-			lineWidth: 0,
-			states: { hover: { lineWidthPlus: 0 } },
-			marker: { enabled: false },
-			visible: false,
-		},{
+		},
+			// {
+			// data: precipitation.snow.linReg.points,
+			// type: 'line',
+			// color: snowColor.color,
+			// name: this.Highcharts.getOptions().lang.linRegSnow,
+			// marker: {
+			// 	enabled: false, // Linear regression lines doesn't contain points
+			// },
+			// states: {
+			// 	hover: {
+			// 		lineWidth: 0, // Do nothing on hover
+				// },
+			// },
+		// },
+			// {
+			// id: 'movAvg',
+			// name: this.Highcharts.getOptions().lang.precMovAvg,
+			// color: rainColor.color,
+			// visible: false,
+			// data: precipitation.total.plotMovAvg(),
+			// marker: { enabled: false },
+			// states: { hover: { lineWidthPlus: 0 } },
+		// },
+			// {
+			// id: 'ciMovAvg',
+			// name: this.Highcharts.getOptions().lang.movAvgCI,
+			// type: 'arearange',
+			// color: '#000055',
+			// data: precipitation.total.plotMovAvgCI(),
+			// zIndex: 0,
+			// fillOpacity: 0.3,
+			// lineWidth: 0,
+			// states: { hover: { lineWidthPlus: 0 } },
+			// marker: { enabled: false },
+			// visible: false,
+		// },
+			{
 			id: 'rain',
 			name: this.Highcharts.getOptions().lang.precRain,
 			type: 'column',
@@ -1235,36 +1251,39 @@ var renderYearlyPrecipitationGraph = function (id) {
 					},
 				},
 			},
-		},{
-			data: precipitation.rain.linReg.points,
-			type: 'line',
-			color: rainColor.color,
-			name: this.Highcharts.getOptions().lang.linRegRain,
-			marker: {
-				enabled: false, // Linear regression lines doesn't contain points
-			},
-			states: {
-				hover: {
-					lineWidth: 0, // Do nothing on hover
-				},
-			},
-		},{
-			type: 'line',
-			name: this.Highcharts.getOptions().lang.linRegAll,
-			visible: false,
-			// linkedTo: ':previous',
-			color: 'red',
-			marker: {
-				enabled: false, // Linear regression lines doesn't contain points
-			},
-			states: {
-				hover: {
-					lineWidth: 0, // Do nothing on hover
-				},
-			},
-			enableMouseTracking: false, // No interactivity
-			data: precipitation.total.linReg.points,
-		}],
+		},
+			// {
+			// data: precipitation.rain.linReg.points,
+			// type: 'line',
+			// color: rainColor.color,
+			// name: this.Highcharts.getOptions().lang.linRegRain,
+			// marker: {
+			// 	enabled: false, // Linear regression lines doesn't contain points
+			// },
+			// states: {
+			// 	hover: {
+			// 		lineWidth: 0, // Do nothing on hover
+			// 	},
+			// },
+		// },
+			// {
+			// type: 'line',
+			// name: this.Highcharts.getOptions().lang.linRegAll,
+			// visible: false,
+			// // linkedTo: ':previous',
+			// color: 'red',
+			// marker: {
+			// 	enabled: false, // Linear regression lines doesn't contain points
+			// },
+			// states: {
+			// 	hover: {
+					// lineWidth: 0, // Do nothing on hover
+				// },
+			// },
+			// enableMouseTracking: false, // No interactivity
+			// data: precipitation.total.linReg.points,
+		// }
+		],
 	});
 	}
 };
@@ -1303,11 +1322,11 @@ var renderMonthlyPrecipitationGraph = function (id) {
 		},
 		series: [
 			{data: [null, null]},
-			{data: [null, null]},
-			{data: [null, null]},
-			{data: [null, null]},
-			{data: [null, null]},
-			{data: [null, null]},
+			// {data: [null, null]},
+			// {data: [null, null]},
+			// {data: [null, null]},
+			// {data: [null, null]},
+			// {data: [null, null]},
 			{data: [null, null]}]
 	})
 	charts[id].showLoading();
@@ -1317,7 +1336,7 @@ var renderMonthlyPrecipitationGraph = function (id) {
 		charts[id].update({
 		dataSrc: precipitation.src,
 		series: [{
-			// regression: true,
+			regression: false,
 			regressionSettings: {
 				type: 'linear',
 				color: snowColor.color,
@@ -1338,14 +1357,16 @@ var renderMonthlyPrecipitationGraph = function (id) {
 					},
 				},
 			},
-		},{
-			type: 'line',
-			color: snowColor.color,
-			name: this.Highcharts.getOptions().lang.linRegSnow,
-			data: precipitation.snow.linReg.points,
-			marker: { enabled: false },
-		},{
-			// regression: true,
+		},
+			// {
+			// type: 'line',
+			// color: snowColor.color,
+			// name: this.Highcharts.getOptions().lang.linRegSnow,
+			// data: precipitation.snow.linReg.points,
+			// marker: { enabled: false },
+		// },
+			{
+			regression: false,
 			regressionSettings: {
 				type: 'linear',
 				color:rainColor.color,
@@ -1367,52 +1388,54 @@ var renderMonthlyPrecipitationGraph = function (id) {
 					},
 				},
 			},
-		},{
-			type: 'line',
-			color:rainColor.color,
-			name: this.Highcharts.getOptions().lang.linRegRain,
-			data: precipitation.rain.linReg.points,
-			marker: { enabled: false },
-		},{
-			name: this.Highcharts.getOptions().lang.movAvgCI,
-			type: 'arearange',
-			color: '#000055',
-			data: precipitation.total.plotMovAvgCI(),
-			zIndex: 0,
-			fillOpacity: 0.3,
-			lineWidth: 0,
-			states: { hover: { lineWidthPlus: 0 } },
-			marker: { enabled: false },
-			visible: false,
+		},
+			// {
+			// type: 'line',
+			// color:rainColor.color,
+			// name: this.Highcharts.getOptions().lang.linRegRain,
+			// data: precipitation.rain.linReg.points,
+			// marker: { enabled: false },
+		// },
+			// {
+			// name: this.Highcharts.getOptions().lang.movAvgCI,
+			// type: 'arearange',
+			// color: '#000055',
+			// data: precipitation.total.plotMovAvgCI(),
+			// zIndex: 0,
+			// fillOpacity: 0.3,
+			// lineWidth: 0,
+			// states: { hover: { lineWidthPlus: 0 } },
+			// marker: { enabled: false },
+			// visible: false,
 
-		},{
-			name: this.Highcharts.getOptions().lang.precMovAvg,
-			visible: false,
-			color: rainColor.color,
-			data: precipitation.total.plotMovAvg(),
-			marker: { enabled: false },
-		},{
-			name: this.Highcharts.getOptions().lang.linRegAll,
-			visible: false,
-			marker: {
-				enabled: false, // Linear regression lines doesn't contain points
-			},
-			color: 'red',
-			states: {
-				hover: {
-					lineWidth: 0, // Do nothing on hover
-				},
-			},
-			enableMouseTracking: false, // No interactivity
-			data: precipitation.total.linReg.points,
-		}],
+// 		},{
+// 			name: this.Highcharts.getOptions().lang.precMovAvg,
+// 			visible: false,
+// 			color: rainColor.color,
+// 			data: precipitation.total.plotMovAvg(),
+// 			marker: { enabled: false },
+// 		},{
+// 			name: this.Highcharts.getOptions().lang.linRegAll,
+// 			visible: false,
+// 			marker: {
+// 				enabled: false, // Linear regression lines doesn't contain points
+// 			},
+// 			color: 'red',
+// 			states: {
+// 				hover: {
+					// lineWidth: 0, // Do nothing on hover
+				// },
+			// },
+			// enableMouseTracking: false, // No interactivity
+			// data: precipitation.total.linReg.points,
+		// }
+		],
 	});
 	}
 };
 
 var renderAbiskoIceGraph = function (id) {
 	// console.log(title);
-	// console.log(ice);
 	charts[id] = Highcharts.chart(id, {
 		chart: {
 			type: 'line'
@@ -1460,13 +1483,14 @@ var renderAbiskoIceGraph = function (id) {
 		},
 		series: [
 			{data: [null, null]},
-			{data: [null, null]},
-			{data: [null, null]},
+			// {data: [null, null]},
+			// {data: [null, null]},
 			{data: [null, null]},
 			{data: [null, null]}]
 	});
 	charts[id].showLoading();
 	return function(ice){
+	// console.log(ice);
 		charts[id].hideLoading();
 		charts[id].update({
 		legend: {
@@ -1474,7 +1498,7 @@ var renderAbiskoIceGraph = function (id) {
 		},
 		dataSrc: ice.src,
 		series: [{
-			regression: true,
+			regression: false,
 			regressionSettings: {
 				type: 'linear',
 				color: '#0000ee',
@@ -1486,9 +1510,9 @@ var renderAbiskoIceGraph = function (id) {
 			lineWidth: 0,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
-			data: ice.freeze,
+			data: ice.freezeDOY,
 		},{
-			regression: true,
+			regression: false,
 			regressionSettings: {
 				type: 'linear',
 				color: '#ee0000',
@@ -1500,21 +1524,23 @@ var renderAbiskoIceGraph = function (id) {
 			lineWidth: 0,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
-			data: ice.breakup,
-		},{
-			name: this.Highcharts.getOptions().lang.movAvgCI,
-			type: 'arearange',
-			color: '#7777ff',
-			data: ice.iceTimeCIMovAvg,
-			zIndex: 0,
-			fillOpacity: 0.3,
-			lineWidth: 0,
-			states: { hover: { lineWidthPlus: 0 } },
-			marker: { enabled: false },
-			yAxis: 1,
-			visible: false,
-		},{
-			regression: true,
+			data: ice.breakupDOY,
+		},
+			// {
+			// name: this.Highcharts.getOptions().lang.movAvgCI,
+			// type: 'arearange',
+			// color: '#7777ff',
+			// data: ice.iceTimeCIMovAvg,
+			// zIndex: 0,
+			// fillOpacity: 0.3,
+			// lineWidth: 0,
+			// states: { hover: { lineWidthPlus: 0 } },
+			// marker: { enabled: false },
+			// yAxis: 1,
+			// visible: false,
+		// },
+			{
+			regression: false,
 			regressionSettings: {
 				type: 'linear',
 				color: '#00bb00',
@@ -1527,13 +1553,15 @@ var renderAbiskoIceGraph = function (id) {
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
 			data: ice.iceTime,
-		},{
-			yAxis: 1,
-			name: this.Highcharts.getOptions().lang.movAvgIceTime,
-			color: '#00bb00',
-			data: ice.iceTimeMovAvg,
-			marker: { enabled: false },
-		}],
+		},
+			// {
+			// yAxis: 1,
+			// name: this.Highcharts.getOptions().lang.movAvgIceTime,
+			// color: '#00bb00',
+			// data: ice.iceTimeMovAvg,
+			// marker: { enabled: false },
+		// }
+		],
 	});
 	}
 };
@@ -1736,517 +1764,5 @@ var renderPerma = function(id){
 //	addSeries: function(series){
 //		this.chart.addSeries(series);
 //		return this;
-//	},
-//}
-
-// const render_config = {
-//	co2: (id) => {
-//		return {
-//			chart: {
-//				type: 'area',
-//				zoomType: 'x',
-//			},
-//			title: {
-//				text: this.Highcharts.getOptions().lang.titles[id],
-//				useHTML: true,
-//			},
-//			plotOptions: {
-//				series: {
-//					marker: {
-//						enabledThreshold: 0,
-//						radius: 1,
-//						states: {
-//							select: {
-//								lineColor: "#6666bb",
-//								lineWidth: 1,
-//								radius: 5,
-//							},
-//							hover: {
-//								radiusPlus: 5,
-//							},
-
-//						}
-//					},
-//					allowPointSelect: true,
-//					point: {
-//						events: {
-//							select: function () {
-//								var date = new Date(this.category);
-//								var text = "Date: "+ date.getFullYear() +"-"+ date.getMonth()+"-"+date.getDate() +"<br/>CO"+ ("2".sub())+": " + this.y + ' ppm';
-//								var chart = this.series.chart;
-//								if (!chart.lbl) {
-//									chart.lbl = chart.renderer.label(text, 200, 70,"callout", this.catergory, this.y, useHTML=true)
-//										.attr({
-//											padding: 10,
-//											r: 5,
-//											fill: Highcharts.getOptions().colors[1],
-//											zIndex: 5
-//										})
-//										.css({
-//											color: '#FFFFFF'
-//										})
-//										.add();
-//								} else {
-//									chart.lbl.attr({
-//										text: text
-//									});
-//								}
-//							},
-//						}
-//					}
-
-//				}
-//			},
-//			xAxis: {
-//				type: 'datetime',
-//				title: {
-//					text: this.Highcharts.getOptions().lang.years, 
-//				},
-//				crosshair: true,
-//				lineWidth: 1,
-//				gridLineWidth: 1,
-//				minorTickInterval: null,
-//			},
-//			yAxis: {
-//				title: {
-//					text: "CO"+("2".sub()), // TODO localization
-//					useHTML: true,
-//				},
-//				// plotLines: [{
-//				// value: 0,
-//				// color: 'rgb(204, 214, 235)',
-//				// width: 2,
-//				// }],
-	//				plotLines:[{
-//					color: '#aaaaaa',
-//					dashStyle: 'shortDash',
-	//					value: 350,
-//					width: 2,
-//					label: {
-//						text: "350 ppm",
-//						style: {
-	//							color: '#aaaaaa',
-//							fontWeight: 'bold',
-//						}
-	//					},
-//					zIndex: 2,
-//				},{
-//					color: '#aaaaaa',
-	//					dashStyle: 'shortDash',
-//					value: 400,
-//					width: 2,
-//					label: {
-//						text: "400 ppm",
-//						style: {
-	//							color: '#aaaaaa',
-	//							fontWeight: 'bold',
-	//						}
-//					},
-	//					zIndex: 1,
-	//				}],
-	//				max: data.values[data.values.length-1].y+30,
-//				min: data.values[0].y-10,
-//				tickInterval: 10,
-//				lineWidth: 1,
-	//			},
-	//			tooltip: {
-//				shared: true,
-//				valueSuffix: ' ppm',
-	//				valueDecimals: 2,
-	//			},
-	//		};
-	//	},
-//	temp: {
-	//		value:  (id) =>{
-	//			return {
-//				chart: {
-	//					type: 'line',
-	//					zoomType: 'x',
-//				},
-//				title: {
-//					text: this.Highcharts.getOptions().lang.titles[id](this.Highcharts.getOptions().lang.months(title[1]))
-//				},
-//				// dataSrc: meta.src,
-//				xAxis: {
-//					title: {
-//						text: this.Highcharts.getOptions().lang.years, 
-	//					},
-	//					crosshair: true,
-	//					min: 1912
-//				},
-//				yAxis: {
-//					title: {
-//						text: this.Highcharts.getOptions().lang.temp, 
-//					},
-//					plotLines: [{
-//						value: 0,
-//						color: 'rgb(204, 214, 235)',
-//						width: 2,
-//					}],
-//					// max: 2,
-//					// min: -4,
-//					tickInterval: 1,
-	//					lineWidth: 1,
-//				},
-	//				tooltip: {
-//					shared: true,
-	//					valueSuffix: ' °C',
-	//					valueDecimals: 2,
-	//				},
-	//			};
-	//		},
-	//		Difference: (id) => {
-	//			return {
-//				chart: {
-//					type: 'column'
-	//				},
-//				dataSrc: temperatures.src,
-	//				// rangeSelector: {
-	//				// selected: 2
-	//				// },
-	//				title: {
-	//					text: this.Highcharts.getOptions().lang.titles[id],
-	//				},
-	//				subtitle: {
-	//					text: this.Highcharts.getOptions().lang.subtitles.baseline(),
-	//				},
-//				// annotations: baselineUI(id),
-	//				xAxis: {
-	//					title: {
-	//						text: this.Highcharts.getOptions().lang.years,
-//					},
-	//					crosshair: true,
-//					plotLines: plotlines(id),
-	//					plotBands: plotBandsDiff(id),
-	//					min: 1913,
-//				},
-	//				yAxis: {
-	//					title: {
-//						text: this.Highcharts.getOptions().lang.temp,
-	//					},
-	//					lineWidth: 1,
-	//					min: -2,
-	//					max: 3,
-//					tickInterval: 1,
-	//				},
-//				tooltip: {
-	//					shared: true,
-	//					valueSuffix: ' °C',
-//					valueDecimals: 2,
-	//				},
-	//				legend: {
-	//					enabled: true,
-	//				},
-	//			};
-
-	//		},
-	//	},
-	//	growingSeason: (id) => {
-//		return {
-	//			chart: {
-	//				type: 'line',
-	//				zoomType: 'x',
-	//			},
-//			dataSrc: season.src,
-	//			title: {
-//				text: this.Highcharts.getOptions().lang.titles[id],
-//			},
-//			subtitle: {
-//				text: 'The maximum consecutive weeks with average temperature above freezing.',
-	//			},
-	//			xAxis: {
-	//				title: {
-//					text: this.Highcharts.getOptions().lang.years,
-//				},
-	//				crosshair: true,
-	//			},
-	//			yAxis: {
-//				title: {
-//					text: this.Highcharts.getOptions().lang.weeks,
-	//				},
-	//				tickInterval: 1,
-	//				lineWidth: 1,
-//			},
-	//			tooltip: {
-//				shared: true,
-//				valueDecimals: 0,
-	//			},
-	//		};
-//	},
-	//	percip: {
-
-	//		Difference: (id) => { 
-	//			return {
-	//				chart: {
-	//					type: 'column'
-	//				},
-	//				// dataSrc: precipitation.src,
-	//				title: {
-	//					text: this.Highcharts.getOptions().lang.titles[id],
-	//				},
-//				subtitle: {
-	//					text: this.Highcharts.getOptions().lang.subtitles.baseline(),
-	//				},
-	//				xAxis: {
-	//					title: {
-//						text: 'Year',
-	//					},
-//					crosshair: true,
-//					plotBands: plotBandsDiff(id),
-//					plotLines: plotlines(id),
-//				},
-	//				yAxis: {
-	//					title: {
-	//						text: this.Highcharts.getOptions().lang.prec,
-//					},
-	//					lineWidth: 1,
-//					//min: -2,
-	//					//max: 3,
-	//					tickInterval: 1,
-	//				},
-//				tooltip: {
-	//					shared: true,
-	//					valueSuffix: ' mm',
-	//					valueDecimals: 2,
-	//				},
-//				legend: {
-//					enabled: true,
-	//				},
-	//				// annotations: baselineUI(id),
-	//			};
-	//		},
-	//		yrly: (id) => {
-	//			return {
-//				chart: {
-//					type: 'line'
-	//				},
-	//				// dataSrc: precipitation.src,
-	//				title: {
-	//					text: title 
-	//				},
-	//				xAxis: {
-//					title: {
-	//						text: this.Highcharts.getOptions().lang.years,
-	//					},
-	//					crosshair: true,
-	//				},
-//				yAxis: {
-	//					title: {
-	//						text: this.Highcharts.getOptions().lang.tprec,
-//					},
-	//					lineWidth: 1,
-	//					floor: 0, // Precipitation can never be negative
-//				},
-//				tooltip: {
-	//					shared: true,
-	//					valueSuffix: ' mm',
-	//					valueDecimals: 0,
-	//				},
-//			};
-	//		},
-	//		monthly: (id) => {
-//			return {
-	//				chart: {
-	//					type: 'line'
-//				},
-//				// dataSrc: precipitation.src,
-	//				title: {
-	//					text: this.Highcharts.getOptions().lang.titles[id.split('_')[0]](this.Highcharts.getOptions().lang.months(id.split('_')[1])),
-	//				},
-//				xAxis: {
-//					title: {
-	//						text: this.Highcharts.getOptions().lang.years,
-	//					},
-	//					crosshair: true,
-	//				},
-	//				yAxis: {
-//					title: {
-	//						text: this.Highcharts.getOptions().lang.tprec,
-	//					},
-	//					lineWidth: 1,
-//					max: 150,
-	//					floor: 0, // Precipitation can never be negative
-//				},
-//				tooltip: {
-//					shared: true,
-//					valueSuffix: ' mm',
-	//					valueDecimals: 0,
-	//				},
-	//			};
-
-//		},
-	//	},
-	//	abiskoLakeIce: (id) => { 
-//		return {
-	//			chart: {
-	//				type: 'line'
-//			},
-//			// dataSrc: ice.src,
-	//			title: {
-	//				text: this.Highcharts.getOptions().lang.titles[id],
-	//			},
-	//			xAxis: {
-	//				title: {
-//					text: this.Highcharts.getOptions().lang.years,
-//				},
-	//				crosshair: true,
-	//			},
-	//			yAxis: [{
-	//				title: {
-	//					text: this.Highcharts.getOptions().lang.iceSub,
-	//				},
-	//				lineWidth: 1,
-	//				labels: {
-	//					formatter: function () {
-//						return this.value > 52 ? this.value - 52 : this.value;
-	//					},
-	//				}
-	//			}, {
-	//				title: {
-//					text: this.Highcharts.getOptions().lang.iceTime,
-	//				},
-	//				lineWidth: 1,
-	//				max: 250,
-	//				min: 80,
-//				opposite: true,
-	//			}],
-//			tooltip: {
-//				shared: true,
-//				valueDecimals: 0,
-//				formatter: function () {
-	//					var tooltip = '<span style="font-size: 10px">' + (+this.x-1) + '/' + this.x + '</span><br/>';
-	//					this.points.forEach(point =>
-	//						tooltip += '<span style="color:' + point.color + '">\u25CF</span> ' + point.series.name + ': <b>' +(point.point.options.week || point.y) + '</b><br/>');
-//					return tooltip;
-//				},
-	//			},
-//		};
-//	},
-	//	abiskoSnow: (id) => { 
-	//		return {
-	//			chart: {
-	//				type: 'line'
-//			},
-//			// dataSrc: snow.src,
-	//			dataSrc: undefined,
-	//			title: {
-	//				text: this.Highcharts.getOptions().lang.titles[id],
-//			},
-	//			xAxis: {
-//				categories: months().rotate(6).slice(2),
-	//				title: {
-	//					text: this.Highcharts.getOptions().lang.month,
-	//				},
-	//				crosshair: true,
-//			},
-	//			yAxis: {
-//				title: {
-//					text: this.Highcharts.getOptions().lang.snowDepth,
-//				},
-//				lineWidth: 1,
-	//				floor: 0,
-	//			},
-	//			tooltip: {
-//				shared: true,
-	//				valueSuffix: ' cm',
-	//				valueDecimals: 0,
-//			},
-//		};
-	//	},
-	//	zoomable: (id) => { 
-	//		return {
-	//			chart: {
-//				zoomType: 'x'
-//			},
-	//			// dataSrc: data.src,
-	//			title: {
-	//				text: title + ' [DUMMY/START]',
-	//			},
-//			subtitle: {
-	//				text: document.ontouchstart === undefined ?
-//				'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
-	//			},
-	//			xAxis: {
-	//				type: 'datetime',
-	//				dateTimeLabelFormats: { // don't display the dummy year
-	//					month: '%e. %b',
-	//					year: '%b'
-//				},
-//				title: {
-//					text: 'Date'
-//				},
-	//			},
-	//			yAxis: {
-	//				title: {
-//					text: 'Temperatures'
-	//				},
-	//			},
-//			legend: {
-//				enabled: false
-	//			},
-	//			plotOptions: {
-	//				area: {
-	//					fillColor: {
-//						linearGradient: {
-//							x1: 0,
-	//							y1: 0,
-	//							x2: 0,
-	//							y2: 1
-//						},
-//						stops: [
-//							[0, Highcharts.getOptions().colors[0]],
-	//							[1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-//						]
-//					},
-//					marker: {
-	//						radius: 2
-	//					},
-	//					lineWidth: 1,
-	//					states: {
-	//						hover: {
-	//							lineWidth: 1
-	//						}
-//					},
-	//					threshold: null
-	//				}
-//			},
-
-//		};
-	//	},
-//	perma: (id) => { 
-//		return {
-	//			chart: {
-	//				zoomType: 'x',
-//				// plotBackgroundColor: "#ddddff",
-//			},
-//			// dataSrc: data.src,
-//			title: {
-	//				text: this.Highcharts.getOptions().lang.titles[id],
-	//			},
-	//			xAxis: {
-	//				title: {
-//					// text: 'Year'
-	//					text: this.Highcharts.getOptions().lang.years,
-//				},
-	//			},
-//			yAxis: {
-	//				title: {
-	//					text: 'meters'
-	//				},
-	//				reversed: true,
-//				plotLines: [{
-//					color: "#88dd88",
-	//					width: 2,
-	//					value: 0,
-	//					zIndex: 5,
-	//					label: {
-	//						text: this.Highcharts.getOptions().lang.groundlevel
-//					}
-	//				}]
-	//			},
-	//			legend: {
-	//				enabled: false
-//			},
-	//		};
 //	},
 //}

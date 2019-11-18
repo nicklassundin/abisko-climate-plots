@@ -648,7 +648,9 @@ var parseAbiskoIceData = function (result, src='') {
 	return {
 		src: src,
 		yearMax,
+		breakupDOY,
 		breakup,
+		freezeDOY,
 		freeze,
 		iceTime,
 		iceTimeMovAvg: iceTimeMovAvg.slice(10),
