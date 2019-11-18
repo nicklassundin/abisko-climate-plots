@@ -56,7 +56,7 @@ var dataset_struct = {
 		if(Object.keys(this.rawData).length > 0) return false
 		if(reset) this.cached = {};
 		if(this.rawData)
-		var ref = this;
+			var ref = this;
 		this.file.forEach(file => {
 			function data(file){
 				addr = file; 

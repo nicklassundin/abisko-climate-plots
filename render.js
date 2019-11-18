@@ -1335,6 +1335,9 @@ var renderMonthlyPrecipitationGraph = function (id) {
 		// console.log(precipitation)
 		charts[id].update({
 		dataSrc: precipitation.src,
+		legend: {
+			enabled: true,
+		},
 		series: [{
 			regression: false,
 			regressionSettings: {
