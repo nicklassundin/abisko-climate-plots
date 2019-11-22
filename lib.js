@@ -205,6 +205,17 @@ var config = {
 		parser = parseAbiskoIceData,
 		render = renderAbiskoIceGraph,
 		reader = Papa.parse),
+	tornetrask_iceTime: dataset_struct.create(
+		src = '',
+		file = "data/Tornetrask_islaggning_islossning.csv",
+		preset = {
+			header: true,
+			download: true,
+			skipEmptyLines: true,
+		},
+		parser = parseAbiskoIceData,
+		render = renderAbiskoIceTimeGraph,
+		reader = Papa.parse),
 	abiskoSnowDepth: dataset_struct.create(
 		src = '',
 		file = "data/ANS_SnowDepth.csv",
@@ -406,6 +417,7 @@ var getID = function(param=urlParams){
 			'abiskoSnowDepthPeriodMeans',
 			'abiskoSnowDepthPeriodMeans2',
 			'abiskoLakeIce',
+			'abiskoLakeIceTime',
 			'weeklyCO2',
 			'permaHistogramCALM',
 		];
@@ -613,6 +625,18 @@ var rendF = {
 			var no = 43;
 			if(!debug) no = debug;
 			return createDiv('abiskoLakeIce', no);
+
+		},
+	}, 
+	'abiskoLakeIceTime':{
+		func: function(reset=false){
+			config['tornetrask_iceTime'].contFunc(reset);
+			config['tornetrask_iceTime'].init('abiskoLakeIceTime')
+		},
+		html: function(debug=false, doc){
+			var no = 47;
+			if(!debug) no = debug;
+			return createDiv('abiskoLakeIceTime', no);
 
 		},
 	}, 

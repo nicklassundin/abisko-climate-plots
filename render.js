@@ -1059,6 +1059,100 @@ var renderMonthlyPrecipitationGraph = function (id) {
 	}
 };
 
+var renderAbiskoIceTimeGraph = function (id) {
+	// console.log(title);
+	charts[id] = Highcharts.chart(id, {
+		chart: {
+			type: 'line'
+		},
+		title: {
+			text: this.Highcharts.getOptions().lang.titles[id],
+		},
+		xAxis: {
+			title: {
+				text: this.Highcharts.getOptions().lang.years,
+			},
+			crosshair: true,
+		},
+		yAxis: [{
+			title: {
+				text: this.Highcharts.getOptions().lang.iceTime,
+			},
+			lineWidth: 1,
+			max: 250,
+			min: 80,
+			// opposite: true,
+		}],
+		tooltip: {
+			shared: true,
+			valueDecimals: 0,
+			formatter: function () {
+				var tooltip = '<span style="font-size: 10px">' + (+this.x-1) + '/' + this.x + '</span><br/>';
+				this.points.forEach(point =>
+					tooltip += '<span style="color:' + point.color + '">\u25CF</span> ' + point.series.name + ': <b>' +(point.point.options.week || point.y) + '</b><br/>');
+				return tooltip;
+			},
+		},
+		legend: {
+			enabled: false,
+		},
+		series: [
+			// {data: [null, null]},
+			// {data: [null, null]},
+			// {data: [null, null]},
+			// {data: [null, null]},
+			{data: [null, null]}]
+	});
+	charts[id].showLoading();
+	return function(ice){
+	// console.log(ice);
+		charts[id].hideLoading();
+		charts[id].update({
+		legend: {
+			enabled: true,
+		},
+		dataSrc: ice.src,
+		series: [
+			// {
+			// name: this.Highcharts.getOptions().lang.movAvgCI,
+			// type: 'arearange',
+			// color: '#7777ff',
+			// data: ice.iceTimeCIMovAvg,
+			// zIndex: 0,
+			// fillOpacity: 0.3,
+			// lineWidth: 0,
+			// states: { hover: { lineWidthPlus: 0 } },
+			// marker: { enabled: false },
+			// yAxis: 1,
+			// visible: false,
+		// },
+			{
+			regression: false,
+			regressionSettings: {
+				type: 'linear',
+				color: '#00bb00',
+				name: this.Highcharts.getOptions().lang.linIceTime,
+			},
+			yAxis: 0,
+			name: this.Highcharts.getOptions().lang.iceTime2,
+			color: '#00bb00',
+			lineWidth: 0,
+			marker: { radius: 2 },
+			states: { hover: { lineWidthPlus: 0 } },
+			data: ice.iceTime,
+		},
+			// {
+			// yAxis: 1,
+			// name: this.Highcharts.getOptions().lang.movAvgIceTime,
+			// color: '#00bb00',
+			// data: ice.iceTimeMovAvg,
+			// marker: { enabled: false },
+		// }
+		],
+	});
+	}
+};
+
 var renderAbiskoIceGraph = function (id) {
 	// console.log(title);
 	charts[id] = Highcharts.chart(id, {
@@ -1084,14 +1178,6 @@ var renderAbiskoIceGraph = function (id) {
 					return this.value > 52 ? this.value - 52 : this.value;
 				},
 			}
-		}, {
-			title: {
-				text: this.Highcharts.getOptions().lang.iceTime,
-			},
-			lineWidth: 1,
-			max: 250,
-			min: 80,
-			opposite: true,
 		}],
 		tooltip: {
 			shared: true,
@@ -1110,7 +1196,7 @@ var renderAbiskoIceGraph = function (id) {
 			{data: [null, null]},
 			// {data: [null, null]},
 			// {data: [null, null]},
-			{data: [null, null]},
+			// {data: [null, null]},
 			{data: [null, null]}]
 	});
 	charts[id].showLoading();
@@ -1164,21 +1250,21 @@ var renderAbiskoIceGraph = function (id) {
 			// yAxis: 1,
 			// visible: false,
 		// },
-			{
-			regression: false,
-			regressionSettings: {
-				type: 'linear',
-				color: '#00bb00',
-				name: this.Highcharts.getOptions().lang.linIceTime,
-			},
-			yAxis: 1,
-			name: this.Highcharts.getOptions().lang.iceTime2,
-			color: '#00bb00',
-			lineWidth: 0,
-			marker: { radius: 2 },
-			states: { hover: { lineWidthPlus: 0 } },
-			data: ice.iceTime,
-		},
+			// {
+			// regression: false,
+			// regressionSettings: {
+			// 	type: 'linear',
+			// 	color: '#00bb00',
+			// 	name: this.Highcharts.getOptions().lang.linIceTime,
+			// },
+			// yAxis: 1,
+			// name: this.Highcharts.getOptions().lang.iceTime2,
+			// color: '#00bb00',
+			// lineWidth: 0,
+			// marker: { radius: 2 },
+			// states: { hover: { lineWidthPlus: 0 } },
+			// data: ice.iceTime,
+		// },
 			// {
 			// yAxis: 1,
 			// name: this.Highcharts.getOptions().lang.movAvgIceTime,
@@ -1190,7 +1276,6 @@ var renderAbiskoIceGraph = function (id) {
 	});
 	}
 };
-
 var renderAbiskoSnowGraph = function (id) {
 	// console.log(id)
 	// console.log(Object.values(snow))
