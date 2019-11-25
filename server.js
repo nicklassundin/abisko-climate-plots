@@ -26,6 +26,9 @@ const TYPE = 'corrected-archive';
 // const TYPE = 'latest-months';
 
 app.use(express.static(__dirname + '/css'));
+app.use(express.static(__dirname + '/dep'));
+app.use(express.static(__dirname + '/modules'));
+app.use(express.static(__dirname + '/config'));
 
 
 app.get( '/', (req, res) => {
