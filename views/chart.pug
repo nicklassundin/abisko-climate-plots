@@ -1,0 +1,46 @@
+// extends default
+block content
+	doctype html
+// meta (charaset="utf-8")
+html
+	head
+		link(rel="stylesheet", type="text/css", href="styles.css")
+		// include ../jquery.js
+		// include ../lib.js
+		// include ../customEvents.js
+		// include ../import_parser.js
+		// include ../regression.js
+		// include ../helpers.js
+		// include ../highcharts-regression.js
+		
+		script(src="https://nicklassundin.github.io/abisko-climate-plots/jquery.js")
+		script(src="https://code.highcharts.com/highcharts.js")
+		script(src="https://code.highcharts.com/modules/annotations.js")
+		script(src="https://code.highcharts.com/highcharts-more.js")
+		script(src="https://code.highcharts.com/modules/series-label.js")
+		script(src="https://code.highcharts.com/modules/exporting.js")
+		script(src="https://code.highcharts.com/modules/export-data.js")
+		script(src="https://code.highcharts.com/modules/histogram-bellcurve.js")
+		script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js")
+		script(src="https://nicklassundin.github.io/abisko-climate-plots/customEvents.js")
+		script(src="https://nicklassundin.github.io/abisko-climate-plots/regression.js")
+		script(src="https://nicklassundin.github.io/abisko-climate-plots/papaparse.min.js")
+		script(src="https://nicklassundin.github.io/abisko-climate-plots/helpers.js")
+		script(src="https://nicklassundin.github.io/abisko-climate-plots/highcharts-regression.js")
+	body
+		script(src="https://nicklassundin.github.io/abisko-climate-plots/f_stats.js")
+		script(src="https://nicklassundin.github.io/abisko-climate-plots/depricated_const.js")
+		script(src="https://nicklassundin.github.io/abisko-climate-plots/render.js")
+		script(src="https://nicklassundin.github.io/abisko-climate-plots/lib.js")
+			
+		div( id="mark" )
+		each ID in ID_REQ
+			script(type="text/javascript").
+				var ID = '#{ID}';
+				// console.log(ID)
+				// config[ID].cached = '#{data}'
+				var data = !{FILE};
+				// console.log(data)
+				// console.log(!{JSON.stringify(data)})
+				document.getElementById("mark").appendChild(rendF[ID].html());
+				rendF[ID].func();
