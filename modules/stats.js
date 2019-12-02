@@ -1,7 +1,8 @@
 
-/***************************************/
+const help = require('./helpers.js');
+const regression = require('regression')
 
-exports.struct = {
+var struct = {
 	type: 'mean',
 	meta: 		{
 		fields: [],
@@ -115,13 +116,13 @@ exports.struct = {
 		return this.movAvg;				
 	},
 	linReg: 	undefined,
-	difference: function(lower=baselineLower, upper=baselineUpper){
+	difference: function(lower=help.baselineLower, upper=help.baselineUpper){
 		// console.log([lower, upper])
 		var basevalue = mean(this.values.filter(value => 
 			(value.x >= lower && value.x <= upper)).map(each => each.y))
 		return Array.from(this.values.map(each => ([each.x, each.y - basevalue])))
 	},
-	build: function(type=this.type, lower=baselineLower, upper=baselineUpper){
+	build: function(type=this.type, lower=help.baselineLower, upper=help.baselineUpper){
 		var result = this;
 		result.type = type;
 		var values = result.values.filter(entry => (!isNaN(entry.y) || $.isNumeric(entry.y)));
@@ -139,7 +140,7 @@ exports.struct = {
 		if(result.y==undefined){
 			switch(type){
 				case "mean":
-					y = sum(values.map(each => each.y));
+					y = help.sum(values.map(each => each.y));
 					y = y/count;
 					break;
 				case "max":
@@ -149,7 +150,7 @@ exports.struct = {
 					y = Math.min(...values.map(each => each.y));
 					break;
 				case "sum":
-					y = sum(values.map(each => each.y));
+					y = help.sum(values.map(each => each.y));
 					break;
 				default:
 					console.log("default: "+type)
@@ -224,7 +225,7 @@ var parseByDate = function (values, type='mean', src='', custom) {
 				}
 				result.yrly[key][year].values.push(entry);
 
-				if(isSummerMonthByIndex(month)) {
+				if(help.isSummerMonthByIndex(month)) {
 					if(!result.summer) result.summer = {};
 					if(!result.summer[key]) result.summer[key] = {};
 					if(!result.summer[key][year]){
@@ -233,7 +234,7 @@ var parseByDate = function (values, type='mean', src='', custom) {
 					} 
 					result.summer[key][year].values.push(entry);
 				}
-				if(isWinterMonthByIndex(month)) {
+				if(help.isWinterMonthByIndex(month)) {
 					if(!result.winter) result.winter = {};
 					if(!result.winter[key]) result.winter[key] = {};
 					if(!result.winter[key][year]){
@@ -366,7 +367,7 @@ var parseByDate = function (values, type='mean', src='', custom) {
 	parseAbiskoCached = respons;
 	return respons
 }
-exports.byDate = parseByDate;
+var byDate = parseByDate;
 
 exports.CALM = function(result, src=''){
 	var fields = result.meta.fields;
@@ -493,7 +494,7 @@ exports.GISSTEMPzonalMeans = function (result, src='') {
 
 var parseAbiskoCached = undefined;
 exports.AbiskoCsv = function (result, src='') {
-	// console.log(result)
+	console.log(result)
 	if(parseAbiskoCached) return parseAbiskoCached;
 	var blocks = { precipitation: [], temperatures: [] };
 	result.data.forEach(entry => {

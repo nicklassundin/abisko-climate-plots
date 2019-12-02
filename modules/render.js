@@ -1,9 +1,12 @@
 // const Highcharts = require(['highcharts'], function(Highcharts){
 // 	return Highcharts
 // });
-const highcharts_Settings = require('../config/highcharts_config.js');
+const highchart_help = require('../config/highcharts_config.js');
 const language = require('../config/language.json');
 const lib = require('./lib.js')
+
+var charts = highchart_help.charts;
+var nav_lang = highchart_help.nav_lang
 
 var dateToYear = function(entries){
 	return entries.map(each => ({
@@ -12,24 +15,7 @@ var dateToYear = function(entries){
 	}))
 }
 
-var updatePlot = function(id, bl, bu){
-	if(id.id) id=id.id; // TODO fix why this it gets a div not id
-	if(id.renderTo) id=id.renderTo.id;
-	var low = document.getElementById(id+"lowLabel") 
-	var upp = document.getElementById(id+"uppLabel") 
-	if(low){
-		if(!bl) bl = low.value;
-		if(!bu) bl = upp.value;
-	} 
-	if(bl<bu && bl>=1913) baselineLower=bl;
-	if(bu>bl && bu<2019) baselineUpper=bu;
-	var chart = charts[id]
-	if(id.split('_')[1]) id = id.split('_')[0]
-	var div = document.getElementById(id);
-	chart.destroy();
-	return lib.buildChart(div,ids=id,reset=true)
-}
-
+var updatePlot = highchart_help.updatePlot;
 
 var resetPlot = function(id){
 	return function(a){
@@ -52,7 +38,7 @@ var resetPlot = function(id){
 	}
 }
 
-baselineUI = function(id) {
+var baselineUI = function(id) {
 	return annotations = [{
 		labelOptions: {
 			verticalAlign: 'top',
@@ -163,10 +149,9 @@ var plotBandsDiff = function(id){
 		}
 	};
 }
-
-
-var init_HighChart = () => Highcharts.setOptions(highcharts_Settings);
-
+console.log(highchart_help)
+var init_HighChart = () => Highcharts.setOptions(highchart_help.highcharts_Settings);
+init_HighChart();
 
 
 // TODO generalize render function
@@ -374,6 +359,7 @@ exports.TemperatureGraph = function (id) {
 	// console.log(promise)
 	// console.log(data.max.max())
 	var title = id.split('_');
+
 	var div_id = id;
 	var id = title[0];
 	charts[div_id] = Highcharts.chart(div_id, {
@@ -385,7 +371,14 @@ exports.TemperatureGraph = function (id) {
 			enabled: false,
 		},
 		title: {
-			text: this.Highcharts.getOptions().lang.titles[id](this.Highcharts.getOptions().lang.months(title[1]))
+			text: function(){
+				var month = '';
+				if(title[1]){
+					month = ' '+this.Highcharts.getOptions().lang.months[title[1]];
+				} 
+				
+				return this.Highcharts.getOptions().lang.titles[id]+month;
+			}()
 		},
 		xAxis: {
 			title: {
@@ -690,7 +683,7 @@ exports.GrowingSeasonGraph = function (id) {
 	}
 }
 
-var renderPrecipitationDifferenceGraph = function (id) {
+exports.renderPrecipitationDifferenceGraph = function (id) {
 	// console.log(id)
 	// console.log(precipitation);
 	// console.log(precipitation.total.difference())
@@ -756,7 +749,7 @@ var renderPrecipitationDifferenceGraph = function (id) {
 	}
 };
 
-var renderYearlyPrecipitationGraph = function (id) {
+exports.YearlyPrecipitationGraph = function (id) {
 	// console.log('renderYearlyPrecipitationGraph')
 	// console.log(precipitation)
 	var title = language[nav_lang].titles[id];

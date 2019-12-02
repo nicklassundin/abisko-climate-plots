@@ -1,15 +1,35 @@
-const Papa = require('../dep/papaparse.min.js');
+var $ = require('jquery')
 const renders = require('./render.js');
+const Papa = require('papaparse');
 const parse = require('./stats.js');
+const help = require('./helpers.js')
+
+var months = help.months;
+
+// var baselineLower = help.baselineLower;
+// var baselineUpper = help.baselineUpper;
+
 
 var monthlyFunc = (render) => function(id, title, src="") {
 	var result = [];
 	months().forEach((month, index) =>  
-		result.push(render(id+"_"+month, title+" "+monthName(month))));	
+		result.push(render(id+"_"+month, title+" "+help.monthName(month))));	
 	return function(data){
 		result.forEach((func, index) => func(data[index+1+'']));	
 	}
 };
+
+exports.charts = {
+	draw: function(ids, div){
+		this.redraw = function() {ids.forEach(id => {
+			div.appendChild(rendF[id].html());
+			rendF[id].func();
+		})
+		this.redraw();	
+		}
+	},
+	redraw: undefined 
+}
 
 var dataset_struct = {
 	src: undefined,
@@ -20,29 +40,25 @@ var dataset_struct = {
 	parser: undefined, 
 	render: undefined,
 	reader: Papa.parse,
-	contFunc: function(reset=false){	
+	contFunc: function(reset=false, page=''){	
 		if(Object.keys(this.rawData).length > 0) return false
 		if(reset) this.cached = {};
 		if(this.rawData)
 			var ref = this;
 		this.file.forEach(file => {
 			function data(file){
-				addr = file; 
 				return new Promise(function(resolve, reject){
 					ref.preset.complete = function(result){
 						resolve(ref.parser(result, ref.src));
 					};
-					ref.reader(url(file), ref.preset)
+					ref.reader('/'+file, ref.preset)
 				}).catch(function(error){
-					console.log("Failed to fetch data");
+					console.log("FAILED TO LOAD DATA")
+					console.log(addr)
 					console.log(error);
-					var er_div = document.createElement("div");
-					er_div.innerHTML = paste("Something went wrong, if you have adblocker try closing it, reload the page.    ERROR MESSAGE: ", error.message);	
-					// document.getElementById(id).append(er_div);
-					// TODO add to all relavent divs
 				})
 			};
-			if(!this.rawData[file]) this.rawData[file] = data(file); 
+			if(!this.rawData[file]) this.rawData[file] = data(file);
 		})
 	},
 	init: function(id, tag, renderTag=tag){
@@ -58,10 +74,12 @@ var dataset_struct = {
 		// console.log(promise)
 
 		new Promise(function(resolve, reject){
+			console.log(render)
+			console.log(renderTag)
 			if(tag) render = tagApply(render, renderTag);
 			resolve(render);
 		}).then(function(result){
-			render = result(id);
+			render = result(id)
 			promise.then(function(data){
 				var result = data
 				if(tag){
@@ -70,6 +88,8 @@ var dataset_struct = {
 				render(result);
 				return data
 			})
+		}).catch(function(err){
+			console.log(err)
 		});
 	},
 	clone: function(){
@@ -252,7 +272,6 @@ var config = {
 			yrly: renders.TemperatureGraph,
 		}),
 }
-exports.config = config;
 
 // wander down the data structure with tag input example: [high, medium, low]
 var tagApply = function(data, tag){
@@ -326,7 +345,7 @@ var baseline = null;
 var baselineForm = undefined;
 
 
-exports.buildChart = function(doc, id, reset=false){
+var buildChart = function(doc, id, reset=false){
 	var call = function(id){
 		return new Promise(function(resolve,reject){
 			try{
@@ -411,7 +430,13 @@ var createDiv = function(id, no=null){
 	return fig
 }
 
-var rendF = {
+rendF = {
+	// TODO
+	// build: function(rendID, sub){
+	// 		config[id].contFunc(reset);
+	// 		config[id].init(rendID, sub);
+	// 	}
+
 	// 'northernHemisphere': {
 	// 	func: function(reset=false) {
 	// 		functorGISSTEMP('data/NH.Ts.csv',renderTemperatureGraph,'https://data.giss.nasa.gov/gistemp/')('northernHemisphere','Northern Hemisphere temperatures');
@@ -748,4 +773,5 @@ var rendF = {
 		}
 	}
 }
+exports.rendF = rendF;
 // console.log(config)

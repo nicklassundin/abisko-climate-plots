@@ -6,15 +6,19 @@
 	"dependencies": {
 		"chai": "^4.2.0",
 		"express": "^4.17.1",
+		"express-force-ssl": "^0.3.2",
 		"highcharts": "^7.2.1",
 		"jquery": "^3.4.1",
 		"mariasql": "^0.2.6",
 		"mongodb": "^3.3.4",
 		"mysql": "^2.17.1",
+		"papaparse": "^5.1.0",
 		"pug": "^2.0.4",
+		"regression": "^2.0.1",
 		"requirejs-plugins": "^1.0.2",
 		"sinon": "^7.5.0",
-		"tedious": "^6.3.0"
+		"tedious": "^6.3.0",
+		"uniq": "^1.0.1"
 	},
 	"devDependencies": {
 		"chai": "3.5.0",
@@ -29,7 +33,7 @@
 	"scripts": {
 		"test": "npm run test-unit",
 		"test-unit": "NODE_ENV=test mocha 'modules/*.spec.js'",
-		"start": "npx nodemon server.js"
+		"start": "npx nodemon server.js --ignore 'client/*.js'"
 	},
 	"repository": {
 		"type": "git",
@@ -41,5 +45,10 @@
 	"bugs": {
 		"url": "https://github.com/nicklassundin/abisko-climate-plots/issues"
 	},
-	"homepage": "https://github.com/nicklassundin/abisko-climate-plots#readme"
+	"homepage": "https://github.com/nicklassundin/abisko-climate-plots#readme",
+	"nodemonConfig": {
+		"events": {
+			"restart": "browserify modules/lib.js -o client/bundle.js"
+		}
+	}
 }
