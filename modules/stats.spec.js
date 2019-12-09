@@ -3,7 +3,7 @@ const request = require('request')
 
 const expect = require('chai').expect
 
-const stats = require('./stats')
+const stats = require('./stats.js')
 
 describe('javascript statistic module', function () {
 	it('saves the content', function * () {

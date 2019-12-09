@@ -1,34 +1,34 @@
-require('regression')
+const regression = require('regression')
+
+
+Date.prototype.getWeekNumber = function(date=this){
+	var d = new Date(Date.UTC(date.getFullYear(), this.getMonth(), this.getDate()));
+	var dayNum = d.getUTCDay() || 7;
+	d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+	var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+	return Math.ceil((((d - yearStart) / 86400000) + 1)/7)
+};
+
+// (function (w) {
+
+// 	w.URLSearchParams = w.URLSearchParams || function (searchString) {
+// 		var self = this;
+// 		self.searchString = searchString;
+// 		self.get = function (name) {
+// 			var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(self.searchString);
+// 			if (results == null) {
+// 				return null;
+// 			}
+// 			else {
+// 				return decodeURI(results[1]) || 0;
+// 			}
+// 		};
+// 	}
+
+// })(window)
+
 
 {
-
-	Date.prototype.getWeekNumber = function(date=this){
-		var d = new Date(Date.UTC(date.getFullYear(), this.getMonth(), this.getDate()));
-		var dayNum = d.getUTCDay() || 7;
-		d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-		var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
-		return Math.ceil((((d - yearStart) / 86400000) + 1)/7)
-	};
-
-	(function (w) {
-
-		w.URLSearchParams = w.URLSearchParams || function (searchString) {
-			var self = this;
-			self.searchString = searchString;
-			self.get = function (name) {
-				var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(self.searchString);
-				if (results == null) {
-					return null;
-				}
-				else {
-					return decodeURI(results[1]) || 0;
-				}
-			};
-		}
-
-	})(window)
-
-
 
 
 	// TODO maybe reuse for new baseline better way to do it?!
@@ -56,21 +56,6 @@ require('regression')
 	// 	parseAbisko();
 	// });
 
-
-	var precipColor = '#550965';
-
-	var snowColor = {
-		color: '#CDD8F0',
-		borderColor: '#5F7CB9',
-		hover: '#eeeeff',
-	};
-
-	var rainColor = {
-		color: '#1000FB',
-		borderColor: '#5F7CB9',
-		hover: '#3333ff',
-	};
-
 	var useWebWorker = true;
 
 	var months = () => ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
@@ -80,7 +65,7 @@ require('regression')
 	}
 
 	var monthByIndex = index => months()[index];
-
+	exports.monthByIndex = monthByIndex;
 	var monthName = month => ({
 		jan: 'January', feb: 'February', mar: 'March', apr: 'April', may: 'May', jun: 'June',
 		jul: 'July', aug: 'August', sep: 'September', oct: 'October', nov: 'November', dec: 'December'
@@ -102,8 +87,8 @@ require('regression')
 	exports.isWinterMonthByIndex = month => isWinterMonth(monthByIndex(month));
 	// exports.isWinterMonthByIndex = isWinterMonthByIndex;
 
-	exports.sum = values => values.reduce((sum, current) => sum + current, 0);
-
+	var sum = values => values.reduce((sum, current) => sum + current, 0);
+	exports.sum = sum;
 	var min = values => values.reduce((min, current) => Math.min(min, current), Infinity);
 
 	var max = values => values.reduce((max, current) => Math.max(max, current), -Infinity);
@@ -113,7 +98,7 @@ require('regression')
 		return sum(values) / values.length;
 	};
 
-	var mean = average;
+	exports.mean = average;
 
 	var movingAverage = (values, index, number) => average(values.slice(Math.max(index - number, 0), index));
 
@@ -137,6 +122,7 @@ require('regression')
 			high: mean + ci
 		};
 	};
+	exports.confidenceInterval = confidenceInterval;
 
 	// equally weighted averages normal distribution 
 	var confidenceInterval_EQ_ND = (values, count) => {
@@ -159,12 +145,12 @@ require('regression')
 			ciMovAvg: ciMovAvg,
 		})
 	}
+	exports.confidenceInterval_EQ_ND = confidenceInterval_EQ_ND;
 
 
 
-
-	exports.baselineLower = 1961;
-	exports.baselineUpper = 1990;
+	// exports.baselineLower = 1961;
+	// exports.baselineUpper = 1990;
 
 	exports.withinBaselinePeriod = year => year >= baselineLower && year <= baselineUpper;
 
@@ -183,7 +169,7 @@ require('regression')
 		var number = +string;
 		return (number) ? number : undefined;
 	};
-
+	exports.validNumber = validNumber;
 	var parseDate = (string) => {
 		var date = string.split('-');
 		if (date.length < 3) date[1] = date[2] = 0;
@@ -193,27 +179,29 @@ require('regression')
 			day: +date[2],
 		};
 	};
+	exports.parseDate = parseDate;
 
 	var isLeapYear = year => ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
 
 	var createDate = date => new Date(date.year, date.month-1, date.day-1);
-
+	exports.createDate = createDate;
 	var weekNumber = (date) => {
 		var d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
 		d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
 		var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
 		return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
 	};
-
+	exports.weekNumber = weekNumber;
 	var dayOfYear = (date) => {
 		var start = new Date(date.getFullYear(), 0, 0);
 		var diff = (date - start) + ((start.getTimezoneOffset() - date.getTimezoneOffset()) * 60 * 1000);
 		var oneDay = 1000 * 60 * 60 * 24;
 		return Math.floor(diff / oneDay);
 	};
+	exports.dayOfYear = dayOfYear;
 
 	var dateFromDayOfYear = (year, dayOfYear) => new Date(year, 0, dayOfYear);
-
+	exports.dateFromDayOfYear = dateFromDayOfYear;
 	var parseNumber = string => parseFloat(string.replace(',', '.')) || undefined;
 
 	var linearRegression = (xs, ys) => {
@@ -226,7 +214,7 @@ require('regression')
 		linear.r2 = result.r2;
 		return linear;
 	};
-
+	exports.linearRegression = linearRegression;
 	Array.prototype.rotate = (function () {
 		var unshift = Array.prototype.unshift,
 			splice = Array.prototype.splice;

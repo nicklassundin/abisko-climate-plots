@@ -39,11 +39,104 @@
 	border: solid;
 }
 #text{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  font-size: 50px;
-  color: white;
-  transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	font-size: 50px;
+	color: white;
+	transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
 }
+
+.login-form {
+	width: 300px;
+	margin: 0 auto;
+	font-family: Tahoma, Geneva, sans-serif;
+}
+.login-form h1 {
+	text-align: center;
+	color: #4d4d4d;
+	font-size: 24px;
+	padding: 20px 0 20px 0;
+}
+.login-form input[type="password"],
+.login-form input[type="text"] {
+	width: 100%;
+	padding: 15px;
+	border: 1px solid #dddddd;
+	margin-bottom: 15px;
+	box-sizing:border-box;
+}
+.login-form input[type="submit"] {
+	width: 100%;
+	padding: 15px;
+	background-color: #535b63;
+	border: 0;
+	box-sizing: border-box;
+	cursor: pointer;
+	font-weight: bold;
+	color: #ffffff;
+}
+
+.upload-form {
+	width: 300px;
+	margin: 0 auto;
+	font-family: Tahoma, Geneva, sans-serif;
+}
+.upload-form h1 {
+	text-align: center;
+	color: #4d4d4d;
+	font-size: 24px;
+	padding: 20px 0 20px 0;
+}
+.upload-form input[type="password"],
+.upload-form input[type="text"] {
+	width: 100%;
+	padding: 15px;
+	border: 1px solid #dddddd;
+	margin-bottom: 15px;
+	box-sizing:border-box;
+}
+.upload-form input[type="submit"] {
+	width: 100%;
+	padding: 15px;
+	background-color: #535b63;
+	border: 0;
+	box-sizing: border-box;
+	cursor: pointer;
+	font-weight: bold;
+	color: #ffffff;
+}
+.upload-form input[type="file"] {
+	width: 100%;
+	padding: 15px;
+	background-color: #535b63;
+	box-sizing: border-box;
+	/* cursor: pointer; */
+	font-weight: bold;
+	color: #ffffff;
+	border: 1px solid #ccc;
+    	display: inline-block;
+    	padding: 6px 12px;
+    	cursor: pointer;
+}
+
+.upload-form select {
+	color: #ffffff;
+  	padding: 8px 16px;
+  	border: 1px solid transparent;
+  	/* border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent; */
+  	cursor: pointer;
+	list-style: square;
+	width: 100%;
+	/* padding: 15px; */
+	background-color: #535b63;
+	/* border: 0; */
+	/* box-sizing: border-box; */
+	/* cursor: pointer; */
+	/* font-weight: bold; */
+	/* color: #ffffff; */
+}
+
+
+

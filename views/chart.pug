@@ -1,10 +1,10 @@
 // extends default
 block content
 	doctype html
-// meta (charaset="utf-8")
 html
 	head
 		link(rel="stylesheet", type="text/css", href="css/styles.css")
+		// meta (charaset="utf-8")
 		// include ../jquery.js
 		// include ../lib.js
 		// include ../customEvents.js
@@ -21,15 +21,19 @@ html
 		script(src="https://code.highcharts.com/modules/export-data.js")
 		script(src="https://code.highcharts.com/modules/histogram-bellcurve.js")
 		script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js")
-		// script(src="dep/require.js")
+		script(type="text/javascript").
+			var nav_lang = '#{LANG}';
+			var baselineLower = '#{baselineLower}';
+			var baselineUpper = '#{baselineUpper}';
+			var station = '#{STATION}';
 		script(src="client/bundle.js", type="text/javascript")
 	body
 		div( id="mark" )
 		each ID in ID_REQ
 			script(type="text/javascript").
-				var ID = '#{ID}';
-				// var data = !{FILE};
+				// console.log(data)
 				$(function() {
-					document.getElementById("mark").appendChild(rendF[ID].html());
-					rendF[ID].func();
+					// requestChart(ID, lang, document.getElementById("mark"))
+					document.getElementById("mark").appendChild(rendF['#{ID}'].html());
+					rendF['#{ID}'].func();
 				});

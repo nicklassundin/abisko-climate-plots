@@ -1,26 +1,37 @@
 
+const hostname = '127.0.0.1';
+const port = 80;
+const serverURL = "http://localhost";
+
 var fs = require('fs');
 const express = require('express');
 const request = require('request');
 const url = require('url');
 
 var $ = require("jquery");
-// const custom = require('./config/custom.json');
+const custom = require('./config/custom.json');
+const constants = require('./config/const.json');
 // const language = require('./config/language.json');
 // const stats = require('./modules/stats');
 const smhi = require('./modules/smhi');
 // const lib = require('./modules/lib');
 
-const hostname = '127.0.0.1';
-const port = 80;
-const serverURL = "http://localhost";
+
+// Security
+const serverCert = [fs.readFileSync("encrypt/primary.crt", "utf8")];
+/////############///////////
+/////############///////////
+// DATABASE
+var database = require('./modules/db');
+/////############///////////
+/////############///////////
+/////############///////////
+
 
 const app = express();
 app.set('view engine', 'pug');
 
 // const ID = 'smhiTemp';
-// const STATION = 159880; // LUND
-const STATION = 188790; // ABISKO 
 const TYPE = 'corrected-archive';
 // const TYPE = 'latest-months';
 
@@ -47,41 +58,112 @@ app.use('/modules', express.static(__dirname + '/modules'));
 app.use('/config', express.static(__dirname + '/config'));
 app.use('/data', express.static(__dirname + '/data'));
 app.use('/client', express.static(__dirname + '/client'));
+app.use('/tmp', express.static(__dirname + '/tmp'));
 
+smhi.init(app, TYPE)
 
-app.get( '/', (req, res) => {
-	res.render('index', {
-		comment: "This is the main page",
-		IDS: custom.ids
-	})
-});
+// app.get( '/map/sweden', (req, res) => {
+// 	res.render('map', {
+// 	})
+// });
 
-app.get( '/abisko', (req, res) => {
-	var temp = lib.config['abisko'];
-	// temp.file = [hostname+':'+port+'/'+temp.file];
-	request({
-		url: "http://localhost:"+port+'/data/ANS_Temp_Prec.csv',
-		json: true,
-		path: '/',
-		method: 'GET',
-	}, function(error, response, body){
-		res.render('index', {
-			comment: JSON.stringify(response), 
-			ids: custom.ids,
+// INTERFACE DATABASE
+
+app.get('/databases', (req, res) => {
+	database.webserver.then(function(connection){
+		console.log("Server Connected Success")
+		// console.log(connection)
+		connection.query('SHOW DATABASES;', function(error, result, fields){
+			console.log(" - Query Success")
+			if(error){
+				console.log(error);
+				return;
+			}
+			res.send(result)
 		})
-
 	})
+})
+
+
+////////////
+var session = require('express-session');
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.json());
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
+app.post('/auth', function(request, response) {
+	var username = request.body.username;
+	var password = request.body.password;
+	if (username && password) {
+		database.admin.then(function(connection){
+			connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+				if (results.length > 0) {
+					request.session.loggedin = true;
+					request.session.username = username;
+					response.render('upload', 
+						{
+							username: username,
+							password: password
+						});
+				} else {
+					response.send('Incorrect Username and/or Password!');
+				}			
+				response.end();
+			});
+		});
+	} else {
+		response.send('Please enter Username and Password!');
+		response.end();
+	}
 });
+
+var multer = require('multer');
+var storage = multer.memoryStorage()
+var upload = multer({ storage: storage })
+app.post('/upload', upload.single('file'), function(request, response, next){
+	if(request.session.loggedin){
+		var username = request.body.username;
+		var password = request.body.password;
+		var filename = request.body.type;
+		const file = request.file
+		fs.writeFile("temp/"+filename ,file.buffer,  "binary",function(err) {
+			if(err) {
+				console.log(err);
+			} else {
+				console.log("The file was saved!");
+				database.importCSV("temp/"+filename, filename, database.admin);
+				response.send(file)
+			}
+		});
+	} else {
+		response.send('Please login to view this page!')
+	}
+})
+
+app.get('/', (req, res) => {
+	res.render('login', {})	
+})
+
+app.get('/home', function(request, response) {
+	if (request.session.loggedin) {
+		response.send('Welcome back, ' + request.session.username + '!');
+	} else {
+		response.send('Please login to view this page!');
+	}
+	response.end();
+});
+
+
+/////############///////////
+/////############///////////
+/////############///////////
+
 
 app.get( '/chart', (req, res) => {
-
-	// console.log(req)
-	// res.statusCode = 200;
-	// res.setHeader('Content-Type', 'text/plain');
-	// res.send('Hello World');
-	// lib.config[ID].contFunc()
-	// JSON.stringify(lib.config[ID])
-	// console.log(lib.config[ID])
 	const queryObject = url.parse(req.url,true).query;
 	var ID; 
 	if(!queryObject.id) {
@@ -89,22 +171,28 @@ app.get( '/chart', (req, res) => {
 	}else{
 		ID = queryObject.id.split(",");
 	}
-	const SMHI_URL = smhi.get_smhi_station_url(STATION, TYPE);
-	// console.log(queryObject)
-	request({
-		url: SMHI_URL,
-		json: true,
-		path: '/',
-		method: 'GET',
-	}, function(error, response, body) {
-		// console.log(body.value)
-		// console.log(charts.ids)
-		res.render('chart', {
-			ID_REQ: ID,
-			FILE: JSON.stringify(response),
-			// LANG: JSON.stringify(language)
-		})
-	});
+	var LANG;
+	if(!queryObject.lang){
+		LANG = 'en';
+	}else{
+		LANG = queryObject.lang;
+	}
+	var STATION;
+	if(!queryObject.station){
+		STATION = 159880; // LUND
+		// STATION = 188790; // ABISKO 
+	}else{
+		STATION = queryObject.station;
+	}
+
+	res.render('chart', {
+		ID_REQ: ID,
+		// FILE: JSON.stringify(response),
+		LANG: LANG,
+		STATION: STATION,
+		baselineLower: constants.baselineLower,
+		baselineUpper: constants.baselineUpper
+	})
 });
 
 

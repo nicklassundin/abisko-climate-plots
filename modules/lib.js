@@ -1,14 +1,21 @@
 var $ = require('jquery')
-const renders = require('./render.js');
+const renders = require('./render.js').graphs;
 const Papa = require('papaparse');
-const parse = require('./stats.js');
+const parse = require('./stats.js').parsers;
 const help = require('./helpers.js')
+updatePlot = require('../config/highcharts_config.js').updatePlot;
 
 var months = help.months;
 
 // var baselineLower = help.baselineLower;
 // var baselineUpper = help.baselineUpper;
 
+// var requestChart = function(id, lang=nav_lang, div){
+// 	nav_lang = lang;
+// 	div.appendChild(RendF[id].html());
+// 	rendF[id].func();
+// }
+// exports.requestChart = requestChart;
 
 var monthlyFunc = (render) => function(id, title, src="") {
 	var result = [];
@@ -25,11 +32,12 @@ exports.charts = {
 			div.appendChild(rendF[id].html());
 			rendF[id].func();
 		})
-		this.redraw();	
+			this.redraw();	
 		}
 	},
 	redraw: undefined 
 }
+
 
 var dataset_struct = {
 	src: undefined,
@@ -54,7 +62,6 @@ var dataset_struct = {
 					ref.reader('/'+file, ref.preset)
 				}).catch(function(error){
 					console.log("FAILED TO LOAD DATA")
-					console.log(addr)
 					console.log(error);
 				})
 			};
@@ -66,6 +73,7 @@ var dataset_struct = {
 		// console.log(tag)
 		// console.log(this)
 		var render = this.render;
+		// console.log(renders)
 		// console.log(this)
 		var rawData = this.rawData;
 		// console.log(rawData)	
@@ -74,8 +82,8 @@ var dataset_struct = {
 		// console.log(promise)
 
 		new Promise(function(resolve, reject){
-			console.log(render)
-			console.log(renderTag)
+			// console.log(render)
+			// console.log(renderTag)
 			if(tag) render = tagApply(render, renderTag);
 			resolve(render);
 		}).then(function(result){
@@ -145,9 +153,9 @@ var config = {
 		},
 		parser = parse.GISSTEMPzonalMeans,
 		render = {
-			'64n-90n': renders.TemperatureDifferenceGraph,
-			'nhem': renders.TemperatureDifferenceGraph,
-			'glob': renders.TemperatureDifferenceGraph,
+			'64n-90n': renders.TemperatureDifference,
+			'nhem': renders.TemperatureDifference,
+			'glob': renders.TemperatureDifference,
 		},
 		reader = Papa.parse),
 	abisko: dataset_struct.create(
@@ -164,21 +172,21 @@ var config = {
 		parser = parse.AbiskoCsv,
 		render = {
 			'temperatures': {
-				'yrly': renders.TemperatureGraph,
-				'summer': renders.TemperatureGraph,
-				'winter': renders.TemperatureGraph,
-				'monthly': monthlyFunc(renders.TemperatureGraph),
-				'difference': renders.TemperatureDifferenceGraph,
+				'yrly': renders.Temperature,
+				'summer': renders.Temperature,
+				'winter': renders.Temperature,
+				'monthly': monthlyFunc(renders.Temperature),
+				'difference': renders.TemperatureDifference,
 			},
 
 			'precipitation':{
-				'yrly': renders.YearlyPrecipitationGraph,
-				'summer': renders.YearlyPrecipitationGraph,
-				'winter': renders.YearlyPrecipitationGraph,
-				'monthly': monthlyFunc(renders.MonthlyPrecipitationGraph),
-				'difference': renders.PrecipitationDifferenceGraph,
+				'yrly': renders.YearlyPrecipitation,
+				'summer': renders.YearlyPrecipitation,
+				'winter': renders.YearlyPrecipitation,
+				'monthly': monthlyFunc(renders.MonthlyPrecipitation),
+				'difference': renders.PrecipitationDifference,
 			},
-			'growingSeason': renders.GrowingSeasonGraph,
+			'growingSeason': renders.GrowingSeason,
 
 		},
 		reader = Papa.parse),
@@ -191,7 +199,7 @@ var config = {
 			skipEmptyLines: true,
 		},
 		parser = parse.AbiskoIceData,
-		render = renders.AbiskoIceGraph,
+		render = renders.AbiskoIce,
 		reader = Papa.parse),
 	tornetrask_iceTime: dataset_struct.create(
 		src = '',
@@ -202,7 +210,7 @@ var config = {
 			skipEmptyLines: true,
 		},
 		parser = parse.AbiskoIceData,
-		render = renders.AbiskoIceTimeGraph,
+		render = renders.AbiskoIceTime,
 		reader = Papa.parse),
 	abiskoSnowDepth: dataset_struct.create(
 		src = '',
@@ -215,8 +223,8 @@ var config = {
 		},
 		parser = parse.AbiskoSnowData,
 		render = {
-			'periodMeans': renders.AbiskoSnowGraph,
-			'decadeMeans': renders.AbiskoSnowGraph,
+			'periodMeans': renders.AbiskoSnow,
+			'decadeMeans': renders.AbiskoSnow,
 		},
 		reader = Papa.parse),
 	weeklyCO2: dataset_struct.create(
@@ -247,19 +255,14 @@ var config = {
 	smhiTemp: dataset_struct.create(
 		src = '',
 		file = [
-			// "data/smhi-opendata_umea.csv"
-			"data/smhi-opendata_19_20_53430_20191106_082848.csv"
-			// "data/smhi-opendata_19_20_140500_20191021_085425.csv"
-			// , 
-			// "data/smhi-opendata_19_20_140480_20191022_164727.csv"
-			// ,
-			// "data/smhi-opendata_19_20_140490_20191022_164733.csv"
+			"data/"+station+"/temperature.csv"
 		],
 		preset = {
 			header: true,
 			download: true,
 			skipEmptyLines: true,
 			beforeFirstChunk: function(result){
+				// console.log(result)
 				result = result.split("\n")
 				var line = result.findIndex(x => x.indexOf("Tidsutsnitt:") > -1)  
 				result.splice(0,line);
@@ -269,7 +272,7 @@ var config = {
 		},
 		parser = parse.smhiTemp,
 		render = {
-			yrly: renders.TemperatureGraph,
+			yrly: renders.Temperature,
 		}),
 }
 
@@ -287,7 +290,7 @@ var tagApply = function(data, tag){
 	return result;
 }
 
-var selectText = function(e){
+selectText = function(e){
 	if(e === document.activeElement){
 		e.blur();
 	}else{
@@ -295,6 +298,7 @@ var selectText = function(e){
 		e.select();
 	}
 };
+// exports.selectText = selectText;
 
 var copy = function() {
 	var body = doc,
@@ -340,7 +344,7 @@ var getID = function(param=urlParams){
 	return id
 }
 
-// var urlParams = new URLSearchParams(window.location.search);
+var urlParams = new URLSearchParams(window.location.search);
 var baseline = null;
 var baselineForm = undefined;
 
@@ -400,6 +404,7 @@ var buildChart = function(doc, id, reset=false){
 	};
 	return doc
 }
+exports.buildChart = buildChart;
 
 var createDiv = function(id, no=null){
 	var div = document.createElement('div');
@@ -439,7 +444,7 @@ rendF = {
 
 	// 'northernHemisphere': {
 	// 	func: function(reset=false) {
-	// 		functorGISSTEMP('data/NH.Ts.csv',renderTemperatureGraph,'https://data.giss.nasa.gov/gistemp/')('northernHemisphere','Northern Hemisphere temperatures');
+	// 		functorGISSTEMP('data/NH.Ts.csv',renderTemperature,'https://data.giss.nasa.gov/gistemp/')('northernHemisphere','Northern Hemisphere temperatures');
 	// 	},
 	// 	html: function(debug=false, doc){
 	// 		var no = 16;
@@ -450,7 +455,7 @@ rendF = {
 	// },
 	// 'globalTemperatures': {
 	// 	func: function(reset=false){
-	// 		functorGISSTEMP('data/GLB.Ts.csv',renderTemperatureGraph, 'https://data.giss.nasa.gov/gistemp/')('globalTemperatures','Global temperatures');
+	// 		functorGISSTEMP('data/GLB.Ts.csv',renderTemperature, 'https://data.giss.nasa.gov/gistemp/')('globalTemperatures','Global temperatures');
 	// 	},
 	// 	html: function(debug=false, doc){
 	// 		var no = 17;
@@ -773,5 +778,3 @@ rendF = {
 		}
 	}
 }
-exports.rendF = rendF;
-// console.log(config)

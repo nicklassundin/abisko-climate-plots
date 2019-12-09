@@ -101,7 +101,7 @@
 			"growingSeason": "Growing season",
 			"weeklyCO2": "Averages global CO2 in atmosphere",
 			"permaHistogramCALM": "Permafrost active layer depth",
-			"smhiTemp": "Lund temperatures"
+			"smhiTemp": "Temperatures for "
 		},
 		"subtitles": {
 			"baseline": "Difference between yearly average and average for "
@@ -207,14 +207,14 @@
 			"yearlyPrecipitationDifference": "Utfällnings skillnaden",
 			"summerPrecipitationDifference": "Precipitation skillnaden för Juni till September",
 			"winterPrecipitationDifference": "Precipitation skillnaden för Oktober till Januari",
-			"monthlyPrecipitation": "Abisko utfällning för "
-		},
+			"monthlyPrecipitation": "Abisko utfällning för ",
 		"growingSeason": "Växande säsonger",
 		"weeklyCO2": "Globalt genomsnittligt CO2 i atmosfären",
 		"permaHistogramCALM": "Permafrost aktivt lager djup",
-		"smhiTemp": "Lund temperaturer"
-	},
-	"subtitles": {
-		"baseline":  "Skillnad mellan årligt genomsnitt och genomsnitt för perioden "
+		"smhiTemp": "Temperaturer för "
+		},
+		"subtitles": {
+			"baseline":  "Skillnad mellan årligt genomsnitt och genomsnitt för perioden "
+		}
 	}
 }

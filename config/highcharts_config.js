@@ -1,8 +1,7 @@
 const language = require('./language.json');
 const lib = require('../modules/lib.js')
 
-var nav_lang = 'en'; 
-exports.nav_lang = nav_lang;
+if(!nav_lang) nav_lang = 'en';
 
 var charts = {};
 exports.charts = charts;
@@ -22,7 +21,7 @@ var updatePlot = function(id, bl, bu){
 	if(id.split('_')[1]) id = id.split('_')[0]
 	var div = document.getElementById(id);
 	chart.destroy();
-	return lib.drawCharts(id, div); 
+	return lib.buildChart(div,window.location.search,ids=id,reset=true)
 }
 exports.updatePlot = updatePlot;
 
@@ -75,9 +74,10 @@ exports.highcharts_Settings = {
 		},
 		// showTable: true, // TODO DATA TABLE
 		// printMaxWidth: 1200,
-		sourceWidth: 1200,
-		sourceHeight: 600,
-		scale: 2,
+		sourceWidth: 1800,
+		sourceHeight: 900,
+		scale: 8,
+		// allowHTML: true,
 		buttons: {
 			contextButton: {
 				menuItems: [{
