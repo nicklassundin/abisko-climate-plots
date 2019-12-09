@@ -18,7 +18,7 @@ const smhi = require('./modules/smhi');
 
 
 // Security
-const serverCert = [fs.readFileSync("encrypt/primary.crt", "utf8")];
+// const serverCert = [fs.readFileSync("encrypt/primary.crt", "utf8")];
 /////############///////////
 /////############///////////
 // DATABASE
