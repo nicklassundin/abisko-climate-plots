@@ -7,6 +7,17 @@ updatePlot = require('../config/highcharts_config.js').updatePlot;
 
 var months = help.months;
 
+var mark = function(id="mark",par=window.location.search) {
+	var param = (''+par);
+	var mark = document.getElementById(id+param);
+	if(!mark) mark = document.getElementById(id);
+
+	var container = document.createElement("div")
+	container.setAttribute('id','cont'+param);
+	mark.appendChild(bpage(container,par=window.location.seach));
+}
+
+
 // var baselineLower = help.baselineLower;
 // var baselineUpper = help.baselineUpper;
 

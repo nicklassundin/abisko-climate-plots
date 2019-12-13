@@ -4,6 +4,7 @@
 const highchart_help = require('../config/highcharts_config.js');
 const language = require('../config/language.json');
 const lib = require('./lib.js')
+const Highcharts = require('highcharts');
 var help = require('./helpers.js');
 
 var baseline = null;
