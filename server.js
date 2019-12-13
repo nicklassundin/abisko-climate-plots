@@ -18,7 +18,7 @@ const smhi = require('./modules/smhi');
 
 
 // Security
-const serverCert = [fs.readFileSync("encrypt/primary.crt", "utf8")];
+// const serverCert = [fs.readFileSync("encrypt/primary.crt", "utf8")];
 /////############///////////
 /////############///////////
 // DATABASE
@@ -35,14 +35,14 @@ app.set('view engine', 'pug');
 const TYPE = 'corrected-archive';
 // const TYPE = 'latest-months';
 
-var key = fs.readFileSync('encrypt/private.key');
-var cert = fs.readFileSync( 'encrypt/primary.crt' );
-var ca = fs.readFileSync( 'encrypt/intermediate.crt' );
-var options = {
-	key: key,
-	cert: cert,
-	ca: ca
-};
+// var key = fs.readFileSync('encrypt/private.key');
+// var cert = fs.readFileSync( 'encrypt/primary.crt' );
+// var ca = fs.readFileSync( 'encrypt/intermediate.crt' );
+// var options = {
+	// key: key,
+	// cert: cert,
+	// ca: ca
+// };
 // const https = require('https');
 // const server = https.createServer(options, app).listen(443);
 const http = require('http');
