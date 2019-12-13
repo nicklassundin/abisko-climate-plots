@@ -90,5 +90,26 @@ module.exports = {
 				});
 			});
 		stream.pipe(csvStream);
+	},
+	getCSV: function(filename, database){
+		return new Promise(function(resolve, reject){
+			database.then(function(connection){
+				let query = 'SELECT * FROM `'+filename+'`;';
+				connection.query(query, function(error, result, fields){
+					resolve(result);
+				})
+			})
+
+		});
+	},
+	createTable(name, col, database){
+		database.then(function(connection){
+			console.log(name)
+			console.log(col)
+			let query = 'CREATE TABLE `'+name+'`( '+col+' );'
+			connection.query(query, (error, response) => {
+				console.log(error || response);	
+			})
+		})
 	}
 };

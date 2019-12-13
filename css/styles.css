@@ -22,7 +22,7 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(0,0,0,0.5);
+	background-color: rgba(0,100,0.5);
 	z-index: 2; 
 	cursor: pointer; 
 	text-align: center;
@@ -78,26 +78,32 @@
 	color: #ffffff;
 }
 
-.upload-form {
+.admin-form {
 	width: 300px;
 	margin: 0 auto;
 	font-family: Tahoma, Geneva, sans-serif;
 }
-.upload-form h1 {
+.admin-form h1 {
 	text-align: center;
 	color: #4d4d4d;
 	font-size: 24px;
 	padding: 20px 0 20px 0;
 }
-.upload-form input[type="password"],
-.upload-form input[type="text"] {
+.admin-form h2 {
+	text-align: center;
+	color: #4d4d4d;
+	font-size: 12px;
+	padding: 10px 0 10px 0;
+}
+.admin-form input[type="password"],
+.admin-form input[type="text"] {
 	width: 100%;
 	padding: 15px;
 	border: 1px solid #dddddd;
 	margin-bottom: 15px;
 	box-sizing:border-box;
 }
-.upload-form input[type="submit"] {
+.admin-form input[type="submit"] {
 	width: 100%;
 	padding: 15px;
 	background-color: #535b63;
@@ -107,7 +113,7 @@
 	font-weight: bold;
 	color: #ffffff;
 }
-.upload-form input[type="file"] {
+.admin-form input[type="file"] {
 	width: 100%;
 	padding: 15px;
 	background-color: #535b63;
@@ -121,7 +127,7 @@
     	cursor: pointer;
 }
 
-.upload-form select {
+.admin-form select {
 	color: #ffffff;
   	padding: 8px 16px;
   	border: 1px solid transparent;
@@ -137,6 +143,4 @@
 	/* font-weight: bold; */
 	/* color: #ffffff; */
 }
-
-
 

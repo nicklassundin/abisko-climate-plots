@@ -124,7 +124,7 @@ app.post('/auth', function(request, response) {
 var multer = require('multer');
 var storage = multer.memoryStorage()
 var upload = multer({ storage: storage })
-app.post('/upload', upload.single('file'), function(request, response, next){
+app.post('/admin/upload', upload.single('file'), function(request, response, next){
 	if(request.session.loggedin){
 		var username = request.body.username;
 		var password = request.body.password;
@@ -157,6 +157,19 @@ app.get('/home', function(request, response) {
 	response.end();
 });
 
+app.post('/admin/create/table', function(request, response, next){
+	if(request.session.loggedin){
+		console.log(request)
+		var username = request.body.username;
+		var password = request.body.password;
+		var tablename = request.body.tablename;
+		var columns = request.body.columns;
+		database.createTable(tablename, columns, database.admin);
+		response.send('Created new table '+tablename)
+	} else {
+		response.send('Please login to view this page!')
+	}
+})
 
 /////############///////////
 /////############///////////
@@ -195,5 +208,13 @@ app.get( '/chart', (req, res) => {
 	})
 });
 
-
-
+const Json2csvParser = require("json2csv").Parser;
+app.get('/abisko/ANS_SnowDepth.csv', (request, response) => {
+	database.getCSV('ANS_SnowDepth.csv', database.admin).then(function(data){
+		const jsonData = JSON.parse(JSON.stringify(data));
+		const json2csvParser = new Json2csvParser({ header: true});
+		const csv = json2csvParser.parse(jsonData);
+		response.send(csv);
+		// response.send(data);
+	})
+});

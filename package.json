@@ -12,6 +12,7 @@
 		"formidable": "^1.2.1",
 		"highcharts": "^7.2.1",
 		"jquery": "^3.4.1",
+		"json2csv": "^4.5.4",
 		"mariadb": "^2.1.4",
 		"mariasql": "^0.2.6",
 		"mongodb": "^3.3.5",
