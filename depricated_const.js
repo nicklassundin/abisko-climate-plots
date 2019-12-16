@@ -318,11 +318,9 @@ const highcharts_Settings = {
 			// annotationsOptions: undefined,
 			// annotations: undefined,
 		},
-		// showTable: true, // TODO DATA TABLE
-		// printMaxWidth: 1200,
-		sourceWidth: 1200,
-		sourceHeight: 600,
-		scale: 1,
+		sourceWidth: 900,
+		// sourceHeight: 600,
+		scale: 3,
 		buttons: {
 			contextButton: {
 				menuItems: [{
