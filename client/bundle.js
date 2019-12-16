@@ -75,8 +75,8 @@ exports.highcharts_Settings = {
 		},
 		// showTable: true, // TODO DATA TABLE
 		// printMaxWidth: 1200,
-		sourceWidth: 1800,
-		sourceHeight: 900,
+		sourceWidth: 900,
+		// sourceHeight: 800,
 		scale: 8,
 		// allowHTML: true,
 		buttons: {
