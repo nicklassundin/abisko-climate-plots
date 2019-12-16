@@ -41,7 +41,7 @@
 	},
 	"scripts": {
 		"test": "npm run test-unit",
-		"test-unit": "NODE_ENV=test mocha 'modules/*.spec.js'",
+		"test-unit": "NODE_ENV=test mocha 'modules/*.spec.js' --delay",
 		"start": "npx nodemon server.js --ignore 'client/*.js' 'temp/*'"
 	},
 	"repository": {

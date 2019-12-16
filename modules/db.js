@@ -13,9 +13,9 @@ const PASSWORD = db_config.ssh.password;
 
 var connect = function(account=db_config.database.webserver){
 	return new Promise(function(resolve, reject){
-		console.log("START SSH connection")
+		// console.log("START SSH connection")
 		ssh.on('ready', function() {
-			console.log("SSH READY")
+			// console.log("SSH READY")
 			ssh.forwardOut(
 				// source address, this can usually be any valid address
 				'127.0.0.1',
@@ -38,7 +38,7 @@ var connect = function(account=db_config.database.webserver){
 					// send connection back in variable depending on success or not
 					connection.connect(function(err){
 						if (!err) {
-							console.log("SSH connected")
+							console.log("SSH connecte")
 							resolve(connection);
 						} else {
 							reject(err);
@@ -56,9 +56,27 @@ var connect = function(account=db_config.database.webserver){
 
 var db = connect
 
+
 module.exports = {
+	connect: connect,
 	webserver: connect(),
 	admin: connect(db_config.database.admin),
+	makeQuery: function(database, query){
+		return new Promise(function(resolve, reject){
+
+			database.then(function(connection){
+				connection.query(query, (error, response) => {
+					if(error){
+						reject(error);
+					}else if(response){
+						resolve(response);
+					}
+				})
+			}).catch(function(error){
+			console.log(error)
+			})
+		})
+	},
 	importCSV: function(filename, table, connection){
 		let stream = fs.createReadStream(filename);
 		let csvData = [];
@@ -92,24 +110,16 @@ module.exports = {
 		stream.pipe(csvStream);
 	},
 	getCSV: function(filename, database){
+		var makeQuery = this.makeQuery;
 		return new Promise(function(resolve, reject){
-			database.then(function(connection){
-				let query = 'SELECT * FROM `'+filename+'`;';
-				connection.query(query, function(error, result, fields){
-					resolve(result);
-				})
-			})
-
+			let query = 'SELECT * FROM `'+filename+'`;';
+			makeQuery(database, query).then(function(res){
+				resolve(res);
+			});
 		});
 	},
 	createTable(name, col, database){
-		database.then(function(connection){
-			console.log(name)
-			console.log(col)
-			let query = 'CREATE TABLE `'+name+'`( '+col+' );'
-			connection.query(query, (error, response) => {
-				console.log(error || response);	
-			})
-		})
+		let query = 'CREATE TABLE `'+name+'`( '+col+' );'
+		this.makeQuery(database, query);
 	}
 };

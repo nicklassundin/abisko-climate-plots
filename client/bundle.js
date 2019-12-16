@@ -633,7 +633,7 @@ var monthlyFunc = (render) => function(id, title, src="") {
 	}
 };
 
-exports.charts = {
+var charts = {
 	draw: function(ids, div){
 		this.redraw = function() {ids.forEach(id => {
 			div.appendChild(rendF[id].html());
@@ -644,6 +644,7 @@ exports.charts = {
 	},
 	redraw: undefined 
 }
+exports.charts = charts;
 
 
 var dataset_struct = {
@@ -3454,7 +3455,7 @@ exports.parsers = {
 		return temperatures;
 	},
 	AbiskoCsv: function (result, src='') {
-		console.log(result)
+		// console.log(result)
 		var blocks = { precipitation: [], temperatures: [] };
 		result.data.forEach(entry => {
 			var parseEntry = function(y){
