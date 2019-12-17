@@ -320,7 +320,7 @@ const highcharts_Settings = {
 		},
 		sourceWidth: 900,
 		// sourceHeight: 600,
-		scale: 3,
+		scale: 4,
 		buttons: {
 			contextButton: {
 				menuItems: [{
