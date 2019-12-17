@@ -1316,7 +1316,10 @@ exports.graphs = {
 					name: this.Highcharts.getOptions().lang.freezeup,
 					color: '#0000ee',
 					lineWidth: 0,
-					marker: { radius: 2 },
+					marker: { 
+						radius: 2,
+						symbol: 'circle'
+					},
 					states: { hover: { lineWidthPlus: 0 } },
 					data: ice.freezeDOY,
 				},{
