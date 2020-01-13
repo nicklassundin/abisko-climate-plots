@@ -38,20 +38,22 @@ var connect = function(account=db_config.database.webserver){
 					// send connection back in variable depending on success or not
 					connection.connect(function(err){
 						if (!err) {
-							console.log("SSH connecte")
+							console.log("SSH connected")
 							resolve(connection);
 						} else {
 							reject(err);
 						}
-					});
+					})
 				});
+		}).on('error', function(err){
+			console.error('Error during connecting to the device: ' + err);
 		}).connect({
 			host: HOST,
 			port: PORT,
 			username: USER,
 			password: PASSWORD
 		});
-	});
+	})
 }
 
 var db = connect
@@ -73,7 +75,7 @@ module.exports = {
 					}
 				})
 			}).catch(function(error){
-			console.log(error)
+				console.log(error)
 			})
 		})
 	},
