@@ -8,6 +8,7 @@ const express = require('express');
 const request = require('request');
 const url = require('url');
 
+
 var $ = require("jquery");
 const custom = require('./config/custom.json');
 const constants = require('./config/const.json');
@@ -29,7 +30,14 @@ var database = require('./modules/db');
 
 
 const app = express();
-app.set('view engine', 'pug');
+var engines = require('consolidate');
+
+// var exphbs = require('express-handlebars');
+// app.engine('handlebars', exphbs());
+// app.set('view engine', 'hbs');
+// app.set('view engine', 'pug');
+app.engine('pug', engines.pug);
+app.engine('handlebars', engines.handlebars);
 
 // const ID = 'smhiTemp';
 const TYPE = 'corrected-archive';
@@ -104,7 +112,7 @@ app.post('/auth', function(request, response) {
 				if (results.length > 0) {
 					request.session.loggedin = true;
 					request.session.username = username;
-					response.render('upload', 
+					response.render('upload.pug', 
 						{
 							username: username,
 							password: password
@@ -145,7 +153,7 @@ app.post('/admin/upload', upload.single('file'), function(request, response, nex
 })
 
 app.get('/', (req, res) => {
-	res.render('login', {})	
+	res.render('login.pug', {})	
 })
 
 app.get('/home', function(request, response) {
@@ -198,7 +206,7 @@ app.get( '/chart', (req, res) => {
 		STATION = queryObject.station;
 	}
 
-	res.render('chart', {
+	res.render('chart.pug', {
 		ID_REQ: ID,
 		// FILE: JSON.stringify(response),
 		LANG: LANG,
