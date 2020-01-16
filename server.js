@@ -206,7 +206,7 @@ app.get( '/chart', (req, res) => {
 		STATION = queryObject.station;
 	}
 
-	res.render('chart.pug', {
+	res.render('chart.hbs', {
 		ID_REQ: ID,
 		// FILE: JSON.stringify(response),
 		LANG: LANG,
