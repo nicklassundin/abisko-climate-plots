@@ -54,8 +54,7 @@ const TYPE = 'corrected-archive';
 // const https = require('https');
 // const server = https.createServer(options, app).listen(443);
 const http = require('http');
-const server = http.createServer(app).listen(80);
-// http.createServer(app).listen(80);
+const server = http.createServer(app).listen(port);
 
 // var forceSsl = require('express-force-ssl');
 // app.use(forceSsl);
