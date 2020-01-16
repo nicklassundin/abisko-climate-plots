@@ -3,30 +3,8 @@ const renders = require('./render.js').graphs;
 const Papa = require('papaparse');
 const parse = require('./stats.js').parsers;
 const help = require('./helpers.js')
-updatePlot = require('../config/highcharts_config.js').updatePlot;
 
 var months = help.months;
-
-// var mark = function(id="mark",par=window.location.search) {
-// 	var param = (''+par);
-// 	var mark = document.getElementById(id+param);
-// 	if(!mark) mark = document.getElementById(id);
-
-// 	var container = document.createElement("div")
-// 	container.setAttribute('id','cont'+param);
-// 	mark.appendChild(bpage(container,par=window.location.seach));
-// }
-
-
-// var baselineLower = help.baselineLower;
-// var baselineUpper = help.baselineUpper;
-
-// var requestChart = function(id, lang=nav_lang, div){
-// 	nav_lang = lang;
-// 	div.appendChild(RendF[id].html());
-// 	rendF[id].func();
-// }
-// exports.requestChart = requestChart;
 
 var monthlyFunc = (render) => function(id, title, src="") {
 	var result = [];
@@ -36,20 +14,6 @@ var monthlyFunc = (render) => function(id, title, src="") {
 		result.forEach((func, index) => func(data[index+1+'']));	
 	}
 };
-
-var charts = {
-	draw: function(ids, div){
-		this.redraw = function() {ids.forEach(id => {
-			div.appendChild(rendF[id].html());
-			rendF[id].func();
-		})
-			this.redraw();	
-		}
-	},
-	redraw: undefined 
-}
-exports.charts = charts;
-
 
 var dataset_struct = {
 	src: undefined,
@@ -134,23 +98,6 @@ var dataset_struct = {
 }
 
 var config = {
-	//// gisstemp:{
-	// 	preset: function(complete){
-	// 		return {
-	// 			// //worker: useWebWorker,
-	// 			header: true,
-	// 			delimiter: ',',
-	// 			download: true,
-	// 			skipEmptyLines: true,
-	// 			dynamicTyping: true,
-	// 			comments: 'Station',
-	// 			complete: complete, 
-	// 		};	
-	// 	},
-	// 	cached: undefined,
-	// 	parser: parseGISSTEMP,
-	// },
-
 	zonal: dataset_struct.create(
 		src = 'https://nicklassundin.github.io/abisko-climate-plots/', 
 		// TODO place holder for later database
@@ -360,7 +307,7 @@ var urlParams = new URLSearchParams(window.location.search);
 var baseline = null;
 var baselineForm = undefined;
 
-
+// DEPREICATED TODO replace 
 var buildChart = function(doc, id, reset=false){
 	var call = function(id){
 		return new Promise(function(resolve,reject){
@@ -448,39 +395,10 @@ var createDiv = function(id, no=null){
 }
 
 rendF = {
-	// TODO
-	// build: function(rendID, sub){
-	// 		config[id].contFunc(reset);
-	// 		config[id].init(rendID, sub);
-	// 	}
-
-	// 'northernHemisphere': {
-	// 	func: function(reset=false) {
-	// 		functorGISSTEMP('data/NH.Ts.csv',renderTemperature,'https://data.giss.nasa.gov/gistemp/')('northernHemisphere','Northern Hemisphere temperatures');
-	// 	},
-	// 	html: function(debug=false, doc){
-	// 		var no = 16;
-	// 		if(!debug) no = debug;
-	// 		return createDiv('northernHemisphere', no);
-
-	// 	},
-	// },
-	// 'globalTemperatures': {
-	// 	func: function(reset=false){
-	// 		functorGISSTEMP('data/GLB.Ts.csv',renderTemperature, 'https://data.giss.nasa.gov/gistemp/')('globalTemperatures','Global temperatures');
-	// 	},
-	// 	html: function(debug=false, doc){
-	// 		var no = 17;
-	// 		if(!debug) no = debug;
-	// 		return createDiv('globalTemperatures', no);
-
-	// 	},
-	// },
 	'temperatureDifference1': {
 		func: function(reset=false){
 			config['zonal'].contFunc(reset);
 			config['zonal'].init('temperatureDifference1','64n-90n')
-			// contFunc(reset,'zonal', 'data/ZonAnn.Ts.csv','https:data.giss.nasa.gov/gistemp/')('temperatureDifference1','64n-90n')
 		},
 		html: function(debug=false, doc){
 			var no = 20;
@@ -493,7 +411,6 @@ rendF = {
 		func: function(reset=false){
 			config['zonal'].contFunc(reset);
 			config['zonal'].init('temperatureDifference2','nhem');
-			// contFunc(reset,'zonal', 'data/ZonAnn.Ts.csv','https:data.giss.nasa.gov/gistemp/')('temperatureDifference2','nhem');
 		},
 		html: function(debug=false, doc){
 			var no = 21;
@@ -525,7 +442,6 @@ rendF = {
 	},
 	'abiskoLakeIce':{
 		func: function(reset=false){
-			// contFunc(reset,'tornetrask', "data/Tornetrask_islaggning_islossning.csv", "https://www.arcticcirc.net/")('abiskoLakeIce')
 			config['tornetrask'].contFunc(reset);
 			config['tornetrask'].init('abiskoLakeIce')
 		},
@@ -538,7 +454,6 @@ rendF = {
 	}, 
 	'abiskoLakeIceTime':{
 		func: function(reset=false){
-			// contFunc(reset,'tornetrask', "data/Tornetrask_islaggning_islossning.csv", "https://www.arcticcirc.net/")('abiskoLakeIce')
 			config['tornetrask_iceTime'].contFunc(reset);
 			config['tornetrask_iceTime'].init('abiskoLakeIceTime')
 		},
@@ -576,7 +491,6 @@ rendF = {
 		func: function(reset=false){
 			config['abisko'].contFunc(reset);
 			config['abisko'].init('AbiskoTemperatures',['temperatures','yrly']);
-			// contFunc(reset,"abisko",csv.abisko.temp,csv.abisko.src)('AbiskoTemperatures',['temperatures','yrly']);
 		},
 		html: function(debug=false, doc){
 			var no = 1;
@@ -612,7 +526,6 @@ rendF = {
 		func: function(reset=false){
 			config['abisko'].contFunc(reset);
 			config['abisko'].init('temperatureDifferenceAbisko', ['temperatures','yrly'],['temperatures','difference'])
-			// contFunc(reset,"abisko",csv.abisko.temp,csv.abisko.src)('temperatureDifferenceAbisko', ['temperatures','yrly'],['temperatures','difference'])
 		},
 		html: function(debug=false, doc){
 			var no = 19;
@@ -625,7 +538,6 @@ rendF = {
 		func: function(reset=false){
 			config['abisko'].contFunc(reset);
 			config['abisko'].init('monthlyAbiskoTemperatures', ['temperatures','monthly'])
-			// contFunc(reset,"abisko",csv.abisko.temp,csv.abisko.src)('monthlyAbiskoTemperatures', ['temperatures','monthly'])
 		},
 		html: function(debug=false, doc){
 			var no = 4;
@@ -650,7 +562,6 @@ rendF = {
 		func: function(reset=false){
 			config['abisko'].contFunc(reset);
 			config['abisko'].init('yearlyPrecipitation', ['precipitation','yrly'])
-			// contFunc(reset,"abisko",csv.abisko.temp,csv.abisko.src)('yearlyPrecipitation', ['precipitation','yrly'])
 		},
 		html: function(debug=false, doc){
 			var no = 23;
@@ -740,7 +651,6 @@ rendF = {
 
 			}
 			return div
-
 		},
 	}, 
 	'growingSeason': {

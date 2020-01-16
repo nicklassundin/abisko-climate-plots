@@ -11,7 +11,7 @@ const PORT = db_config.ssh.port;
 const USER = db_config.ssh.user;
 const PASSWORD = db_config.ssh.password;
 
-var connect = function(account=db_config.database.webserver){
+var connect = function(account=db_config.database.admin){
 	return new Promise(function(resolve, reject){
 		// console.log("START SSH connection")
 		ssh.on('ready', function() {
@@ -26,7 +26,7 @@ var connect = function(account=db_config.database.webserver){
 				// destination port
 				account.port,
 				function (err, stream) {
-					if (err) throw err; // SSH error: can also send error in promise ex. reject(err)
+					if (err) reject(err); // SSH error: can also send error in promise ex. reject(err)
 					// use `sql` connection as usual
 					const connection = mysql.createConnection({
 						host     : account.host,
@@ -38,7 +38,7 @@ var connect = function(account=db_config.database.webserver){
 					// send connection back in variable depending on success or not
 					connection.connect(function(err){
 						if (!err) {
-							console.log("SSH connected")
+							// console.log("SSH connected")
 							resolve(connection);
 						} else {
 							reject(err);
@@ -53,6 +53,8 @@ var connect = function(account=db_config.database.webserver){
 			username: USER,
 			password: PASSWORD
 		});
+	}).catch(function(error){
+		// console.log(error)
 	})
 }
 
@@ -60,12 +62,27 @@ var db = connect
 
 
 module.exports = {
+	ssh: function(account=db_config.database.admin){
+		return new Promise(function(resolve, reject){
+			// console.log("START SSH connection")
+			ssh.on('ready', function() {
+				resolve(ssh)	
+			}).on('error', function(err){
+				console.error('Error during connecting to the device: ' + err);
+			}).connect({
+				host: HOST,
+				port: PORT,
+				username: USER,
+				password: PASSWORD
+			});
+		}).catch(function(error){
+			// console.log(error)
+		})
+	},
 	connect: connect,
-	webserver: connect(),
 	admin: connect(db_config.database.admin),
 	makeQuery: function(database, query){
 		return new Promise(function(resolve, reject){
-
 			database.then(function(connection){
 				connection.query(query, (error, response) => {
 					if(error){
