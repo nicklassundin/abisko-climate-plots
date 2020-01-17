@@ -64,7 +64,7 @@
 	"homepage": "https://github.com/nicklassundin/abisko-climate-plots#readme",
 	"nodemonConfig": {
 		"events": {
-			"restart": "webpack modules/lib.js -o client/bundle.js"
+			"start": "webpack --mode=development modules/lib.js -o client/bundle.js"
 		}
 	}
 }
