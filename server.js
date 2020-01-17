@@ -1,4 +1,3 @@
-
 const hostname = '127.0.0.1';
 const port = 80;
 const serverURL = "http://localhost";
@@ -8,7 +7,6 @@ const express = require('express');
 const request = require('request');
 const url = require('url');
 
-
 var $ = require("jquery");
 const custom = require('./config/custom.json');
 const constants = require('./config/const.json');
@@ -16,8 +14,6 @@ const constants = require('./config/const.json');
 // const stats = require('./modules/stats');
 const smhi = require('./modules/smhi');
 // const lib = require('./modules/lib');
-
-
 // Security
 // const serverCert = [fs.readFileSync("encrypt/primary.crt", "utf8")];
 /////############///////////

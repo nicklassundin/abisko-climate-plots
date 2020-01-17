@@ -31,7 +31,8 @@
 		"sinon": "^7.5.0",
 		"ssh2": "^0.8.7",
 		"tedious": "^6.3.0",
-		"uniq": "^1.0.1"
+		"uniq": "^1.0.1",
+		"webpack": "^4.41.5"
 	},
 	"devDependencies": {
 		"chai": "3.5.0",
@@ -41,7 +42,8 @@
 		"mocha": "^6.2.2",
 		"mocha-lcov-reporter": "^1.3.0",
 		"sinon": "1.17.4",
-		"sinon-chai": "2.8.0"
+		"sinon-chai": "2.8.0",
+		"webpack-cli": "^3.3.10"
 	},
 	"scripts": {
 		"test": "npm run test-unit",
@@ -62,7 +64,7 @@
 	"homepage": "https://github.com/nicklassundin/abisko-climate-plots#readme",
 	"nodemonConfig": {
 		"events": {
-			"restart": "browserify modules/lib.js -o client/bundle.js && browserify modules/maps.js -o client/navigate_bundle.js"
+			"restart": "webpack modules/lib.js -o client/bundle.js"
 		}
 	}
 }
