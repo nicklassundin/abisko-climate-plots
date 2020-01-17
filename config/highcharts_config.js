@@ -21,7 +21,7 @@ var updatePlot = function(id, bl, bu){
 	if(id.split('_')[1]) id = id.split('_')[0]
 	var div = document.getElementById(id);
 	chart.destroy();
-	return lib.buildChart(div,window.location.search,ids=id,reset=true)
+	return buildChart(div,window.location.search,ids=id,reset=true)
 }
 global.updatePlot = updatePlot;
 
