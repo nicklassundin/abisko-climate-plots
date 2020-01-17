@@ -670,64 +670,6 @@ exports.parsers = {
 	AbiskoSnowData: function (result, src='') {
 		var data = result.data;
 		var fields = result.meta.fields;
-
-		//	var custom = function(date){
-		//		var tmp = [
-		//			//{ start: 1931, end: 1940, },
-		//			//{ start: 1941, end: 1950, },
-		//			//{ start: 1951, end: 1960, },
-		//			{ start: 1961, end: 1970, },
-		//			{ start: 1971, end: 1980, },
-		//			{ start: 1981, end: 1990, },
-		//			{ start: 1991, end: 2000, },
-		//			{ start: 2001, end: 2010, },
-		//			{ start: 2011, end: Infinity },
-		//			// { start: -Infinity, end: Infinity }, // entire period
-		//		];
-		//		var year = parseInt(date.getFullYear());
-		//		var p = undefined;
-		//		tmp.forEach(period => {
-		//			if(parseInt(period.start) <= year && parseInt(period.end) >= year){
-		//				p = ("From "+period.start+" to "+period.end); 
-		//			} 
-		//		})
-		//		return p;
-		//	}
-		//	var values = parseByDate(data.map((row) => {
-		//		var date;
-		//		var entry = {};
-		//		Object.keys(row).forEach(key => {
-		//			switch(key){
-		//				case 'Time':
-		//					date = new Date(row[key]);
-		//					break;
-		//				default:
-		//					if(key!="" && key!='Time'){
-		//						entry[key] = {
-		//							x: date,
-		//							y: parseFloat(row[key]),
-		//						}
-
-		//					}
-		//			}	
-		//		})
-		//		return entry;
-		//	}), 'mean', '', custom=custom)
-		//	console.log(values)
-		//	var result = {
-		//		periods: [],
-		//		decades: [],
-		//	};
-
-
-		//	///
-		//	//
-		//	//
-		//	//
-		//	//
-		//	//
-		//
-
 		var periods = [
 			//{ start: 1913, end: 1930 },
 			{ start: 1931, end: 1960 },

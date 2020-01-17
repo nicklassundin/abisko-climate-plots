@@ -1,4 +1,3 @@
-
 const hostname = '127.0.0.1';
 const port = 80;
 const serverURL = "http://localhost";
@@ -7,7 +6,6 @@ var fs = require('fs');
 const express = require('express');
 const request = require('request');
 const url = require('url');
-
 
 var $ = require("jquery");
 const custom = require('./config/custom.json');
