@@ -1,4 +1,4 @@
-// const Highcharts = require(['highcharts'], function(Highcharts){
+// const Highcharts = require(['highcharts':q], function(Highcharts){
 // 	return Highcharts
 // });
 const highchart_help = require('../config/highcharts_config.js');
@@ -7,9 +7,9 @@ const lib = require('./lib.js')
 // const Highcharts = require('highcharts');
 var help = require('./helpers.js');
 
-var baseline = null;
-// var baselineLower = help.baselineLower;
-// var baselineUpper = help.baselineUpper;
+var baseline = require('../config/const.json');
+global.baselineLower = baseline.baselineLower;
+global.baselineUpper = baseline.baselineUpper;
 
 var charts = highchart_help.charts;
 
@@ -34,9 +34,6 @@ var rainColor = {
 	borderColor: '#5F7CB9',
 	hover: '#3333ff',
 };
-
-
-var updatePlot = highchart_help.updatePlot;
 
 // TODO Seperate them to one constructor with general input for reuse
 var createBaseline = function(ver=true, change){

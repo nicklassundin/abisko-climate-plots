@@ -23,7 +23,7 @@ var updatePlot = function(id, bl, bu){
 	chart.destroy();
 	return lib.buildChart(div,window.location.search,ids=id,reset=true)
 }
-exports.updatePlot = updatePlot;
+global.updatePlot = updatePlot;
 
 var preSetMeta = {
 	'abiskoTemp': {
