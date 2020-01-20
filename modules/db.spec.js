@@ -19,10 +19,10 @@ describe('database connection test', function () {
 		});
 	})
 
-	it('Admin Query: ', function(done) {
-		db.makeQuery(db.admin, 'SHOW TABLES').then(function(response){
-			if(response) done()
-		});
-	})
+	// it('Admin Query: ', function(done) {
+	// 	db.makeQuery(db.admin, 'SHOW TABLES').then(function(response){
+	// 		if(response) done()
+	// 	});
+	// })
 
 })
