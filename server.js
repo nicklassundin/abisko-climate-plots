@@ -1,4 +1,4 @@
-const config = require('.config/server.json');
+const config = require('./config/server.json');
 const hostname = config.hostname;
 const port = config.port;
 const serverURL = config.serverURL; 
