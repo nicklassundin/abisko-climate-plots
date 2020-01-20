@@ -52,9 +52,6 @@ const TYPE = 'corrected-archive';
 const http = require('http');
 const server = http.createServer(app).listen(port);
 
-// var forceSsl = require('express-force-ssl');
-// app.use(forceSsl);
-
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/dep', express.static(__dirname + '/dep'));
 app.use('/modules', express.static(__dirname + '/modules'));
@@ -64,13 +61,6 @@ app.use('/client', express.static(__dirname + '/client'));
 app.use('/tmp', express.static(__dirname + '/tmp'));
 
 smhi.init(app, TYPE)
-
-// app.get( '/map/sweden', (req, res) => {
-// 	res.render('map', {
-// 	})
-// });
-
-// INTERFACE DATABASE
 
 app.get('/databases', (req, res) => {
 	database.webserver.then(function(connection){
