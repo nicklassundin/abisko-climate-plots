@@ -1,6 +1,7 @@
-const hostname = '127.0.0.1';
-const port = 80;
-const serverURL = "http://localhost";
+const config = require('.config/server.json');
+const hostname = config.hostname;
+const port = config.port;
+const serverURL = config.serverURL; 
 
 var fs = require('fs');
 const express = require('express');
