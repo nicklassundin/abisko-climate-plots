@@ -2,14 +2,6 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/styles.css">
-		<!-- meta (charaset="utf-8")-->
-		<!-- include ../jquery.js-->
-		<!-- include ../lib.js-->
-		<!-- include ../customEvents.js-->
-		<!-- include ../import_parser.js-->
-		<!-- include ../regression.js-->
-		<!-- include ../helpers.js-->
-		<!-- include ../highcharts-regression.js-->
 		<script src="https://nicklassundin.github.io/abisko-climate-plots/jquery.js"></script>
 		<script src="https://code.highcharts.com/highcharts.js"></script>
 		<script src="https://code.highcharts.com/modules/annotations.js"></script>
@@ -23,7 +15,8 @@
 	<body>
 		<div id="mark"></div>
 		{{#each ID_REQ}}
-			<script type="text/javascript">
+		<script type="text/javascript">
+			console.log({{station}})
 				lib.renderChart(document.getElementById("mark"), '{{this}}');
 			</script>
 		{{/each}}

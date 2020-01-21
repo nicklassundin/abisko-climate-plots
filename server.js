@@ -191,10 +191,8 @@ app.get( '/chart', (req, res) => {
 	}else{
 		STATION = queryObject.station;
 	}
-
 	res.render('chart.hbs', {
 		ID_REQ: ID,
-		// FILE: JSON.stringify(response),
 		LANG: LANG,
 		STATION: STATION,
 		baselineLower: constants.baselineLower,
