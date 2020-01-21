@@ -149,7 +149,6 @@ var config = {
 				'monthly': monthlyFunc(renders.Temperature),
 				'difference': renders.TemperatureDifference,
 			},
-
 			'precipitation':{
 				'yrly': renders.YearlyPrecipitation,
 				'summer': renders.YearlyPrecipitation,

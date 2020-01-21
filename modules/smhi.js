@@ -123,6 +123,7 @@ var latestMonths = function(id){
 
 
 exports.init = function(app, TYPE){
+	console.log(get_smhi_param("1.json"));
 	request({
 		url: get_smhi_param("1.json"),
 		json: true,
