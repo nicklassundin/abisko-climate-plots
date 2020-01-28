@@ -2,11 +2,6 @@ process.argv.forEach(function (val, index, array) {
 	//TODO argument on start up	
 });
 
-const config = require('./config/server.json');
-const hostname = config.hostname;
-const port = config.port;
-const serverURL = config.serverURL; 
-
 var fs = require('fs');
 const express = require('express');
 const request = require('request');
@@ -26,30 +21,8 @@ app.engine('handlebars', engines.handlebars);
 
 const TYPE = 'corrected-archive';
 
-var webserver = {
-	options: {
-		key: fs.readFileSync('encrypt/private.key'),
-		cert: fs.readFileSync( 'encrypt/primary.crt' ),
-		// ca: fs.readFileSync( 'encrypt/intermediate.crt' )
-	},
-	http: function(app){
-		const http = require('http');
-		try{
-			return http.createServer(app).listen(port);
-		}catch(err){
-			console.log(err)
-		}
-	},
-	https: function(app){
-		const https = require('https');
-		try{
-			return https.createServer(this.options, app).listen(config.https.port);
-		}catch(err){
-			console.log(err);
-		}
-	}
-}
-webserver.https(app);
+// Starts webserver
+require('./modules/webserver.js').webserver.https(app);
 
 
 app.use('/css', express.static(__dirname + '/css'));
