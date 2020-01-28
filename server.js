@@ -40,18 +40,19 @@ app.engine('handlebars', engines.handlebars);
 const TYPE = 'corrected-archive';
 // const TYPE = 'latest-months';
 
-// var key = fs.readFileSync('encrypt/private.key');
-// var cert = fs.readFileSync( 'encrypt/primary.crt' );
+var key = fs.readFileSync('encrypt/private.key');
+var cert = fs.readFileSync( 'encrypt/primary.crt' );
 // var ca = fs.readFileSync( 'encrypt/intermediate.crt' );
-// var options = {
-	// key: key,
-	// cert: cert,
+var options = {
+	key: key,
+	cert: cert,
 	// ca: ca
-// };
-// const https = require('https');
-// const server = https.createServer(options, app).listen(443);
+};
+const https = require('https');
+https.createServer(options, app).listen(config.https.port);
+
 const http = require('http');
-const server = http.createServer(app).listen(port);
+http.createServer(app).listen(port);
 
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/dep', express.static(__dirname + '/dep'));
