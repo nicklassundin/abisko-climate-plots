@@ -1,3 +1,6 @@
+// Pre-setup
+var $ = require("jquery");
+
 process.argv.forEach(function (val, index, array) {
 	//TODO argument on start up	
 });
@@ -5,26 +8,17 @@ process.argv.forEach(function (val, index, array) {
 var fs = require('fs');
 const express = require('express');
 const request = require('request');
-const url = require('url');
 
-var $ = require("jquery");
-const custom = require('./config/custom.json');
-const constants = require('./config/const.json');
-const smhi = require('./modules/smhi');
-var database = require('./modules/db');
-
+// Setup
 const app = express();
 var engines = require('consolidate');
-
 app.engine('pug', engines.pug);
 app.engine('handlebars', engines.handlebars);
-
-const TYPE = 'corrected-archive';
 
 // Starts webserver
 require('./modules/webserver.js').webserver.https(app);
 
-
+// Open file access
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/dep', express.static(__dirname + '/dep'));
 app.use('/modules', express.static(__dirname + '/modules'));
@@ -33,7 +27,12 @@ app.use('/data', express.static(__dirname + '/data'));
 app.use('/client', express.static(__dirname + '/client'));
 app.use('/tmp', express.static(__dirname + '/tmp'));
 
-smhi.init(app, TYPE)
+// SMHI DB connection
+const TYPE = 'corrected-archive';
+require('./modules/smhi').init(app, TYPE);
+
+// Database
+var database = require('./modules/db');
 
 app.get('/databases', (req, res) => {
 	database.webserver.then(function(connection){
@@ -50,8 +49,6 @@ app.get('/databases', (req, res) => {
 	})
 })
 
-
-////////////
 var session = require('express-session');
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended : true}));
@@ -137,38 +134,25 @@ app.post('/admin/create/table', function(request, response, next){
 	}
 })
 
-/////############///////////
-/////############///////////
-/////############///////////
-
-
+const url = require('url');
+const custom = require('./config/custom.json');
+const constants = require('./config/const.json');
 app.get( '/chart', (req, res) => {
 	const queryObject = url.parse(req.url,true).query;
-	var ID; 
+	var ids; 
 	if(!queryObject.id) {
-		ID = custom.ids;
+		ids = custom.ids;
 	}else{
-		ID = queryObject.id.split(",");
+		ids = queryObject.id.split(",");
 	}
-	var LANG;
-	if(!queryObject.lang){
-		LANG = 'en';
-	}else{
-		LANG = queryObject.lang;
-	}
-	var STATION;
-	if(!queryObject.station){
-		STATION = 159880; // LUND
-		// STATION = 188790; // ABISKO 
-	}else{
-		STATION = queryObject.station;
-	}
+	var charts = ids.map(id => {
+		return {
+			id: id,
+			station: queryObject.station
+		}
+	})
 	res.render('chart.hbs', {
-		ID_REQ: ID,
-		LANG: LANG,
-		STATION: STATION,
-		baselineLower: constants.baselineLower,
-		baselineUpper: constants.baselineUpper
+		charts
 	})
 });
 

@@ -14,11 +14,11 @@
 	</head>
 	<body>
 		<div id="mark"></div>
-		{{#each ID_REQ}}
+
+		{{#each charts}}
 		<script type="text/javascript">
-			console.log({{station}})
-				lib.renderChart(document.getElementById("mark"), '{{this}}');
-			</script>
+			lib.renderChart(document.getElementById("mark"), '{{this.id}}', '{{this.station}}');
+					</script>
 		{{/each}}
 	</body>
 </html>

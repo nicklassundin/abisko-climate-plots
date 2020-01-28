@@ -7,6 +7,11 @@ var months = help.months;
 
 const hostUrl = require("../../config/server.json").serverURL;
 
+var filePath = function(fileName, id=station){
+		return hostUrl+"/"+"data/"+id+"/"+fileName;
+}
+
+
 var monthlyFunc = (render) => function(id, title, src="") {
 	var result = [];
 	months().forEach((month, index) =>  
@@ -32,6 +37,7 @@ var tagApply = function(data, tag){
 var dataset_struct = {
 	src: undefined,
 	file: undefined,
+	filePath: undefined,
 	preset: undefined,
 	cached: {},
 	rawData: {},
@@ -43,7 +49,7 @@ var dataset_struct = {
 		if(reset) this.cached = {};
 		if(this.rawData)
 			var ref = this;
-		this.file.forEach(file => {
+		this.filePath().forEach(file => {
 			function data(file){
 				return new Promise(function(resolve, reject){
 					ref.preset.complete = function(result){
@@ -59,21 +65,10 @@ var dataset_struct = {
 		})
 	},
 	init: function(id, tag, renderTag=tag){
-		// console.log(id)
-		// console.log(tag)
-		// console.log(this)
 		var render = this.render;
-		// console.log(renders)
-		// console.log(this)
 		var rawData = this.rawData;
-		// console.log(rawData)	
-		// var promise = path();
 		var promise = rawData[Object.keys(rawData)[0]];
-		// console.log(promise)
-
 		new Promise(function(resolve, reject){
-			// console.log(render)
-			// console.log(renderTag)
 			if(tag) render = tagApply(render, renderTag);
 			resolve(render);
 		}).then(function(result){
@@ -102,6 +97,7 @@ var dataset_struct = {
 		}else{
 			res.file = [file];
 		}
+		res.filePath = () => res.file.map(x => filePath(file))
 		res.src = src;
 		res.preset = preset;
 		res.parser = parser;
@@ -115,7 +111,7 @@ var config = {
 	zonal: dataset_struct.create(
 		src = 'https://nicklassundin.github.io/abisko-climate-plots/', 
 		// TODO place holder for later database
-		file = hostUrl+"/"+"data/ZonAnn.Ts.csv",
+		file = "ZonAnn.Ts.csv",
 		preset = {
 			//worker: useWebWorker,
 			header: true,
@@ -133,7 +129,7 @@ var config = {
 		reader = Papa.parse),
 	abisko: dataset_struct.create(
 		src = '',
-		file = hostUrl+"/"+"data/ANS_Temp_Prec.csv",
+		file = "ANS_Temp_Prec.csv",
 		preset = {
 			//worker: useWebWorker,
 			header: true,
@@ -164,7 +160,7 @@ var config = {
 		reader = Papa.parse),
 	tornetrask: dataset_struct.create(
 		src = '', 
-		file = hostUrl+"/"+"data/Tornetrask_islaggning_islossning.csv",
+		file = "Tornetrask_islaggning_islossning.csv",
 		preset = {
 			header: true,
 			download: true,
@@ -175,7 +171,7 @@ var config = {
 		reader = Papa.parse),
 	tornetrask_iceTime: dataset_struct.create(
 		src = '',
-		file = hostUrl+"/"+"data/Tornetrask_islaggning_islossning.csv",
+		file = "Tornetrask_islaggning_islossning.csv",
 		preset = {
 			header: true,
 			download: true,
@@ -201,7 +197,7 @@ var config = {
 		reader = Papa.parse),
 	weeklyCO2: dataset_struct.create(
 		src ='',
-		file = hostUrl+"/"+"data/weekly_in_situ_co2_mlo.csv",
+		file = "weekly_in_situ_co2_mlo.csv",
 		preset = {
 			download: true,
 			skipEmptyLines: true,
@@ -215,7 +211,7 @@ var config = {
 
 	permaHistogramCALM: dataset_struct.create(
 		src = '',
-		file = hostUrl+"/"+"data/CALM.csv",
+		file = "data/CALM.csv",
 		preset = {
 			header: true,
 			download: true,
@@ -226,15 +222,12 @@ var config = {
 		reader = Papa.parse),
 	smhiTemp: dataset_struct.create(
 		src = '',
-		file = [
-			hostUrl+"/"+"data/"+station+"/temperature.csv"
-		],
+		file = "temperature.csv",
 		preset = {
 			header: true,
 			download: true,
 			skipEmptyLines: true,
 			beforeFirstChunk: function(result){
-				// console.log(result)
 				result = result.split("\n")
 				var line = result.findIndex(x => x.indexOf("Tidsutsnitt:") > -1)  
 				result.splice(0,line);
