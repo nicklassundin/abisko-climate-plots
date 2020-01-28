@@ -5,7 +5,7 @@ exports.webserver = {
 	options: {
 		key: fs.readFileSync('./encrypt/private.key'),
 		cert: fs.readFileSync( './encrypt/primary.crt' ),
-		ca: fs.readFileSync( './encrypt/intermediate.crt' )
+		// ca: fs.readFileSync( './encrypt/intermediate.crt' )
 	},
 	http: function(app){
 		const http = require('http');
