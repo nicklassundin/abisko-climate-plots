@@ -5,7 +5,7 @@ module.exports = {
     		bundle: './modules/lib.js'
   	},
 	output: {
-		filename: './[bundle].js',
+		filename: './bundle.js',
     		path: __dirname + '/client'
 	},
 	module: {

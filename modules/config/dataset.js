@@ -5,6 +5,8 @@ const parse = require('../stats.js').parsers;
 const help = require('../helpers.js')
 var months = help.months;
 
+const hostUrl = require("../../config/server.json").serverURL;
+
 var monthlyFunc = (render) => function(id, title, src="") {
 	var result = [];
 	months().forEach((month, index) =>  
@@ -47,7 +49,7 @@ var dataset_struct = {
 					ref.preset.complete = function(result){
 						resolve(ref.parser(result, ref.src));
 					};
-					ref.reader('/'+file, ref.preset)
+					ref.reader(file, ref.preset)
 				}).catch(function(error){
 					console.log("FAILED TO LOAD DATA")
 					console.log(error);
@@ -113,7 +115,7 @@ var config = {
 	zonal: dataset_struct.create(
 		src = 'https://nicklassundin.github.io/abisko-climate-plots/', 
 		// TODO place holder for later database
-		file = "data/ZonAnn.Ts.csv",
+		file = hostUrl+"/"+"data/ZonAnn.Ts.csv",
 		preset = {
 			//worker: useWebWorker,
 			header: true,
@@ -131,7 +133,7 @@ var config = {
 		reader = Papa.parse),
 	abisko: dataset_struct.create(
 		src = '',
-		file = "data/ANS_Temp_Prec.csv",
+		file = hostUrl+"/"+"data/ANS_Temp_Prec.csv",
 		preset = {
 			//worker: useWebWorker,
 			header: true,
@@ -161,8 +163,8 @@ var config = {
 		},
 		reader = Papa.parse),
 	tornetrask: dataset_struct.create(
-		src = '',
-		file = "data/Tornetrask_islaggning_islossning.csv",
+		src = '', 
+		file = hostUrl+"/"+"data/Tornetrask_islaggning_islossning.csv",
 		preset = {
 			header: true,
 			download: true,
@@ -173,7 +175,7 @@ var config = {
 		reader = Papa.parse),
 	tornetrask_iceTime: dataset_struct.create(
 		src = '',
-		file = "data/Tornetrask_islaggning_islossning.csv",
+		file = hostUrl+"/"+"data/Tornetrask_islaggning_islossning.csv",
 		preset = {
 			header: true,
 			download: true,
@@ -184,7 +186,7 @@ var config = {
 		reader = Papa.parse),
 	abiskoSnowDepth: dataset_struct.create(
 		src = '',
-		file = "data/ANS_SnowDepth.csv",
+		file = hostUrl+"/"+"data/ANS_SnowDepth.csv",
 		preset = {
 			//worker: useWebWorker, TODO BUG waiting for response
 			header: true,
@@ -199,7 +201,7 @@ var config = {
 		reader = Papa.parse),
 	weeklyCO2: dataset_struct.create(
 		src ='',
-		file = "data/weekly_in_situ_co2_mlo.csv",
+		file = hostUrl+"/"+"data/weekly_in_situ_co2_mlo.csv",
 		preset = {
 			download: true,
 			skipEmptyLines: true,
@@ -213,7 +215,7 @@ var config = {
 
 	permaHistogramCALM: dataset_struct.create(
 		src = '',
-		file = "data/CALM.csv",
+		file = hostUrl+"/"+"data/CALM.csv",
 		preset = {
 			header: true,
 			download: true,
@@ -225,7 +227,7 @@ var config = {
 	smhiTemp: dataset_struct.create(
 		src = '',
 		file = [
-			"data/"+station+"/temperature.csv"
+			hostUrl+"/"+"data/"+station+"/temperature.csv"
 		],
 		preset = {
 			header: true,
