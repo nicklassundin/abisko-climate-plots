@@ -1,3 +1,7 @@
+process.argv.forEach(function (val, index, array) {
+	//TODO argument on start up	
+});
+
 const config = require('./config/server.json');
 const hostname = config.hostname;
 const port = config.port;
@@ -11,56 +15,42 @@ const url = require('url');
 var $ = require("jquery");
 const custom = require('./config/custom.json');
 const constants = require('./config/const.json');
-// const language = require('./config/language.json');
-// const stats = require('./modules/stats');
 const smhi = require('./modules/smhi');
-// const lib = require('./modules/lib');
-// Security
-// const serverCert = [fs.readFileSync("encrypt/primary.crt", "utf8")];
-/////############///////////
-/////############///////////
-// DATABASE
 var database = require('./modules/db');
-/////############///////////
-/////############///////////
-/////############///////////
-
 
 const app = express();
 var engines = require('consolidate');
 
-// var exphbs = require('express-handlebars');
-// app.engine('handlebars', exphbs());
-// app.set('view engine', 'hbs');
-// app.set('view engine', 'pug');
 app.engine('pug', engines.pug);
 app.engine('handlebars', engines.handlebars);
 
-// const ID = 'smhiTemp';
 const TYPE = 'corrected-archive';
-// const TYPE = 'latest-months';
 
-var key = fs.readFileSync('encrypt/private.key');
-var cert = fs.readFileSync( 'encrypt/primary.crt' );
-// var ca = fs.readFileSync( 'encrypt/intermediate.crt' );
-var options = {
-	key: key,
-	cert: cert,
-	// ca: ca
-};
-const https = require('https');
-try{
-	https.createServer(options, app).listen(config.https.port);
-}catch(err){
-	console.log(err);
+var webserver = {
+	options: {
+		key: fs.readFileSync('encrypt/private.key'),
+		cert: fs.readFileSync( 'encrypt/primary.crt' ),
+		// ca: fs.readFileSync( 'encrypt/intermediate.crt' )
+	},
+	http: function(app){
+		const http = require('http');
+		try{
+			return http.createServer(app).listen(port);
+		}catch(err){
+			console.log(err)
+		}
+	},
+	https: function(app){
+		const https = require('https');
+		try{
+			return https.createServer(this.options, app).listen(config.https.port);
+		}catch(err){
+			console.log(err);
+		}
+	}
 }
+webserver.https(app);
 
-const http = require('http');
-try{
-	http.createServer(app).listen(port);
-}catch(err){
-	console.log(err)
-}
 
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/dep', express.static(__dirname + '/dep'));
