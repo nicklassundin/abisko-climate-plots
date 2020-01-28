@@ -49,10 +49,18 @@ var options = {
 	// ca: ca
 };
 const https = require('https');
-https.createServer(options, app).listen(config.https.port);
+try{
+	https.createServer(options, app).listen(config.https.port);
+}catch(err){
+	console.log(err);
+}
 
 const http = require('http');
-http.createServer(app).listen(port);
+try{
+	http.createServer(app).listen(port);
+}catch(err){
+	console.log(err)
+}
 
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/dep', express.static(__dirname + '/dep'));
