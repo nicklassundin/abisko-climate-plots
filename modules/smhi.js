@@ -47,7 +47,7 @@ var smhiParam = {
 	perc: SMHI_PARAM+'5.json',
 }
 
-var get_smhi_station_url = function(ID){
+var get_smhi_station_url = function(ID, period=smhi.archive){
 	var res = SMHI_STATION_URL[0]+ID+SMHI_STATION_URL[1]+period+SMHI_STATION_URL[2];
 	return res;
 }
