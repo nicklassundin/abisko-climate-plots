@@ -11,6 +11,12 @@ global.baselineUpper = '';
 lib = {
 	renderChart: function(div, type, id="abisko"){ 
 		global.station = id;
+		// TODO refractor later
+		if(id=="abisko"){
+			global.stationType = "abisko";
+		}else{
+			global.stationType = "smhi";
+		}
 		$(function(){
 			var config = require('./config/dataset.js').config;
 			var charts = require('./config/charts.js');

@@ -373,6 +373,7 @@ var byDate = parseByDate;
 
 exports.parsers = {
 	CALM: function(result, src=''){
+		result = result[0];
 		var fields = result.meta.fields;
 		fields.shift()
 		var data = result.data;
@@ -388,10 +389,13 @@ exports.parsers = {
 				y,
 			}
 		})
-		return data;
+		return new Promise(function(resolve, reject){
+			resolve(data)
+		})
 	},
 	SCRIPPS_CO2: function(result, src=''){
 		// TODO
+		result = result[0];
 		var parse = function(entry){
 			var x = (new Date(entry[0])).getTime();
 			var y = parseFloat(entry[1]);
@@ -402,11 +406,14 @@ exports.parsers = {
 		}
 		var data = struct;
 		data.values = Object.values(result.data.slice(44).map(each => parse(each)));
-		return {
-			weekly: data.build(),
-		}
+		return new Promise(function(resolve, reject){
+			resolve({
+				weekly: data.build()
+			})
+		})
 	},
 	GISSTEMP: function (result, src='') {
+		result = result[0];
 		var fields = result.meta.fields;
 		var meta = preSetMeta['default'];
 		meta.src = src;
@@ -467,10 +474,13 @@ exports.parsers = {
 		temperatures.meta = meta;
 		temperatures.src = src;
 		temperatures.ciMovAvg = temperatures.ciMovAvg.slice(10);
-		return temperatures;
+		return new Promise(function(resolve, reject){
+			resolve(temperatures)
+		})
 	},
 	GISSTEMPzonalMeans: function (result, src='') {
 		// console.log(result)
+		result = result[0]
 		var fields = result.meta.fields.map((each) => (each));
 		var keys = fields.slice(0);
 		var year = keys.shift();
@@ -489,10 +499,12 @@ exports.parsers = {
 		}
 		temperatures.src = src;
 		// console.log(tempe ratures)
-		return temperatures;
+		return new Promise(function(resolve, reject){
+			resolve(temperatures)
+		})
 	},
 	AbiskoCsv: function (result, src='') {
-		// console.log(result)
+		result = result[0]
 		var blocks = { precipitation: [], temperatures: [] };
 		result.data.forEach(entry => {
 			var parseEntry = function(y){
@@ -545,9 +557,12 @@ exports.parsers = {
 		blocks.growingSeason = struct.create(Object.keys(blocks.temperatures.weekly).map(year =>  blocks.temperatures.weekly[year].avg.sequence())).build();
 
 		parseAbiskoCached = blocks
-		return blocks
+		return new Promise(function(resolve, reject){
+			resolve(blocks)
+		})
 	},
 	AbiskoIceData: function (result, src='') {
+		result = result[0]
 		var fields = result.meta.fields;
 		var data = result.data;
 		// console.log(data)
@@ -639,7 +654,9 @@ exports.parsers = {
 		var yearMax = iceData.length - 1;
 		// console.log(data);
 		// console.log(breakup);
-		return {
+		return new Promise(function(resolve, reject){
+
+		resolve({
 			src: src,
 			yearMax,
 			breakupDOY,
@@ -665,9 +682,11 @@ exports.parsers = {
 				{ x: 1925, y: iceTimeMovAvgLinear(1925) },
 				{ x: yearMax, y: iceTimeMovAvgLinear(yearMax) }
 			],
-		};
+		})
+		})
 	},
 	AbiskoSnowData: function (result, src='') {
+		result = result[0];
 		var data = result.data;
 		var fields = result.meta.fields;
 		var periods = [
@@ -748,14 +767,18 @@ exports.parsers = {
 		calculateMeans(decades, decadeMeans);
 		// console.log({periodMeans, decadeMeans})
 		AbiskoSnowCached = {src: src, periodMeans, decadeMeans,}
-		return {
-			src: src,
-			periodMeans,
-			decadeMeans,
-		};
+		return new Promise(function(resolve, reject){
+			resolve({
+				src: src,
+				periodMeans,
+				decadeMeans,
+			})
+		})
 	},
 	smhiTemp: function(result, src=''){
 		// console.log(result)
+		var precipitation = result[1];
+		result = result[0];
 		var parse = function(entry){
 			// var x = (new Date(entry[0])).getTime();
 			var x = entry[0];
@@ -784,7 +807,10 @@ exports.parsers = {
 
 		// console.log(values)
 		return new Promise(function(resolve, reject){
-			resolve(parseByDate(values))
+			resolve({
+				precipitation: undefined,
+				temperatures: parseByDate(values)
+			})
 		})
 
 	}

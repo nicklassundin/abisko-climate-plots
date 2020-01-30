@@ -219,70 +219,70 @@ var rendF = {
 			return createDiv('abiskoSnowDepthPeriodMeans2',no)
 		},
 	},
-	'AbiskoTemperatures':{
+	'Temperatures':{
 		func: function(reset=false){
-			config['abisko'].contFunc(reset);
-			config['abisko'].init('AbiskoTemperatures',['temperatures','yrly']);
+			config[stationType].contFunc(reset);
+			config[stationType].init('Temperatures',['temperatures','yrly']);
 		},
 		html: function(debug=false, doc){
 			var no = 1;
 			if(!debug) no = debug;
-			return createDiv('AbiskoTemperatures', no);
+			return createDiv('Temperatures', no);
 		},
 
 	}, 
-	'AbiskoTemperaturesSummer': {
+	'TemperaturesSummer': {
 		func: function(reset=false){
-			config['abisko'].contFunc(reset);
-			config['abisko'].init('AbiskoTemperaturesSummer', ['temperatures','summer']);
+			config[stationType].contFunc(reset);
+			config[stationType].init('TemperaturesSummer', ['temperatures','summer']);
 		},
 		html: function(debug=false, doc){
 			var no = 2;
 			if(!debug) no = debug;
-			return createDiv('AbiskoTemperaturesSummer', no);
+			return createDiv('TemperaturesSummer', no);
 		},
 	}, 
-	'AbiskoTemperaturesWinter': {
+	'TemperaturesWinter': {
 		func: function(reset=false){
-			config['abisko'].contFunc(reset);
-			config['abisko'].init('AbiskoTemperaturesWinter', ['temperatures','winter']);
+			config[stationType].contFunc(reset);
+			config[stationType].init('TemperaturesWinter', ['temperatures','winter']);
 		},
 		html: function(debug=false, doc){
 			var no = 3;
 			if(!debug) no = debug;
-			return createDiv('AbiskoTemperaturesWinter', no);
+			return createDiv('TemperaturesWinter', no);
 
 		},
 	},
-	'temperatureDifferenceAbisko': {
+	'temperatureDifference': {
 		func: function(reset=false){
-			config['abisko'].contFunc(reset);
-			config['abisko'].init('temperatureDifferenceAbisko', ['temperatures','yrly'],['temperatures','difference'])
+			config[stationType].contFunc(reset);
+			config[stationType].init('temperatureDifference', ['temperatures','yrly'],['temperatures','difference'])
 		},
 		html: function(debug=false, doc){
 			var no = 19;
 			if(!debug) no = debug;
-			return createDiv('temperatureDifferenceAbisko', no);
+			return createDiv('temperatureDifference', no);
 
 		},
 	},
-	'monthlyAbiskoTemperatures': {
+	'monthlyTemperatures': {
 		func: function(reset=false){
-			config['abisko'].contFunc(reset);
-			config['abisko'].init('monthlyAbiskoTemperatures', ['temperatures','monthly'])
+			config[stationType].contFunc(reset);
+			config[stationType].init('monthlyTemperatures', ['temperatures','monthly'])
 		},
 		html: function(debug=false, doc){
 			var no = 4;
 			var div = document.createElement("div");
-			div.setAttribute("id","monthlyAbiskoTemperatures");
+			div.setAttribute("id","monthlyTemperatures");
 			if(debug){
 				months().forEach((month, index) => {
-					div.appendChild(createDiv('monthlyAbiskoTemperatures_'+month, no+index))
+					div.appendChild(createDiv('monthlyTemperatures_'+month, no+index))
 				})
 
 			}else{
 				months().forEach((month, index) => {
-					div.appendChild(createDiv('monthlyAbiskoTemperatures_'+month));
+					div.appendChild(createDiv('monthlyTemperatures_'+month));
 				})
 
 			}
@@ -292,8 +292,8 @@ var rendF = {
 	}, 
 	'yearlyPrecipitation': {
 		func: function(reset=false){
-			config['abisko'].contFunc(reset);
-			config['abisko'].init('yearlyPrecipitation', ['precipitation','yrly'])
+			config[stationType].contFunc(reset);
+			config[stationType].init('yearlyPrecipitation', ['precipitation','yrly'])
 		},
 		html: function(debug=false, doc){
 			var no = 23;
@@ -304,8 +304,8 @@ var rendF = {
 	}, 
 	'summerPrecipitation': {
 		func: function(reset=false){
-			config['abisko'].contFunc(reset);
-			config['abisko'].init('summerPrecipitation', ['precipitation','summer'])
+			config[stationType].contFunc(reset);
+			config[stationType].init('summerPrecipitation', ['precipitation','summer'])
 		},
 		html: function(debug=false, doc){
 			var no = 24;
@@ -316,8 +316,8 @@ var rendF = {
 	}, 
 	'winterPrecipitation': {
 		func: function(reset=false){
-			config['abisko'].contFunc(reset);
-			config['abisko'].init('winterPrecipitation', ['precipitation','winter'])
+			config[stationType].contFunc(reset);
+			config[stationType].init('winterPrecipitation', ['precipitation','winter'])
 		},
 		html: function(debug=false, doc){
 			var no = 25;
@@ -328,8 +328,8 @@ var rendF = {
 	}, 
 	'yearlyPrecipitationDifference': {
 		func: function(reset=false){
-			config['abisko'].contFunc(reset);
-			config['abisko'].init('yearlyPrecipitationDifference', ['precipitation','yrly'], ['precipitation','difference']);
+			config[stationType].contFunc(reset);
+			config[stationType].init('yearlyPrecipitationDifference', ['precipitation','yrly'], ['precipitation','difference']);
 		},
 		html: function(debug=false, doc){
 			var no = 38;
@@ -340,8 +340,8 @@ var rendF = {
 	}, 
 	'summerPrecipitationDifference': {
 		func: function(reset=false){
-			config['abisko'].contFunc(reset);
-			config['abisko'].init('summerPrecipitationDifference', ['precipitation','summer'], ['precipitation','difference']);
+			config[stationType].contFunc(reset);
+			config[stationType].init('summerPrecipitationDifference', ['precipitation','summer'], ['precipitation','difference']);
 		},
 		html: function(debug=false, doc){
 			var no = 39;
@@ -352,8 +352,8 @@ var rendF = {
 	}, 
 	'winterPrecipitationDifference': {
 		func: function(reset=false){
-			config['abisko'].contFunc(reset);
-			config['abisko'].init('winterPrecipitationDifference', ['precipitation','winter'],['precipitation','difference']);
+			config[stationType].contFunc(reset);
+			config[stationType].init('winterPrecipitationDifference', ['precipitation','winter'],['precipitation','difference']);
 		},
 		html: function(debug=false, doc){
 			var no = 40;
@@ -364,8 +364,8 @@ var rendF = {
 	}, 
 	'monthlyPrecipitation': {
 		func: function(reset=false){
-			config['abisko'].contFunc(reset);
-			config['abisko'].init('monthlyPrecipitation', ['precipitation','monthly'])
+			config[stationType].contFunc(reset);
+			config[stationType].init('monthlyPrecipitation', ['precipitation','monthly'])
 		},
 		html: function(debug=false, doc){
 			var no = 26;
@@ -388,8 +388,8 @@ var rendF = {
 	'growingSeason': {
 		func: function(reset=false){
 
-			config['abisko'].contFunc(reset);
-			config['abisko'].init('growingSeason', 'growingSeason')
+			config[stationType].contFunc(reset);
+			config[stationType].init('growingSeason', 'growingSeason')
 		},
 		html: function(debug=false, doc){
 			var no = 18;

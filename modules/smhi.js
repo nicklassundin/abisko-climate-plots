@@ -133,7 +133,7 @@ exports.init = function(app){
 			
 			Object.keys(body.station).forEach(key => {
 				var id = body.station[key].id;
-				// console.log(id)
+				if(id=='188790') console.log('/data/'+id+"/"+fileName+".csv");
 				app.get( '/data/'+id+"/"+fileName+".csv", (req, res) => {
 					request({
 						url: get_smhi_station_url(id),
@@ -150,5 +150,5 @@ exports.init = function(app){
 		});
 	}
 	smhiRestApi(smhiParam.temp, "temperature")
-	smhiRestApi(smhiParam.perc, "percipitation")
+	smhiRestApi(smhiParam.perc, "precipitation")
 }

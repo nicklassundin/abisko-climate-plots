@@ -7,8 +7,13 @@ var months = help.months;
 
 const hostUrl = require("../../config/server.json").serverURL;
 
-var filePath = function(fileName, id=station){
-		return hostUrl+"/"+"data/"+id+"/"+fileName;
+var filePath = {
+	station: function(fileName, id=station){
+		return hostUrl+"/data/"+id+"/"+fileName;
+	},
+	other: function(fileName){
+		return hostUrl+"/data/"+fileName;
+	}
 }
 
 
@@ -40,20 +45,20 @@ var dataset_struct = {
 	filePath: undefined,
 	preset: undefined,
 	cached: {},
-	rawData: {},
+	rawData: [],
 	parser: undefined, 
 	render: undefined,
 	reader: Papa.parse,
 	contFunc: function(reset=false, page=''){	
 		if(Object.keys(this.rawData).length > 0) return false
 		if(reset) this.cached = {};
-		if(this.rawData)
-			var ref = this;
-		this.filePath().forEach(file => {
+		var ref = this;
+		this.filePath(this.file).forEach(file => {
+			// console.log(file)
 			function data(file){
 				return new Promise(function(resolve, reject){
 					ref.preset.complete = function(result){
-						resolve(ref.parser(result, ref.src));
+						resolve(result);
 					};
 					ref.reader(file, ref.preset)
 				}).catch(function(error){
@@ -61,43 +66,40 @@ var dataset_struct = {
 					console.log(error);
 				})
 			};
-			if(!this.rawData[file]) this.rawData[file] = data(file);
+			ref.rawData.push(data(file));
 		})
 	},
 	init: function(id, tag, renderTag=tag){
 		var render = this.render;
-		var rawData = this.rawData;
-		var promise = rawData[Object.keys(rawData)[0]];
-		new Promise(function(resolve, reject){
-			if(tag) render = tagApply(render, renderTag);
-			resolve(render);
-		}).then(function(result){
-			render = result(id)
-			promise.then(function(data){
-				var result = data
+		var parser = this.parser;
+		Promise.all(this.rawData).then(function(rawData){
+			var data = parser(rawData);
+			data.then(function(data){
+				// console.log(data)
+				if(tag) render = tagApply(render, renderTag);
 				if(tag){
-					result = tagApply(data, tag);
+					data = tagApply(data, tag);
 				}
-				render(result);
-				return data
+				render = render(id)(data)
 			})
-		}).catch(function(err){
-			console.log(err)
-		});
+		})
 	},
 	clone: function(){
 		return Object.assign({}, this);
 	},
-	create: function(src, file, preset, parser, render, reader = Papa.parse){
+	create: function(src, file, preset, parser, render, reader = Papa.parse, local=true){
 		var res = this.clone();
-		res.rawData = {};
+		res.rawData = [];
 		res.cached = {};
-		if(Array.isArray(file)){
-			res.file = file;
-		}else{
-			res.file = [file];
+		if(!Array.isArray(file)){
+			file = [file];
 		}
-		res.filePath = () => res.file.map(x => filePath(file))
+		res.file = file;	
+		if(local){
+			res.filePath = (files) => files.map(x => filePath.station(x)); 
+		}else{
+			res.filePath = (files) => files.map(x => filePath.other(x)); 
+		}
 		res.src = src;
 		res.preset = preset;
 		res.parser = parser;
@@ -111,7 +113,7 @@ var config = {
 	zonal: dataset_struct.create(
 		src = 'https://nicklassundin.github.io/abisko-climate-plots/', 
 		// TODO place holder for later database
-		file = "ZonAnn.Ts.csv",
+		file = ["ZonAnn.Ts.csv"],
 		preset = {
 			//worker: useWebWorker,
 			header: true,
@@ -126,10 +128,11 @@ var config = {
 			'nhem': renders.TemperatureDifference,
 			'glob': renders.TemperatureDifference,
 		},
-		reader = Papa.parse),
+		reader = Papa.parse,
+		local = false),
 	abisko: dataset_struct.create(
 		src = '',
-		file = "ANS_Temp_Prec.csv",
+		file = ["ANS_Temp_Prec.csv"],
 		preset = {
 			//worker: useWebWorker,
 			header: true,
@@ -158,71 +161,9 @@ var config = {
 
 		},
 		reader = Papa.parse),
-	tornetrask: dataset_struct.create(
-		src = '', 
-		file = "Tornetrask_islaggning_islossning.csv",
-		preset = {
-			header: true,
-			download: true,
-			skipEmptyLines: true,
-		},
-		parser = parse.AbiskoIceData,
-		render = renders.AbiskoIce,
-		reader = Papa.parse),
-	tornetrask_iceTime: dataset_struct.create(
+	smhi: dataset_struct.create(
 		src = '',
-		file = "Tornetrask_islaggning_islossning.csv",
-		preset = {
-			header: true,
-			download: true,
-			skipEmptyLines: true,
-		},
-		parser = parse.AbiskoIceData,
-		render = renders.AbiskoIceTime,
-		reader = Papa.parse),
-	abiskoSnowDepth: dataset_struct.create(
-		src = '',
-		file = hostUrl+"/"+"data/ANS_SnowDepth.csv",
-		preset = {
-			//worker: useWebWorker, TODO BUG waiting for response
-			header: true,
-			download: true,
-			skipEmptyLines: true,
-		},
-		parser = parse.AbiskoSnowData,
-		render = {
-			'periodMeans': renders.AbiskoSnow,
-			'decadeMeans': renders.AbiskoSnow,
-		},
-		reader = Papa.parse),
-	weeklyCO2: dataset_struct.create(
-		src ='',
-		file = "weekly_in_situ_co2_mlo.csv",
-		preset = {
-			download: true,
-			skipEmptyLines: true,
-		},
-		parser = parse.SCRIPPS_CO2,
-		render = {
-			'weekly': renders.CO2,
-			'monthly': renders.CO2,
-		},
-		reader = Papa.parse),
-
-	permaHistogramCALM: dataset_struct.create(
-		src = '',
-		file = "data/CALM.csv",
-		preset = {
-			header: true,
-			download: true,
-			skipEmptyLines: true,
-		},
-		parser = parse.CALM,
-		render = renders.Perma,
-		reader = Papa.parse),
-	smhiTemp: dataset_struct.create(
-		src = '',
-		file = "temperature.csv",
+		file = ["temperature.csv", "precipitation.csv"],
 		preset = {
 			header: true,
 			download: true,
@@ -237,8 +178,87 @@ var config = {
 		},
 		parser = parse.smhiTemp,
 		render = {
-			yrly: renders.Temperature,
-		}),
+			'temperatures': {
+				'yrly': renders.Temperature,
+				'summer': renders.Temperature,
+				'winter': renders.Temperature,
+				'monthly': monthlyFunc(renders.Temperature),
+				'difference': renders.TemperatureDifference,
+			},
+			'precipitation':{
+				'yrly': renders.YearlyPrecipitation,
+				'summer': renders.YearlyPrecipitation,
+				'winter': renders.YearlyPrecipitation,
+				'monthly': monthlyFunc(renders.MonthlyPrecipitation),
+				'difference': renders.PrecipitationDifference,
+			},
+			'growingSeason': renders.GrowingSeason,
+
+		},
+		reader = Papa.parse),
+	tornetrask: dataset_struct.create(
+		src = '', 
+		file = ["Tornetrask_islaggning_islossning.csv"], 
+		preset = {
+			header: true,
+			download: true,
+			skipEmptyLines: true,
+		},
+		parser = parse.AbiskoIceData,
+		render = renders.AbiskoIce,
+		reader = Papa.parse),
+	tornetrask_iceTime: dataset_struct.create(
+		src = '',
+		file = ["Tornetrask_islaggning_islossning.csv"],
+		preset = {
+			header: true,
+			download: true,
+			skipEmptyLines: true,
+		},
+		parser = parse.AbiskoIceData,
+		render = renders.AbiskoIceTime,
+		reader = Papa.parse),
+	abiskoSnowDepth: dataset_struct.create(
+		src = '',
+		file = ["ANS_SnowDepth.csv"], 
+		preset = {
+			//worker: useWebWorker, TODO BUG waiting for response
+			header: true,
+			download: true,
+			skipEmptyLines: true,
+		},
+		parser = parse.AbiskoSnowData,
+		render = {
+			'periodMeans': renders.AbiskoSnow,
+			'decadeMeans': renders.AbiskoSnow,
+		},
+		reader = Papa.parse),
+	weeklyCO2: dataset_struct.create(
+		src ='',
+		file = ["weekly_in_situ_co2_mlo.csv"],
+		preset = {
+			download: true,
+			skipEmptyLines: true,
+		},
+		parser = parse.SCRIPPS_CO2,
+		render = {
+			'weekly': renders.CO2,
+			'monthly': renders.CO2,
+		},
+		reader = Papa.parse,
+		local = false),
+	permaHistogramCALM: dataset_struct.create(
+		src = '',
+		file = ["CALM.csv"], 
+		preset = {
+			header: true,
+			download: true,
+			skipEmptyLines: true,
+		},
+		parser = parse.CALM,
+		render = renders.Perma,
+		reader = Papa.parse,
+		local = false),
 }
 exports.config = config;
 

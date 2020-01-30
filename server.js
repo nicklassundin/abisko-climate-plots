@@ -24,6 +24,7 @@ app.use('/dep', express.static(__dirname + '/dep'));
 app.use('/modules', express.static(__dirname + '/modules'));
 app.use('/config', express.static(__dirname + '/config'));
 app.use('/data', express.static(__dirname + '/data'));
+app.use('/data/abisko', express.static(__dirname + '/data/abisko'));
 app.use('/client', express.static(__dirname + '/client'));
 app.use('/tmp', express.static(__dirname + '/tmp'));
 
@@ -141,9 +142,11 @@ app.get( '/chart', (req, res) => {
 	const queryObject = url.parse(req.url,true).query;
 	var ids; 
 	if(!queryObject.id) {
-		ids = custom.ids;
-	}else{
+		ids = custom.all;
+	}else if(!custom[queryObject.id]){
 		ids = queryObject.id.split(",");
+	}else{
+		ids = custom[queryObject.id];
 	}
 	var charts = ids.map(id => {
 		return {
