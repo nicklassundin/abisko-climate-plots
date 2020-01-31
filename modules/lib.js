@@ -3,23 +3,31 @@ global.nav_lang = 'en';
 global.baselineLower = '';
 global.baselineUpper = '';
 
-// global.station = "abisko" 
+global.stationType = "abisko" 
 // global.station = 159880;
 // global.station = 188790;
 
+var config = require('./config/dataset.js').config;
+var charts = require('./config/charts.js');
 
 lib = {
 	renderChart: function(div, type, id="abisko"){ 
 		global.station = id;
 		// TODO refractor later
 		if(id=="abisko"){
-			global.stationType = "abisko";
+			if(stationType != "abisko"){
+				global.stationType = "abisko";
+				config = require('./config/dataset.js').config;
+				charts = require('./config/charts.js');
+			}
 		}else{
-			global.stationType = "smhi";
+			if(stationType != "smhi"){
+				global.stationType = "smhi";
+				config = require('./config/dataset.js').config;
+				charts = require('./config/charts.js');
+			}
 		}
 		$(function(){
-			var config = require('./config/dataset.js').config;
-			var charts = require('./config/charts.js');
 			div.appendChild(charts.rendF[type].html());
 			charts.rendF[type].func();
 			return div;

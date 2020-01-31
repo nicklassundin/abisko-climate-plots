@@ -136,7 +136,6 @@ var rendF = {
 			var no = 20;
 			if(!debug) no = debug;
 			return createDiv('temperatureDifference1', no);
-
 		},
 	},
 	'temperatureDifference2': {

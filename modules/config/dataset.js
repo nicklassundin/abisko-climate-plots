@@ -44,17 +44,19 @@ var dataset_struct = {
 	file: undefined,
 	filePath: undefined,
 	preset: undefined,
-	cached: {},
+	cached: undefined,
 	rawData: [],
 	parser: undefined, 
 	render: undefined,
 	reader: Papa.parse,
-	contFunc: function(reset=false, page=''){	
+	contFunc: function(reset=false, page=''){
+		if(typeof this.rawData !== 'undefined' && this.rawData.length > 0){
+			return this;
+		}	
 		if(Object.keys(this.rawData).length > 0) return false
 		if(reset) this.cached = {};
 		var ref = this;
 		this.filePath(this.file).forEach(file => {
-			// console.log(file)
 			function data(file){
 				return new Promise(function(resolve, reject){
 					ref.preset.complete = function(result){
@@ -68,21 +70,32 @@ var dataset_struct = {
 			};
 			ref.rawData.push(data(file));
 		})
+		return this;
 	},
 	init: function(id, tag, renderTag=tag){
 		var render = this.render;
-		var parser = this.parser;
-		Promise.all(this.rawData).then(function(rawData){
-			var data = parser(rawData);
-			data.then(function(data){
-				// console.log(data)
+		var renderProc = function(data){
 				if(tag) render = tagApply(render, renderTag);
 				if(tag){
 					data = tagApply(data, tag);
 				}
 				render = render(id)(data)
+		}
+		var parser = this.parser;
+		if(!this.cached){
+			var rawDataPromise = this.rawData;
+			this.cached = new Promise(function(resolve, reject){
+				Promise.all(rawDataPromise).then(function(rawData){
+					var data = parser(rawData);
+					resolve(data);	
+				})
 			})
+		}
+		// console.log(this.cached)
+		this.cached.then(function(data){
+			renderProc(data);
 		})
+		return this;
 	},
 	clone: function(){
 		return Object.assign({}, this);
@@ -90,7 +103,6 @@ var dataset_struct = {
 	create: function(src, file, preset, parser, render, reader = Papa.parse, local=true){
 		var res = this.clone();
 		res.rawData = [];
-		res.cached = {};
 		if(!Array.isArray(file)){
 			file = [file];
 		}
@@ -196,6 +208,7 @@ var config = {
 
 		},
 		reader = Papa.parse),
+	// TODO Bake together
 	tornetrask: dataset_struct.create(
 		src = '', 
 		file = ["Tornetrask_islaggning_islossning.csv"], 
