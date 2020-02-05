@@ -18,6 +18,16 @@ app.engine('handlebars', engines.handlebars);
 // Starts webserver
 require('./modules/webserver.js').webserver.https(app);
 
+// Local Database
+var cache = require('./db/core.js').struct;
+
+cache.createTable('datafiles');
+fs.readdir('data/abisko', (err, files) => {
+	// TODO read files and enter them
+	// cache.insertInto('datafiles', files);
+	cache.initApi(app, 'datafiles')
+});
+
 // Open file access
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/dep', express.static(__dirname + '/dep'));

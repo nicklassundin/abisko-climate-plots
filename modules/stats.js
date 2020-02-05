@@ -115,7 +115,11 @@ var struct = {
 		if(this.movAvg==undefined) this.movAvg = this.plotMovAvg();
 		return this.movAvg;				
 	},
-	linReg: 	undefined,
+	linReg: function(){
+		var result = regression.linear(this.values.map((each,index) => [index, each.y]))	
+		result.linReg.points = values.map((each, index) => ([each.x, result.linReg.points[index][1]]))
+		return result; 
+	},
 	difference: function(lower=baselineLower, upper=baselineUpper){
 		// console.log([lower, upper])
 		var basevalue = help.mean(this.values.filter(value => 
@@ -160,8 +164,8 @@ var struct = {
 		}
 
 		result.count = count;
-		result.linReg = regression.linear(values.map((each,index) => [index, each.y]))
-		result.linReg.points = values.map((each, index) => ([each.x, result.linReg.points[index][1]]))
+		// result.linReg = regression.linear(values.map((each,index) => [index, each.y]))
+		// result.linReg.points = values.map((each, index) => ([each.x, result.linReg.points[index][1]]))
 		return result;
 	},
 	clone: function(){
@@ -285,6 +289,7 @@ var parseByDate = function (values, type='mean', src='', custom) {
 			var build = function(entries){
 				var values = {};
 				entries.forEach(entry => {
+					var date = undefined; 
 					keys.forEach(key => {
 						var date = new Date(entry[key].x);
 						var year = date.getFullYear();

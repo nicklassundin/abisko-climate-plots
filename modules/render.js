@@ -1,10 +1,8 @@
-// const Highcharts = require(['highcharts':q], function(Highcharts){
-// 	return Highcharts
+// const Highcharts = require(['highcharts'], function(Highcharts){
+	// return Highcharts
 // });
 const highchart_help = require('../config/highcharts_config.js');
 const language = require('../config/language.json');
-const lib = require('./lib.js')
-// const Highcharts = require('highcharts');
 var help = require('./helpers.js');
 
 var baseline = require('../config/const.json');

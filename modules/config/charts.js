@@ -1,9 +1,9 @@
 var $ = require('jquery')
-const renders = require('../render.js').graphs;
 const Papa = require('papaparse');
 const parse = require('../stats.js').parsers;
 const help = require('../helpers.js')
 
+global.urlParams = new URLSearchParams(window.location.search);
 var months = help.months;
 
 global.selectText = function(e){
@@ -39,7 +39,6 @@ global.getID = function(param=urlParams){
 	}
 	return id
 }
-global.urlParams = new URLSearchParams(window.location.search);
 
 var createDiv = function(id, no=null){
 	var div = document.createElement('div');

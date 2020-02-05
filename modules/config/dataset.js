@@ -1,5 +1,7 @@
 var $ = require('jquery')
+
 const renders = require('../render.js').graphs;
+
 const Papa = require('papaparse');
 const parse = require('../stats.js').parsers;
 const help = require('../helpers.js')
@@ -72,26 +74,26 @@ var dataset_struct = {
 		})
 		return this;
 	},
-	init: function(id, tag, renderTag=tag){
-		var render = this.render;
-		var renderProc = function(data){
-				if(tag) render = tagApply(render, renderTag);
-				if(tag){
-					data = tagApply(data, tag);
-				}
-				render = render(id)(data)
-		}
+	parseRawData: function(reset=false){
 		var parser = this.parser;
-		if(!this.cached){
 			var rawDataPromise = this.rawData;
-			this.cached = new Promise(function(resolve, reject){
+			return new Promise(function(resolve, reject){
 				Promise.all(rawDataPromise).then(function(rawData){
 					var data = parser(rawData);
 					resolve(data);	
 				})
 			})
+	},
+	init: function(id, tag, renderTag=tag){
+		var render = this.render;
+		if(tag) render = tagApply(render, renderTag)(id);
+		var renderProc = function(data){
+				if(tag){
+					data = tagApply(data, tag);
+				}
+				render = render(data)
 		}
-		// console.log(this.cached)
+		if(!this.cached) this.cached = this.parseRawData();
 		this.cached.then(function(data){
 			renderProc(data);
 		})
@@ -152,6 +154,7 @@ var config = {
 			download: true,
 			skipEmptyLines: true,
 			dynamicTyping: false,
+			// fastMode: true TODO fix parsing error
 		},
 		parser = parse.AbiskoCsv,
 		render = {
@@ -186,7 +189,8 @@ var config = {
 				result.splice(0,line);
 				result = result.join("\r\n");
 				return result
-			}
+			},
+			fastMode: true
 		},
 		parser = parse.smhiTemp,
 		render = {

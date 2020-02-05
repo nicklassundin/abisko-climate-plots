@@ -1,7 +1,12 @@
 const language = require('./language.json');
-const lib = require('../modules/lib.js')
 
-// if(!nav_lang) nav_lang = 'en';
+// require('../modules/lib.js')
+if(typeof nav_lang !== 'undefined' && nav_lang ){
+
+}else{
+	global.nav_lang = 'en';
+}
+
 
 var charts = {};
 exports.charts = charts;
