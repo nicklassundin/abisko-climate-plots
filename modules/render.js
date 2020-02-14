@@ -1,5 +1,5 @@
 // const Highcharts = require(['highcharts'], function(Highcharts){
-	// return Highcharts
+// return Highcharts
 // });
 const highchart_help = require('../config/highcharts_config.js');
 const language = require('../config/language.json');
@@ -443,10 +443,10 @@ exports.graphs = {
 		// console.log(id)
 		// console.log(promise)
 		// console.log(data.max.max())
-		var title = id.split('_');
+		var id_split = id.split('_');
 
 		var div_id = id;
-		var id = title[0];
+		var id = id_split[0];
 		charts[div_id] = Highcharts.chart(div_id, {
 			chart: {
 				type: 'line',
@@ -454,16 +454,6 @@ exports.graphs = {
 			},
 			legend: {
 				enabled: false,
-			},
-			title: {
-				text: function(){
-					var month = '';
-					if(title[1]){
-						month = ' '+this.Highcharts.getOptions().lang.months[title[1]];
-						return this.Highcharts.getOptions().lang.titles[id]+month;
-					} 
-					return this.Highcharts.getOptions().lang.titles[id];
-				}()
 			},
 			xAxis: {
 				title: {
@@ -517,6 +507,17 @@ exports.graphs = {
 			charts[div_id].hideLoading();
 			// var meta = data.meta;
 			charts[div_id].update({
+				title: {
+					text: function(){
+						var month = '';
+						var title = stationName + this.Highcharts.getOptions().lang.titles[id];
+						if(id_split[1]){
+							month = ' '+this.Highcharts.getOptions().lang.months[id_split[1]];
+							return title + month;
+						} 
+						return title; 
+					}()
+				},
 				legend: {
 					enabled: true,
 				},
@@ -641,6 +642,9 @@ exports.graphs = {
 		return function(temperatures){
 			charts[id].hideLoading();
 			charts[id].update({
+				title: {
+				text: this.Highcharts.getOptions().lang.titles[id] + stationName,
+				},
 				legend: {
 					enabled: true,
 				},

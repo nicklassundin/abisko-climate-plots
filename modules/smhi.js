@@ -52,10 +52,6 @@ var get_smhi_station_url = function(ID, period=smhi.archive){
 	return res;
 }
 
-// TODO
-var get_wmo_station_url = function(ID){
-	// TODO read up on API
-}
 
 // TODO Time;Temp_avg;Temp_min;Temp_max;Precipitation
 // example string: "1913-01-01;-10,0;-13,6;-2,7;0,1"
@@ -118,7 +114,6 @@ var csv_smhi_json = function(id, type){
 	return result
 }
 
-
 exports.init = function(app){
 	var smhiRestApi = function(parmFile, fileName, type='text/csv'){
 		request({
@@ -130,7 +125,6 @@ exports.init = function(app){
 			app.get( '/data/'+fileName+'/smhi', (req, res) => {
 				res.send(body);
 			})
-			
 			Object.keys(body.station).forEach(key => {
 				var id = body.station[key].id;
 				if(id=='188790') console.log('/data/'+id+"/"+fileName+".csv");

@@ -153,6 +153,9 @@ var config = {
 			//delimiter: ';',
 			download: true,
 			skipEmptyLines: true,
+			beforeFirstChunk: function(result){
+				global.stationName = "Abisko";
+			},
 			dynamicTyping: false,
 			// fastMode: true TODO fix parsing error
 		},
@@ -186,8 +189,10 @@ var config = {
 			beforeFirstChunk: function(result){
 				result = result.split("\n")
 				var line = result.findIndex(x => x.indexOf("Tidsutsnitt:") > -1)  
-				result.splice(0,line);
+				var rest = result.splice(0,line);
 				result = result.join("\r\n");
+				rest = rest[1].split(";");
+				global.stationName = rest[0];
 				return result
 			},
 			fastMode: true
