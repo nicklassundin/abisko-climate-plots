@@ -16,7 +16,8 @@ app.engine('pug', engines.pug);
 app.engine('handlebars', engines.handlebars);
 
 // Starts webserver
-require('./modules/webserver.js').webserver.https(app);
+const config = require('./config/server.json');
+require('./modules/webserver.js').webserver[config.protocol](app);
 
 // Local Database
 var cache = require('./db/core.js').struct;

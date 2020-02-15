@@ -123,10 +123,10 @@ eval("module.exports = JSON.parse(\"{\\\"en\\\":{\\\"baselineform\\\":{\\\"title
 /*!****************************!*\
   !*** ./config/server.json ***!
   \****************************/
-/*! exports provided: hostname, port, serverURL, https, default */
+/*! exports provided: hostname, port, serverURL, protocol, https, default */
 /***/ (function(module) {
 
-eval("module.exports = JSON.parse(\"{\\\"hostname\\\":\\\"127.0.0.1\\\",\\\"port\\\":80,\\\"serverURL\\\":\\\"https://localhost\\\",\\\"https\\\":{\\\"port\\\":443}}\");\n\n//# sourceURL=webpack:///./config/server.json?");
+eval("module.exports = JSON.parse(\"{\\\"hostname\\\":\\\"127.0.0.1\\\",\\\"port\\\":80,\\\"serverURL\\\":\\\"https://localhost\\\",\\\"protocol\\\":\\\"https\\\",\\\"https\\\":{\\\"port\\\":443}}\");\n\n//# sourceURL=webpack:///./config/server.json?");
 
 /***/ }),
 
