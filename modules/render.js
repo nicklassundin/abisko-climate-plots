@@ -5,9 +5,10 @@ const highchart_help = require('../config/highcharts_config.js');
 const language = require('../config/language.json');
 var help = require('./helpers.js');
 
-var baseline = require('../config/const.json');
-global.baselineLower = baseline.baselineLower;
-global.baselineUpper = baseline.baselineUpper;
+var constant = require('../config/const.json');
+global.baselineLower = constant.baselineLower;
+global.baselineUpper = constant.baselineUpper;
+global.startYear = constant.startYear;
 
 var charts = highchart_help.charts;
 
@@ -460,7 +461,7 @@ exports.graphs = {
 					text: this.Highcharts.getOptions().lang.years, 
 				},
 				crosshair: true,
-				min: 1912,
+				min: startYear 
 			},
 			yAxis: {
 				title: {
@@ -617,7 +618,7 @@ exports.graphs = {
 				crosshair: true,
 				plotLines: plotlines(id),
 				plotBands: plotBandsDiff(id),
-				min: 1913,
+				min: startYear,
 			},
 			yAxis: {
 				title: {
@@ -689,6 +690,7 @@ exports.graphs = {
 					text: this.Highcharts.getOptions().lang.years,
 				},
 				crosshair: true,
+				min: startYear,
 			},
 			yAxis: {
 				title: {
@@ -790,6 +792,7 @@ exports.graphs = {
 				crosshair: true,
 				plotBands: plotBandsDiff(id),
 				plotLines: plotlines(id),
+				min: startYear,
 			},
 			yAxis: {
 				title: {
@@ -850,6 +853,7 @@ exports.graphs = {
 					text: this.Highcharts.getOptions().lang.years,
 				},
 				crosshair: true,
+				min: startYear,
 			},
 			yAxis: {
 				title: {
@@ -1014,6 +1018,7 @@ exports.graphs = {
 					text: this.Highcharts.getOptions().lang.years,
 				},
 				crosshair: true,
+				min: startYear,
 			},
 			yAxis: {
 				title: {
@@ -1161,6 +1166,7 @@ exports.graphs = {
 					text: this.Highcharts.getOptions().lang.years,
 				},
 				crosshair: true,
+				min: startYear,
 			},
 			yAxis: [{
 				title: {
@@ -1254,6 +1260,7 @@ exports.graphs = {
 					text: this.Highcharts.getOptions().lang.years,
 				},
 				crosshair: true,
+				min: startYear,
 			},
 			yAxis: [{
 				title: {
@@ -1390,6 +1397,7 @@ exports.graphs = {
 					text: this.Highcharts.getOptions().lang.month,
 				},
 				crosshair: true,
+				min: startYear,
 			},
 			yAxis: {
 				title: {
@@ -1511,6 +1519,7 @@ exports.graphs = {
 					// text: 'Year'
 					text: this.Highcharts.getOptions().lang.years,
 				},
+				min: startYear,
 			},
 			yAxis: {
 				title: {
