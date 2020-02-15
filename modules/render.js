@@ -836,7 +836,6 @@ exports.graphs = {
 	},
 
 	YearlyPrecipitation: function (id) {
-		// console.log(precipitation)
 		var title = language[nav_lang].titles[id];
 		if(typeof title == 'function') title = title();
 		charts[id] = Highcharts.chart(id, {

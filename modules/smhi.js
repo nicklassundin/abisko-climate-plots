@@ -3,7 +3,7 @@ const request = require('request');
 
 // CONSTANTS
 var SMHI_STATION_NAME_URL = "https://opendata-download-metobs.smhi.se/api/version/latest/parameter/4.json";
-var SMHI_STATION_URL = ["https://opendata-download-metobs.smhi.se/api/version/latest/parameter/1/station/","/period/","/data.csv"];
+var SMHI_STATION_URL = ["https://opendata-download-metobs.smhi.se/api/version/latest/parameter/","/station/","/period/","/data.csv"];
 
 var SMHI_PARAM = "https://opendata-download-metobs.smhi.se/api/version/latest/parameter/";
 
@@ -43,25 +43,21 @@ var getName = function(url,i) {
 // // input ID from station and period currently string "latest-months"
 
 var smhiParam = {
-	temp: SMHI_PARAM+'1.json',
-	perc: SMHI_PARAM+'5.json',
+	temp: {
+		id: 1,
+		url: SMHI_PARAM+'1.json'
+	},
+	perc: {
+		id: 5,
+		url: SMHI_PARAM+'5.json'
+	} 
 }
 
-var get_smhi_station_url = function(ID, period=smhi.archive){
-	var res = SMHI_STATION_URL[0]+ID+SMHI_STATION_URL[1]+period+SMHI_STATION_URL[2];
+var get_smhi_station_url = function(ID, param, period=smhi.archive){
+	var res = SMHI_STATION_URL[0]+param+SMHI_STATION_URL[1]+ID+SMHI_STATION_URL[2]+period+SMHI_STATION_URL[3];
 	return res;
 }
 
-
-// TODO Time;Temp_avg;Temp_min;Temp_max;Precipitation
-// example string: "1913-01-01;-10,0;-13,6;-2,7;0,1"
-var temp_prec_csv_row = function(Time,Temp_avg,Temp_min,Temp_max,Percipitation) {
-
-}
-// TODO Build csv file
-var buildCSVFile = function(){
-
-}
 // TEMP get temprature from SMHI 
 // TODO generalize function for WMO
 var getTempSMHI = function(id, type){
@@ -117,7 +113,7 @@ var csv_smhi_json = function(id, type){
 exports.init = function(app){
 	var smhiRestApi = function(parmFile, fileName, type='text/csv'){
 		request({
-			url: parmFile,
+			url: parmFile.url,
 			json: true,
 			path: '/',
 			method: 'GET',
@@ -130,7 +126,7 @@ exports.init = function(app){
 				if(id=='188790') console.log('/data/'+id+"/"+fileName+".csv");
 				app.get( '/data/'+id+"/"+fileName+".csv", (req, res) => {
 					request({
-						url: get_smhi_station_url(id),
+						url: get_smhi_station_url(id, parmFile.id),
 						json: true,
 						path: '/',
 						method: 'GET',
@@ -143,6 +139,6 @@ exports.init = function(app){
 
 		});
 	}
-	smhiRestApi(smhiParam.temp, "temperature")
 	smhiRestApi(smhiParam.perc, "precipitation")
+	smhiRestApi(smhiParam.temp, "temperature")
 }

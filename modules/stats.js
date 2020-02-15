@@ -781,13 +781,12 @@ exports.parsers = {
 		})
 	},
 	smhiTemp: function(result, src=''){
-		// console.log(result)
-		var precipitation = result[1];
-		result = result[0];
+		var avgs = {};
 		var parse = function(entry){
 			// var x = (new Date(entry[0])).getTime();
 			var x = entry[0];
 			var y = parseFloat(entry[1]);
+			avgs[x] = y;
 			return {
 				avg: {
 					x: x,
@@ -803,18 +802,42 @@ exports.parsers = {
 				},
 			}
 		}
-		var values = Object.values(result.data.map(each => {
-			temp = [each["Datum"], each["Lufttemperatur"]]
+		var temperature = Object.values(result[0].data.map(each => {
+			var temp = [each["Datum"], each["Lufttemperatur"]]
 			return parse(temp);
 		}));
-		// console.log(values)
-		// var temperatures = parseByDate(values)
-
-		// console.log(values)
+		// console.log(temperature)
+		var parsePrecip = function(entry){
+			// var x = (new Date(entry[0])).getTime();
+			var total = parseFloat(entry[1]);
+			var zero = 0;
+			var date = entry[0];
+			if(total==undefined) zero = undefined;
+			var avg = avgs[date];
+			return {
+				total: {
+					x: date,
+					y: total,
+				},
+				snow: {
+					x: date,
+					y: (avg < 0) ? total : zero,
+				},
+				rain: {
+					x: date,
+					y: (avg >= 0) ? total : zero,
+				},
+			}
+		}
+		var precipitation = Object.values(result[1].data.map(each => {
+			var prec = [each["Representativt dygn"], each["Nederbördsmängd"]]
+			return parsePrecip(prec);
+		}));
+		// console.log(precipitation)
 		return new Promise(function(resolve, reject){
 			resolve({
-				precipitation: undefined,
-				temperatures: parseByDate(values)
+				precipitation: parseByDate(precipitation, 'sum'),
+				temperatures: parseByDate(temperature)
 			})
 		})
 
