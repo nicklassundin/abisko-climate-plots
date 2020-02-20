@@ -471,7 +471,6 @@ var parseGISSTEMP = function (result, src='') {
 };
 
 var parseGISSTEMPzonalMeans = function (result, src='') {
-	// console.log(result)
 	var fields = result.meta.fields.map((each) => (each));
 	var keys = fields.slice(0);
 	var year = keys.shift();

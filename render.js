@@ -509,7 +509,6 @@ var renderTemperatureGraph = function (id) {
 
 var renderTemperatureDifferenceGraph = function (id) {
 	// console.log('#renderTemperatureGraph')
-	// console.log(temperatures);
 	// console.log(temperatures.difference());
 
 	var overlay = document.getElementById(id+"overlay");
@@ -558,6 +557,7 @@ var renderTemperatureDifferenceGraph = function (id) {
 	})
 	charts[id].showLoading();
 	return function(temperatures){
+		// console.log(id)
 		charts[id].hideLoading();
 	charts[id].update({
 		legend: {

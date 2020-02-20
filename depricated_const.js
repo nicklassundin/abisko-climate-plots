@@ -322,7 +322,7 @@ const highcharts_Settings = {
 		// printMaxWidth: 1200,
 		sourceWidth: 1200,
 		sourceHeight: 600,
-		scale: 2,
+		scale: 3,
 		buttons: {
 			contextButton: {
 				menuItems: [{
