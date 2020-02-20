@@ -1233,7 +1233,10 @@ var renderAbiskoIceGraph = function (id) {
 			name: this.Highcharts.getOptions().lang.breakup,
 			color: '#ee0000',
 			lineWidth: 0,
-			marker: { radius: 2 },
+			marker: {
+				radius: 2,
+				symbol: 'circle'
+			},
 			states: { hover: { lineWidthPlus: 0 } },
 			data: ice.breakupDOY,
 		},

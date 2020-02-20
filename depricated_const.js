@@ -320,9 +320,12 @@ const highcharts_Settings = {
 		},
 		// showTable: true, // TODO DATA TABLE
 		// printMaxWidth: 1200,
-		sourceWidth: 1200,
-		sourceHeight: 600,
-		scale: 3,
+		// sourceWidth: 1200,
+		// sourceHeight: 600,
+		// scale: 3,
+		sourceWidth: 900,
+		// sourceHeight: 600,
+		scale: 4,
 		buttons: {
 			contextButton: {
 				menuItems: [{
