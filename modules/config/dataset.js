@@ -59,7 +59,6 @@ var dataset_struct = {
 		if(reset) this.cached = {};
 		var ref = this;
 		this.filePath(this.file).forEach(file => {
-			console.log(file)
 			function data(file){
 				return new Promise(function(resolve, reject){
 					ref.preset.complete = function(result){
@@ -87,7 +86,11 @@ var dataset_struct = {
 	},
 	init: function(id, tag, renderTag=tag){
 		var render = this.render;
-		if(tag) render = tagApply(render, renderTag)(id);
+		if(tag){
+			render = tagApply(render, renderTag)(id);
+		}else{
+			render = render(id);
+		}
 		var renderProc = function(data){
 				if(tag){
 					data = tagApply(data, tag);

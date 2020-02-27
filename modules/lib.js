@@ -8,6 +8,7 @@ global.stationType = "abisko"
 // global.station = 188790;
 global.stationName = "";
 
+
 var config = require('./config/dataset.js').config;
 var charts = require('./config/charts.js');
 

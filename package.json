@@ -5,6 +5,7 @@
 	"main": "abisko-climate-plots-lib.js",
 	"dependencies": {
 		"chai": "^4.2.0",
+		"commonjs-highcharts": "^4.0.3",
 		"consolidate": "^0.15.1",
 		"express": "^4.17.1",
 		"express-force-ssl": "^0.3.2",
