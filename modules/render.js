@@ -126,64 +126,10 @@ var resetPlot = function(id){
 				default: 
 					break;
 			}
-			document.getElementById(id.id+"overlay").style.display = "none";
 			updatePlot(id.id);
 		}
 	}
 }
-
-var baselineUI = function(id) {
-	return annotations = [{
-		labelOptions: {
-			verticalAlign: 'top',
-			crop: false,
-			// shape: 'connector',
-			y: 0,
-			borderRadius: 5,
-			backgroundColor: 'rgb(245, 245, 245)',
-			borderWidth: 1,
-			borderColor: '#AAA'
-			// distance: 20,
-		},
-		draggable: 'x',
-		labels: [{
-			text: createBaseline(false,submit="resetPlot("+id+")").innerHTML,
-			point: {
-				xAxis: 0,
-				yAxis: 10,
-				x: baselineLower - (baselineLower-baselineUpper)/2,
-				y: 2,
-			},
-			useHTML: true,
-			style: {
-				// width: '100%',
-				// fontSize: '70%'
-				opacity: .4,
-			},
-		}],
-		events: {
-			afterUpdate: function(e){
-				var mov = parseInt(e.target.options.labels[0].x/12);
-				if(!mov) mov = 0; 
-				var dif = baselineUpper-baselineLower;
-				var mid = baselineLower +dif/2+mov;
-				if(2019-dif/2 < mid) mid = 2019-dif/2;
-				if(1913+dif/2 > mid) mid = 1913+dif/2;
-				baselineLower = parseInt(mid - dif/2);
-				baselineUpper = parseInt(mid + dif/2);
-				updatePlot(this)(id);
-			},
-			// TODO events for filling out form
-			mouseover: function(e){
-				// console.log(e.target.options.labels[0])
-			},
-			mouseclick: function(e){
-				console.log(e)
-			}
-		}
-	}];
-}
-
 var addInput = function(){	
 	var input = document.createElement("input");
 	input.setAttribute("type", "date");
@@ -252,29 +198,6 @@ init_HighChart();
 
 exports.graphs = {
 	CO2: function(id){
-		// console.log(id)
-		// console.log(data)
-		// var meta = data.meta;
-		var overlay = document.getElementById(id+"overlay");
-		var form = document.createElement("form");
-		var div = document.createElement("div");
-		div.setAttribute("id", id+"overlay"+"-input");
-		div.appendChild(addInput());
-
-		// var add = document.createElement("button")
-		// add.innerHTML = "add"
-		// add.setAttribute("onclick","appendChild("+id+"overlay"+"-input,addInput())");
-
-		var submit = document.createElement("input")
-		submit.setAttribute("type", "submit");
-		var br = document.createElement("br");
-
-		form.appendChild(div);
-		form.appendChild(br);
-		form.appendChild(br);
-		form.appendChild(submit);
-		// overlay.appendChild(add);
-		overlay.appendChild(form);
 		charts[id] = Highcharts.chart(id, {
 			chart: {
 				type: 'area',
@@ -595,8 +518,6 @@ exports.graphs = {
 	TemperatureDifference: function (id) {
 		// console.log(temperatures);
 		// console.log(temperatures.difference());
-		var overlay = document.getElementById(id+"overlay");
-		overlay.appendChild(createBaseline(false,submit="resetPlot("+id+")"));
 		charts[id] = Highcharts.chart(id, {
 			chart: {
 				type: 'column'
@@ -610,7 +531,6 @@ exports.graphs = {
 			subtitle: {
 				text: this.Highcharts.getOptions().lang.subtitles.baseline + baselineLower +" - "+ baselineUpper 
 			},
-			// annotations: baselineUI(id),
 			xAxis: {
 				title: {
 					text: this.Highcharts.getOptions().lang.years,
@@ -821,7 +741,6 @@ exports.graphs = {
 					enabled: true,
 				},
 				dataSrc: precipitation.src,
-				// annotations: baselineUI(id),
 				series: [{
 					name: this.Highcharts.getOptions().lang.diff,
 					data: precipitation.total.difference(),
@@ -1381,7 +1300,6 @@ exports.graphs = {
 	},
 	AbiskoSnow: function (id) {
 		// console.log(id)
-		// console.log(Object.values(snow))
 		charts[id] = Highcharts.chart(id, {
 			chart: {
 				type: 'line'
@@ -1395,7 +1313,6 @@ exports.graphs = {
 					text: this.Highcharts.getOptions().lang.month,
 				},
 				crosshair: true,
-				min: startYear,
 			},
 			yAxis: {
 				title: {
@@ -1409,9 +1326,6 @@ exports.graphs = {
 				valueSuffix: ' cm',
 				valueDecimals: 0,
 			},
-			// series: [
-			// 	{data: [null, null]}
-			// ],
 			legend: {
 				enabled: false,
 			}
@@ -1426,10 +1340,16 @@ exports.graphs = {
 					enabled: true,
 				},
 			})
-			var series = Object.values(snow).map(p => charts[id].addSeries({
-				name: language[nav_lang].abiskoSnowDepthPeriod[p.period],
-				data: p.means.rotate(6).slice(2),
-			}));
+			var series = Object.values(snow).map(p => {	
+				return {
+
+					name: language[nav_lang].abiskoSnowDepthPeriod[p.period],
+					data: p.means.rotate(6).slice(2),
+				}
+			});
+			series.forEach(each => {
+				charts[id].addSeries(each)
+			})
 		}
 
 	},

@@ -59,6 +59,7 @@ var dataset_struct = {
 		if(reset) this.cached = {};
 		var ref = this;
 		this.filePath(this.file).forEach(file => {
+			console.log(file)
 			function data(file){
 				return new Promise(function(resolve, reject){
 					ref.preset.complete = function(result){

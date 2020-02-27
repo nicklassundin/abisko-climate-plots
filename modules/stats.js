@@ -691,6 +691,7 @@ exports.parsers = {
 		})
 	},
 	AbiskoSnowData: function (result, src='') {
+		console.log(result)
 		result = result[0];
 		var data = result.data;
 		var fields = result.meta.fields;

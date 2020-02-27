@@ -417,17 +417,6 @@ var rendF = {
 			if(!debug) no = debug;
 			return createDiv("permaHistogramCALM", no);
 		}
-	},
-	'smhiTemp': {
-		func: function(reset=false){
-			config['smhiTemp'].contFunc(reset)
-			config['smhiTemp'].init('smhiTemp', 'yrly');
-		},
-		html: function(debug=false, doc){
-			var no = 46;
-			if(!debug) no = debug;
-			return createDiv("smhiTemp", no);
-		}
 	}
 }
 exports.rendF = rendF;

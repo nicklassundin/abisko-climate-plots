@@ -39,9 +39,12 @@ app.use('/data/abisko', express.static(__dirname + '/data/abisko'));
 app.use('/client', express.static(__dirname + '/client'));
 app.use('/tmp', express.static(__dirname + '/tmp'));
 
+
 // SMHI DB connection
 const TYPE = 'corrected-archive';
 require('./modules/smhi').init(app, TYPE);
+
+require('./modules/api/api').lang(app, __dirname, '/lang');
 
 // Database
 var database = require('./modules/db');
@@ -176,7 +179,7 @@ app.get('/abisko/ANS_SnowDepth.csv', (request, response) => {
 		const jsonData = JSON.parse(JSON.stringify(data));
 		const json2csvParser = new Json2csvParser({ header: true});
 		const csv = json2csvParser.parse(jsonData);
-		response.send(csv);
-		// response.send(data);
+		// response.send(csv);
+		response.send(data);
 	})
 });

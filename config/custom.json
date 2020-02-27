@@ -45,5 +45,7 @@
 		"monthlyPrecipitation",
 		"yearlyPrecipitationDifference",
 		"summerPrecipitationDifference",
-		"winterPrecipitationDifference"]
+		"winterPrecipitationDifference"],
+	"snowDepth": ["abiskoSnowDepthPeriodMeans",
+		"abiskoSnowDepthPeriodMeans2"]
 }
