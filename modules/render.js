@@ -779,9 +779,6 @@ exports.graphs = {
 			chart: {
 				type: 'column'
 			},
-			title: {
-				text: this.Highcharts.getOptions().lang.titles[id],
-			},
 			subtitle: {
 				text: this.Highcharts.getOptions().lang.subtitles.baseline + ' '+ baselineLower +' - '+baselineUpper,
 			},
@@ -817,6 +814,9 @@ exports.graphs = {
 		return function(precipitation){
 			charts[id].hideLoading();
 			charts[id].update({
+				title: {
+					text: stationName + ' ' + this.Highcharts.getOptions().lang.titles[id],
+				},
 				legend: {
 					enabled: true,
 				},
@@ -839,14 +839,9 @@ exports.graphs = {
 	},
 
 	YearlyPrecipitation: function (id) {
-		var title = language[nav_lang].titles[id];
-		if(typeof title == 'function') title = title();
 		charts[id] = Highcharts.chart(id, {
 			chart: {
 				type: 'line'
-			},
-			title: {
-				text: title 
 			},
 			xAxis: {
 				title: {
@@ -882,6 +877,9 @@ exports.graphs = {
 		return function(precipitation){
 			charts[id].hideLoading();
 			charts[id].update({
+				title: {
+					text: language[nav_lang].titles[id] + stationName,
+				},
 				legend: {
 					enabled: true,
 				},
@@ -1004,15 +1002,6 @@ exports.graphs = {
 			chart: {
 				type: 'line'
 			},
-			title: {
-				text: function(){ 
-					if(title[1]){
-						month = ' '+this.Highcharts.getOptions().lang.months[title[1]];
-						return this.Highcharts.getOptions().lang.titles[title[0]]+month;
-					} 
-					return this.Highcharts.getOptions().lang.titles[id];
-				}()
-			},
 			xAxis: {
 				title: {
 					text: this.Highcharts.getOptions().lang.years,
@@ -1050,6 +1039,15 @@ exports.graphs = {
 			charts[id].hideLoading();
 			// console.log(precipitation)
 			charts[id].update({
+				title: {
+					text: function(){ 
+						if(title[1]){
+							month = ' '+this.Highcharts.getOptions().lang.months[title[1]];
+							return stationName + ' ' + this.Highcharts.getOptions().lang.titles[title[0]]+month;
+						} 
+						return stationName + this.Highcharts.getOptions().lang.titles[id];
+					}()
+				},
 				dataSrc: precipitation.src,
 				legend: {
 					enabled: true,
