@@ -87,6 +87,8 @@ var dataset_struct = {
 	init: function(id, tag, renderTag=tag){
 		var render = this.render;
 		if(tag){
+			// console.log(render)
+			// console.log(tag)
 			render = tagApply(render, renderTag)(id);
 		}else{
 			render = render(id);
@@ -285,6 +287,21 @@ var config = {
 		render = renders.Perma,
 		reader = Papa.parse,
 		local = false),
+	iceThick: dataset_struct.create(
+		src = '',
+		file = ["Tornetrask-data.csv"],
+		preset = {
+			header: true,
+			download: true,
+			skipEmptyLines: true,
+		},
+		parser = parse.AbiskoLakeThickness,
+		render = {
+			'yrly': renders.iceThicknessYear,
+			'date': renders.iceThicknessDate
+		},
+		reader = Papa.parse,
+		local = true)
 }
 exports.config = config;
 

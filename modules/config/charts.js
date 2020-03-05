@@ -193,7 +193,29 @@ var rendF = {
 			return createDiv('abiskoLakeIceTime', no);
 
 		},
-	}, 
+	},
+	'iceThicknessYear': {
+		func: function(reset=false){
+			config['iceThick'].contFunc(reset);
+			config['iceThick'].init('iceThicknessYear', 'yrly')
+		},
+		html: function(debug=false, doc){
+			var no = 43;
+			if(!debug) no = debug;
+			return createDiv('iceThicknessYear', no);
+		},
+	},
+	'iceThicknessDate': {
+		func: function(reset=false){
+			config['iceThick'].contFunc(reset);
+			config['iceThick'].init('iceThicknessDate', 'date')
+		},
+		html: function(debug=false, doc){
+			var no = 43;
+			if(!debug) no = debug;
+			return createDiv('iceThicknessDate', no);
+		},
+	},
 	'abiskoSnowDepthPeriodMeans':{
 		func: function(reset=false) {
 			config['abiskoSnowDepth'].contFunc(reset);

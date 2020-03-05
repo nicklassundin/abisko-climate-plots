@@ -11,7 +11,6 @@ const highchart_help = require('../config/highcharts_config.js');
 const language = require('../config/language.json');
 var help = require('./helpers.js');
 
-
 var constant = require('../config/const.json');
 global.baselineLower = constant.baselineLower;
 global.baselineUpper = constant.baselineUpper;
@@ -571,7 +570,7 @@ exports.graphs = {
 			charts[id].hideLoading();
 			charts[id].update({
 				title: {
-				text: Highcharts.getOptions().lang.titles[id] + stationName,
+					text: Highcharts.getOptions().lang.titles[id] + stationName,
 				},
 				legend: {
 					enabled: true,
@@ -1356,6 +1355,178 @@ exports.graphs = {
 		}
 
 	},
+	iceThicknessYear: function(id){
+		charts[id] = Highcharts.chart(id, {
+			chart: {
+				zoomType: 'x',
+			},
+			title: {
+				text: "placeholder" 
+			},
+			xAxis: {
+				title: {
+					text: "placeholder" 
+				},
+				crosshair: true,
+				min: startYear,
+			},
+			yAxis: {
+				title: {
+					text: "placeholder" 
+				},
+				crosshair: true,
+				reversed: true,
+			},
+			tooltip: {
+				shared: true,
+				valueSuffix: ' cm',
+				valueDecimals: 0,
+			},
+			legend: {
+				enabled: false,
+			},
+			series: [
+				{
+					data: [null, null],
+				},
+				{
+					data: [null, null],
+				},
+				{
+					data: [null, null],
+				},
+				// {
+				// 	data: [null, null],
+				// },
+				// {
+				// 	data: [null, null],
+				// },
+				// {
+				// 	data: [null, null],
+				// },
+			]
+		})
+		charts[id].showLoading();
+		return function(data){
+			charts[id].hideLoading();
+			// console.log(data.total.max())
+			charts[id].update({
+				series: [{
+					yAxis: 0,
+					name: "test",
+					color: '#0000ee',
+					lineWidth: 0,
+					marker: { 
+						radius: 2,
+						symbol: 'circle'
+					},
+					data: data.total.max().map(each => {
+						return {
+							x: each.x - 1,
+							y: each.y
+						}
+					}),
+					type: 'histogram',
+				}]
+			});
+
+		}
+	},
+	iceThicknessDate: function(id){
+		var startDate = new Date(startYear + "-01-01");
+		// console.log(startDate)
+		charts[id] = Highcharts.chart(id, {
+			chart: {
+				// type: 'bar'
+				zoomType: 'x',
+			},
+			xAxis: {
+				title: {
+					text: "placeholder" 
+				},
+				crosshair: true,
+				// type: 'datetime',
+				// min: startDate, 
+				min: startYear,
+			},
+			yAxis: {
+				title: {
+					text: "placeholder" 
+				},
+				crosshair: true,
+				reversed: true,
+			},
+			legend: {
+				enabled: false,
+			},
+			series: [
+				{
+					data: [null, null],
+				},
+				{
+					data: [null, null],
+				},
+				{
+					data: [null, null],
+				},
+				// {
+				// 	data: [null, null],
+				// },
+				// {
+				// 	data: [null, null],
+				// },
+				// {
+				// 	data: [null, null],
+				// },
+			]
+		})
+		charts[id].showLoading();
+		return function(data){
+			charts[id].hideLoading();
+			// console.log(data(new Date("1989-11-11")))
+			var dateStr = "1989-11-11";
+			var date = new Date(dateStr);
+			charts[id].update({
+				title: {
+					text: "Ice Thickness for Closest year to "+date.getMonth()+1 + "/" + date.getDate(),  
+				},
+				tooltip: {
+					shared: true,
+					valueSuffix: ' cm',
+					valueDecimals: 0,
+					formatter: function () {
+						var tooltip = '<span style="font-size: 10px">' + this.x + '</span><br/>';
+						this.points.forEach(point => {
+							tooltip += '<span">\u25CF</span> ' + point.series.name + ': <b>' + point.y + '</b><br/><br>'+ 'Closest date: ' + point.point.date +'<br/>';
+						});
+						return tooltip;
+					},
+				},
+				series: [{
+					yAxis: 0,
+					name: "test",
+					color: '#0000ee',
+					lineWidth: 0,
+					marker: { 
+						radius: 2,
+						symbol: 'circle'
+					},
+					data: data(date),
+					states: {
+						hover: {
+							color: snowColor.hover,
+							animation: {
+								duration: 0,
+							},
+						},
+					},
+					name: 'Ice Thickness',
+					type: 'histogram',
+				}]
+		});
+
+	}
+},
 	ZoomableGraph: function(data, id, title){
 		// console.log(title)
 		// console.log(data);
@@ -1476,23 +1647,23 @@ exports.graphs = {
 		}
 	}
 
-	//var rend_struct = {
-	//	chart: undefined,
-	//	config: undefined,
-	//	clone: function(){
-	//		return Object.assign({}, this);
-	//	},
-	//	create: function(config){
-	//		var result = this.clone();
-	//		result.config = config;
-	//		return result;
-	//	},
-	//	init: function(id){
-	//		this.chart = Highcharts.chart(id, this.config); 
-	//	},
-	//	addSeries: function(series){
-	//		this.chart.addSeries(series);
-	//		return this;
-	//	},
-	//}
+//var rend_struct = {
+//	chart: undefined,
+//	config: undefined,
+//	clone: function(){
+//		return Object.assign({}, this);
+//	},
+//	create: function(config){
+//		var result = this.clone();
+//		result.config = config;
+//		return result;
+//	},
+//	init: function(id){
+//		this.chart = Highcharts.chart(id, this.config); 
+//	},
+//	addSeries: function(series){
+//		this.chart.addSeries(series);
+//		return this;
+//	},
+//}
 }

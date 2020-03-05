@@ -49,5 +49,6 @@
 	"snowDepth": ["abiskoSnowDepthPeriodMeans",
 		"abiskoSnowDepthPeriodMeans2"],
 	"ice": ["abiskoLakeIce",
-		"abiskoLakeIceTime"]
+		"abiskoLakeIceTime"],
+	"iceThick": ["iceThicknessYear", "iceThicknessDate"]
 }

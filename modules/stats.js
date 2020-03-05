@@ -91,6 +91,32 @@ var struct = {
 		})
 		return result;
 	},
+	closest: function(date){
+		const oneDay = 24 * 60 * 60 * 1000;
+		var distance = new Array();
+		this.values.forEach(each => {
+			var temp = new Date(each.x);
+			var end = new Date(temp.getYear() + 1900, 11, 31);
+			var start = new Date(temp.getYear() + 1900, 0, 1);
+			var days = Math.round(Math.abs((start - end) / oneDay));
+			var degree = 360 / days;
+			date = new Date(temp.getYear() + 1900, date.getMonth(), date.getDate())
+			var dis = Math.round(Math.abs((date - temp) / oneDay));
+			var degrees = dis * degree;
+			if(degrees > 180) degrees = 360 - degrees;
+			distance.push(Math.round(degrees / degree));
+		})
+		var min = Math.min.apply(null, distance);
+		// console.log(distance)
+		var values = this.values;
+		var result = undefined;
+		distance.forEach(function(value, index){
+			if(value == min){
+				result = values[index]; 
+			}
+		})
+		return result;
+	},
 	movAvg: undefined,
 	plotMovAvg: function(){
 		if(this.movAvg!=undefined) return this.movAvg
@@ -221,6 +247,7 @@ var parseByDate = function (values, type='mean', src='', custom) {
 			var result = Object.assign({}, frame);
 			// TODO build to general function to be use for all functions
 			var set = function(entry, key, date, year, month, week){
+				// console.log(entry)
 				var decade = year - year % 10;
 				if(!result.yrly) result.yrly = {};
 				if(!result.yrly[key]) result.yrly[key] = {};
@@ -291,8 +318,10 @@ var parseByDate = function (values, type='mean', src='', custom) {
 				entries.forEach(entry => {
 					var date = undefined; 
 					keys.forEach(key => {
+						// console.log(entry(key).x)
 						var date = new Date(entry[key].x);
 						var year = date.getFullYear();
+						// console.log(year)
 						var month = date.getMonth()+1;
 						var week = date.getWeekNumber();
 						if(!years[year+'']) years[year] = year+'';
@@ -661,34 +690,69 @@ exports.parsers = {
 		// console.log(breakup);
 		return new Promise(function(resolve, reject){
 
-		resolve({
-			src: src,
-			yearMax,
-			breakupDOY,
-			breakup,
-			freezeDOY,
-			freeze,
-			iceTime,
-			iceTimeMovAvg: iceTimeMovAvg.slice(10),
-			iceTimeCIMovAvg: iceTimeCIMovAvg.slice(10),
-			breakupLinear: [
-				{ x: 1915, y: help.weekNumber(help.dateFromDayOfYear(1915, Math.round(breakupLinear(1915)))) },
-				{ x: yearMax, y: help.weekNumber(help.dateFromDayOfYear(yearMax, Math.round(breakupLinear(yearMax)))) }
-			],
-			freezeLinear: [
-				{ x: 1909, y: help.weekNumber(help.dateFromDayOfYear(1909, Math.round(freezeLinear(1909)))) },
-				{ x: yearMax, y: help.weekNumber(help.dateFromDayOfYear(yearMax, Math.round(freezeLinear(yearMax)))) }
-			],
-			iceTimeLinear: [
-				{ x: 1915, y: iceTimeLinear(1915) },
-				{ x: yearMax, y: iceTimeLinear(yearMax) }
-			],
-			iceTimeMovAvgLinear: [
-				{ x: 1925, y: iceTimeMovAvgLinear(1925) },
-				{ x: yearMax, y: iceTimeMovAvgLinear(yearMax) }
-			],
+			resolve({
+				src: src,
+				yearMax,
+				breakupDOY,
+				breakup,
+				freezeDOY,
+				freeze,
+				iceTime,
+				iceTimeMovAvg: iceTimeMovAvg.slice(10),
+				iceTimeCIMovAvg: iceTimeCIMovAvg.slice(10),
+				breakupLinear: [
+					{ x: 1915, y: help.weekNumber(help.dateFromDayOfYear(1915, Math.round(breakupLinear(1915)))) },
+					{ x: yearMax, y: help.weekNumber(help.dateFromDayOfYear(yearMax, Math.round(breakupLinear(yearMax)))) }
+				],
+				freezeLinear: [
+					{ x: 1909, y: help.weekNumber(help.dateFromDayOfYear(1909, Math.round(freezeLinear(1909)))) },
+					{ x: yearMax, y: help.weekNumber(help.dateFromDayOfYear(yearMax, Math.round(freezeLinear(yearMax)))) }
+				],
+				iceTimeLinear: [
+					{ x: 1915, y: iceTimeLinear(1915) },
+					{ x: yearMax, y: iceTimeLinear(yearMax) }
+				],
+				iceTimeMovAvgLinear: [
+					{ x: 1925, y: iceTimeMovAvgLinear(1925) },
+					{ x: yearMax, y: iceTimeMovAvgLinear(yearMax) }
+				],
+			})
 		})
+	},
+	AbiskoLakeThickness: function(result, src=''){
+		//TODO	
+		var data = result[0].data;
+		var rawData = new Array();
+		data.forEach(each => {
+			var res = {
+				y: Number(each['Hela istäcket']),
+				x: each['Datum']
+			}
+			rawData.push(res)
 		})
+		data = rawData.map(each => {
+			var temp = {
+				'total': each
+			}
+			// console.log(temp)
+				// fsdfds
+			// }
+			return temp;
+		})
+		yrly = parseByDate(data).yrly;
+		var dateSelect = function(date){
+			var close = new Array();
+			yrly.total.values.forEach(each => {
+				var res = each.closest(date);
+				close.push({ 
+					x: new Date(res.x).getFullYear(),
+					y: res.y,
+					date: res.x
+				})
+			})
+			return close;
+		}
+		return {'yrly': yrly, 'date': dateSelect };
 	},
 	AbiskoSnowData: function (result, src='') {
 		// console.log(result)
