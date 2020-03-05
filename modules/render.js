@@ -1484,11 +1484,11 @@ exports.graphs = {
 		return function(data){
 			charts[id].hideLoading();
 			// console.log(data(new Date("1989-11-11")))
-			var dateStr = "1989-11-11";
+			var dateStr = "1989-11-28";
 			var date = new Date(dateStr);
 			charts[id].update({
 				title: {
-					text: "Ice Thickness for Closest year to "+date.getMonth()+1 + "/" + date.getDate(),  
+					text: "Ice thickness for Closest year to "+ date.getDate() +"/" + (date.getMonth()+1),
 				},
 				tooltip: {
 					shared: true,
