@@ -6,8 +6,7 @@ const Papa = require('papaparse');
 const parse = require('../stats.js').parsers;
 const help = require('../helpers.js')
 var months = help.months;
-
-const hostUrl = require("../../config/server.json").serverURL;
+const hostUrl = location.protocol +"//"+ require("../../config/server.json").domain;
 
 var filePath = {
 	station: function(fileName, id=station){
@@ -129,9 +128,10 @@ var dataset_struct = {
 	},
 }
 
+
 var config = {
 	zonal: dataset_struct.create(
-		src = 'https://nicklassundin.github.io/abisko-climate-plots/', 
+		src = location.protocol+'//nicklassundin.github.io/abisko-climate-plots/', 
 		// TODO place holder for later database
 		file = ["ZonAnn.Ts.csv"],
 		preset = {

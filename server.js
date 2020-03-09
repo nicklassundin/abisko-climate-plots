@@ -17,7 +17,8 @@ app.engine('handlebars', engines.handlebars);
 
 // Starts webserver
 const config = require('./config/server.json');
-require('./modules/webserver.js').webserver[config.protocol](app);
+require('./modules/webserver.js').webserver["http"](app);
+require('./modules/webserver.js').webserver["https"](app);
 
 // Local Database
 var cache = require('./db/core.js').struct;
