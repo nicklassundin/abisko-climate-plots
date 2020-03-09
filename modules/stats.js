@@ -103,7 +103,7 @@ var struct = {
 			date = new Date(temp.getYear() + 1900, date.getMonth(), date.getDate())
 			var dis = Math.round(Math.abs((date - temp) / oneDay));
 			var degrees = dis * degree;
-			if(degrees > 180) degrees = 360 - degrees;
+			// if(degrees > 180) degrees = 360 - degrees;
 			distance.push(Math.round(degrees / degree));
 		})
 		var min = Math.min.apply(null, distance);
@@ -221,6 +221,7 @@ var parseByDate = function (values, type='mean', src='', custom) {
 	var frame = {
 		weeks: {},
 		yrly: {},
+		yrlySplit: {},
 		decades: {},
 		monthly: {},
 		weekly: {},
@@ -234,6 +235,7 @@ var parseByDate = function (values, type='mean', src='', custom) {
 	const data = {
 		weeks: {},
 		yrly: {},
+		yrlySplit: {},
 		decades: {},
 		monthly: {},
 		weekly: {},
@@ -256,6 +258,19 @@ var parseByDate = function (values, type='mean', src='', custom) {
 					result.yrly[key][year] = cont;
 				}
 				result.yrly[key][year].values.push(entry);
+				
+				// split year over 6 month
+				var splitYear = year;
+				if(help.isFirstHalfYear(month)){
+					splitYear = year - 1;	
+				}	
+				if(!result.yrlySplit) result.yrlySplit = {};
+				if(!result.yrlySplit[key]) result.yrlySplit[key] = {}
+				if(!result.yrlySplit[key][splitYear]){
+					const cont = struct.create([], splitYear, type);
+					result.yrlySplit[key][splitYear] = cont;
+				}
+				result.yrlySplit[key][splitYear].values.push(entry);
 
 				if(help.isSummerMonthByIndex(month)) {
 					if(!result.summer) result.summer = {};
@@ -356,6 +371,11 @@ var parseByDate = function (values, type='mean', src='', custom) {
 							})
 							break;
 						case 'yrly':
+							keys.forEach(tkey => {
+								values[key][tkey] = construct(values[key][tkey])
+							})
+							break;
+						case 'yrlySplit':
 							keys.forEach(tkey => {
 								values[key][tkey] = construct(values[key][tkey])
 							})
@@ -739,13 +759,20 @@ exports.parsers = {
 			// }
 			return temp;
 		})
-		yrly = parseByDate(data).yrly;
+		var parseData = parseByDate(data)
+		yrly = parseData.yrlySplit;
+		// console.log(yrly)
 		var dateSelect = function(date){
 			var close = new Array();
 			yrly.total.values.forEach(each => {
 				var res = each.closest(date);
+				var resDate = new Date(res.x);
+				var xYear = resDate.getFullYear();
+				if(help.isFirstHalfYear(resDate.getMonth()+1)){
+					xYear = xYear - 1;
+				}
 				close.push({ 
-					x: new Date(res.x).getFullYear(),
+					x: xYear, 
 					y: res.y,
 					date: res.x
 				})

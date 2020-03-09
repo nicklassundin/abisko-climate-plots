@@ -1361,18 +1361,18 @@ exports.graphs = {
 				zoomType: 'x',
 			},
 			title: {
-				text: "placeholder" 
+				text: "Ice Max Thickness measured by year"
 			},
 			xAxis: {
 				title: {
-					text: "placeholder" 
+					text: language[nav_lang].years 
 				},
 				crosshair: true,
 				min: startYear,
 			},
 			yAxis: {
 				title: {
-					text: "placeholder" 
+					text: "Ice Thickness [cm]" 
 				},
 				crosshair: true,
 				reversed: true,
@@ -1436,13 +1436,16 @@ exports.graphs = {
 		var startDate = new Date(startYear + "-01-01");
 		// console.log(startDate)
 		charts[id] = Highcharts.chart(id, {
+			title: {
+				text: "Ice thickness for Closest year to [day of month]/[month]",
+			},
 			chart: {
 				// type: 'bar'
 				zoomType: 'x',
 			},
 			xAxis: {
 				title: {
-					text: "placeholder" 
+					text: language[nav_lang].years
 				},
 				crosshair: true,
 				// type: 'datetime',
@@ -1451,7 +1454,7 @@ exports.graphs = {
 			},
 			yAxis: {
 				title: {
-					text: "placeholder" 
+					text: "Ice Thickness [cm]" 
 				},
 				crosshair: true,
 				reversed: true,
@@ -1483,12 +1486,22 @@ exports.graphs = {
 		charts[id].showLoading();
 		return function(data){
 			charts[id].hideLoading();
-			// console.log(data(new Date("1989-11-11")))
-			var dateStr = "1989-11-28";
+			var dateStr = "1989-12-28";
 			var date = new Date(dateStr);
+			global.iceThickDate = function(value){
+				console.log("test")
+				console.log(value)
+				console.log(document.getElementById("date_"+id).value);
+			}	
+			
 			charts[id].update({
 				title: {
-					text: "Ice thickness for Closest year to "+ date.getDate() +"/" + (date.getMonth()+1),
+					useHTML: true,
+					text: "<form id='date_"+id+"' onChange='iceThickDate(this.value)'><label for='fname'>"+
+					"Ice thickness for Closest year to "
+					+":</label>"+
+					"<input type='date' id='date' name='selected' value='2018-07-22' onclick='selectText(this)')>"
+					// text: "Ice thickness for Closest year to "+ date.getDate() +"/" + (date.getMonth()+1),
 				},
 				tooltip: {
 					shared: true,

@@ -173,13 +173,13 @@ app.get( '/chart', (req, res) => {
 	})
 });
 
-const Json2csvParser = require("json2csv").Parser;
-app.get('/abisko/ANS_SnowDepth.csv', (request, response) => {
-	database.getCSV('ANS_SnowDepth.csv', database.admin).then(function(data){
-		const jsonData = JSON.parse(JSON.stringify(data));
-		const json2csvParser = new Json2csvParser({ header: true});
-		const csv = json2csvParser.parse(jsonData);
-		// response.send(csv);
-		response.send(data);
-	})
-});
+// const Json2csvParser = require("json2csv").Parser;
+// app.get('/abisko/ANS_SnowDepth.csv', (request, response) => {
+// 	database.getCSV('ANS_SnowDepth.csv', database.admin).then(function(data){
+// 		const jsonData = JSON.parse(JSON.stringify(data));
+// 		const json2csvParser = new Json2csvParser({ header: true});
+// 		const csv = json2csvParser.parse(jsonData);
+// 		// response.send(csv);
+// 		response.send(data);
+// 	})
+// });

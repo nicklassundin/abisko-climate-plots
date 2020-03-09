@@ -30,6 +30,10 @@ Date.prototype.getWeekNumber = function(date=this){
 
 {
 
+	exports.isFirstHalfYear = function(month){
+		return month < 7
+	}
+
 
 	// TODO maybe reuse for new baseline better way to do it?!
 	// $('#baseline').submit((e) => {
