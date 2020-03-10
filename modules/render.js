@@ -1,5 +1,5 @@
 
-var Highcharts = require('highcharts');
+global.Highcharts = require('highcharts');
 require('highcharts/modules/annotations')(Highcharts)
 require('highcharts/modules/series-label')(Highcharts)
 require('highcharts/modules/series-label')(Highcharts)
@@ -1489,9 +1489,9 @@ exports.graphs = {
 			var dateStr = "1989-12-28";
 			var date = new Date(dateStr);
 			global.iceThickDate = function(value){
-				console.log("test")
-				console.log(value)
-				console.log(document.getElementById("date_"+id).value);
+				// console.log("test")
+				// console.log(value)
+				// console.log(document.getElementById("date_"+id).value);
 			}	
 			
 			charts[id].update({
