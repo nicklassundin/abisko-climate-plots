@@ -11,7 +11,11 @@ if(typeof nav_lang !== 'undefined' && nav_lang ){
 var charts = {};
 exports.charts = charts;
 
-var updatePlot = function(id, bl, bu){
+var updatePlot = function(id, bl, bu, date){
+	if(date){
+		date = date.split("-");
+		variables.date = new Date(date[0],Number(date[1])-1,date[2]);
+	}
 	if(id.id) id=id.id; // TODO fix why this it gets a div not id
 	if(id.renderTo) id=id.renderTo.id;
 	var low = document.getElementById(id+"lowLabel") 

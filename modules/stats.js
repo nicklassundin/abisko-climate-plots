@@ -109,13 +109,21 @@ var struct = {
 		var min = Math.min.apply(null, distance);
 		// console.log(distance)
 		var values = this.values;
-		var result = undefined;
+		var result = {
+			data: undefined,
+			interval: {
+				y: {
+					hi: undefined,
+					lo: undefined
+				}
+			}
+		}
 		distance.forEach(function(value, index){
 			if(value == min){
-				result = values[index]; 
+				result.data = values[index]; 
 			}
 		})
-		return result;
+		return result
 	},
 	movAvg: undefined,
 	plotMovAvg: function(){
@@ -258,7 +266,7 @@ var parseByDate = function (values, type='mean', src='', custom) {
 					result.yrly[key][year] = cont;
 				}
 				result.yrly[key][year].values.push(entry);
-				
+
 				// split year over 6 month
 				var splitYear = year;
 				if(help.isFirstHalfYear(month)){
@@ -344,14 +352,21 @@ var parseByDate = function (values, type='mean', src='', custom) {
 						values = set(entry[key], key, date, year, month, week);
 					})
 				})
-				var construct = function(entries, x){
+				var construct = function(bValues, x){
 					const str = [];
-					// console.log(entries)
-					Object.keys(entries).forEach(key => {
-						const entry = entries[key];
+					Object.keys(bValues).forEach(key => {
+						const entry = bValues[key];
 						str.push(entry.build(type))		
 					})
-					return struct.create(str, x).build(type);
+					try{
+						return struct.create(str, x).build(type);
+					}catch(error){
+						console.log(bValues)
+						console.log(str)
+						console.log(x)
+						console.log(struct.create(str, x))
+						throw error
+					}
 				}
 				// console.log(values.decades)
 				Object.keys(frame).forEach(key => {
@@ -755,7 +770,7 @@ exports.parsers = {
 				'total': each
 			}
 			// console.log(temp)
-				// fsdfds
+			// fsdfds
 			// }
 			return temp;
 		})
@@ -766,15 +781,15 @@ exports.parsers = {
 			var close = new Array();
 			yrly.total.values.forEach(each => {
 				var res = each.closest(date);
-				var resDate = new Date(res.x);
+				var resDate = new Date(res.data.x);
 				var xYear = resDate.getFullYear();
 				if(help.isFirstHalfYear(resDate.getMonth()+1)){
 					xYear = xYear - 1;
 				}
 				close.push({ 
 					x: xYear, 
-					y: res.y,
-					date: res.x
+					y: res.data.y,
+					date: res.data.x
 				})
 			})
 			return close;

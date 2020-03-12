@@ -39,6 +39,7 @@ app.use('/data', express.static(__dirname + '/data'));
 app.use('/data/abisko', express.static(__dirname + '/data/abisko'));
 app.use('/client', express.static(__dirname + '/client'));
 app.use('/tmp', express.static(__dirname + '/tmp'));
+app.use('/maps', express.static(__dirname + '/maps'));
 
 
 // SMHI DB connection
@@ -170,6 +171,32 @@ app.get( '/chart', (req, res) => {
 		}
 	})
 	res.render('chart.hbs', {
+		charts
+	})
+});
+
+app.get('/map', (req, res) => {
+	res.render('map.hbs', {
+
+	})
+})
+app.get('/d3-map', (req, res) => {
+	const queryObject = url.parse(req.url,true).query;
+	var ids; 
+	if(!queryObject.id) {
+		ids = custom.all;
+	}else if(!custom[queryObject.id]){
+		ids = queryObject.id.split(",");
+	}else{
+		ids = custom[queryObject.id];
+	}
+	var charts = ids.map(id => {
+		return {
+			id: id,
+			station: queryObject.station
+		}
+	})
+	res.render('d3-map.hbs', {
 		charts
 	})
 });

@@ -8,6 +8,10 @@ global.stationType = "abisko"
 // global.station = 188790;
 global.stationName = "";
 
+global.variables = {
+	date: new Date(),
+	dateStr: function(){ return (this.date.getYear()+1900)+"-"+(this.date.getMonth()+1)+"-"+this.date.getDate() }
+}
 
 var config = require('./config/dataset.js').config;
 var charts = require('./config/charts.js');

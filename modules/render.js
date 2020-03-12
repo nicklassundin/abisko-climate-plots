@@ -1486,22 +1486,15 @@ exports.graphs = {
 		charts[id].showLoading();
 		return function(data){
 			charts[id].hideLoading();
-			var dateStr = "1989-12-28";
-			var date = new Date(dateStr);
-			global.iceThickDate = function(value){
-				// console.log("test")
-				// console.log(value)
-				// console.log(document.getElementById("date_"+id).value);
-			}	
-			
 			charts[id].update({
 				title: {
 					useHTML: true,
-					text: "<form id='date_"+id+"' onChange='iceThickDate(this.value)'><label for='fname'>"+
-					"Ice thickness for Closest year to "
-					+":</label>"+
-					"<input type='date' id='date' name='selected' value='2018-07-22' onclick='selectText(this)')>"
-					// text: "Ice thickness for Closest year to "+ date.getDate() +"/" + (date.getMonth()+1),
+					text: "<label>"+
+					"Ice thickness for Closest year to </label>"+
+					"<input type='date' value="+
+					variables.dateStr()+
+					" onclick=selectText(this) "+
+					"onchange=updatePlot("+id+","+baselineLower+","+baselineUpper+",this.value)></input>"
 				},
 				tooltip: {
 					shared: true,
@@ -1524,7 +1517,7 @@ exports.graphs = {
 						radius: 2,
 						symbol: 'circle'
 					},
-					data: data(date),
+					data: data(variables.date),
 					states: {
 						hover: {
 							color: snowColor.hover,
@@ -1536,10 +1529,10 @@ exports.graphs = {
 					name: 'Ice Thickness',
 					type: 'histogram',
 				}]
-		});
+			});
 
-	}
-},
+		}
+	},
 	ZoomableGraph: function(data, id, title){
 		// console.log(title)
 		// console.log(data);
@@ -1660,23 +1653,23 @@ exports.graphs = {
 		}
 	}
 
-//var rend_struct = {
-//	chart: undefined,
-//	config: undefined,
-//	clone: function(){
-//		return Object.assign({}, this);
-//	},
-//	create: function(config){
-//		var result = this.clone();
-//		result.config = config;
-//		return result;
-//	},
-//	init: function(id){
-//		this.chart = Highcharts.chart(id, this.config); 
-//	},
-//	addSeries: function(series){
-//		this.chart.addSeries(series);
-//		return this;
-//	},
-//}
+	//var rend_struct = {
+	//	chart: undefined,
+	//	config: undefined,
+	//	clone: function(){
+	//		return Object.assign({}, this);
+	//	},
+	//	create: function(config){
+	//		var result = this.clone();
+	//		result.config = config;
+	//		return result;
+	//	},
+	//	init: function(id){
+	//		this.chart = Highcharts.chart(id, this.config); 
+	//	},
+	//	addSeries: function(series){
+	//		this.chart.addSeries(series);
+	//		return this;
+	//	},
+	//}
 }

@@ -1,4 +1,3 @@
-var $ = require('jquery');
 const request = require('request');
 
 // CONSTANTS
@@ -110,35 +109,49 @@ var csv_smhi_json = function(id, type){
 	return result
 }
 
-exports.init = function(app){
-	var smhiRestApi = function(parmFile, fileName, type='text/csv'){
+var restApiStations = function(parmFile=smhiParam.temp){
+	return new Promise((resolve, reject) => {
 		request({
 			url: parmFile.url,
 			json: true,
 			path: '/',
 			method: 'GET',
 		}, function(error, response, body) {
-			app.get( '/data/'+fileName+'/smhi', (req, res) => {
-				res.send(body);
-			})
-			Object.keys(body.station).forEach(key => {
-				var id = body.station[key].id;
-				if(id=='188790') console.log('/data/'+id+"/"+fileName+".csv");
-				app.get( '/data/'+id+"/"+fileName+".csv", (req, res) => {
-					request({
-						url: get_smhi_station_url(id, parmFile.id),
-						json: true,
-						path: '/',
-						method: 'GET',
-					}, function(error, response, body){
-						res.set('Content-Type', type);
-						res.status(200).end(body);
-					})
-				});
-			})
+			if(error){
+				reject(error);
+			}else{
+				resolve(body);
+			}
+		})
+	})
+}
+exports.stations = restApiStations; 
 
-		});
+exports.init = function(app){
+	var smhiRestApi = function(body, parmFile, fileName, type='text/csv'){
+		app.get( '/data/'+fileName+'/smhi', (req, res) => {
+			res.send(body);
+		})
+		Object.keys(body.station).forEach(key => {
+			var id = body.station[key].id;
+			app.get( '/data/'+id+"/"+fileName+".csv", (req, res) => {
+				request({
+					url: get_smhi_station_url(id, parmFile.id),
+					json: true,
+					path: '/',
+					method: 'GET',
+				}, function(error, response, body){
+					res.set('Content-Type', type);
+					res.status(200).end(body);
+				})
+			});
+		})
 	}
-	smhiRestApi(smhiParam.perc, "precipitation")
-	smhiRestApi(smhiParam.temp, "temperature")
+
+	restApiStations(smhiParam.perc).then((result) => {
+		smhiRestApi(result, smhiParam.perc, "precipitation")
+	})
+	restApiStations(smhiParam.temp).then((result) => {
+		smhiRestApi(result, smhiParam.temp, "temperature")
+	})
 }

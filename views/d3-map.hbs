@@ -1,0 +1,29 @@
+<!-- extends default--><!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/styles.css">
+		<link rel="stylesheet" type="text/css" href="css/map.css">
+		<script src="https://nicklassundin.github.io/abisko-climate-plots/jquery.js"></script>
+			<script src="/client/d3-map.js"></script>
+			<script src="/client/bundle.js"></script>
+	</head>
+	<body>
+		<div style="display: table-row">
+			<div id="map" style="width: 600px; display: table-cell; vertical-align: top;"></div>
+			<script type="text/javascript">
+				geoMap();
+			</script>
+			<div id="panel" style="display: table-cell; vertical-align: top;">
+				<div id="mark"></div>
+				{{#each charts}}
+					<script type="text/javascript">
+						$(document).ready(function(){
+
+							lib.renderChart(document.getElementById("mark"), '{{this.id}}', '{{this.station}}');
+						})
+					</script>
+				{{/each}}
+			</div>
+		</div>
+	</body>
+</html>

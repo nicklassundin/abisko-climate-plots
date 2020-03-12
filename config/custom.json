@@ -34,6 +34,7 @@
 		"yearlyPrecipitationDifference",
 		"summerPrecipitationDifference",
 		"winterPrecipitationDifference"],
+	"localSmall": ["Temperatures", "yearlyPrecipitation"],
 	"temp": ["Temperatures",
 		"TemperaturesSummer",
 		"TemperaturesWinter",
