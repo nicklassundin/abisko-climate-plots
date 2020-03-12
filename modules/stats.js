@@ -674,6 +674,7 @@ exports.parsers = {
 			name: each.breakupDate ? dateFormat(each.breakupDate) : null,
 			week: each.breakupDate ? help.weekNumber(each.breakupDate) : null,
 		})).filter(each => each.y).filter(each => each.x >= 1909).filter(each => each.name != null);
+		
 		// var breakupVar = variance(breakupDOY.map(each=>each.y));
 
 		var freezeDOY = iceData.map((each, year) => ({
@@ -689,20 +690,35 @@ exports.parsers = {
 		var breakupLinear = help.linearRegression(breakupDOY.map(w => w.x), breakupDOY.map(w => w.y));
 		var freezeLinear = help.linearRegression(freezeDOY.map(w => w.x), freezeDOY.map(w => w.y));
 
-		var breakup = breakupDOY.map(each => ({
-			x: each.x,
-			y: help.weekNumber(help.dateFromDayOfYear(each.x, each.y)),
-			name: each.name,
-		}));
-
-		var freeze = freezeDOY.map(each => {
-			var weekNo = help.weekNumber(help.dateFromDayOfYear(each.x, each.y));
-			return {
+		var breakup = {
+			week: breakupDOY.map(each => ({
 				x: each.x,
-				y: weekNo + (weekNo < 10 ? 52 : 0),
+				y: help.weekNumber(help.dateFromDayOfYear(each.x, each.y)),
 				name: each.name,
-			}
-		});
+			})),
+			date: breakupDOY.map(each => ({
+				x: each.x,
+				y: help.dateFromDayOfYear(each.x, each.y),
+				name: each.name,
+			}))
+		}
+
+
+		var freeze = {
+			week: freezeDOY.map(each => {
+				var weekNo = help.weekNumber(help.dateFromDayOfYear(each.x, each.y));
+				return {
+					x: each.x,
+					y: weekNo + (weekNo < 10 ? 52 : 0),
+					name: each.name,
+				}
+			}),
+			date: freezeDOY.map(each => ({
+				x: each.x,
+				y: help.dateFromDayOfYear(each.x, each.y),
+				name: each.name,
+			}))
+		}
 		var calculateMovingAverages = (values) => movingAverages(values.map(v => v.y), 10).map((avg, i) => ({
 			x: values[i].x, 
 			y: avg,

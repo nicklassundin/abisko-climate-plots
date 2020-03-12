@@ -1206,7 +1206,7 @@ exports.graphs = {
 				formatter: function () {
 					var tooltip = '<span style="font-size: 10px">' + (+this.x-1) + '/' + this.x + '</span><br/>';
 					this.points.forEach(point =>
-						tooltip += '<span style="color:' + point.color + '">\u25CF</span> ' + point.series.name + ': <b>' +(point.point.options.week || point.y) + '</b><br/>');
+						tooltip += '<span style="color:' + point.color + '">\u25CF</span> ' + point.series.name + ': <b>' +(point.point.name || point.y) + '</b><br/>');
 					return tooltip;
 				},
 			},
