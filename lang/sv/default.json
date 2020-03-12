@@ -1,0 +1,20 @@
+{
+	"title": "[TITLE]",
+	"sub-title": "[SUB-TITLE]",
+	"x-axis": {
+		"left": "[X-AXIS]",
+		"right": "[X-AXIS]"
+	},
+	"y-axis": {
+		"bott": "[Y-AXIS]",
+		"top": "[Y-AXIS]"
+	},
+	"caption": "[SOME TEXT]",
+	"series" {
+		"avg": "[example]",
+		"diff": "[example]",
+		"max": "[example]",
+		"min": "[example]",
+		"linjer": "[example]"
+	}
+}

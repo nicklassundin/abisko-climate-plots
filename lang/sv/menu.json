@@ -1,0 +1,14 @@
+{
+	"baselineform": {
+		"title": "Intervalet för baslinjen",
+		"lower": "Lägre gränsen",
+		"upper": "Övre gränsen"
+	},
+	"dataCredit": "Data källa",
+	"contribute": "Bidra mjukvara - Github [dummy]",
+	"showDataTable": "Visa/göm data",
+	"langOption": "English",
+	"downloadJPEG": "Ladda ner som JPEG",
+	"downloadPDF": "Ladda ner som PDF",
+	"downloadSVG": "Ladda ner som SVG"
+}
