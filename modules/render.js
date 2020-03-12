@@ -1191,15 +1191,17 @@ exports.graphs = {
 						return this.value > 52 ? this.value - 52 : this.value;
 					},
 				}
-			}, {
-				title: {
-					text: Highcharts.getOptions().lang.iceTime,
-				},
-				lineWidth: 1,
-				max: 250,
-				min: 80,
-				opposite: true,
-			}],
+			}
+				// ,{
+				// title: {
+				// 	text: Highcharts.getOptions().lang.iceTime,
+				// },
+				// lineWidth: 1,
+				// max: 250,
+				// min: 80,
+				// opposite: true,
+			// }
+			],
 			tooltip: {
 				shared: true,
 				valueDecimals: 0,
@@ -1274,21 +1276,21 @@ exports.graphs = {
 					// yAxis: 1,
 					// visible: false,
 					// },
-					{
-						regression: false,
-						regressionSettings: {
-							type: 'linear',
-							color: '#00bb00',
-							name: Highcharts.getOptions().lang.linIceTime,
-						},
-						yAxis: 1,
-						name: Highcharts.getOptions().lang.iceTime2,
-						color: '#00bb00',
-						lineWidth: 0,
-						marker: { radius: 2 },
-						states: { hover: { lineWidthPlus: 0 } },
-						data: ice.iceTime,
-					},
+					// {
+					// 	regression: false,
+					// 	regressionSettings: {
+					// 		type: 'linear',
+					// 		color: '#00bb00',
+					// 		name: Highcharts.getOptions().lang.linIceTime,
+					// 	},
+					// 	yAxis: 1,
+					// 	name: Highcharts.getOptions().lang.iceTime2,
+					// 	color: '#00bb00',
+					// 	lineWidth: 0,
+						// marker: { radius: 2 },
+						// states: { hover: { lineWidthPlus: 0 } },
+						// data: ice.iceTime,
+					// },
 					// {
 					// yAxis: 1,
 					// name: Highcharts.getOptions().lang.movAvgIceTime,
