@@ -1188,9 +1188,11 @@ exports.graphs = {
 				lineWidth: 1,
 				labels: {
 					formatter: function () {
-						return this.value > 52 ? this.value - 52 : this.value;
+						return (this.value > 366 ? this.value - 365 : this.value);
 					},
-				}
+				},
+				tickPositions: [100, 150, 200, 250, 300, 365, 400],
+				tickInterval: 50,
 			}
 				// ,{
 				// title: {

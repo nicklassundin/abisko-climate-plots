@@ -448,6 +448,7 @@ exports.parsers = {
 		var data = result.data;
 		data.splice(0,4)
 		data = data.map(function(each){
+			var 
 			each = Object.keys(each).map(key => each[key]);
 			var x = parseInt(each.shift());
 			var y = help.mean(each.map(each => parseFloat(each)).filter(function(value){
