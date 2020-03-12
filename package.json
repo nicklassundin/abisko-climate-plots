@@ -18,6 +18,8 @@
 		"handlebars": "^4.7.2",
 		"hbs": "^4.0.6",
 		"highcharts": "^7.2.1",
+		"highcharts-more": "^0.1.7",
+		"highcharts-more-node": "^5.0.13",
 		"jquery": "^3.4.1",
 		"json2csv": "^4.5.4",
 		"mariadb": "^2.1.4",

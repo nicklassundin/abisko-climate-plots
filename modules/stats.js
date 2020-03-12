@@ -229,6 +229,7 @@ var parseByDate = function (values, type='mean', src='', custom) {
 	var frame = {
 		weeks: {},
 		yrly: {},
+		yrlyFull: {},
 		yrlySplit: {},
 		decades: {},
 		monthly: {},
@@ -243,6 +244,7 @@ var parseByDate = function (values, type='mean', src='', custom) {
 	const data = {
 		weeks: {},
 		yrly: {},
+		yrlyFull: {},
 		yrlySplit: {},
 		decades: {},
 		monthly: {},
@@ -298,10 +300,17 @@ var parseByDate = function (values, type='mean', src='', custom) {
 					}
 					result.winter[key][year].values.push(entry);
 				}
-
+				// Yearly Full
+				if(!result.yrlyFull) result.yrlyFull = {}
+				if(!result.yrlyFull[year]) result.yrlyFull[year] = {}
+				if(!result.yrlyFull[year][key]) result.yrlyFull[year][key] = {}
+				if(!result.yrlyFull[year][key][month]){
+					const cont = struct.create([],month, type);
+					result.yrlyFull[year][key][month] = cont;
+				} 
+				result.yrlyFull[year][key][month].values.push(entry);
 
 				// Monthly
-
 				if(!result.monthly) result.monthly = {}
 				if(!result.monthly[month]) result.monthly[month] = {}
 				if(!result.monthly[month][key]) result.monthly[month][key] = {}
@@ -388,6 +397,13 @@ var parseByDate = function (values, type='mean', src='', custom) {
 						case 'yrly':
 							keys.forEach(tkey => {
 								values[key][tkey] = construct(values[key][tkey])
+							})
+							break;
+						case 'yrlyFull': 
+							Object.keys(values[key]).forEach(year => {
+								keys.forEach(tkey => {
+									values[key][year][tkey] = construct(values[key][year][tkey], parseInt(year));
+								})
 							})
 							break;
 						case 'yrlySplit':

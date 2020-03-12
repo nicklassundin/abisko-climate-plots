@@ -52,5 +52,6 @@
 	"ice": ["abiskoLakeIce",
 		"abiskoLakeIceTime"],
 	"iceThick": ["iceThicknessYear", "iceThicknessDate"],
-	"perma": ["permaHistogramCALM"]
+	"perma": ["permaHistogramCALM"],
+	"exper": ["monthlyTemperaturesPolar"]
 }

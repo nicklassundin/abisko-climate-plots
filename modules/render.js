@@ -1,11 +1,12 @@
 
-global.Highcharts = require('highcharts');
-require('highcharts/modules/annotations')(Highcharts)
-require('highcharts/modules/series-label')(Highcharts)
-require('highcharts/modules/series-label')(Highcharts)
-require('highcharts/modules/exporting')(Highcharts)
-require('highcharts/modules/export-data.js')(Highcharts)
-require('highcharts/modules/histogram-bellcurve')(Highcharts)
+// global.Highcharts = require('highcharts');
+global.Highcharts = require('highcharts-more-node');
+// require('highcharts/modules/annotations')(Highcharts)
+// require('highcharts/modules/series-label')(Highcharts)
+// require('highcharts/modules/series-label')(Highcharts)
+// require('highcharts/modules/exporting')(Highcharts)
+// require('highcharts/modules/export-data.js')(Highcharts)
+// require('highcharts/modules/histogram-bellcurve')(Highcharts)
 
 const highchart_help = require('../config/highcharts_config.js');
 const language = require('../config/language.json');
@@ -227,9 +228,9 @@ exports.graphs = {
 								lineWidth: 1,
 								radius: 5,
 							},
-							hover: {
-								radiusPlus: 5,
-							},
+								hover: {
+									radiusPlus: 5,
+								},
 
 						}
 					},
@@ -266,9 +267,9 @@ exports.graphs = {
 			dataSrc: undefined,
 			xAxis: {
 				type: 'datetime',
-				title: {
-					text: Highcharts.getOptions().lang.years, 
-				},
+					title: {
+						text: Highcharts.getOptions().lang.years, 
+					},
 				crosshair: true,
 				lineWidth: 1,
 				gridLineWidth: 1,
@@ -281,7 +282,7 @@ exports.graphs = {
 				},
 				// plotLines: [{
 				// value: 0,
-				// color: 'rgb(204, 214, 235)',
+					// color: 'rgb(204, 214, 235)',
 				// width: 2,
 				// }],
 				plotLines:[{
@@ -312,7 +313,7 @@ exports.graphs = {
 					zIndex: 1,
 				}],
 				tickInterval: 10,
-				lineWidth: 1,
+					lineWidth: 1,
 			},
 			tooltip: {
 				shared: true,
@@ -358,7 +359,7 @@ exports.graphs = {
 					// useHTML: true,
 					// data: data.linReg.points, 
 					// type: 'line',
-					// lineWidth: 2,
+					,			// lineWidth: 2,
 					// marker: {enabled: false,},
 					// states: { hover: { lineWidthPlus: 0 } },
 					// color: '#333377',
@@ -367,6 +368,139 @@ exports.graphs = {
 				]
 			})
 
+		}
+	},
+	Polar: function(id){
+		charts[id] = Highcharts.chart(id, {
+			chart: {
+				polar: true,
+				type: 'column' 
+				// type: 'line'
+				// type: 'area'
+				// type: 'bar'
+			},
+			title: {
+				text: 'Precipitation',
+			},
+			pane: {
+				size: '80%'
+			},
+			xAxis: {
+				categories: ["January", "February", "Mars", "April", "May", "Juni", "Juli", "August", "September", "October", "November", "December"],
+				tickmarkPlacement: 'on',
+				lineWidth: 0,
+				reversed: true,
+			},
+			yAxis: {
+				gridLineInterpolation: 'polygon',
+				lineWidth: 0,
+				max: 125,
+				min: 0
+			},
+			tooltip: {
+				shared: true,
+				pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f} mm</b><br/>'
+			},
+			legend: {
+				enabled: false,
+			},
+			responsive: {
+				rules: [{
+					condition: {
+						maxWidth: 500
+					},
+					chartOptions: {
+						legend: {
+							align: 'center',
+							verticalAlign: 'bottom',
+							layout: 'horizontal'
+						},
+						pane: {
+							size: '70%'
+						}
+					}
+				}]
+			},
+			plotOptions: {
+				column: {
+					stacking: 'normal',
+					lineWidth: 0,
+					pointPadding: 0,
+				},
+				// area: {
+				// 	stacking: 'normal',
+				// 	lineColor: '#666666',
+				// 		lineWidth: 0,
+				// 	marker: {
+				// 		enabled: false,
+				// 		lineWidth: 0,
+				// 		lineColor: '#666666'
+					// }
+				// }
+			},
+			series: Array(107).fill(1).map(each => ({ data: [null, null], visible: false }))
+		})
+		charts[id].onscroll = function (e) {  
+			console.log(e)
+		} 
+		//IE, Opera, Safari
+		var years = [];
+		var index = 0;
+		var delta = 0;
+		var n = 3;
+		$('#'+id).bind('mousewheel', function(e){
+			delta = delta + e.originalEvent.deltaY;
+			if(delta < -100){
+				delta = 0;
+				if(index < (years.length - (n + 1))){
+					$('#' + id).highcharts().series[index].update({
+        					visible: false, 
+    					});	
+					index = index + 1;
+					$('#' + id).highcharts().series[index + n].update({
+        					visible: true,
+    					});	
+				} 
+			}else if(delta > 100){
+				delta = 0;
+				if(index > 0){
+					$('#' + id).highcharts().series[index + n].update({
+        					visible: false,
+    					});	
+					index = index - 1;
+					$('#' + id).highcharts().series[index].update({
+        					visible: true,
+    					});	
+				} 
+			}
+			return false;
+		});
+		charts[id].showLoading();
+		return function(data){
+			var parseData = Object.keys(data).map((key, index) => {
+				years.push(data[key].snow.x);
+				var entries = Array(12).fill(0);
+				data[key].snow.values.forEach(each => {
+					entries[each.x - 1] = each.y
+				})
+				return {
+					data: entries,
+					name: data[key].snow.x, 
+					pointPlacement: 'on',
+					stack: 'precipitation',
+					visible: index < 3,
+				}
+			})
+			charts[id].hideLoading();
+			charts[id].update({
+				legend: {
+					align: 'right',
+					verticalAlign: 'middle',
+					layout: 'vertical',
+					enabled: true, 
+				},	
+				series: parseData
+			})
 		}
 	},
 	Temperature: function (id) {
@@ -401,7 +535,7 @@ exports.graphs = {
 					color: 'rgb(204, 214, 235)',
 					width: 2,
 				}],
-				// max: 60,
+					// max: 60,
 				// min: -20,
 				tickInterval: 1,
 				lineWidth: 1,
@@ -510,7 +644,7 @@ exports.graphs = {
 						color: '#888888',
 						regressionSettings: {
 							type: 'linear',
-							color: '#888888',
+								color: '#888888',
 							// color: '#4444ff',
 							// '#888888'
 							name: Highcharts.getOptions().lang.linReg,
@@ -1202,7 +1336,7 @@ exports.graphs = {
 				// max: 250,
 				// min: 80,
 				// opposite: true,
-			// }
+				// }
 			],
 			tooltip: {
 				shared: true,
@@ -1289,9 +1423,9 @@ exports.graphs = {
 					// 	name: Highcharts.getOptions().lang.iceTime2,
 					// 	color: '#00bb00',
 					// 	lineWidth: 0,
-						// marker: { radius: 2 },
-						// states: { hover: { lineWidthPlus: 0 } },
-						// data: ice.iceTime,
+					// marker: { radius: 2 },
+					// states: { hover: { lineWidthPlus: 0 } },
+					// data: ice.iceTime,
 					// },
 					// {
 					// yAxis: 1,
@@ -1610,6 +1744,7 @@ exports.graphs = {
 		charts[id] = Highcharts.chart(id, {
 			chart: {
 				zoomType: 'x',
+				type: 'column'
 			},
 			title: {
 				text: Highcharts.getOptions().lang.titles[id],
@@ -1637,6 +1772,11 @@ exports.graphs = {
 			legend: {
 				enabled: false
 			},
+			plotOptions: {
+				column: {
+					pointPadding: 0,
+				}
+			},
 			series: [{data: [null, null]}],
 		});
 		charts[id].showLoading();
@@ -1644,12 +1784,12 @@ exports.graphs = {
 			charts[id].hideLoading();
 			charts[id].update({
 				series: [{
-					data: data.map(each => ({
-						x: each.x,
-						y: each.y,
+					data: Object.keys(data).map(key => ({
+						x: data[key].x,
+						y: data[key].y,
 					})),
 					name: 'Histogram',
-					type: 'histogram',
+					type: 'column',
 					color: "#bb9999",
 					opacity: 0.5,
 				}]

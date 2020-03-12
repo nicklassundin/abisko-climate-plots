@@ -286,6 +286,34 @@ var rendF = {
 
 		},
 	},
+	'monthlyTemperaturesPolar': {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('monthlyTemperaturesPolar', ['temperatures', 'yrlyFull'], ["temperatures", "polar"])
+		},
+		html: function(debug=false, doc){
+			var no = 4;
+			var div = document.createElement("div");
+			div.setAttribute("id","monthlyTemperaturesPolar");
+			div.appendChild(createDiv('monthlyTemperaturesPolar'))
+			return div;
+
+		},
+	}, 
+	'monthlyPrecipitationPolar': {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('monthlyPrecipitationPolar', ['precipitation', 'yrlyFull'], ["precipitation", "polar"])
+		},
+		html: function(debug=false, doc){
+			var no = 4;
+			var div = document.createElement("div");
+			div.setAttribute("id","monthlyPrecipitationPolar");
+			div.appendChild(createDiv('monthlyPrecipitationPolar'))
+			return div;
+
+		},
+	}, 
 	'monthlyTemperatures': {
 		func: function(reset=false){
 			config[stationType].contFunc(reset);

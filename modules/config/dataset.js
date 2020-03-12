@@ -86,8 +86,6 @@ var dataset_struct = {
 	init: function(id, tag, renderTag=tag){
 		var render = this.render;
 		if(tag){
-			// console.log(render)
-			// console.log(tag)
 			render = tagApply(render, renderTag)(id);
 		}else{
 			render = render(id);
@@ -173,6 +171,7 @@ var config = {
 				'winter': renders.Temperature,
 				'monthly': monthlyFunc(renders.Temperature),
 				'difference': renders.TemperatureDifference,
+				'polar': renders.Polar,
 			},
 			'precipitation':{
 				'yrly': renders.YearlyPrecipitation,
@@ -180,9 +179,9 @@ var config = {
 				'winter': renders.YearlyPrecipitation,
 				'monthly': monthlyFunc(renders.MonthlyPrecipitation),
 				'difference': renders.PrecipitationDifference,
+				'polar': renders.Polar,
 			},
 			'growingSeason': renders.GrowingSeason,
-
 		},
 		reader = Papa.parse),
 	smhi: dataset_struct.create(
