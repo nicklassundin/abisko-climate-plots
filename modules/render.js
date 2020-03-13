@@ -1497,6 +1497,7 @@ exports.graphs = {
 		charts[id] = Highcharts.chart(id, {
 			chart: {
 				zoomType: 'x',
+				type: 'column'
 			},
 			title: {
 				text: "Ice Max Thickness measured by year"
@@ -1564,7 +1565,6 @@ exports.graphs = {
 							y: each.y
 						}
 					}),
-					type: 'histogram',
 				}]
 			});
 
@@ -1575,11 +1575,17 @@ exports.graphs = {
 		// console.log(startDate)
 		charts[id] = Highcharts.chart(id, {
 			title: {
-				text: "Ice thickness for Closest year to [day of month]/[month]",
+				useHTML: true,
+				text: "<label>"+
+				"Ice thickness by date across years </label><br>"+
+				"<input type='date' value="+
+				variables.dateStr()+
+				" onclick=selectText(this) "+
+				"onchange=updatePlot("+id+","+baselineLower+","+baselineUpper+",this.value)></input>"
 			},
 			chart: {
-				// type: 'bar'
 				zoomType: 'x',
+				type: 'column'
 			},
 			xAxis: {
 				title: {
@@ -1625,15 +1631,6 @@ exports.graphs = {
 		return function(data){
 			charts[id].hideLoading();
 			charts[id].update({
-				title: {
-					useHTML: true,
-					text: "<label>"+
-					"Ice thickness for Closest year to </label>"+
-					"<input type='date' value="+
-					variables.dateStr()+
-					" onclick=selectText(this) "+
-					"onchange=updatePlot("+id+","+baselineLower+","+baselineUpper+",this.value)></input>"
-				},
 				tooltip: {
 					shared: true,
 					valueSuffix: ' cm',
@@ -1665,7 +1662,6 @@ exports.graphs = {
 						},
 					},
 					name: 'Ice Thickness',
-					type: 'histogram',
 				}]
 			});
 
