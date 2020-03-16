@@ -302,13 +302,13 @@ var parseByDate = function (values, type='mean', src='', custom) {
 				}
 				// Yearly Full split over winter
 				if(!result.yrlyFull) result.yrlyFull = {}
-				if(!result.yrlyFull[year]) result.yrlyFull[year] = {}
-				if(!result.yrlyFull[year][key]) result.yrlyFull[year][key] = {}
-				if(!result.yrlyFull[year][key][month]){
+				if(!result.yrlyFull[decade]) result.yrlyFull[decade] = {}
+				if(!result.yrlyFull[decade][key]) result.yrlyFull[decade][key] = {}
+				if(!result.yrlyFull[decade][key][month]){
 					const cont = struct.create([],month, type);
-					result.yrlyFull[year][key][month] = cont;
+					result.yrlyFull[decade][key][month] = cont;
 				} 
-				result.yrlyFull[year][key][month].values.push(entry);
+				result.yrlyFull[decade][key][month].values.push(entry);
 
 				// Monthly
 				if(!result.monthly) result.monthly = {}
@@ -463,20 +463,22 @@ exports.parsers = {
 		fields.shift()
 		var data = result.data;
 		data.splice(0,4)
-		data = data.map(function(each){
-			var 
-			each = Object.keys(each).map(key => each[key]);
-			var x = parseInt(each.shift());
-			var y = help.mean(each.map(each => parseFloat(each)).filter(function(value){
-				return !Number.isNaN(value)
-			}));
-			return {
-				x,
-				y,
-			}
+		var stations = {};
+		data.forEach(function(each){
+			Object.keys(each).forEach(key => {
+				if(key != ""){
+					if(!stations[key]){
+						stations[key] = [];
+					}
+					stations[key].push({
+						x: Number(each[""]),
+						y: !Number.isNaN(Number(each[key])) ? Number(each[key]) : undefined 
+					})
+				}
+			})
 		})
 		return new Promise(function(resolve, reject){
-			resolve(data)
+			resolve(stations)
 		})
 	},
 	SCRIPPS_CO2: function(result, src=''){
@@ -691,7 +693,7 @@ exports.parsers = {
 			name: each.breakupDate ? dateFormat(each.breakupDate) : null,
 			week: each.breakupDate ? help.weekNumber(each.breakupDate) : null,
 		})).filter(each => each.y).filter(each => each.x >= 1909).filter(each => each.name != null);
-		
+
 		// var breakupVar = variance(breakupDOY.map(each=>each.y));
 
 		var freezeDOY = iceData.map((each, year) => ({

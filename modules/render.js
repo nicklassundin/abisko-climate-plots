@@ -228,9 +228,9 @@ exports.graphs = {
 								lineWidth: 1,
 								radius: 5,
 							},
-								hover: {
-									radiusPlus: 5,
-								},
+							hover: {
+								radiusPlus: 5,
+							},
 
 						}
 					},
@@ -267,9 +267,9 @@ exports.graphs = {
 			dataSrc: undefined,
 			xAxis: {
 				type: 'datetime',
-					title: {
-						text: Highcharts.getOptions().lang.years, 
-					},
+				title: {
+					text: Highcharts.getOptions().lang.years, 
+				},
 				crosshair: true,
 				lineWidth: 1,
 				gridLineWidth: 1,
@@ -282,7 +282,7 @@ exports.graphs = {
 				},
 				// plotLines: [{
 				// value: 0,
-					// color: 'rgb(204, 214, 235)',
+				// color: 'rgb(204, 214, 235)',
 				// width: 2,
 				// }],
 				plotLines:[{
@@ -313,7 +313,7 @@ exports.graphs = {
 					zIndex: 1,
 				}],
 				tickInterval: 10,
-					lineWidth: 1,
+				lineWidth: 1,
 			},
 			tooltip: {
 				shared: true,
@@ -380,7 +380,8 @@ exports.graphs = {
 				// type: 'bar'
 			},
 			title: {
-				text: 'Precipitation',
+				text: "<label id='"+id+"_title'>Precipitation 1910th</label>",
+				useHTML: true,
 			},
 			pane: {
 				size: '80%'
@@ -394,7 +395,7 @@ exports.graphs = {
 			yAxis: {
 				gridLineInterpolation: 'polygon',
 				lineWidth: 0,
-				// max: 90,
+				max: 650, 
 				// min: 0,
 			},
 			tooltip: {
@@ -457,36 +458,48 @@ exports.graphs = {
 				delta = 0;
 				if(index < (years.length*2 - 2)){
 					$('#' + id).highcharts().series[index].update({
-        					visible: false, 
-    					});	
+						visible: false, 
+					});	
 					$('#' + id).highcharts().series[index + 1].update({
-        					visible: false, 
-    					});	
+						visible: false, 
+					});	
 					index = index + 2;
 					$('#' + id).highcharts().series[index].update({
-        					visible: true,
-    					});	
+						visible: true,
+					});	
 					$('#' + id).highcharts().series[index + 1].update({
-        					visible: true,
-    					});	
+						visible: true,
+					});	
+					charts[id].update({
+						title: {
+							text: "<label id='"+id+"_title'>Precipitation "+$('#'+id).highcharts().series[index].options.year+"th</label>",
+							useHTML: true,
+						},
+					})
 				} 
 			}else if(delta > 100){
 				delta = 0;
 				if(index > 0){
 					$('#' + id).highcharts().series[index].update({
-        					visible: false,
-    					});	
+						visible: false,
+					});	
 					$('#' + id).highcharts().series[index + 1].update({
-        					visible: false,
-    					});	
+						visible: false,
+					});	
 					index = index - 2;
 					$('#' + id).highcharts().series[index].update({
-        					visible: true,
-    					});	
+						visible: true,
+					});	
 					$('#' + id).highcharts().series[index + 1].update({
-        					visible: true,
-    					});	
-				} 
+						visible: true,
+					});
+					charts[id].update({
+						title: {
+							text: "<label id='"+id+"_title'>Precipitation "+$('#'+id).highcharts().series[index].options.year+"th</label>",
+							useHTML: true,
+						},
+					})
+				}
 			}
 			return false;
 		});
@@ -502,6 +515,7 @@ exports.graphs = {
 				parseData.push({
 					data: rain,
 					name: "Rain for "+data[key].rain.x, 
+					year: data[key].rain.x,
 					// pointPlacement: 'on',
 					stack: data[key].snow.x,
 					visible: index < 1,
@@ -513,7 +527,8 @@ exports.graphs = {
 				})
 				parseData.push({
 					data: snow, 
-					name: "Snow for "+data[key].snow.x, 
+					name: "Snow for "+data[key].snow.x,
+					year: data[key].snow.x,
 					// pointPlacement: 'on',
 					stack: data[key].snow.x,
 					visible: index < 1,
@@ -522,12 +537,6 @@ exports.graphs = {
 			})
 			charts[id].hideLoading();
 			charts[id].update({
-				// legend: {
-				// 	align: 'right',
-				// 	verticalAlign: 'middle',
-				// 	layout: 'vertical',
-				// 	enabled: true, 
-				// },	
 				series: parseData
 			})
 		}
@@ -564,7 +573,7 @@ exports.graphs = {
 					color: 'rgb(204, 214, 235)',
 					width: 2,
 				}],
-					// max: 60,
+				// max: 60,
 				// min: -20,
 				tickInterval: 1,
 				lineWidth: 1,
@@ -673,7 +682,7 @@ exports.graphs = {
 						color: '#888888',
 						regressionSettings: {
 							type: 'linear',
-								color: '#888888',
+							color: '#888888',
 							// color: '#4444ff',
 							// '#888888'
 							name: Highcharts.getOptions().lang.linReg,
@@ -1792,32 +1801,55 @@ exports.graphs = {
 					label: {
 						text: Highcharts.getOptions().lang.groundlevel
 					}
-				}]
+				}],
+				min: 0,
+				max: 1.5,
 			},
 			legend: {
-				enabled: false
+				enabled: true
 			},
 			plotOptions: {
 				column: {
 					pointPadding: 0,
+				},
+				series: {
+					events: {
+						legendItemClick: function(event) {
+							var thisSeries = this,
+								chart = this.chart;
+
+							if (this.visible === true) {
+								this.hide();
+								chart.get("highcharts-navigator-series").hide();
+							} else {
+								this.show();
+								chart.series.forEach(function(el, inx) {
+									if (el !== thisSeries) {
+										el.hide();
+									}
+								});
+								// chart.get("highcharts-navigator-series").setData(thisSeries.options.data, false);
+								// chart.get("highcharts-navigator-series").show();
+							}
+							event.preventDefault();
+						}
+					}
 				}
 			},
-			series: [{data: [null, null]}],
+			series: [{data: [null, null]},{data: [null, null]},{data: [null, null]},{data: [null, null]},{data: [null, null]},{data: [null, null]},{data: [null, null]},{data: [null, null]}],
 		});
 		charts[id].showLoading();
 		return function(data){
 			charts[id].hideLoading();
 			charts[id].update({
-				series: [{
-					data: Object.keys(data).map(key => ({
-						x: data[key].x,
-						y: data[key].y,
-					})),
-					name: 'Histogram',
+				series: Object.keys(data).map(key => ({
+					name: key,
+					data: data[key],
 					type: 'column',
 					color: "#bb9999",
 					opacity: 0.5,
-				}]
+					visible: "Torneträsk" == key,
+				})),
 			});
 		}
 	}
