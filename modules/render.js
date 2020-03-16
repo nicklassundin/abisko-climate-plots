@@ -394,8 +394,8 @@ exports.graphs = {
 			yAxis: {
 				gridLineInterpolation: 'polygon',
 				lineWidth: 0,
-				max: 125,
-				min: 0
+				// max: 90,
+				// min: 0,
 			},
 			tooltip: {
 				shared: true,
@@ -407,7 +407,7 @@ exports.graphs = {
 			responsive: {
 				rules: [{
 					condition: {
-						maxWidth: 500
+						maxWidth: 800
 					},
 					chartOptions: {
 						legend: {
@@ -423,22 +423,26 @@ exports.graphs = {
 			},
 			plotOptions: {
 				column: {
+					// stacking: 'percent',	
 					stacking: 'normal',
 					lineWidth: 0,
 					pointPadding: 0,
+					animation: false,
 				},
-				// area: {
-				// 	stacking: 'normal',
-				// 	lineColor: '#666666',
-				// 		lineWidth: 0,
-				// 	marker: {
-				// 		enabled: false,
-				// 		lineWidth: 0,
-				// 		lineColor: '#666666'
-					// }
-				// }
+				area: {
+					// stacking: 'percent',	
+					stacking: 'normal',
+					lineColor: '#666666',
+					animation: false,
+					lineWidth: 0,
+					marker: {
+						enabled: false,
+						lineWidth: 0,
+						lineColor: '#666666'
+					}
+				}
 			},
-			series: Array(107).fill(1).map(each => ({ data: [null, null], visible: false }))
+			series: Array(107*2).fill(1).map(each => ({ data: [null, null], visible: false }))
 		})
 		charts[id].onscroll = function (e) {  
 			console.log(e)
@@ -447,28 +451,39 @@ exports.graphs = {
 		var years = [];
 		var index = 0;
 		var delta = 0;
-		var n = 3;
 		$('#'+id).bind('mousewheel', function(e){
 			delta = delta + e.originalEvent.deltaY;
 			if(delta < -100){
 				delta = 0;
-				if(index < (years.length - (n + 1))){
+				if(index < (years.length*2 - 2)){
 					$('#' + id).highcharts().series[index].update({
         					visible: false, 
     					});	
-					index = index + 1;
-					$('#' + id).highcharts().series[index + n].update({
+					$('#' + id).highcharts().series[index + 1].update({
+        					visible: false, 
+    					});	
+					index = index + 2;
+					$('#' + id).highcharts().series[index].update({
+        					visible: true,
+    					});	
+					$('#' + id).highcharts().series[index + 1].update({
         					visible: true,
     					});	
 				} 
 			}else if(delta > 100){
 				delta = 0;
 				if(index > 0){
-					$('#' + id).highcharts().series[index + n].update({
+					$('#' + id).highcharts().series[index].update({
         					visible: false,
     					});	
-					index = index - 1;
+					$('#' + id).highcharts().series[index + 1].update({
+        					visible: false,
+    					});	
+					index = index - 2;
 					$('#' + id).highcharts().series[index].update({
+        					visible: true,
+    					});	
+					$('#' + id).highcharts().series[index + 1].update({
         					visible: true,
     					});	
 				} 
@@ -477,28 +492,42 @@ exports.graphs = {
 		});
 		charts[id].showLoading();
 		return function(data){
-			var parseData = Object.keys(data).map((key, index) => {
+			var parseData = [];
+			Object.keys(data).map((key, index) => {
 				years.push(data[key].snow.x);
-				var entries = Array(12).fill(0);
-				data[key].snow.values.forEach(each => {
-					entries[each.x - 1] = each.y
+				var rain = Array(12).fill(0);
+				data[key].rain.values.forEach(each => {
+					rain[each.x - 1] = each.y
 				})
-				return {
-					data: entries,
-					name: data[key].snow.x, 
-					pointPlacement: 'on',
-					stack: 'precipitation',
-					visible: index < 3,
-				}
+				parseData.push({
+					data: rain,
+					name: "Rain for "+data[key].rain.x, 
+					// pointPlacement: 'on',
+					stack: data[key].snow.x,
+					visible: index < 1,
+					color: rainColor.color,
+				})
+				var snow = Array(12).fill(0);
+				data[key].snow.values.forEach(each => {
+					snow[each.x - 1] = each.y
+				})
+				parseData.push({
+					data: snow, 
+					name: "Snow for "+data[key].snow.x, 
+					// pointPlacement: 'on',
+					stack: data[key].snow.x,
+					visible: index < 1,
+					color: snowColor.color,
+				})
 			})
 			charts[id].hideLoading();
 			charts[id].update({
-				legend: {
-					align: 'right',
-					verticalAlign: 'middle',
-					layout: 'vertical',
-					enabled: true, 
-				},	
+				// legend: {
+				// 	align: 'right',
+				// 	verticalAlign: 'middle',
+				// 	layout: 'vertical',
+				// 	enabled: true, 
+				// },	
 				series: parseData
 			})
 		}

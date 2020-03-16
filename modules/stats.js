@@ -300,7 +300,7 @@ var parseByDate = function (values, type='mean', src='', custom) {
 					}
 					result.winter[key][year].values.push(entry);
 				}
-				// Yearly Full
+				// Yearly Full split over winter
 				if(!result.yrlyFull) result.yrlyFull = {}
 				if(!result.yrlyFull[year]) result.yrlyFull[year] = {}
 				if(!result.yrlyFull[year][key]) result.yrlyFull[year][key] = {}
