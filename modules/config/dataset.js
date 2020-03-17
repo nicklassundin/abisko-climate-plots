@@ -150,7 +150,7 @@ var config = {
 		local = false),
 	abisko: dataset_struct.create(
 		src = '',
-		file = ["ANS_Temp_Prec.csv"],
+		file = ["ANS_Temp_Prec.csv", "AWS_Daily_1984-2019.csv"],
 		preset = {
 			//worker: useWebWorker,
 			header: true,

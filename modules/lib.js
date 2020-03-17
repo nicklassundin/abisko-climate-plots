@@ -15,6 +15,7 @@ global.variables = {
 
 var config = require('./config/dataset.js').config;
 var charts = require('./config/charts.js');
+var sets = require('../config/custom.json');
 
 lib = {
 	renderChart: function(div, type, id="abisko"){ 
@@ -39,5 +40,12 @@ lib = {
 			return div;
 		})
 	},
-	// listCharts: charts.ids
+	renderSets: function(div, set, id){
+		sets[set].forEach(type => {
+			var container = document.createElement("div");
+			container.setAttribute("id", "mark_"+type);
+			div.appendChild(container);
+			this.renderChart(container, type, id)
+		})
+	}
 }

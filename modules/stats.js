@@ -446,12 +446,7 @@ var parseByDate = function (values, type='mean', src='', custom) {
 			return answer
 		}
 	}
-
-	var respons = data.insert(values);
-	//console.log("resolved Abisko");
-	//console.log(respons)
-	parseAbiskoCached = respons;
-	return respons
+	return data.insert(values);
 }
 var byDate = parseByDate;
 
@@ -592,54 +587,66 @@ exports.parsers = {
 		})
 	},
 	AbiskoCsv: function (result, src='') {
-		result = result[0]
 		var blocks = { precipitation: [], temperatures: [] };
-		result.data.forEach(entry => {
-			var parseEntry = function(y){
-				if(y != undefined){
-					y = parseFloat(y.replace(",","."));
-				}else{
-					y = undefined;
-				}
-				return y;
+		var parseEntry = function(y){
+			if(y != undefined){
+				y = parseFloat(y.replace(",","."));
+			}else{
+				y = undefined;
 			}
-			var zero = 0;
-			var date = entry['Time'];
-			var avg = parseEntry(entry['Temp_avg']);
-			var total =parseEntry(entry['Precipitation']);
-			if(total==undefined) zero = undefined
+			return y;
+		}
 
-			blocks.temperatures.push({
-				avg:{
-					x: date,
-					y: avg, 
-				},
-				min: {
-					x: date,
-					y: parseEntry(entry['Temp_min']),
-				}, 
-				max: {
-					x: date,
-					y: parseEntry(entry['Temp_max']),
-				},
+		var insertToBlocks = function(data){
+			console.log(data)
+			data.forEach(entry => {
+				var zero = 0;
+				var date = entry.date; 
+				var avg = entry.avg;
+				var min = entry.min;
+				var max = entry.max;
+				var total = entry.total; 
+				if(total==undefined) zero = undefined
 
-			});
-			blocks.precipitation.push({
+				blocks.temperatures.push({
+					avg:{
+						x: date,
+						y: avg, 
+					},
+					min: {
+						x: date,
+						y: min
+					}, 
+					max: {
+						x: date,
+						y: max
+					},
 
-				total: {
-					x: date,
-					y: total, 
-				},
-				snow: {
-					x: date,
-					y: (avg < 0) ? total : zero
-				},
-				rain: {
-					x: date,
-					y: (avg >= 0) ? total : zero
-				}
-			});
-		})
+				});
+				blocks.precipitation.push({
+
+					total: {
+						x: date,
+						y: total, 
+					},
+					snow: {
+						x: date,
+						y: (avg < 0) ? total : zero
+					},
+					rain: {
+						x: date,
+						y: (avg >= 0) ? total : zero
+					}
+				});
+			})
+		}
+		insertToBlocks(result[0].data.map(entry => ({
+			date: entry['Time'],
+			avg: parseEntry(entry['Temp_avg']),
+			total: parseEntry(entry['Precipitation']),
+			min: parseEntry(entry['Temp_min']),
+			max: parseEntry(entry['Temp_max'])
+		})))
 		blocks.temperatures = parseByDate(blocks.temperatures);
 		blocks.precipitation = parseByDate(blocks.precipitation, 'sum');
 		blocks.growingSeason = struct.create(Object.keys(blocks.temperatures.weekly).map(year =>  blocks.temperatures.weekly[year].avg.sequence())).build();

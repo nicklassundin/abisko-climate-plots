@@ -396,6 +396,7 @@ exports.graphs = {
 				gridLineInterpolation: 'polygon',
 				lineWidth: 0,
 				max: 650, 
+				// max: 100, 
 				// min: 0,
 			},
 			tooltip: {
