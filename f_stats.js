@@ -370,22 +370,28 @@ var parseByDate = function (values, type='mean', src='', custom) {
 
 
 var parseCALM = function(result, src=''){
+	// result = result[0];
 	var fields = result.meta.fields;
 	fields.shift()
 	var data = result.data;
 	data.splice(0,4)
-	data = data.map(function(each){
-		each = Object.keys(each).map(key => each[key]);
-		var x = parseInt(each.shift());
-		var y = mean(each.map(each => parseFloat(each)).filter(function(value){
-			return !Number.isNaN(value)
-		}));
-		return {
-			x,
-			y,
-		}
+	var stations = {};
+	data.forEach(function(each){
+		Object.keys(each).forEach(key => {
+			if(key != ""){
+				if(!stations[key]){
+					stations[key] = [];
+				}
+				stations[key].push({
+					x: Number(each[""]),
+					y: !Number.isNaN(Number(each[key])) ? Number(each[key]) : undefined 
+				})
+			}
+		})
 	})
-	return data;
+	return new Promise(function(resolve, reject){
+		resolve(stations)
+	})
 }
 
 var parseSCRIPPS_CO2 = function(result, src=''){
@@ -854,5 +860,5 @@ var smhiTemp = function(result, src=''){
 	return new Promise(function(resolve, reject){
 		resolve(parseByDate(values))
 	})
-	
+
 }
