@@ -862,3 +862,46 @@ var smhiTemp = function(result, src=''){
 	})
 
 }
+
+var AbiskoLakeThickness = function(result, src=''){
+		//TODO	
+		var data = result[0].data;
+		var rawData = new Array();
+		data.forEach(each => {
+			var res = {
+				y: Number(each['Hela istäcket']),
+				x: each['Datum']
+			}
+			rawData.push(res)
+		})
+		data = rawData.map(each => {
+			var temp = {
+				'total': each
+			}
+			// console.log(temp)
+			// fsdfds
+			// }
+			return temp;
+		})
+		var parseData = parseByDate(data)
+		yrly = parseData.yrlySplit;
+		// console.log(yrly)
+		var dateSelect = function(date){
+			var close = new Array();
+			yrly.total.values.forEach(each => {
+				var res = each.closest(date);
+				var resDate = new Date(res.data.x);
+				var xYear = resDate.getFullYear();
+				if(help.isFirstHalfYear(resDate.getMonth()+1)){
+					xYear = xYear - 1;
+				}
+				close.push({ 
+					x: xYear, 
+					y: res.data.y,
+					date: res.data.x
+				})
+			})
+			return close;
+		}
+		return {'yrly': yrly, 'date': dateSelect };
+};

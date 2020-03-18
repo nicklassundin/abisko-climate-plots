@@ -8,6 +8,11 @@
 // console.log(test)
 ////////////
 
+var variables = {
+	date: new Date(),
+	dateStr: function(){ return (this.date.getYear()+1900)+"-"+(this.date.getMonth()+1)+"-"+this.date.getDate() }
+}
+
 var mark = function(id="mark",par=window.location.search) {
 	var param = (''+par);
 	var mark = document.getElementById(id+param);
@@ -283,6 +288,21 @@ var config = {
 		render = {
 			yrly: renderTemperatureGraph,
 		}),
+	iceThick: dataset_struct.create(
+		src = '',
+		file = ["data/Tornetrask-data.csv"],
+		preset = {
+			header: true,
+			download: true,
+			skipEmptyLines: true,
+		},
+		parser = AbiskoLakeThickness,
+		render = {
+			'yrly': iceThicknessYear,
+			'date': iceThicknessDate
+		},
+		reader = Papa.parse,
+		local = true)
 }
 
 // wander down the data structure with tag input example: [high, medium, low]
@@ -420,6 +440,8 @@ var getID = function(param=urlParams){
 			'abiskoLakeIceTime',
 			'weeklyCO2',
 			'permaHistogramCALM',
+			'iceThicknessYear',
+			'iceThicknessDate'
 		];
 	}
 	return id
@@ -879,6 +901,28 @@ var rendF = {
 			if(!debug) no = debug;
 			return createDiv("smhiTemp", no);
 		}
-	}
+	},
+	'iceThicknessYear': {
+		func: function(reset=false){
+			config['iceThick'].contFunc(reset);
+			config['iceThick'].init('iceThicknessYear', 'yrly')
+		},
+		html: function(debug=false, doc){
+			var no = 43;
+			if(!debug) no = debug;
+			return createDiv('iceThicknessYear', no);
+		},
+	},
+	'iceThicknessDate': {
+		func: function(reset=false){
+			config['iceThick'].contFunc(reset);
+			config['iceThick'].init('iceThicknessDate', 'date')
+		},
+		html: function(debug=false, doc){
+			var no = 43;
+			if(!debug) no = debug;
+			return createDiv('iceThicknessDate', no);
+		},
+	},
 }
 // console.log(config)

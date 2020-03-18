@@ -7,7 +7,11 @@ var dateToYear = function(entries){
 	}))
 }
 
-var updatePlot = function(id, bl, bu){
+var updatePlot = function(id, bl, bu, date){
+	if(date){
+		date = date.split("-");
+		variables.date = new Date(date[0],Number(date[1])-1,date[2]);
+	}
 	if(id.id) id=id.id; // TODO fix why this it gets a div not id
 	if(id.renderTo) id=id.renderTo.id;
 	var low = document.getElementById(id+"lowLabel") 
@@ -22,9 +26,8 @@ var updatePlot = function(id, bl, bu){
 	if(id.split('_')[1]) id = id.split('_')[0]
 	var div = document.getElementById(id);
 	chart.destroy();
-	return bpage(div,window.location.search,ids=id,reset=true)
+	return buildChart(div,window.location.search,ids=id,reset=true)
 }
-
 
 var resetPlot = function(id){
 	return function(a){
@@ -1505,3 +1508,178 @@ var renderPerma = function(id){
 //		return this;
 //	},
 //}
+//
+var iceThicknessYear = function(id){
+	charts[id] = Highcharts.chart(id, {
+		chart: {
+			zoomType: 'x',
+			type: 'column'
+		},
+		title: {
+			text: "Ice Max Thickness measured by year"
+		},
+		xAxis: {
+			title: {
+				text: language[nav_lang].years 
+			},
+			crosshair: true,
+			min: 1913,
+		},
+		yAxis: {
+			title: {
+				text: "Ice Thickness [cm]" 
+			},
+			crosshair: true,
+			reversed: true,
+		},
+		tooltip: {
+			shared: true,
+			valueSuffix: ' cm',
+			valueDecimals: 0,
+		},
+		legend: {
+			enabled: false,
+		},
+		series: [
+			{
+				data: [null, null],
+			},
+			{
+				data: [null, null],
+			},
+			{
+				data: [null, null],
+			},
+			// {
+			// 	data: [null, null],
+			// },
+			// {
+			// 	data: [null, null],
+			// },
+			// {
+			// 	data: [null, null],
+			// },
+		]
+	})
+	charts[id].showLoading();
+	return function(data){
+		charts[id].hideLoading();
+		// console.log(data.total.max())
+		charts[id].update({
+			series: [{
+				yAxis: 0,
+				name: "test",
+				color: '#0000ee',
+				lineWidth: 0,
+				marker: { 
+					radius: 2,
+					symbol: 'circle'
+				},
+				data: data.total.max().map(each => {
+					return {
+						x: each.x - 1,
+						y: each.y
+					}
+				}),
+			}]
+		});
+
+	}
+};
+var iceThicknessDate = function(id){
+	var startDate = new Date(1913 + "-01-01");
+	// console.log(startDate)
+	charts[id] = Highcharts.chart(id, {
+		title: {
+			useHTML: true,
+			text: "<label>"+
+			"Ice thickness by date across years </label><br>"+
+			"<input type='date' value="+
+			variables.dateStr()+
+			" onclick=selectText(this) "+
+			"onchange=updatePlot("+id+","+baselineLower+","+baselineUpper+",this.value)></input>"
+		},
+		chart: {
+			zoomType: 'x',
+			type: 'column'
+		},
+		xAxis: {
+			title: {
+				text: language[nav_lang].years
+			},
+			crosshair: true,
+			// type: 'datetime',
+			// min: startDate, 
+			min: 1913, 
+		},
+		yAxis: {
+			title: {
+				text: "Ice Thickness [cm]" 
+			},
+			crosshair: true,
+			reversed: true,
+		},
+		legend: {
+			enabled: false,
+		},
+		series: [
+			{
+				data: [null, null],
+			},
+			{
+				data: [null, null],
+			},
+			{
+				data: [null, null],
+			},
+			// {
+			// 	data: [null, null],
+			// },
+			// {
+			// 	data: [null, null],
+			// },
+			// {
+			// 	data: [null, null],
+			// },
+		]
+	})
+	charts[id].showLoading();
+	return function(data){
+		charts[id].hideLoading();
+		charts[id].update({
+			tooltip: {
+				shared: true,
+				valueSuffix: ' cm',
+				valueDecimals: 0,
+				formatter: function () {
+					var tooltip = '<span style="font-size: 10px">' + this.x + '</span><br/>';
+					this.points.forEach(point => {
+						tooltip += '<span">\u25CF</span> ' + point.series.name + ': <b>' + point.y + '</b><br/><br>'+ 'Closest date: ' + point.point.date +'<br/>';
+					});
+					return tooltip;
+				},
+			},
+			series: [{
+				yAxis: 0,
+				name: "test",
+				color: '#0000ee',
+				lineWidth: 0,
+				marker: { 
+					radius: 2,
+					symbol: 'circle'
+				},
+				data: data(variables.date),
+				states: {
+					hover: {
+						color: snowColor.hover,
+						animation: {
+							duration: 0,
+						},
+					},
+				},
+				name: 'Ice Thickness',
+			}]
+		});
+
+	}
+};
