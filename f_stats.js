@@ -91,6 +91,40 @@ var struct = {
 		})
 		return result;
 	},
+	closest: function(date){
+		const oneDay = 24 * 60 * 60 * 1000;
+		var distance = new Array();
+		this.values.forEach(each => {
+			var temp = new Date(each.x);
+			var end = new Date(temp.getYear() + 1900, 11, 31);
+			var start = new Date(temp.getYear() + 1900, 0, 1);
+			var days = Math.round(Math.abs((start - end) / oneDay));
+			var degree = 360 / days;
+			date = new Date(temp.getYear() + 1900, date.getMonth(), date.getDate())
+			var dis = Math.round(Math.abs((date - temp) / oneDay));
+			var degrees = dis * degree;
+			// if(degrees > 180) degrees = 360 - degrees;
+			distance.push(Math.round(degrees / degree));
+		})
+		var min = Math.min.apply(null, distance);
+		// console.log(distance)
+		var values = this.values;
+		var result = {
+			data: undefined,
+			interval: {
+				y: {
+					hi: undefined,
+					lo: undefined
+				}
+			}
+		}
+		distance.forEach(function(value, index){
+			if(value == min){
+				result.data = values[index]; 
+			}
+		})
+		return result
+	},
 	movAvg: undefined,
 	plotMovAvg: function(){
 		if(this.movAvg!=undefined) return this.movAvg
@@ -190,6 +224,8 @@ var parseByDate = function (values, type='mean', src='', custom) {
 	var frame = {
 		weeks: {},
 		yrly: {},
+		yrlyFull: {},
+		yrlySplit: {},
 		decades: {},
 		monthly: {},
 		weekly: {},
@@ -203,6 +239,8 @@ var parseByDate = function (values, type='mean', src='', custom) {
 	const data = {
 		weeks: {},
 		yrly: {},
+		yrlyFull: {},
+		yrlySplit: {},
 		decades: {},
 		monthly: {},
 		weekly: {},
@@ -216,6 +254,7 @@ var parseByDate = function (values, type='mean', src='', custom) {
 			var result = Object.assign({}, frame);
 			// TODO build to general function to be use for all functions
 			var set = function(entry, key, date, year, month, week){
+				// console.log(entry)
 				var decade = year - year % 10;
 				if(!result.yrly) result.yrly = {};
 				if(!result.yrly[key]) result.yrly[key] = {};
@@ -224,6 +263,19 @@ var parseByDate = function (values, type='mean', src='', custom) {
 					result.yrly[key][year] = cont;
 				}
 				result.yrly[key][year].values.push(entry);
+
+				// split year over 6 month
+				var splitYear = year;
+				if(month < 7){
+					splitYear = year - 1;	
+				}	
+				if(!result.yrlySplit) result.yrlySplit = {};
+				if(!result.yrlySplit[key]) result.yrlySplit[key] = {}
+				if(!result.yrlySplit[key][splitYear]){
+					const cont = struct.create([], splitYear, type);
+					result.yrlySplit[key][splitYear] = cont;
+				}
+				result.yrlySplit[key][splitYear].values.push(entry);
 
 				if(isSummerMonthByIndex(month)) {
 					if(!result.summer) result.summer = {};
@@ -243,10 +295,17 @@ var parseByDate = function (values, type='mean', src='', custom) {
 					}
 					result.winter[key][year].values.push(entry);
 				}
-
+				// Yearly Full split over winter
+				if(!result.yrlyFull) result.yrlyFull = {}
+				if(!result.yrlyFull[decade]) result.yrlyFull[decade] = {}
+				if(!result.yrlyFull[decade][key]) result.yrlyFull[decade][key] = {}
+				if(!result.yrlyFull[decade][key][month]){
+					const cont = struct.create([],month, type);
+					result.yrlyFull[decade][key][month] = cont;
+				} 
+				result.yrlyFull[decade][key][month].values.push(entry);
 
 				// Monthly
-
 				if(!result.monthly) result.monthly = {}
 				if(!result.monthly[month]) result.monthly[month] = {}
 				if(!result.monthly[month][key]) result.monthly[month][key] = {}
@@ -284,9 +343,12 @@ var parseByDate = function (values, type='mean', src='', custom) {
 			var build = function(entries){
 				var values = {};
 				entries.forEach(entry => {
+					var date = undefined; 
 					keys.forEach(key => {
+						// console.log(entry(key).x)
 						var date = new Date(entry[key].x);
 						var year = date.getFullYear();
+						// console.log(year)
 						var month = date.getMonth()+1;
 						var week = date.getWeekNumber();
 						if(!years[year+'']) years[year] = year+'';
@@ -294,14 +356,21 @@ var parseByDate = function (values, type='mean', src='', custom) {
 						values = set(entry[key], key, date, year, month, week);
 					})
 				})
-				var construct = function(entries, x){
+				var construct = function(bValues, x){
 					const str = [];
-					// console.log(entries)
-					Object.keys(entries).forEach(key => {
-						const entry = entries[key];
+					Object.keys(bValues).forEach(key => {
+						const entry = bValues[key];
 						str.push(entry.build(type))		
 					})
-					return struct.create(str, x).build(type);
+					try{
+						return struct.create(str, x).build(type);
+					}catch(error){
+						console.log(bValues)
+						console.log(str)
+						console.log(x)
+						console.log(struct.create(str, x))
+						throw error
+					}
 				}
 				// console.log(values.decades)
 				Object.keys(frame).forEach(key => {
@@ -321,6 +390,18 @@ var parseByDate = function (values, type='mean', src='', custom) {
 							})
 							break;
 						case 'yrly':
+							keys.forEach(tkey => {
+								values[key][tkey] = construct(values[key][tkey])
+							})
+							break;
+						case 'yrlyFull': 
+							Object.keys(values[key]).forEach(year => {
+								keys.forEach(tkey => {
+									values[key][year][tkey] = construct(values[key][year][tkey], parseInt(year));
+								})
+							})
+							break;
+						case 'yrlySplit':
 							keys.forEach(tkey => {
 								values[key][tkey] = construct(values[key][tkey])
 							})
@@ -360,12 +441,7 @@ var parseByDate = function (values, type='mean', src='', custom) {
 			return answer
 		}
 	}
-
-	var respons = data.insert(values);
-	//console.log("resolved Abisko");
-	//console.log(respons)
-	parseAbiskoCached = respons;
-	return respons
+	return data.insert(values);
 }
 
 
@@ -864,44 +940,44 @@ var smhiTemp = function(result, src=''){
 }
 
 var AbiskoLakeThickness = function(result, src=''){
-		//TODO	
-		var data = result[0].data;
-		var rawData = new Array();
-		data.forEach(each => {
-			var res = {
-				y: Number(each['Hela istäcket']),
-				x: each['Datum']
-			}
-			rawData.push(res)
-		})
-		data = rawData.map(each => {
-			var temp = {
-				'total': each
-			}
-			// console.log(temp)
-			// fsdfds
-			// }
-			return temp;
-		})
-		var parseData = parseByDate(data)
-		yrly = parseData.yrlySplit;
-		// console.log(yrly)
-		var dateSelect = function(date){
-			var close = new Array();
-			yrly.total.values.forEach(each => {
-				var res = each.closest(date);
-				var resDate = new Date(res.data.x);
-				var xYear = resDate.getFullYear();
-				if(help.isFirstHalfYear(resDate.getMonth()+1)){
-					xYear = xYear - 1;
-				}
-				close.push({ 
-					x: xYear, 
-					y: res.data.y,
-					date: res.data.x
-				})
-			})
-			return close;
+	//TODO	
+	var data = result.data;
+	var rawData = new Array();
+	data.forEach(each => {
+		var res = {
+			y: Number(each['Hela istäcket']),
+			x: each['Datum']
 		}
-		return {'yrly': yrly, 'date': dateSelect };
+		rawData.push(res)
+	})
+	data = rawData.map(each => {
+		var temp = {
+			'total': each
+		}
+		// console.log(temp)
+		// fsdfds
+		// }
+		return temp;
+	})
+	var parseData = parseByDate(data)
+	yrly = parseData.yrlySplit;
+	// console.log(yrly)
+	var dateSelect = function(date){
+		var close = new Array();
+		yrly.total.values.forEach(each => {
+			var res = each.closest(date);
+			var resDate = new Date(res.data.x);
+			var xYear = resDate.getFullYear();
+			if(7 > (resDate.getMonth()+1)){
+				xYear = xYear - 1;
+			}
+			close.push({ 
+				x: xYear, 
+				y: res.data.y,
+				date: res.data.x
+			})
+		})
+		return close;
+	}
+	return {'yrly': yrly, 'date': dateSelect };
 };
