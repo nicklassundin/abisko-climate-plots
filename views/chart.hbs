@@ -7,11 +7,8 @@
 	</head>
 	<body>
 		<div id="mark"></div>
-
-		{{#each charts}}
 		<script type="text/javascript">
-			lib.renderChart(document.getElementById("mark"), '{{this.id}}', '{{this.station}}');
-					</script>
-		{{/each}}
+			lib.renderSets(document.getElementById("mark"))
+		</script>
 	</body>
 </html>

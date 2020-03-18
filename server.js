@@ -15,6 +15,7 @@ var engines = require('consolidate');
 app.engine('pug', engines.pug);
 app.engine('handlebars', engines.handlebars);
 
+
 // Starts webserver
 const config = require('./config/server.json');
 require('./modules/webserver.js').webserver["http"](app);
@@ -154,8 +155,10 @@ app.post('/admin/create/table', function(request, response, next){
 const url = require('url');
 const custom = require('./config/custom.json');
 const constants = require('./config/const.json');
+
 app.get( '/chart', (req, res) => {
 	const queryObject = url.parse(req.url,true).query;
+	var id;
 	var ids; 
 	if(!queryObject.id) {
 		ids = custom.all;
@@ -170,8 +173,21 @@ app.get( '/chart', (req, res) => {
 			station: queryObject.station
 		}
 	})
+	console.log(res.render+"")
 	res.render('chart.hbs', {
 		charts
+	})
+});
+
+app.render('chart.hbs',{ charts: [{ id: "Temperatures", station: "abisko" } ] }, (err, str) => {
+	fs.writeFile('static/temp.html', str, err => {
+		if (err) {
+			console.error(err)
+			return
+		}
+	})
+	app.get('/static', (req, res) => {
+		res.send(str);
 	})
 });
 
@@ -200,14 +216,3 @@ app.get('/d3-map', (req, res) => {
 		charts
 	})
 });
-
-// const Json2csvParser = require("json2csv").Parser;
-// app.get('/abisko/ANS_SnowDepth.csv', (request, response) => {
-// 	database.getCSV('ANS_SnowDepth.csv', database.admin).then(function(data){
-// 		const jsonData = JSON.parse(JSON.stringify(data));
-// 		const json2csvParser = new Json2csvParser({ header: true});
-// 		const csv = json2csvParser.parse(jsonData);
-// 		// response.send(csv);
-// 		response.send(data);
-// 	})
-// });

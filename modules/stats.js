@@ -598,7 +598,6 @@ exports.parsers = {
 		}
 
 		var insertToBlocks = function(data){
-			console.log(data)
 			data.forEach(entry => {
 				var zero = 0;
 				var date = entry.date; 

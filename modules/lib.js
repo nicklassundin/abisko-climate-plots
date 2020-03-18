@@ -40,7 +40,7 @@ lib = {
 			return div;
 		})
 	},
-	renderSets: function(div, set, id){
+	renderSets: function(div, set=(new URL(window.location.href).searchParams.get("set")), id=(new URL(window.location.href).searchParams.get("station"))){
 		sets[set].forEach(type => {
 			var container = document.createElement("div");
 			container.setAttribute("id", "mark_"+type);
