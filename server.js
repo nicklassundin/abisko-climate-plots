@@ -179,7 +179,7 @@ app.get( '/chart', (req, res) => {
 	})
 });
 
-app.render('chart.hbs',{ charts: [{ id: "Temperatures", station: "abisko" } ] }, (err, str) => {
+app.render('chart-release.hbs',{ charts: [{ id: "Temperatures", station: "abisko" } ] }, (err, str) => {
 	fs.writeFile('static/temp.html', str, err => {
 		if (err) {
 			console.error(err)
