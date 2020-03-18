@@ -1,13 +1,43 @@
-
+<!DOCTYPE html>
+<meta charset="utf-8"/>
 <html>
 
 	<head>
-		<script type="text/javascript">
-	var url = window.location.href
-	url = url.replace("index.html","view.html?debug=true");
-	window.location.href = url
-		</script>
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  -->
+		<script src="jquery.js"></script> 
+
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/annotations.js"></script>
+		<script src="https://code.highcharts.com/highcharts-more.js"></script>
+		<script src="https://code.highcharts.com/modules/series-label.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+		<script src="https://code.highcharts.com/modules/export-data.js"></script>
+		
+		<script src="https://code.highcharts.com/modules/histogram-bellcurve.js"</script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+		
+<!-- Creative Commons Public License : customEvents from mouse interaction ; https://github.com/blacklabel/custom_events/-->
+
+		<script src="customEvents.js"></script>
+		<!-- <script src="import_parser.js"></script> -->
+
+		<script src="regression.js"></script>
+		<script src="papaparse.min.js"></script>
+		<script src="helpers.js"></script>
+		<link rel="stylesheet" href="styles.css">
+<!-- MIT licence from	https://github.com/streamlinesocial/highcharts-regression -->
+		<script src="highcharts-regression.js"></script> 
 	</head>
+
 	<body>
+		<div id="mark"></div>
+		<!-- <script data-main="lib.js" src="require.js"></script> -->
+		<script src="f_stats.js"></script>
+		<script src="depricated_const.js"></script>
+		<script src="render.js"></script>
+		<script src="lib.js"></script>
+		<script type="text/javascript">
+			if(document.getElementById("mark")) window.onload = mark();
+		</script>
 	</body>
 </html>
