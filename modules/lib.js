@@ -7,6 +7,8 @@ global.stationType = "abisko"
 // global.station = 159880;
 // global.station = 188790;
 global.stationName = "";
+global.hostUrl = location.protocol +"//"+ require("../config/server.json").domain;
+
 
 global.variables = {
 	date: new Date(),
@@ -18,7 +20,8 @@ var charts = require('./config/charts.js');
 var sets = require('../config/custom.json');
 
 lib = {
-	renderChart: function(div, type, id="abisko"){ 
+	renderChart: function(div, type, id="abisko", url){ 
+		if(url) hostUrl = url;
 		global.station = id;
 		// TODO refractor later
 		if(id=="abisko"){
@@ -40,7 +43,8 @@ lib = {
 			return div;
 		})
 	},
-	renderSets: function(div, set=(new URL(window.location.href).searchParams.get("set")), id=(new URL(window.location.href).searchParams.get("station"))){
+	renderSets: function(div, set=(new URL(window.location.href).searchParams.get("set")), id=(new URL(window.location.href).searchParams.get("station")), url){
+		if(url) hostUrl = url;
 		sets[set].forEach(type => {
 			var container = document.createElement("div");
 			container.setAttribute("id", "mark_"+type);

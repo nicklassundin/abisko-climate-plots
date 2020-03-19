@@ -63,8 +63,8 @@
 	"scripts": {
 		"test": "npm run test-unit",
 		"test-unit": "NODE_ENV=test mocha 'modules/*.spec.js' --delay",
-		"start": "npx nodemon server.js [PLACEHOLDER] --ignore 'client/*.js' 'temp/*' 'cms/*' 'node_modules/*'",
-		"start-full": "npm test && npx nodemon server.js --ignore 'client/*.js' 'temp/*' 'cms/*'"
+		"start": "npx nodemon server.js [PLACEHOLDER] --ignore 'client/*.js' 'temp/*' 'cms/*' 'node_modules/*' 'doc/*'",
+		"start-full": "npm test && npx nodemon server.js --ignore 'client/*.js' 'temp/*' 'cms/*' 'doc/*'"
 	},
 	"repository": {
 		"type": "git",

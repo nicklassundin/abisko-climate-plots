@@ -173,22 +173,22 @@ app.get( '/chart', (req, res) => {
 			station: queryObject.station
 		}
 	})
-	console.log(res.render+"")
 	res.render('chart.hbs', {
 		charts
 	})
 });
 
 app.render('chart-release.hbs',{ charts: [{ id: "Temperatures", station: "abisko" } ] }, (err, str) => {
-	fs.writeFile('static/temp.html', str, err => {
+	fs.writeFile('doc/temp.html', str, err => {
 		if (err) {
 			console.error(err)
 			return
 		}
 	})
-	app.get('/static', (req, res) => {
+	app.get('/doc', (req, res) => {
 		res.send(str);
 	})
+	app.use('/doc', express.static(__dirname + '/doc'));
 });
 
 app.get('/map', (req, res) => {

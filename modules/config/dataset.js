@@ -6,7 +6,6 @@ const Papa = require('papaparse');
 const parse = require('../stats.js').parsers;
 const help = require('../helpers.js')
 var months = help.months;
-const hostUrl = location.protocol +"//"+ require("../../config/server.json").domain;
 
 var filePath = {
 	station: function(fileName, id=station){
