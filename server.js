@@ -179,16 +179,16 @@ app.get( '/chart', (req, res) => {
 });
 
 app.render('chart-release.hbs',{ charts: [{ id: "Temperatures", station: "abisko" } ] }, (err, str) => {
-	fs.writeFile('doc/temp.html', str, err => {
+	fs.writeFile('docs/temp.html', str, err => {
 		if (err) {
 			console.error(err)
 			return
 		}
 	})
-	app.get('/doc', (req, res) => {
+	app.get('/docs', (req, res) => {
 		res.send(str);
 	})
-	app.use('/doc', express.static(__dirname + '/doc'));
+	app.use('/docs', express.static(__dirname + '/docs'));
 });
 
 app.get('/map', (req, res) => {
