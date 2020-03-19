@@ -125,7 +125,7 @@ app.post('/admin/upload', upload.single('file'), function(request, response, nex
 	}
 })
 
-app.get('/login', (req, res) => {
+app.get('/', (req, res) => {
 	res.render('login.pug', {})	
 })
 
@@ -185,10 +185,20 @@ app.render('chart-release.hbs',{ charts: [{ id: "Temperatures", station: "abisko
 			return
 		}
 	})
-	app.get('/', (req, res) => {
+	app.get('/static', (req, res) => {
 		res.send(str);
 	})
 	app.use('/static', express.static(__dirname + '/static'));
+	app.use('/static/css', express.static(__dirname + '/css'));
+	app.use('/static/dep', express.static(__dirname + '/dep'));
+	app.use('/static/modules', express.static(__dirname + '/modules'));
+	app.use('/static/config', express.static(__dirname + '/config'));
+	app.use('/static/data', express.static(__dirname + '/data'));
+	app.use('/static/data/abisko', express.static(__dirname + '/data/abisko'));
+	app.use('/static/client', express.static(__dirname + '/client'));
+	app.use('/static/tmp', express.static(__dirname + '/tmp'));
+	app.use('/static/maps', express.static(__dirname + '/maps'));
+
 });
 
 app.get('/map', (req, res) => {
