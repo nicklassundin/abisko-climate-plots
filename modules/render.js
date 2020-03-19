@@ -544,8 +544,6 @@ exports.graphs = {
 	},
 	Temperature: function (id) {
 		// console.log(id)
-		// console.log(promise)
-		// console.log(data.max.max())
 		var id_split = id.split('_');
 
 		var div_id = id;
@@ -608,7 +606,6 @@ exports.graphs = {
 		charts[div_id].showLoading();
 		return function(data){
 			charts[div_id].hideLoading();
-			// var meta = data.meta;
 			charts[div_id].update({
 				title: {
 					text: function(){

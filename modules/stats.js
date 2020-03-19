@@ -931,7 +931,6 @@ exports.parsers = {
 	smhiTemp: function(result, src=''){
 		var avgs = {};
 		var parse = function(entry){
-			// var x = (new Date(entry[0])).getTime();
 			var x = entry[0];
 			var y = parseFloat(entry[1]);
 			avgs[x] = y;
@@ -951,10 +950,9 @@ exports.parsers = {
 			}
 		}
 		var temperature = Object.values(result[0].data.map(each => {
-			var temp = [each["Datum"], each["Lufttemperatur"]]
+			var temp = [each["Representativt dygn"], each["Lufttemperatur"]]
 			return parse(temp);
 		}));
-		// console.log(temperature)
 		var parsePrecip = function(entry){
 			// var x = (new Date(entry[0])).getTime();
 			var total = parseFloat(entry[1]);
@@ -981,7 +979,6 @@ exports.parsers = {
 			var prec = [each["Representativt dygn"], each["Nederbördsmängd"]]
 			return parsePrecip(prec);
 		}));
-		// console.log(precipitation)
 		return new Promise(function(resolve, reject){
 			resolve({
 				precipitation: parseByDate(precipitation, 'sum'),
