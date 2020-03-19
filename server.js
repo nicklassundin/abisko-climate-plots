@@ -125,7 +125,7 @@ app.post('/admin/upload', upload.single('file'), function(request, response, nex
 	}
 })
 
-app.get('/', (req, res) => {
+app.get('/login', (req, res) => {
 	res.render('login.pug', {})	
 })
 
@@ -179,16 +179,16 @@ app.get( '/chart', (req, res) => {
 });
 
 app.render('chart-release.hbs',{ charts: [{ id: "Temperatures", station: "abisko" } ] }, (err, str) => {
-	fs.writeFile('docs/temp.html', str, err => {
+	fs.writeFile('static/temp.html', str, err => {
 		if (err) {
 			console.error(err)
 			return
 		}
 	})
-	app.get('/docs', (req, res) => {
+	app.get('/', (req, res) => {
 		res.send(str);
 	})
-	app.use('/docs', express.static(__dirname + '/docs'));
+	app.use('/static', express.static(__dirname + '/static'));
 });
 
 app.get('/map', (req, res) => {
