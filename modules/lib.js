@@ -51,5 +51,5 @@ lib = {
 			div.appendChild(container);
 			this.renderChart(container, type, id)
 		})
-	}
+	},
 }

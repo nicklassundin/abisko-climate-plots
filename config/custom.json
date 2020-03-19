@@ -19,6 +19,8 @@
 		"abiskoSnowDepthPeriodMeans2",
 		"abiskoLakeIce",
 		"abiskoLakeIceTime",
+		"iceThicknessYear", 
+		"iceThicknessDate",
 		"weeklyCO2",
 		"permaHistogramCALM"],
 	"local": ["Temperatures",
@@ -53,5 +55,18 @@
 		"abiskoLakeIceTime"],
 	"iceThick": ["iceThicknessYear", "iceThicknessDate"],
 	"perma": ["permaHistogramCALM"],
-	"exper": ["monthlyTemperaturesPolar"]
+	"exper": ["monthlyTemperaturesPolar"],
+	"sqrt-IceThick": ["iceThicknessYear", "iceThicknessDate"],
+	"sqrt-temp": ["temperatureDifference","temperatureDifference1","temperatureDifference2","temperatureDifference3"],
+	"sqrt-season-temp": ["Temperatures","TemperaturesSummer","TemperaturesWinter"],
+	"sqrt-growing": ["growingSeason","Temperatures","temperatureDifference"],
+	"sqrt-mTemp": ["monthlyTemperatures"],
+	"sqrt-prec": ["yearlyPrecipitation","summerPrecipitation","winterPrecipitation"],
+	"sqrt-mPrec": ["monthlyPrecipitation"],
+	"sqrt-snowDepth": ["abiskoSnowDepthPeriodMeans",
+		"abiskoSnowDepthPeriodMeans2"],
+	"sqrt-lakeIce": ["abiskoLakeIce",
+		"abiskoLakeIceTime","iceThicknessYear", "iceThicknessDate"],
+	"sqrt-perma": ["permaHistogramCALM"],
+	"sqrt-carbon": ["weeklyCO2"]
 }
