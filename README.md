@@ -3,14 +3,14 @@ Original work from https://github.com/antoneri/abisko-climate-plots
 
 
 ## Command
-# npm test
+### npm test
 Runt unit-tests
-## test-unit
-# npm start
+#### test-unit
+### npm start
 Start Node-JS server
-# npm start-full
+### npm start-full
 Start Node-JS and build static page, after running tests 
-# npm run static
+### npm run static
 Releases the static page index.html and static/bundle.js are updated.
 
 # Supported by BrowserStack 
