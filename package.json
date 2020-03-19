@@ -64,7 +64,7 @@
 		"test": "npm run test-unit",
 		"test-unit": "NODE_ENV=test mocha 'modules/*.spec.js' --delay",
 		"start": "npx nodemon server.js [PLACEHOLDER] --ignore 'client/*.js' 'temp/*' 'cms/*' 'node_modules/*' 'doc/*'",
-		"start-full": "npm test && npx nodemon server.js --ignore 'client/*.js' 'temp/*' 'cms/*' 'doc/*'",
+		"start-full": "npm test && npx nodemon server.js --ignore 'client/*.js' 'temp/*' 'cms/*' 'doc/*' && npm run static",
 		"static": "cp static/temp.html index.html && cp client/bundle.js static/bundle.js"
 	},
 	"repository": {
