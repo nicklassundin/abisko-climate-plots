@@ -31,7 +31,7 @@ global.copy = function() {
 
 var config = require('./dataset.js').config;
 global.getID = function(param=urlParams){
-	var id = param.get('id');
+	var id = param.get('set');
 	if(id){
 		id = id.split(',');
 	}else{
@@ -69,13 +69,13 @@ var createDiv = function(id, no=null){
 	return fig
 }
 
-global.buildChart = function(doc, id, reset=false){
+global.buildChart = function(doc, ids, reset=false){
 	var call = function(id){
 		return new Promise(function(resolve,reject){
 			try{
-				resolve(true);
-				doc.appendChild(rendF[id].html(debug, doc));	
+				doc.appendChild(rendF[id].html(false, doc));	
 				rendF[id].func(reset);
+				resolve(true);
 			}catch(err){
 				reject(err)
 			}
@@ -96,6 +96,7 @@ global.buildChart = function(doc, id, reset=false){
 				doc.appendChild(div)
 				doc.appendChild(error)
 				console.log("failed to render: "+target)
+				throw error
 			})
 		}
 	};	

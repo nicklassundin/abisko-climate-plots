@@ -30,7 +30,7 @@ var updatePlot = function(id, bl, bu, date){
 	if(id.split('_')[1]) id = id.split('_')[0]
 	var div = document.getElementById(id);
 	chart.destroy();
-	return buildChart(div,window.location.search,ids=id,reset=true)
+	return buildChart(div,ids=id,reset=true)
 }
 global.updatePlot = updatePlot;
 

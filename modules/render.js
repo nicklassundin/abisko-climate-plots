@@ -1,12 +1,13 @@
 
-// global.Highcharts = require('highcharts');
-global.Highcharts = require('highcharts-more-node');
-// require('highcharts/modules/annotations')(Highcharts)
-// require('highcharts/modules/series-label')(Highcharts)
-// require('highcharts/modules/series-label')(Highcharts)
-// require('highcharts/modules/exporting')(Highcharts)
-// require('highcharts/modules/export-data.js')(Highcharts)
-// require('highcharts/modules/histogram-bellcurve')(Highcharts)
+global.Highcharts = require('highcharts');
+require('highcharts-more')(Highcharts);
+// global.Highcharts = require('highcharts-more-node');
+// require('highcharts-more-node/node_modules/highcharts/modules/annotations')(Highcharts)
+// require('highcharts-more-node/node_modules/highcharts/modules/series-label')(Highcharts)
+require('highcharts/modules/series-label')(Highcharts)
+require('highcharts/modules/exporting')(Highcharts)
+require('highcharts/modules/export-data.js')(Highcharts)
+require('highcharts/modules/histogram-bellcurve')(Highcharts)
 
 const highchart_help = require('../config/highcharts_config.js');
 const language = require('../config/language.json');
@@ -153,7 +154,6 @@ var plotlines = function(id){
 		color: 'rgb(160, 160, 160)',
 		value: baselineUpper,
 		width: 1,
-		useHTML: true,
 		label: {
 			useHTML: true,
 			text: "<input id="+id+"uppLabel type=text class=input value="+baselineUpper+" maxlength=4 onclick=selectText(this) onchange=updatePlot("+id+","+baselineLower+",this.value)></input>",
@@ -165,7 +165,6 @@ var plotlines = function(id){
 		color: 'rgb(160, 160, 160)',
 		value: baselineLower,
 		width: 1,
-		useHTML: true,
 		label: {
 			useHTML: true,
 			text: "<input id="+id+"lowLabel type=text class=input value="+baselineLower+" maxlength=4 onclick=selectText(this) onchange=updatePlot("+id+",this.value,"+baselineUpper+")></input>",
@@ -188,9 +187,9 @@ var plotBandsDiff = function(id){
 		},
 		events: {
 			click: function(e){
-				var lowLabel = document.getElementById(id+"lowLabel");
-				var uppLabel = document.getElementById(id+"uppLabel");
-				selectText(lowLabel);
+				// var lowLabel = document.getElementById(id+"lowLabel");
+				// var uppLabel = document.getElementById(id+"uppLabel");
+				// selectText(lowLabel);
 				// document.getElementById(id+"overlay").style.display = "block";
 			},
 		}
@@ -506,6 +505,7 @@ exports.graphs = {
 		});
 		charts[id].showLoading();
 		return function(data){
+			console.log(data)
 			var parseData = [];
 			Object.keys(data).map((key, index) => {
 				years.push(data[key].snow.x);
@@ -694,6 +694,7 @@ exports.graphs = {
 	TemperatureDifference: function (id) {
 		// console.log(temperatures);
 		// console.log(temperatures.difference());
+		// console.log(plotlines(id))
 		charts[id] = Highcharts.chart(id, {
 			chart: {
 				type: 'column'
@@ -737,6 +738,7 @@ exports.graphs = {
 		})
 		charts[id].showLoading();
 		return function(temperatures){
+			// console.log(temperatures.avg.difference())
 			charts[id].hideLoading();
 			charts[id].update({
 				title: {
@@ -1776,7 +1778,7 @@ exports.graphs = {
 		charts[id] = Highcharts.chart(id, {
 			chart: {
 				zoomType: 'x',
-				type: 'column'
+				type: 'histogram'
 			},
 			title: {
 				text: Highcharts.getOptions().lang.titles[id],
