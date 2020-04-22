@@ -3,6 +3,12 @@ const Papa = require('papaparse');
 const parse = require('../stats.js').parsers;
 const help = require('../helpers.js')
 
+// var React = require('react');
+// var reactSwipeableViews = require("react-swipeable-views")
+
+// import React from 'react';
+// import SwipeableViews from 'react-swipeable-views';
+
 global.urlParams = new URLSearchParams(window.location.search);
 var months = help.months;
 
@@ -238,6 +244,17 @@ var rendF = {
 			var no = 42;
 			if(!debug) no = debug;
 			return createDiv('abiskoSnowDepthPeriodMeans2',no)
+		},
+	},
+	'slideTemperature':{
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('slideTemperature',['temperatures','yrly'], ['slideTemperature']);
+		},
+		html: function(debug=false, doc){
+			var no = 1;
+			if(!debug) no = debug;
+			return createDiv('slideTemperature', no);
 		},
 	},
 	'Temperatures':{

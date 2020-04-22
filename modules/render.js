@@ -1,9 +1,6 @@
 
 global.Highcharts = require('highcharts');
 require('highcharts-more')(Highcharts);
-// global.Highcharts = require('highcharts-more-node');
-// require('highcharts-more-node/node_modules/highcharts/modules/annotations')(Highcharts)
-// require('highcharts-more-node/node_modules/highcharts/modules/series-label')(Highcharts)
 require('highcharts/modules/series-label')(Highcharts)
 require('highcharts/modules/exporting')(Highcharts)
 require('highcharts/modules/export-data.js')(Highcharts)
@@ -202,7 +199,7 @@ init_HighChart();
 
 // TODO generalize render function
 
-exports.graphs = {
+var graphs = {
 	CO2: function(id){
 		charts[id] = Highcharts.chart(id, {
 			chart: {
@@ -766,8 +763,210 @@ exports.graphs = {
 		// alert("You hover on "+$(this).text())
 		// });
 	},
+	slideTemperature: function(id){
+		// console.log(temperatures);
+		// console.log(temperatures.difference());
+		// console.log(plotlines(id))
+		var subtitle = Highcharts.getOptions().lang.subtitles.baseline + baselineLower +" - "+ baselineUpper 
+		charts[id] = Highcharts.chart(id, {
+			chart: {
+				type: 'column'
+			},
+			// rangeSelector: {
+			// selected: 2
+			// },
+			title: {
+				text: "<label id='"+id+"_title'>Weather Temperature</label>",
+				useHTML: true,
+			},
+			// subtitle: {
+			// text: Highcharts.getOptions().lang.subtitles.baseline + baselineLower +" - "+ baselineUpper 
+			// },
+			xAxis: {
+				title: {
+					text: Highcharts.getOptions().lang.years,
+				},
+				crosshair: true,
+				min: startYear,
+			},
+			yAxis: {
+				title: {
+					text: Highcharts.getOptions().lang.temp,
+				},
+				lineWidth: 1,
+				// min: -2,
+				// max: 3,
+				tickInterval: 1,
+			},
+			tooltip: {
+				shared: true,
+				valueSuffix: ' °C',
+				valueDecimals: 2,
+			},
+			legend: {
+				enabled: false,
+			},
+			series: [{data: [null, null]},
+				{data: [null, null]},
+				{data: [null, null]},
+				{data: [null, null]}]
+		})
+		charts[id].showLoading();
 
-	GrowingSeason: function (id) {
+		var index = true;
+		var delta = 0;
+		$('#'+id).bind('mousewheel', function(e){
+			delta = delta + e.originalEvent.deltaY;
+			if(delta < -100){
+				delta = 0;
+				if(index){
+					$('#' + id).highcharts().series[0].update({
+						visible: false, 
+						showInLegend: false
+					});	
+					$('#' + id).highcharts().series[1].update({
+						visible: true, 
+						showInLegend: true, 
+					});	
+					$('#' + id).highcharts().series[2].update({
+						visible: false,
+						showInLegend: true, 
+					});	
+					$('#' + id).highcharts().series[3].update({
+						visible: false,
+						showInLegend: true, 
+					});	
+					index = false;
+					charts[id].update({
+						title: {
+							text: "<label id='"+id+"_title'>Weather Temperature</label>",
+							useHTML: true,
+						},
+						subtitle: {
+							text: '' 
+						},
+			xAxis: {
+				title: {
+					text: Highcharts.getOptions().lang.years, 
+				},
+				crosshair: true,
+				plotLines: false, 
+				plotBands: false, 
+				min: startYear 
+			},
+					})
+				} 
+			}else if(delta > 100){
+				delta = 0;
+				if(!index){
+					$('#' + id).highcharts().series[0].update({
+						visible: true,
+						showInLegend: true, 
+					});	
+					$('#' + id).highcharts().series[1].update({
+						visible: false,
+						showInLegend: false, 
+					});	
+					$('#' + id).highcharts().series[2].update({
+						visible: false,
+						showInLegend: false, 
+					});	
+					$('#' + id).highcharts().series[3].update({
+						visible: false,
+						showInLegend: false, 
+					});
+					index = true;
+					charts[id].update({
+						title: {
+							text: "<label id='"+id+"_title'>Climate Temperature Difference</label>",
+							useHTML: true,
+						},
+						subtitle: {
+							text: subtitle
+						},
+						xAxis: {
+							title: {
+					text: Highcharts.getOptions().lang.years,
+				},
+				crosshair: true,
+				plotLines: plotlines(id),
+				plotBands: plotBandsDiff(id),
+				min: startYear,
+			},
+					})
+				}
+			}
+			return false;
+		});
+
+		return function(data){
+			// console.log(temperatures.avg.difference())
+			charts[id].hideLoading();
+			charts[id].update({
+				title: {
+					text: "<label id='"+id+"_title'>Weather Temperature</label>",
+					useHTML: true,
+				},
+				legend: {
+					enabled: true,
+				},
+				dataSrc: data.src,
+				series: [{
+					visible: false,
+					regression: false, // TODO adv options 
+					regressionSettings: {
+						type: 'linear',
+						color: '#aa0000',
+						name: Highcharts.getOptions().lang.linReg,
+					},
+					name: Highcharts.getOptions().lang.diff,
+					data: (data.difference!=undefined) ? data.difference() : data.avg.difference(),
+					color: 'red',
+					negativeColor: 'blue',
+					showInLegend: false
+				},{
+					type: 'line',
+					visible: true,
+					name: language[nav_lang].yearlyAvg,
+					regression: true,
+					marker: {radius: 2},
+					states: {hover: { lineWidthPlus: 0 }},
+					lineWidth: 0,
+					color: '#888888',
+					regressionSettings: {
+						type: 'linear',
+						color: '#888888',
+						// color: '#4444ff',
+						// '#888888'
+						name: Highcharts.getOptions().lang.linReg,
+					},
+					data: data.avg.values,
+					showInLegend: true
+				},{
+					type: 'line',
+					name: Highcharts.getOptions().lang.max,
+					lineWidth: 0,
+					marker: { radius: 2 },
+					states: { hover: { lineWidthPlus: 0 } },
+					color: '#ff0000',
+					data: data.max.max(), 
+					visible: false,
+					showInLegend: true
+				},{
+					type: 'line',
+					name: Highcharts.getOptions().lang.min,
+					lineWidth: 0,
+					marker: { radius: 2 },
+					states: { hover: { lineWidthPlus: 0 } },
+					color: '#0000ff',
+					data: data.min.min(),
+					visible: false,
+					showInLegend: true
+				}],
+			});
+		}
+	},
+	GrowingSeason: function(id){
 		// console.log(season)
 		// console.log(season.max())
 		// console.log(season.variance())
@@ -1874,3 +2073,4 @@ exports.graphs = {
 	//	},
 	//}
 }
+exports.graphs = graphs;

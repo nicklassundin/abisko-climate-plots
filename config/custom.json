@@ -58,6 +58,7 @@
 	"iceThick": ["iceThicknessYear", "iceThicknessDate"],
 	"perma": ["permaHistogramCALM"],
 	"exper": ["monthlyPrecipitationPolar"],
+	"tempClimateWeather": ["slideTemperature"],
 	"sqrt-IceThick": ["iceThicknessYear", "iceThicknessDate"],
 	"sqrt-temp": ["temperatureDifference","temperatureDifference1","temperatureDifference2","temperatureDifference3"],
 	"sqrt-season-temp": ["Temperatures","TemperaturesSummer","TemperaturesWinter"],

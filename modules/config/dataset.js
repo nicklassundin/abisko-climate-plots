@@ -181,6 +181,7 @@ var config = {
 				'polar': renders.Polar,
 			},
 			'growingSeason': renders.GrowingSeason,
+			'slideTemperature' :renders.slideTemperature,
 		},
 		reader = Papa.parse),
 	smhi: dataset_struct.create(
@@ -218,7 +219,7 @@ var config = {
 				'difference': renders.PrecipitationDifference,
 			},
 			'growingSeason': renders.GrowingSeason,
-
+			'slideTemperature' :renders.slideTemperature,
 		},
 		reader = Papa.parse),
 	// TODO Bake together
