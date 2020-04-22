@@ -764,6 +764,8 @@ var graphs = {
 		// });
 	},
 	slideTemperature: function(id){
+		var vis_min = false;
+		var vis_max = false;
 		// console.log(temperatures);
 		// console.log(temperatures.difference());
 		// console.log(plotlines(id))
@@ -827,13 +829,13 @@ var graphs = {
 					$('#' + id).highcharts().series[1].update({
 						visible: true, 
 						showInLegend: true, 
-					});	
+					});
 					$('#' + id).highcharts().series[2].update({
-						visible: false,
+						visible: vis_max,
 						showInLegend: true, 
 					});	
 					$('#' + id).highcharts().series[3].update({
-						visible: false,
+						visible: vis_min,
 						showInLegend: true, 
 					});	
 					index = false;
@@ -867,10 +869,12 @@ var graphs = {
 						visible: false,
 						showInLegend: false, 
 					});	
+					vis_max = $('#' + id).highcharts().series[2].options.visible
 					$('#' + id).highcharts().series[2].update({
 						visible: false,
 						showInLegend: false, 
 					});	
+					vis_min = $('#' + id).highcharts().series[3].options.visible
 					$('#' + id).highcharts().series[3].update({
 						visible: false,
 						showInLegend: false, 
