@@ -774,16 +774,10 @@ var graphs = {
 			chart: {
 				type: 'column'
 			},
-			// rangeSelector: {
-			// selected: 2
-			// },
 			title: {
-				text: "<label id='"+id+"_title'>Weather Temperature</label>",
+				text: "<div id='"+id+"_title'><label class='active'>Weather Temperature</label>"+ "<label class='disabled'>Climate Temperature Difference</label></div>",
 				useHTML: true,
 			},
-			// subtitle: {
-			// text: Highcharts.getOptions().lang.subtitles.baseline + baselineLower +" - "+ baselineUpper 
-			// },
 			xAxis: {
 				title: {
 					text: Highcharts.getOptions().lang.years,
@@ -817,10 +811,15 @@ var graphs = {
 
 		var index = true;
 		var delta = 0;
-		$('#'+id).bind('mousewheel', function(e){
-			delta = delta + e.originalEvent.deltaY;
-			if(delta < -100){
-				delta = 0;
+		switchFocus = {
+			switch: function(){
+				if(index){
+					this.weather();
+				}else{
+					this.climate();
+				}
+			},
+			weather: function(){
 				if(index){
 					$('#' + id).highcharts().series[0].update({
 						visible: false, 
@@ -841,25 +840,29 @@ var graphs = {
 					index = false;
 					charts[id].update({
 						title: {
-							text: "<label id='"+id+"_title'>Weather Temperature</label>",
+							text: "<div id='"+id+"_title'><label class='active'>Weather Temperature</label>" + 
+							"<label class='disabled'>Climate Temperature Difference</label></div>",
 							useHTML: true,
 						},
 						subtitle: {
 							text: '' 
 						},
-			xAxis: {
-				title: {
-					text: Highcharts.getOptions().lang.years, 
-				},
-				crosshair: true,
-				plotLines: false, 
-				plotBands: false, 
-				min: startYear 
-			},
+						xAxis: {
+							title: {
+								text: Highcharts.getOptions().lang.years, 
+							},
+							crosshair: true,
+							plotLines: false, 
+							plotBands: false, 
+							min: startYear 
+						},
 					})
-				} 
-			}else if(delta > 100){
-				delta = 0;
+				}
+				$( ".disabled" ).click(function() {
+					switchFocus.switch();
+				})
+			},
+			climate: function(){
 				if(!index){
 					$('#' + id).highcharts().series[0].update({
 						visible: true,
@@ -882,7 +885,8 @@ var graphs = {
 					index = true;
 					charts[id].update({
 						title: {
-							text: "<label id='"+id+"_title'>Climate Temperature Difference</label>",
+							text: "<div id='"+id+"_title'><label class='disabled'>Weather Temperature</label>" + 
+							"<label class='active'>Climate Temperature Difference</label></div>",
 							useHTML: true,
 						},
 						subtitle: {
@@ -890,15 +894,31 @@ var graphs = {
 						},
 						xAxis: {
 							title: {
-					text: Highcharts.getOptions().lang.years,
-				},
-				crosshair: true,
-				plotLines: plotlines(id),
-				plotBands: plotBandsDiff(id),
-				min: startYear,
-			},
+								text: Highcharts.getOptions().lang.years,
+							},
+							crosshair: true,
+							plotLines: plotlines(id),
+							plotBands: plotBandsDiff(id),
+							min: startYear,
+						},
 					})
-				}
+				} 
+				$( ".disabled" ).click(function() {
+					switchFocus.switch();
+				})
+			}
+		}
+		$( ".disabled" ).click(function() {
+			switchFocus.switch();
+		})
+		$('#'+id).bind('mousewheel', function(e){
+			delta = delta + e.originalEvent.deltaY;
+			if(delta < -100){
+				delta = 0;
+				switchFocus.weather();
+			}else if(delta > 100){
+				delta = 0;
+				switchFocus.climate();
 			}
 			return false;
 		});
@@ -908,7 +928,6 @@ var graphs = {
 			charts[id].hideLoading();
 			charts[id].update({
 				title: {
-					text: "<label id='"+id+"_title'>Weather Temperature</label>",
 					useHTML: true,
 				},
 				legend: {

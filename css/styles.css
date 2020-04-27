@@ -160,3 +160,11 @@
 	/* color: #ffffff; */
 }
 
+.active {
+	color: #222222;
+	padding: 8px 16px
+}
+.disabled {
+	color: #aaaaaa;
+	padding: 8px 16px
+}
