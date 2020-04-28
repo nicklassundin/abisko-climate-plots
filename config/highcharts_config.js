@@ -76,6 +76,9 @@ exports.highcharts_Settings = {
 			}
 		},
 	},
+	credits: {
+    		enabled: false
+	},
 	exporting: {
 		chartOptions: {
 			// annotationsOptions: undefined,
