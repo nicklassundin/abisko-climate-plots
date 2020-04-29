@@ -11,6 +11,9 @@ const language = require('../config/language.json');
 var help = require('./helpers.js');
 
 var constant = require('../config/const.json');
+
+// var render = require('/config/renderer.js');
+
 global.baselineLower = constant.baselineLower;
 global.baselineUpper = constant.baselineUpper;
 global.startYear = constant.startYear;
@@ -678,8 +681,6 @@ var graphs = {
 						regressionSettings: {
 							type: 'linear',
 							color: '#888888',
-							// color: '#4444ff',
-							// '#888888'
 							name: Highcharts.getOptions().lang.linReg,
 						},
 						data: data.avg.values,
