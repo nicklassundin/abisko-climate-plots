@@ -12,7 +12,7 @@ var help = require('./helpers.js');
 
 var constant = require('../config/const.json');
 
-// var render = require('/config/renderer.js');
+var render = require('./config/renderer.js').render;
 
 global.baselineLower = constant.baselineLower;
 global.baselineUpper = constant.baselineUpper;
@@ -195,8 +195,10 @@ var plotBandsDiff = function(id){
 		}
 	};
 }
-
-
+exports.baseline = {
+	plotBandsDiff: plotBandsDiff,
+	plotlines: plotlines
+}
 var init_HighChart = () => Highcharts.setOptions(highchart_help.highcharts_Settings);
 init_HighChart();
 
@@ -763,8 +765,18 @@ var graphs = {
 		// $('.highcharts-annotations-labels text').bind('mouseover',function(e){
 		// alert("You hover on "+$(this).text())
 		// });
-	},
+	}, 
 	slideTemperature: function(id){
+		var meta = require('../config/charts/lang/en/slideTemperature.json')
+		var metaConfig = require('../config/charts/slideTemperature.json')
+		// var meta = {};
+		$.extend(true, meta, metaConfig);
+		render.setup(id, meta)
+		return function(data){
+			render.initiate(id, data);
+		}
+	},
+	oldslideTemperature: function(id){
 		var vis_min = false;
 		var vis_max = false;
 		// console.log(temperatures);

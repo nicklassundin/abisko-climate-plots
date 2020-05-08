@@ -161,10 +161,14 @@
 }
 
 .active {
+  	border: 1px solid transparent;
+	/* background-color: #757d85; */
 	color: #222222;
-	padding: 8px 16px
+	padding: 2px 8px
 }
 .disabled {
+  	border: 1px solid transparent;
+	/* background-color: #535b63; */
 	color: #aaaaaa;
-	padding: 8px 16px
+	padding: 2px 8px
 }

@@ -1,0 +1,40 @@
+{
+	"title": "[TITLE]",
+	"subTitle": "[SUB-TITLE]",
+	"xAxis": {
+		"left": "[X-AXIS]",
+		"right": "[X-AXIS]"
+	},
+	"yAxis": {
+		"bott": "[Y-AXIS]",
+		"top": "[Y-AXIS]"
+	},
+	"caption": "[SOME TEXT]",
+	"groups": {
+		"0": {
+			"title": "Weather",
+			"subTitle": ""
+		},
+		"1": {
+			"title": "Climate",
+			"subTitle": ""
+		}
+	},
+	"series": {
+		"max": {
+			"name": "Max"
+		},
+		"min": {
+			"name": "Min"
+		},
+		"avg": {
+			"name": "Yearly Average"
+		},  
+		"diff": {
+			"name": "Difference"
+		},
+		"linjer": {
+			"name": "[example]"
+		}
+	}
+}

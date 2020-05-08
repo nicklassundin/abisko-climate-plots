@@ -47,7 +47,7 @@ app.use('/maps', express.static(__dirname + '/maps'));
 const TYPE = 'corrected-archive';
 require('./modules/smhi').init(app, TYPE);
 
-require('./modules/api/api').lang(app, __dirname, '/lang');
+// require('./modules/api/api').lang(app, __dirname, '/lang');
 
 // Database
 var database = require('./modules/db');
