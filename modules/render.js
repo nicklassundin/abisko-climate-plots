@@ -1003,107 +1003,16 @@ var graphs = {
 		}
 	},
 	GrowingSeason: function(id){
-		// console.log(season)
-		// console.log(season.max())
-		// console.log(season.variance())
-		// console.log(season.plotCI())
-		charts[id] = Highcharts.chart(id, {
-			chart: {
-				type: 'line',
-				zoomType: 'x',
-			},
-			title: {
-				text: Highcharts.getOptions().lang.titles[id],
-			},
-			subtitle: {
-				text: 'The maximum consecutive weeks with average temperature above freezing.',
-			},
-			xAxis: {
-				title: {
-					text: Highcharts.getOptions().lang.years,
-				},
-				crosshair: true,
-				min: startYear,
-			},
-			yAxis: {
-				title: {
-					text: Highcharts.getOptions().lang.weeks,
-				},
-				tickInterval: 1,
-				lineWidth: 1,
-			},
-			tooltip: {
-				shared: true,
-				valueDecimals: 0,
-			},
-			legend: {
-				enabled: false,
-			},
-			series: [
-				// {data: [null, null]},
-				// {data: [null, null]},
-				// {data: [null, null]},
-				{data: [null, null]}]
-		});
-		charts[id].showLoading();
-		return function(season){
-			charts[id].hideLoading();
-			// console.log(season)
-			charts[id].update({
-				legend: {
-					enabled: true,
-				},
-				dataSrc: season.src,
-				series: [{
-					regression: false,
-					regressionSettings: {
-						type: 'linear',
-						color: '#008800',
-						name: Highcharts.getOptions().lang.linReg,
-					},
-					name: Highcharts.getOptions().lang.weeks,
-					lineWidth: 0,
-					marker: { radius: 2 },
-					states: { hover: { lineWidthPlus: 0 } },
-					color: '#00aa00',
-					data: season.values,
-					visible: true,
-				},
-					// { 
-					// name: Highcharts.getOptions().lang.ci,
-					// type: 'arearange',
-					// color: '#005500',
-					// data: season.plotCI(),
-					// zIndex: 0,
-					// fillOpacity: 0.3,
-					// lineWidth: 0,
-					// states: { hover: { lineWidthPlus: 0 } },
-					// marker: { enabled: false },
-					// visible: false,
-					// }, 
-					// {
-					// name: Highcharts.getOptions().lang.movAvg,
-					// color: '#00aa00',
-					// marker: { enabled: false },
-					// data: season.plotMovAvg(),
-					// },
-					// {
-					// name: Highcharts.getOptions().lang.movAvgCI,
-					// type: 'arearange',
-					// color: '#006600',
-					// data: season.plotMovAvgCI(),
-					// zIndex: 0,
-					// fillOpacity: 0.3,
-					// lineWidth: 0,
-					// states: { hover: { lineWidthPlus: 0 } },
-					// marker: { enabled: false },
-					// visible: false,
-					// }
-				],
-			});
+		var meta = require('../config/charts/lang/en/growingSeason.json')
+		var metaConfig = require('../config/charts/growingSeason.json')
+		// var meta = {};
+		$.extend(true, meta, metaConfig);
+		render.setup(id, meta)
+		return function(data){
+			console.log(data)
+			render.initiate(id, data);
 		}
 	},
-
 	PrecipitationDifference: function (id) {
 		// console.log(id)
 		// console.log(precipitation);

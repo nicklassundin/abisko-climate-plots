@@ -82,9 +82,11 @@ var chart = {
 				data: [null, null],
 			}]
 		})
-		var gTitle = this.groupTitle();
-		$('#'+id).append(gTitle);
-		this.chart.showLoading();
+		if(Object.keys(meta.groups).length > 1){
+			var gTitle = this.groupTitle();
+			$('#'+id).append(gTitle);
+			this.chart.showLoading();
+		}
 	},
 	groupTitle: function(active = 0){
 		var meta = this.meta;
@@ -120,32 +122,32 @@ var chart = {
 			},
 			series: [{
 				name: meta.series.max.name,
-				lineWidth: 1,
-				marker: { redious: 2 },
+				lineWidth: 0,
+				marker: { radius: 2 },
 				states: { hover: { lineWidthPlus: 0 } },
 				color: meta.series.max.colour,
-				data: data.min.max(),
+				data: (data.max.max != undefined) ? data.max.max() : data.max(),
 				visible: false,
 				showInLegend: false, //TODO
-				type: meta.series.max.type,
+				// type: meta.series.max.type,
 			},{
 				name: meta.series.min.name,
-				lineWidth: 1,
-				marker: { redious: 2 },
+				lineWidth: 0,
+				marker: { radius: 2 },
 				states: { hover: { lineWidthPlus: 0 } },
 				color: meta.series.min.colour,
-				data: data.min.min(),
+				data: (data.min.min != undefined) ? data.min.min() : data.min(),
 				visible: false,
 				showInLegend: false, //TODO
-				type: meta.series.min.type,
+				// type: meta.series.min.type,
 			},{
 				name: meta.series.avg.name,
-				lineWidth: 1,
+				lineWidth: 0,
 				regression: true,
-				marker: { redious: 2 },
+				marker: { radius: 2 },
 				states: { hover: { lineWidthPlus: 0 } },
 				color: meta.series.avg.colour,
-				data: data.avg.values,
+				data: (data.avg != undefined) ? data.avg.values : data.values,
 				regressionSettings: {
 					type: 'linear',
 					color: meta.series.linjer.colour,
@@ -153,7 +155,7 @@ var chart = {
 				},
 				visible: false,
 				showInLegend: false, //TODO
-				type: meta.series.avg.type,
+				// type: meta.series.avg.type,
 			},{
 				regression: false,
 				regressionSettings: {
@@ -175,12 +177,14 @@ var chart = {
 				showInLegend: false
 			}]
 		})
-		var chart = this;
-		$( ".tablinks" ).click(function(e) {
-			$(".tablinks").toggleClass('active')
-			// e.currentTarget.className += " active";
-			chart.switchToGroup(e.target.id);
-		})
+		if(Object.keys(meta.groups).length > 1){
+			var chart = this;
+			$( ".tablinks" ).click(function(e) {
+				$(".tablinks").toggleClass('active')
+				// e.currentTarget.className += " active";
+				chart.switchToGroup(e.target.id);
+			})
+		}
 		this.switchToGroup(0)	
 	},
 	switch: function(){
@@ -194,7 +198,6 @@ var chart = {
 		var meta = this.meta;
 		var id = this.id;
 		// console.log(gID)
-		//
 		Object.keys(meta.series).forEach((key, index) => {
 			if(meta.series[key].group == gID){
 				// // console.log("Show")
