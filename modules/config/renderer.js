@@ -98,7 +98,6 @@ var chart = {
 		return "<div id='"+this.id+"_title' class='tab'>" + group + "</div>"
 	},
 	initiate: function(data){
-		console.log(data)
 		var id = this.id;
 		var meta = this.meta;
 		// $('#'+id).bind('mousewheel', function(e){
