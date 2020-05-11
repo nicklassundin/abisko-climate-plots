@@ -62,7 +62,7 @@ var chart = {
 			},
 			tooltip: {
 				shared: true,
-				valueSuffix: ' °C',
+				valueSuffix: ' '+meta.valueSuffix,
 				valueDecimals: 2,
 			},
 			series: [{

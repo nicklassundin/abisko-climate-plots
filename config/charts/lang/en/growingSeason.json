@@ -5,6 +5,7 @@
 		"left": "Weeks",
 		"right": "[X-AXIS]"
 	},
+	"valueSuffix": "Weeks",
 	"xAxis": {
 		"bott": "Year", 
 		"top": "[Y-AXIS]"

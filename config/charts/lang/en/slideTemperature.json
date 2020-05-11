@@ -5,6 +5,7 @@
 		"left": "Average temperature [°C]",
 		"right": "[X-AXIS]"
 	},
+	"valueSuffix": "°C",
 	"xAxis": {
 		"bott": "Year", 
 		"top": "[Y-AXIS]"
