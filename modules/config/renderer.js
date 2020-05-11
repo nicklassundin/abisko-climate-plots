@@ -63,7 +63,7 @@ var chart = {
 			tooltip: {
 				shared: true,
 				valueSuffix: ' '+meta.valueSuffix,
-				valueDecimals: 2,
+				valueDecimals: meta.decimals,
 			},
 			series: [{
 				showInLegend: false,
@@ -129,7 +129,7 @@ var chart = {
 				data: (data.max.max != undefined) ? data.max.max() : data.max(),
 				visible: false,
 				showInLegend: false, //TODO
-				// type: meta.series.max.type,
+				type: meta.series.max.type,
 			},{
 				name: meta.series.min.name,
 				lineWidth: 0,
@@ -139,7 +139,7 @@ var chart = {
 				data: (data.min.min != undefined) ? data.min.min() : data.min(),
 				visible: false,
 				showInLegend: false, //TODO
-				// type: meta.series.min.type,
+				type: meta.series.min.type,
 			},{
 				name: meta.series.avg.name,
 				lineWidth: 0,
@@ -155,7 +155,7 @@ var chart = {
 				},
 				visible: false,
 				showInLegend: false, //TODO
-				// type: meta.series.avg.type,
+				type: meta.series.avg.type,
 			},{
 				regression: false,
 				regressionSettings: {

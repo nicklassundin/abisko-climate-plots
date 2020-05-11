@@ -8,6 +8,7 @@
 			"baseline": true
 		}
 	},
+	"decimals": 2,
 	"series": {
 		"max": {
 			"group": 0, 
