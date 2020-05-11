@@ -1,0 +1,36 @@
+{
+	"type": "line",
+	"groups": {
+		"0": {
+			"baseline": false
+		}
+	},
+	"series": {
+		"max": {
+			"visible": false,
+			"colour": "#ff0000", 
+			"type": "line"
+		},
+		"min": {
+			"visible": false,
+			"colour": "#0000ff",
+			"type": "line"
+		},
+		"avg": {
+			"group": 0,
+			"visible": true,
+			"colour": "#00aa00",
+			"type": "line"
+		},  
+		"diff": {
+			"visible": false,
+			"colour": "[example]",
+			"type": "column" 
+		},
+		"linjer": {
+			"visible": false,
+			"colour": "#008800",
+			"type": "linear"
+		}
+	}
+}

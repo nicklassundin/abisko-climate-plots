@@ -1,0 +1,36 @@
+{
+	"title": "[stationName] Growing Season" ,
+	"subTitle": "[SUB-TITLE]",
+	"yAxis": {
+		"left": "Weeks",
+		"right": "[X-AXIS]"
+	},
+	"xAxis": {
+		"bott": "Year", 
+		"top": "[Y-AXIS]"
+	},
+	"caption": "[SOME TEXT]",
+	"groups": {
+		"0": {
+			"title": "Growing Season",
+			"subTitle": "The maximum consecutive weeks with average temperature ab     ove freezing."
+		}
+	},
+	"series": {
+		"max": {
+			"name": "Max"
+		},
+		"min": {
+			"name": "Min"
+		},
+		"avg": {
+			"name": "Weeks"
+		},  
+		"diff": {
+			"name": "Difference"
+		},
+		"linjer": {
+			"name": "[example]"
+		}
+	}
+}
