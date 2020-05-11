@@ -1,12 +1,12 @@
 {
-	"title": "[TITLE]",
+	"title": "[stationName] Temperatures" ,
 	"subTitle": "[SUB-TITLE]",
-	"xAxis": {
-		"left": "[X-AXIS]",
+	"yAxis": {
+		"left": "Average temperature [°C]",
 		"right": "[X-AXIS]"
 	},
-	"yAxis": {
-		"bott": "[Y-AXIS]",
+	"xAxis": {
+		"bott": "Year", 
 		"top": "[Y-AXIS]"
 	},
 	"caption": "[SOME TEXT]",
@@ -17,7 +17,7 @@
 		},
 		"1": {
 			"title": "Climate",
-			"subTitle": ""
+			"subTitle": "Difference between yearly average and average for [baseline]"
 		}
 	},
 	"series": {

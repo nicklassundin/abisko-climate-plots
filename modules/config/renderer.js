@@ -41,14 +41,14 @@ var chart = {
 			},
 			xAxis: {
 				title: {
-					text: meta.xAxis.left, 
+					text: meta.xAxis.bott, 
 				},
 				corsshair: true,
 				min: startYear,
 			},
 			yAxis: {
 				title: {
-					text: meta.yAxis.bott, 
+					text: meta.yAxis.left, 
 				},
 				plotLines: [{
 					value: 0,
@@ -82,18 +82,20 @@ var chart = {
 				data: [null, null],
 			}]
 		})
+		var gTitle = this.groupTitle();
+		$('#'+id).append(gTitle);
 		this.chart.showLoading();
 	},
 	groupTitle: function(active = 0){
 		var meta = this.meta;
 		var group = Object.keys(meta.groups).map(function(each, index){
 			if(index == active){
-				return "<label class='active' id="+index+">"+meta.groups[each].title+"</label>"
+				return "<button class='tablinks active' id="+index+">"+meta.groups[each].title+"</button>"
 			}else{
-				return "<label class='disabled' id="+index+">"+meta.groups[each].title+"</label>"
+				return "<button class='tablinks' id="+index+">"+meta.groups[each].title+"</button>"
 			}
 		})
-		return "<div id='"+this.id+"_title'>" + group + "</div>"
+		return "<div id='"+this.id+"_title' class='tab'>" + group + "</div>"
 	},
 	initiate: function(data){
 		console.log(data)
@@ -114,7 +116,7 @@ var chart = {
 		this.chart.hideLoading();
 		this.chart.update({
 			title: {
-				text: this.groupTitle(0),
+				text: meta.title,
 				useHTML: true,
 			},
 			series: [{
@@ -174,6 +176,12 @@ var chart = {
 				showInLegend: false
 			}]
 		})
+		var chart = this;
+		$( ".tablinks" ).click(function(e) {
+			$(".tablinks").toggleClass('active')
+			// e.currentTarget.className += " active";
+			chart.switchToGroup(e.target.id);
+		})
 		this.switchToGroup(0)	
 	},
 	switch: function(){
@@ -187,9 +195,10 @@ var chart = {
 		var meta = this.meta;
 		var id = this.id;
 		// console.log(gID)
+		//
 		Object.keys(meta.series).forEach((key, index) => {
 			if(meta.series[key].group == gID){
-				// console.log("Show")
+				// // console.log("Show")
 				// console.log(key)
 				// console.log(meta.series[key].group)
 				$('#' + id).highcharts().series[index].update({
@@ -208,11 +217,11 @@ var chart = {
 		})
 		this.chart.update({
 			title: {
-				text: this.groupTitle(gID),
+				text: meta.title.replace("[stationName]", stationName),
 				useHTML: true,
 			},
 			subtitle: {
-				text: '' 
+				text: meta.groups[gID].subTitle.replace("[baseline]", baselineLower +" - "+ baselineUpper)
 			},
 			xAxis: {
 				title: {
@@ -224,11 +233,7 @@ var chart = {
 				min: startYear 
 			},
 		})
-		var chart = this;
-		$( ".disabled" ).click(function(e) {
-			// console.log(e)
-			chart.switchToGroup(e.target.id);
-		})
+
 	},
 	clone: function(){
 		return Object.assign({}, this);
