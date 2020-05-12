@@ -1,7 +1,9 @@
 var $ = require('jquery')
 global.nav_lang = 'en';
-global.baselineLower = '';
-global.baselineUpper = '';
+var constant = require('../config/const.json');
+global.startYear = constant.startYear;
+global.baselineLower = constant.baselineLower;
+global.baselineUpper = constant.baselineUpper;
 
 global.stationType = "abisko" 
 // global.station = 159880;

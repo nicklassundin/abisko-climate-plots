@@ -544,8 +544,16 @@ var graphs = {
 			})
 		}
 	},
+	newTemperature: function(id){
+		var meta = require('../config/charts/lang/en/'+id+'.json')
+		var metaConfig = require('../config/charts/temperature.json')
+		$.extend(true, meta, metaConfig);
+		render.setup(id, meta)
+		return function(data){
+			render.initiate(id, data);
+		}
+	},
 	Temperature: function (id) {
-		// console.log(id)
 		var id_split = id.split('_');
 
 		var div_id = id;
@@ -769,7 +777,6 @@ var graphs = {
 	slideTemperature: function(id){
 		var meta = require('../config/charts/lang/en/slideTemperature.json')
 		var metaConfig = require('../config/charts/slideTemperature.json')
-		// var meta = {};
 		$.extend(true, meta, metaConfig);
 		render.setup(id, meta)
 		return function(data){
