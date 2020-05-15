@@ -662,6 +662,9 @@ exports.parsers = {
 		// console.log(data)
 		var iceData = [];
 		data.forEach((row) => {
+			function isLeapYear(year) {
+     				return year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0);
+			}
 			// console.log(row)
 			var winterYear = +row[fields[0]] || undefined;
 			var springYear = +row[fields[1]] || undefined;
@@ -673,14 +676,17 @@ exports.parsers = {
 			var breakupDOY = breakupDate.year > 0 ? help.dayOfYear(help.createDate(breakupDate)) : null
 			var iceTime = help.validNumber(row[fields[4]]) || null;
 
+			var yearDays = (isLeapYear(freezeDate.year) ? 366 : 365);
 			if (springYear) {
 				iceData[springYear] = {
 					breakupDate: breakupDate.year > 0 ? help.createDate(breakupDate) : null,
-					breakupDOY,
+					breakupDOY: breakupDOY,
 					breakupWeek,
 					freezeDate: freezeDate.year > 0 ? help.createDate(freezeDate) : null,
-					freezeDOY: freezeDOY + (freezeDOY < breakupDOY ? 365 : 0),
-					freezeWeek: freezeWeek + (freezeWeek < breakupWeek ? 52 : 0),
+					freezeDOY: freezeDOY + (freezeDOY < breakupDOY ? yearDays : 0),
+					// freezeDOY: freezeDOY,
+					// freezeWeek: freezeWeek + (freezeWeek < breakupWeek ? 52 : 0),
+					freezeWeek: freezeWeek,
 					iceTime,
 				};
 			}
@@ -691,13 +697,14 @@ exports.parsers = {
 			y: each[statistic],
 		})).filter(each => each.y).filter(each => each.x >= 1909);
 
-		var dateFormat = date => date.getFullYear() + ' ' + help.monthName(help.monthByIndex(date.getMonth())) + ' ' + (+date.getDay() + 1);
+		var dateFormat = date => (date.getFullYear() + ' ' + help.monthName(help.monthByIndex(date.getMonth())) + ' ' + date.getDate());
 
 		var breakupDOY = iceData.map((each, year) => ({
 			x: +year,
 			y: each.breakupDOY,
 			name: each.breakupDate ? dateFormat(each.breakupDate) : null,
 			week: each.breakupDate ? help.weekNumber(each.breakupDate) : null,
+			date: each.breakupDate,
 		})).filter(each => each.y).filter(each => each.x >= 1909).filter(each => each.name != null);
 
 		// var breakupVar = variance(breakupDOY.map(each=>each.y));
@@ -707,6 +714,7 @@ exports.parsers = {
 			y: each.freezeDOY,
 			name: each.freezeDate ? dateFormat(each.freezeDate) : null,
 			week: each.freezeDate ? help.weekNumber(each.freezeDate) : null,
+			date: each.freezeDate,
 		})).filter(each => each.y).filter(each => each.x >= 1909).filter(each => each.name != null);
 		// var freezeVar = variance(freezeDOY.map(each=>each.y));
 
@@ -718,12 +726,12 @@ exports.parsers = {
 		var breakup = {
 			week: breakupDOY.map(each => ({
 				x: each.x,
-				y: help.weekNumber(help.dateFromDayOfYear(each.x, each.y)),
+				y: each.date, 
 				name: each.name,
 			})),
 			date: breakupDOY.map(each => ({
 				x: each.x,
-				y: help.dateFromDayOfYear(each.x, each.y),
+				y: each.date,
 				name: each.name,
 			}))
 		}
@@ -740,7 +748,7 @@ exports.parsers = {
 			}),
 			date: freezeDOY.map(each => ({
 				x: each.x,
-				y: help.dateFromDayOfYear(each.x, each.y),
+				y: each.date, 
 				name: each.name,
 			}))
 		}

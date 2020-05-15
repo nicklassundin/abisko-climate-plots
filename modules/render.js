@@ -1425,8 +1425,9 @@ var graphs = {
 				valueDecimals: 0,
 				formatter: function () {
 					var tooltip = '<span style="font-size: 10px">' + (+this.x-1) + '/' + this.x + '</span><br/>';
-					this.points.forEach(point =>
-						tooltip += '<span style="color:' + point.color + '">\u25CF</span> ' + point.series.name + ': <b>' +(point.point.options.week || point.y) + '</b><br/>');
+					this.points.forEach(point =>{
+						tooltip += '<span style="color:' + point.color + '">\u25CF</span> ' + point.series.name + ': <b>' +(point.point.options.date || point.y) + '</b><br/>'
+					});
 					return tooltip;
 				},
 			},
@@ -1442,6 +1443,7 @@ var graphs = {
 		});
 		charts[id].showLoading();
 		return function(ice){
+			// console.log(ice.iceTime)
 			charts[id].hideLoading();
 			charts[id].update({
 				legend: {
@@ -1511,11 +1513,11 @@ var graphs = {
 				lineWidth: 1,
 				labels: {
 					formatter: function () {
-						return (this.value > 366 ? this.value - 365 : this.value);
+						return (this.value > 365 ? this.value - 365 : this.value);
+						// return this.value;
 					},
 				},
-				tickPositions: [95, 125, 155, 185, 215, 245, 275, 305, 335,
-					365, 395, 425],
+				// tickPositions: [95, 125, 155, 185, 215, 245, 275, 305, 335, 365, 395, 425],
 				tickInterval: 50,
 			}
 				// ,{
