@@ -679,8 +679,8 @@ exports.parsers = {
 					breakupDOY,
 					breakupWeek,
 					freezeDate: freezeDate.year > 0 ? help.createDate(freezeDate) : null,
-					freezeDOY: freezeDOY + (freezeDOY < 50 ? 365 : 0),
-					freezeWeek: freezeWeek + (freezeWeek < 20 ? 52 : 0),
+					freezeDOY: freezeDOY + (freezeDOY < breakupDOY ? 365 : 0),
+					freezeWeek: freezeWeek + (freezeWeek < breakupWeek ? 52 : 0),
 					iceTime,
 				};
 			}

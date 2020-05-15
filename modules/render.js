@@ -1514,7 +1514,8 @@ var graphs = {
 						return (this.value > 366 ? this.value - 365 : this.value);
 					},
 				},
-				tickPositions: [100, 150, 200, 250, 300, 365, 400],
+				tickPositions: [95, 125, 155, 185, 215, 245, 275, 305, 335,
+					365, 395, 425],
 				tickInterval: 50,
 			}
 				// ,{
