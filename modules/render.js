@@ -1710,6 +1710,7 @@ var graphs = {
 				valueSuffix: ' cm',
 				valueDecimals: 0,
 				formatter: function(){
+					//TODO Fix localizaton Winter
 					var tooltip = '<span style="font-size: 10px">Winter ' + (this.x + '-' + (this.x+1)) + '</span><br/>';
 					this.points.forEach(point => 
 						tooltip += '<span style="color:'+
@@ -1836,6 +1837,7 @@ var graphs = {
 					valueSuffix: ' cm',
 					valueDecimals: 0,
 					formatter: function(){
+						//TODO Fix localizaton Winter
 						var tooltip = '<span style="font-size: 10px">Winter ' + (this.x + '-' + (this.x+1)) + '</span><br/>';
 						this.points.forEach(point => 
 							tooltip += '<span style="color:'+
