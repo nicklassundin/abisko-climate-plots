@@ -544,16 +544,16 @@ var graphs = {
 			})
 		}
 	},
-	newTemperature: function(id){
-		var meta = require('../config/charts/lang/en/'+id+'.json')
-		var metaConfig = require('../config/charts/temperature.json')
-		$.extend(true, meta, metaConfig);
+	Temperature: function(id, meta){
+		// var meta = require('../config/charts/lang/en/'+id+'.json')
+		// var metaConfig = require('../config/charts/temperature.json')
+		// $.extend(true, meta, metaConfig);
 		render.setup(id, meta)
 		return function(data){
 			render.initiate(id, data);
 		}
 	},
-	Temperature: function (id) {
+	oldTemperature: function (id) {
 		var id_split = id.split('_');
 
 		var div_id = id;
@@ -750,7 +750,7 @@ var graphs = {
 			charts[id].hideLoading();
 			charts[id].update({
 				title: {
-					text: Highcharts.getOptions().lang.titles[id] + stationName,
+					text: Highcharts.getOptions().lang.titles[id],
 				},
 				legend: {
 					enabled: true,
@@ -1045,7 +1045,7 @@ var graphs = {
 					text: Highcharts.getOptions().lang.prec,
 				},
 				lineWidth: 1,
-				//min: -2,
+					//min: -2,
 				//max: 3,
 				tickInterval: 1,
 			},
@@ -1709,6 +1709,18 @@ var graphs = {
 				shared: true,
 				valueSuffix: ' cm',
 				valueDecimals: 0,
+				formatter: function(){
+					var tooltip = '<span style="font-size: 10px">Winter ' + (this.x + '-' + (this.x+1)) + '</span><br/>';
+					this.points.forEach(point => 
+						tooltip += '<span style="color:'+
+						point.color +
+						'">\u25CF</span> ' +
+						point.series.name +
+						': <b>'+
+						(point.y) + 
+						'</b><br/>');
+					return tooltip;
+				}
 			},
 			legend: {
 				enabled: false,
@@ -1737,7 +1749,6 @@ var graphs = {
 		charts[id].showLoading();
 		return function(data){
 			charts[id].hideLoading();
-			// console.log(data.total.max())
 			charts[id].update({
 				series: [{
 					yAxis: 0,
@@ -1824,13 +1835,18 @@ var graphs = {
 					shared: true,
 					valueSuffix: ' cm',
 					valueDecimals: 0,
-					formatter: function () {
-						var tooltip = '<span style="font-size: 10px">' + this.x + '</span><br/>';
-						this.points.forEach(point => {
-							tooltip += '<span">\u25CF</span> ' + point.series.name + ': <b>' + point.y + '</b><br/><br>'+ 'Closest date: ' + point.point.date +'<br/>';
-						});
+					formatter: function(){
+						var tooltip = '<span style="font-size: 10px">Winter ' + (this.x + '-' + (this.x+1)) + '</span><br/>';
+						this.points.forEach(point => 
+							tooltip += '<span style="color:'+
+							point.color +
+							'">\u25CF</span> ' +
+							point.series.name +
+							': <b>'+
+							(point.y) + 
+							'</b><br/>');
 						return tooltip;
-					},
+					}
 				},
 				series: [{
 					yAxis: 0,

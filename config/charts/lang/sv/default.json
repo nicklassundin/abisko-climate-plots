@@ -10,7 +10,7 @@
 		"top": "[Y-AXIS]"
 	},
 	"caption": "[SOME TEXT]",
-	"series" {
+	"series": {
 		"avg": "[example]",
 		"diff": "[example]",
 		"max": "[example]",

@@ -7,6 +7,8 @@ const parse = require('../stats.js').parsers;
 const help = require('../helpers.js')
 var months = help.months;
 
+var renderer = require('./renderer.js')
+
 var filePath = {
 	station: function(fileName, id=station){
 		return hostUrl+"/data/"+id+"/"+fileName;
@@ -17,10 +19,12 @@ var filePath = {
 }
 
 
-var monthlyFunc = (render) => function(id, title, src="") {
+var monthlyFunc = (render) => function(id, meta, src="") {
 	var result = [];
+	//TODO
 	months().forEach((month, index) =>  
-		result.push(render(id+"_"+month, title+" "+help.monthName(month))));	
+		// help.monthName(month);
+		result.push(render(id+"_"+month, meta)));	
 	return function(data){
 		result.forEach((func, index) => func(data[index+1+'']));	
 	}
@@ -49,6 +53,18 @@ var dataset_struct = {
 	parser: undefined, 
 	render: undefined,
 	reader: Papa.parse,
+	metaRef: undefined,
+	getMeta: function(define){
+		if(define.config != undefined){
+
+			var meta = require('../../config/charts/lang/'+nav_lang+'/'+define.lang+'.json')
+			var metaConfig = require('../../config/charts/'+define.config+'.json');
+			$.extend(true, meta, metaConfig);
+			return meta;
+		}else{
+			return false
+		}
+	},
 	contFunc: function(reset=false, page=''){
 		if(typeof this.rawData !== 'undefined' && this.rawData.length > 0){
 			return this;
@@ -74,26 +90,29 @@ var dataset_struct = {
 	},
 	parseRawData: function(reset=false){
 		var parser = this.parser;
-			var rawDataPromise = this.rawData;
-			return new Promise(function(resolve, reject){
-				Promise.all(rawDataPromise).then(function(rawData){
-					var data = parser(rawData);
-					resolve(data);	
-				})
+		var rawDataPromise = this.rawData;
+		return new Promise(function(resolve, reject){
+			Promise.all(rawDataPromise).then(function(rawData){
+				var data = parser(rawData);
+				resolve(data);	
 			})
+		})
 	},
 	init: function(id, tag, renderTag=tag){
 		var render = this.render;
 		if(tag){
-			render = tagApply(render, renderTag)(id);
+			var meta = tagApply(this.metaRef, renderTag);
+			console.log(id)
+			console.log(meta)
+			render = tagApply(render, renderTag)(id, this.getMeta(meta));
 		}else{
-			render = render(id);
+			render = render(id, this.getMeta(this.metaRef));
 		}
 		var renderProc = function(data){
-				if(tag){
-					data = tagApply(data, tag);
-				}
-				render = render(data)
+			if(tag){
+				data = tagApply(data, tag);
+			}
+			render = render(data)
 		}
 		if(!this.cached) this.cached = this.parseRawData();
 		this.cached.then(function(data){
@@ -104,12 +123,13 @@ var dataset_struct = {
 	clone: function(){
 		return Object.assign({}, this);
 	},
-	create: function(src, file, preset, parser, render, reader = Papa.parse, local=true){
+	create: function(src, file, preset, parser, render, meta, reader = Papa.parse, local=true){
 		var res = this.clone();
 		res.rawData = [];
 		if(!Array.isArray(file)){
 			file = [file];
 		}
+		res.metaRef = meta;
 		res.file = file;	
 		if(local){
 			res.filePath = (files) => files.map(x => filePath.station(x)); 
@@ -145,6 +165,11 @@ var config = {
 			'nhem': renders.TemperatureDifference,
 			'glob': renders.TemperatureDifference,
 		},
+		meta = {
+			'64n-90n': { config: undefined, lang: undefined }, 
+			'nhem': { config: undefined, lang: undefined }, 
+			'glob': { config: undefined, lang: undefined }, 
+		},
 		reader = Papa.parse,
 		local = false),
 	abisko: dataset_struct.create(
@@ -168,8 +193,9 @@ var config = {
 				'yrly': renders.Temperature,
 				'summer': renders.Temperature,
 				'winter': renders.Temperature,
-				'monthly': monthlyFunc(renders.Temperature),
-				'difference': renders.TemperatureDifference,
+				// 'monthly': monthlyFunc(renders.Temperature),
+				'monthly': monthlyFunc(renders.oldTemperature),
+				'difference': renders.Temperature,
 				'polar': renders.Polar,
 			},
 			'precipitation':{
@@ -181,7 +207,27 @@ var config = {
 				'polar': renders.Polar,
 			},
 			'growingSeason': renders.GrowingSeason,
-			'slideTemperature' :renders.slideTemperature,
+			'slideTemperature': renders.slideTemperature,
+		},
+		meta = {
+			'temperatures': {
+				'yrly': { config: 'temperature', lang: 'yrlyTemperature' }, 
+				'summer': { config: 'temperature', lang: 'summerTemperature' },  
+				'winter': { config: 'temperature', lang: 'winterTemperature' }, 
+				'monthly': { config: 'temperature', lang: 'monthlyTemperature' }, 
+				'difference': { config: 'diffTemperature', lang: 'diffTemperature' }, 
+				'polar': { config: undefined, lang: undefined }, 
+			},
+			'precipitation':{
+				'yrly': { config: undefined, lang: undefined }, 
+				'summer': { config: undefined, lang: undefined }, 
+				'winter': { config: undefined, lang: undefined }, 
+				'monthly': { config: undefined, lang: undefined }, 
+				'difference': { config: undefined, lang: undefined }, 
+				'polar': { config: undefined, lang: undefined }, 
+			},
+			'growingSeason': { config: 'growingSeason', lang: 'growingSeason' }, 
+			'slideTemperature': { config: 'slideTemperature', lang: 'slideTemperature' }, 
 		},
 		reader = Papa.parse),
 	smhi: dataset_struct.create(
@@ -221,6 +267,26 @@ var config = {
 			'growingSeason': renders.GrowingSeason,
 			'slideTemperature' :renders.slideTemperature,
 		},
+		meta = {
+			'temperatures': {
+				'yrly': undefined, 
+				'summer': undefined, 
+				'winter': undefined,
+				'monthly': undefined, 
+				'difference': undefined, 
+				'polar': undefined, 
+			},
+			'precipitation':{
+				'yrly': undefined, 
+				'summer': undefined, 
+				'winter': undefined, 
+				'monthly': undefined, 
+				'difference': undefined, 
+				'polar': undefined, 
+			},
+			'growingSeason': undefined, 
+			'slideTemperature': undefined, 
+		},
 		reader = Papa.parse),
 	// TODO Bake together
 	tornetrask: dataset_struct.create(
@@ -233,6 +299,7 @@ var config = {
 		},
 		parser = parse.AbiskoIceData,
 		render = renders.AbiskoIce,
+		meta = { config: undefined, lang: undefined },
 		reader = Papa.parse),
 	tornetrask_iceTime: dataset_struct.create(
 		src = '',
@@ -244,6 +311,7 @@ var config = {
 		},
 		parser = parse.AbiskoIceData,
 		render = renders.AbiskoIceTime,
+		meta = { config: undefined, lang: undefined },
 		reader = Papa.parse),
 	abiskoSnowDepth: dataset_struct.create(
 		src = '',
@@ -259,6 +327,10 @@ var config = {
 			'periodMeans': renders.AbiskoSnow,
 			'decadeMeans': renders.AbiskoSnow,
 		},
+		meta = {
+			'periodMeans': { config: undefined, lang: undefined },
+			'decadeMeans': { config: undefined, lang: undefined },
+		},
 		reader = Papa.parse),
 	weeklyCO2: dataset_struct.create(
 		src ='',
@@ -272,6 +344,10 @@ var config = {
 			'weekly': renders.CO2,
 			'monthly': renders.CO2,
 		},
+		meta = {
+			'weekly': { config: undefined, lang: undefined },
+			'monthly': { config: undefined, lang: undefined },
+		},
 		reader = Papa.parse,
 		local = false),
 	permaHistogramCALM: dataset_struct.create(
@@ -284,6 +360,7 @@ var config = {
 		},
 		parser = parse.CALM,
 		render = renders.Perma,
+		meta = { config: undefined, lang: undefined },
 		reader = Papa.parse,
 		local = false),
 	iceThick: dataset_struct.create(
@@ -298,6 +375,10 @@ var config = {
 		render = {
 			'yrly': renders.iceThicknessYear,
 			'date': renders.iceThicknessDate
+		},
+		meta = {
+			'yrly': { config: undefined, lang: undefined },
+			'date': { config: undefined, lang: undefined },
 		},
 		reader = Papa.parse,
 		local = true)
