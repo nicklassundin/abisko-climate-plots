@@ -187,7 +187,7 @@ Date.prototype.getWeekNumber = function(date=this){
 
 	var isLeapYear = year => ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
 
-	var createDate = date => new Date(date.year, date.month-1, date.day-1);
+	var createDate = date => new Date(date.year, date.month-1, date.day);
 	exports.createDate = createDate;
 	var weekNumber = (date) => {
 		var d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));

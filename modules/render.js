@@ -1534,7 +1534,7 @@ var graphs = {
 				shared: true,
 				valueDecimals: 0,
 				formatter: function () {
-					var tooltip = '<span style="font-size: 10px">' + (+this.x-1) + '/' + this.x + '</span><br/>';
+					var tooltip = '<span style="font-size: 10px">' + (+this.x-1) + '-' + this.x + '</span><br/>';
 					this.points.forEach(point =>
 						tooltip += '<span style="color:' + point.color + '">\u25CF</span> ' + point.series.name + ': <b>' +(point.point.name || point.y) + '</b><br/>');
 					return tooltip;
@@ -1756,7 +1756,7 @@ var graphs = {
 			charts[id].update({
 				series: [{
 					yAxis: 0,
-					name: "test",
+					name: "Ice Thickness (cm)",
 					color: '#0000ee',
 					lineWidth: 0,
 					marker: { 
@@ -1765,7 +1765,7 @@ var graphs = {
 					},
 					data: data.total.max().map(each => {
 						return {
-							x: each.x - 1,
+							x: each.x,
 							y: each.y
 						}
 					}),
@@ -1780,9 +1780,9 @@ var graphs = {
 		charts[id] = Highcharts.chart(id, {
 			title: {
 				useHTML: true,
-				text: "<label>"+
+				text: "<label>"+ //TODO fix localization Choose date
 				"Ice thickness by date across years </label><br>"+
-				"<input type='date' value="+
+				'<label style="font-size: 10px">Choose date </label><input type="date" value='+
 				variables.dateStr()+
 				" onclick=selectText(this) "+
 				"onchange=updatePlot("+id+","+baselineLower+","+baselineUpper+",this.value)></input>"
@@ -1842,20 +1842,23 @@ var graphs = {
 					formatter: function(){
 						//TODO Fix localizaton Winter
 						var tooltip = '<span style="font-size: 10px">Winter ' + (this.x + '-' + (this.x+1)) + '</span><br/>';
-						this.points.forEach(point => 
+						this.points.forEach(point =>{
+
+							tooltip += '<span style="font-size: 10px">'+point.point.date+'</span><br/>'
 							tooltip += '<span style="color:'+
 							point.color +
 							'">\u25CF</span> ' +
 							point.series.name +
 							': <b>'+
 							(point.y) + 
-							'</b><br/>');
+							'</b><br/>'
+						});
 						return tooltip;
 					}
 				},
 				series: [{
 					yAxis: 0,
-					name: "test",
+					name: "Ice Thickness (cm):",
 					color: '#0000ee',
 					lineWidth: 0,
 					marker: { 

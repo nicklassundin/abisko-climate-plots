@@ -219,7 +219,7 @@ var chart = {
 		})
 		this.chart.update({
 			title: {
-				text: meta.title.replace("[stationName]", stationName),
+				text: meta.title.replace("[stationName]", stationName).replace("[month]", meta.month),
 				useHTML: true,
 			},
 			subtitle: {

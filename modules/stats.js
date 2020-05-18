@@ -587,6 +587,7 @@ exports.parsers = {
 		})
 	},
 	AbiskoCsv: function (result, src='') {
+		console.log(result)
 		var blocks = { precipitation: [], temperatures: [] };
 		var parseEntry = function(y){
 			if(y != undefined){
@@ -606,7 +607,6 @@ exports.parsers = {
 				var max = entry.max;
 				var total = entry.total; 
 				if(total==undefined) zero = undefined
-
 				blocks.temperatures.push({
 					avg:{
 						x: date,
@@ -646,6 +646,14 @@ exports.parsers = {
 			min: parseEntry(entry['Temp_min']),
 			max: parseEntry(entry['Temp_max'])
 		})))
+		// insertToBlocks(result[1]).data.map(entry => ({
+		// 	date: entry['Time(UTC)'],
+		// 	avg: parseEntry(entry['AirTemperature (°C)']),
+		// 	total: undefined, 
+		// 	min: parseEntry(entry['Minimim_AirTemperature']),
+		// 	max: parseEntry(entry['Maximum_AirTemperature'])
+		// }))
+
 		blocks.temperatures = parseByDate(blocks.temperatures);
 		blocks.precipitation = parseByDate(blocks.precipitation, 'sum');
 		blocks.growingSeason = struct.create(Object.keys(blocks.temperatures.weekly).map(year =>  blocks.temperatures.weekly[year].avg.sequence())).build();
@@ -698,7 +706,7 @@ exports.parsers = {
 		})).filter(each => each.y).filter(each => each.x >= 1909);
 
 		var dateFormat = date => (date.getFullYear() + ' ' + help.monthName(help.monthByIndex(date.getMonth())) + ' ' + date.getDate());
-
+		
 		var breakupDOY = iceData.map((each, year) => ({
 			x: +year,
 			y: each.breakupDOY,
@@ -706,8 +714,6 @@ exports.parsers = {
 			week: each.breakupDate ? help.weekNumber(each.breakupDate) : null,
 			date: each.breakupDate,
 		})).filter(each => each.y).filter(each => each.x >= 1909).filter(each => each.name != null);
-
-		// var breakupVar = variance(breakupDOY.map(each=>each.y));
 
 		var freezeDOY = iceData.map((each, year) => ({
 			x: +year,

@@ -19,12 +19,14 @@ var filePath = {
 }
 
 
-var monthlyFunc = (render) => function(id, meta, src="") {
+var monthlyFunc = (render) => function(id, meta) {
 	var result = [];
 	//TODO
-	months().forEach((month, index) =>  
-		// help.monthName(month);
-		result.push(render(id+"_"+month, meta)));	
+	months().forEach((month, index) => {
+		var cloneMeta = Object.assign({}, meta, {})
+		cloneMeta.month = help.monthName(month);
+		result.push(render(id+"_"+month, cloneMeta))
+	});	
 	return function(data){
 		result.forEach((func, index) => func(data[index+1+'']));	
 	}
@@ -193,8 +195,8 @@ var config = {
 				'yrly': renders.Temperature,
 				'summer': renders.Temperature,
 				'winter': renders.Temperature,
-				// 'monthly': monthlyFunc(renders.Temperature),
-				'monthly': monthlyFunc(renders.oldTemperature),
+				'monthly': monthlyFunc(renders.Temperature),
+				// 'monthly': monthlyFunc(renders.oldTemperature),
 				'difference': renders.Temperature,
 				'polar': renders.Polar,
 			},
@@ -254,7 +256,7 @@ var config = {
 				'yrly': renders.Temperature,
 				'summer': renders.Temperature,
 				'winter': renders.Temperature,
-				'monthly': monthlyFunc(renders.Temperature),
+				'monthly': monthlyFunc(renders.oldTemperature),
 				'difference': renders.TemperatureDifference,
 			},
 			'precipitation':{
