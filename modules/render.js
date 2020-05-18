@@ -1547,7 +1547,7 @@ var graphs = {
 				{data: [null, null]},
 				// {data: [null, null]},
 				// {data: [null, null]},
-				{data: [null, null]},
+				// {data: [null, null]},
 				{data: [null, null]}]
 		});
 		charts[id].showLoading();
