@@ -1,0 +1,28 @@
+{
+	"title": "Troneträsk Freeze-up and break-up of lake ice vs ice time" ,
+	"subTitle": "[SUB-TITLE]",
+	"yAxis": {
+		"left": "Ice break-up / freeze-up [day of year]",
+		"right": "[X-AXIS]"
+	},
+	"valueSuffix": "",
+	"xAxis": {
+		"bott": "Year", 
+		"top": "[Y-AXIS]"
+	},
+	"caption": "[SOME TEXT]",
+	"groups": {
+		"0": {
+			"title": "Weather",
+			"subTitle": ""
+		}
+	},
+	"series": {
+		"freeze": {
+			"name": "Freeze-up"
+		},
+		"breakup": {
+			"name": "Break-up"
+		}
+	}
+}

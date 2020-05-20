@@ -1,0 +1,25 @@
+{
+	"title": "", 
+	"subTitle": "",
+	"yAxis": {
+		"left": "Ice time [number of days]",
+		"right": "[X-AXIS]"
+	},
+	"valueSuffix": "days",
+	"xAxis": {
+		"bott": "Year", 
+		"top": "[Y-AXIS]"
+	},
+	"caption": "[SOME TEXT]",
+	"groups": {
+		"0": {
+			"title": "Weather",
+			"subTitle": ""
+		}
+	},
+	"series": {
+		"iceTime": {
+			"name": "Ice time" 
+		}
+	}
+}

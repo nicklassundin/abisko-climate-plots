@@ -1,0 +1,23 @@
+{
+	"type": "column",
+	"groups": {
+		"0": {
+			"baseline": false
+		}
+	},
+	"decimals": 0,
+	"series": {
+		"freeze": {
+			"group": 0,
+			"visible": true,
+			"colour": "#0000ee",
+			"type": "line"
+		},
+		"breakup": {
+			"group": 0,
+			"visible": true,
+			"colour": "#ee0000",
+			"type": "line"
+		}
+	}
+}

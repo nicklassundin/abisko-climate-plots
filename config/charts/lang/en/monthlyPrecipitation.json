@@ -1,0 +1,28 @@
+{
+	"title": "[stationName] Precipitation for [month]" ,
+	"subTitle": "[SUB-TITLE]",
+	"yAxis": {
+		"left": "Total Precipitation [mm]",
+		"right": "[X-AXIS]"
+	},
+	"valueSuffix": "mm",
+	"xAxis": {
+		"bott": "Year", 
+		"top": "[Y-AXIS]"
+	},
+	"caption": "[SOME TEXT]",
+	"groups": {
+		"0": {
+			"title": "Weather",
+			"subTitle": ""
+		}
+	},
+	"series": {
+		"snow": {
+			"name": "Precipitation from snow"
+		},
+		"rain": {
+			"name": "Precipitation from rain"
+		}
+	}
+}

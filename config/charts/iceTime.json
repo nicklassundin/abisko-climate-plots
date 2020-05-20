@@ -1,0 +1,21 @@
+{
+	"type": "column",
+	"groups": {
+		"0": {
+			"baseline": false
+		}
+	},
+	"yAxis": {
+		"max": 250,
+		"min": 80
+	},
+	"decimals": 0,
+	"series": {
+		"iceTime": {
+			"group": 0,
+			"visible": true,
+			"colour": "#00bb00",
+			"type": "line"
+		}
+	}
+}

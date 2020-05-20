@@ -1,0 +1,52 @@
+{
+	"type": "column",
+	"groups": {
+		"0": {
+			"baseline": false
+		}
+	},
+	"month": false,
+	"decimals": 0,
+	"series": {
+		"max": {
+			"visible": false,
+			"colour": "#ff0000", 
+			"type": "line"
+		},
+		"min": {
+			"visible": false,
+			"colour": "#0000ff",
+			"type": "line"
+		},
+		"avg": {
+			"visible": false,
+			"colour": "#888888",
+			"type": "line"
+		},  
+		"diff": {
+			"visible": false,
+			"colour": "[example]",
+			"type": "column" 
+		},
+		"linjer": {
+			"colour": "[example]",
+			"type": "[example]"
+		},
+		"snow": {
+			"group": 0,
+			"visible": true,
+			"colour": "#CDD8F0",
+			"hoverColour": "#eeeeff",
+			"borderColour": "#5F7CB9",
+			"type": "column"
+		},
+		"rain": {
+			"group": 0,
+			"visible": true,
+			"colour": "#1000FB",
+			"hoverColor": "#3333ff",
+			"borderColour": "#5F7CB9",
+			"type": "column"
+		}
+	}
+}

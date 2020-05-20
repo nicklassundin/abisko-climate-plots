@@ -1,0 +1,37 @@
+{
+	"title": "[stationName] Precipitation" ,
+	"subTitle": "[SUB-TITLE]",
+	"yAxis": {
+		"left": "Precipitation [mm]",
+		"right": "[X-AXIS]"
+	},
+	"valueSuffix": "mm",
+	"xAxis": {
+		"bott": "Year", 
+		"top": "[Y-AXIS]"
+	},
+	"caption": "[SOME TEXT]",
+	"groups": {
+		"0": {
+			"title": "Climate",
+			"subTitle": "Difference between yearly average and average for [baseline]"
+		}
+	},
+	"series": {
+		"max": {
+			"name": "Max"
+		},
+		"min": {
+			"name": "Min"
+		},
+		"avg": {
+			"name": "Yearly Average"
+		},  
+		"diff": {
+			"name": "Difference"
+		},
+		"linjer": {
+			"name": "[example]"
+		}
+	}
+}

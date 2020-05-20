@@ -1,0 +1,37 @@
+{
+	"title": "[stationName] Temperatures for [month]" ,
+	"subTitle": "[SUB-TITLE]",
+	"yAxis": {
+		"left": "Average temperature [°C]",
+		"right": "[X-AXIS]"
+	},
+	"valueSuffix": "°C",
+	"xAxis": {
+		"bott": "Year", 
+		"top": "[Y-AXIS]"
+	},
+	"caption": "[SOME TEXT]",
+	"groups": {
+		"0": {
+			"title": "Weather",
+			"subTitle": ""
+		}
+	},
+	"series": {
+		"max": {
+			"name": "Max"
+		},
+		"min": {
+			"name": "Min"
+		},
+		"avg": {
+			"name": "Yearly Average"
+		},  
+		"diff": {
+			"name": "Difference"
+		},
+		"linjer": {
+			"name": "[example]"
+		}
+	}
+}
