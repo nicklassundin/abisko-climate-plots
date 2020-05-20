@@ -7,6 +7,7 @@ require('highcharts/modules/histogram-bellcurve')(Highcharts);
 const highchart_help = require('../../config/highcharts_config.js');
 var base = require('../render.js')
 
+const help = require('../helpers.js');
 // console.log(base)
 // console.log(Object.keys(base))
 
@@ -55,8 +56,8 @@ var chart = {
 					color: 'rgb(204, 214, 235)',
 					width: 2,
 				}],
-				// max: 60,
-				// min: -20,
+				max: meta.yAxis.max,
+				min: meta.yAxis.min,
 				ticketInterval: 1,
 				lineWidth: 1,
 			},
@@ -65,22 +66,10 @@ var chart = {
 				valueSuffix: ' '+meta.valueSuffix,
 				valueDecimals: meta.decimals,
 			},
-			series: [{
+			series: Object.keys(meta.series).map(each => ({
 				showInLegend: false,
 				data: [null, null],
-			},{
-				showInLegend: false,
-				data: [null, null],
-			},{
-				showInLegend: false,
-				data: [null, null],
-			},{
-				showInLegend: false,
-				data: [null, null],
-			},{
-				showInLegend: false,
-				data: [null, null],
-			}]
+			}))
 		})
 		if(Object.keys(meta.groups).length > 1){
 			var gTitle = this.groupTitle();
@@ -113,14 +102,8 @@ var chart = {
 		// 	}
 		// 	return false;
 		// });
-
-		this.chart.hideLoading();
-		this.chart.update({
-			title: {
-				text: meta.title,
-				useHTML: true,
-			},
-			series: [{
+		var seriesBuild = {
+			max: () => ({
 				name: meta.series.max.name,
 				lineWidth: 0,
 				marker: { radius: 2 },
@@ -130,7 +113,8 @@ var chart = {
 				visible: false,
 				showInLegend: false, //TODO
 				type: meta.series.max.type,
-			},{
+			}),
+			min: () => ({
 				name: meta.series.min.name,
 				lineWidth: 0,
 				marker: { radius: 2 },
@@ -140,7 +124,8 @@ var chart = {
 				visible: false,
 				showInLegend: false, //TODO
 				type: meta.series.min.type,
-			},{
+			}),
+			avg: () => ({
 				name: meta.series.avg.name,
 				lineWidth: 0,
 				regression: true,
@@ -156,7 +141,8 @@ var chart = {
 				visible: false,
 				showInLegend: false, //TODO
 				type: meta.series.avg.type,
-			},{
+			}),
+			diff: () => ({
 				regression: false,
 				regressionSettings: {
 					type: 'linear',
@@ -165,18 +151,122 @@ var chart = {
 				},
 				name: meta.series.diff.name,
 				type: meta.series.diff.type,
-				data: (data.difference != undefined) ? data.difference() : data.avg.difference(),
+				data: (data.difference != undefined) ? data.difference() : (data.avg != undefined) ? data.avg.difference() : data.total.difference(),
 				color: 'red',
 				negativeColor: 'blue',
 				visible: false,
 				showInLegend: false, //TODO
-			},{
+			}),
+			linjer: () => ({
 				name: meta.series.linjer.name,
-				typ: meta.series.linjer.typ,
+				type: meta.series.linjer.typ,
 				visible: false,
 				showInLegend: false
-			}]
+			}),
+			snow: () => ({
+				name: meta.series.snow.name,
+				type: meta.series.snow.type,
+				stack: meta.groups[meta.series.snow.group].title,
+				stacking: 'normal',
+				color: meta.series.snow.colour,
+				data: data.snow.values,
+				visible: false,
+				showInLegend: false,
+				borderColor: meta.series.snow.borderColour,
+				states: {
+					hover: {
+						color: meta.series.snow.hoverColour,
+						animation: {
+							duration: 0,
+						}
+					}
+				}
+			}),
+			rain: () => ({
+				name: meta.series.rain.name,
+				type: meta.series.rain.type,
+				stack: meta.groups[meta.series.rain.group].title,
+				stacking: 'normal',
+				data: data.rain.values,
+				color: meta.series.rain.colour,
+				visible: false,
+				showInLegend: false,
+				borderColor: meta.series.rain.borderColour,
+				states: {
+					hover: {
+						color: meta.series.rain.hoverColour,
+						animation: {
+							duration: 0,
+						}
+					}
+				}
+			}),
+			iceTime: () => ({
+				regression: false,
+				type: meta.series.iceTime.type,
+				regressionSettings: {
+					type: 'linear',
+					color: '#00bb00',
+					name: '[placeholder]',
+				},
+				name: meta.series.iceTime.name,
+				color: meta.series.iceTime.colour,
+				lineWidth: 0,
+				marker: { radius: 2 },
+				states: { hover: { lineWidthPlus: 0 } },
+				data: data.iceTime,
+			}),
+			freeze: () => ({
+				regression: false,
+				type: meta.series.freeze.type,
+				regressionSettings: {
+					type: 'linear',
+					color: '#0000ee',
+					name: '[placeholder]',
+				},
+				name: meta.series.freeze.name,
+				color: meta.series.freeze.colour,
+				lineWidth: 0,
+				marker: { radius: 2 },
+				states: { hover: { lineWidthPlus: 0 } },
+				data: data.freezeDOY,
+			}),
+			breakup: () => ({
+				regression: false,
+				type: meta.series.breakup.type,
+				regressionSettings: {
+					type: 'linear',
+					color: '#0000ee',
+					name: '[placeholder]',
+				},
+				name: meta.series.breakup.name,
+				color: meta.series.breakup.colour,
+				lineWidth: 0,
+				marker: { radius: 2 },
+				states: { hover: { lineWidthPlus: 0 } },
+				data: data.breakupDOY,
+			})
+		}
+		this.chart.hideLoading();
+		var series = [];
+		Object.keys(meta.series).forEach(key => {
+			if(meta.series[key].visible){
+				series.push(seriesBuild[key]());
+			}else{
+				series.push({
+					visible: false,
+					showInLegend: false
+				})
+			}
 		})
+		this.chart.update({
+			title: {
+				text: meta.title,
+				useHTML: true,
+			},
+			series: series
+		})
+
 		if(Object.keys(meta.groups).length > 1){
 			var chart = this;
 			$( ".tablinks" ).click(function(e) {
@@ -197,20 +287,13 @@ var chart = {
 	switchToGroup: function(gID){
 		var meta = this.meta;
 		var id = this.id;
-		// console.log(gID)
 		Object.keys(meta.series).forEach((key, index) => {
 			if(meta.series[key].group == gID){
-				// // console.log("Show")
-				// console.log(key)
-				// console.log(meta.series[key].group)
 				$('#' + id).highcharts().series[index].update({
 					visible: true,
 					showInLegend: true,
 				})
 			}else{
-				// console.log("Hide")
-				// console.log(key)
-				// console.log(meta.series[key].group)
 				$('#' + id).highcharts().series[index].update({
 					visible: false,
 					showInLegend: false,
@@ -244,10 +327,27 @@ var chart = {
 exports.render = {
 	charts: {},
 	setup: function(id, meta){
-		this.charts[id] = chart.clone();
-		this.charts[id].setup(id, meta);
+		if(meta.month){
+			this.charts[id] = {};
+			this.charts[id].meta = meta;
+			help.months().forEach((month, index) => {
+				var cloneMeta = Object.assign({}, meta, {});
+				cloneMeta.month = help.monthName(month);
+				this.charts[id][month] = chart.clone();
+				this.charts[id][month].setup(id+"_"+month, cloneMeta);
+			})
+		}else{
+			this.charts[id] = chart.clone();
+			this.charts[id].setup(id, meta);
+		}
 	},
 	initiate: function(id, data){
-		this.charts[id].initiate(data)
+		if(this.charts[id].meta.month){
+			help.months().forEach((month, index) => {
+				this.charts[id][month].initiate(data[index+1+'']);
+			})
+		}else{
+			this.charts[id].initiate(data)
+		}
 	}
 }

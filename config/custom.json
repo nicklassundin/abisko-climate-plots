@@ -43,6 +43,7 @@
 		"monthlyTemperatures",
 		"temperatureDifference"],
 	"tempMonth": ["monthlyTemperatures"],
+	"tempAvg": ["Temperatures"],
 	"tempDiff": ["temperatureDifference"],
 	"precip": ["yearlyPrecipitation",
 		"summerPrecipitation",

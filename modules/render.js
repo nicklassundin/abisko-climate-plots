@@ -372,6 +372,7 @@ var graphs = {
 		}
 	},
 	Polar: function(id){
+		// TODO convert to generic
 		charts[id] = Highcharts.chart(id, {
 			chart: {
 				polar: true,
@@ -698,91 +699,6 @@ var graphs = {
 			});
 		}
 	},
-
-	TemperatureDifference: function (id) {
-		// console.log(temperatures);
-		// console.log(temperatures.difference());
-		// console.log(plotlines(id))
-		charts[id] = Highcharts.chart(id, {
-			chart: {
-				type: 'column'
-			},
-			// rangeSelector: {
-			// selected: 2
-			// },
-			title: {
-				text: Highcharts.getOptions().lang.titles[id],
-			},
-			subtitle: {
-				text: Highcharts.getOptions().lang.subtitles.baseline + baselineLower +" - "+ baselineUpper 
-			},
-			xAxis: {
-				title: {
-					text: Highcharts.getOptions().lang.years,
-				},
-				crosshair: true,
-				plotLines: plotlines(id),
-				plotBands: plotBandsDiff(id),
-				min: startYear,
-			},
-			yAxis: {
-				title: {
-					text: Highcharts.getOptions().lang.temp,
-				},
-				lineWidth: 1,
-				min: -2,
-				max: 3,
-				tickInterval: 1,
-			},
-			tooltip: {
-				shared: true,
-				valueSuffix: ' °C',
-				valueDecimals: 2,
-			},
-			legend: {
-				enabled: false,
-			},
-			series: [{data: [null, null]}]
-		})
-		charts[id].showLoading();
-		return function(temperatures){
-			// console.log(temperatures.avg.difference())
-			charts[id].hideLoading();
-			charts[id].update({
-				title: {
-					text: Highcharts.getOptions().lang.titles[id],
-				},
-				legend: {
-					enabled: true,
-				},
-				dataSrc: temperatures.src,
-				series: [{
-					regression: false, // TODO adv options 
-					regressionSettings: {
-						type: 'linear',
-						color: '#aa0000',
-						name: Highcharts.getOptions().lang.linReg,
-					},
-					name: Highcharts.getOptions().lang.diff,
-					data: (temperatures.difference!=undefined) ? temperatures.difference() : temperatures.avg.difference(),
-					color: 'red',
-					negativeColor: 'blue',
-				}],
-			});
-		}
-		// $('.highcharts-annotations-labels text').bind('mouseover',function(e){
-		// alert("You hover on "+$(this).text())
-		// });
-	}, 
-	slideTemperature: function(id){
-		var meta = require('../config/charts/lang/en/slideTemperature.json')
-		var metaConfig = require('../config/charts/slideTemperature.json')
-		$.extend(true, meta, metaConfig);
-		render.setup(id, meta)
-		return function(data){
-			render.initiate(id, data);
-		}
-	},
 	oldslideTemperature: function(id){
 		var vis_min = false;
 		var vis_max = false;
@@ -1009,17 +925,6 @@ var graphs = {
 			});
 		}
 	},
-	GrowingSeason: function(id){
-		var meta = require('../config/charts/lang/en/growingSeason.json')
-		var metaConfig = require('../config/charts/growingSeason.json')
-		// var meta = {};
-		$.extend(true, meta, metaConfig);
-		render.setup(id, meta)
-		return function(data){
-			console.log(data)
-			render.initiate(id, data);
-		}
-	},
 	PrecipitationDifference: function (id) {
 		// console.log(id)
 		// console.log(precipitation);
@@ -1085,163 +990,12 @@ var graphs = {
 			});
 		}
 	},
-
-	YearlyPrecipitation: function (id) {
-		charts[id] = Highcharts.chart(id, {
-			chart: {
-				type: 'line'
-			},
-			xAxis: {
-				title: {
-					text: Highcharts.getOptions().lang.years,
-				},
-				crosshair: true,
-				min: startYear,
-			},
-			yAxis: {
-				title: {
-					text: Highcharts.getOptions().lang.tprec,
-				},
-				lineWidth: 1,
-				floor: 0, // Precipitation can never be negative
-			},
-			tooltip: {
-				shared: true,
-				valueSuffix: ' mm',
-				valueDecimals: 0,
-			},
-			legend: {
-				enabled: false,
-			},
-			series: [{data: [null, null]},
-				// {data: [null, null]},
-				// {data: [null, null]},
-				// {data: [null, null]},
-				// {data: [null, null]},
-				// {data: [null, null]},
-				{data: [null, null]}],
-		})
-		charts[id].showLoading();
-		return function(precipitation){
-			charts[id].hideLoading();
-			charts[id].update({
-				title: {
-					text: language[nav_lang].titles[id] + stationName,
-				},
-				legend: {
-					enabled: true,
-				},
-				dataSrc: precipitation.src,
-				series: [{
-					id: 'snow',
-					name: Highcharts.getOptions().lang.precSnow,
-					type: 'column',
-					stack: 'precip',
-					stacking: 'normal',
-					data: precipitation.snow.values,
-					color: snowColor.color,
-					visible: true,
-					borderColor: snowColor.borderColor,
-					states: {
-						hover: {
-							color: snowColor.hover,
-							animation: {
-								duration: 0,
-							},
-						},
-					},
-				},
-					// {
-					// data: precipitation.snow.linReg.points,
-					// type: 'line',
-					// color: snowColor.color,
-					// name: Highcharts.getOptions().lang.linRegSnow,
-					// marker: {
-					// 	enabled: false, // Linear regression lines doesn't contain points
-					// },
-					// states: {
-					// 	hover: {
-					// 		lineWidth: 0, // Do nothing on hover
-					// },
-					// },
-					// },
-					// {
-					// id: 'movAvg',
-					// name: Highcharts.getOptions().lang.precMovAvg,
-					// color: rainColor.color,
-					// visible: false,
-					// data: precipitation.total.plotMovAvg(),
-					// marker: { enabled: false },
-					// states: { hover: { lineWidthPlus: 0 } },
-					// },
-					// {
-					// id: 'ciMovAvg',
-					// name: Highcharts.getOptions().lang.movAvgCI,
-					// type: 'arearange',
-					// color: '#000055',
-					// data: precipitation.total.plotMovAvgCI(),
-					// zIndex: 0,
-					// fillOpacity: 0.3,
-					// lineWidth: 0,
-					// states: { hover: { lineWidthPlus: 0 } },
-					// marker: { enabled: false },
-					// visible: false,
-					// },
-					{
-						id: 'rain',
-						name: Highcharts.getOptions().lang.precRain,
-						type: 'column',
-						stack: 'precip',
-						stacking: 'normal',
-						visible: true,
-						data: precipitation.rain.values,
-						color: rainColor.color,
-						borderColor: rainColor.borderColor,
-						states: {
-							hover: {
-								color: rainColor.hover,
-								animation: {
-									duration: 0,
-								},
-							},
-						},
-					},
-					// {
-					// data: precipitation.rain.linReg.points,
-					// type: 'line',
-					// color: rainColor.color,
-					// name: Highcharts.getOptions().lang.linRegRain,
-					// marker: {
-					// 	enabled: false, // Linear regression lines doesn't contain points
-					// },
-					// states: {
-					// 	hover: {
-					// 		lineWidth: 0, // Do nothing on hover
-					// 	},
-					// },
-					// },
-					// {
-					// type: 'line',
-					// name: Highcharts.getOptions().lang.linRegAll,
-					// visible: false,
-					// // linkedTo: ':previous',
-					// color: 'red',
-					// marker: {
-					// 	enabled: false, // Linear regression lines doesn't contain points
-					// },
-					// states: {
-					// 	hover: {
-					// lineWidth: 0, // Do nothing on hover
-					// },
-					// },
-					// enableMouseTracking: false, // No interactivity
-					// data: precipitation.total.linReg.points,
-					// }
-				],
-			});
+	generic: function(id, meta){
+		render.setup(id, meta)
+		return function(data){
+			render.initiate(id, data);
 		}
 	},
-
 	MonthlyPrecipitation: function (id) {
 		// console.log('renderMonthlyPrecipitationGraph')
 		var title = id.split('_');

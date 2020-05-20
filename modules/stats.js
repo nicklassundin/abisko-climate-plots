@@ -587,7 +587,6 @@ exports.parsers = {
 		})
 	},
 	AbiskoCsv: function (result, src='') {
-		console.log(result)
 		var blocks = { precipitation: [], temperatures: [] };
 		var parseEntry = function(y){
 			if(y != undefined){
@@ -599,45 +598,49 @@ exports.parsers = {
 		}
 
 		var insertToBlocks = function(data){
-			data.forEach(entry => {
-				var zero = 0;
-				var date = entry.date; 
-				var avg = entry.avg;
-				var min = entry.min;
-				var max = entry.max;
-				var total = entry.total; 
-				if(total==undefined) zero = undefined
-				blocks.temperatures.push({
-					avg:{
-						x: date,
-						y: avg, 
-					},
-					min: {
-						x: date,
-						y: min
-					}, 
-					max: {
-						x: date,
-						y: max
-					},
+			try{
+				data.forEach(entry => {
+					var zero = 0;
+					var date = entry.date; 
+					var avg = entry.avg;
+					var min = entry.min;
+					var max = entry.max;
+					var total = entry.total; 
+					if(total==undefined) zero = undefined
+					blocks.temperatures.push({
+						avg:{
+							x: date,
+							y: avg, 
+						},
+						min: {
+							x: date,
+							y: min
+						}, 
+						max: {
+							x: date,
+							y: max
+						},
 
-				});
-				blocks.precipitation.push({
+					});
+					blocks.precipitation.push({
 
-					total: {
-						x: date,
-						y: total, 
-					},
-					snow: {
-						x: date,
-						y: (avg < 0) ? total : zero
-					},
-					rain: {
-						x: date,
-						y: (avg >= 0) ? total : zero
-					}
-				});
-			})
+						total: {
+							x: date,
+							y: total, 
+						},
+						snow: {
+							x: date,
+							y: (avg < 0) ? total : zero
+						},
+						rain: {
+							x: date,
+							y: (avg >= 0) ? total : zero
+						}
+					});
+				})
+			}catch(e){
+				console.log(data)
+			}
 		}
 		insertToBlocks(result[0].data.map(entry => ({
 			date: entry['Time'],
@@ -646,13 +649,13 @@ exports.parsers = {
 			min: parseEntry(entry['Temp_min']),
 			max: parseEntry(entry['Temp_max'])
 		})))
-		// insertToBlocks(result[1]).data.map(entry => ({
-		// 	date: entry['Time(UTC)'],
-		// 	avg: parseEntry(entry['AirTemperature (°C)']),
-		// 	total: undefined, 
-		// 	min: parseEntry(entry['Minimim_AirTemperature']),
-		// 	max: parseEntry(entry['Maximum_AirTemperature'])
-		// }))
+		insertToBlocks(result[1].data.map(entry => ({
+			date: entry['Time(UTC)'],
+			avg: parseEntry(entry['AirTemperature (°C)']),
+			total: undefined, 
+			min: parseEntry(entry['Minimim_AirTemperature']),
+			max: parseEntry(entry['Maximum_AirTemperature'])
+		})));
 
 		blocks.temperatures = parseByDate(blocks.temperatures);
 		blocks.precipitation = parseByDate(blocks.precipitation, 'sum');
@@ -671,7 +674,7 @@ exports.parsers = {
 		var iceData = [];
 		data.forEach((row) => {
 			function isLeapYear(year) {
-     				return year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0);
+				return year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0);
 			}
 			// console.log(row)
 			var winterYear = +row[fields[0]] || undefined;
@@ -706,7 +709,7 @@ exports.parsers = {
 		})).filter(each => each.y).filter(each => each.x >= 1909);
 
 		var dateFormat = date => (date.getFullYear() + ' ' + help.monthName(help.monthByIndex(date.getMonth())) + ' ' + date.getDate());
-		
+
 		var breakupDOY = iceData.map((each, year) => ({
 			x: +year,
 			y: each.breakupDOY,

@@ -1,5 +1,6 @@
 {
 	"type": "line",
+	"polar": false,
 	"groups": {
 		"0": {
 			"baseline": false
