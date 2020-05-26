@@ -11,28 +11,28 @@ if(typeof nav_lang !== 'undefined' && nav_lang ){
 var charts = {};
 exports.charts = charts;
 
-var updatePlot = function(id, bl, bu, date){
-	if(date){
-		date = date.split("-");
-		variables.date = new Date(date[0],Number(date[1])-1,date[2]);
-	}
-	if(id.id) id=id.id; // TODO fix why this it gets a div not id
-	if(id.renderTo) id=id.renderTo.id;
-	var low = document.getElementById(id+"lowLabel") 
-	var upp = document.getElementById(id+"uppLabel") 
-	if(low){
-		if(!bl) bl = low.value;
-		if(!bu) bl = upp.value;
-	} 
-	if(bl<bu && bl>=1913) baselineLower=bl;
-	if(bu>bl && bu<2019) baselineUpper=bu;
-	var chart = charts[id]
-	if(id.split('_')[1]) id = id.split('_')[0]
-	var div = document.getElementById(id);
-	chart.destroy();
-	return buildChart(div,ids=id,reset=true)
-}
-global.updatePlot = updatePlot;
+// var updatePlot = function(id, bl, bu, date){
+// 	if(date){
+// 		date = date.split("-");
+// 		variables.date = new Date(date[0],Number(date[1])-1,date[2]);
+// 	}
+// 	if(id.id) id=id.id; // TODO fix why this it gets a div not id
+// 	if(id.renderTo) id=id.renderTo.id;
+// 	var low = document.getElementById(id+"lowLabel") 
+// 	var upp = document.getElementById(id+"uppLabel") 
+// 	if(low){
+// 		if(!bl) bl = low.value;
+// 		if(!bu) bl = upp.value;
+// 	} 
+// 	if(bl<bu && bl>=1913) baselineLower=bl;
+// 	if(bu>bl && bu<2019) baselineUpper=bu;
+// 	var chart = charts[id]
+// 	if(id.split('_')[1]) id = id.split('_')[0]
+// 	var div = document.getElementById(id);
+// 	chart.destroy();
+// 	return buildChart(div,ids=id,reset=true)
+// }
+// global.updatePlot = updatePlot;
 
 var preSetMeta = {
 	'abiskoTemp': {

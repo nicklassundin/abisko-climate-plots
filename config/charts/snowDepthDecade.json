@@ -1,0 +1,48 @@
+{
+	"type": "column",
+	"groups": {
+		"0": {
+			"baseline": false
+		}
+	},
+	"decimals": 0,
+	"month": false,
+	"period": true,
+	"series": {
+		"1961": {
+			"group": 0,
+			"visible": true,
+			"type": "line"
+		},
+		"1971": {
+			"group": 0,
+			"visible": true,
+			"type": "line"
+		},
+		"1981": {
+			"group": 0,
+			"visible": true,
+			"type": "line"
+		},
+		"1991": {
+			"group": 0,
+			"visible": true,
+			"type": "line"
+		},
+		"2001": {
+			"group": 0,
+			"visible": true,
+			"type": "line"
+		},
+		"2011": {
+			"group": 0,
+			"visible": true,
+			"type": "line"
+		},
+		"allTime": {
+			"group": 0,
+			"visible": true,
+			"type": "line"
+		}
+	}
+}

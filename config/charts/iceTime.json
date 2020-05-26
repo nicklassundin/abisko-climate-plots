@@ -5,6 +5,9 @@
 			"baseline": false
 		}
 	},
+	"tooltip": {
+		"type": "winterValue"
+	},
 	"yAxis": {
 		"max": 250,
 		"min": 80

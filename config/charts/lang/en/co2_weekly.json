@@ -1,0 +1,25 @@
+{
+	"title": "Averages Global [CO2] in atmosphere", 
+	"subTitle": "[SUB-TITLE]",
+	"yAxis": {
+		"left": "[CO2]",
+		"right": "[X-AXIS]"
+	},
+	"valueSuffix": "ppm",
+	"xAxis": {
+		"bott": "Year", 
+		"top": "[Y-AXIS]"
+	},
+	"caption": "[SOME TEXT]",
+	"groups": {
+		"0": {
+			"title": "Weather",
+			"subTitle": ""
+		}
+	},
+	"series": {
+		"co2": {
+			"name": "[CO2]"
+		}
+	}
+}

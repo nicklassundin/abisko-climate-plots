@@ -1,0 +1,28 @@
+{
+	"title": "Ice Thickness by Date Across years", 
+	"subTitle": "[SUB-TITLE]",
+	"select": {
+		"text": "Choose date"
+	},
+	"yAxis": {
+		"left": "Ice thickness [cm]", 
+		"right": "[X-AXIS]"
+	},
+	"valueSuffix": "",
+	"xAxis": {
+		"bott": "Year", 
+		"top": "[Y-AXIS]"
+	},
+	"caption": "[SOME TEXT]",
+	"groups": {
+		"0": {
+			"title": "Weather",
+			"subTitle": ""
+		}
+	},
+	"series": {
+		"bar": {
+			"name": "Ice thickness (cm)"
+		}
+	}
+}

@@ -6,17 +6,13 @@ require('highcharts/modules/export-data.js')(Highcharts);
 require('highcharts/modules/histogram-bellcurve')(Highcharts);
 const highchart_help = require('../../config/highcharts_config.js');
 var base = require('../render.js')
-
+const formatters = require('./tooltips.js').formatters;
 const help = require('../helpers.js');
-// console.log(base)
-// console.log(Object.keys(base))
 
-var init_HighChart = () => Highcharts.setOptions(highchart_help.highcharts_Settings);
-init_HighChart();
-
-// Cases
-// Monthly
-// Yearly
+var textMorph = function(text){
+	var res = text.replace("[stationName]", stationName).replace("[month]", meta.month).replace("[baseline]", baselineLower +" - "+ baselineUpper).replace("[CO2]", 'CO'+("2".sub()))
+	return res;
+}
 
 var chart = {
 	id: undefined,
@@ -25,7 +21,81 @@ var chart = {
 	setup: function(id, meta){
 		this.id = id;
 		this.meta = meta;
+		var title = this.title();
 		this.chart = Highcharts.chart(id, {
+			dataSrc: '[placeholder]',
+			credits: {
+				enabled: false
+			},
+			exporting: {
+				chartOptions: {
+					// annotationsOptions: undefined,
+					// annotations: undefined,
+				},
+				// showTable: true, // TODO DATA TABLE
+				// printMaxWidth: 1200,
+				sourceWidth: 900,
+				// sourceHeight: 800,
+				scale: 8,
+				// allowHTML: true,
+				buttons: {
+					contextButton: {
+						menuItems: [{
+							textKey: 'downloadPDF',
+							onclick: function(){
+								this.exportChart({
+									type: 'application/pdf'
+								});
+							},
+						},{
+							textKey: 'downloadJPEG',
+							onclick: function(){
+								this.exportChart({
+									type: 'image/jpeg'
+								});
+							}
+						},'downloadSVG','viewFullscreen','printChart',{
+							separator: true,
+						},{
+							textKey: 'langOption',
+							onclick: function(){
+								if(nav_lang=='en') nav_lang='sv';
+								else nav_lang='en';
+								// Highcharts.setOptions({
+								// lang: language[nav_lang],
+								// })	
+								var id = this.renderTo.id.split('_')[0];
+								renderInterface.updatePlot(this);
+							},
+						},{
+							textKey: 'showDataTable',
+							onclick: function(){
+								if(this.options.exporting.showTable) {
+									this.dataTableDiv.innerHTML = '';
+								};
+								this.update({
+									exporting: {
+										showTable: !this.options.exporting.showTable, 
+									},
+								});
+								// TODO toggle between 'Show data' and 'Hide data'
+							},
+						},{
+							textKey: 'dataCredit',
+							onclick: function(){
+								if(this.options.dataSrc){
+									window.location.href = this.options.dataSrc // TODO link to exact dataset with entry in data to href
+								}
+							},
+						},{
+							textKey: 'contribute',
+							onclick: function(){
+								window.location.href = 'https://github.com/nicklassundin/abisko-climate-plots/wiki';
+							},
+						}],
+					},
+				},
+			},
 			chart: {
 				type: meta.type, 
 				zoomType: 'x',
@@ -34,22 +104,27 @@ var chart = {
 				text: meta.subTitle,
 			},
 			title: {
-				text: meta.title,
 				useHTML: true,
+				text: title, 
 			},
 			legend: {
 				enabled: true,
 			},
 			xAxis: {
+				type: meta.xAxis.type,
 				title: {
+					useHTML: true,
 					text: meta.xAxis.bott, 
 				},
+				gridLineWidth: meta.xAxis.gridLineWidth,
+				categories: (meta.period) ? meta.xAxis.categories : undefined,
 				corsshair: true,
-				min: startYear,
+				min: (meta.period) ? null : (meta.xAxis.min) ? meta.xAxis.min : startYear,
 			},
 			yAxis: {
 				title: {
-					text: meta.yAxis.left, 
+					text: textMorph(meta.yAxis.left), 
+					useHTML: true,
 				},
 				plotLines: [{
 					value: 0,
@@ -58,13 +133,15 @@ var chart = {
 				}],
 				max: meta.yAxis.max,
 				min: meta.yAxis.min,
-				ticketInterval: 1,
+				tickInterval: (meta.yAxis.left.tickInterval) ? meta.yAxis.left.tickInterval : 1,
 				lineWidth: 1,
+				reversed: meta.yAxis.reversed,
 			},
 			tooltip: {
 				shared: true,
-				valueSuffix: ' '+meta.valueSuffix,
+				valueSuffix: ' '+textMorph(meta.valueSuffix),
 				valueDecimals: meta.decimals,
+				formatter: (meta.tooltip != undefined) ? formatters[meta.tooltip.type] : undefined
 			},
 			series: Object.keys(meta.series).map(each => ({
 				showInLegend: false,
@@ -76,6 +153,22 @@ var chart = {
 			$('#'+id).append(gTitle);
 			this.chart.showLoading();
 		}
+	},
+	title: function(){
+		var meta = this.meta;
+		var title = '<label>'+
+			meta.title+
+			'</label><br>';
+		if(meta.select != undefined && meta.select.enabled){
+			title = title + '<label style="font-size: 10px">'+
+				meta.select.text+
+				' </label>'+
+				'<input type="date" value='+
+				variables.dateStr()+
+				' onclick=selectText(this) '+
+				'onchange=renderInterface.updatePlot('+this.id+','+baselineLower+','+baselineUpper+',this.value)></input>'
+		}
+		return title;
 	},
 	groupTitle: function(active = 0){
 		var meta = this.meta;
@@ -91,6 +184,7 @@ var chart = {
 	initiate: function(data){
 		var id = this.id;
 		var meta = this.meta;
+		var title = this.title();
 		// $('#'+id).bind('mousewheel', function(e){
 		// 	delta = delta + e.originalEvent.deltaY;
 		// 	if(delta < -100){
@@ -111,7 +205,6 @@ var chart = {
 				color: meta.series.max.colour,
 				data: (data.max.max != undefined) ? data.max.max() : data.max(),
 				visible: false,
-				showInLegend: false, //TODO
 				type: meta.series.max.type,
 			}),
 			min: () => ({
@@ -122,7 +215,6 @@ var chart = {
 				color: meta.series.min.colour,
 				data: (data.min.min != undefined) ? data.min.min() : data.min(),
 				visible: false,
-				showInLegend: false, //TODO
 				type: meta.series.min.type,
 			}),
 			avg: () => ({
@@ -138,8 +230,7 @@ var chart = {
 					color: meta.series.linjer.colour,
 					name: meta.series.linjer.name,
 				},
-				visible: false,
-				showInLegend: false, //TODO
+				visible: true,
 				type: meta.series.avg.type,
 			}),
 			diff: () => ({
@@ -154,8 +245,7 @@ var chart = {
 				data: (data.difference != undefined) ? data.difference() : (data.avg != undefined) ? data.avg.difference() : data.total.difference(),
 				color: 'red',
 				negativeColor: 'blue',
-				visible: false,
-				showInLegend: false, //TODO
+				visible: true,
 			}),
 			linjer: () => ({
 				name: meta.series.linjer.name,
@@ -170,8 +260,7 @@ var chart = {
 				stacking: 'normal',
 				color: meta.series.snow.colour,
 				data: data.snow.values,
-				visible: false,
-				showInLegend: false,
+				visible: true,
 				borderColor: meta.series.snow.borderColour,
 				states: {
 					hover: {
@@ -189,8 +278,6 @@ var chart = {
 				stacking: 'normal',
 				data: data.rain.values,
 				color: meta.series.rain.colour,
-				visible: false,
-				showInLegend: false,
 				borderColor: meta.series.rain.borderColour,
 				states: {
 					hover: {
@@ -199,7 +286,8 @@ var chart = {
 							duration: 0,
 						}
 					}
-				}
+				},
+				visible: true,
 			}),
 			iceTime: () => ({
 				regression: false,
@@ -215,6 +303,7 @@ var chart = {
 				marker: { radius: 2 },
 				states: { hover: { lineWidthPlus: 0 } },
 				data: data.iceTime,
+				visible: true,
 			}),
 			freeze: () => ({
 				regression: false,
@@ -230,6 +319,7 @@ var chart = {
 				marker: { radius: 2 },
 				states: { hover: { lineWidthPlus: 0 } },
 				data: data.freezeDOY,
+				visible: true,
 			}),
 			breakup: () => ({
 				regression: false,
@@ -245,13 +335,68 @@ var chart = {
 				marker: { radius: 2 },
 				states: { hover: { lineWidthPlus: 0 } },
 				data: data.breakupDOY,
+				visible: true,
+			}),
+			bar: () => ({
+				name: meta.series.bar.name,
+				color: meta.series.bar.colour,
+				lineWidth: 0,
+				marker: {
+					radius: 2,
+					symbol: 'circle',
+				},
+				data: (data.total != undefined) ? data.total.max().map(each => ({
+					x: each.x, 
+					y: each.y })) : data(variables.date),
+				visible: true,
+			}),
+			perma: (p, s, k) => ({
+				name: (s.name == undefined) ? k : s.name,
+				type: s.type,
+				color: s.colour,
+				opacity: 0.5,
+				data: p,
+				visible: k == "Torneträsk",
+			}),
+			period: (p, s) => ({
+				name: s.name, 
+				type: s.type,
+				lineWidth: 1,
+				data: p.means.rotate(6).slice(2),
+				visible: true,
+			}),
+			co2: () => ({
+				name: textMorph(meta.series.co2.name),
+				color: meta.series.co2.colour,
+				type: meta.series.co2.type,
+				lineWidth: 2,
+				states: { hover: { lineWidthPlus: 0 } },
+				data: data.values,
+				turboThreshold: 4000,
+				fillOpacity: 0.2,
+				marker: {
+					states: {
+						select: {
+							fillColor: 'red',
+							lineWidth: 1,
+							radius: 5,
+						}
+					}
+				},
+				zIndex: 6,
 			})
 		}
 		this.chart.hideLoading();
 		var series = [];
 		Object.keys(meta.series).forEach(key => {
 			if(meta.series[key].visible){
-				series.push(seriesBuild[key]());
+				if(meta.period){
+					series.push(seriesBuild['period'](data[key], meta.series[key]))
+				}else if(meta.groups['0'].perma){
+					series.push(seriesBuild['perma'](data[key], meta.series[key], key))
+				}else{
+					series.push(seriesBuild[key]());
+				}
 			}else{
 				series.push({
 					visible: false,
@@ -261,7 +406,7 @@ var chart = {
 		})
 		this.chart.update({
 			title: {
-				text: meta.title,
+				text: title,
 				useHTML: true,
 			},
 			series: series
@@ -275,6 +420,33 @@ var chart = {
 				chart.switchToGroup(e.target.id);
 			})
 		}
+		if(meta.groups['0'].perma){
+			this.chart.update({
+				plotOptions: {
+					pointPadding: 0,
+					series: {
+						events: {
+							legendItemClick: function(event){
+								var thisSeries = this,
+									chart = this.chart;
+								if(this.visible === true) {
+									this.hide();
+									chart.get("highcharts-navigator-series").hide();
+								}else{
+									this.show();
+									chart.series.forEach(function(el, inx){
+										if(el !== thisSeries){
+											el.hide();
+										}
+									});
+								}
+								event.preventDefault();
+							}
+						},
+					}
+				}
+			})	
+		}
 		this.switchToGroup(0)	
 	},
 	switch: function(){
@@ -284,13 +456,13 @@ var chart = {
 			this.climate();
 		}
 	},
-	switchToGroup: function(gID){
+	switchToGroup: function(gID, changeVisibility = true){
 		var meta = this.meta;
 		var id = this.id;
+		var title = this.title();
 		Object.keys(meta.series).forEach((key, index) => {
 			if(meta.series[key].group == gID){
 				$('#' + id).highcharts().series[index].update({
-					visible: true,
 					showInLegend: true,
 				})
 			}else{
@@ -300,31 +472,139 @@ var chart = {
 				})
 			}
 		})
+		var plotLinesX = function(group){
+			var res = [];
+			if(group.baseline){
+				res.push(base.baseline.plotlines(id));
+			}
+			return res;
+		}
+		var plotLinesY = function(group){
+			var res = [];
+			if(group.ppm400){
+				res.push({
+					color: '#aaaaaa',
+					dashStyle: 'shortDash',
+					value: 400,
+					width: 2,
+					label: {
+						text: '400 ppm',
+						style: {
+							color: '#aaaaaa',
+							fontWeight: 'bold',
+						}
+					}
+				})
+			}
+			if(group.ppm350){
+				res.push({
+					color: '#aaaaaa',
+					dashStyle: 'shortDash',
+					value: 350,
+					width: 2,
+					label: {
+						text: '350 ppm',
+						style: {
+							color: '#aaaaaa',
+							fontWeight: 'bold',
+						}
+					}
+				})
+			}
+			if(group.perma){
+				res.push({
+					color: meta.yAxis.plotLines.color,
+					width: 2,
+					value: 0,
+					zIndex: 5,
+					label: {
+						text: meta.yAxis.plotLines.text,
+					},
+				})
+			}
+
+			return res;
+		}
 		this.chart.update({
 			title: {
-				text: meta.title.replace("[stationName]", stationName).replace("[month]", meta.month),
+				text: textMorph(title),
 				useHTML: true,
 			},
 			subtitle: {
-				text: meta.groups[gID].subTitle.replace("[baseline]", baselineLower +" - "+ baselineUpper)
+				text: (meta.groups[gID].subTitle != undefined) ? textMorph(meta.groups[gID].subTitle) : "",
 			},
 			xAxis: {
-				title: {
-					text: Highcharts.getOptions().lang.years, 
-				},
-				crosshair: true,
-				plotLines: meta.groups[gID].baseline ? base.baseline.plotlines(id) : false, 
-				plotBands: meta.groups[gID].baseline ? base.baseline.plotBandsDiff(id) : false, 
-				min: startYear 
+				plotLines: plotLinesX(meta.groups[gID]),
+				plotBands: meta.groups[gID].baseline ? base.baseline.plotBandsDiff(id) : [], 
 			},
+			yAxis: {
+				plotLines: plotLinesY(meta.groups[gID]), 
+			}
 		})
-
+		if(meta.groups[gID].pointSelect){
+			this.chart.update({
+				plotOptions: {
+					series: {
+						marker: {
+							enabledThreshold: 0,
+							radius: 1,
+							state: {
+								select: {
+									lineColor: "6666bb",
+									lineWidth: 1,
+									radius: 5,
+								},
+								hover: {
+									radiusPlus: 20,
+								},
+							}
+						},
+						allowPointSelect: true,
+						point: {
+							events: {
+								select: function () {
+									var date = new Date(this.category);
+									var text = "Date: "+ date.getFullYear() +"-"+ date.getMonth()+"-"+date.getDate() +
+										"<br/>CO"+ ("2".sub())+": " + this.y + ' ppm';
+									var chart = this.series.chart;
+									if (!chart.lbl) {
+										chart.lbl = chart.renderer.label(text, 200, 70,"callout", this.catergory, this.y, useHTML=true)
+											.attr({
+												padding: 10,
+												r: 5,
+												fill: Highcharts.getOptions().colors[1],
+												zIndex: 5
+											})
+											.css({
+												color: '#FFFFFF'
+											})
+											.add();
+									} else {
+										chart.lbl.attr({
+											text: text
+										});
+									}
+								},
+							}
+						}
+					}
+				}
+			});
+		}else{
+			this.chart.update({
+				plotOptions: {
+					series: {
+						allowPointSelect: true,
+					}
+				}
+			})
+		}
 	},
 	clone: function(){
 		return Object.assign({}, this);
 	}
 }
-exports.render = {
+var render = {
 	charts: {},
 	setup: function(id, meta){
 		if(meta.month){
@@ -349,5 +629,28 @@ exports.render = {
 		}else{
 			this.charts[id].initiate(data)
 		}
+	},
+	updatePlot: function(id, bl, bu, date){
+		if(date){
+			date = date.split("-");
+			variables.date = new Date(date[0],Number(date[1])-1,date[2]);
+		}
+		if(id.id) id=id.id; // TODO fix why this it gets a div not id
+		if(id.renderTo) id=id.renderTo.id;
+		var low = document.getElementById(id+"lowLabel") 
+		var upp = document.getElementById(id+"uppLabel") 
+		if(low){
+			if(!bl) bl = low.value;
+			if(!bu) bl = upp.value;
+		} 
+		if(bl<bu && bl>=1913) baselineLower=bl;
+		if(bu>bl && bu<2019) baselineUpper=bu;
+		var chart = this.charts[id].chart
+		if(id.split('_')[1]) id = id.split('_')[0]
+		var div = document.getElementById(id);
+		chart.destroy();
+		return buildChart(div,ids=id,reset=true)
 	}
 }
+global.renderInterface = render;
+exports.render = render;

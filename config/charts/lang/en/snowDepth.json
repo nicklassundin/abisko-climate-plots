@@ -1,0 +1,36 @@
+{
+	"title": "Monthly mean snow depth for Abisko",
+	"subTitle": "[SUB-TITLE]",
+	"yAxis": {
+		"left": "Snow depth [cm]", 
+		"right": "[X-AXIS]"
+	},
+	"valueSuffix": "cm",
+	"xAxis": {
+		"bott": "Month", 
+		"top": "[Y-AXIS]"
+	},
+	"caption": "[SOME TEXT]",
+	"groups": {
+		"0": {
+			"title": "Weather",
+			"subTitle": ""
+		}
+	},
+	"series": {
+		"periods": {
+			"name": {
+				"From 1961 to 1970": "From 1961 to 1970",
+				"From 1971 to 1980": "From 1971 to 1980",
+				"From 1981 to 1990": "From 1981 to 1990",
+				"From 1991 to 2000": "From 1991 to 2000",
+				"From 2001 to 2010": "From 2001 to 2010",
+				"From 2011 to present": "From 2011 to present",
+				"Entire period": "Entire period",
+				"From 1931 to 1960": "From 1931 to 1960",
+				"From 1961 to 1990": "From 1961 to 1990",
+				"From 1991 to present": "From 1991 to present"
+			}
+		}
+	}
+}

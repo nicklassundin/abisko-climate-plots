@@ -18,19 +18,6 @@ var filePath = {
 	}
 }
 
-
-var monthlyFunc = (render) => function(id, meta) {
-	var result = [];
-	//TODO
-	months().forEach((month, index) => {
-		var cloneMeta = Object.assign({}, meta, {})
-		cloneMeta.month = help.monthName(month);
-		result.push(render(id+"_"+month, cloneMeta))
-	});	
-	return function(data){
-		result.forEach((func, index) => func(data[index+1+'']));	
-	}
-};
 // wander down the data structure with tag input example: [high, medium, low]
 var tagApply = function(data, tag){
 	var result = data;
@@ -161,14 +148,14 @@ var config = {
 		},
 		parser = parse.GISSTEMPzonalMeans,
 		render = {
-			'64n-90n': renders.TemperatureDifference,
-			'nhem': renders.TemperatureDifference,
-			'glob': renders.TemperatureDifference,
+			'64n-90n': renders.generic,
+			'nhem': renders.generic,
+			'glob': renders.generic
 		},
 		meta = {
-			'64n-90n': { config: undefined, lang: undefined }, 
-			'nhem': { config: undefined, lang: undefined }, 
-			'glob': { config: undefined, lang: undefined }, 
+			'64n-90n': { config: 'difference', lang: 'diffTemperature_64n-90n' }, 
+			'nhem': { config: 'difference', lang: 'diffTemperature_nhem' }, 
+			'glob': { config: 'difference', lang: 'diffTemperature_glob' }, 
 		},
 		reader = Papa.parse,
 		local = false),
@@ -194,7 +181,6 @@ var config = {
 				'summer': renders.generic,
 				'winter': renders.generic,
 				'monthly': renders.generic,
-				// 'monthly': monthlyFunc(renders.oldTemperature),
 				'difference': renders.generic,
 				'polar': renders.Polar,
 			},
@@ -262,7 +248,7 @@ var config = {
 				'summer': renders.generic,
 				'winter': renders.generic,
 				'monthly': renders.generic, 
-				'difference': renders.PrecipitationDifference,
+				'difference': renders.generic,
 			},
 			'growingSeason': renders.generic,
 			'slideTemperature' :renders.generic,
@@ -324,12 +310,12 @@ var config = {
 		},
 		parser = parse.AbiskoSnowData,
 		render = {
-			'periodMeans': renders.AbiskoSnow,
-			'decadeMeans': renders.AbiskoSnow,
+			'periodMeans': renders.generic,
+			'decadeMeans': renders.generic
 		},
 		meta = {
-			'periodMeans': { config: undefined, lang: undefined },
-			'decadeMeans': { config: undefined, lang: undefined },
+			'periodMeans': { config: 'snowDepthPeriod', lang: 'snowDepthPeriod' },
+			'decadeMeans': { config: 'snowDepthDecade', lang: 'snowDepthDecade' },
 		},
 		reader = Papa.parse),
 	weeklyCO2: dataset_struct.create(
@@ -341,12 +327,12 @@ var config = {
 		},
 		parser = parse.SCRIPPS_CO2,
 		render = {
-			'weekly': renders.CO2,
-			'monthly': renders.CO2,
+			'weekly': renders.generic,
+			'monthly': renders.generic,
 		},
 		meta = {
-			'weekly': { config: undefined, lang: undefined },
-			'monthly': { config: undefined, lang: undefined },
+			'weekly': { config: 'co2', lang: 'co2_weekly' },
+			'monthly': { config: 'co2', lang: 'co2_monthly' },
 		},
 		reader = Papa.parse,
 		local = false),
@@ -359,8 +345,8 @@ var config = {
 			skipEmptyLines: true,
 		},
 		parser = parse.CALM,
-		render = renders.Perma,
-		meta = { config: undefined, lang: undefined },
+		render = renders.generic,
+		meta = { config: 'perma', lang: 'perma' },
 		reader = Papa.parse,
 		local = false),
 	iceThick: dataset_struct.create(
@@ -373,12 +359,12 @@ var config = {
 		},
 		parser = parse.AbiskoLakeThickness,
 		render = {
-			'yrly': renders.iceThicknessYear,
-			'date': renders.iceThicknessDate
+			'yrly': renders.generic,
+			'date': renders.generic,
 		},
 		meta = {
-			'yrly': { config: undefined, lang: undefined },
-			'date': { config: undefined, lang: undefined },
+			'yrly': { config: 'iceThick', lang: 'iceThick' },
+			'date': { config: 'iceThickDate', lang: 'iceThickDate' },
 		},
 		reader = Papa.parse,
 		local = true)

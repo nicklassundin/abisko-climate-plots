@@ -1,5 +1,5 @@
 {
-	"title": "[stationName] Temperatures" ,
+	"title": "Global Temperature Difference", 
 	"subTitle": "[SUB-TITLE]",
 	"yAxis": {
 		"left": "Temperature [°C]",

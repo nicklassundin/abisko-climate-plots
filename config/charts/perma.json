@@ -1,0 +1,74 @@
+{
+	"type": "column",
+	"groups": {
+		"0": {
+			"baseline": false,
+			"perma": true
+		}
+	},
+	"tooltip": {
+		"type": "winterValue"
+	},
+	"yAxis": {
+		"reversed": true,
+		"plotLines": {
+			"color": "#88dd88"
+		},
+		"min": 0,
+		"max": 1.5
+	},
+	"xAxis": {
+		"min": 1978
+	},
+	"decimals": 2,
+	"series": {
+		"Katterjokk": {
+			"group": 0,
+			"visible": true,
+			"colour": "#bb9999",
+			"type": "column"
+		},
+		"Låkta": {
+			"group": 0,
+			"visible": true,
+			"colour": "#bb9999",
+			"type": "column"
+		},
+		"Heliport": {
+			"group": 0,
+			"visible": true,
+			"colour": "#bb9999",
+			"type": "column"
+		},
+		"Kursflaket": {
+			"group": 0,
+			"visible": true,
+			"colour": "#bb9999",
+			"type": "column"
+		},
+		"Mellanflaket": {
+			"group": 0,
+			"visible": true,
+			"colour": "#bb9999",
+			"type": "column"
+		},
+		"Storflaket": {
+			"group": 0,
+			"visible": true,
+			"colour": "#bb9999",
+			"type": "column"
+		},
+		"Torneträsk": {
+			"group": 0,
+			"visible": true,
+			"colour": "#bb9999",
+			"type": "column"
+		},
+		"Narkevaere": {
+			"group": 0,
+			"visible": true,
+			"colour": "#bb9999",
+			"type": "column"
+		}
+	}
+}

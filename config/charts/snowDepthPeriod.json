@@ -5,21 +5,28 @@
 			"baseline": false
 		}
 	},
-	"tooltip": {
-		"type": "winterDOY"
-	},
 	"decimals": 0,
+	"month": false,
+	"period": true,
 	"series": {
-		"freeze": {
+		"1931": {
 			"group": 0,
 			"visible": true,
-			"colour": "#0000ee",
 			"type": "line"
 		},
-		"breakup": {
+		"1961": {
 			"group": 0,
 			"visible": true,
-			"colour": "#ee0000",
+			"type": "line"
+		},
+		"1991": {
+			"group": 0,
+			"visible": true,
+			"type": "line"
+		},
+		"allTime": {
+			"group": 0,
+			"visible": true,
 			"type": "line"
 		}
 	}

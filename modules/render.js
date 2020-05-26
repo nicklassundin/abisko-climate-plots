@@ -317,6 +317,7 @@ var graphs = {
 				lineWidth: 1,
 			},
 			tooltip: {
+				useHTML: true,
 				shared: true,
 				valueSuffix: ' ppm',
 				valueDecimals: 2,
@@ -349,7 +350,7 @@ var graphs = {
 						states: {
 							select: {
 								fillColor: 'red',
-								lineWidth: 3
+								lineWidth: 3,
 							}
 						}
 					},

@@ -6,21 +6,18 @@
 		}
 	},
 	"tooltip": {
-		"type": "winterDOY"
+		"type": "winterValue"
+	},
+	"yAxis": {
+		"reversed": true
 	},
 	"decimals": 0,
 	"series": {
-		"freeze": {
+		"bar": {
 			"group": 0,
 			"visible": true,
 			"colour": "#0000ee",
-			"type": "line"
-		},
-		"breakup": {
-			"group": 0,
-			"visible": true,
-			"colour": "#ee0000",
-			"type": "line"
+			"type": "column"
 		}
 	}
 }
