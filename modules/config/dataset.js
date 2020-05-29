@@ -1,13 +1,11 @@
 var $ = require('jquery')
 
-const renders = require('../render.js').graphs;
-
 const Papa = require('papaparse');
 const parse = require('../stats.js').parsers;
 const help = require('../helpers.js')
 var months = help.months;
 
-var renderer = require('./renderer.js')
+var renderer = require('./renderer.js').render;
 
 var filePath = {
 	station: function(fileName, id=station){
@@ -33,14 +31,13 @@ var tagApply = function(data, tag){
 }
 
 var dataset_struct = {
-	src: undefined,
 	file: undefined,
 	filePath: undefined,
 	preset: undefined,
 	cached: undefined,
 	rawData: [],
 	parser: undefined, 
-	render: undefined,
+	render: renderer, 
 	reader: Papa.parse,
 	metaRef: undefined,
 	getMeta: function(define){
@@ -91,26 +88,26 @@ var dataset_struct = {
 		var render = this.render;
 		if(tag){
 			var meta = tagApply(this.metaRef, renderTag);
-			render = tagApply(render, renderTag)(id, this.getMeta(meta));
+			render.setup(id, this.getMeta(meta));
 		}else{
-			render = render(id, this.getMeta(this.metaRef));
+			render.setup(id, this.getMeta(this.metaRef));
 		}
 		var renderProc = function(data){
-			if(tag){
-				data = tagApply(data, tag);
-			}
-			render = render(data)
 		}
 		if(!this.cached) this.cached = this.parseRawData();
 		this.cached.then(function(data){
-			renderProc(data);
+			if(tag){
+				data = tagApply(data, tag);
+			}
+			render.initiate(id, data)
 		})
+		this.render = render;
 		return this;
 	},
 	clone: function(){
 		return Object.assign({}, this);
 	},
-	create: function(src, file, preset, parser, render, meta, reader = Papa.parse, local=true){
+	create: function(file, preset, parser, meta, reader = Papa.parse, local=true){
 		var res = this.clone();
 		res.rawData = [];
 		if(!Array.isArray(file)){
@@ -123,10 +120,8 @@ var dataset_struct = {
 		}else{
 			res.filePath = (files) => files.map(x => filePath.other(x)); 
 		}
-		res.src = src;
 		res.preset = preset;
 		res.parser = parser;
-		res.render = render;
 		res.reader = reader;
 		return res;
 	},
@@ -135,8 +130,6 @@ var dataset_struct = {
 
 var config = {
 	zonal: dataset_struct.create(
-		src = location.protocol+'//nicklassundin.github.io/abisko-climate-plots/', 
-		// TODO place holder for later database
 		file = ["ZonAnn.Ts.csv"],
 		preset = {
 			//worker: useWebWorker,
@@ -147,11 +140,6 @@ var config = {
 			dynamicTyping: true,
 		},
 		parser = parse.GISSTEMPzonalMeans,
-		render = {
-			'64n-90n': renders.generic,
-			'nhem': renders.generic,
-			'glob': renders.generic
-		},
 		meta = {
 			'64n-90n': { config: 'difference', lang: 'diffTemperature_64n-90n' }, 
 			'nhem': { config: 'difference', lang: 'diffTemperature_nhem' }, 
@@ -160,7 +148,6 @@ var config = {
 		reader = Papa.parse,
 		local = false),
 	abisko: dataset_struct.create(
-		src = '',
 		file = ["ANS_Temp_Prec.csv", "AWS_Daily_1984-2019.csv"],
 		preset = {
 			//worker: useWebWorker,
@@ -175,26 +162,6 @@ var config = {
 			// fastMode: true TODO fix parsing error
 		},
 		parser = parse.AbiskoCsv,
-		render = {
-			'temperatures': {
-				'yrly': renders.generic,
-				'summer': renders.generic,
-				'winter': renders.generic,
-				'monthly': renders.generic,
-				'difference': renders.generic,
-				'polar': renders.Polar,
-			},
-			'precipitation':{
-				'yrly': renders.generic,
-				'summer': renders.generic,
-				'winter': renders.generic,
-				'monthly': renders.generic,
-				'difference': renders.generic,
-				'polar': renders.Polar,
-			},
-			'growingSeason': renders.generic,
-			'slideTemperature': renders.generic,
-		},
 		meta = {
 			'temperatures': {
 				'yrly': { config: 'temperature', lang: 'yrlyTemperature' }, 
@@ -217,7 +184,6 @@ var config = {
 		},
 		reader = Papa.parse),
 	smhi: dataset_struct.create(
-		src = '',
 		file = ["temperature.csv", "precipitation.csv"],
 		preset = {
 			header: true,
@@ -235,24 +201,6 @@ var config = {
 			fastMode: true
 		},
 		parser = parse.smhiTemp,
-		render = {
-			'temperatures': {
-				'yrly': renders.generic,
-				'summer': renders.generic,
-				'winter': renders.generic,
-				'monthly': renders.generic,
-				'difference': renders.generic,
-			},
-			'precipitation':{
-				'yrly': renders.generic,
-				'summer': renders.generic,
-				'winter': renders.generic,
-				'monthly': renders.generic, 
-				'difference': renders.generic,
-			},
-			'growingSeason': renders.generic,
-			'slideTemperature' :renders.generic,
-		},
 		meta = {
 			'temperatures': {
 				'yrly': { config: 'temperature', lang: 'yrlyTemperature' }, 
@@ -276,7 +224,6 @@ var config = {
 		reader = Papa.parse),
 	// TODO Bake together
 	tornetrask: dataset_struct.create(
-		src = '', 
 		file = ["Tornetrask_islaggning_islossning.csv"], 
 		preset = {
 			header: true,
@@ -284,11 +231,9 @@ var config = {
 			skipEmptyLines: true,
 		},
 		parser = parse.AbiskoIceData,
-		render = renders.generic,
 		meta = { config: 'ice', lang: 'ice' },
 		reader = Papa.parse),
 	tornetrask_iceTime: dataset_struct.create(
-		src = '',
 		file = ["Tornetrask_islaggning_islossning.csv"],
 		preset = {
 			header: true,
@@ -296,11 +241,9 @@ var config = {
 			skipEmptyLines: true,
 		},
 		parser = parse.AbiskoIceData,
-		render = renders.generic,
 		meta = { config: 'iceTime', lang: 'iceTime' },
 		reader = Papa.parse),
 	abiskoSnowDepth: dataset_struct.create(
-		src = '',
 		file = ["ANS_SnowDepth.csv"], 
 		preset = {
 			//worker: useWebWorker, TODO BUG waiting for response
@@ -309,27 +252,18 @@ var config = {
 			skipEmptyLines: true,
 		},
 		parser = parse.AbiskoSnowData,
-		render = {
-			'periodMeans': renders.generic,
-			'decadeMeans': renders.generic
-		},
 		meta = {
 			'periodMeans': { config: 'snowDepthPeriod', lang: 'snowDepthPeriod' },
 			'decadeMeans': { config: 'snowDepthDecade', lang: 'snowDepthDecade' },
 		},
 		reader = Papa.parse),
 	weeklyCO2: dataset_struct.create(
-		src ='',
 		file = ["weekly_in_situ_co2_mlo.csv"],
 		preset = {
 			download: true,
 			skipEmptyLines: true,
 		},
 		parser = parse.SCRIPPS_CO2,
-		render = {
-			'weekly': renders.generic,
-			'monthly': renders.generic,
-		},
 		meta = {
 			'weekly': { config: 'co2', lang: 'co2_weekly' },
 			'monthly': { config: 'co2', lang: 'co2_monthly' },
@@ -337,7 +271,6 @@ var config = {
 		reader = Papa.parse,
 		local = false),
 	permaHistogramCALM: dataset_struct.create(
-		src = '',
 		file = ["CALM.csv"], 
 		preset = {
 			header: true,
@@ -345,12 +278,10 @@ var config = {
 			skipEmptyLines: true,
 		},
 		parser = parse.CALM,
-		render = renders.generic,
 		meta = { config: 'perma', lang: 'perma' },
 		reader = Papa.parse,
 		local = false),
 	iceThick: dataset_struct.create(
-		src = '',
 		file = ["Tornetrask-data.csv"],
 		preset = {
 			header: true,
@@ -358,10 +289,6 @@ var config = {
 			skipEmptyLines: true,
 		},
 		parser = parse.AbiskoLakeThickness,
-		render = {
-			'yrly': renders.generic,
-			'date': renders.generic,
-		},
 		meta = {
 			'yrly': { config: 'iceThick', lang: 'iceThick' },
 			'date': { config: 'iceThickDate', lang: 'iceThickDate' },

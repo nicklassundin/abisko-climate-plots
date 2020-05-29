@@ -587,7 +587,6 @@ exports.parsers = {
 		})
 	},
 	AbiskoCsv: function (result, src='') {
-		console.log("call")
 		var blocks = { precipitation: [], temperatures: [] };
 		var parseEntry = function(y){
 			if(y != undefined){

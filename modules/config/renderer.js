@@ -5,16 +5,21 @@ require('highcharts/modules/exporting')(Highcharts);
 require('highcharts/modules/export-data.js')(Highcharts);
 require('highcharts/modules/histogram-bellcurve')(Highcharts);
 const highchart_help = require('../../config/highcharts_config.js');
-var base = require('../render.js')
+var base = require('./base.js')
 const formatters = require('./tooltips.js').formatters;
 const help = require('../helpers.js');
 
-var textMorph = function(text){
-	var res = text.replace("[stationName]", stationName).replace("[month]", meta.month).replace("[baseline]", baselineLower +" - "+ baselineUpper).replace("[CO2]", 'CO'+("2".sub()))
-	return res;
-}
+// var constant = require('../../config/const.json')
+// global.baselineLower = constant.baselineLower;
+// global.baselineUpper = constant.baselineUpper;
+// global.startYear = constant.startYear;
+
 
 var chart = {
+	textMorph: function(text, meta){
+		var res = text.replace("[stationName]", stationName).replace("[month]", meta.month).replace("[baseline]", baselineLower +" - "+ baselineUpper).replace("[CO2]", 'CO'+("2".sub()))
+	return res;
+	},
 	id: undefined,
 	chart: undefined,
 	meta: undefined,
@@ -22,6 +27,7 @@ var chart = {
 		this.id = id;
 		this.meta = meta;
 		var title = this.title();
+		var textMorph = this.textMorph;
 		this.chart = Highcharts.chart(id, {
 			dataSrc: '[placeholder]',
 			credits: {
@@ -123,7 +129,7 @@ var chart = {
 			},
 			yAxis: {
 				title: {
-					text: textMorph(meta.yAxis.left), 
+					text: textMorph(meta.yAxis.left, meta), 
 					useHTML: true,
 				},
 				plotLines: [{
@@ -139,7 +145,7 @@ var chart = {
 			},
 			tooltip: {
 				shared: true,
-				valueSuffix: ' '+textMorph(meta.valueSuffix),
+				valueSuffix: ' '+textMorph(meta.valueSuffix, meta),
 				valueDecimals: meta.decimals,
 				formatter: (meta.tooltip != undefined) ? formatters[meta.tooltip.type] : undefined
 			},
@@ -185,6 +191,7 @@ var chart = {
 		var id = this.id;
 		var meta = this.meta;
 		var title = this.title();
+		var textMorph = this.textMorph;
 		// $('#'+id).bind('mousewheel', function(e){
 		// 	delta = delta + e.originalEvent.deltaY;
 		// 	if(delta < -100){
@@ -366,7 +373,7 @@ var chart = {
 				visible: true,
 			}),
 			co2: () => ({
-				name: textMorph(meta.series.co2.name),
+				name: textMorph(meta.series.co2.name, meta),
 				color: meta.series.co2.colour,
 				type: meta.series.co2.type,
 				lineWidth: 2,
@@ -460,6 +467,7 @@ var chart = {
 		var meta = this.meta;
 		var id = this.id;
 		var title = this.title();
+		var textMorph = this.textMorph;
 		Object.keys(meta.series).forEach((key, index) => {
 			if(meta.series[key].group == gID){
 				$('#' + id).highcharts().series[index].update({
@@ -527,11 +535,11 @@ var chart = {
 		}
 		this.chart.update({
 			title: {
-				text: textMorph(title),
+				text: textMorph(title, meta),
 				useHTML: true,
 			},
 			subtitle: {
-				text: (meta.groups[gID].subTitle != undefined) ? textMorph(meta.groups[gID].subTitle) : "",
+				text: (meta.groups[gID].subTitle != undefined) ? textMorph(meta.groups[gID].subTitle, meta) : "",
 			},
 			xAxis: {
 				plotLines: plotLinesX(meta.groups[gID]),
@@ -608,27 +616,44 @@ var render = {
 	charts: {},
 	setup: function(id, meta){
 		if(meta.month){
-			this.charts[id] = {};
-			this.charts[id].meta = meta;
-			help.months().forEach((month, index) => {
-				var cloneMeta = Object.assign({}, meta, {});
-				cloneMeta.month = help.monthName(month);
-				this.charts[id][month] = chart.clone();
-				this.charts[id][month].setup(id+"_"+month, cloneMeta);
-			})
+			this.charts[id] = new Promise(function(resolve, reject){
+				try{
+					var res = {};
+					res.meta = meta;
+					help.months().forEach((month, index) => {
+						var cloneMeta = Object.assign({}, meta, {});
+						cloneMeta.month = help.monthName(month);
+						res[month] = chart.clone();
+						res[month].setup(id+"_"+month, cloneMeta);
+					})
+					resolve(res);
+				}catch(error){
+					console.log(error);
+					reject(error);
+				}
+			});
 		}else{
-			this.charts[id] = chart.clone();
-			this.charts[id].setup(id, meta);
+			this.charts[id] = new Promise(function(resolve, reject){
+				try{
+					var res = chart.clone() 
+					res.setup(id, meta);
+					resolve(res);
+				}catch(error){
+					reject(error)
+				}
+			})
 		}
 	},
 	initiate: function(id, data){
-		if(this.charts[id].meta.month){
-			help.months().forEach((month, index) => {
-				this.charts[id][month].initiate(data[index+1+'']);
-			})
-		}else{
-			this.charts[id].initiate(data)
-		}
+		this.charts[id].then(function(result){
+			if(result.meta.month){
+				help.months().forEach((month, index) => {
+					result[month].initiate(data[index+1+'']);
+				})
+			}else{
+				result.initiate(data)
+			}
+		})
 	},
 	updatePlot: function(id, bl, bu, date){
 		if(date){
