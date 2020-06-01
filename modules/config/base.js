@@ -31,7 +31,7 @@ exports.baseline = {
 			width: 1,
 			label: {
 				useHTML: true,
-				text: "<input id="+id+"uppLabel type=text class=input value="+baselineUpper+" maxlength=4 onclick=selectText(this) onchange=updatePlot("+id+","+baselineLower+",this.value)></input>",
+				text: "<input id="+id+"uppLabel type=text class=input value="+baselineUpper+" maxlength=4 onclick=selectText(this) onchange=renderInterface.updatePlot("+id+","+baselineLower+",this.value)></input>",
 				rotation: 0,
 				y: 12,
 			},
@@ -42,7 +42,7 @@ exports.baseline = {
 			width: 1,
 			label: {
 				useHTML: true,
-				text: "<input id="+id+"lowLabel type=text class=input value="+baselineLower+" maxlength=4 onclick=selectText(this) onchange=updatePlot("+id+",this.value,"+baselineUpper+")></input>",
+				text: "<input id="+id+"lowLabel type=text class=input value="+baselineLower+" maxlength=4 onclick=selectText(this) onchange=renderInterface.updatePlot("+id+",this.value,"+baselineUpper+")></input>",
 				rotation: 0,
 				textAlign: 'left',
 				x: -40,

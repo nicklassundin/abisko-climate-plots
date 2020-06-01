@@ -22,7 +22,8 @@
 		"iceThicknessYear", 
 		"iceThicknessDate",
 		"weeklyCO2",
-		"permaHistogramCALM"],
+		"permaHistogramCALM",
+		"slideTemperature"],
 	"local": ["Temperatures",
 		"TemperaturesSummer",
 		"TemperaturesWinter",
@@ -74,5 +75,6 @@
 	"sqrt-lakeIce": ["abiskoLakeIce",
 		"abiskoLakeIceTime","iceThicknessYear", "iceThicknessDate"],
 	"sqrt-perma": ["permaHistogramCALM"],
-	"sqrt-carbon": ["weeklyCO2"]
+	"sqrt-carbon": ["weeklyCO2"],
+	"sqrt-temp-climate-weather": ["slideTemperature"]
 }

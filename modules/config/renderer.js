@@ -487,9 +487,9 @@ var chart = {
 		var plotLinesX = function(group){
 			var res = [];
 			if(group.baseline){
-				res.push(base.baseline.plotlines(id));
+				return base.baseline.plotlines(id);
 			}
-			return res;
+			return undefined
 		}
 		var plotLinesY = function(group){
 			var res = [];
@@ -674,11 +674,12 @@ var render = {
 		} 
 		if(bl<bu && bl>=1913) baselineLower=bl;
 		if(bu>bl && bu<2019) baselineUpper=bu;
-		var chart = this.charts[id].chart
-		if(id.split('_')[1]) id = id.split('_')[0]
-		var div = document.getElementById(id);
-		chart.destroy();
-		return buildChart(div,ids=id,reset=true)
+		this.charts[id].then(function(chart){
+			if(id.split('_')[1]) id = id.split('_')[0]
+			var div = document.getElementById(id);
+			chart.chart.destroy();
+			buildChart(div,ids=id,reset=true)
+		})
 	}
 }
 global.renderInterface = render;
