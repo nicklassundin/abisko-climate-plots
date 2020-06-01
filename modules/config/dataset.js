@@ -206,7 +206,7 @@ var config = {
 				'yrly': { config: 'temperature', lang: 'yrlyTemperature' }, 
 				'summer': { config: 'temperature', lang: 'summerTemperature' },  
 				'winter': { config: 'temperature', lang: 'winterTemperature' }, 
-				'monthly': { config: 'monthlyTemperature', lang: 'monthlyTemperature' }, 
+				'monthly': { config: 'monthlyTemperature', lang: 'monthlyTemperature' },
 				'difference': { config: 'difference', lang: 'diffTemperature' }, 
 				'polar': { config: undefined, lang: undefined }, 
 			},

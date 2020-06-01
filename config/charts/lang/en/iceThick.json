@@ -1,5 +1,5 @@
 {
-	"title": "Ice Max Thickness Measured by year", 
+	"title": "[stationName] Maximum Lake Ice Thickness",
 	"subTitle": "[SUB-TITLE]",
 	"yAxis": {
 		"left": "Ice thickness [cm]", 
@@ -10,7 +10,7 @@
 		"bott": "Year", 
 		"top": "[Y-AXIS]"
 	},
-	"caption": "[SOME TEXT]",
+	"caption": "The maximum ice thickness for a given winter.",
 	"groups": {
 		"0": {
 			"title": "Weather",

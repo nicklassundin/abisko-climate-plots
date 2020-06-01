@@ -1,8 +1,8 @@
 {
-	"title": "[stationName] Annual Average Precipitation" ,
+	"title": "[stationName] [month] Average Precipitation Difference from Baseline" ,
 	"subTitle": "[SUB-TITLE]",
 	"yAxis": {
-		"left": "Total Precipitation [mm]",
+		"left": "Precipitation [mm]",
 		"right": "[X-AXIS]"
 	},
 	"valueSuffix": "mm",
@@ -10,11 +10,11 @@
 		"bott": "Year", 
 		"top": "[Y-AXIS]"
 	},
-	"caption": "Average annual precipitation. The lowest (min) and highest (max) precipitation of the month.",
+	"caption": "Difference between the [month] average precipitation for the year and the average precipitation for the baseline period, typically 1961 to 1990.",
 	"groups": {
 		"0": {
-			"title": "Weather",
-			"subTitle": ""
+			"title": "Climate",
+			"subTitle": "Difference between yearly average and average for [baseline]"
 		}
 	},
 	"series": {
@@ -32,12 +32,6 @@
 		},
 		"linjer": {
 			"name": "[example]"
-		},
-		"snow": {
-			"name": "Precipitation from snow"
-		},
-		"rain": {
-			"name": "Precipitation from rain"
 		}
 	}
 }

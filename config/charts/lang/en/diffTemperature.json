@@ -1,5 +1,5 @@
 {
-	"title": "[stationName] Temperatures" ,
+	"title": "[stationName] Annual Average Temperature Difference from Baseline" ,
 	"subTitle": "[SUB-TITLE]",
 	"yAxis": {
 		"left": "Temperature [°C]",
@@ -10,7 +10,7 @@
 		"bott": "Year", 
 		"top": "[Y-AXIS]"
 	},
-	"caption": "[SOME TEXT]",
+	"caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
 	"groups": {
 		"0": {
 			"title": "Climate",

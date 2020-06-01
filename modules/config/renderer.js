@@ -17,8 +17,8 @@ const help = require('../helpers.js');
 
 var chart = {
 	textMorph: function(text, meta){
-		var res = text.replace("[stationName]", stationName).replace("[month]", meta.month).replace("[baseline]", baselineLower +" - "+ baselineUpper).replace("[CO2]", 'CO'+("2".sub()))
-	return res;
+		var res = text.replace("[stationName]", stationName).replace("[month]", meta.month).replace("[baseline]", baselineLower +" - "+ baselineUpper).replace("[CO2]", 'CO'+("2".sub())).replace("[SOME TEXT]", "")
+		return res;
 	},
 	id: undefined,
 	chart: undefined,
@@ -112,6 +112,10 @@ var chart = {
 			title: {
 				useHTML: true,
 				text: title, 
+			},
+			caption: {
+				text: textMorph(meta.caption, meta),
+				useHTML: true,
 			},
 			legend: {
 				enabled: true,

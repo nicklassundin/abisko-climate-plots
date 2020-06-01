@@ -1,5 +1,5 @@
 {
-	"title": "Ice Thickness by Date Across years", 
+	"title": "[stationName] Lake Ice Thickness (by Date)", 
 	"subTitle": "[SUB-TITLE]",
 	"select": {
 		"text": "Choose date"
@@ -13,7 +13,7 @@
 		"bott": "Year", 
 		"top": "[Y-AXIS]"
 	},
-	"caption": "[SOME TEXT]",
+	"caption": "Ice thickness for a given date across all years (if not measured on a selected date, data presented from the closest previous measurement).",
 	"groups": {
 		"0": {
 			"title": "Weather",

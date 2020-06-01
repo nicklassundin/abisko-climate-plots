@@ -1,5 +1,5 @@
 {
-	"title": "[stationName] Precipitation for [month]" ,
+	"title": "[stationName] [month] Average Precipitation" ,
 	"subTitle": "[SUB-TITLE]",
 	"yAxis": {
 		"left": "Total Precipitation [mm]",
@@ -10,7 +10,7 @@
 		"bott": "Year", 
 		"top": "[Y-AXIS]"
 	},
-	"caption": "[SOME TEXT]",
+	"caption": "Average monthly precipitation. The lowest (min) and highest (max) precipitation of the month.",
 	"groups": {
 		"0": {
 			"title": "Weather",

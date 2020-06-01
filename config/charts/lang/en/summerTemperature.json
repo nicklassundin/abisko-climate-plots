@@ -1,6 +1,6 @@
 {
 	"title": "[stationName] Temperatures for June to September" ,
-	"subTitle": "[SUB-TITLE]",
+	"subTitle": "",
 	"yAxis": {
 		"left": "Average temperature [°C]",
 		"right": "[X-AXIS]"

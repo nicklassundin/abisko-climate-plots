@@ -1,8 +1,8 @@
 {
-	"title": "Averages Global [CO2] in atmosphere", 
+	"title": "Global Atmospheric Carbon Dioxide Concentration", 
 	"subTitle": "[SUB-TITLE]",
 	"yAxis": {
-		"left": "[CO2]",
+		"left": "[CO2] Concentration (ppm)",
 		"right": "[X-AXIS]"
 	},
 	"valueSuffix": "ppm",
@@ -10,7 +10,7 @@
 		"bott": "Year", 
 		"top": "[Y-AXIS]"
 	},
-	"caption": "[SOME TEXT]",
+	"caption": "Carbon dioxide ([CO2]) Concentration (ppm) at the Mauna Loa Observatory in Hawaii.",
 	"groups": {
 		"0": {
 			"title": "Weather",

@@ -1,0 +1,51 @@
+{
+	"ANS": {
+		"src": "https://polar.se/forskning-i-abisko/forskningsdata/",
+		"downloadDate": "",
+		"citation": "",
+		"desc": "Abisko naturvetenskapliga station",
+		"descLong": "Polarforskningssekretariatet"
+	},
+	"Scipps-CO2": {
+		"src": "",
+		"downloadDate": "",
+		"citation": "",
+		"desc": "",
+		"descLong": ""
+	},
+	"GTNP-ANL": {
+		"src": "",
+		"downloadDate": "",
+		"citation": "",
+		"desc": "",
+		"descLong": ""
+	},
+	"GTNP-PT": {
+		"src": "",
+		"downloadDate": "",
+		"citation": "",
+		"desc": "",
+		"descLong": ""
+	},
+	"SMHI-Weather": {
+		"src": "",
+		"downloadDate": "",
+		"citation": "",
+		"desc": "",
+		"descLong": ""
+	},
+	"SMHI-Hydrology": {
+		"src": "",
+		"downloadDate": "",
+		"citation": "",
+		"desc": "",
+		"descLong": ""
+	},
+	"ICOS": {
+		"src": "",
+		"downloadDate": "",
+		"citation": "",
+		"desc": "",
+		"descLong": ""
+	}
+}
