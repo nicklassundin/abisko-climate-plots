@@ -33,6 +33,7 @@ var chart = {
 			credits: {
 				enabled: false
 			},
+			lang: require('../../config/charts/lang/'+nav_lang+'/menu.json'),
 			exporting: {
 				chartOptions: {
 					// annotationsOptions: undefined,
@@ -67,9 +68,9 @@ var chart = {
 							onclick: function(){
 								if(nav_lang=='en') nav_lang='sv';
 								else nav_lang='en';
-								// Highcharts.setOptions({
-								// lang: language[nav_lang],
-								// })	
+								Highcharts.setOptions({
+									lang: require('../../config/charts/lang/'+nav_lang+'/menu.json') 
+								})	
 								var id = this.renderTo.id.split('_')[0];
 								renderInterface.updatePlot(this);
 							},
@@ -90,7 +91,8 @@ var chart = {
 							textKey: 'dataCredit',
 							onclick: function(){
 								if(this.options.dataSrc){
-									window.location.href = this.options.dataSrc // TODO link to exact dataset with entry in data to href
+									console.log(meta.data)
+									window.location.href = meta.data.src;
 								}
 							},
 						},{

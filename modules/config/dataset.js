@@ -46,6 +46,7 @@ var dataset_struct = {
 			var meta = require('../../config/charts/lang/'+nav_lang+'/'+define.lang+'.json')
 			var metaConfig = require('../../config/charts/'+define.config+'.json');
 			$.extend(true, meta, metaConfig);
+			meta.data = require('../../config/charts/lang/'+nav_lang+'/dataSource.json')[define.data];
 			return meta;
 		}else{
 			return false
@@ -141,9 +142,9 @@ var config = {
 		},
 		parser = parse.GISSTEMPzonalMeans,
 		meta = {
-			'64n-90n': { config: 'difference', lang: 'diffTemperature_64n-90n' }, 
-			'nhem': { config: 'difference', lang: 'diffTemperature_nhem' }, 
-			'glob': { config: 'difference', lang: 'diffTemperature_glob' }, 
+			'64n-90n': { config: 'difference', lang: 'diffTemperature_64n-90n', data: undefined }, 
+			'nhem': { config: 'difference', lang: 'diffTemperature_nhem', data: undefined }, 
+			'glob': { config: 'difference', lang: 'diffTemperature_glob', data: undefined }, 
 		},
 		reader = Papa.parse,
 		local = false),
@@ -164,23 +165,24 @@ var config = {
 		parser = parse.AbiskoCsv,
 		meta = {
 			'temperatures': {
-				'yrly': { config: 'temperature', lang: 'yrlyTemperature' }, 
-				'summer': { config: 'temperature', lang: 'summerTemperature' },  
-				'winter': { config: 'temperature', lang: 'winterTemperature' }, 
-				'monthly': { config: 'monthlyTemperature', lang: 'monthlyTemperature' }, 
-				'difference': { config: 'difference', lang: 'diffTemperature' }, 
-				'polar': { config: undefined, lang: undefined }, 
+				'yrly': { config: 'temperature', lang: 'yrlyTemperature', data: 'ANS'
+				}, 
+				'summer': { config: 'temperature', lang: 'summerTemperature', data: 'ANS' },  
+				'winter': { config: 'temperature', lang: 'winterTemperature', data: 'ANS' }, 
+				'monthly': { config: 'monthlyTemperature', lang: 'monthlyTemperature', data: 'ANS' }, 
+				'difference': { config: 'difference', lang: 'diffTemperature', data: 'ANS' }, 
+				'polar': { config: undefined, lang: undefined, data: 'ANS' }, 
 			},
 			'precipitation':{
-				'yrly': { config: 'precipitation', lang: 'yrlyPrecipitation' }, 
-				'summer': { config: 'precipitation', lang: 'summerPrecipitation' }, 
-				'winter': { config: 'precipitation', lang: 'winterPrecipitation' }, 
-				'monthly': { config: 'monthlyPrecipitation', lang: 'monthlyPrecipitation' }, 
-				'difference': { config: 'difference', lang: 'diffPrecipitation' }, 
+				'yrly': { config: 'precipitation', lang: 'yrlyPrecipitation', data: 'ANS' }, 
+				'summer': { config: 'precipitation', lang: 'summerPrecipitation', data: 'ANS' }, 
+				'winter': { config: 'precipitation', lang: 'winterPrecipitation', data: 'ANS' }, 
+				'monthly': { config: 'monthlyPrecipitation', lang: 'monthlyPrecipitation', data: 'ANS' }, 
+				'difference': { config: 'difference', lang: 'diffPrecipitation', data: 'ANS' }, 
 				'polar': { config: undefined, lang: undefined }, 
 			},
-			'growingSeason': { config: 'growingSeason', lang: 'growingSeason' }, 
-			'slideTemperature': { config: 'slideTemperature', lang: 'slideTemperature' }, 
+			'growingSeason': { config: 'growingSeason', lang: 'growingSeason', data: 'ANS' }, 
+			'slideTemperature': { config: 'slideTemperature', lang: 'slideTemperature', data: 'ANS' }, 
 		},
 		reader = Papa.parse),
 	smhi: dataset_struct.create(
@@ -203,23 +205,25 @@ var config = {
 		parser = parse.smhiTemp,
 		meta = {
 			'temperatures': {
-				'yrly': { config: 'temperature', lang: 'yrlyTemperature' }, 
-				'summer': { config: 'temperature', lang: 'summerTemperature' },  
-				'winter': { config: 'temperature', lang: 'winterTemperature' }, 
-				'monthly': { config: 'monthlyTemperature', lang: 'monthlyTemperature' },
-				'difference': { config: 'difference', lang: 'diffTemperature' }, 
-				'polar': { config: undefined, lang: undefined }, 
+				'yrly': { config: 'temperature', lang: 'yrlyTemperature', data: 'SMHI-Weather'
+				}, 
+				'summer': { config: 'temperature', lang: 'summerTemperature', data: 'SMHI-Weather' },  
+				'winter': { config: 'temperature', lang: 'winterTemperature', data: 'SMHI-Weather' }, 
+				'monthly': { config: 'monthlyTemperature', lang: 'monthlyTemperature', data: 'SMHI-Weather' },
+				'difference': { config: 'difference', lang: 'diffTemperature', data: 'SMHI-Weather' }, 
+				'polar': { config: undefined, lang: undefined, data: 'SMHI-Weather' }, 
 			},
 			'precipitation':{
-				'yrly': { config: 'precipitation', lang: 'yrlyPrecipitation' }, 
-				'summer': { config: 'precipitation', lang: 'summerPrecipitation' }, 
-				'winter': { config: 'precipitation', lang: 'winterPrecipitation' }, 
-				'monthly': { config: 'monthlyPrecipitation', lang: 'monthlyPrecipitation' }, 
-				'difference': { config: 'difference', lang: 'diffPrecipitation' }, 
-				'polar': { config: undefined, lang: undefined }, 
+				'yrly': { config: 'precipitation', lang: 'yrlyPrecipitation', data: 'SMHI-Hydrology' 
+				}, 
+				'summer': { config: 'precipitation', lang: 'summerPrecipitation', data: 'SMHI-Hydrology'  }, 
+				'winter': { config: 'precipitation', lang: 'winterPrecipitation', data: 'SMHI-Hydrology'  }, 
+				'monthly': { config: 'monthlyPrecipitation', lang: 'monthlyPrecipitation', data: 'SMHI-Hydrology'  }, 
+				'difference': { config: 'difference', lang: 'diffPrecipitation', data: 'SMHI-Hydrology'  }, 
+				'polar': { config: undefined, lang: undefined, data: 'SMHI-Hydrology'  }, 
 			},
-			'growingSeason': { config: 'growingSeason', lang: 'growingSeason' }, 
-			'slideTemperature': { config: 'slideTemperature', lang: 'slideTemperature' }, 
+			'growingSeason': { config: 'growingSeason', lang: 'growingSeason', data: 'SMHI-Hydrology'  }, 
+			'slideTemperature': { config: 'slideTemperature', lang: 'slideTemperature', data: 'SMHI-Hydrology'  }, 
 		},
 		reader = Papa.parse),
 	// TODO Bake together
@@ -231,7 +235,7 @@ var config = {
 			skipEmptyLines: true,
 		},
 		parser = parse.AbiskoIceData,
-		meta = { config: 'ice', lang: 'ice' },
+		meta = { config: 'ice', lang: 'ice', data: 'ANS' },
 		reader = Papa.parse),
 	tornetrask_iceTime: dataset_struct.create(
 		file = ["Tornetrask_islaggning_islossning.csv"],
@@ -241,7 +245,7 @@ var config = {
 			skipEmptyLines: true,
 		},
 		parser = parse.AbiskoIceData,
-		meta = { config: 'iceTime', lang: 'iceTime' },
+		meta = { config: 'iceTime', lang: 'iceTime', data: 'ANS' },
 		reader = Papa.parse),
 	abiskoSnowDepth: dataset_struct.create(
 		file = ["ANS_SnowDepth.csv"], 
@@ -253,8 +257,8 @@ var config = {
 		},
 		parser = parse.AbiskoSnowData,
 		meta = {
-			'periodMeans': { config: 'snowDepthPeriod', lang: 'snowDepthPeriod' },
-			'decadeMeans': { config: 'snowDepthDecade', lang: 'snowDepthDecade' },
+			'periodMeans': { config: 'snowDepthPeriod', lang: 'snowDepthPeriod', data: 'ANS' },
+			'decadeMeans': { config: 'snowDepthDecade', lang: 'snowDepthDecade', data: 'ANS' },
 		},
 		reader = Papa.parse),
 	weeklyCO2: dataset_struct.create(
@@ -265,8 +269,8 @@ var config = {
 		},
 		parser = parse.SCRIPPS_CO2,
 		meta = {
-			'weekly': { config: 'co2', lang: 'co2_weekly' },
-			'monthly': { config: 'co2', lang: 'co2_monthly' },
+			'weekly': { config: 'co2', lang: 'co2_weekly', data: 'Scipps-CO2' },
+			'monthly': { config: 'co2', lang: 'co2_monthly', data: 'Scipps-CO2' },
 		},
 		reader = Papa.parse,
 		local = false),
@@ -278,7 +282,7 @@ var config = {
 			skipEmptyLines: true,
 		},
 		parser = parse.CALM,
-		meta = { config: 'perma', lang: 'perma' },
+		meta = { config: 'perma', lang: 'perma', data: undefined },
 		reader = Papa.parse,
 		local = false),
 	iceThick: dataset_struct.create(
@@ -290,8 +294,8 @@ var config = {
 		},
 		parser = parse.AbiskoLakeThickness,
 		meta = {
-			'yrly': { config: 'iceThick', lang: 'iceThick' },
-			'date': { config: 'iceThickDate', lang: 'iceThickDate' },
+			'yrly': { config: 'iceThick', lang: 'iceThick', data: 'ANS' },
+			'date': { config: 'iceThickDate', lang: 'iceThickDate', data: 'ANS' },
 		},
 		reader = Papa.parse,
 		local = true)
