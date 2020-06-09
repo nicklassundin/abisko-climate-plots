@@ -1,23 +1,25 @@
 {
-	"title": "[stationName] [month] Average Precipitation" ,
-	"subTitle": "[SUB-TITLE]",
-	"yAxis": {
-		"left": "Total Precipitation [mm]",
-		"right": "[X-AXIS]"
-	},
 	"valueSuffix": "mm",
 	"xAxis": {
 		"bott": "Year", 
 		"top": "[Y-AXIS]"
 	},
-	"caption": "Average monthly precipitation. The lowest (min) and highest (max) precipitation of the month.",
 	"groups": {
 		"0": {
-			"title": "Weather",
-			"subTitle": ""
+			"title": "[stationName] [month] Average Precipitation" ,
+			"subTitle": "[SUB-TITLE]",
+			"caption": "Average monthly precipitation. The lowest (min) and highest (max) precipitation of the month.",
+			"yAxis": {
+				"left": "Total Precipitation [mm]",
+				"right": "[X-AXIS]"
+			},
+			"legend": "Weather"
 		}
 	},
 	"series": {
+		"diff": {
+			"name": ""
+		},
 		"snow": {
 			"name": "Precipitation from snow"
 		},

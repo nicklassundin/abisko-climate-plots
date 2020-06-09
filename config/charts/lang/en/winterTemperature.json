@@ -1,20 +1,19 @@
 {
-	"title": "[stationName] Temperatures for October to January" ,
-	"subTitle": "[SUB-TITLE]",
-	"yAxis": {
-		"left": "Average temperature [°C]",
-		"right": "[X-AXIS]"
-	},
 	"valueSuffix": "°C",
 	"xAxis": {
 		"bott": "Year", 
 		"top": "[Y-AXIS]"
 	},
-	"caption": "[SOME TEXT]",
 	"groups": {
 		"0": {
-			"title": "Weather",
-			"subTitle": ""
+			"title": "[stationName] Temperatures for October to January" ,
+			"subTitle": "",
+			"caption": "[SOME TEXT]",
+			"legend": "Weather",
+			"yAxis": {
+				"left": "Average temperature [°C]",
+				"right": "[X-AXIS]"
+			}
 		}
 	},
 	"series": {

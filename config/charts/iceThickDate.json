@@ -1,11 +1,11 @@
 {
 	"type": "column",
-	"select": {
-		"enabled": true
-	},
 	"groups": {
 		"0": {
-			"baseline": false
+			"baseline": false,
+			"select": {
+				"enabled": true
+			}
 		}
 	},
 	"tooltip": {

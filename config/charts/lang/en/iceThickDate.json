@@ -1,23 +1,22 @@
 {
-	"title": "[stationName] Lake Ice Thickness (by Date)", 
-	"subTitle": "[SUB-TITLE]",
-	"select": {
-		"text": "Choose date"
-	},
-	"yAxis": {
-		"left": "Ice thickness [cm]", 
-		"right": "[X-AXIS]"
-	},
 	"valueSuffix": "",
 	"xAxis": {
 		"bott": "Year", 
 		"top": "[Y-AXIS]"
 	},
-	"caption": "Ice thickness for a given date across all years (if not measured on a selected date, data presented from the closest previous measurement).",
 	"groups": {
 		"0": {
-			"title": "Weather",
-			"subTitle": ""
+			"title": "[stationName] Lake Ice Thickness (by Date)", 
+			"subTitle": "[SUB-TITLE]",
+			"caption": "Ice thickness for a given date across all years (if not measured on a selected date, data presented from the closest previous measurement).",
+			"select": {
+				"text": "Choose date"
+			},
+			"yAxis": {
+				"left": "Ice thickness [cm]", 
+				"right": "[X-AXIS]"
+			},
+			"legend": "Weather"
 		}
 	},
 	"series": {

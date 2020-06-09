@@ -1,19 +1,24 @@
 {
-	"title": "Permafrost active layer depth", 
-	"subTitle": "",
-	"yAxis": {
-		"left": "Perma frost depth [m]", 
-		"right": "[X-AXIS]",
-		"plotLines": {
-			"text": "Ground"
-		} 
+	"groups": {
+		"0": {
+			"title": "Permafrost active layer depth", 
+			"subTitle": "",
+			"caption": "[SOME TEXT]",
+			"yAxis": {
+				"left": "Perma frost depth [m]", 
+				"right": "[X-AXIS]",
+				"plotLines": {
+					"text": "Ground"
+				} 
+			}
+
+		}
 	},
 	"valueSuffix": "",
 	"xAxis": {
 		"bott": "Year", 
 		"top": "[Y-AXIS]"
 	},
-	"caption": "[SOME TEXT]",
 	"series": {
 	}
 }

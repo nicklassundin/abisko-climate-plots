@@ -17,7 +17,14 @@ const help = require('../helpers.js');
 
 var chart = {
 	textMorph: function(text, meta){
-		var res = text.replace("[stationName]", stationName).replace("[month]", meta.month).replace("[baseline]", baselineLower +" - "+ baselineUpper).replace("[CO2]", 'CO'+("2".sub())).replace("[SOME TEXT]", "")
+		var res = undefined;
+		try{
+			var res = text.replace("[stationName]", stationName).replace("[month]", meta.month).replace("[baseline]", baselineLower +" - "+ baselineUpper).replace("[CO2]", 'CO'+("2".sub())).replace("[SOME TEXT]", "")
+		}catch(error){
+			console.log(text)
+			console.log(meta)
+			console.log(error)
+		}
 		return res;
 	},
 	id: undefined,
@@ -26,7 +33,7 @@ var chart = {
 	setup: function(id, meta){
 		this.id = id;
 		this.meta = meta;
-		var title = this.title();
+		var title = this.title(0);
 		var textMorph = this.textMorph;
 		this.chart = Highcharts.chart(id, {
 			dataSrc: '[placeholder]',
@@ -108,17 +115,6 @@ var chart = {
 				type: meta.type, 
 				zoomType: 'x',
 			},
-			subtitle: {
-				text: meta.subTitle,
-			},
-			title: {
-				useHTML: true,
-				text: title, 
-			},
-			caption: {
-				text: textMorph(meta.caption, meta),
-				useHTML: true,
-			},
 			legend: {
 				enabled: true,
 			},
@@ -133,22 +129,6 @@ var chart = {
 				corsshair: true,
 				min: (meta.period) ? null : (meta.xAxis.min) ? meta.xAxis.min : startYear,
 			},
-			yAxis: {
-				title: {
-					text: textMorph(meta.yAxis.left, meta), 
-					useHTML: true,
-				},
-				plotLines: [{
-					value: 0,
-					color: 'rgb(204, 214, 235)',
-					width: 2,
-				}],
-				max: meta.yAxis.max,
-				min: meta.yAxis.min,
-				tickInterval: (meta.yAxis.left.tickInterval) ? meta.yAxis.left.tickInterval : 1,
-				lineWidth: 1,
-				reversed: meta.yAxis.reversed,
-			},
 			tooltip: {
 				shared: true,
 				valueSuffix: ' '+textMorph(meta.valueSuffix, meta),
@@ -160,35 +140,35 @@ var chart = {
 				data: [null, null],
 			}))
 		})
-		if(Object.keys(meta.groups).length > 1){
+		if(Object.keys(meta.groups).map(key => meta.groups[key].enabled).filter(each => each).length > 1){
 			var gTitle = this.groupTitle();
 			$('#'+id).append(gTitle);
 			this.chart.showLoading();
 		}
 	},
-	title: function(){
-		var meta = this.meta;
+	title: function(gID){
+		var group = this.meta.groups[gID];
 		var title = '<label>'+
-			meta.title+
+			group.title+
 			'</label><br>';
-		if(meta.select != undefined && meta.select.enabled){
+		if(group.select != undefined && group.select.enabled){
 			title = title + '<label style="font-size: 10px">'+
-				meta.select.text+
+				group.select.text+
 				' </label>'+
 				'<input type="date" value='+
 				variables.dateStr()+
 				' onclick=selectText(this) '+
 				'onchange=renderInterface.updatePlot('+this.id+','+baselineLower+','+baselineUpper+',this.value)></input>'
 		}
-		return title;
+		return title; 
 	},
 	groupTitle: function(active = 0){
 		var meta = this.meta;
 		var group = Object.keys(meta.groups).map(function(each, index){
 			if(index == active){
-				return "<button class='tablinks active' id="+index+">"+meta.groups[each].title+"</button>"
+				return "<button class='tablinks active' id="+index+">"+meta.groups[each].legend+"</button>"
 			}else{
-				return "<button class='tablinks' id="+index+">"+meta.groups[each].title+"</button>"
+				return "<button class='tablinks' id="+index+">"+meta.groups[each].legend+"</button>"
 			}
 		})
 		return "<div id='"+this.id+"_title' class='tab'>" + group + "</div>"
@@ -196,8 +176,12 @@ var chart = {
 	initiate: function(data){
 		var id = this.id;
 		var meta = this.meta;
-		var title = this.title();
 		var textMorph = this.textMorph;
+		var groups = Object.keys(meta.groups).map(key => ({
+			key: key,
+			enabled: meta.groups[key].enabled
+		}));
+		var groups = groups.filter(each => each.enabled);
 		// $('#'+id).bind('mousewheel', function(e){
 		// 	delta = delta + e.originalEvent.deltaY;
 		// 	if(delta < -100){
@@ -239,9 +223,9 @@ var chart = {
 				color: meta.series.avg.colour,
 				data: (data.avg != undefined) ? data.avg.values : data.values,
 				regressionSettings: {
-					type: 'linear',
-					color: meta.series.linjer.colour,
-					name: meta.series.linjer.name,
+					// type: 'linear',
+					// color: meta.series.linjer.colour,
+					// name: meta.series.linjer.name,
 				},
 				visible: true,
 				type: meta.series.avg.type,
@@ -402,30 +386,20 @@ var chart = {
 		this.chart.hideLoading();
 		var series = [];
 		Object.keys(meta.series).forEach(key => {
-			if(meta.series[key].visible){
-				if(meta.period){
-					series.push(seriesBuild['period'](data[key], meta.series[key]))
-				}else if(meta.groups['0'].perma){
-					series.push(seriesBuild['perma'](data[key], meta.series[key], key))
-				}else{
-					series.push(seriesBuild[key]());
-				}
+			if(meta.period){
+				series.push(seriesBuild['period'](data[key], meta.series[key]))
+			}else if(meta.groups['0'].perma){
+				series.push(seriesBuild['perma'](data[key], meta.series[key], key))
 			}else{
-				series.push({
-					visible: false,
-					showInLegend: false
-				})
+				series.push(seriesBuild[key]());
 			}
 		})
 		this.chart.update({
-			title: {
-				text: title,
-				useHTML: true,
-			},
 			series: series
 		})
 
-		if(Object.keys(meta.groups).length > 1){
+		// if(Object.keys(meta.groups).length > 1){
+		if(Object.keys(meta.groups).map(key => meta.groups[key].enabled).filter(each => each).length > 1){
 			var chart = this;
 			$( ".tablinks" ).click(function(e) {
 				$(".tablinks").toggleClass('active')
@@ -460,7 +434,7 @@ var chart = {
 				}
 			})	
 		}
-		this.switchToGroup(0)	
+		this.switchToGroup(groups[0].key)	
 	},
 	switch: function(){
 		if(index){
@@ -472,11 +446,13 @@ var chart = {
 	switchToGroup: function(gID, changeVisibility = true){
 		var meta = this.meta;
 		var id = this.id;
-		var title = this.title();
+		var title = this.title(gID);
 		var textMorph = this.textMorph;
+		var group = meta.groups[gID];
 		Object.keys(meta.series).forEach((key, index) => {
 			if(meta.series[key].group == gID){
 				$('#' + id).highcharts().series[index].update({
+					visible: meta.series[key].visible,
 					showInLegend: true,
 				})
 			}else{
@@ -491,7 +467,7 @@ var chart = {
 			if(group.baseline){
 				return base.baseline.plotlines(id);
 			}
-			return undefined
+			return null
 		}
 		var plotLinesY = function(group){
 			var res = [];
@@ -527,17 +503,17 @@ var chart = {
 			}
 			if(group.perma){
 				res.push({
-					color: meta.yAxis.plotLines.color,
+					color: group.yAxis.plotLines.color,
 					width: 2,
 					value: 0,
 					zIndex: 5,
 					label: {
-						text: meta.yAxis.plotLines.text,
+						text: group.yAxis.plotLines.text,
 					},
 				})
 			}
 
-			return res;
+			return res.length < 0 ? null : res;
 		}
 		this.chart.update({
 			title: {
@@ -545,17 +521,35 @@ var chart = {
 				useHTML: true,
 			},
 			subtitle: {
-				text: (meta.groups[gID].subTitle != undefined) ? textMorph(meta.groups[gID].subTitle, meta) : "",
+				text: (group.subTitle != undefined) ? textMorph(group.subTitle, meta) : "",
+			},
+			caption: {
+				text: textMorph(group.caption, meta),
+				useHTML: true,
 			},
 			xAxis: {
-				plotLines: plotLinesX(meta.groups[gID]),
-				plotBands: meta.groups[gID].baseline ? base.baseline.plotBandsDiff(id) : [], 
+				plotLines: plotLinesX(group),
+				plotBands: group.baseline ? base.baseline.plotBandsDiff(id) : null, 
 			},
 			yAxis: {
-				plotLines: plotLinesY(meta.groups[gID]), 
+				title: {
+					text: textMorph(group.yAxis.left, meta), 
+					useHTML: true,
+				},
+				plotLines: [{
+					value: 0,
+					color: 'rgb(204, 214, 235)',
+					width: 2,
+				}],
+				max: group.yAxis.max,
+				min: group.yAxis.min,
+				tickInterval: (group.yAxis.left.tickInterval) ? group.yAxis.left.tickInterval : 1,
+				lineWidth: 1,
+				reversed: group.yAxis.reversed,
+				plotLines: plotLinesY(group), 
 			}
 		})
-		if(meta.groups[gID].pointSelect){
+		if(group.pointSelect){
 			this.chart.update({
 				plotOptions: {
 					series: {
@@ -634,7 +628,7 @@ var render = {
 					})
 					resolve(res);
 				}catch(error){
-					console.log(error);
+					console.log({ERROR: error, ID: id});
 					reject(error);
 				}
 			});

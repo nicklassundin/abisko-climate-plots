@@ -1,20 +1,19 @@
 {
-	"title": "[stationName] Temperatures for June to September" ,
-	"subTitle": "",
-	"yAxis": {
-		"left": "Average temperature [°C]",
-		"right": "[X-AXIS]"
-	},
 	"valueSuffix": "°C",
 	"xAxis": {
 		"bott": "Year", 
 		"top": "[Y-AXIS]"
 	},
-	"caption": "[SOME TEXT]",
 	"groups": {
 		"0": {
-			"title": "Weather",
-			"subTitle": ""
+			"title": "[stationName] Temperatures for June to September" ,
+			"caption": "[SOME TEXT]",
+			"subTitle": "",
+			"legend": "Weather",
+			"yAxis": {
+				"left": "Average temperature [°C]",
+				"right": "[X-AXIS]"
+			}
 		}
 	},
 	"series": {

@@ -1,40 +1,39 @@
 {
 	"type": "column",
+	"polar": false,
 	"groups": {
 		"0": {
 			"baseline": false
+		},
+		"1": {
+			"baseline": true
 		}
 	},
 	"decimals": 2,
-	"month": false,
 	"series": {
 		"max": {
-			"group": 0, 
-			"visible": true,
+			"group": "0", 
+			"visible": false,
 			"colour": "#ff0000", 
 			"type": "line"
 		},
 		"min": {
-			"group": 0, 
-			"visible": true,
+			"group": "0", 
+			"visible": false,
 			"colour": "#0000ff",
 			"type": "line"
 		},
 		"avg": {
-			"group": 0,
+			"group": "0",
 			"visible": true,
 			"colour": "#888888",
 			"type": "line"
 		},  
 		"diff": {
+			"group": "1",
 			"visible": true,
 			"colour": "[example]",
 			"type": "column" 
-		},
-		"linjer": {
-			"visible": false,
-			"colour": "[example]",
-			"type": "[example]"
 		}
 	}
 }

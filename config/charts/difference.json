@@ -19,7 +19,7 @@
 			"type": "line"
 		},
 		"avg": {
-			"visible": true,
+			"visible": false,
 			"colour": "#888888",
 			"type": "line"
 		},  
@@ -28,11 +28,6 @@
 			"visible": true,
 			"colour": "[example]",
 			"type": "column" 
-		},
-		"linjer": {
-			"visible": false,
-			"colour": "[example]",
-			"type": "[example]"
 		}
 	}
 }

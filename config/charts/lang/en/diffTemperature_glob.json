@@ -1,10 +1,4 @@
 {
-	"title": "Global Temperature Difference", 
-	"subTitle": "[SUB-TITLE]",
-	"yAxis": {
-		"left": "Temperature [°C]",
-		"right": "[X-AXIS]"
-	},
 	"valueSuffix": "°C",
 	"xAxis": {
 		"bott": "Year", 
@@ -12,9 +6,15 @@
 	},
 	"caption": "[SOME TEXT]",
 	"groups": {
-		"0": {
-			"title": "Climate",
-			"subTitle": "Difference between yearly average and average for [baseline]"
+		"0": {},
+		"1": {
+			"title": "Global Temperature Difference", 
+			"subTitle": "Difference between yearly average and average for [baseline]",
+			"yAxis": {
+				"left": "Temperature [°C]",
+				"right": "[X-AXIS]"
+			},
+			"legend": "Climate"
 		}
 	},
 	"series": {

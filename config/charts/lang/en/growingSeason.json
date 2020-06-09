@@ -1,37 +1,27 @@
 {
-	"title": "[stationName] Growing Season" ,
-	"subTitle": "Maximum number of consecutive weeks above zero Celcius",
-	"yAxis": {
-		"left": "Weeks",
-		"right": "[X-AXIS]"
-	},
 	"valueSuffix": "Weeks",
 	"xAxis": {
 		"bott": "Year", 
 		"top": "[Y-AXIS]"
 	},
-	"caption": "The Frost-Free Season is the approximate length of the growing season (in weeks), during which there are no freezing temperatures to kill or damage plants. This is calculated from temperature data.",
 	"groups": {
 		"0": {
-			"title": "Growing Season",
-			"subTitle": "The maximum consecutive weeks with average temperature ab     ove freezing."
+			"title": "[stationName] Growing Season" ,
+			"subTitle": "Maximum number of consecutive weeks above zero Celcius",
+			"legend": "Growing Season",
+			"caption": "The Frost-Free Season is the approximate length of the growing season (in weeks), during which there are no freezing temperatures to kill or damage plants. This is calculated from temperature data.",
+			"yAxis": {
+				"left": "Weeks",
+				"right": "[X-AXIS]"
+			}
 		}
 	},
 	"series": {
-		"max": {
-			"name": "Max"
-		},
-		"min": {
-			"name": "Min"
-		},
 		"avg": {
 			"name": "Weeks"
 		},  
 		"diff": {
 			"name": "Difference"
-		},
-		"linjer": {
-			"name": "[example]"
 		}
 	}
 }

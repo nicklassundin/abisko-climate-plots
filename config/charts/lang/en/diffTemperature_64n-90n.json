@@ -1,20 +1,20 @@
 {
-	"title": "Temperature Difference for Arctic (65N-90N)", 
-	"subTitle": "[SUB-TITLE]",
-	"yAxis": {
-		"left": "Temperature [°C]",
-		"right": "[X-AXIS]"
-	},
 	"valueSuffix": "°C",
 	"xAxis": {
 		"bott": "Year", 
 		"top": "[Y-AXIS]"
 	},
-	"caption": "[SOME TEXT]",
 	"groups": {
-		"0": {
-			"title": "Climate",
-			"subTitle": "Difference between yearly average and average for [baseline]"
+		"0": {},
+		"1": {
+			"title": "Temperature Difference for Arctic (65N-90N)", 
+			"subTitle": "Difference between yearly average and average for [baseline]",
+			"caption": "[SOME TEXT]",
+			"yAxis": {
+				"left": "Temperature [°C]",
+				"right": "[X-AXIS]"
+			},
+			"legend": "Climate"
 		}
 	},
 	"series": {

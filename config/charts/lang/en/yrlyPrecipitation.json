@@ -1,37 +1,34 @@
 {
-	"title": "[stationName] Annual Average Precipitation" ,
-	"subTitle": "[SUB-TITLE]",
-	"yAxis": {
-		"left": "Total Precipitation [mm]",
-		"right": "[X-AXIS]"
-	},
 	"valueSuffix": "mm",
 	"xAxis": {
 		"bott": "Year", 
 		"top": "[Y-AXIS]"
 	},
-	"caption": "Average annual precipitation. The lowest (min) and highest (max) precipitation of the month.",
 	"groups": {
 		"0": {
-			"title": "Weather",
-			"subTitle": ""
+			"title": "[stationName] Annual Average Precipitation" ,
+			"subTitle": "",
+			"caption": "Average annual precipitation. The lowest (min) and highest (max) precipitation of the month.",
+			"yAxis": {
+				"left": "Total Precipitation [mm]",
+				"right": "[X-AXIS]"
+			},
+			"legend": "Weather"
+		},
+		"1": {
+			"title": "[stationName] Annual Average Precipitation Difference from Baseline" ,
+			"subTitle": "Difference between yearly average and average for [baseline]", 
+			"yAxis": {
+				"left": "Precipitation [mm]",
+				"right": "[X-AXIS]"
+			},
+			"caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
+			"legend": "Climate"
 		}
 	},
 	"series": {
-		"max": {
-			"name": "Max"
-		},
-		"min": {
-			"name": "Min"
-		},
-		"avg": {
-			"name": "Yearly Average"
-		},  
 		"diff": {
 			"name": "Difference"
-		},
-		"linjer": {
-			"name": "[example]"
 		},
 		"snow": {
 			"name": "Precipitation from snow"

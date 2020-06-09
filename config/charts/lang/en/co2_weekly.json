@@ -1,20 +1,19 @@
 {
-	"title": "Global Atmospheric Carbon Dioxide Concentration", 
-	"subTitle": "[SUB-TITLE]",
-	"yAxis": {
-		"left": "[CO2] Concentration (ppm)",
-		"right": "[X-AXIS]"
-	},
 	"valueSuffix": "ppm",
 	"xAxis": {
 		"bott": "Year", 
 		"top": "[Y-AXIS]"
 	},
-	"caption": "Carbon dioxide ([CO2]) Concentration (ppm) at the Mauna Loa Observatory in Hawaii.",
 	"groups": {
 		"0": {
-			"title": "Weather",
-			"subTitle": ""
+			"title": "Global Atmospheric Carbon Dioxide Concentration", 
+			"subTitle": "[SUB-TITLE]",
+			"caption": "Carbon dioxide ([CO2]) Concentration (ppm) at the Mauna Loa Observatory in Hawaii.",
+			"yAxis": {
+				"left": "[CO2] Concentration (ppm)",
+				"right": "[X-AXIS]"
+			},
+			"legend": "Weather"
 		}
 	},
 	"series": {

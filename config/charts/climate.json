@@ -1,0 +1,10 @@
+{
+	"groups": {
+		"0": {
+			"enabled": false
+		},
+		"1": {
+			"enabled": true
+		}
+	}
+}

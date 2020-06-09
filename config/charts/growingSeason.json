@@ -8,16 +8,6 @@
 	},
 	"decimals": 0,
 	"series": {
-		"max": {
-			"visible": false,
-			"colour": "#ff0000", 
-			"type": "line"
-		},
-		"min": {
-			"visible": false,
-			"colour": "#0000ff",
-			"type": "line"
-		},
 		"avg": {
 			"group": 0,
 			"visible": true,
@@ -28,11 +18,6 @@
 			"visible": false,
 			"colour": "[example]",
 			"type": "column" 
-		},
-		"linjer": {
-			"visible": false,
-			"colour": "#008800",
-			"type": "linear"
 		}
 	}
 }

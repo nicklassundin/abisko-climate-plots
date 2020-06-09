@@ -1,21 +1,20 @@
 {
-	"title": "[stationName] Snow Depth",
-	"subTitle": "Decadal average by month",
-	"yAxis": {
-		"left": "Snow depth [cm]", 
-		"right": "[X-AXIS]"
-	},
 	"valueSuffix": "cm",
 	"xAxis": {
 		"categories": ["Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Ju    n"],
 		"bott": "Month", 
 		"top": "[Y-AXIS]"
 	},
-	"caption": "Average monthly snow depth in centimeters by decade.",
 	"groups": {
 		"0": {
-			"title": "Weather",
-			"subTitle": ""
+			"title": "[stationName] Snow Depth",
+			"subTitle": "Decadal average by month",
+			"caption": "Average monthly snow depth in centimeters by decade.",
+			"yAxis": {
+				"left": "Snow depth [cm]", 
+				"right": "[X-AXIS]"
+			},
+			"legend": "Weather"
 		}
 	},
 	"series": {

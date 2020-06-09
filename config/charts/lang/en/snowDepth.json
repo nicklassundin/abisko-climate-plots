@@ -1,20 +1,19 @@
 {
-	"title": "Monthly mean snow depth for Abisko",
-	"subTitle": "[SUB-TITLE]",
-	"yAxis": {
-		"left": "Snow depth [cm]", 
-		"right": "[X-AXIS]"
-	},
 	"valueSuffix": "cm",
 	"xAxis": {
 		"bott": "Month", 
 		"top": "[Y-AXIS]"
 	},
-	"caption": "[SOME TEXT]",
 	"groups": {
 		"0": {
-			"title": "Weather",
-			"subTitle": ""
+			"title": "Monthly mean snow depth for Abisko",
+			"subTitle": "[SUB-TITLE]",
+			"caption": "[SOME TEXT]",
+			"yAxis": {
+				"left": "Snow depth [cm]", 
+				"right": "[X-AXIS]"
+			},
+			"legend": "Weather"
 		}
 	},
 	"series": {
