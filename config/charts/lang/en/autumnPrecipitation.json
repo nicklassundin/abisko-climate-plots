@@ -6,9 +6,9 @@
 	},
 	"groups": {
 		"0": {
-			"title": "[stationName] Winter Average Precipitation" ,
-			"subTitle": "December to February",
-			"caption": "Average annual winter (December to February) precipitation. The lowest (min) and highest (max) precipitation of the month.",
+			"title": "[stationName] Autumn Average Precipitation" ,
+			"subTitle": "September to November",
+			"caption": "Average annual autumn (Septembe to November) precipitation. The lowest (min) and highest (max) precipitation of the month.",
 			"yAxis": {
 				"left": "Total Precipitation [mm]",
 				"right": "[X-AXIS]"

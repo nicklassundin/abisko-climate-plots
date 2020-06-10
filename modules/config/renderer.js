@@ -14,16 +14,17 @@ const help = require('../helpers.js');
 // global.baselineUpper = constant.baselineUpper;
 // global.startYear = constant.startYear;
 
-
 var chart = {
 	textMorph: function(text, meta){
 		var res = undefined;
 		try{
 			var res = text.replace("[stationName]", stationName).replace("[month]", meta.month).replace("[baseline]", baselineLower +" - "+ baselineUpper).replace("[CO2]", 'CO'+("2".sub())).replace("[SOME TEXT]", "")
 		}catch(error){
+			console.log(this.id)
 			console.log(text)
 			console.log(meta)
 			console.log(error)
+			throw error;
 		}
 		return res;
 	},
@@ -31,6 +32,7 @@ var chart = {
 	chart: undefined,
 	meta: undefined,
 	setup: function(id, meta){
+		console.log(id)
 		this.id = id;
 		this.meta = meta;
 		var title = this.title(0);
@@ -174,6 +176,7 @@ var chart = {
 		return "<div id='"+this.id+"_title' class='tab'>" + group + "</div>"
 	},
 	initiate: function(data){
+		// console.log(data)
 		var id = this.id;
 		var meta = this.meta;
 		var textMorph = this.textMorph;
@@ -386,12 +389,20 @@ var chart = {
 		this.chart.hideLoading();
 		var series = [];
 		Object.keys(meta.series).forEach(key => {
-			if(meta.period){
-				series.push(seriesBuild['period'](data[key], meta.series[key]))
-			}else if(meta.groups['0'].perma){
-				series.push(seriesBuild['perma'](data[key], meta.series[key], key))
-			}else{
-				series.push(seriesBuild[key]());
+			try{
+
+				if(meta.period){
+					series.push(seriesBuild['period'](data[key], meta.series[key]))
+				}else if(meta.groups['0'].perma){
+					series.push(seriesBuild['perma'](data[key], meta.series[key], key))
+				}else{
+					series.push(seriesBuild[key]());
+				}
+			}catch(error){
+				console.log(key);
+				console.log(error);
+				console.log(meta);
+				throw error
 			}
 		})
 		this.chart.update({
@@ -628,7 +639,7 @@ var render = {
 					})
 					resolve(res);
 				}catch(error){
-					console.log({ERROR: error, ID: id});
+					console.log({ERROR: error, ID: id, meta: meta});
 					reject(error);
 				}
 			});

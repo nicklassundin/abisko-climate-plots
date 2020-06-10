@@ -234,7 +234,9 @@ var parseByDate = function (values, type='mean', src='', custom) {
 		decades: {},
 		monthly: {},
 		weekly: {},
-		summer: {}, 
+		spring: {},
+		summer: {},
+		autumn: {},
 		winter: {},
 		customPeriod: {},
 		meta: {
@@ -249,7 +251,9 @@ var parseByDate = function (values, type='mean', src='', custom) {
 		decades: {},
 		monthly: {},
 		weekly: {},
+		spring: {},
 		summer: {}, 
+		autumn: {},
 		winter: {},	
 		customPeriod: {},
 		meta: {
@@ -282,24 +286,14 @@ var parseByDate = function (values, type='mean', src='', custom) {
 				}
 				result.yrlySplit[key][splitYear].values.push(entry);
 
-				if(help.isSummerMonthByIndex(month)) {
-					if(!result.summer) result.summer = {};
-					if(!result.summer[key]) result.summer[key] = {};
-					if(!result.summer[key][year]){
-						const cont = struct.create([],year, type);
-						result.summer[key][year] = cont; 
-					} 
-					result.summer[key][year].values.push(entry);
-				}
-				if(help.isWinterMonthByIndex(month)) {
-					if(!result.winter) result.winter = {};
-					if(!result.winter[key]) result.winter[key] = {};
-					if(!result.winter[key][year]){
-						const cont = struct.create([],year, type);
-						result.winter[key][year] = cont;
-					}
-					result.winter[key][year].values.push(entry);
-				}
+				var season = help.getSeasonByIndex(month-1);
+				if(!result[season]) result[season] = {};
+				if(!result[season][key]) result[season][key] = {};
+				if(!result[season][key][year]){
+					const cont = struct.create([],year, type);
+					result[season][key][year] = cont; 
+				} 
+				result[season][key][year].values.push(entry);
 				// Yearly Full split over winter
 				if(!result.yrlyFull) result.yrlyFull = {}
 				if(!result.yrlyFull[decade]) result.yrlyFull[decade] = {}
@@ -363,11 +357,12 @@ var parseByDate = function (values, type='mean', src='', custom) {
 				})
 				var construct = function(bValues, x){
 					const str = [];
-					Object.keys(bValues).forEach(key => {
-						const entry = bValues[key];
-						str.push(entry.build(type))		
-					})
+
 					try{
+						Object.keys(bValues).forEach(key => {
+							const entry = bValues[key];
+							str.push(entry.build(type))		
+						})
 						return struct.create(str, x).build(type);
 					}catch(error){
 						console.log(bValues)
@@ -427,17 +422,13 @@ var parseByDate = function (values, type='mean', src='', custom) {
 							break;
 						case 'meta':
 							break;
-						case 'summer':
-							keys.forEach(tkey => {
-								values[key][tkey] = construct(values[key][tkey])
-							})
-							break;
-						case 'winter':
-							keys.forEach(tkey => {
-								values[key][tkey] = construct(values[key][tkey])
-							})
-							break;
 						default:
+							keys.forEach(tkey => {
+								if(values[key][tkey]){
+									values[key][tkey] = construct(values[key][tkey], help.seasons[key])
+								}
+							})
+							break;
 					}
 				})
 				return values

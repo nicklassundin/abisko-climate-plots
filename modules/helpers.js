@@ -90,6 +90,16 @@ Date.prototype.getWeekNumber = function(date=this){
 	// var isWinterMonthByIndex = month => isWinterMonth(monthByIndex(month));
 	exports.isWinterMonthByIndex = month => isWinterMonth(monthByIndex(month));
 	// exports.isWinterMonthByIndex = isWinterMonthByIndex;
+	var seasons = {
+			spring: ['mar', 'apr', 'may'],
+			summer: ['jun', 'jul', 'aug'],
+			autumn: ['sep', 'oct', 'nov'],
+			winter: ['dec', 'jan', 'feb']
+	}
+	exports.seasons = seasons;
+	exports.getSeasonByIndex = month => {
+		return Object.keys(seasons).filter(key => seasons[key].includes(monthByIndex(month)))[0]
+	}
 
 	var sum = values => values.reduce((sum, current) => sum + current, 0);
 	exports.sum = sum;

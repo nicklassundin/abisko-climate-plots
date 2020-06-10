@@ -4,12 +4,12 @@
 		"bott": "Year", 
 		"top": "[Y-AXIS]"
 	},
-	"caption": "[SOME TEXT]",
 	"groups": {
 		"0": {},
 		"1": {
 			"title": "Global Temperature Difference", 
 			"subTitle": "Difference between yearly average and average for [baseline]",
+			"caption": "",
 			"yAxis": {
 				"left": "Temperature [°C]",
 				"right": "[X-AXIS]"

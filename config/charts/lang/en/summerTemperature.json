@@ -6,9 +6,9 @@
 	},
 	"groups": {
 		"0": {
-			"title": "[stationName] Temperatures for June to September" ,
-			"caption": "[SOME TEXT]",
-			"subTitle": "",
+			"title": "[stationName] Summer Average Temperature" ,
+			"caption": "Average annual summer (June to August) temperature. The lowest (min) and highest (max) temperature of the month.", 
+			"subTitle": "June to August",
 			"legend": "Weather",
 			"yAxis": {
 				"left": "Average temperature [°C]",

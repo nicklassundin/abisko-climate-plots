@@ -6,15 +6,15 @@
 			"perma": false,
 			"ppm400": true,
 			"ppm350": true,
-			"pointSelect": true
+			"pointSelect": true,
+			"yAxis": {
+				"min": 300,
+				"max": 450,
+				"tickInterval": 10
+			}
 		}
 	},
 	"tooltip": {
-	},
-	"yAxis": {
-		"min": 300,
-		"max": 450,
-		"tickInterval": 10
 	},
 	"xAxis": {
 		"gridLineWidth": 1,

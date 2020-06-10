@@ -6,9 +6,9 @@
 	},
 	"groups": {
 		"0": {
-			"title": "[stationName] Precipitation for June to September" ,
-			"subTitle": "[SUB-TITLE]",
-			"caption": "[SOME TEXT]",
+			"title": "[stationName] Summer Average Precipitation" ,
+			"subTitle": "June to August",
+			"caption": "Average annual summer (June to August) precipitation. The lowest (min) and highest (max) precipitation of the month.",
 			"yAxis": {
 				"left": "Total Precipitation [mm]",
 				"right": "[X-AXIS]"

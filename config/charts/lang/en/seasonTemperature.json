@@ -6,9 +6,9 @@
 	},
 	"groups": {
 		"0": {
-			"title": "[stationName] Winter Average Temperature" ,
-			"subTitle": "December to February",
-			"caption": "Average annual winter (December to February) temperature. The lowest (min) and highest (max) temperature of the month.",
+			"title": "[stationName] [season] Average Temperature" ,
+			"subTitle": "[period]",
+			"caption": "[SOME TEXT]",
 			"legend": "Weather",
 			"yAxis": {
 				"left": "Average temperature [°C]",

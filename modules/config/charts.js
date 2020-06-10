@@ -280,6 +280,28 @@ var rendF = {
 			return createDiv('TemperaturesSummer', no);
 		},
 	}, 
+	'TemperaturesAutumn': {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('TemperaturesAutumn', ['temperatures','autumn']);
+		},
+		html: function(debug=false, doc){
+			var no = 2;
+			if(!debug) no = debug;
+			return createDiv('TemperaturesAutumn', no);
+		},
+	}, 
+	'TemperaturesSpring': {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('TemperaturesSpring', ['temperatures','spring']);
+		},
+		html: function(debug=false, doc){
+			var no = 2;
+			if(!debug) no = debug;
+			return createDiv('TemperaturesSpring', no);
+		},
+	}, 
 	'TemperaturesWinter': {
 		func: function(reset=false){
 			config[stationType].contFunc(reset);
@@ -356,15 +378,39 @@ var rendF = {
 
 		},
 	}, 
-	'yearlyPrecipitation': {
+	'Precipitation': {
 		func: function(reset=false){
 			config[stationType].contFunc(reset);
-			config[stationType].init('yearlyPrecipitation', ['precipitation','yrly'])
+			config[stationType].init('Precipitation', ['precipitation','yrly'])
 		},
 		html: function(debug=false, doc){
 			var no = 23;
 			if(!debug) no = debug;
-			return createDiv('yearlyPrecipitation', no);
+			return createDiv('Precipitation', no);
+
+		},
+	}, 
+	'autumnPrecipitation': {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('autumnPrecipitation', ['precipitation','autumn'])
+		},
+		html: function(debug=false, doc){
+			var no = 24;
+			if(!debug) no = debug;
+			return createDiv('autumnPrecipitation', no);
+
+		},
+	}, 
+	'springPrecipitation': {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('springPrecipitation', ['precipitation','spring'])
+		},
+		html: function(debug=false, doc){
+			var no = 24;
+			if(!debug) no = debug;
+			return createDiv('springPrecipitation', no);
 
 		},
 	}, 
@@ -401,30 +447,6 @@ var rendF = {
 			var no = 38;
 			if(!debug) no = debug;
 			return createDiv('yearlyPrecipitationDifference', no);
-
-		},
-	}, 
-	'summerPrecipitationDifference': {
-		func: function(reset=false){
-			config[stationType].contFunc(reset);
-			config[stationType].init('summerPrecipitationDifference', ['precipitation','summer'], ['precipitation','difference']);
-		},
-		html: function(debug=false, doc){
-			var no = 39;
-			if(!debug) no = debug;
-			return createDiv('summerPrecipitationDifference', no);
-
-		},
-	}, 
-	'winterPrecipitationDifference': {
-		func: function(reset=false){
-			config[stationType].contFunc(reset);
-			config[stationType].init('winterPrecipitationDifference', ['precipitation','winter'],['precipitation','difference']);
-		},
-		html: function(debug=false, doc){
-			var no = 40;
-			if(!debug) no = debug;
-			return createDiv('winterPrecipitationDifference', no);
 
 		},
 	}, 
