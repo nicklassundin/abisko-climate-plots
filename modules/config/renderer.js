@@ -18,7 +18,10 @@ var chart = {
 	textMorph: function(text, meta){
 		var res = undefined;
 		try{
-			var res = text.replace("[stationName]", stationName).replace("[month]", meta.month).replace("[baseline]", baselineLower +" - "+ baselineUpper).replace("[CO2]", 'CO'+("2".sub())).replace("[SOME TEXT]", "").replace("[unit]", meta.units.singular).replace("[units]", meta.units.plural).replace("[interval]", meta.units.interval);
+			var res = text.replace("[stationName]", stationName).replace("[month]", meta.month).replace("[baseline]", baselineLower +" - "+ baselineUpper).replace("[CO2]", 'CO'+("2".sub())).replace("[SOME TEXT]", "")
+			if(meta.units){
+				var res = res.replace("[unit]", meta.units.singular).replace("[units]", meta.units.plural).replace("[interval]", meta.units.interval);
+			}
 		}catch(error){
 			console.log(this.id)
 			console.log(text)
@@ -225,7 +228,7 @@ var chart = {
 				marker: { radius: 2 },
 				states: { hover: { lineWidthPlus: 0 } },
 				color: meta.series.extreme.colour,
-				data: (data.max != undefined) ? data.max.max(false) : data.total.max(false), 
+				data: (data.max != undefined) ? (data.max.max != undefined ? data.max.max(false) : undefined) : data.total.max(false), 
 				visible: false,
 				type: meta.series.extreme.type,
 			}),

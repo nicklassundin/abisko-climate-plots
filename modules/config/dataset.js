@@ -58,7 +58,9 @@ var dataset_struct = {
 				var set = require('../../config/charts/'+define.set+'.json');
 				$.extend(true, meta, set);
 			}
-			meta.units = require('../../config/charts/lang/'+nav_lang+'/units.json')[meta.unitType];
+			if(meta.unitType){
+				meta.units = require('../../config/charts/lang/'+nav_lang+'/units.json')[meta.unitType];
+			}
 			return meta;
 		}else{
 			return false

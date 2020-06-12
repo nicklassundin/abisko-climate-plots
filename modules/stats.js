@@ -37,21 +37,40 @@ var struct = {
 		}
 	},
 	min: function(abs = true){
-		return this.values.map(each => each.filter((entry) => {
-			return {
-				y: Math.min(...entry.values.map(each => each.y)),
-				x: entry.x
-			}
-		}, 'min', abs));
+		if(this.values[0].filter){
+			return this.values.map(each => each.filter((entry) => {
+				return {
+					y: Math.min(...entry.values.map(each => each.y)),
+					x: entry.x
+				}
+			}, 'min', abs));
+		}else{
+			return this.filter((entry) => {
+				return {
+					y: Math.min(...entry.values.map(each => each.y)),
+					x: entry.x
+				}
+			}, 'min', abs)
+		}
 	},
 	max: function(abs = false){
-		return this.values.map(each => each.filter((entry) => {
-			return {
-				y: Math.max(...entry.values.map(each => each.y)),
-				x: entry.x
-			}
-		
-		}, 'max', abs))
+		if(this.values[0].filter){
+			return this.values.map(each => each.filter((entry) => {
+				return {
+					y: Math.max(...entry.values.map(each => each.y)),
+					x: entry.x
+				}
+
+			}, 'max', abs))
+		}else{
+			return this.filter((entry) => {
+				return {
+					y: Math.max(...entry.values.map(each => each.y)),
+					x: entry.x
+				}
+
+			}, 'max', abs)
+		}
 	},
 	last: function(f = (e) => { return e.y <= 0 }, type=this.type){
 		return this.filter((entry) => {
