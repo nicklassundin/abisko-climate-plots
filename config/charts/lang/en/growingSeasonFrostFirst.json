@@ -1,0 +1,24 @@
+{
+	"valueSuffix": "date",
+	"xAxis": {
+		"bott": "Year", 
+		"top": "[Y-AXIS]"
+	},
+	"groups": {
+		"0": {
+			"title": "[stationName] First Frost of the Autumn" ,
+			"subTitle": "Maximum number of consecutive weeks above zero Celcius",
+			"legend": "Growing Season",
+			"caption": "The date of the first fall frost, which marks the approximate end of the growing season for frost-sensitive crops and plants. This is calculated from temperature data.", 
+			"yAxis": {
+				"left": "First date with temperatures record below 0°C",
+				"right": "[X-AXIS]"
+			}
+		}
+	},
+	"series": {
+		"first": {
+			"name": "Date"
+		}  
+	}
+}

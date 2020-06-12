@@ -1,0 +1,20 @@
+{
+	"type": "line",
+	"polar": false,
+	"groups": {
+		"0": {
+			"baseline": false
+		}
+	},
+	"tooltip": {
+	},
+	"decimals": 0,
+	"series": {
+		"first": {
+			"group": 0,
+			"visible": true,
+			"colour": "#0000ee",
+			"type": "line"
+		}
+	}
+}
