@@ -100,7 +100,7 @@
 		"abiskoLakeIceTime","iceThicknessYear", "iceThicknessDate"],
 	"sqrt-perma": ["permaHistogramCALM"],
 	"sqrt-carbon": ["weeklyCO2"],
-	"sqrt-temp-climate-weather": ["slideTemperature"]
+	"sqrt-temp-climate-weather": ["slideTemperature"],
 	"sqrt-temp-extreme": ["dailyExtremeTemperature",
 		"weeklyExtremeTemperature"],
 	"sqrt-prec-extreme": ["dailyExtremePrecipitation",
