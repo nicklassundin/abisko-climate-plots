@@ -176,9 +176,9 @@ var chart = {
 	},
 	initiate: function(data){
 		var id = this.id;
-		console.log(id)
+		// console.log(id)
 		// console.log(data)
-		console.log((data.max != undefined) ? data.max.max(false) : data.total.max(false))
+		// console.log((data.max != undefined) ? data.max.max(false) : data.total.max(false))
 		var meta = this.meta;
 		// console.log(meta)
 		var textMorph = this.textMorph;
