@@ -11,7 +11,7 @@
 			"legend": "Growing Season",
 			"caption": "The Frost-Free Season is the approximate length of the growing season (in weeks), during which there are no freezing temperatures to kill or damage plants. This is calculated from temperature data.",
 			"yAxis": {
-				"left": "Weeks",
+				"left": "Growing Season [Number of consecutive weeks above freezing (> 0°C)]", 
 				"right": "[X-AXIS]"
 			}
 		}

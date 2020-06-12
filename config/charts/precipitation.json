@@ -2,12 +2,13 @@
 	"type": "column",
 	"groups": {
 		"0": {
-			"baseline": false,
-			"enabled": true
+			"baseline": false
 		},
 		"1": {
-			"baseline": true,
-			"enabled": false
+			"baseline": true
+		},
+		"2": {
+			"baseline": false
 		}
 	},
 	"decimals": 0,
@@ -33,6 +34,12 @@
 			"hoverColor": "#3333ff",
 			"borderColour": "#5F7CB9",
 			"type": "column"
+		},
+		"extreme": {
+			"group": 2,
+			"visible": true,
+			"colour": "#ff0000",
+			"type": "column" 
 		}
 	}
 }

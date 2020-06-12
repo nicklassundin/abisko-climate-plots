@@ -24,6 +24,16 @@
 			},
 			"caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
 			"legend": "Climate"
+		},
+		"2": {
+			"title": "[stationName] Wettest [unit] of the year",
+			"subTitle": "",
+			"yAxis": {
+				"left": "Total precipitation [mm]",
+				"right": "[X-Axis]"
+			},
+			"caption": "The wettest [unit] of the year (total precipitation in mm).",
+			"legend": "Weather"
 		}
 	},
 	"series": {
@@ -35,6 +45,9 @@
 		},
 		"rain": {
 			"name": "Precipitation from rain"
+		},
+		"extreme": {
+			"name": "wettest [interval] of the year (total precipitation in mm)"
 		}
 	}
 }

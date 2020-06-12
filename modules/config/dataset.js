@@ -42,7 +42,6 @@ var dataset_struct = {
 	metaRef: undefined,
 	getMeta: function(define){
 		if(define.config != undefined){
-
 			var metaConfig =require('../../config/charts/'+define.config+'.json');
 			var meta = {};
 			$.extend(true, meta, metaConfig);
@@ -59,6 +58,7 @@ var dataset_struct = {
 				var set = require('../../config/charts/'+define.set+'.json');
 				$.extend(true, meta, set);
 			}
+			meta.units = require('../../config/charts/lang/'+nav_lang+'/units.json')[meta.unitType];
 			return meta;
 		}else{
 			return false
@@ -166,9 +166,9 @@ var config = {
 		},
 		parser = parse.GISSTEMPzonalMeans,
 		meta = {
-			'64n-90n': { config: 'temperature', lang: 'diffTemperature_64n-90n', data: undefined, set: 'climate' }, 
-			'nhem': { config: 'temperature', lang: 'diffTemperature_nhem', data: undefined, set: 'climate' }, 
-			'glob': { config: 'temperature', lang: 'diffTemperature_glob', data: undefined, set: 'climate' }, 
+			'64n-90n': { config: 'temperature', lang: '64n-90n_Temperature', data: undefined, set: 'climate' }, 
+			'nhem': { config: 'temperature', lang: 'nhem_Temperature', data: undefined, set: 'climate' }, 
+			'glob': { config: 'temperature', lang: 'glob_Temperature', data: undefined, set: 'climate' }, 
 		},
 		reader = Papa.parse,
 		local = false),
@@ -196,6 +196,8 @@ var config = {
 				'spring': { config: 'temperature', lang: 'springTemperature', data: 'ANS', set: 'weather' }, 
 				'monthly': { config: 'temperature', lang: 'monthlyTemperature', data: 'ANS', monthly: true, set: 'weather' }, 
 				'difference': { config: 'temperature', lang: 'yrlyTemperature', data: 'ANS', set: 'climate'}, 
+				'dailyExtreme': { config: 'temperature', lang: 'yrlyTemperature', data: 'ANS' , set: 'extremeDay'}, 
+				'weeklyExtreme': { config: 'temperature', lang: 'yrlyTemperature', data: 'ANS' , set: 'extremeWeek'}, 
 				'polar': { config: undefined, lang: undefined, data: 'ANS' }, 
 			},
 			'precipitation':{
@@ -205,10 +207,15 @@ var config = {
 				'winter': { config: 'precipitation', lang: 'winterPrecipitation', data: 'ANS', set: 'weather' }, 
 				'autumn': { config: 'precipitation', lang: 'autumnPrecipitation', data: 'ANS', set: 'weather' }, 
 				'monthly': { config: 'precipitation', lang: 'monthlyPrecipitation', data: 'ANS' , monthly: true, set: 'weather'}, 
-				'difference': { config: 'temperature', lang: 'yrlyPrecipitation', data: 'ANS', set: 'climate'}, 
+				'difference': { config: 'precipitation', lang: 'yrlyPrecipitation', data: 'ANS', set: 'climate'}, 
+				'dailyExtreme': { config: 'precipitation', lang: 'yrlyPrecipitation', data: 'ANS' , set: 'extremeDay'}, 
+				'weeklyExtreme': { config: 'precipitation', lang: 'yrlyPrecipitation', data: 'ANS' , set: 'extremeWeek'}, 
 				'polar': { config: undefined, lang: undefined }, 
 			},
 			'growingSeason': { config: 'growingSeason', lang: 'growingSeason', data: 'ANS', set: 'weather'}, 
+			'growingSeasonDays': { config: 'growingSeason', lang: 'growingSeasonDays', data: 'ANS', set: 'weather'}, 
+			'growingSeasonFrostFirst': { config: 'growingSeasonFirst', lang: 'growingSeasonFrostFirst', data: 'ANS', set: 'weather'}, 
+			'growingSeasonFrostLast': { config: 'growingSeasonLast', lang: 'growingSeasonFrostLast', data: 'ANS', set: 'weather'}, 
 			'slideTemperature': { config: 'temperature', lang: 'yrlyTemperature', data: 'ANS', set: 'slide'}, 
 		},
 		reader = Papa.parse),

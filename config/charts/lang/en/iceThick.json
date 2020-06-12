@@ -7,7 +7,7 @@
 	"groups": {
 		"0": {
 			"title": "[stationName] Maximum Lake Ice Thickness",
-			"subTitle": "[SUB-TITLE]",
+			"subTitle": "",
 			"caption": "The maximum ice thickness for a given winter.",
 			"yAxis": {
 				"left": "Ice thickness [cm]", 

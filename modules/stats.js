@@ -2,6 +2,8 @@
 const help = require('./helpers.js');
 const regression = require('regression')
 
+
+
 var struct = {
 	type: 'mean',
 	meta: 		{
@@ -12,20 +14,16 @@ var struct = {
 	x: 		undefined,
 	y: 		undefined,
 	count:		undefined,
-	filter:		function(f, type=this.type){
+	filter: function(f, type=this.type, abs = true){
 		var value = [];
-		if(this.values[0].filter){
+		if(this.values[0].filter && abs){
 			this.values.forEach(entry => {
 				value.push(entry.filter(f, type));
 			})
 			return value;
 
 		}else{
-			return  {
-				y: f(...this.values.map(each => each.y)),
-				x: this.x,
-			}
-
+			return f(this);
 		}
 		// return struct.create(value, this.x, this.meta.src ).build(type);
 	},
@@ -38,11 +36,40 @@ var struct = {
 			return struct.create(f(this.values), this.x, src)	
 		}
 	},
-	min: function(){
-		return this.filter(Math.min, 'min');
+	min: function(abs = true){
+		return this.values.map(each => each.filter((entry) => {
+			return {
+				y: Math.min(...entry.values.map(each => each.y)),
+				x: entry.x
+			}
+		}, 'min', abs));
 	},
-	max: function(){
-		return this.filter(Math.max, 'max');
+	max: function(abs = false){
+		return this.values.map(each => each.filter((entry) => {
+			return {
+				y: Math.max(...entry.values.map(each => each.y)),
+				x: entry.x
+			}
+		
+		}, 'max', abs))
+	},
+	last: function(f = (e) => { return e.y <= 0 }, type=this.type){
+		return this.filter((entry) => {
+			var values = entry.values.filter(f);
+			return {
+				y: help.dayOfYear(new Date(Math.max(...Object.values(values).map(each => new Date(each.x).getTime())))),
+				x: entry.x
+			}
+		})
+	},
+	first: function(f = (e) => { return e.y <= 0 }, type=this.type){
+		return this.filter((entry) => {
+			var values = entry.values.filter(f);
+			return {
+				y: help.dayOfYear(new Date(Math.min(...Object.values(values).map(each => new Date(each.x).getTime())))),
+				x: entry.x
+			}
+		})
 	},
 	sequence: function(f=(e)=>{ return e < 0 }){
 		var values = this.values.map(each => each.y)
@@ -319,6 +346,15 @@ var parseByDate = function (values, type='mean', src='', custom) {
 				if(!result.weekly[year][key]) result.weekly[year][key] = {}; 
 				if(!result.weekly[year][key][week]) result.weekly[year][key][week] = struct.create([],week,type);
 				result.weekly[year][key][week].values.push(entry);
+				// Week
+				if(!result.weeks) result.weeks = {};
+				if(!result.weeks[key]) result.weeks[key] = {};
+				if(!result.weeks[key][year]) result.weeks[key][year] = {}; 
+				if(!result.weeks[key][year][week]){
+					const cont = struct.create([], week, type);
+					result.weeks[key][year][week] = cont;
+				} 
+				result.weeks[key][year][week].values.push(entry);
 				// Decades
 				if(!result.decades) result.decades = {};
 				if(!result.decades[key]) result.decades[key] = {};
@@ -361,7 +397,11 @@ var parseByDate = function (values, type='mean', src='', custom) {
 					try{
 						Object.keys(bValues).forEach(key => {
 							const entry = bValues[key];
-							str.push(entry.build(type))		
+							if(entry.build){
+								str.push(entry.build(type))	
+							}else{
+								str.push(construct(entry, parseInt(key)))
+							}
 						})
 						return struct.create(str, x).build(type);
 					}catch(error){
@@ -387,6 +427,15 @@ var parseByDate = function (values, type='mean', src='', custom) {
 								keys.forEach(tkey => {
 									values[key][year][tkey] = construct(values[key][year][tkey], parseInt(year));
 								})
+							})
+							break;
+						case 'weeks':
+							// TODO
+							keys.forEach(tkey => {
+								// console.log(key)
+								// console.log(tkey)
+								// console.log(values[key][tkey])
+								values[key][tkey] = construct(values[key][tkey])
 							})
 							break;
 						case 'yrly':
@@ -553,7 +602,6 @@ exports.parsers = {
 		})
 	},
 	GISSTEMPzonalMeans: function (result, src='') {
-		// console.log(result)
 		result = result[0]
 		var fields = result.meta.fields.map((each) => (each));
 		var keys = fields.slice(0);
@@ -651,8 +699,9 @@ exports.parsers = {
 		blocks.temperatures = parseByDate(blocks.temperatures);
 		blocks.precipitation = parseByDate(blocks.precipitation, 'sum');
 		blocks.growingSeason = struct.create(Object.keys(blocks.temperatures.weekly).map(year =>  blocks.temperatures.weekly[year].avg.sequence())).build();
-
+		blocks.growingSeasonDays = struct.create(Object.keys(blocks.temperatures.yrly.avg.values).map(year =>  blocks.temperatures.yrly.avg.values[year].sequence())).build();
 		parseAbiskoCached = blocks
+		// console.log(blocks)
 		return new Promise(function(resolve, reject){
 			resolve(blocks)
 		})
@@ -987,10 +1036,14 @@ exports.parsers = {
 			var prec = [each["Representativt dygn"], each["Nederbördsmängd"]]
 			return parsePrecip(prec);
 		}));
+		var blocks = {};
+		blocks.precipitation = parseByDate(precipitation, 'sum');
+		blocks.temperatures = parseByDate(temperature);
 		return new Promise(function(resolve, reject){
 			resolve({
-				precipitation: parseByDate(precipitation, 'sum'),
-				temperatures: parseByDate(temperature)
+				precipitation: blocks.precipitation,
+				temperatures: blocks.temperatures,
+				growingSeason: struct.create(Object.keys(blocks.temperatures.weekly).map(year =>  blocks.temperatures.weekly[year].avg.sequence())).build()
 			})
 		})
 

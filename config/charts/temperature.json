@@ -7,6 +7,9 @@
 		},
 		"1": {
 			"baseline": true
+		},
+		"2": {
+			"baseline": false
 		}
 	},
 	"decimals": 2,
@@ -34,6 +37,12 @@
 			"visible": true,
 			"colour": "[example]",
 			"type": "column" 
+		},
+		"extreme": {
+			"group": "2", 
+			"visible": true,
+			"colour": "#ff0000", 
+			"type": "line"
 		}
 	}
 }

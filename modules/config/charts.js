@@ -136,7 +136,7 @@ var rendF = {
 	'temperatureDifference1': {
 		func: function(reset=false){
 			config['zonal'].contFunc(reset);
-			config['zonal'].init('temperatureDifference1','64n-90n')
+			config['zonal'].init('temperatureDifference1', '64n-90n')
 		},
 		html: function(debug=false, doc){
 			var no = 20;
@@ -147,7 +147,7 @@ var rendF = {
 	'temperatureDifference2': {
 		func: function(reset=false){
 			config['zonal'].contFunc(reset);
-			config['zonal'].init('temperatureDifference2','nhem');
+			config['zonal'].init('temperatureDifference2', 'nhem')
 		},
 		html: function(debug=false, doc){
 			var no = 21;
@@ -159,7 +159,7 @@ var rendF = {
 	'temperatureDifference3': {
 		func: function(reset=false){
 			config['zonal'].contFunc(reset);
-			config['zonal'].init('temperatureDifference3', 'glob');
+			config['zonal'].init('temperatureDifference3', 'glob')
 		},
 		html: function(debug=false, doc){
 			var no = 22;
@@ -326,6 +326,30 @@ var rendF = {
 
 		},
 	},
+	"dailyExtremeTemperature": {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('dailyExtremeTemperature', ['temperatures','yrly'],['temperatures','dailyExtreme'])
+		},
+		html: function(debug=false, doc){
+			var no = 19;
+			if(!debug) no = debug;
+			return createDiv('dailyExtremeTemperature', no);
+
+		},
+	},
+	"weeklyExtremeTemperature": {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('weeklyExtremeTemperature', ['temperatures','weeks'],['temperatures','weeklyExtreme'])
+		},
+		html: function(debug=false, doc){
+			var no = 19;
+			if(!debug) no = debug;
+			return createDiv('weeklyExtremeTemperature', no);
+
+		},
+	},
 	'monthlyTemperaturesPolar': {
 		func: function(reset=false){
 			config[stationType].contFunc(reset);
@@ -450,6 +474,30 @@ var rendF = {
 
 		},
 	}, 
+	"dailyExtremePrecipitation": {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('dailyExtremePrecipitation', ['precipitation','yrly'],['precipitation','dailyExtreme'])
+		},
+		html: function(debug=false, doc){
+			var no = 19;
+			if(!debug) no = debug;
+			return createDiv('dailyExtremePrecipitation', no);
+
+		},
+	},
+	"weeklyExtremePrecipitation": {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('weeklyExtremePrecipitation', ['precipitation','weeks'],['precipitation','weeklyExtreme'])
+		},
+		html: function(debug=false, doc){
+			var no = 19;
+			if(!debug) no = debug;
+			return createDiv('weeklyExtremePrecipitation', no);
+
+		},
+	},
 	'monthlyPrecipitation': {
 		func: function(reset=false){
 			config[stationType].contFunc(reset);
@@ -473,6 +521,43 @@ var rendF = {
 			return div
 		},
 	}, 
+	'growingSeasonFrostFirst': {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('growingSeasonFirst', ['temperatures', 'yrlySplit'], 'growingSeasonFrostFirst')
+		},
+		html: function(debug=false, doc){
+			var no = 18;
+			if(!debug) no = debug;
+			return createDiv('growingSeasonFirst', no);
+
+		}
+	},
+	'growingSeasonFrostLast': {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('growingSeasonLast', ['temperatures', 'yrlySplit'], 'growingSeasonFrostLast')
+		},
+		html: function(debug=false, doc){
+			var no = 18;
+			if(!debug) no = debug;
+			return createDiv('growingSeasonLast', no);
+
+		}
+	},
+	'growingSeasonDays': {
+		func: function(reset=false){
+
+			config[stationType].contFunc(reset);
+			config[stationType].init('growingSeasonDays', 'growingSeasonDays')
+		},
+		html: function(debug=false, doc){
+			var no = 18;
+			if(!debug) no = debug;
+			return createDiv('growingSeasonDays', no);
+
+		}
+	},
 	'growingSeason': {
 		func: function(reset=false){
 

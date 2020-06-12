@@ -2,14 +2,14 @@
 	"type": "column",
 	"groups": {
 		"0": {
-			"baseline": false
+			"baseline": false,
+			"yAxis": {
+				"reversed": true
+			}
 		}
 	},
 	"tooltip": {
 		"type": "winterValue"
-	},
-	"yAxis": {
-		"reversed": true
 	},
 	"decimals": 0,
 	"series": {

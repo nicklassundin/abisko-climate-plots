@@ -5,14 +5,14 @@
 			"baseline": false,
 			"select": {
 				"enabled": true
+			},
+			"yAxis": {
+				"reversed": true
 			}
 		}
 	},
 	"tooltip": {
 		"type": "winterValue"
-	},
-	"yAxis": {
-		"reversed": true
 	},
 	"decimals": 0,
 	"series": {

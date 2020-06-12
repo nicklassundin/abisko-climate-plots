@@ -18,7 +18,7 @@ var chart = {
 	textMorph: function(text, meta){
 		var res = undefined;
 		try{
-			var res = text.replace("[stationName]", stationName).replace("[month]", meta.month).replace("[baseline]", baselineLower +" - "+ baselineUpper).replace("[CO2]", 'CO'+("2".sub())).replace("[SOME TEXT]", "")
+			var res = text.replace("[stationName]", stationName).replace("[month]", meta.month).replace("[baseline]", baselineLower +" - "+ baselineUpper).replace("[CO2]", 'CO'+("2".sub())).replace("[SOME TEXT]", "").replace("[unit]", meta.units.singular).replace("[units]", meta.units.plural).replace("[interval]", meta.units.interval);
 		}catch(error){
 			console.log(this.id)
 			console.log(text)
@@ -32,7 +32,6 @@ var chart = {
 	chart: undefined,
 	meta: undefined,
 	setup: function(id, meta){
-		console.log(id)
 		this.id = id;
 		this.meta = meta;
 		var title = this.title(0);
@@ -176,9 +175,12 @@ var chart = {
 		return "<div id='"+this.id+"_title' class='tab'>" + group + "</div>"
 	},
 	initiate: function(data){
-		// console.log(data)
 		var id = this.id;
+		console.log(id)
+		// console.log(data)
+		console.log((data.max != undefined) ? data.max.max(false) : data.total.max(false))
 		var meta = this.meta;
+		// console.log(meta)
 		var textMorph = this.textMorph;
 		var groups = Object.keys(meta.groups).map(key => ({
 			key: key,
@@ -203,7 +205,7 @@ var chart = {
 				marker: { radius: 2 },
 				states: { hover: { lineWidthPlus: 0 } },
 				color: meta.series.max.colour,
-				data: (data.max.max != undefined) ? data.max.max() : data.max(),
+				data: (data.max != undefined) ? ((data.max.max != undefined) ? data.max.max() : data.max()) : undefined ,
 				visible: false,
 				type: meta.series.max.type,
 			}),
@@ -213,9 +215,39 @@ var chart = {
 				marker: { radius: 2 },
 				states: { hover: { lineWidthPlus: 0 } },
 				color: meta.series.min.colour,
-				data: (data.min.min != undefined) ? data.min.min() : data.min(),
+				data: (data.min != undefined) ? ((data.min.min != undefined) ? data.min.min() : data.min()) : undefined ,
 				visible: false,
 				type: meta.series.min.type,
+			}),
+			extreme: () => ({
+				name: meta.series.extreme.name,
+				lineWidth: 0,
+				marker: { radius: 2 },
+				states: { hover: { lineWidthPlus: 0 } },
+				color: meta.series.extreme.colour,
+				data: (data.max != undefined) ? data.max.max(false) : data.total.max(false), 
+				visible: false,
+				type: meta.series.extreme.type,
+			}),
+			first: () => ({
+				name: meta.series.first.name,
+				lineWidth: 0,
+				marker: { radius: 2 },
+				states: { hover: { lineWidthPlus: 0 } },
+				color: meta.series.first.colour,
+				data: data.min.first(),
+				visible: false,
+				type: meta.series.first.type,
+			}),
+			last: () => ({
+				name: meta.series.last.name,
+				lineWidth: 0,
+				marker: { radius: 2 },
+				states: { hover: { lineWidthPlus: 0 } },
+				color: meta.series.last.colour,
+				data: data.min.last(),
+				visible: false,
+				type: meta.series.last.type,
 			}),
 			avg: () => ({
 				name: meta.series.avg.name,
@@ -259,7 +291,7 @@ var chart = {
 				stack: meta.groups[meta.series.snow.group].title,
 				stacking: 'normal',
 				color: meta.series.snow.colour,
-				data: data.snow.values,
+				data: (data.snow != undefined) ? data.snow.values : undefined,
 				visible: true,
 				borderColor: meta.series.snow.borderColour,
 				states: {
@@ -276,7 +308,7 @@ var chart = {
 				type: meta.series.rain.type,
 				stack: meta.groups[meta.series.rain.group].title,
 				stacking: 'normal',
-				data: data.rain.values,
+				data: (data.rain != undefined) ? data.rain.values : undefined,
 				color: meta.series.rain.colour,
 				borderColor: meta.series.rain.borderColour,
 				states: {
@@ -390,7 +422,6 @@ var chart = {
 		var series = [];
 		Object.keys(meta.series).forEach(key => {
 			try{
-
 				if(meta.period){
 					series.push(seriesBuild['period'](data[key], meta.series[key]))
 				}else if(meta.groups['0'].perma){
@@ -399,9 +430,10 @@ var chart = {
 					series.push(seriesBuild[key]());
 				}
 			}catch(error){
-				console.log(key);
-				console.log(error);
-				console.log(meta);
+				// console.log(key);
+				// console.log(error);
+				// console.log(meta);
+				// console.log(data)
 				throw error
 			}
 		})

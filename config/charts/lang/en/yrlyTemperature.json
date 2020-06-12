@@ -24,6 +24,16 @@
 				"right": "[X-AXIS]"
 			},
 			"legend": "Climate"
+		},
+		"2": {
+			"title": "[stationName] Warmest [unit] of the year",
+			"subTitle": "",
+			"caption": "Average temperature of warmest [unit] of the year.",
+			"yAxis": {
+				"left": "Average temperature of warmest [unit] of the year [°C]",
+				"right": "[X-AXIS]"
+			},
+			"legend": "Weather"
 		}
 	},
 	"series": {
@@ -38,6 +48,11 @@
 		},
 		"diff": {
 			"name": "Difference"
+		},
+		"extreme": {
+			"name": "Average warmest maximum [interval] temperature",
+			"week": "weekly",
+			"day": "dayly"
 		}
 	}
 }
