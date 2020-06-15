@@ -14,6 +14,16 @@
 				"left": "Average temperature [°C]",
 				"right": "[X-AXIS]"
 			}
+		},
+		"1": {
+			"title": "[stationName] Autumn Average Temperature Difference from baseline" ,
+			"subTitle": "September to November",
+			"caption": "Difference between the autumn (September-November)seasonal averages and the average for the baseline period, typically 1961 to 1990.", 
+			"legend": "Climate",
+			"yAxis": {
+				"left": "Temperature difference [°C]",
+				"right": "[X-AXIS]"
+			}
 		}
 	},
 	"series": {

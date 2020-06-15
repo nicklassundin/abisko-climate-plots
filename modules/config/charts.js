@@ -249,7 +249,7 @@ var rendF = {
 	'slideTemperature':{
 		func: function(reset=false){
 			config[stationType].contFunc(reset);
-			config[stationType].init('slideTemperature',['temperatures','yrly'], ['slideTemperature']);
+			config[stationType].init('slideTemperature',['temperatures','yrly'], ['temperatures', 'yrlySlide']);
 		},
 		html: function(debug=false, doc){
 			var no = 1;
@@ -257,6 +257,158 @@ var rendF = {
 			return createDiv('slideTemperature', no);
 		},
 	},
+	'slideTemperaturesSummer': {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('TemperaturesSummer', ['temperatures','summer'], ['temperatures', 'summerSlide']);
+		},
+		html: function(debug=false, doc){
+			var no = 2;
+			if(!debug) no = debug;
+			return createDiv('TemperaturesSummer', no);
+		},
+	}, 
+	'slideTemperaturesAutumn': {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('TemperaturesAutumn', ['temperatures','autumn'], ['temperatures', 'autumnSlide']);
+		},
+		html: function(debug=false, doc){
+			var no = 2;
+			if(!debug) no = debug;
+			return createDiv('TemperaturesAutumn', no);
+		},
+	}, 
+	'slideTemperaturesSpring': {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('TemperaturesSpring', ['temperatures','spring'], ['temperatures', 'springSlide']);
+		},
+		html: function(debug=false, doc){
+			var no = 2;
+			if(!debug) no = debug;
+			return createDiv('TemperaturesSpring', no);
+		},
+	}, 
+	'slideTemperaturesWinter': {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('TemperaturesWinter', ['temperatures','winter'], ['temperatures', 'winterSlide']);
+		},
+		html: function(debug=false, doc){
+			var no = 3;
+			if(!debug) no = debug;
+			return createDiv('TemperaturesWinter', no);
+
+		},
+	},
+	'slideMonthlyTemperatures': {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('monthlyTemperatures', ['temperatures','monthly'], ['temperatures', 'monthlySlide'])
+		},
+		html: function(debug=false, doc){
+			var no = 4;
+			var div = document.createElement("div");
+			div.setAttribute("id","monthlyTemperatures");
+			if(debug){
+				months().forEach((month, index) => {
+					div.appendChild(createDiv('monthlyTemperatures_'+month, no+index))
+				})
+
+			}else{
+				months().forEach((month, index) => {
+					div.appendChild(createDiv('monthlyTemperatures_'+month));
+				})
+
+			}
+			return div;
+
+		},
+	}, 
+	'slidePrecipitation': {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('Precipitation', ['precipitation','yrly'], ['precipitation', 'yrlySlide'])
+		},
+		html: function(debug=false, doc){
+			var no = 23;
+			if(!debug) no = debug;
+			return createDiv('Precipitation', no);
+
+		},
+	}, 
+	'slideAutumnPrecipitation': {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('autumnPrecipitation', ['precipitation','autumn'], ['precipitation', 'autumnSlide'])
+		},
+		html: function(debug=false, doc){
+			var no = 24;
+			if(!debug) no = debug;
+			return createDiv('autumnPrecipitation', no);
+
+		},
+	}, 
+	'slideSpringPrecipitation': {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('springPrecipitation', ['precipitation','spring'], ['precipitation', 'springSlide'])
+		},
+		html: function(debug=false, doc){
+			var no = 24;
+			if(!debug) no = debug;
+			return createDiv('springPrecipitation', no);
+
+		},
+	}, 
+	'slideSummerPrecipitation': {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('summerPrecipitation', ['precipitation','summer'], ['precipitation', 'summerSlide'])
+		},
+		html: function(debug=false, doc){
+			var no = 24;
+			if(!debug) no = debug;
+			return createDiv('summerPrecipitation', no);
+
+		},
+	}, 
+	'slideWinterPrecipitation': {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('winterPrecipitation', ['precipitation','winter'], ['precipitation', 'winterSlide'])
+		},
+		html: function(debug=false, doc){
+			var no = 25;
+			if(!debug) no = debug;
+			return createDiv('winterPrecipitation', no);
+
+		},
+	}, 
+	'slideMonthlyPrecipitation': {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('monthlyPrecipitation', ['precipitation','monthly'], ['precipitation', 'monthlySlide'])
+		},
+		html: function(debug=false, doc){
+			var no = 26;
+			var div = document.createElement('div');
+			div.setAttribute("id", "monthlyPrecipitation")
+			if(debug){
+				months().forEach((month, index) => {
+					div.appendChild(createDiv('monthlyPrecipitation_'+month, no+index));
+				})
+
+			}else{
+				months().forEach((month, index) => {
+					div.appendChild(createDiv('monthlyPrecipitation_'+month))
+				})
+
+			}
+			return div
+		},
+	}, 
 	'Temperatures':{
 		func: function(reset=false){
 			config[stationType].contFunc(reset);

@@ -15,7 +15,7 @@
 	"series": {
 		"diff": {
 			"group": 1,
-			"visible": false,
+			"visible": true,
 			"colour": "[example]",
 			"type": "column" 
 		},

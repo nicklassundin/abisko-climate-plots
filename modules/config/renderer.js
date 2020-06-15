@@ -16,18 +16,21 @@ const help = require('../helpers.js');
 
 var chart = {
 	textMorph: function(text, meta){
-		var res = undefined;
-		try{
-			var res = text.replace("[stationName]", stationName).replace("[month]", meta.month).replace("[baseline]", baselineLower +" - "+ baselineUpper).replace("[CO2]", 'CO'+("2".sub())).replace("[SOME TEXT]", "")
-			if(meta.units){
-				var res = res.replace("[unit]", meta.units.singular).replace("[units]", meta.units.plural).replace("[interval]", meta.units.interval);
+		var res = "";
+		if(text){
+
+			try{
+				var res = text.replace("[stationName]", stationName).replace("[month]", meta.month).replace("[baseline]", baselineLower +" - "+ baselineUpper).replace("[CO2]", 'CO'+("2".sub())).replace("[SOME TEXT]", "")
+				if(meta.units){
+					var res = res.replace("[unit]", meta.units.singular).replace("[units]", meta.units.plural).replace("[interval]", meta.units.interval);
+				}
+			}catch(error){
+				console.log(this.id)
+				console.log(text)
+				console.log(meta)
+				console.log(error)
+				throw error;
 			}
-		}catch(error){
-			console.log(this.id)
-			console.log(text)
-			console.log(meta)
-			console.log(error)
-			throw error;
 		}
 		return res;
 	},
@@ -168,7 +171,7 @@ var chart = {
 	},
 	groupTitle: function(active = 0){
 		var meta = this.meta;
-		var group = Object.keys(meta.groups).map(function(each, index){
+		var group = Object.keys(meta.groups).filter((key) => meta.groups[key].enabled).map(function(each, index){
 			if(index == active){
 				return "<button class='tablinks active' id="+index+">"+meta.groups[each].legend+"</button>"
 			}else{
@@ -561,40 +564,46 @@ var chart = {
 
 			return res.length < 0 ? null : res;
 		}
-		this.chart.update({
-			title: {
-				text: textMorph(title, meta),
-				useHTML: true,
-			},
-			subtitle: {
-				text: (group.subTitle != undefined) ? textMorph(group.subTitle, meta) : "",
-			},
-			caption: {
-				text: textMorph(group.caption, meta),
-				useHTML: true,
-			},
-			xAxis: {
-				plotLines: plotLinesX(group),
-				plotBands: group.baseline ? base.baseline.plotBandsDiff(id) : null, 
-			},
-			yAxis: {
+		try{
+			this.chart.update({
 				title: {
-					text: textMorph(group.yAxis.left, meta), 
+					text: textMorph(title, meta),
 					useHTML: true,
 				},
-				plotLines: [{
-					value: 0,
-					color: 'rgb(204, 214, 235)',
-					width: 2,
-				}],
-				max: group.yAxis.max,
-				min: group.yAxis.min,
-				tickInterval: (group.yAxis.left.tickInterval) ? group.yAxis.left.tickInterval : 1,
-				lineWidth: 1,
-				reversed: group.yAxis.reversed,
-				plotLines: plotLinesY(group), 
-			}
-		})
+				subtitle: {
+					text: (group.subTitle != undefined) ? textMorph(group.subTitle, meta) : "",
+				},
+				caption: {
+					text: textMorph(group.caption, meta),
+					useHTML: true,
+				},
+				xAxis: {
+					plotLines: plotLinesX(group),
+					plotBands: group.baseline ? base.baseline.plotBandsDiff(id) : null, 
+				},
+				yAxis: {
+					title: {
+						text: textMorph(group.yAxis.left, meta), 
+						useHTML: true,
+					},
+					plotLines: [{
+						value: 0,
+						color: 'rgb(204, 214, 235)',
+						width: 2,
+					}],
+					max: group.yAxis.max,
+					min: group.yAxis.min,
+					tickInterval: (group.yAxis.left.tickInterval) ? group.yAxis.left.tickInterval : 1,
+					lineWidth: 1,
+					reversed: group.yAxis.reversed,
+					plotLines: plotLinesY(group), 
+				}
+			})
+		}catch(error){
+			console.log(group);
+			console.log(this.chart)
+			throw error
+		}
 		if(group.pointSelect){
 			this.chart.update({
 				plotOptions: {

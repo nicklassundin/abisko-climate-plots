@@ -14,6 +14,16 @@
 				"left": "Average temperature [°C]",
 				"right": "[X-AXIS]"
 			}
+		},
+		"1": {
+			"title": "[stationName] Summer Average Temperature Difference from Baseline" ,
+			"caption": "Difference between the summer (June-August) seasonal averages and the average for the baseline period, typically 1961 to 1990.",
+			"subTitle": "",
+			"legend": "Climate",
+			"yAxis": {
+				"left": "Temperature Difference [°C]",
+				"right": "[X-AXIS]"
+			}
 		}
 	},
 	"series": {

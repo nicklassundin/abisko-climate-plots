@@ -14,6 +14,16 @@
 				"right": "[X-AXIS]"
 			},
 			"legend": "Weather"
+		},
+		"1": {
+			"title": "[stationName] Summer Average Precipitation Difference from Baseline" ,
+			"subTitle": "",
+			"caption": "Difference between the summer (June-August) seasonal averages and the average for the baseline period, typically 1961 to 1990.", 
+			"yAxis": {
+				"left": "Average precipitation [mm]",
+				"right": "[X-AXIS]"
+			},
+			"legend": "Climate"
 		}
 	},
 	"series": {

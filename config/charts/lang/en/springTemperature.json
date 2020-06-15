@@ -14,6 +14,16 @@
 				"left": "Average temperature [°C]",
 				"right": "[X-AXIS]"
 			}
+		},
+		"1": {
+			"title": "[stationName] Spring Average Temperature Difference from Baseline" ,
+			"subTitle": "March to May",
+			"caption": "Difference between the spring (March-May) seasonal averages and the average for the baseline period, typically 1961 to 1990.",
+			"legend": "Climate",
+			"yAxis": {
+				"left": "Temperature Difference [°C]",
+				"right": "[X-AXIS]"
+			}
 		}
 	},
 	"series": {
