@@ -104,5 +104,9 @@
 	"sqrt-temp-extreme": ["dailyExtremeTemperature",
 		"weeklyExtremeTemperature"],
 	"sqrt-prec-extreme": ["dailyExtremePrecipitation",
-	"weeklyExtremePrecipitation"]
+	"weeklyExtremePrecipitation"],
+	"sqrt-growing": ["growingSeason",
+	"growingSeasonDays",
+	"growingSeasonFrostFirst",
+	"growingSeasonFrostLast"]
 }
