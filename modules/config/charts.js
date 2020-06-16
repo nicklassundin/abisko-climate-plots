@@ -246,6 +246,17 @@ var rendF = {
 			return createDiv('abiskoSnowDepthPeriodMeans2',no)
 		},
 	},
+	'yrlyAvgSnowDepth':{
+		func: function(reset=false) {
+			config['abiskoSnowDepth'].contFunc(reset);
+			config['abiskoSnowDepth'].init("yrlyAvgSnowDepth",["snowDepth", 'singleStake', 'yrly'], ['snowDepth', 'yrly'])
+		},
+		html: function(debug=false, doc){
+			var no = 42;
+			if(!debug) no = debug;
+			return createDiv('yrlyAvgSnowDepth',no)
+		},
+	},
 	'slideTemperature':{
 		func: function(reset=false){
 			config[stationType].contFunc(reset);

@@ -134,5 +134,8 @@
 		"slideWinterPrecipitation",
 		"slideSpringPrecipitation", 
 		"slideAutumnPrecipitation",
-		"slideMonthlyPrecipitation"]
+		"slideMonthlyPrecipitation"],
+		"sqrt-snowDepth-v2": ["yrlyAvgSnowDepth",
+			"abiskoSnowDepthPeriodMeans",
+			"abiskoSnowDepthPeriodMeans2"]
 }

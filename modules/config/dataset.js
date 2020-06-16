@@ -95,6 +95,7 @@ var dataset_struct = {
 		return new Promise(function(resolve, reject){
 			Promise.all(rawDataPromise).then(function(rawData){
 				var data = parser(rawData);
+				// console.log(data)
 				resolve(data);	
 			})
 		})
@@ -305,6 +306,9 @@ var config = {
 		meta = {
 			'periodMeans': { config: 'snowDepthPeriod', lang: 'snowDepthPeriod', data: 'ANS', set: 'weather' },
 			'decadeMeans': { config: 'snowDepthDecade', lang: 'snowDepthDecade', data: 'ANS', set: 'weather' },
+			'snowDepth': {
+				'yrly': { config: 'avgSnowDepth', lang: 'yrlyAvgSnowDepth', data: 'ANS', set: 'weather' },
+			}
 		},
 		reader = Papa.parse),
 	weeklyCO2: dataset_struct.create(
