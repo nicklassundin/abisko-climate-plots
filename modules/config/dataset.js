@@ -307,7 +307,7 @@ var config = {
 			'periodMeans': { config: 'snowDepthPeriod', lang: 'snowDepthPeriod', data: 'ANS', set: 'weather' },
 			'decadeMeans': { config: 'snowDepthDecade', lang: 'snowDepthDecade', data: 'ANS', set: 'weather' },
 			'snowDepth': {
-				'yrly': { config: 'avgSnowDepth', lang: 'yrlyAvgSnowDepth', data: 'ANS', set: 'weather' },
+				'yrly': { config: 'avgSnowDepth', lang: 'yrlyAvgSnowDepth', data: 'ANS', set: 'slide' },
 			}
 		},
 		reader = Papa.parse),
