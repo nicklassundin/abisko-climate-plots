@@ -178,7 +178,7 @@ var chart = {
 				return "<button class='tablinks' id="+index+">"+meta.groups[each].legend+"</button>"
 			}
 		})
-		return "<div id='"+this.id+"_title' class='tab'>" + group + "</div>"
+		return "<div id='"+this.id+"_title' class='tab'>" + group.join("") + "</div>"
 	},
 	initiate: function(data){
 		var id = this.id;
