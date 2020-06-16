@@ -20,5 +20,8 @@
 		"top": "[Y-AXIS]"
 	},
 	"series": {
+		"avg": {
+			"name": "Average of all stations"
+		}
 	}
 }

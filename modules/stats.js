@@ -517,20 +517,35 @@ exports.parsers = {
 		fields.shift()
 		var data = result.data;
 		data.splice(0,4)
-		var stations = {};
+		var stations = { avg: {} };
 		data.forEach(function(each){
 			Object.keys(each).forEach(key => {
 				if(key != ""){
 					if(!stations[key]){
 						stations[key] = [];
 					}
-					stations[key].push({
+					var entry = {
 						x: Number(each[""]),
 						y: !Number.isNaN(Number(each[key])) ? Number(each[key]) : undefined 
-					})
+					}
+					stations[key].push(entry)
+					if(!stations['avg'][each[""]]){
+						stations['avg'][each[""]] = [];
+					}
+					if(entry.y){
+						stations['avg'][each[""]].push({
+							x: Number(each[""]),
+							y: !Number.isNaN(Number(each[key])) ? Number(each[key]) : undefined 
+						})
+					}
 				}
 			})
 		})
+
+		stations['avg'] = Object.keys(stations['avg']).map(year => ({
+			x: Number(year),
+			y: (stations['avg'][year].map(each => each.y)).reduce((a, b) => a + b, 0)/stations['avg'][year].length
+		}))
 		return new Promise(function(resolve, reject){
 			resolve(stations)
 		})
@@ -959,7 +974,7 @@ exports.parsers = {
 				month.count++;
 			}
 		});
-			
+
 		all.singleStake = parseByDate(all.singleStake);
 		snow.forEach((year) => {
 			for (var i = 1; i <= 12; i++) {
