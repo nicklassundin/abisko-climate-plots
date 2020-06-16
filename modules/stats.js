@@ -914,7 +914,7 @@ exports.parsers = {
 		return {'yrly': yrly, 'date': dateSelect };
 	},
 	AbiskoSnowData: function (result, src='') {
-		// console.log(result)
+		console.log(result)
 		result = result[0];
 		var data = result.data;
 		var fields = result.meta.fields;
@@ -941,10 +941,16 @@ exports.parsers = {
 
 		var snow = [];
 
+		var all = [];
+
 		data.forEach((row) => {
 			var date = help.parseDate(row[fields[0]]);
 			var depthSingleStake = help.validNumber(row[fields[1]]);
 			if (date.year && depthSingleStake) {
+				all.push({
+					y: depthSingleStake,
+					x: date
+				})
 				var year = snow[date.year] = snow[date.year] || [];
 				var month = year[date.month] = year[date.month] || { sum: 0, count: 0 };
 				month.sum += depthSingleStake;

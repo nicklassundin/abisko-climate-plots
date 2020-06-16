@@ -1,20 +1,30 @@
 {
-	"title": "[stationName] Årlig medeltemperatur" ,
 	"subTitle": "",
-	"yAxis": {
-		"left": "Medeltemperatur [°C]",
-		"right": "[X-AXIS]"
-	},
 	"valueSuffix": "°C",
 	"xAxis": {
 		"bott": "År", 
 		"top": "[Y-AXIS]"
 	},
-	"caption": "Genomsnittlig årlig temperatur. Månadens lägsta (min) och högsta (max) temperatur.", 
 	"groups": {
 		"0": {
-			"title": "Weather",
-			"subTitle": ""
+			"legend": "Väder",
+			"subTitle": "",
+			"yAxis": {
+				"left": "Medeltemperatur [°C]",
+				"right": "[X-AXIS]"
+			},
+			"title": "[stationName] Årlig medeltemperatur",
+			"caption": "Genomsnittlig årlig temperatur. Månadens lägsta (min) och högsta (max) temperatur."
+		},
+		"1": {
+			"legend": "Klimat",
+			"subTitle": "",
+			"yAxis": {
+				"left": "Temperaturskillnad [°C]",
+				"right": "[X-AXIS]"
+			},
+			"title": "[stationName] Årlig genomsnittlig temperaturskillnad från baslinjen",
+			"caption": "Skillnaden mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990." 
 		}
 	},
 	"series": {
