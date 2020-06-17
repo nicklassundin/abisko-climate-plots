@@ -137,5 +137,11 @@
 		"slideMonthlyPrecipitation"],
 		"sqrt-snowDepth-v2": ["yrlyAvgSnowDepth",
 			"abiskoSnowDepthPeriodMeans",
-			"abiskoSnowDepthPeriodMeans2"]
+			"abiskoSnowDepthPeriodMeans2"],
+	"sqrt-lakeIce-v2": [
+		"abiskoLakeIceBreakup",
+		"abiskoLakeIceFreezeup",
+		"abiskoLakeIceTime",
+		"iceThicknessYear",
+		"iceThicknessDate"]
 }

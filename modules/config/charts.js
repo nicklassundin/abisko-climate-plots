@@ -180,7 +180,7 @@ var rendF = {
 	'abiskoLakeIce':{
 		func: function(reset=false){
 			config['tornetrask'].contFunc(reset);
-			config['tornetrask'].init('abiskoLakeIce')
+			config['tornetrask'].init('abiskoLakeIce', 'DOY')
 		},
 		html: function(debug=false, doc){
 			var no = 43;
@@ -189,10 +189,34 @@ var rendF = {
 
 		},
 	}, 
+	'abiskoLakeIceBreakup':{
+		func: function(reset=false){
+			config['tornetrask'].contFunc(reset);
+			config['tornetrask'].init('abiskoLakeIceBreakup', ['DOY', 'breakup'], 'breakupDOY')
+		},
+		html: function(debug=false, doc){
+			var no = 43;
+			if(!debug) no = debug;
+			return createDiv('abiskoLakeIceBreakup', no);
+
+		},
+	}, 
+	'abiskoLakeIceFreezeup':{
+		func: function(reset=false){
+			config['tornetrask'].contFunc(reset);
+			config['tornetrask'].init('abiskoLakeIceFreezeup', ['DOY', 'freeze'], 'freezeDOY')
+		},
+		html: function(debug=false, doc){
+			var no = 43;
+			if(!debug) no = debug;
+			return createDiv('abiskoLakeIceFreezeup', no);
+
+		},
+	}, 
 	'abiskoLakeIceTime':{
 		func: function(reset=false){
-			config['tornetrask_iceTime'].contFunc(reset);
-			config['tornetrask_iceTime'].init('abiskoLakeIceTime')
+			config['tornetrask'].contFunc(reset);
+			config['tornetrask'].init('abiskoLakeIceTime', 'iceTime')
 		},
 		html: function(debug=false, doc){
 			var no = 43;

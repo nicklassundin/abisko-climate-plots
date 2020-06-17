@@ -102,7 +102,7 @@ var dataset_struct = {
 	},
 	init: function(id, tag, renderTag=tag){
 		var render = this.render;
-		if(tag){
+		if(renderTag){
 			var meta = tagApply(this.metaRef, renderTag);
 			render.setup(id, this.getMeta(meta));
 		}else{
@@ -282,17 +282,12 @@ var config = {
 			skipEmptyLines: true,
 		},
 		parser = parse.AbiskoIceData,
-		meta = { config: 'ice', lang: 'ice', data: 'ANS', set: 'weather' },
-		reader = Papa.parse),
-	tornetrask_iceTime: dataset_struct.create(
-		file = ["Tornetrask_islaggning_islossning.csv"],
-		preset = {
-			header: true,
-			download: true,
-			skipEmptyLines: true,
+		meta = {
+			DOY: { config: 'ice', lang: 'ice', data: 'ANS', set: 'weather' },
+			breakupDOY: { config: 'iceBreakup', lang: 'iceBreakup', data: 'ANS', set: 'slide' },
+			freezeDOY: { config: 'iceFreeze', lang: 'iceFreeze', data: 'ANS', set: 'slide' },
+			iceTime: { config: 'iceTime', lang: 'iceTime', data: 'ANS', set: 'weather' },
 		},
-		parser = parse.AbiskoIceData,
-		meta = { config: 'iceTime', lang: 'iceTime', data: 'ANS', set: 'weather' },
 		reader = Papa.parse),
 	abiskoSnowDepth: dataset_struct.create(
 		file = ["ANS_SnowDepth.csv"], 

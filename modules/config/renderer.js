@@ -340,7 +340,7 @@ var chart = {
 				lineWidth: 0,
 				marker: { radius: 2 },
 				states: { hover: { lineWidthPlus: 0 } },
-				data: data.iceTime,
+				data: data,
 				visible: true,
 			}),
 			freeze: () => ({
@@ -356,7 +356,7 @@ var chart = {
 				lineWidth: 0,
 				marker: { radius: 2 },
 				states: { hover: { lineWidthPlus: 0 } },
-				data: data.freezeDOY,
+				data: data.freeze.values,
 				visible: true,
 			}),
 			breakup: () => ({
@@ -372,7 +372,7 @@ var chart = {
 				lineWidth: 0,
 				marker: { radius: 2 },
 				states: { hover: { lineWidthPlus: 0 } },
-				data: data.breakupDOY,
+				data: data.breakup.values,
 				visible: true,
 			}),
 			bar: () => ({

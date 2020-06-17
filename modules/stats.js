@@ -784,28 +784,21 @@ exports.parsers = {
 
 		var dateFormat = date => (date.getFullYear() + ' ' + help.monthName(help.monthByIndex(date.getMonth())) + ' ' + date.getDate());
 
-		var breakupDOY = iceData.map((each, year) => ({
+		var breakupDOY = struct.create(iceData.map((each, year) => ({
 			x: +year,
 			y: each.breakupDOY,
 			name: each.breakupDate ? dateFormat(each.breakupDate) : null,
 			week: each.breakupDate ? help.weekNumber(each.breakupDate) : null,
 			date: each.breakupDate,
-		})).filter(each => each.y).filter(each => each.x >= 1909).filter(each => each.name != null);
+		})).filter(each => each.y).filter(each => each.x >= 1909).filter(each => each.name != null)).build();
 
-		var freezeDOY = iceData.map((each, year) => ({
+		var freezeDOY = struct.create(iceData.map((each, year) => ({
 			x: +year,
 			y: each.freezeDOY,
 			name: each.freezeDate ? dateFormat(each.freezeDate) : null,
 			week: each.freezeDate ? help.weekNumber(each.freezeDate) : null,
 			date: each.freezeDate,
-		})).filter(each => each.y).filter(each => each.x >= 1909).filter(each => each.name != null);
-		// var freezeVar = variance(freezeDOY.map(each=>each.y));
-
-		// console.log(breakupDOY);
-		// console.log(freezeDOY);
-		var breakupLinear = help.linearRegression(breakupDOY.map(w => w.x), breakupDOY.map(w => w.y));
-		var freezeLinear = help.linearRegression(freezeDOY.map(w => w.x), freezeDOY.map(w => w.y));
-
+		})).filter(each => each.y).filter(each => each.x >= 1909).filter(each => each.name != null)).build();
 		var breakup = {
 			week: breakupDOY.map(each => ({
 				x: each.x,
@@ -844,13 +837,12 @@ exports.parsers = {
 		var iceTime = yearly('iceTime');
 
 		// equal weighted confidence interval
-		var equal_weight = help.confidenceInterval_EQ_ND(iceTime, 10)	
+		// var equal_weight = help.confidenceInterval_EQ_ND(iceTime, 10)	
 
-		var iceTimeMovAvg = equal_weight.movAvg;
-		var iceTimeMovAvgVar = equal_weight.movAvgVar;
-		var iceTimeCIMovAvg = equal_weight.ciMovAvg;
-		var iceTimeLinear = help.linearRegression(iceTime.map(w => w.x), iceTime.map(w => w.y));
-		var iceTimeMovAvgLinear = help.linearRegression(iceTimeMovAvg.map(w => w.x), iceTimeMovAvg.map(w => w.y));
+		// var iceTimeMovAvgVar = equal_weight.movAvgVar;
+		// var iceTimeCIMovAvg = equal_weight.ciMovAvg;
+		// var iceTimeLinear = help.linearRegression(iceTime.map(w => w.x), iceTime.map(w => w.y));
+		// var iceTimeMovAvgLinear = help.linearRegression(iceTimeMovAvg.map(w => w.x), iceTimeMovAvg.map(w => w.y));
 
 		var yearMax = iceData.length - 1;
 		// console.log(data);
@@ -860,29 +852,31 @@ exports.parsers = {
 			resolve({
 				src: src,
 				yearMax,
-				breakupDOY,
 				breakup,
-				freezeDOY,
 				freeze,
+				DOY: {
+					breakup: breakupDOY,
+					freeze: freezeDOY,
+				},
 				iceTime,
-				iceTimeMovAvg: iceTimeMovAvg.slice(10),
-				iceTimeCIMovAvg: iceTimeCIMovAvg.slice(10),
-				breakupLinear: [
-					{ x: 1915, y: help.weekNumber(help.dateFromDayOfYear(1915, Math.round(breakupLinear(1915)))) },
-					{ x: yearMax, y: help.weekNumber(help.dateFromDayOfYear(yearMax, Math.round(breakupLinear(yearMax)))) }
-				],
-				freezeLinear: [
-					{ x: 1909, y: help.weekNumber(help.dateFromDayOfYear(1909, Math.round(freezeLinear(1909)))) },
-					{ x: yearMax, y: help.weekNumber(help.dateFromDayOfYear(yearMax, Math.round(freezeLinear(yearMax)))) }
-				],
-				iceTimeLinear: [
-					{ x: 1915, y: iceTimeLinear(1915) },
-					{ x: yearMax, y: iceTimeLinear(yearMax) }
-				],
-				iceTimeMovAvgLinear: [
-					{ x: 1925, y: iceTimeMovAvgLinear(1925) },
-					{ x: yearMax, y: iceTimeMovAvgLinear(yearMax) }
-				],
+				// iceTimeMovAvg: iceTimeMovAvg.slice(10),
+				// iceTimeCIMovAvg: iceTimeCIMovAvg.slice(10),
+				// breakupLinear: [
+					// { x: 1915, y: help.weekNumber(help.dateFromDayOfYear(1915, Math.round(breakupLinear(1915)))) },
+					// { x: yearMax, y: help.weekNumber(help.dateFromDayOfYear(yearMax, Math.round(breakupLinear(yearMax)))) }
+				// ],
+				// freezeLinear: [
+					// { x: 1909, y: help.weekNumber(help.dateFromDayOfYear(1909, Math.round(freezeLinear(1909)))) },
+					// { x: yearMax, y: help.weekNumber(help.dateFromDayOfYear(yearMax, Math.round(freezeLinear(yearMax)))) }
+				// ],
+				// iceTimeLinear: [
+					// { x: 1915, y: iceTimeLinear(1915) },
+					// { x: yearMax, y: iceTimeLinear(yearMax) }
+				// ],
+				// iceTimeMovAvgLinear: [
+					// { x: 1925, y: iceTimeMovAvgLinear(1925) },
+					// { x: yearMax, y: iceTimeMovAvgLinear(yearMax) }
+				// ],
 			})
 		})
 	},
