@@ -14,11 +14,24 @@
 				"right": "[X-AXIS]"
 			},
 			"legend": "Weather"
+		},
+		"1": {
+			"title": "", 
+			"subTitle": "",
+			"caption": "[SOME TEXT]",
+			"yAxis": {
+				"left": "Difference Ice time [number of days]",
+				"right": "[X-AXIS]"
+			},
+			"legend": "Climate"
 		}
 	},
 	"series": {
-		"iceTime": {
+		"avg": {
 			"name": "Ice time" 
+		},
+		"diff": {
+			"name": "Difference"
 		}
 	}
 }

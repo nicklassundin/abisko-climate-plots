@@ -286,7 +286,7 @@ var config = {
 			DOY: { config: 'ice', lang: 'ice', data: 'ANS', set: 'weather' },
 			breakupDOY: { config: 'iceBreakup', lang: 'iceBreakup', data: 'ANS', set: 'slide' },
 			freezeDOY: { config: 'iceFreeze', lang: 'iceFreeze', data: 'ANS', set: 'slide' },
-			iceTime: { config: 'iceTime', lang: 'iceTime', data: 'ANS', set: 'weather' },
+			iceTime: { config: 'iceTime', lang: 'iceTime', data: 'ANS', set: 'slide' },
 		},
 		reader = Papa.parse),
 	abiskoSnowDepth: dataset_struct.create(

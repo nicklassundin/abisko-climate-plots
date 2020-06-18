@@ -834,7 +834,7 @@ exports.parsers = {
 		}))
 
 
-		var iceTime = yearly('iceTime');
+		var iceTime = struct.create(yearly('iceTime')).build();
 
 		// equal weighted confidence interval
 		// var equal_weight = help.confidenceInterval_EQ_ND(iceTime, 10)	
