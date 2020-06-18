@@ -11,9 +11,9 @@ global.stationType = "abisko"
 global.stationName = "";
 global.hostUrl = location.protocol +"//"+ require("../config/server.json").domain;
 
-
+var today = new Date();
 global.variables = {
-	date: new Date(),
+	date: new Date(today.getFullYear()-1, 11, 24),
 	dateStr: function(){ return (this.date.getYear()+1900)+"-"+(this.date.getMonth()+1)+"-"+this.date.getDate() }
 }
 
