@@ -232,7 +232,7 @@ var chart = {
 				marker: { radius: 2 },
 				states: { hover: { lineWidthPlus: 0 } },
 				color: meta.series.extreme.colour,
-				data: (data.max != undefined) ? (data.max.max != undefined ? data.max.max(false) : undefined) : data.total.max(false), 
+				data: (data.max != undefined) ? (data.max.max != undefined ? data.max.max(false).values : undefined) : data.total.max(false).values, 
 				visible: false,
 				type: meta.series.extreme.type,
 			}),
