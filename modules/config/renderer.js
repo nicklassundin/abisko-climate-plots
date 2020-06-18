@@ -170,12 +170,13 @@ var chart = {
 		return title; 
 	},
 	groupTitle: function(active = 0){
+		var id = this.id
 		var meta = this.meta;
 		var group = Object.keys(meta.groups).filter((key) => meta.groups[key].enabled).map(function(each, index){
 			if(index == active){
-				return "<button class='tablinks active' id="+index+">"+meta.groups[each].legend+"</button>"
+				return "<button class='tablinks_"+id+" active' id="+index+">"+meta.groups[each].legend+"</button>"
 			}else{
-				return "<button class='tablinks' id="+index+">"+meta.groups[each].legend+"</button>"
+				return "<button class='tablinks_"+id+"' id="+index+">"+meta.groups[each].legend+"</button>"
 			}
 		})
 		return "<div id='"+this.id+"_title' class='tab'>" + group.join("") + "</div>"
@@ -446,12 +447,12 @@ var chart = {
 		this.chart.update({
 			series: series
 		})
-
-		// if(Object.keys(meta.groups).length > 1){
+		
 		if(Object.keys(meta.groups).map(key => meta.groups[key].enabled).filter(each => each).length > 1){
+			console.log("switcheru")
 			var chart = this;
-			$( ".tablinks" ).click(function(e) {
-				$(".tablinks").toggleClass('active')
+			$(".tablinks_"+id).click(function(e) {
+				$(".tablinks_"+id).toggleClass('active')
 				// e.currentTarget.className += " active";
 				chart.switchToGroup(e.target.id);
 			})
