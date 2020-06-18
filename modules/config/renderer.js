@@ -212,7 +212,7 @@ var chart = {
 				marker: { radius: 2 },
 				states: { hover: { lineWidthPlus: 0 } },
 				color: meta.series.max.colour,
-				data: (data.max != undefined) ? ((data.max.max != undefined) ? data.max.max() : data.max()) : undefined ,
+				data: (data.max != undefined) ? ((data.max.max != undefined) ? data.max.max().values : data.max().values) : undefined ,
 				visible: false,
 				type: meta.series.max.type,
 			}),
@@ -222,7 +222,7 @@ var chart = {
 				marker: { radius: 2 },
 				states: { hover: { lineWidthPlus: 0 } },
 				color: meta.series.min.colour,
-				data: (data.min != undefined) ? ((data.min.min != undefined) ? data.min.min() : data.min()) : undefined ,
+				data: (data.min != undefined) ? ((data.min.min != undefined) ? data.min.min().values : data.min().values) : undefined ,
 				visible: false,
 				type: meta.series.min.type,
 			}),
@@ -281,7 +281,7 @@ var chart = {
 				},
 				name: meta.series.diff.name,
 				type: meta.series.diff.type,
-				data: (data.difference != undefined) ? data.difference() : (data.avg != undefined) ? data.avg.difference() : data.total.difference(),
+				data: (data.difference != undefined ? data.difference() : (data.avg != undefined) ? data.avg.difference() : (data.total != undefined ? data.total.difference() : data(variables.date).difference())),
 				color: 'red',
 				negativeColor: 'blue',
 				visible: true,
@@ -376,17 +376,26 @@ var chart = {
 				data: data.breakup.values,
 				visible: true,
 			}),
-			bar: () => ({
-				name: meta.series.bar.name,
-				color: meta.series.bar.colour,
+			iceThick: () => ({
+				name: meta.series.iceThick.name,
+				color: meta.series.iceThick.colour,
 				lineWidth: 0,
 				marker: {
 					radius: 2,
 					symbol: 'circle',
 				},
-				data: (data.total != undefined) ? data.total.max().map(each => ({
-					x: each.x, 
-					y: each.y })) : data(variables.date),
+				data: (data.total != undefined) ? data.total.max().values : data(date = variables.date).values,
+				visible: true,
+			}),
+			iceThickDiff: () => ({
+				name: meta.series.iceThickDiff.name,
+				color: meta.series.iceThickDiff.colour,
+				lineWidth: 0,
+				marker: {
+					radius: 2,
+					symbol: 'circle',
+				},
+				data: (data.total != undefined) ? data.total.max().values : data(date = variables.date).difference(),
 				visible: true,
 			}),
 			perma: (p, s, k) => ({
@@ -449,7 +458,6 @@ var chart = {
 		})
 		
 		if(Object.keys(meta.groups).map(key => meta.groups[key].enabled).filter(each => each).length > 1){
-			console.log("switcheru")
 			var chart = this;
 			$(".tablinks_"+id).click(function(e) {
 				$(".tablinks_"+id).toggleClass('active')

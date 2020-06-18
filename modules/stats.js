@@ -38,38 +38,38 @@ var struct = {
 	},
 	min: function(abs = true){
 		if(this.values[0].filter){
-			return this.values.map(each => each.filter((entry) => {
+			return struct.create(this.values.map(each => each.filter((entry) => {
 				return {
 					y: Math.min(...entry.values.map(each => each.y)),
 					x: entry.x
 				}
-			}, 'min', abs));
+			}, 'min', abs))).build();
 		}else{
-			return this.filter((entry) => {
+			return struct.create(this.filter((entry) => {
 				return {
 					y: Math.min(...entry.values.map(each => each.y)),
 					x: entry.x
 				}
-			}, 'min', abs)
+			}, 'min', abs)).build()
 		}
 	},
 	max: function(abs = false){
 		if(this.values[0].filter){
-			return this.values.map(each => each.filter((entry) => {
+			return struct.create(this.values.map(each => each.filter((entry) => {
 				return {
 					y: Math.max(...entry.values.map(each => each.y)),
 					x: entry.x
 				}
 
-			}, 'max', abs))
+			}, 'max', abs))).build()
 		}else{
-			return this.filter((entry) => {
+			return struct.create(this.filter((entry) => {
 				return {
 					y: Math.max(...entry.values.map(each => each.y)),
 					x: entry.x
 				}
 
-			}, 'max', abs)
+			}, 'max', abs)).build()
 		}
 	},
 	last: function(f = (e) => { return e.y <= 0 }, type=this.type){
@@ -221,7 +221,7 @@ var struct = {
 		var count = values.length;
 
 		var y;
-		if(result.y==undefined){
+		if(result.y == undefined){
 			switch(type){
 				case "mean":
 					y = help.sum(values.map(each => each.y));
@@ -259,7 +259,7 @@ var struct = {
 		}catch(err){
 			return undefined;
 		}
-		result.values = values.filter(each => each.y);
+		result.values = values.filter(each => each.y || each.y == 0);
 		result.x = x;
 		return result;
 	},
@@ -918,7 +918,7 @@ exports.parsers = {
 					date: res.data.x
 				})
 			})
-			return close;
+			return struct.create(close).build(); 
 		}
 		return {'yrly': yrly, 'date': dateSelect };
 	},

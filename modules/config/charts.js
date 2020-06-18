@@ -228,7 +228,7 @@ var rendF = {
 	'iceThicknessYear': {
 		func: function(reset=false){
 			config['iceThick'].contFunc(reset);
-			config['iceThick'].init('iceThicknessYear', 'yrly')
+			config['iceThick'].init('iceThicknessYear', ['yrly'], ['yrly', 'max'])
 		},
 		html: function(debug=false, doc){
 			var no = 43;

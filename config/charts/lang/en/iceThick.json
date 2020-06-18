@@ -14,11 +14,24 @@
 				"right": "[X-AXIS]"
 			},
 			"legend": "Weather"
+		},
+		"1": {
+			"title": "[stationName] Maximum Lake Ice Thickness Difference",
+			"subTitle": "",
+			"caption": "The maximum ice thickness for a given winter.",
+			"yAxis": {
+				"left": "Ice thickness [cm]", 
+				"right": "[X-AXIS]"
+			},
+			"legend": "Climate"
 		}
 	},
 	"series": {
-		"bar": {
+		"iceThick": {
 			"name": "Ice thickness (cm)"
+		},
+		"diff": {
+			"name": "Ice thickess Difference (cm)"
 		}
 	}
 }

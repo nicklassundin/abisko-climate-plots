@@ -339,8 +339,10 @@ var config = {
 		},
 		parser = parse.AbiskoLakeThickness,
 		meta = {
-			'yrly': { config: 'iceThick', lang: 'iceThick', data: 'ANS', set: 'weather' },
-			'date': { config: 'iceThickDate', lang: 'iceThickDate', data: 'ANS', set: 'weather' },
+			'yrly': {
+				'max': { config: 'iceThick', lang: 'iceThick', data: 'ANS', set: 'slide' },
+			}, 
+			'date': { config: 'iceThickDate', lang: 'iceThickDate', data: 'ANS', set: 'slide' },
 		},
 		reader = Papa.parse,
 		local = true)

@@ -6,6 +6,12 @@
 			"yAxis": {
 				"reversed": true
 			}
+		},
+		"1": {
+			"baseline": true,
+			"yAxis": {
+				"reversed": true
+			}
 		}
 	},
 	"tooltip": {
@@ -13,10 +19,15 @@
 	},
 	"decimals": 0,
 	"series": {
-		"bar": {
+		"iceThick": {
 			"group": 0,
 			"visible": true,
 			"colour": "#0000ee",
+			"type": "column"
+		},
+		"diff": {
+			"group": 1,
+			"visible": true,
 			"type": "column"
 		}
 	}
