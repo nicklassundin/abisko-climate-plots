@@ -222,7 +222,7 @@ var config = {
 				'polar': { config: undefined, lang: undefined }, 
 				'yrlySlide': { config: 'precipitation', lang: 'yrlyPrecipitation', data: 'ANS' , set: 'slide'}, 
 				'summerSlide': { config: 'precipitation', lang: 'summerPrecipitation', data: 'ANS', set: 'slide' }, 
-				'springSlide': { config: 'precipitation', lang: 'summerPrecipitation', data: 'ANS', set: 'slide' }, 
+				'springSlide': { config: 'precipitation', lang: 'springPrecipitation', data: 'ANS', set: 'slide' }, 
 				'winterSlide': { config: 'precipitation', lang: 'winterPrecipitation', data: 'ANS', set: 'slide' }, 
 				'autumnSlide': { config: 'precipitation', lang: 'autumnPrecipitation', data: 'ANS', set: 'slide' }, 
 				'monthlySlide': { config: 'precipitation', lang: 'monthlyPrecipitation', data: 'ANS' , monthly: true, set: 'slide'}, 

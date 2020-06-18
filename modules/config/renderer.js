@@ -286,7 +286,13 @@ var chart = {
 				},
 				name: meta.series.diff.name,
 				type: meta.series.diff.type,
-				data: (data.difference != undefined ? data.difference() : (data.avg != undefined) ? data.avg.difference() : (data.total != undefined ? data.total.difference() : data(variables.date).difference())),
+				data: (data.difference != undefined ?
+						data.difference() : 
+							(data.avg != undefined ?
+								data.avg.difference() : 
+								(data.total != undefined ? 
+									data.total.difference() : 
+									data(variables.date).difference()))),
 				color: 'red',
 				negativeColor: 'blue',
 				visible: true,
@@ -441,8 +447,9 @@ var chart = {
 		}
 		this.chart.hideLoading();
 		var series = [];
-		Object.keys(meta.series).forEach(key => {
-			try{
+		// TODO clean up
+		Object.keys(meta.series).filter((s) => meta.groups[meta.series[s].group].enabled).forEach(key => {
+			// try{
 				if(meta.period){
 					series.push(seriesBuild['period'](data[key], meta.series[key]))
 				}else if(meta.groups['0'].perma){
@@ -450,13 +457,13 @@ var chart = {
 				}else{
 					series.push(seriesBuild[key]());
 				}
-			}catch(error){
+			// }catch(error){
 				// console.log(key);
 				// console.log(error);
 				// console.log(meta);
 				// console.log(data)
-				throw error
-			}
+				// throw error
+			// }
 		})
 		this.chart.update({
 			series: series
