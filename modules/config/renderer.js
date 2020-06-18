@@ -147,8 +147,13 @@ var chart = {
 				data: [null, null],
 			}))
 		})
+		var groups = Object.keys(meta.groups).map(key => ({
+			key: key,
+			enabled: meta.groups[key].enabled
+		}));
 		if(Object.keys(meta.groups).map(key => meta.groups[key].enabled).filter(each => each).length > 1){
 			var gTitle = this.groupTitle();
+			this.switchToGroup(groups[0].key, true, change = false)
 			$('#'+id).append(gTitle);
 			this.chart.showLoading();
 		}
@@ -456,7 +461,7 @@ var chart = {
 		this.chart.update({
 			series: series
 		})
-		
+
 		if(Object.keys(meta.groups).map(key => meta.groups[key].enabled).filter(each => each).length > 1){
 			var chart = this;
 			$(".tablinks_"+id).click(function(e) {
@@ -501,25 +506,28 @@ var chart = {
 			this.climate();
 		}
 	},
-	switchToGroup: function(gID, changeVisibility = true){
+	switchToGroup: function(gID, changeVisibility = true, change = true){
 		var meta = this.meta;
 		var id = this.id;
 		var title = this.title(gID);
 		var textMorph = this.textMorph;
 		var group = meta.groups[gID];
-		Object.keys(meta.series).forEach((key, index) => {
-			if(meta.series[key].group == gID){
-				$('#' + id).highcharts().series[index].update({
-					visible: meta.series[key].visible,
-					showInLegend: true,
-				})
-			}else{
-				$('#' + id).highcharts().series[index].update({
-					visible: false,
-					showInLegend: false,
-				})
-			}
-		})
+		if(change) {
+
+			Object.keys(meta.series).forEach((key, index) => {
+				if(meta.series[key].group == gID){
+					$('#' + id).highcharts().series[index].update({
+						visible: meta.series[key].visible,
+						showInLegend: true,
+					})
+				}else{
+					$('#' + id).highcharts().series[index].update({
+						visible: false,
+						showInLegend: false,
+					})
+				}
+			})
+		}
 		var plotLinesX = function(group){
 			var res = [];
 			if(group.baseline){
