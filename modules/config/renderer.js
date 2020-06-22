@@ -287,12 +287,12 @@ var chart = {
 				name: meta.series.diff.name,
 				type: meta.series.diff.type,
 				data: (data.difference != undefined ?
-						data.difference() : 
-							(data.avg != undefined ?
-								data.avg.difference() : 
-								(data.total != undefined ? 
-									data.total.difference() : 
-									data(variables.date).difference()))),
+					data.difference() : 
+					(data.avg != undefined ?
+						data.avg.difference() : 
+						(data.total != undefined ? 
+							data.total.difference() : 
+							data(variables.date).difference()))),
 				color: 'red',
 				negativeColor: 'blue',
 				visible: true,
@@ -448,23 +448,29 @@ var chart = {
 		this.chart.hideLoading();
 		var series = [];
 		// TODO clean up
-		Object.keys(meta.series).filter((s) => meta.groups[meta.series[s].group].enabled).forEach(key => {
-			// try{
-				if(meta.period){
-					series.push(seriesBuild['period'](data[key], meta.series[key]))
-				}else if(meta.groups['0'].perma){
-					series.push(seriesBuild['perma'](data[key], meta.series[key], key))
-				}else{
-					series.push(seriesBuild[key]());
+		try{
+			Object.keys(meta.series).filter((s) => (meta.series[s].group != undefined) ? meta.groups[meta.series[s].group].enabled : false).forEach(key => {
+				try{
+					if(meta.period){
+						series.push(seriesBuild['period'](data[key], meta.series[key]))
+					}else if(meta.groups['0'].perma){
+						series.push(seriesBuild['perma'](data[key], meta.series[key], key))
+					}else{
+						series.push(seriesBuild[key]());
+					}
+				}catch(error){
+					console.log(key);
+					console.log(error);
+					console.log(meta);
+					console.log(data)
+					throw error
 				}
-			// }catch(error){
-				// console.log(key);
-				// console.log(error);
-				// console.log(meta);
-				// console.log(data)
-				// throw error
-			// }
-		})
+			})
+		}catch(error){
+			console.log(meta.groups)
+			console.log(meta.series)
+			throw error
+		}
 		this.chart.update({
 			series: series
 		})
