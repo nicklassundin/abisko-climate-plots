@@ -48,7 +48,7 @@ lib = {
 	renderSets: function(div, set=(new URL(window.location.href).searchParams.get("set")), id=(new URL(window.location.href).searchParams.get("station")), url){
 		if(url) hostUrl = url;
 		variables.debug = (new URL(window.location.href).searchParams.get("debug"))
-		if(variables.debug) {
+		if(variables.debug == "true") {
 			var debug = document.createElement("div");
 			debug.setAttribute("class", "debug");
 			debug.innerHTML = "set: "+ set +"</br> station: "+ id
@@ -57,7 +57,7 @@ lib = {
 		sets[set].forEach(type => {
 			var container = document.createElement("div");
 			container.setAttribute("id", "mark_"+type);
-			if(variables.debug) {
+			if(variables.debug == "true") {
 				var debug = document.createElement("div");
 				debug.setAttribute("class", "debug");
 				debug.setAttribute("id", "debug_"+type);
