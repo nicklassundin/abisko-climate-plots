@@ -18,7 +18,7 @@
 		}
 	},
 	"tooltip": {
-		"type": "winterValue"
+		"type": "winterValueDate"
 	},
 	"decimals": 0,
 	"series": {
