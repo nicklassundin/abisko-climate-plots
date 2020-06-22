@@ -1,0 +1,40 @@
+{
+	"valueSuffix": "mm",
+	"xAxis": {
+		"bott": "År", 
+		"top": "[Y-AXIS]"
+	},
+	"groups": {
+		"0": {
+			"title": "[stationName] Vårens genomsnittliga nederbörd",
+			"subTitle": "Mars till Maj",
+			"caption": "Genomsnittlig årlig vårn (mars till maj) nederbörd. Månadens lägsta (min) och högsta (max) temperatur.", 
+			"yAxis": {
+				"left": "Genomsnittlig nederbörd [mm]", 
+				"right": "[X-AXIS]"
+			},
+			"legend": "Väder"
+		},
+		"1": {
+			"title": "[stationName] Vårens genomsnittliga nederbördsskillnad från baslinjen",
+			"subTitle": "", 
+			"caption": "Skillnaden mellan vår (mars till maj) säsongsmedelvärden och genomsnittet för utgångsperioden, vanligtvis 1961 till 1990.", 
+			"yAxis": {
+				"left": "Genomsnittlig nederbörd [mm]", 
+				"right": "[X-AXIS]"
+			},
+			"legend": "Klimat"
+		}
+	},
+	"series": {
+		"diff": {
+			"name": "Skillnad från baslinhjen"
+		},
+		"snow": {
+			"name": "Nederbörd från snö"
+		},
+		"rain": {
+			"name": "Nederbörd från regn"
+		}
+	}
+}

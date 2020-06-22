@@ -1,0 +1,40 @@
+{
+	"valueSuffix": "mm",
+	"xAxis": {
+		"bott": "År", 
+		"top": "[Y-AXIS]"
+	},
+	"groups": {
+		"0": {
+			"title": "[stationName] Vinterns genomsnittliga nederbörd",
+			"subTitle": "December till Februari",
+			"caption": "Genomsnittlig årlig vintern (december till februari) nederbörd. Månadens lägsta (min) och högsta (max) temperatur.", 
+			"yAxis": {
+				"left": "Genomsnittlig nederbörd [mm]", 
+				"right": "[X-AXIS]"
+			},
+			"legend": "Väder"
+		},
+		"1": {
+			"title": "[stationName] Vinterns genomsnittliga nederbördsskillnad från baslinjen",
+			"subTitle": "", 
+			"caption": "Skillnaden mellan vinter (december till februari) säsongsmedelvärden och genomsnittet för utgångsperioden, vanligtvis 1961 till 1990.", 
+			"yAxis": {
+				"left": "Genomsnittlig nederbörd [mm]", 
+				"right": "[X-AXIS]"
+			},
+			"legend": "Klimat"
+		}
+	},
+	"series": {
+		"diff": {
+			"name": "Skillnad från baslinhjen"
+		},
+		"snow": {
+			"name": "Nederbörd från snö"
+		},
+		"rain": {
+			"name": "Nederbörd från regn"
+		}
+	}
+}
