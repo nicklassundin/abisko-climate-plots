@@ -11,7 +11,7 @@
 			}
 		},
 		"1": {
-			"baseline": false,
+			"baseline": true,
 			"select": {
 				"enabled": true
 			}

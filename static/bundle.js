@@ -236,7 +236,7 @@ eval("module.exports = JSON.parse(\"{\\\"type\\\":\\\"column\\\",\\\"groups\\\":
 /*! exports provided: type, groups, tooltip, decimals, series, default */
 /***/ (function(module) {
 
-eval("module.exports = JSON.parse(\"{\\\"type\\\":\\\"column\\\",\\\"groups\\\":{\\\"0\\\":{\\\"baseline\\\":false,\\\"select\\\":{\\\"enabled\\\":true},\\\"yAxis\\\":{\\\"reversed\\\":true}},\\\"1\\\":{\\\"baseline\\\":false,\\\"select\\\":{\\\"enabled\\\":true}}},\\\"tooltip\\\":{\\\"type\\\":\\\"winterValue\\\"},\\\"decimals\\\":0,\\\"series\\\":{\\\"iceThick\\\":{\\\"group\\\":0,\\\"visible\\\":true,\\\"colour\\\":\\\"#0000ee\\\",\\\"type\\\":\\\"column\\\"},\\\"diff\\\":{\\\"group\\\":1,\\\"visible\\\":true,\\\"type\\\":\\\"column\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/iceThickDate.json?");
+eval("module.exports = JSON.parse(\"{\\\"type\\\":\\\"column\\\",\\\"groups\\\":{\\\"0\\\":{\\\"baseline\\\":false,\\\"select\\\":{\\\"enabled\\\":true},\\\"yAxis\\\":{\\\"reversed\\\":true}},\\\"1\\\":{\\\"baseline\\\":true,\\\"select\\\":{\\\"enabled\\\":true}}},\\\"tooltip\\\":{\\\"type\\\":\\\"winterValue\\\"},\\\"decimals\\\":0,\\\"series\\\":{\\\"iceThick\\\":{\\\"group\\\":0,\\\"visible\\\":true,\\\"colour\\\":\\\"#0000ee\\\",\\\"type\\\":\\\"column\\\"},\\\"diff\\\":{\\\"group\\\":1,\\\"visible\\\":true,\\\"type\\\":\\\"column\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/iceThickDate.json?");
 
 /***/ }),
 
