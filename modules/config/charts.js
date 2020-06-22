@@ -53,23 +53,6 @@ var createDiv = function(id, no=null){
 	overlay.setAttribute("id", id+"overlay");
 	overlay.setAttribute("class","overlay");
 	var fig = document.createElement('figure');
-	if(no){
-		var remove = getID().filter(each => each!=id.split('_')[0]);
-		if(remove){
-			var del = document.createElement('a');
-			del.setAttribute('href', getUrl(uid=remove))
-			del.innerHTML = 'remove ';
-			fig.appendChild(del);
-		}
-
-		var a = document.createElement('a');
-		a.innerHTML = 'no: '+no;
-		fig.appendChild(a);
-
-		var aID = document.createElement('a');
-		aID.innerHTML = ' id: '+id;
-		fig.appendChild(aID);
-	}
 	fig.appendChild(div);
 	fig.appendChild(overlay);
 	return fig
@@ -79,7 +62,7 @@ global.buildChart = function(doc, ids, reset=false){
 	var call = function(id){
 		return new Promise(function(resolve,reject){
 			try{
-				doc.appendChild(rendF[id].html(false, doc));	
+				doc.appendChild(rendF[id].html(doc));	
 				rendF[id].func(reset);
 				resolve(true);
 			}catch(err){
@@ -138,9 +121,9 @@ var rendF = {
 			config['zonal'].contFunc(reset);
 			config['zonal'].init('temperatureDifference1', '64n-90n')
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 20;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('temperatureDifference1', no);
 		},
 	},
@@ -149,9 +132,9 @@ var rendF = {
 			config['zonal'].contFunc(reset);
 			config['zonal'].init('temperatureDifference2', 'nhem')
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 21;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('temperatureDifference2', no);
 
 		},
@@ -161,18 +144,18 @@ var rendF = {
 			config['zonal'].contFunc(reset);
 			config['zonal'].init('temperatureDifference3', 'glob')
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 22;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('temperatureDifference3', no);
 
 		},
 	},
 	'arcticTemperatures': {
 		func: function(reset=false){alert("PLACE HOLDER")}, 
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 16.1;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('arcticTemperatures', no);
 
 		},
@@ -182,9 +165,9 @@ var rendF = {
 			config['tornetrask'].contFunc(reset);
 			config['tornetrask'].init('abiskoLakeIce', 'DOY')
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 43;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('abiskoLakeIce', no);
 
 		},
@@ -194,9 +177,9 @@ var rendF = {
 			config['tornetrask'].contFunc(reset);
 			config['tornetrask'].init('abiskoLakeIceBreakup', ['DOY', 'breakup'], 'breakupDOY')
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 43;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('abiskoLakeIceBreakup', no);
 
 		},
@@ -206,9 +189,9 @@ var rendF = {
 			config['tornetrask'].contFunc(reset);
 			config['tornetrask'].init('abiskoLakeIceFreezeup', ['DOY', 'freeze'], 'freezeDOY')
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 43;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('abiskoLakeIceFreezeup', no);
 
 		},
@@ -218,9 +201,9 @@ var rendF = {
 			config['tornetrask'].contFunc(reset);
 			config['tornetrask'].init('abiskoLakeIceTime', 'iceTime')
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 43;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('abiskoLakeIceTime', no);
 
 		},
@@ -230,9 +213,9 @@ var rendF = {
 			config['iceThick'].contFunc(reset);
 			config['iceThick'].init('iceThicknessYear', ['yrly'], ['yrly', 'max'])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 43;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('iceThicknessYear', no);
 		},
 	},
@@ -241,9 +224,9 @@ var rendF = {
 			config['iceThick'].contFunc(reset);
 			config['iceThick'].init('iceThicknessDate', 'date')
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 43;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('iceThicknessDate', no);
 		},
 	},
@@ -253,9 +236,9 @@ var rendF = {
 			config['abiskoSnowDepth'].init("abiskoSnowDepthPeriodMeans", "periodMeans")
 		},
 
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 41;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('abiskoSnowDepthPeriodMeans', no)
 		},
 	},
@@ -264,9 +247,9 @@ var rendF = {
 			config['abiskoSnowDepth'].contFunc(reset);
 			config['abiskoSnowDepth'].init("abiskoSnowDepthPeriodMeans2","decadeMeans")
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 42;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('abiskoSnowDepthPeriodMeans2',no)
 		},
 	},
@@ -275,9 +258,9 @@ var rendF = {
 			config['abiskoSnowDepth'].contFunc(reset);
 			config['abiskoSnowDepth'].init("yrlyAvgSnowDepth",["snowDepth", 'singleStake', 'yrly'], ['snowDepth', 'yrly'])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 42;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('yrlyAvgSnowDepth',no)
 		},
 	},
@@ -286,9 +269,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('slideTemperature',['temperatures','yrly'], ['temperatures', 'yrlySlide']);
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 1;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('slideTemperature', no);
 		},
 	},
@@ -297,9 +280,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('TemperaturesSummer', ['temperatures','summer'], ['temperatures', 'summerSlide']);
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 2;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('TemperaturesSummer', no);
 		},
 	}, 
@@ -308,9 +291,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('TemperaturesAutumn', ['temperatures','autumn'], ['temperatures', 'autumnSlide']);
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 2;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('TemperaturesAutumn', no);
 		},
 	}, 
@@ -319,9 +302,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('TemperaturesSpring', ['temperatures','spring'], ['temperatures', 'springSlide']);
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 2;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('TemperaturesSpring', no);
 		},
 	}, 
@@ -330,9 +313,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('TemperaturesWinter', ['temperatures','winter'], ['temperatures', 'winterSlide']);
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 3;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('TemperaturesWinter', no);
 
 		},
@@ -342,7 +325,7 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('monthlyTemperatures', ['temperatures','monthly'], ['temperatures', 'monthlySlide'])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 4;
 			var div = document.createElement("div");
 			div.setAttribute("id","monthlyTemperatures");
@@ -366,9 +349,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('Precipitation', ['precipitation','yrly'], ['precipitation', 'yrlySlide'])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 23;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('Precipitation', no);
 
 		},
@@ -378,9 +361,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('autumnPrecipitation', ['precipitation','autumn'], ['precipitation', 'autumnSlide'])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 24;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('autumnPrecipitation', no);
 
 		},
@@ -390,9 +373,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('springPrecipitation', ['precipitation','spring'], ['precipitation', 'springSlide'])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 24;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('springPrecipitation', no);
 
 		},
@@ -402,9 +385,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('summerPrecipitation', ['precipitation','summer'], ['precipitation', 'summerSlide'])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 24;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('summerPrecipitation', no);
 
 		},
@@ -414,9 +397,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('winterPrecipitation', ['precipitation','winter'], ['precipitation', 'winterSlide'])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 25;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('winterPrecipitation', no);
 
 		},
@@ -426,7 +409,7 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('monthlyPrecipitation', ['precipitation','monthly'], ['precipitation', 'monthlySlide'])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 26;
 			var div = document.createElement('div');
 			div.setAttribute("id", "monthlyPrecipitation")
@@ -449,9 +432,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('Temperatures',['temperatures','yrly']);
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 1;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('Temperatures', no);
 		},
 
@@ -461,9 +444,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('TemperaturesSummer', ['temperatures','summer']);
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 2;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('TemperaturesSummer', no);
 		},
 	}, 
@@ -472,9 +455,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('TemperaturesAutumn', ['temperatures','autumn']);
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 2;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('TemperaturesAutumn', no);
 		},
 	}, 
@@ -483,9 +466,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('TemperaturesSpring', ['temperatures','spring']);
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 2;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('TemperaturesSpring', no);
 		},
 	}, 
@@ -494,9 +477,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('TemperaturesWinter', ['temperatures','winter']);
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 3;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('TemperaturesWinter', no);
 
 		},
@@ -506,9 +489,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('temperatureDifference', ['temperatures','yrly'],['temperatures','difference'])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 19;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('temperatureDifference', no);
 
 		},
@@ -518,9 +501,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('dailyExtremeTemperature', ['temperatures','yrly'],['temperatures','dailyExtreme'])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 19;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('dailyExtremeTemperature', no);
 
 		},
@@ -530,9 +513,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('weeklyExtremeTemperature', ['temperatures','weeks'],['temperatures','weeklyExtreme'])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 19;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('weeklyExtremeTemperature', no);
 
 		},
@@ -542,7 +525,7 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('monthlyTemperaturesPolar', ['temperatures', 'yrlyFull'], ["temperatures", "polar"])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 4;
 			var div = document.createElement("div");
 			div.setAttribute("id","monthlyTemperaturesPolar");
@@ -556,7 +539,7 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('monthlyPrecipitationPolar', ['precipitation', 'yrlyFull'], ["precipitation", "polar"])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 4;
 			var div = document.createElement("div");
 			div.setAttribute("id","monthlyPrecipitationPolar");
@@ -570,7 +553,7 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('monthlyTemperatures', ['temperatures','monthly'])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 4;
 			var div = document.createElement("div");
 			div.setAttribute("id","monthlyTemperatures");
@@ -594,9 +577,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('Precipitation', ['precipitation','yrly'])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 23;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('Precipitation', no);
 
 		},
@@ -606,9 +589,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('autumnPrecipitation', ['precipitation','autumn'])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 24;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('autumnPrecipitation', no);
 
 		},
@@ -618,9 +601,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('springPrecipitation', ['precipitation','spring'])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 24;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('springPrecipitation', no);
 
 		},
@@ -630,9 +613,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('summerPrecipitation', ['precipitation','summer'])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 24;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('summerPrecipitation', no);
 
 		},
@@ -642,9 +625,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('winterPrecipitation', ['precipitation','winter'])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 25;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('winterPrecipitation', no);
 
 		},
@@ -654,9 +637,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('yearlyPrecipitationDifference', ['precipitation','yrly'], ['precipitation','difference']);
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 38;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('yearlyPrecipitationDifference', no);
 
 		},
@@ -666,9 +649,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('dailyExtremePrecipitation', ['precipitation','yrly'],['precipitation','dailyExtreme'])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 19;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('dailyExtremePrecipitation', no);
 
 		},
@@ -678,9 +661,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('weeklyExtremePrecipitation', ['precipitation','weeks'],['precipitation','weeklyExtreme'])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 19;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('weeklyExtremePrecipitation', no);
 
 		},
@@ -690,7 +673,7 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('monthlyPrecipitation', ['precipitation','monthly'])
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 26;
 			var div = document.createElement('div');
 			div.setAttribute("id", "monthlyPrecipitation")
@@ -713,9 +696,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('growingSeasonFirst', ['temperatures', 'yrlySplit'], 'growingSeasonFrostFirst')
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 18;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('growingSeasonFirst', no);
 
 		}
@@ -725,9 +708,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('growingSeasonLast', ['temperatures', 'yrlySplit'], 'growingSeasonFrostLast')
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 18;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('growingSeasonLast', no);
 
 		}
@@ -738,9 +721,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('growingSeasonDays', 'growingSeasonDays')
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 18;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('growingSeasonDays', no);
 
 		}
@@ -751,9 +734,9 @@ var rendF = {
 			config[stationType].contFunc(reset);
 			config[stationType].init('growingSeason', 'growingSeason')
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 18;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('growingSeason', no);
 
 		}
@@ -763,9 +746,9 @@ var rendF = {
 			config['weeklyCO2'].contFunc(reset);
 			config['weeklyCO2'].init('weeklyCO2', 'weekly')
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 44;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv('weeklyCO2', no);
 		}
 	},
@@ -774,9 +757,9 @@ var rendF = {
 			config['permaHistogramCALM'].contFunc(reset);
 			config['permaHistogramCALM'].init('permaHistogramCALM','')
 		},
-		html: function(debug=false, doc){
+		html: function(doc){
 			var no = 45;
-			if(!debug) no = debug;
+			if(!variables.debug) no = debug;
 			return createDiv("permaHistogramCALM", no);
 		}
 	}

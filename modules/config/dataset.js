@@ -61,6 +61,7 @@ var dataset_struct = {
 			if(meta.unitType){
 				meta.units = require('../../config/charts/lang/'+nav_lang+'/units.json')[meta.unitType];
 			}
+			// DEBUG TODO link to config files
 			return meta;
 		}else{
 			return false

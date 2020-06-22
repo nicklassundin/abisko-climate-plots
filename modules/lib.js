@@ -14,7 +14,7 @@ global.hostUrl = location.protocol +"//"+ require("../config/server.json").domai
 var today = new Date();
 global.variables = {
 	date: new Date(today.getFullYear()-1, 11, 24),
-	dateStr: function(){ return (this.date.getYear()+1900)+"-"+(this.date.getMonth()+1)+"-"+this.date.getDate() }
+	dateStr: function(){ return (this.date.getYear()+1900)+"-"+(this.date.getMonth()+1)+"-"+this.date.getDate() },
 }
 
 var config = require('./config/dataset.js').config;
@@ -47,9 +47,23 @@ lib = {
 	},
 	renderSets: function(div, set=(new URL(window.location.href).searchParams.get("set")), id=(new URL(window.location.href).searchParams.get("station")), url){
 		if(url) hostUrl = url;
+		variables.debug = (new URL(window.location.href).searchParams.get("debug"))
+		if(variables.debug) {
+			var debug = document.createElement("div");
+			debug.setAttribute("class", "debug");
+			debug.innerHTML = "set: "+ set +"</br> station: "+ id
+			div.appendChild(debug)
+		}
 		sets[set].forEach(type => {
 			var container = document.createElement("div");
 			container.setAttribute("id", "mark_"+type);
+			if(variables.debug) {
+				var debug = document.createElement("div");
+				debug.setAttribute("class", "debug");
+				debug.setAttribute("id", "debug_"+type);
+				debug.innerHTML = "type: "+ type +"</br> station: "+ id
+				container.appendChild(debug)
+			}
 			div.appendChild(container);
 			this.renderChart(container, type, id)
 		})

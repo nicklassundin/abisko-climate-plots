@@ -18,7 +18,6 @@ var chart = {
 	textMorph: function(text, meta){
 		var res = "";
 		if(text){
-
 			try{
 				var res = text.replace("[stationName]", stationName).replace("[month]", meta.month).replace("[baseline]", baselineLower +" - "+ baselineUpper).replace("[CO2]", 'CO'+("2".sub())).replace("[SOME TEXT]", "")
 				if(meta.units){
