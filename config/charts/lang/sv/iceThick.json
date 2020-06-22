@@ -1,0 +1,37 @@
+{
+	"valueSuffix": "",
+	"xAxis": {
+		"bott": "År", 
+		"top": "[Y-AXIS]"
+	},
+	"groups": {
+		"0": {
+			"title": "[stationName] Största sjöisdjupet",
+			"subTitle": "",
+			"caption": "Den maximala istjockleken för en viss vinter.",
+			"yAxis": {
+				"left": "Isens tjocklek [cm]", 
+				"right": "[X-AXIS]"
+			},
+			"legend": "Väder"
+		},
+		"1": {
+			"title": "[stationName] Största sjöisdjupet skillnad från baslinjen", 
+			"subTitle": "",
+			"caption": "[Placeholder]",
+			"yAxis": {
+				"left": "Isens tjocklek [cm]", 
+				"right": "[X-AXIS]"
+			},
+			"legend": "Klimat"
+		}
+	},
+	"series": {
+		"iceThick": {
+			"name": "Isens tjocklek"
+		},
+		"diff": {
+			"name": "Isens tjocklek skillnad från baslinjen"
+		}
+	}
+}

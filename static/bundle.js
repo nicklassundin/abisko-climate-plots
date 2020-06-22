@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("var map = {\n\t\"./avgSnowDepth.json\": \"./config/charts/avgSnowDepth.json\",\n\t\"./climate.json\": \"./config/charts/climate.json\",\n\t\"./co2.json\": \"./config/charts/co2.json\",\n\t\"./extremeDay.json\": \"./config/charts/extremeDay.json\",\n\t\"./extremeWeek.json\": \"./config/charts/extremeWeek.json\",\n\t\"./growingSeason.json\": \"./config/charts/growingSeason.json\",\n\t\"./growingSeasonFirst.json\": \"./config/charts/growingSeasonFirst.json\",\n\t\"./growingSeasonLast.json\": \"./config/charts/growingSeasonLast.json\",\n\t\"./ice.json\": \"./config/charts/ice.json\",\n\t\"./iceBreakup.json\": \"./config/charts/iceBreakup.json\",\n\t\"./iceFreeze.json\": \"./config/charts/iceFreeze.json\",\n\t\"./iceThick.json\": \"./config/charts/iceThick.json\",\n\t\"./iceThickDate.json\": \"./config/charts/iceThickDate.json\",\n\t\"./iceTime.json\": \"./config/charts/iceTime.json\",\n\t\"./lang/en/64n-90n_Temperature.json\": \"./config/charts/lang/en/64n-90n_Temperature.json\",\n\t\"./lang/en/autumnPrecipitation.json\": \"./config/charts/lang/en/autumnPrecipitation.json\",\n\t\"./lang/en/autumnTemperature.json\": \"./config/charts/lang/en/autumnTemperature.json\",\n\t\"./lang/en/co2_weekly.json\": \"./config/charts/lang/en/co2_weekly.json\",\n\t\"./lang/en/dataSource.json\": \"./config/charts/lang/en/dataSource.json\",\n\t\"./lang/en/default.json\": \"./config/charts/lang/en/default.json\",\n\t\"./lang/en/glob_Temperature.json\": \"./config/charts/lang/en/glob_Temperature.json\",\n\t\"./lang/en/growingSeason.json\": \"./config/charts/lang/en/growingSeason.json\",\n\t\"./lang/en/growingSeasonDays.json\": \"./config/charts/lang/en/growingSeasonDays.json\",\n\t\"./lang/en/growingSeasonFrostFirst.json\": \"./config/charts/lang/en/growingSeasonFrostFirst.json\",\n\t\"./lang/en/growingSeasonFrostLast.json\": \"./config/charts/lang/en/growingSeasonFrostLast.json\",\n\t\"./lang/en/ice.json\": \"./config/charts/lang/en/ice.json\",\n\t\"./lang/en/iceBreakup.json\": \"./config/charts/lang/en/iceBreakup.json\",\n\t\"./lang/en/iceFreeze.json\": \"./config/charts/lang/en/iceFreeze.json\",\n\t\"./lang/en/iceThick.json\": \"./config/charts/lang/en/iceThick.json\",\n\t\"./lang/en/iceThickDate.json\": \"./config/charts/lang/en/iceThickDate.json\",\n\t\"./lang/en/iceTime.json\": \"./config/charts/lang/en/iceTime.json\",\n\t\"./lang/en/menu.json\": \"./config/charts/lang/en/menu.json\",\n\t\"./lang/en/monthlyPrecipitation.json\": \"./config/charts/lang/en/monthlyPrecipitation.json\",\n\t\"./lang/en/monthlyTemperature.json\": \"./config/charts/lang/en/monthlyTemperature.json\",\n\t\"./lang/en/nhem_Temperature.json\": \"./config/charts/lang/en/nhem_Temperature.json\",\n\t\"./lang/en/perma.json\": \"./config/charts/lang/en/perma.json\",\n\t\"./lang/en/seasonTemperature.json\": \"./config/charts/lang/en/seasonTemperature.json\",\n\t\"./lang/en/snowDepth.json\": \"./config/charts/lang/en/snowDepth.json\",\n\t\"./lang/en/snowDepthDecade.json\": \"./config/charts/lang/en/snowDepthDecade.json\",\n\t\"./lang/en/snowDepthPeriod.json\": \"./config/charts/lang/en/snowDepthPeriod.json\",\n\t\"./lang/en/springPrecipitation.json\": \"./config/charts/lang/en/springPrecipitation.json\",\n\t\"./lang/en/springTemperature.json\": \"./config/charts/lang/en/springTemperature.json\",\n\t\"./lang/en/summerPrecipitation.json\": \"./config/charts/lang/en/summerPrecipitation.json\",\n\t\"./lang/en/summerTemperature.json\": \"./config/charts/lang/en/summerTemperature.json\",\n\t\"./lang/en/units.json\": \"./config/charts/lang/en/units.json\",\n\t\"./lang/en/winterPrecipitation.json\": \"./config/charts/lang/en/winterPrecipitation.json\",\n\t\"./lang/en/winterTemperature.json\": \"./config/charts/lang/en/winterTemperature.json\",\n\t\"./lang/en/yrlyAvgSnowDepth.json\": \"./config/charts/lang/en/yrlyAvgSnowDepth.json\",\n\t\"./lang/en/yrlyPrecipitation.json\": \"./config/charts/lang/en/yrlyPrecipitation.json\",\n\t\"./lang/en/yrlyTemperature.json\": \"./config/charts/lang/en/yrlyTemperature.json\",\n\t\"./lang/sv/dataSource.json\": \"./config/charts/lang/sv/dataSource.json\",\n\t\"./lang/sv/default.json\": \"./config/charts/lang/sv/default.json\",\n\t\"./lang/sv/menu.json\": \"./config/charts/lang/sv/menu.json\",\n\t\"./lang/sv/yrlyTemperature.json\": \"./config/charts/lang/sv/yrlyTemperature.json\",\n\t\"./monthly.json\": \"./config/charts/monthly.json\",\n\t\"./perma.json\": \"./config/charts/perma.json\",\n\t\"./polarPrecipitation.json\": \"./config/charts/polarPrecipitation.json\",\n\t\"./polarTemperature.json\": \"./config/charts/polarTemperature.json\",\n\t\"./precipitation.json\": \"./config/charts/precipitation.json\",\n\t\"./slide.json\": \"./config/charts/slide.json\",\n\t\"./snowDepthDecade.json\": \"./config/charts/snowDepthDecade.json\",\n\t\"./snowDepthPeriod.json\": \"./config/charts/snowDepthPeriod.json\",\n\t\"./temperature.json\": \"./config/charts/temperature.json\",\n\t\"./weather.json\": \"./config/charts/weather.json\"\n};\n\n\nfunction webpackContext(req) {\n\tvar id = webpackContextResolve(req);\n\treturn __webpack_require__(id);\n}\nfunction webpackContextResolve(req) {\n\tif(!__webpack_require__.o(map, req)) {\n\t\tvar e = new Error(\"Cannot find module '\" + req + \"'\");\n\t\te.code = 'MODULE_NOT_FOUND';\n\t\tthrow e;\n\t}\n\treturn map[req];\n}\nwebpackContext.keys = function webpackContextKeys() {\n\treturn Object.keys(map);\n};\nwebpackContext.resolve = webpackContextResolve;\nmodule.exports = webpackContext;\nwebpackContext.id = \"./config/charts sync recursive ^\\\\.\\\\/.*\\\\.json$\";\n\n//# sourceURL=webpack:///./config/charts_sync_^\\.\\/.*\\.json$?");
+eval("var map = {\n\t\"./avgSnowDepth.json\": \"./config/charts/avgSnowDepth.json\",\n\t\"./climate.json\": \"./config/charts/climate.json\",\n\t\"./co2.json\": \"./config/charts/co2.json\",\n\t\"./extremeDay.json\": \"./config/charts/extremeDay.json\",\n\t\"./extremeWeek.json\": \"./config/charts/extremeWeek.json\",\n\t\"./growingSeason.json\": \"./config/charts/growingSeason.json\",\n\t\"./growingSeasonFirst.json\": \"./config/charts/growingSeasonFirst.json\",\n\t\"./growingSeasonLast.json\": \"./config/charts/growingSeasonLast.json\",\n\t\"./ice.json\": \"./config/charts/ice.json\",\n\t\"./iceBreakup.json\": \"./config/charts/iceBreakup.json\",\n\t\"./iceFreeze.json\": \"./config/charts/iceFreeze.json\",\n\t\"./iceThick.json\": \"./config/charts/iceThick.json\",\n\t\"./iceThickDate.json\": \"./config/charts/iceThickDate.json\",\n\t\"./iceTime.json\": \"./config/charts/iceTime.json\",\n\t\"./lang/en/64n-90n_Temperature.json\": \"./config/charts/lang/en/64n-90n_Temperature.json\",\n\t\"./lang/en/autumnPrecipitation.json\": \"./config/charts/lang/en/autumnPrecipitation.json\",\n\t\"./lang/en/autumnTemperature.json\": \"./config/charts/lang/en/autumnTemperature.json\",\n\t\"./lang/en/co2_weekly.json\": \"./config/charts/lang/en/co2_weekly.json\",\n\t\"./lang/en/dataSource.json\": \"./config/charts/lang/en/dataSource.json\",\n\t\"./lang/en/default.json\": \"./config/charts/lang/en/default.json\",\n\t\"./lang/en/glob_Temperature.json\": \"./config/charts/lang/en/glob_Temperature.json\",\n\t\"./lang/en/growingSeason.json\": \"./config/charts/lang/en/growingSeason.json\",\n\t\"./lang/en/growingSeasonDays.json\": \"./config/charts/lang/en/growingSeasonDays.json\",\n\t\"./lang/en/growingSeasonFrostFirst.json\": \"./config/charts/lang/en/growingSeasonFrostFirst.json\",\n\t\"./lang/en/growingSeasonFrostLast.json\": \"./config/charts/lang/en/growingSeasonFrostLast.json\",\n\t\"./lang/en/ice.json\": \"./config/charts/lang/en/ice.json\",\n\t\"./lang/en/iceBreakup.json\": \"./config/charts/lang/en/iceBreakup.json\",\n\t\"./lang/en/iceFreeze.json\": \"./config/charts/lang/en/iceFreeze.json\",\n\t\"./lang/en/iceThick.json\": \"./config/charts/lang/en/iceThick.json\",\n\t\"./lang/en/iceThickDate.json\": \"./config/charts/lang/en/iceThickDate.json\",\n\t\"./lang/en/iceTime.json\": \"./config/charts/lang/en/iceTime.json\",\n\t\"./lang/en/menu.json\": \"./config/charts/lang/en/menu.json\",\n\t\"./lang/en/monthlyPrecipitation.json\": \"./config/charts/lang/en/monthlyPrecipitation.json\",\n\t\"./lang/en/monthlyTemperature.json\": \"./config/charts/lang/en/monthlyTemperature.json\",\n\t\"./lang/en/nhem_Temperature.json\": \"./config/charts/lang/en/nhem_Temperature.json\",\n\t\"./lang/en/perma.json\": \"./config/charts/lang/en/perma.json\",\n\t\"./lang/en/seasonTemperature.json\": \"./config/charts/lang/en/seasonTemperature.json\",\n\t\"./lang/en/snowDepth.json\": \"./config/charts/lang/en/snowDepth.json\",\n\t\"./lang/en/snowDepthDecade.json\": \"./config/charts/lang/en/snowDepthDecade.json\",\n\t\"./lang/en/snowDepthPeriod.json\": \"./config/charts/lang/en/snowDepthPeriod.json\",\n\t\"./lang/en/springPrecipitation.json\": \"./config/charts/lang/en/springPrecipitation.json\",\n\t\"./lang/en/springTemperature.json\": \"./config/charts/lang/en/springTemperature.json\",\n\t\"./lang/en/summerPrecipitation.json\": \"./config/charts/lang/en/summerPrecipitation.json\",\n\t\"./lang/en/summerTemperature.json\": \"./config/charts/lang/en/summerTemperature.json\",\n\t\"./lang/en/units.json\": \"./config/charts/lang/en/units.json\",\n\t\"./lang/en/winterPrecipitation.json\": \"./config/charts/lang/en/winterPrecipitation.json\",\n\t\"./lang/en/winterTemperature.json\": \"./config/charts/lang/en/winterTemperature.json\",\n\t\"./lang/en/yrlyAvgSnowDepth.json\": \"./config/charts/lang/en/yrlyAvgSnowDepth.json\",\n\t\"./lang/en/yrlyPrecipitation.json\": \"./config/charts/lang/en/yrlyPrecipitation.json\",\n\t\"./lang/en/yrlyTemperature.json\": \"./config/charts/lang/en/yrlyTemperature.json\",\n\t\"./lang/sv/64n-90n_Temperature.json\": \"./config/charts/lang/sv/64n-90n_Temperature.json\",\n\t\"./lang/sv/autumnPrecipitation.json\": \"./config/charts/lang/sv/autumnPrecipitation.json\",\n\t\"./lang/sv/autumnTemperature.json\": \"./config/charts/lang/sv/autumnTemperature.json\",\n\t\"./lang/sv/co2_weekly.json\": \"./config/charts/lang/sv/co2_weekly.json\",\n\t\"./lang/sv/dataSource.json\": \"./config/charts/lang/sv/dataSource.json\",\n\t\"./lang/sv/default.json\": \"./config/charts/lang/sv/default.json\",\n\t\"./lang/sv/glob_Temperature.json\": \"./config/charts/lang/sv/glob_Temperature.json\",\n\t\"./lang/sv/growingSeason.json\": \"./config/charts/lang/sv/growingSeason.json\",\n\t\"./lang/sv/growingSeasonDays.json\": \"./config/charts/lang/sv/growingSeasonDays.json\",\n\t\"./lang/sv/growingSeasonFrostFirst.json\": \"./config/charts/lang/sv/growingSeasonFrostFirst.json\",\n\t\"./lang/sv/growingSeasonFrostLast.json\": \"./config/charts/lang/sv/growingSeasonFrostLast.json\",\n\t\"./lang/sv/ice.json\": \"./config/charts/lang/sv/ice.json\",\n\t\"./lang/sv/iceBreakup.json\": \"./config/charts/lang/sv/iceBreakup.json\",\n\t\"./lang/sv/iceFreeze.json\": \"./config/charts/lang/sv/iceFreeze.json\",\n\t\"./lang/sv/iceThick.json\": \"./config/charts/lang/sv/iceThick.json\",\n\t\"./lang/sv/iceThickDate.json\": \"./config/charts/lang/sv/iceThickDate.json\",\n\t\"./lang/sv/iceTime.json\": \"./config/charts/lang/sv/iceTime.json\",\n\t\"./lang/sv/menu.json\": \"./config/charts/lang/sv/menu.json\",\n\t\"./lang/sv/monthlyPrecipitation.json\": \"./config/charts/lang/sv/monthlyPrecipitation.json\",\n\t\"./lang/sv/monthlyTemperature.json\": \"./config/charts/lang/sv/monthlyTemperature.json\",\n\t\"./lang/sv/nhem_Temperature.json\": \"./config/charts/lang/sv/nhem_Temperature.json\",\n\t\"./lang/sv/perma.json\": \"./config/charts/lang/sv/perma.json\",\n\t\"./lang/sv/seasonTemperature.json\": \"./config/charts/lang/sv/seasonTemperature.json\",\n\t\"./lang/sv/snowDepth.json\": \"./config/charts/lang/sv/snowDepth.json\",\n\t\"./lang/sv/snowDepthDecade.json\": \"./config/charts/lang/sv/snowDepthDecade.json\",\n\t\"./lang/sv/snowDepthPeriod.json\": \"./config/charts/lang/sv/snowDepthPeriod.json\",\n\t\"./lang/sv/units.json\": \"./config/charts/lang/sv/units.json\",\n\t\"./lang/sv/yrlyAvgSnowDepth.json\": \"./config/charts/lang/sv/yrlyAvgSnowDepth.json\",\n\t\"./lang/sv/yrlyPrecipitation.json\": \"./config/charts/lang/sv/yrlyPrecipitation.json\",\n\t\"./lang/sv/yrlyTemperature.json\": \"./config/charts/lang/sv/yrlyTemperature.json\",\n\t\"./monthly.json\": \"./config/charts/monthly.json\",\n\t\"./perma.json\": \"./config/charts/perma.json\",\n\t\"./polarPrecipitation.json\": \"./config/charts/polarPrecipitation.json\",\n\t\"./polarTemperature.json\": \"./config/charts/polarTemperature.json\",\n\t\"./precipitation.json\": \"./config/charts/precipitation.json\",\n\t\"./slide.json\": \"./config/charts/slide.json\",\n\t\"./snowDepthDecade.json\": \"./config/charts/snowDepthDecade.json\",\n\t\"./snowDepthPeriod.json\": \"./config/charts/snowDepthPeriod.json\",\n\t\"./temperature.json\": \"./config/charts/temperature.json\",\n\t\"./weather.json\": \"./config/charts/weather.json\"\n};\n\n\nfunction webpackContext(req) {\n\tvar id = webpackContextResolve(req);\n\treturn __webpack_require__(id);\n}\nfunction webpackContextResolve(req) {\n\tif(!__webpack_require__.o(map, req)) {\n\t\tvar e = new Error(\"Cannot find module '\" + req + \"'\");\n\t\te.code = 'MODULE_NOT_FOUND';\n\t\tthrow e;\n\t}\n\treturn map[req];\n}\nwebpackContext.keys = function webpackContextKeys() {\n\treturn Object.keys(map);\n};\nwebpackContext.resolve = webpackContextResolve;\nmodule.exports = webpackContext;\nwebpackContext.id = \"./config/charts sync recursive ^\\\\.\\\\/.*\\\\.json$\";\n\n//# sourceURL=webpack:///./config/charts_sync_^\\.\\/.*\\.json$?");
 
 /***/ }),
 
@@ -258,7 +258,7 @@ eval("module.exports = JSON.parse(\"{\\\"type\\\":\\\"column\\\",\\\"groups\\\":
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("var map = {\n\t\"./en/64n-90n_Temperature.json\": \"./config/charts/lang/en/64n-90n_Temperature.json\",\n\t\"./en/autumnPrecipitation.json\": \"./config/charts/lang/en/autumnPrecipitation.json\",\n\t\"./en/autumnTemperature.json\": \"./config/charts/lang/en/autumnTemperature.json\",\n\t\"./en/co2_weekly.json\": \"./config/charts/lang/en/co2_weekly.json\",\n\t\"./en/dataSource.json\": \"./config/charts/lang/en/dataSource.json\",\n\t\"./en/default.json\": \"./config/charts/lang/en/default.json\",\n\t\"./en/glob_Temperature.json\": \"./config/charts/lang/en/glob_Temperature.json\",\n\t\"./en/growingSeason.json\": \"./config/charts/lang/en/growingSeason.json\",\n\t\"./en/growingSeasonDays.json\": \"./config/charts/lang/en/growingSeasonDays.json\",\n\t\"./en/growingSeasonFrostFirst.json\": \"./config/charts/lang/en/growingSeasonFrostFirst.json\",\n\t\"./en/growingSeasonFrostLast.json\": \"./config/charts/lang/en/growingSeasonFrostLast.json\",\n\t\"./en/ice.json\": \"./config/charts/lang/en/ice.json\",\n\t\"./en/iceBreakup.json\": \"./config/charts/lang/en/iceBreakup.json\",\n\t\"./en/iceFreeze.json\": \"./config/charts/lang/en/iceFreeze.json\",\n\t\"./en/iceThick.json\": \"./config/charts/lang/en/iceThick.json\",\n\t\"./en/iceThickDate.json\": \"./config/charts/lang/en/iceThickDate.json\",\n\t\"./en/iceTime.json\": \"./config/charts/lang/en/iceTime.json\",\n\t\"./en/menu.json\": \"./config/charts/lang/en/menu.json\",\n\t\"./en/monthlyPrecipitation.json\": \"./config/charts/lang/en/monthlyPrecipitation.json\",\n\t\"./en/monthlyTemperature.json\": \"./config/charts/lang/en/monthlyTemperature.json\",\n\t\"./en/nhem_Temperature.json\": \"./config/charts/lang/en/nhem_Temperature.json\",\n\t\"./en/perma.json\": \"./config/charts/lang/en/perma.json\",\n\t\"./en/seasonTemperature.json\": \"./config/charts/lang/en/seasonTemperature.json\",\n\t\"./en/snowDepth.json\": \"./config/charts/lang/en/snowDepth.json\",\n\t\"./en/snowDepthDecade.json\": \"./config/charts/lang/en/snowDepthDecade.json\",\n\t\"./en/snowDepthPeriod.json\": \"./config/charts/lang/en/snowDepthPeriod.json\",\n\t\"./en/springPrecipitation.json\": \"./config/charts/lang/en/springPrecipitation.json\",\n\t\"./en/springTemperature.json\": \"./config/charts/lang/en/springTemperature.json\",\n\t\"./en/summerPrecipitation.json\": \"./config/charts/lang/en/summerPrecipitation.json\",\n\t\"./en/summerTemperature.json\": \"./config/charts/lang/en/summerTemperature.json\",\n\t\"./en/units.json\": \"./config/charts/lang/en/units.json\",\n\t\"./en/winterPrecipitation.json\": \"./config/charts/lang/en/winterPrecipitation.json\",\n\t\"./en/winterTemperature.json\": \"./config/charts/lang/en/winterTemperature.json\",\n\t\"./en/yrlyAvgSnowDepth.json\": \"./config/charts/lang/en/yrlyAvgSnowDepth.json\",\n\t\"./en/yrlyPrecipitation.json\": \"./config/charts/lang/en/yrlyPrecipitation.json\",\n\t\"./en/yrlyTemperature.json\": \"./config/charts/lang/en/yrlyTemperature.json\",\n\t\"./sv/dataSource.json\": \"./config/charts/lang/sv/dataSource.json\",\n\t\"./sv/default.json\": \"./config/charts/lang/sv/default.json\",\n\t\"./sv/menu.json\": \"./config/charts/lang/sv/menu.json\",\n\t\"./sv/yrlyTemperature.json\": \"./config/charts/lang/sv/yrlyTemperature.json\"\n};\n\n\nfunction webpackContext(req) {\n\tvar id = webpackContextResolve(req);\n\treturn __webpack_require__(id);\n}\nfunction webpackContextResolve(req) {\n\tif(!__webpack_require__.o(map, req)) {\n\t\tvar e = new Error(\"Cannot find module '\" + req + \"'\");\n\t\te.code = 'MODULE_NOT_FOUND';\n\t\tthrow e;\n\t}\n\treturn map[req];\n}\nwebpackContext.keys = function webpackContextKeys() {\n\treturn Object.keys(map);\n};\nwebpackContext.resolve = webpackContextResolve;\nmodule.exports = webpackContext;\nwebpackContext.id = \"./config/charts/lang sync recursive ^\\\\.\\\\/.*\\\\.json$\";\n\n//# sourceURL=webpack:///./config/charts/lang_sync_^\\.\\/.*\\.json$?");
+eval("var map = {\n\t\"./en/64n-90n_Temperature.json\": \"./config/charts/lang/en/64n-90n_Temperature.json\",\n\t\"./en/autumnPrecipitation.json\": \"./config/charts/lang/en/autumnPrecipitation.json\",\n\t\"./en/autumnTemperature.json\": \"./config/charts/lang/en/autumnTemperature.json\",\n\t\"./en/co2_weekly.json\": \"./config/charts/lang/en/co2_weekly.json\",\n\t\"./en/dataSource.json\": \"./config/charts/lang/en/dataSource.json\",\n\t\"./en/default.json\": \"./config/charts/lang/en/default.json\",\n\t\"./en/glob_Temperature.json\": \"./config/charts/lang/en/glob_Temperature.json\",\n\t\"./en/growingSeason.json\": \"./config/charts/lang/en/growingSeason.json\",\n\t\"./en/growingSeasonDays.json\": \"./config/charts/lang/en/growingSeasonDays.json\",\n\t\"./en/growingSeasonFrostFirst.json\": \"./config/charts/lang/en/growingSeasonFrostFirst.json\",\n\t\"./en/growingSeasonFrostLast.json\": \"./config/charts/lang/en/growingSeasonFrostLast.json\",\n\t\"./en/ice.json\": \"./config/charts/lang/en/ice.json\",\n\t\"./en/iceBreakup.json\": \"./config/charts/lang/en/iceBreakup.json\",\n\t\"./en/iceFreeze.json\": \"./config/charts/lang/en/iceFreeze.json\",\n\t\"./en/iceThick.json\": \"./config/charts/lang/en/iceThick.json\",\n\t\"./en/iceThickDate.json\": \"./config/charts/lang/en/iceThickDate.json\",\n\t\"./en/iceTime.json\": \"./config/charts/lang/en/iceTime.json\",\n\t\"./en/menu.json\": \"./config/charts/lang/en/menu.json\",\n\t\"./en/monthlyPrecipitation.json\": \"./config/charts/lang/en/monthlyPrecipitation.json\",\n\t\"./en/monthlyTemperature.json\": \"./config/charts/lang/en/monthlyTemperature.json\",\n\t\"./en/nhem_Temperature.json\": \"./config/charts/lang/en/nhem_Temperature.json\",\n\t\"./en/perma.json\": \"./config/charts/lang/en/perma.json\",\n\t\"./en/seasonTemperature.json\": \"./config/charts/lang/en/seasonTemperature.json\",\n\t\"./en/snowDepth.json\": \"./config/charts/lang/en/snowDepth.json\",\n\t\"./en/snowDepthDecade.json\": \"./config/charts/lang/en/snowDepthDecade.json\",\n\t\"./en/snowDepthPeriod.json\": \"./config/charts/lang/en/snowDepthPeriod.json\",\n\t\"./en/springPrecipitation.json\": \"./config/charts/lang/en/springPrecipitation.json\",\n\t\"./en/springTemperature.json\": \"./config/charts/lang/en/springTemperature.json\",\n\t\"./en/summerPrecipitation.json\": \"./config/charts/lang/en/summerPrecipitation.json\",\n\t\"./en/summerTemperature.json\": \"./config/charts/lang/en/summerTemperature.json\",\n\t\"./en/units.json\": \"./config/charts/lang/en/units.json\",\n\t\"./en/winterPrecipitation.json\": \"./config/charts/lang/en/winterPrecipitation.json\",\n\t\"./en/winterTemperature.json\": \"./config/charts/lang/en/winterTemperature.json\",\n\t\"./en/yrlyAvgSnowDepth.json\": \"./config/charts/lang/en/yrlyAvgSnowDepth.json\",\n\t\"./en/yrlyPrecipitation.json\": \"./config/charts/lang/en/yrlyPrecipitation.json\",\n\t\"./en/yrlyTemperature.json\": \"./config/charts/lang/en/yrlyTemperature.json\",\n\t\"./sv/64n-90n_Temperature.json\": \"./config/charts/lang/sv/64n-90n_Temperature.json\",\n\t\"./sv/autumnPrecipitation.json\": \"./config/charts/lang/sv/autumnPrecipitation.json\",\n\t\"./sv/autumnTemperature.json\": \"./config/charts/lang/sv/autumnTemperature.json\",\n\t\"./sv/co2_weekly.json\": \"./config/charts/lang/sv/co2_weekly.json\",\n\t\"./sv/dataSource.json\": \"./config/charts/lang/sv/dataSource.json\",\n\t\"./sv/default.json\": \"./config/charts/lang/sv/default.json\",\n\t\"./sv/glob_Temperature.json\": \"./config/charts/lang/sv/glob_Temperature.json\",\n\t\"./sv/growingSeason.json\": \"./config/charts/lang/sv/growingSeason.json\",\n\t\"./sv/growingSeasonDays.json\": \"./config/charts/lang/sv/growingSeasonDays.json\",\n\t\"./sv/growingSeasonFrostFirst.json\": \"./config/charts/lang/sv/growingSeasonFrostFirst.json\",\n\t\"./sv/growingSeasonFrostLast.json\": \"./config/charts/lang/sv/growingSeasonFrostLast.json\",\n\t\"./sv/ice.json\": \"./config/charts/lang/sv/ice.json\",\n\t\"./sv/iceBreakup.json\": \"./config/charts/lang/sv/iceBreakup.json\",\n\t\"./sv/iceFreeze.json\": \"./config/charts/lang/sv/iceFreeze.json\",\n\t\"./sv/iceThick.json\": \"./config/charts/lang/sv/iceThick.json\",\n\t\"./sv/iceThickDate.json\": \"./config/charts/lang/sv/iceThickDate.json\",\n\t\"./sv/iceTime.json\": \"./config/charts/lang/sv/iceTime.json\",\n\t\"./sv/menu.json\": \"./config/charts/lang/sv/menu.json\",\n\t\"./sv/monthlyPrecipitation.json\": \"./config/charts/lang/sv/monthlyPrecipitation.json\",\n\t\"./sv/monthlyTemperature.json\": \"./config/charts/lang/sv/monthlyTemperature.json\",\n\t\"./sv/nhem_Temperature.json\": \"./config/charts/lang/sv/nhem_Temperature.json\",\n\t\"./sv/perma.json\": \"./config/charts/lang/sv/perma.json\",\n\t\"./sv/seasonTemperature.json\": \"./config/charts/lang/sv/seasonTemperature.json\",\n\t\"./sv/snowDepth.json\": \"./config/charts/lang/sv/snowDepth.json\",\n\t\"./sv/snowDepthDecade.json\": \"./config/charts/lang/sv/snowDepthDecade.json\",\n\t\"./sv/snowDepthPeriod.json\": \"./config/charts/lang/sv/snowDepthPeriod.json\",\n\t\"./sv/units.json\": \"./config/charts/lang/sv/units.json\",\n\t\"./sv/yrlyAvgSnowDepth.json\": \"./config/charts/lang/sv/yrlyAvgSnowDepth.json\",\n\t\"./sv/yrlyPrecipitation.json\": \"./config/charts/lang/sv/yrlyPrecipitation.json\",\n\t\"./sv/yrlyTemperature.json\": \"./config/charts/lang/sv/yrlyTemperature.json\"\n};\n\n\nfunction webpackContext(req) {\n\tvar id = webpackContextResolve(req);\n\treturn __webpack_require__(id);\n}\nfunction webpackContextResolve(req) {\n\tif(!__webpack_require__.o(map, req)) {\n\t\tvar e = new Error(\"Cannot find module '\" + req + \"'\");\n\t\te.code = 'MODULE_NOT_FOUND';\n\t\tthrow e;\n\t}\n\treturn map[req];\n}\nwebpackContext.keys = function webpackContextKeys() {\n\treturn Object.keys(map);\n};\nwebpackContext.resolve = webpackContextResolve;\nmodule.exports = webpackContext;\nwebpackContext.id = \"./config/charts/lang sync recursive ^\\\\.\\\\/.*\\\\.json$\";\n\n//# sourceURL=webpack:///./config/charts/lang_sync_^\\.\\/.*\\.json$?");
 
 /***/ }),
 
@@ -291,7 +291,7 @@ eval("var map = {\n\t\"./en/menu.json\": \"./config/charts/lang/en/menu.json\",\
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("var map = {\n\t\"./en/units.json\": \"./config/charts/lang/en/units.json\"\n};\n\n\nfunction webpackContext(req) {\n\tvar id = webpackContextResolve(req);\n\treturn __webpack_require__(id);\n}\nfunction webpackContextResolve(req) {\n\tif(!__webpack_require__.o(map, req)) {\n\t\tvar e = new Error(\"Cannot find module '\" + req + \"'\");\n\t\te.code = 'MODULE_NOT_FOUND';\n\t\tthrow e;\n\t}\n\treturn map[req];\n}\nwebpackContext.keys = function webpackContextKeys() {\n\treturn Object.keys(map);\n};\nwebpackContext.resolve = webpackContextResolve;\nmodule.exports = webpackContext;\nwebpackContext.id = \"./config/charts/lang sync recursive ^\\\\.\\\\/.*\\\\/units\\\\.json$\";\n\n//# sourceURL=webpack:///./config/charts/lang_sync_^\\.\\/.*\\/units\\.json$?");
+eval("var map = {\n\t\"./en/units.json\": \"./config/charts/lang/en/units.json\",\n\t\"./sv/units.json\": \"./config/charts/lang/sv/units.json\"\n};\n\n\nfunction webpackContext(req) {\n\tvar id = webpackContextResolve(req);\n\treturn __webpack_require__(id);\n}\nfunction webpackContextResolve(req) {\n\tif(!__webpack_require__.o(map, req)) {\n\t\tvar e = new Error(\"Cannot find module '\" + req + \"'\");\n\t\te.code = 'MODULE_NOT_FOUND';\n\t\tthrow e;\n\t}\n\treturn map[req];\n}\nwebpackContext.keys = function webpackContextKeys() {\n\treturn Object.keys(map);\n};\nwebpackContext.resolve = webpackContextResolve;\nmodule.exports = webpackContext;\nwebpackContext.id = \"./config/charts/lang sync recursive ^\\\\.\\\\/.*\\\\/units\\\\.json$\";\n\n//# sourceURL=webpack:///./config/charts/lang_sync_^\\.\\/.*\\/units\\.json$?");
 
 /***/ }),
 
@@ -445,7 +445,7 @@ eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"\\\",\\\"xAxis\\\":
 /*! exports provided: valueSuffix, xAxis, groups, series, default */
 /***/ (function(module) {
 
-eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"Year\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"Troneträsk Freeze-up of lake ice vs ice time\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"Day of year for freeze-up of lake ice.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"freeze-up [day of year]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Weather\\\"},\\\"1\\\":{\\\"title\\\":\\\"Troneträsk Freeze-Up Date of Lake Ice Difference from Baseline\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"Freeze-up difference from baseline period, typically 1961 to 1990.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Ice freeze-up [day of year]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Climate\\\"}},\\\"series\\\":{\\\"avg\\\":{\\\"name\\\":\\\"Break-up\\\"},\\\"diff\\\":{\\\"name\\\":\\\"Difference\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/en/iceFreeze.json?");
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"Year\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"Troneträsk Freeze-up of lake ice vs ice time\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"Day of year for freeze-up of lake ice.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"freeze-up [day of year]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Weather\\\"},\\\"1\\\":{\\\"title\\\":\\\"Troneträsk Freeze-Up Date of Lake Ice Difference from Baseline\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"Freeze-up difference from baseline period, typically 1961 to 1990.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Ice freeze-up [day of year]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Climate\\\"}},\\\"series\\\":{\\\"avg\\\":{\\\"name\\\":\\\"Freeze-up\\\"},\\\"diff\\\":{\\\"name\\\":\\\"Difference\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/en/iceFreeze.json?");
 
 /***/ }),
 
@@ -691,6 +691,50 @@ eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"°C\\\",\\\"xAxis\\
 
 /***/ }),
 
+/***/ "./config/charts/lang/sv/64n-90n_Temperature.json":
+/*!********************************************************!*\
+  !*** ./config/charts/lang/sv/64n-90n_Temperature.json ***!
+  \********************************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"°C\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"År\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"Årlig genomsnittlig Temperatur för Arktis (64N-90N)\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"[SOME TEXT]\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Genomsnittlig Temperatur [°C]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Väder\\\"},\\\"1\\\":{\\\"title\\\":\\\"Årlig genomsnittlig temperaturskillnad från baslinjen för Akrktis (64N-90N)\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"Skillnaden mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Temperaturskillnad [°C]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Klimat\\\"}},\\\"series\\\":{\\\"max\\\":{\\\"name\\\":\\\"Max\\\"},\\\"min\\\":{\\\"name\\\":\\\"Min\\\"},\\\"avg\\\":{\\\"name\\\":\\\"Genomsnittlig Temperature\\\"},\\\"diff\\\":{\\\"name\\\":\\\"Temperaturskillnad\\\"},\\\"linjer\\\":{\\\"name\\\":\\\"[example]\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/64n-90n_Temperature.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/autumnPrecipitation.json":
+/*!********************************************************!*\
+  !*** ./config/charts/lang/sv/autumnPrecipitation.json ***!
+  \********************************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"mm\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"År\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"[stationName] Höstens genomsnittliga nederbörd\\\",\\\"subTitle\\\":\\\"September till November\\\",\\\"caption\\\":\\\"Genomsnittlig årlig höst (september till november) nederbörd. Månadens lägsta (min) och högsta (max) temperatur.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Genomsnittlig nederbörd [mm]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Väder\\\"},\\\"1\\\":{\\\"title\\\":\\\"[stationName]  Höstens genomsnittliga nederbördsskillnad från baslinjen\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"Skillnaden mellan höstens (september-november) säsongsmedelvärden och genomsnittet för utgångsperioden, vanligtvis 1961 till 1990.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Genomsnittlig nederbörd [mm]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Klimat\\\"}},\\\"series\\\":{\\\"diff\\\":{\\\"name\\\":\\\"Skillnad från baslinhjen\\\"},\\\"snow\\\":{\\\"name\\\":\\\"Nederbörd från snö\\\"},\\\"rain\\\":{\\\"name\\\":\\\"Nederbörd från regn\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/autumnPrecipitation.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/autumnTemperature.json":
+/*!******************************************************!*\
+  !*** ./config/charts/lang/sv/autumnTemperature.json ***!
+  \******************************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"°C\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"År\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"[stationName] Höstens medeltemperatur\\\",\\\"subTitle\\\":\\\"September till November\\\",\\\"caption\\\":\\\"Genomsnittlig årlig höst (september till november) temperatur. Månadens lägsta (min) och högsta (max) temperatur.\\\",\\\"legend\\\":\\\"Väder\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Medeltemperatur [°C]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"}},\\\"1\\\":{\\\"title\\\":\\\"[stationName] Höstens genomsnittliga temperaturskillnad från baslinjen\\\",\\\"subTitle\\\":\\\"September till November\\\",\\\"caption\\\":\\\"Skillnaden mellan höstens (september-november) säsongsmedelvärden och genomsnittet för utgångsperioden, vanligtvis 1961 till 1990.\\\",\\\"legend\\\":\\\"Klimat\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Temperaturskillnad [°C]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"}}},\\\"series\\\":{\\\"max\\\":{\\\"name\\\":\\\"Max\\\"},\\\"min\\\":{\\\"name\\\":\\\"Min\\\"},\\\"avg\\\":{\\\"name\\\":\\\"Årligt genomsnitt\\\"},\\\"diff\\\":{\\\"name\\\":\\\"Skillnad från baslinjen\\\"},\\\"linjer\\\":{\\\"name\\\":\\\"[example]\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/autumnTemperature.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/co2_weekly.json":
+/*!***********************************************!*\
+  !*** ./config/charts/lang/sv/co2_weekly.json ***!
+  \***********************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"ppm\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"År\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"Global Atmosfärisk CO2 koncentration\\\",\\\"subTitle\\\":\\\"[SUB-TITLE]\\\",\\\"caption\\\":\\\"Koldioxidkoncentration (ppm) vid Mauna Loa-observatoriet på Hawaii.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"[CO2] koncentration (ppm)\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Väder\\\"}},\\\"series\\\":{\\\"co2\\\":{\\\"name\\\":\\\"[CO2]\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/co2_weekly.json?");
+
+/***/ }),
+
 /***/ "./config/charts/lang/sv/dataSource.json":
 /*!***********************************************!*\
   !*** ./config/charts/lang/sv/dataSource.json ***!
@@ -713,6 +757,127 @@ eval("module.exports = JSON.parse(\"{\\\"title\\\":\\\"[TITLE]\\\",\\\"sub-title
 
 /***/ }),
 
+/***/ "./config/charts/lang/sv/glob_Temperature.json":
+/*!*****************************************************!*\
+  !*** ./config/charts/lang/sv/glob_Temperature.json ***!
+  \*****************************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"°C\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"År\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"Årlig genomsnittlig Temperatur Globalt\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"[SOME TEXT]\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Genomsnittlig Temperatur [°C]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Väder\\\"},\\\"1\\\":{\\\"title\\\":\\\"Årlig genomsnittlig temperaturskillnad från baslinjen, Globalt\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"Skillnaden mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Temperaturskillnad [°C]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Klimat\\\"}},\\\"series\\\":{\\\"max\\\":{\\\"name\\\":\\\"Max\\\"},\\\"min\\\":{\\\"name\\\":\\\"Min\\\"},\\\"avg\\\":{\\\"name\\\":\\\"Genomsnittlig Temperature\\\"},\\\"diff\\\":{\\\"name\\\":\\\"Temperaturskillnad\\\"},\\\"linjer\\\":{\\\"name\\\":\\\"[example]\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/glob_Temperature.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/growingSeason.json":
+/*!**************************************************!*\
+  !*** ./config/charts/lang/sv/growingSeason.json ***!
+  \**************************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"Weeks\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"Year\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"[stationName] Growing Season\\\",\\\"subTitle\\\":\\\"Maximum number of consecutive weeks above zero Celcius\\\",\\\"legend\\\":\\\"Growing Season\\\",\\\"caption\\\":\\\"The Frost-Free Season is the approximate length of the growing season (in weeks), during which there are no freezing temperatures to kill or damage plants. This is calculated from temperature data.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Growing Season [Number of consecutive weeks above freezing (> 0°C)]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"}}},\\\"series\\\":{\\\"avg\\\":{\\\"name\\\":\\\"Weeks\\\"},\\\"diff\\\":{\\\"name\\\":\\\"Difference\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/growingSeason.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/growingSeasonDays.json":
+/*!******************************************************!*\
+  !*** ./config/charts/lang/sv/growingSeasonDays.json ***!
+  \******************************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"Days\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"Year\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"[stationName] Growing Season\\\",\\\"subTitle\\\":\\\"Maximum number of consecutive days above zero Celcius\\\",\\\"legend\\\":\\\"Growing Season\\\",\\\"caption\\\":\\\"The Frost-free season is the approximate length of the growing season, during which there are no freezing temperatures to kill or damage plants. This is calculated from temperature data.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Growing Season [Number of consecutive days above freezing (> 0°C)]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"}}},\\\"series\\\":{\\\"avg\\\":{\\\"name\\\":\\\"Weeks\\\"},\\\"diff\\\":{\\\"name\\\":\\\"Difference\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/growingSeasonDays.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/growingSeasonFrostFirst.json":
+/*!************************************************************!*\
+  !*** ./config/charts/lang/sv/growingSeasonFrostFirst.json ***!
+  \************************************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"date\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"Year\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"[stationName] First Frost of the Autumn\\\",\\\"subTitle\\\":\\\"Maximum number of consecutive weeks above zero Celcius\\\",\\\"legend\\\":\\\"Growing Season\\\",\\\"caption\\\":\\\"The date of the first fall frost, which marks the approximate end of the growing season for frost-sensitive crops and plants. This is calculated from temperature data.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"First date with temperatures record below 0°C\\\",\\\"right\\\":\\\"[X-AXIS]\\\"}}},\\\"series\\\":{\\\"first\\\":{\\\"name\\\":\\\"Date\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/growingSeasonFrostFirst.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/growingSeasonFrostLast.json":
+/*!***********************************************************!*\
+  !*** ./config/charts/lang/sv/growingSeasonFrostLast.json ***!
+  \***********************************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"Date\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"Year\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"[stationName] Last Frost of the Spring or Summer\\\",\\\"subTitle\\\":\\\"\\\",\\\"legend\\\":\\\"Growing Season\\\",\\\"caption\\\":\\\"The date of the last spring or summer frost, which marks the approximate beginning of the growing season for frost-sensitive crops and plants. This is calculated from temperature data.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Last date with temperatures record below 0°C\\\",\\\"right\\\":\\\"[X-AXIS]\\\"}}},\\\"series\\\":{\\\"first\\\":{\\\"name\\\":\\\"Date\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/growingSeasonFrostLast.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/ice.json":
+/*!****************************************!*\
+  !*** ./config/charts/lang/sv/ice.json ***!
+  \****************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"År\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"Troneträsk Isläggning och Islossning samt Tiden isen ligger på sjön\\\",\\\"subTitle\\\":\\\"[SUB-TITLE]\\\",\\\"caption\\\":\\\"[SOME TEXT]\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Islossning / Isläggning [årets dag]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Väder\\\"}},\\\"series\\\":{\\\"freeze\\\":{\\\"name\\\":\\\"Isläggning\\\"},\\\"breakup\\\":{\\\"name\\\":\\\"Islossning\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/ice.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/iceBreakup.json":
+/*!***********************************************!*\
+  !*** ./config/charts/lang/sv/iceBreakup.json ***!
+  \***********************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"År\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"Troneträsk Islossningsdag\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"Årets dag för islossning av sjöisen\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Islossning av sjöisen [årets dag]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Väder\\\"},\\\"1\\\":{\\\"title\\\":\\\"Troneträsk Skillnad i datum för islossning från baslinjen\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"Skillnad i isläggning och islossning från utgångsperioden, vanligtvis 1961 till 1991\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Islossning [årets dag]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Klimat\\\"}},\\\"series\\\":{\\\"avg\\\":{\\\"name\\\":\\\"Islossning\\\"},\\\"diff\\\":{\\\"name\\\":\\\"Skillnad från baslinjen\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/iceBreakup.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/iceFreeze.json":
+/*!**********************************************!*\
+  !*** ./config/charts/lang/sv/iceFreeze.json ***!
+  \**********************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"År\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"Troneträsk Isläggningsdag\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"Årets dag för isläggning av sjöisen\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Isläggning av sjöisen (årets dag)\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Väder\\\"},\\\"1\\\":{\\\"title\\\":\\\"Troneträsk Skillnad i datum för isläggning från baslinjen\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"Skillnad i isläggning och islossning från utgångsperioden, vanligtvis 1961 till 1990\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Isläggning [årets dag]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Klimat\\\"}},\\\"series\\\":{\\\"avg\\\":{\\\"name\\\":\\\"Isläggning\\\"},\\\"diff\\\":{\\\"name\\\":\\\"Skillnad från baslinjen\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/iceFreeze.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/iceThick.json":
+/*!*********************************************!*\
+  !*** ./config/charts/lang/sv/iceThick.json ***!
+  \*********************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"År\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"[stationName] Största sjöisdjupet\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"Den maximala istjockleken för en viss vinter.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Isens tjocklek [cm]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Väder\\\"},\\\"1\\\":{\\\"title\\\":\\\"[stationName] Största sjöisdjupet skillnad från baslinjen\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"[Placeholder]\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Isens tjocklek [cm]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Klimat\\\"}},\\\"series\\\":{\\\"iceThick\\\":{\\\"name\\\":\\\"Isens tjocklek\\\"},\\\"diff\\\":{\\\"name\\\":\\\"Isens tjocklek skillnad från baslinjen\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/iceThick.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/iceThickDate.json":
+/*!*************************************************!*\
+  !*** ./config/charts/lang/sv/iceThickDate.json ***!
+  \*************************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"År\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"[stationName] Sjöisdjupet (datum)\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"Istjocklek för ett visst datum över alla år (om det inte mäts på ett valt datum, presenteras data från närmaste tidigare mätning).\\\",\\\"select\\\":{\\\"text\\\":\\\"Välj ett datum\\\"},\\\"yAxis\\\":{\\\"left\\\":\\\"Isens tjocklek [cm]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Väder\\\"},\\\"1\\\":{\\\"title\\\":\\\"[stationName] Sjöisdjupet Skillnad från baslinjen (datum)\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"[PlaceHolder]\\\",\\\"select\\\":{\\\"text\\\":\\\"Välj ett datum\\\"},\\\"yAxis\\\":{\\\"left\\\":\\\"Isens tjocklek [cm]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Klimat\\\"}},\\\"series\\\":{\\\"iceThick\\\":{\\\"name\\\":\\\"Isens tjocklek\\\"},\\\"diff\\\":{\\\"name\\\":\\\"Isens tjocklek skillnad från baslinjen\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/iceThickDate.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/iceTime.json":
+/*!********************************************!*\
+  !*** ./config/charts/lang/sv/iceTime.json ***!
+  \********************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"dagar\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"År\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"[stationName] Isperiodens längd\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"Antal dagar under en viss vinter där sjön är helt täckt av is.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Istid [antal dagar]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Väder\\\"},\\\"1\\\":{\\\"title\\\":\\\"[stationName] Skillnad från baslinjen för isperiodens längd\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"Antal dagar där sjön täcks helt av is skillnad från baslinjeperioden, vanligtvis 1961 till 1990.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Istid [antal dagar]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Klimat\\\"}},\\\"series\\\":{\\\"avg\\\":{\\\"name\\\":\\\"Istid\\\"},\\\"diff\\\":{\\\"name\\\":\\\"Skillnad från baslinjen\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/iceTime.json?");
+
+/***/ }),
+
 /***/ "./config/charts/lang/sv/menu.json":
 /*!*****************************************!*\
   !*** ./config/charts/lang/sv/menu.json ***!
@@ -721,6 +886,127 @@ eval("module.exports = JSON.parse(\"{\\\"title\\\":\\\"[TITLE]\\\",\\\"sub-title
 /***/ (function(module) {
 
 eval("module.exports = JSON.parse(\"{\\\"baselineform\\\":{\\\"title\\\":\\\"Intervalet för baslinjen\\\",\\\"lower\\\":\\\"Lägre gränsen\\\",\\\"upper\\\":\\\"Övre gränsen\\\"},\\\"dataCredit\\\":\\\"Data källa\\\",\\\"contribute\\\":\\\"Bidra mjukvara - Github [dummy]\\\",\\\"showDataTable\\\":\\\"Visa/göm data\\\",\\\"langOption\\\":\\\"English\\\",\\\"downloadJPEG\\\":\\\"Ladda ner som JPEG\\\",\\\"downloadPDF\\\":\\\"Ladda ner som PDF\\\",\\\"downloadSVG\\\":\\\"Ladda ner som SVG\\\"}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/menu.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/monthlyPrecipitation.json":
+/*!*********************************************************!*\
+  !*** ./config/charts/lang/sv/monthlyPrecipitation.json ***!
+  \*********************************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"mm\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"Year\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"[stationName] [month] Average Precipitation\\\",\\\"subTitle\\\":\\\"[SUB-TITLE]\\\",\\\"caption\\\":\\\"Average monthly precipitation. The lowest (min) and highest (max) precipitation of the month.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Total Precipitation [mm]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Weather\\\"}},\\\"series\\\":{\\\"diff\\\":{\\\"name\\\":\\\"\\\"},\\\"snow\\\":{\\\"name\\\":\\\"Precipitation from snow\\\"},\\\"rain\\\":{\\\"name\\\":\\\"Precipitation from rain\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/monthlyPrecipitation.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/monthlyTemperature.json":
+/*!*******************************************************!*\
+  !*** ./config/charts/lang/sv/monthlyTemperature.json ***!
+  \*******************************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"°C\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"Year\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"[stationName] [month] Average Temperature\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"Average monthly temperature. The lowest (min) and highest (max) temperature of the month.\\\",\\\"legend\\\":\\\"Weather\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Average temperature [°C]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"}},\\\"1\\\":{\\\"title\\\":\\\"[stationName] [month] Average Temperature Difference from Baseline\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"Difference between the [month] average temperature for the year and the average temperature for the baseline period, typically 1961 to 1990.\\\",\\\"legend\\\":\\\"Climate\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Temperature difference [°C]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"}}},\\\"series\\\":{\\\"max\\\":{\\\"name\\\":\\\"Max\\\"},\\\"min\\\":{\\\"name\\\":\\\"Min\\\"},\\\"avg\\\":{\\\"name\\\":\\\"Yearly Average\\\"},\\\"diff\\\":{\\\"name\\\":\\\"Difference\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/monthlyTemperature.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/nhem_Temperature.json":
+/*!*****************************************************!*\
+  !*** ./config/charts/lang/sv/nhem_Temperature.json ***!
+  \*****************************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"°C\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"Year\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"Average Temperature for Northern Hemosphere\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"[SOME TEXT]\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Average Temperature [°C]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Weather\\\"},\\\"1\\\":{\\\"title\\\":\\\"Temperature Difference for Northern Hemosphere\\\",\\\"subTitle\\\":\\\"Difference between yearly average and average for [baseline]\\\",\\\"caption\\\":\\\"[SOME TEXT]\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Temperature [°C]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Climate\\\"}},\\\"series\\\":{\\\"max\\\":{\\\"name\\\":\\\"Max\\\"},\\\"min\\\":{\\\"name\\\":\\\"Min\\\"},\\\"avg\\\":{\\\"name\\\":\\\"Yearly Average\\\"},\\\"diff\\\":{\\\"name\\\":\\\"Difference\\\"},\\\"linjer\\\":{\\\"name\\\":\\\"[example]\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/nhem_Temperature.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/perma.json":
+/*!******************************************!*\
+  !*** ./config/charts/lang/sv/perma.json ***!
+  \******************************************/
+/*! exports provided: groups, valueSuffix, xAxis, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"[stationName] Djupet av permafrostens aktivt lager\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"Maximalt djupet av permafrostens aktivt lager (cm) noterat in September varje år.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Djupet av permafrostens aktivt lager (cm)\\\",\\\"right\\\":\\\"[X-AXIS]\\\",\\\"plotLines\\\":{\\\"text\\\":\\\"Jord ytan\\\"}}}},\\\"valueSuffix\\\":\\\"\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"År\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"series\\\":{\\\"avg\\\":{\\\"name\\\":\\\"Genomsnitt av alla stationer\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/perma.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/seasonTemperature.json":
+/*!******************************************************!*\
+  !*** ./config/charts/lang/sv/seasonTemperature.json ***!
+  \******************************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"°C\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"Year\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"[stationName] [season] Average Temperature\\\",\\\"subTitle\\\":\\\"[period]\\\",\\\"caption\\\":\\\"[SOME TEXT]\\\",\\\"legend\\\":\\\"Weather\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Average temperature [°C]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"}}},\\\"series\\\":{\\\"max\\\":{\\\"name\\\":\\\"Max\\\"},\\\"min\\\":{\\\"name\\\":\\\"Min\\\"},\\\"avg\\\":{\\\"name\\\":\\\"Yearly Average\\\"},\\\"diff\\\":{\\\"name\\\":\\\"Difference\\\"},\\\"linjer\\\":{\\\"name\\\":\\\"[example]\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/seasonTemperature.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/snowDepth.json":
+/*!**********************************************!*\
+  !*** ./config/charts/lang/sv/snowDepth.json ***!
+  \**********************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"cm\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"Månad\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"[stationName] Snödjup\\\",\\\"subTitle\\\":\\\"Årlig genomsnitt\\\",\\\"caption\\\":\\\"Genomsnittligt årligt snödjup in centimeter\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Genomsnittligt snödjup [cm]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Väder\\\"}},\\\"series\\\":{\\\"periods\\\":{\\\"name\\\":{\\\"Från 1961 till 1970\\\":\\\"Från 1961 till 1970\\\",\\\"Från 1971 till 1980\\\":\\\"Från 1971 till 1980\\\",\\\"Från 1981 till 1990\\\":\\\"Från 1981 till 1990\\\",\\\"Från 1991 till 2000\\\":\\\"Från 1991 till 2000\\\",\\\"Från 2001 till 2010\\\":\\\"Från 2001 till 2010\\\",\\\"Från 2011 till present\\\":\\\"Från 2011 till nutid\\\",\\\"Entire period\\\":\\\"Hela period\\\",\\\"Från 1931 till 1960\\\":\\\"Från 1931 till 1960\\\",\\\"Från 1961 till 1990\\\":\\\"Från 1961 till 1990\\\",\\\"Från 1991 till present\\\":\\\"Från 1991 till nutid\\\"}}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/snowDepth.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/snowDepthDecade.json":
+/*!****************************************************!*\
+  !*** ./config/charts/lang/sv/snowDepthDecade.json ***!
+  \****************************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"cm\\\",\\\"xAxis\\\":{\\\"categories\\\":[\\\"Sep\\\",\\\"Okt\\\",\\\"Nov\\\",\\\"Dec\\\",\\\"Jan\\\",\\\"Feb\\\",\\\"Mar\\\",\\\"Apr\\\",\\\"Maj\\\",\\\"Ju    n\\\"],\\\"bott\\\":\\\"Månad\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"[stationName] Snödjup\\\",\\\"subTitle\\\":\\\"Dekadalt genomsnitt per månad\\\",\\\"caption\\\":\\\"Genomsnittligt månads snödjup i centimeter per decennium.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Snödjup [cm]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Väder\\\"}},\\\"series\\\":{\\\"1961\\\":{\\\"name\\\":\\\"Från 1961 till 1970\\\"},\\\"1971\\\":{\\\"name\\\":\\\"Från 1971 till 1980\\\"},\\\"1981\\\":{\\\"name\\\":\\\"Från 1981 till 1990\\\"},\\\"1991\\\":{\\\"name\\\":\\\"Från 1991 till 2000\\\"},\\\"2001\\\":{\\\"name\\\":\\\"Från 2001 till 2010\\\"},\\\"2011\\\":{\\\"name\\\":\\\"Från 2011 till nutid\\\"},\\\"allTime\\\":{\\\"name\\\":\\\"Hela period\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/snowDepthDecade.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/snowDepthPeriod.json":
+/*!****************************************************!*\
+  !*** ./config/charts/lang/sv/snowDepthPeriod.json ***!
+  \****************************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"cm\\\",\\\"xAxis\\\":{\\\"categories\\\":[\\\"Sep\\\",\\\"Okt\\\",\\\"Nov\\\",\\\"Dec\\\",\\\"Jan\\\",\\\"Feb\\\",\\\"Mar\\\",\\\"Apr\\\",\\\"Maj\\\",\\\"Jun\\\"],\\\"bott\\\":\\\"Månad\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"[stationName] Snödjup\\\",\\\"subTitle\\\":\\\"30-årsperiod i genomsnitt per månad\\\",\\\"caption\\\":\\\"Genomsnittligt månads snödjup i centimeter per 30-års period.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Snödjup [cm]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Väder\\\"}},\\\"series\\\":{\\\"1931\\\":{\\\"name\\\":\\\"Från 1931 till 1960\\\"},\\\"1961\\\":{\\\"name\\\":\\\"Från 1961 till 1990\\\"},\\\"1991\\\":{\\\"name\\\":\\\"Från 1991 till present\\\"},\\\"allTime\\\":{\\\"name\\\":\\\"Hela period\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/snowDepthPeriod.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/units.json":
+/*!******************************************!*\
+  !*** ./config/charts/lang/sv/units.json ***!
+  \******************************************/
+/*! exports provided: day, week, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"day\\\":{\\\"plural\\\":\\\"dagar\\\",\\\"singular\\\":\\\"dag\\\",\\\"interval\\\":\\\"dagligen\\\"},\\\"week\\\":{\\\"plural\\\":\\\"veckor\\\",\\\"singular\\\":\\\"vecka\\\",\\\"interval\\\":\\\"veckovis\\\"}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/units.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/yrlyAvgSnowDepth.json":
+/*!*****************************************************!*\
+  !*** ./config/charts/lang/sv/yrlyAvgSnowDepth.json ***!
+  \*****************************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"cm\\\",\\\"xAxis\\\":{\\\"categories\\\":[\\\"Sep\\\",\\\"Oct\\\",\\\"Nov\\\",\\\"Dec\\\",\\\"Jan\\\",\\\"Feb\\\",\\\"Mar\\\",\\\"Apr\\\",\\\"May\\\",\\\"Ju    n\\\"],\\\"bott\\\":\\\"Month\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"[stationName] Snow Depth\\\",\\\"subTitle\\\":\\\"Annual average\\\",\\\"caption\\\":\\\"Average annual snow depth in centimeters.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Average Snow depth [cm]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Weather\\\"},\\\"1\\\":{\\\"title\\\":\\\"[stationName] Annual Average Snow Depth Difference from Baseline\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"Difference between annual snow depth in centimeters and the average for the baseline period, typically 1961 to 1990.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Average Snow depth [cm]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Climate\\\"}},\\\"series\\\":{\\\"avg\\\":{\\\"name\\\":\\\"Average snow depth\\\"},\\\"diff\\\":{\\\"name\\\":\\\"Difference\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/yrlyAvgSnowDepth.json?");
+
+/***/ }),
+
+/***/ "./config/charts/lang/sv/yrlyPrecipitation.json":
+/*!******************************************************!*\
+  !*** ./config/charts/lang/sv/yrlyPrecipitation.json ***!
+  \******************************************************/
+/*! exports provided: valueSuffix, xAxis, groups, series, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"mm\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"Year\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"[stationName] Annual Average Precipitation\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"Average annual precipitation. The lowest (min) and highest (max) precipitation of the month.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Total Precipitation [mm]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"legend\\\":\\\"Weather\\\"},\\\"1\\\":{\\\"title\\\":\\\"[stationName] Annual Average Precipitation Difference from Baseline\\\",\\\"subTitle\\\":\\\"Difference between yearly average and average for [baseline]\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Precipitation [mm]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"caption\\\":\\\"Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.\\\",\\\"legend\\\":\\\"Climate\\\"},\\\"2\\\":{\\\"title\\\":\\\"[stationName] Wettest [unit] of the year\\\",\\\"subTitle\\\":\\\"\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Total precipitation [mm]\\\",\\\"right\\\":\\\"[X-Axis]\\\"},\\\"caption\\\":\\\"The wettest [unit] of the year (total precipitation in mm).\\\",\\\"legend\\\":\\\"Weather\\\"}},\\\"series\\\":{\\\"diff\\\":{\\\"name\\\":\\\"Difference\\\"},\\\"snow\\\":{\\\"name\\\":\\\"Precipitation from snow\\\"},\\\"rain\\\":{\\\"name\\\":\\\"Precipitation from rain\\\"},\\\"extreme\\\":{\\\"name\\\":\\\"wettest [interval] of the year (total precipitation in mm)\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/yrlyPrecipitation.json?");
 
 /***/ }),
 

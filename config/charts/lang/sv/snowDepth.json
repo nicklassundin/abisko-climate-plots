@@ -1,0 +1,35 @@
+{
+	"valueSuffix": "cm",
+	"xAxis": {
+		"bott": "Månad", 
+		"top": "[Y-AXIS]"
+	},
+	"groups": {
+		"0": {
+			"title": "[stationName] Snödjup", 
+			"subTitle": "Årlig genomsnitt",
+			"caption": "Genomsnittligt årligt snödjup in centimeter", 
+			"yAxis": {
+				"left": "Genomsnittligt snödjup [cm]", 
+				"right": "[X-AXIS]"
+			},
+			"legend": "Väder"
+		}
+	},
+	"series": {
+		"periods": {
+			"name": {
+				"Från 1961 till 1970": "Från 1961 till 1970",
+				"Från 1971 till 1980": "Från 1971 till 1980",
+				"Från 1981 till 1990": "Från 1981 till 1990",
+				"Från 1991 till 2000": "Från 1991 till 2000",
+				"Från 2001 till 2010": "Från 2001 till 2010",
+				"Från 2011 till present": "Från 2011 till nutid",
+				"Entire period": "Hela period",
+				"Från 1931 till 1960": "Från 1931 till 1960",
+				"Från 1961 till 1990": "Från 1961 till 1990",
+				"Från 1991 till present": "Från 1991 till nutid"
+			}
+		}
+	}
+}

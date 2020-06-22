@@ -1,0 +1,34 @@
+{
+	"valueSuffix": "cm",
+	"xAxis": {
+		"categories": ["Sep", "Okt", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "Maj", "Jun"],
+		"bott": "Månad", 
+		"top": "[Y-AXIS]"
+	},
+	"groups": {
+		"0": {
+			"title": "[stationName] Snödjup",
+			"subTitle": "30-årsperiod i genomsnitt per månad", 
+			"caption": "Genomsnittligt månads snödjup i centimeter per 30-års period.",
+			"yAxis": {
+				"left": "Snödjup [cm]", 
+				"right": "[X-AXIS]"
+			},
+			"legend": "Väder"
+		}
+	},
+	"series": {
+		"1931": {
+			"name": "Från 1931 till 1960"
+		},
+		"1961": {
+			"name": "Från 1961 till 1990"
+		},
+		"1991": {
+			"name": "Från 1991 till present"
+		},
+		"allTime": {
+			"name": "Hela period"
+		}
+	}
+}

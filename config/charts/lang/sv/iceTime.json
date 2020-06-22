@@ -1,0 +1,37 @@
+{
+	"valueSuffix": "dagar",
+	"xAxis": {
+		"bott": "År", 
+		"top": "[Y-AXIS]"
+	},
+	"groups": {
+		"0": {
+			"title": "[stationName] Isperiodens längd", 
+			"subTitle": "",
+			"caption": "Antal dagar under en viss vinter där sjön är helt täckt av is.",
+			"yAxis": {
+				"left": "Istid [antal dagar]",
+				"right": "[X-AXIS]"
+			},
+			"legend": "Väder"
+		},
+		"1": {
+			"title": "[stationName] Skillnad från baslinjen för isperiodens längd", 
+			"subTitle": "",
+			"caption": "Antal dagar där sjön täcks helt av is skillnad från baslinjeperioden, vanligtvis 1961 till 1990.",
+			"yAxis": {
+				"left": "Istid [antal dagar]", 
+				"right": "[X-AXIS]"
+			},
+			"legend": "Klimat"
+		}
+	},
+	"series": {
+		"avg": {
+			"name": "Istid" 
+		},
+		"diff": {
+			"name": "Skillnad från baslinjen"
+		}
+	}
+}

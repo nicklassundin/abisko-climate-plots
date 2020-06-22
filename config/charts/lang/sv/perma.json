@@ -1,0 +1,27 @@
+{
+	"groups": {
+		"0": {
+			"title": "[stationName] Djupet av permafrostens aktivt lager",
+			"subTitle": "",
+			"caption": "Maximalt djupet av permafrostens aktivt lager (cm) noterat in September varje år.",
+			"yAxis": {
+				"left": "Djupet av permafrostens aktivt lager (cm)", 
+				"right": "[X-AXIS]",
+				"plotLines": {
+					"text": "Jord ytan"
+				} 
+			}
+
+		}
+	},
+	"valueSuffix": "",
+	"xAxis": {
+		"bott": "År", 
+		"top": "[Y-AXIS]"
+	},
+	"series": {
+		"avg": {
+			"name": "Genomsnitt av alla stationer"
+		}
+	}
+}

@@ -1,0 +1,46 @@
+{
+	"valueSuffix": "°C",
+	"xAxis": {
+		"bott": "År", 
+		"top": "[Y-AXIS]"
+	},
+	"groups": {
+		"0": {
+			"title": "Årlig genomsnittlig Temperatur för Arktis (64N-90N)", 
+			"subTitle": "",
+			"caption": "[SOME TEXT]",
+			"yAxis": {
+				"left": "Genomsnittlig Temperatur [°C]",
+				"right": "[X-AXIS]"
+			},
+			"legend": "Väder"
+		},
+		"1": {
+			"title": "Årlig genomsnittlig temperaturskillnad från baslinjen för Akrktis (64N-90N)", 
+			"subTitle": "", 
+			"caption": "Skillnaden mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.", 
+			"yAxis": {
+				"left": "Temperaturskillnad [°C]", 
+				"right": "[X-AXIS]"
+			},
+			"legend": "Klimat"
+		}
+	},
+	"series": {
+		"max": {
+			"name": "Max"
+		},
+		"min": {
+			"name": "Min"
+		},
+		"avg": {
+			"name": "Genomsnittlig Temperature" 
+		},  
+		"diff": {
+			"name": "Temperaturskillnad" 
+		},
+		"linjer": {
+			"name": "[example]"
+		}
+	}
+}

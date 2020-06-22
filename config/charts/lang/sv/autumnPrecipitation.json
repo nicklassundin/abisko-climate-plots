@@ -1,0 +1,40 @@
+{
+	"valueSuffix": "mm",
+	"xAxis": {
+		"bott": "År", 
+		"top": "[Y-AXIS]"
+	},
+	"groups": {
+		"0": {
+			"title": "[stationName] Höstens genomsnittliga nederbörd",
+			"subTitle": "September till November",
+			"caption": "Genomsnittlig årlig höst (september till november) nederbörd. Månadens lägsta (min) och högsta (max) temperatur.", 
+			"yAxis": {
+				"left": "Genomsnittlig nederbörd [mm]", 
+				"right": "[X-AXIS]"
+			},
+			"legend": "Väder"
+		},
+		"1": {
+			"title": "[stationName]  Höstens genomsnittliga nederbördsskillnad från baslinjen",
+			"subTitle": "", 
+			"caption": "Skillnaden mellan höstens (september-november) säsongsmedelvärden och genomsnittet för utgångsperioden, vanligtvis 1961 till 1990.", 
+			"yAxis": {
+				"left": "Genomsnittlig nederbörd [mm]", 
+				"right": "[X-AXIS]"
+			},
+			"legend": "Klimat"
+		}
+	},
+	"series": {
+		"diff": {
+			"name": "Skillnad från baslinhjen"
+		},
+		"snow": {
+			"name": "Nederbörd från snö"
+		},
+		"rain": {
+			"name": "Nederbörd från regn"
+		}
+	}
+}

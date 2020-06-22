@@ -1,0 +1,46 @@
+{
+	"valueSuffix": "°C",
+	"xAxis": {
+		"bott": "År", 
+		"top": "[Y-AXIS]"
+	},
+	"groups": {
+		"0": {
+			"title": "[stationName] Höstens medeltemperatur",
+			"subTitle": "September till November",
+			"caption": "Genomsnittlig årlig höst (september till november) temperatur. Månadens lägsta (min) och högsta (max) temperatur.", 
+			"legend": "Väder",
+			"yAxis": {
+				"left": "Medeltemperatur [°C]",
+				"right": "[X-AXIS]"
+			}
+		},
+		"1": {
+			"title": "[stationName] Höstens genomsnittliga temperaturskillnad från baslinjen",
+			"subTitle": "September till November",
+			"caption": "Skillnaden mellan höstens (september-november) säsongsmedelvärden och genomsnittet för utgångsperioden, vanligtvis 1961 till 1990.", 
+			"legend": "Klimat",
+			"yAxis": {
+				"left": "Temperaturskillnad [°C]", 
+				"right": "[X-AXIS]"
+			}
+		}
+	},
+	"series": {
+		"max": {
+			"name": "Max"
+		},
+		"min": {
+			"name": "Min"
+		},
+		"avg": {
+			"name": "Årligt genomsnitt"
+		},  
+		"diff": {
+			"name": "Skillnad från baslinjen"
+		},
+		"linjer": {
+			"name": "[example]"
+		}
+	}
+}
