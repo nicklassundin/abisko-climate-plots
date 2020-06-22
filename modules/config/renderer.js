@@ -190,6 +190,7 @@ var chart = {
 		var id = this.id;
 		// console.log(id)
 		// console.log(data)
+		// console.log((data.max != undefined) ? (data.max.max != undefined ? data.max.max(false).values : undefined) : data.total.max(false).values)
 		// console.log((data.max != undefined) ? data.max.max(false) : data.total.max(false))
 		var meta = this.meta;
 		// console.log(meta)
@@ -526,8 +527,8 @@ var chart = {
 		var textMorph = this.textMorph;
 		var group = meta.groups[gID];
 		if(change) {
-
-			Object.keys(meta.series).forEach((key, index) => {
+			// Object.keys(meta.series).forEach((key, index) => {
+			Object.keys(meta.series).filter((s) => (meta.series[s].group != undefined) ? meta.groups[meta.series[s].group].enabled : false).forEach((key, index) => {
 				if(meta.series[key].group == gID){
 					$('#' + id).highcharts().series[index].update({
 						visible: meta.series[key].visible,
