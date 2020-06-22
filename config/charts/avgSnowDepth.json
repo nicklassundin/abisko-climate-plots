@@ -1,0 +1,33 @@
+{
+	"type": "column",
+	"groups": {
+		"0": {
+			"baseline": false,
+			"xAxis": {
+				"min": 1930
+			}
+		},
+		"1": {
+			"baseline": true,
+			"xAxis": {
+				"min": 1930
+			}
+		}
+	},
+	"decimals": 0,
+	"month": false,
+	"period": false,
+	"series": {
+		"avg": {
+			"group": 0,
+			"visible": true,
+			"type": "line",
+			"colour": "#1000FB"
+		},
+		"diff": {
+			"group": 1,
+			"visible": true,
+			"type": "column"
+		}
+	}
+}

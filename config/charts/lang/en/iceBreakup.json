@@ -1,0 +1,37 @@
+{
+	"valueSuffix": "",
+	"xAxis": {
+		"bott": "Year", 
+		"top": "[Y-AXIS]"
+	},
+	"groups": {
+		"0": {
+			"title": "Troneträsk Break-up of lake ice vs ice time" ,
+			"subTitle": "",
+			"caption": "Day of year for the start of the lake ice breaking-up.", 
+			"yAxis": {
+				"left": "Ice break-up [day of year]",
+				"right": "[X-AXIS]"
+			},
+			"legend": "Weather"
+		},
+		"1": {
+			"title": "Troneträsk Break-Up Date of Lake Ice Difference from Baseline",
+			"subTitle": "",
+			"caption": "Break-up difference from baseline period, typically 1961 to 1990.", 
+			"yAxis": {
+				"left": "Ice break-up [day of year]",
+				"right": "[X-AXIS]"
+			},
+			"legend": "Climate"
+		}
+	},
+	"series": {
+		"avg": {
+			"name": "Break-up"
+		},
+		"diff": {
+			"name": "Difference"
+		}
+	}
+}

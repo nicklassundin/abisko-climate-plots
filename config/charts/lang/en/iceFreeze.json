@@ -1,0 +1,37 @@
+{
+	"valueSuffix": "",
+	"xAxis": {
+		"bott": "Year", 
+		"top": "[Y-AXIS]"
+	},
+	"groups": {
+		"0": {
+			"title": "Troneträsk Freeze-up of lake ice vs ice time" ,
+			"subTitle": "",
+			"caption": "Day of year for freeze-up of lake ice.",
+			"yAxis": {
+				"left": "freeze-up [day of year]",
+				"right": "[X-AXIS]"
+			},
+			"legend": "Weather"
+		},
+		"1": {
+			"title": "Troneträsk Freeze-Up Date of Lake Ice Difference from Baseline",
+			"subTitle": "",
+			"caption": "Freeze-up difference from baseline period, typically 1961 to 1990.", 
+			"yAxis": {
+				"left": "Ice freeze-up [day of year]",
+				"right": "[X-AXIS]"
+			},
+			"legend": "Climate"
+		}
+	},
+	"series": {
+		"avg": {
+			"name": "Break-up"
+		},
+		"diff": {
+			"name": "Difference"
+		}
+	}
+}
