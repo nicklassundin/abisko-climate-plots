@@ -73,22 +73,26 @@ var struct = {
 		}
 	},
 	last: function(f = (e) => { return e.y <= 0 }, type=this.type){
-		return this.filter((entry) => {
+		var res = this.filter((entry) => {
 			var values = entry.values.filter(f);
 			return {
 				y: help.dayOfYear(new Date(Math.max(...Object.values(values).map(each => new Date(each.x).getTime())))),
 				x: entry.x
 			}
 		})
+		res.splice(-1, 1);
+		return res
 	},
 	first: function(f = (e) => { return e.y <= 0 }, type=this.type){
-		return this.filter((entry) => {
+		var res = this.filter((entry) => {
 			var values = entry.values.filter(f);
 			return {
 				y: help.dayOfYear(new Date(Math.min(...Object.values(values).map(each => new Date(each.x).getTime())))),
 				x: entry.x
 			}
 		})
+		res.shift();
+		return res;
 	},
 	sequence: function(f=(e)=>{ return e < 0 }){
 		var values = this.values.map(each => each.y)
