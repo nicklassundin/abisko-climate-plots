@@ -412,7 +412,7 @@ eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"date\\\",\\\"xAxis\
 /*! exports provided: valueSuffix, xAxis, groups, series, default */
 /***/ (function(module) {
 
-eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"Date\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"Year\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"[stationName] Last Frost of the Spring or Summer\\\",\\\"subTitle\\\":\\\"\\\",\\\"legend\\\":\\\"Growing Season\\\",\\\"caption\\\":\\\"The date of the last spring or summer frost, which marks the approximate beginning of the growing season for frost-sensitive crops and plants. This is calculated from temperature data.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Last date with temperatures record below 0°C\\\",\\\"right\\\":\\\"[X-AXIS]\\\"}}},\\\"series\\\":{\\\"first\\\":{\\\"name\\\":\\\"Date\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/en/growingSeasonFrostLast.json?");
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"Date\\\",\\\"xAxis\\\":{\\\"bott\\\":\\\"Year\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"[stationName] Last Frost of the Spring or Summer\\\",\\\"subTitle\\\":\\\"\\\",\\\"legend\\\":\\\"Growing Season\\\",\\\"caption\\\":\\\"The date of the last spring or summer frost, which marks the approximate beginning of the growing season for frost-sensitive crops and plants. This is calculated from temperature data.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Last date with temperatures record below 0°C\\\",\\\"right\\\":\\\"[X-AXIS]\\\"}}},\\\"series\\\":{\\\"last\\\":{\\\"name\\\":\\\"Date\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/en/growingSeasonFrostLast.json?");
 
 /***/ }),
 
