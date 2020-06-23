@@ -189,7 +189,7 @@ var chart = {
 		var id = this.id;
 		// console.log(id)
 		// console.log(data)
-		// console.log((data.max != undefined) ? (data.max.max != undefined ? data.max.max(false).values : undefined) : data.total.max(false).values)
+		// // console.log((data.max != undefined) ? (data.max.max != undefined ? data.max.max(false).values : undefined) : data.total.max(false).values)
 		// console.log((data.max != undefined) ? data.max.max(false) : data.total.max(false))
 		var meta = this.meta;
 		// console.log(meta)

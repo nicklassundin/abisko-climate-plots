@@ -81,7 +81,7 @@ var struct = {
 			}
 		})
 		res.splice(-1, 1);
-		return res
+		return res;
 	},
 	first: function(f = (e) => { return e.y <= 0 }, type=this.type){
 		var res = this.filter((entry) => {
@@ -726,14 +726,17 @@ exports.parsers = {
 			min: parseEntry(entry['Temp_min']),
 			max: parseEntry(entry['Temp_max'])
 		})))
+		var res = {};
+		result[2].data.forEach(entry => {
+			res[entry['Time']] = entry['Precipitation']
+		})
 		insertToBlocks(result[1].data.map(entry => ({
 			date: entry['Time(UTC)'],
 			avg: parseEntry(entry['AirTemperature (°C)']),
-			total: undefined, 
+			total: parseEntry(res[entry['Time(UTC)']]),
 			min: parseEntry(entry['Minimim_AirTemperature']),
 			max: parseEntry(entry['Maximum_AirTemperature'])
 		})));
-
 		blocks.temperatures = parseByDate(blocks.temperatures);
 		blocks.precipitation = parseByDate(blocks.precipitation, 'sum');
 		blocks.growingSeason = struct.create(Object.keys(blocks.temperatures.weekly).map(year =>  blocks.temperatures.weekly[year].avg.sequence())).build();
@@ -866,20 +869,20 @@ exports.parsers = {
 				// iceTimeMovAvg: iceTimeMovAvg.slice(10),
 				// iceTimeCIMovAvg: iceTimeCIMovAvg.slice(10),
 				// breakupLinear: [
-					// { x: 1915, y: help.weekNumber(help.dateFromDayOfYear(1915, Math.round(breakupLinear(1915)))) },
-					// { x: yearMax, y: help.weekNumber(help.dateFromDayOfYear(yearMax, Math.round(breakupLinear(yearMax)))) }
+				// { x: 1915, y: help.weekNumber(help.dateFromDayOfYear(1915, Math.round(breakupLinear(1915)))) },
+				// { x: yearMax, y: help.weekNumber(help.dateFromDayOfYear(yearMax, Math.round(breakupLinear(yearMax)))) }
 				// ],
 				// freezeLinear: [
-					// { x: 1909, y: help.weekNumber(help.dateFromDayOfYear(1909, Math.round(freezeLinear(1909)))) },
-					// { x: yearMax, y: help.weekNumber(help.dateFromDayOfYear(yearMax, Math.round(freezeLinear(yearMax)))) }
+				// { x: 1909, y: help.weekNumber(help.dateFromDayOfYear(1909, Math.round(freezeLinear(1909)))) },
+				// { x: yearMax, y: help.weekNumber(help.dateFromDayOfYear(yearMax, Math.round(freezeLinear(yearMax)))) }
 				// ],
 				// iceTimeLinear: [
-					// { x: 1915, y: iceTimeLinear(1915) },
-					// { x: yearMax, y: iceTimeLinear(yearMax) }
+				// { x: 1915, y: iceTimeLinear(1915) },
+				// { x: yearMax, y: iceTimeLinear(yearMax) }
 				// ],
 				// iceTimeMovAvgLinear: [
-					// { x: 1925, y: iceTimeMovAvgLinear(1925) },
-					// { x: yearMax, y: iceTimeMovAvgLinear(yearMax) }
+				// { x: 1925, y: iceTimeMovAvgLinear(1925) },
+				// { x: yearMax, y: iceTimeMovAvgLinear(yearMax) }
 				// ],
 			})
 		})
