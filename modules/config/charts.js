@@ -123,7 +123,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 20;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('temperatureDifference1', no);
 		},
 	},
@@ -134,7 +134,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 21;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('temperatureDifference2', no);
 
 		},
@@ -146,7 +146,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 22;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('temperatureDifference3', no);
 
 		},
@@ -155,7 +155,7 @@ var rendF = {
 		func: function(reset=false){alert("PLACE HOLDER")}, 
 		html: function(doc){
 			var no = 16.1;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('arcticTemperatures', no);
 
 		},
@@ -167,7 +167,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 43;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('abiskoLakeIce', no);
 
 		},
@@ -179,7 +179,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 43;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('abiskoLakeIceBreakup', no);
 
 		},
@@ -191,7 +191,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 43;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('abiskoLakeIceFreezeup', no);
 
 		},
@@ -203,7 +203,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 43;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('abiskoLakeIceTime', no);
 
 		},
@@ -215,7 +215,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 43;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('iceThicknessYear', no);
 		},
 	},
@@ -226,7 +226,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 43;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('iceThicknessDate', no);
 		},
 	},
@@ -238,7 +238,7 @@ var rendF = {
 
 		html: function(doc){
 			var no = 41;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('abiskoSnowDepthPeriodMeans', no)
 		},
 	},
@@ -249,7 +249,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 42;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('abiskoSnowDepthPeriodMeans2',no)
 		},
 	},
@@ -260,7 +260,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 42;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('yrlyAvgSnowDepth',no)
 		},
 	},
@@ -271,7 +271,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 1;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('slideTemperature', no);
 		},
 	},
@@ -282,7 +282,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 2;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('TemperaturesSummer', no);
 		},
 	}, 
@@ -293,7 +293,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 2;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('TemperaturesAutumn', no);
 		},
 	}, 
@@ -304,7 +304,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 2;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('TemperaturesSpring', no);
 		},
 	}, 
@@ -315,7 +315,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 3;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('TemperaturesWinter', no);
 
 		},
@@ -351,7 +351,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 23;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('Precipitation', no);
 
 		},
@@ -363,7 +363,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 24;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('autumnPrecipitation', no);
 
 		},
@@ -375,7 +375,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 24;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('springPrecipitation', no);
 
 		},
@@ -387,7 +387,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 24;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('summerPrecipitation', no);
 
 		},
@@ -399,7 +399,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 25;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('winterPrecipitation', no);
 
 		},
@@ -434,7 +434,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 1;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('Temperatures', no);
 		},
 
@@ -446,7 +446,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 2;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('TemperaturesSummer', no);
 		},
 	}, 
@@ -457,7 +457,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 2;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('TemperaturesAutumn', no);
 		},
 	}, 
@@ -468,7 +468,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 2;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('TemperaturesSpring', no);
 		},
 	}, 
@@ -479,7 +479,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 3;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('TemperaturesWinter', no);
 
 		},
@@ -491,7 +491,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 19;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('temperatureDifference', no);
 
 		},
@@ -503,7 +503,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 19;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('dailyExtremeTemperature', no);
 
 		},
@@ -515,7 +515,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 19;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('weeklyExtremeTemperature', no);
 
 		},
@@ -579,7 +579,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 23;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('Precipitation', no);
 
 		},
@@ -591,7 +591,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 24;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('autumnPrecipitation', no);
 
 		},
@@ -603,7 +603,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 24;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('springPrecipitation', no);
 
 		},
@@ -615,7 +615,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 24;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('summerPrecipitation', no);
 
 		},
@@ -627,7 +627,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 25;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('winterPrecipitation', no);
 
 		},
@@ -639,7 +639,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 38;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('yearlyPrecipitationDifference', no);
 
 		},
@@ -651,7 +651,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 19;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('dailyExtremePrecipitation', no);
 
 		},
@@ -663,7 +663,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 19;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('weeklyExtremePrecipitation', no);
 
 		},
@@ -698,7 +698,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 18;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('growingSeasonFirst', no);
 
 		}
@@ -710,7 +710,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 18;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('growingSeasonLast', no);
 
 		}
@@ -723,7 +723,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 18;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('growingSeasonDays', no);
 
 		}
@@ -736,7 +736,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 18;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('growingSeason', no);
 
 		}
@@ -748,7 +748,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 44;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv('weeklyCO2', no);
 		}
 	},
@@ -759,7 +759,7 @@ var rendF = {
 		},
 		html: function(doc){
 			var no = 45;
-			if(!variables.debug) no = debug;
+			if(!variables.debug) no = variables.debug;
 			return createDiv("permaHistogramCALM", no);
 		}
 	}
