@@ -38,7 +38,7 @@
 		"extreme": {
 			"group": 2,
 			"visible": true,
-			"colour": "#ff0000",
+			"colour": "#1000FF",
 			"type": "column" 
 		}
 	}
