@@ -177,7 +177,7 @@ var config = {
 		reader = Papa.parse,
 		local = false),
 	abisko: dataset_struct.create(
-		file = ["ANS_Temp_Prec.csv", "AWS_Daily_1984-2019.csv", "ANS_prec.csv"],
+		file = ["ANS_Temp_Prec.csv", "AWS_Daily_1984-2019.csv", "ANS_Prec.csv"],
 		preset = {
 			//worker: useWebWorker,
 			header: true,
