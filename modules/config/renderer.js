@@ -1,4 +1,5 @@
 global.Highcharts = require('highcharts');
+require('jquery-contextmenu');
 require('highcharts-more')(Highcharts);
 require('highcharts/modules/series-label')(Highcharts);
 require('highcharts/modules/exporting')(Highcharts);
@@ -156,6 +157,9 @@ var chart = {
 			$('#'+id).append(gTitle);
 			this.chart.showLoading();
 		}
+		return new Promise(function(resolve, reject){
+			resolve(true);
+		})
 	},
 	title: function(gID){
 		var group = this.meta.groups[gID];
@@ -414,7 +418,7 @@ var chart = {
 				type: s.type,
 				color: s.colour,
 				opacity: 0.5,
-				data: p,
+				data: p.values,
 				visible: k == "Torneträsk",
 			}),
 			period: (p, s) => ({
@@ -703,15 +707,29 @@ var render = {
 		if(meta.month){
 			this.charts[id] = new Promise(function(resolve, reject){
 				try{
-					var res = {};
-					res.meta = meta;
-					help.months().forEach((month, index) => {
+					var months = help.months()
+					var recurMonth = function(mnths){
+						var month = mnths.shift()
 						var cloneMeta = Object.assign({}, meta, {});
 						cloneMeta.month = help.monthName(month);
+						var res = {};
 						res[month] = chart.clone();
-						res[month].setup(id+"_"+month, cloneMeta);
-					})
-					resolve(res);
+						try{
+							if(mnths.length > 0){
+								res[month].setup(id+"_"+month, cloneMeta)
+								return Object.assign(res, recurMonth(mnths), {});
+							}else{
+								res[month].setup(id+"_"+month, cloneMeta)
+								res.meta = meta;
+								return res
+							}
+						}catch(error){
+							console.log({ERROR: error, month: month, meta: meta})
+							reject(error)
+						}
+					}
+					rest = recurMonth(months);
+					resolve(rest);
 				}catch(error){
 					console.log({ERROR: error, ID: id, meta: meta});
 					reject(error);

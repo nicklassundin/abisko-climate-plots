@@ -23,6 +23,7 @@
 		"highcharts-more": "^0.1.7",
 		"highcharts-more-node": "^5.0.13",
 		"jquery": "^3.5.0",
+		"jquery-contextmenu": "^2.9.2",
 		"json2csv": "^4.5.4",
 		"mariadb": "^2.3.1",
 		"mariasql": "^0.2.6",

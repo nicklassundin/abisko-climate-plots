@@ -17,8 +17,7 @@ global.variables = {
 	dateStr: function(){ return (this.date.getYear()+1900)+"-"+(this.date.getMonth()+1)+"-"+this.date.getDate() },
 }
 
-var config = require('./config/dataset.js').config;
-var charts = require('./config/charts.js');
+var charts = require('./config/charts/config.js');
 var sets = require('../config/custom.json');
 
 lib = {
@@ -29,14 +28,12 @@ lib = {
 		if(id=="abisko"){
 			if(stationType != "abisko"){
 				global.stationType = "abisko";
-				config = require('./config/dataset.js').config;
-				charts = require('./config/charts.js');
+				charts = require('./config/charts/config.js');
 			}
 		}else{
 			if(stationType != "smhi"){
 				global.stationType = "smhi";
-				config = require('./config/dataset.js').config;
-				charts = require('./config/charts.js');
+				charts = require('./config/charts/config.js');
 			}
 		}
 		$(function(){

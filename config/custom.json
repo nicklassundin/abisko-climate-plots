@@ -127,12 +127,16 @@
 		"slideTemperaturesSpring",
 		"slideTemperaturesSummer",
 		"slideTemperaturesAutumn",
-		"slideTemperaturesWinter"],
+		"slideTemperaturesWinter",
+		"slideMonthlyTemperatures"
+	],
 	"sqrt-prec-slide": ["slidePrecipitation",
 		"slideWinterPrecipitation",
 		"slideSpringPrecipitation", 
 		"slideSummerPrecipitation",
-		"slideAutumnPrecipitation"],
+		"slideAutumnPrecipitation",
+		"slideMonthlyPrecipitation"
+	],
 		"sqrt-snowDepth-v2": ["yrlyAvgSnowDepth",
 			"abiskoSnowDepthPeriodMeans",
 			"abiskoSnowDepthPeriodMeans2"],
