@@ -120,8 +120,11 @@ var config = {
 				'difference': { config: 'difference', lang: 'diffPrecipitation', data: 'SMHI-Hydrology', set: 'climate' }, 
 				'polar': { config: undefined, lang: undefined, data: 'SMHI-Hydrology', set: 'weather' }, 
 			},
-			'growingSeason': { config: 'growingSeason', lang: 'growingSeason', data: 'SMHI-Hydrology', set: 'slide' }, 
-			'slideTemperature': { config: 'temperature', lang: 'slideTemperature', data: 'SMHI-Hydrology', set: 'slide' }, 
+			'growingSeason': { config: 'growingSeason', lang: 'growingSeason', data: 'SMHI-Weather', set: 'slide' }, 
+			'growingSeasonDays': { config: 'growingSeason', lang: 'growingSeasonDays', data: 'SMHI-Weather', set: 'slide'}, 
+			'growingSeasonFrostFirst': { config: 'growingSeasonFirst', lang: 'growingSeasonFrostFirst', data: 'SMHI-Weather', set: 'slide'},
+			'growingSeasonFrostLast': { config: 'growingSeasonLast', lang: 'growingSeasonFrostLast', data: 'SMHI-Weather', set: 'slide'}, 
+			'slideTemperature': { config: 'temperature', lang: 'slideTemperature', data: 'SMHI-Weather', set: 'slide' }, 
 		},
 		reader = Papa.parse),
 	// TODO Bake together

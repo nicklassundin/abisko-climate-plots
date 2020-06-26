@@ -1076,6 +1076,9 @@ exports.parsers = {
 				temperatures: blocks.temperatures,
 				growingSeason: struct.create(Object.keys(blocks.temperatures.weekly).map(year =>  blocks.temperatures.weekly[year].avg.sequence())).build(),
 				growingSeasonDays: struct.create(Object.keys(blocks.temperatures.yrly.avg.values).map(year =>  blocks.temperatures.yrly.avg.values[year].sequence())).build(),
+				growingSeasonDays: struct.create(Object.keys(blocks.temperatures.yrly.avg.values).map(year =>  blocks.temperatures.yrly.avg.values[year].sequence())).build(),
+				growingSeasonFrostFirst: blocks.temperatures.yrlySplit.min.first(),
+				growingSeasonFrostLast: blocks.temperatures.yrlySplit.min.last(),
 			})
 		})
 

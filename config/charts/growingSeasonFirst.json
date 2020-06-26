@@ -10,6 +10,7 @@
 		}
 	},
 	"tooltip": {
+		"type": "winterValue"
 	},
 	"decimals": 0,
 	"series": {
