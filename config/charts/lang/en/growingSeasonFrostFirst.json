@@ -8,17 +8,30 @@
 		"0": {
 			"title": "[stationName] First Frost of the Autumn" ,
 			"subTitle": "Maximum number of consecutive weeks above zero Celcius",
-			"legend": "Growing Season",
+			"legend": "Weather",
 			"caption": "The date of the first fall frost, which marks the approximate end of the growing season for frost-sensitive crops and plants. This is calculated from temperature data.", 
 			"yAxis": {
 				"left": "First date with temperatures record below 0°C",
 				"right": "[X-AXIS]"
 			}
+		},
+		"1": {
+			"title": "[stationName] First Autumn Frost - Difference from Baseline" ,
+			"subTitle": "",
+			"legend": "Climate",
+			"caption": "The difference between the date of the first autumn frost for the year and the average for the baseline period, typically 1961 to 1990. This is calculated from temperature data.", 
+			"yAxis": {
+				"left": "First date with temperatures record below 0°C Difference",
+				"right": "[X-AXIS]"
+			}
 		}
 	},
 	"series": {
-		"first": {
-			"name": "Date"
-		}  
+		"avg": {
+			"name": "Day of the year"
+		},
+		"diff": {
+			"name": "Difference"
+		}
 	}
 }

@@ -81,7 +81,7 @@ var struct = {
 			}
 		})
 		res.splice(-1, 1);
-		return res;
+		return struct.create(res).build();
 	},
 	first: function(f = (e) => { return e.y <= 0 }, type=this.type){
 		var res = this.filter((entry) => {
@@ -92,7 +92,7 @@ var struct = {
 			}
 		})
 		res.shift();
-		return res;
+		return struct.create(res).build();
 	},
 	sequence: function(f=(e)=>{ return e < 0 }){
 		var values = this.values.map(each => each.y)
@@ -746,6 +746,8 @@ exports.parsers = {
 			blocks.precipitation = parseByDate(blocks.precipitation, 'sum');
 			blocks.growingSeason = struct.create(Object.keys(blocks.temperatures.weekly).map(year =>  blocks.temperatures.weekly[year].avg.sequence())).build();
 			blocks.growingSeasonDays = struct.create(Object.keys(blocks.temperatures.yrly.avg.values).map(year =>  blocks.temperatures.yrly.avg.values[year].sequence())).build();
+			blocks.growingSeasonFrostFirst = blocks.temperatures.yrlySplit.min.first();
+			blocks.growingSeasonFrostLast = blocks.temperatures.yrlySplit.min.last();
 			parseAbiskoCached = blocks
 			// console.log(blocks)
 			resolve(blocks)
@@ -1072,7 +1074,8 @@ exports.parsers = {
 			resolve({
 				precipitation: blocks.precipitation,
 				temperatures: blocks.temperatures,
-				growingSeason: struct.create(Object.keys(blocks.temperatures.weekly).map(year =>  blocks.temperatures.weekly[year].avg.sequence())).build()
+				growingSeason: struct.create(Object.keys(blocks.temperatures.weekly).map(year =>  blocks.temperatures.weekly[year].avg.sequence())).build(),
+				growingSeasonDays: struct.create(Object.keys(blocks.temperatures.yrly.avg.values).map(year =>  blocks.temperatures.yrly.avg.values[year].sequence())).build(),
 			})
 		})
 

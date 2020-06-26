@@ -4,17 +4,24 @@
 	"groups": {
 		"0": {
 			"baseline": false
+		},
+		"1": {
+			"baseline": true
 		}
 	},
 	"tooltip": {
 	},
 	"decimals": 0,
 	"series": {
-		"first": {
+		"avg": {
 			"group": 0,
 			"visible": true,
 			"colour": "#0000ee",
 			"type": "line"
+		},
+		"diff": {
+			"group": 1,
+			"type": "column"
 		}
 	}
 }

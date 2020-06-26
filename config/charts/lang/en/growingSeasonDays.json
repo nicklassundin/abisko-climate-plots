@@ -8,17 +8,27 @@
 		"0": {
 			"title": "[stationName] Growing Season" ,
 			"subTitle": "Maximum number of consecutive days above zero Celcius",
-			"legend": "Growing Season",
+			"legend": "Weather",
 			"caption": "The Frost-free season is the approximate length of the growing season, during which there are no freezing temperatures to kill or damage plants. This is calculated from temperature data.",
 			"yAxis": {
 				"left": "Growing Season [Number of consecutive days above freezing (> 0°C)]",
+				"right": "[X-AXIS]"
+			}
+		},
+		"1": {
+			"title": "[stationName] Growing Season Difference (Days) from Baseline<Paste>" ,
+			"subTitle": "", 
+			"legend": "Climate",
+			"caption": "Difference between the maximum number of days above zero for the year and the average for the baseline period, typically 1961 to 1990. This is calculated from temperature data.", 
+			"yAxis": {
+				"left": "Growing Season Difference [Number of consecutive days above freezing (> 0°C)]", 
 				"right": "[X-AXIS]"
 			}
 		}
 	},
 	"series": {
 		"avg": {
-			"name": "Weeks"
+			"name": "Days"
 		},  
 		"diff": {
 			"name": "Difference"

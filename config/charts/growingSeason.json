@@ -4,6 +4,9 @@
 	"groups": {
 		"0": {
 			"baseline": false
+		},
+		"1": {
+			"baseline": true
 		}
 	},
 	"decimals": 0,
@@ -15,7 +18,8 @@
 			"type": "line"
 		},  
 		"diff": {
-			"visible": false,
+			"group": 1,
+			"visible": true,
 			"colour": "[example]",
 			"type": "column" 
 		}

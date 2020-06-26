@@ -584,7 +584,7 @@ var rendF = {
 	'growingSeasonFrostFirst': {
 		func: function(reset=false){
 			config[stationType].contFunc(reset);
-			config[stationType].init('growingSeasonFirst', ['temperatures', 'yrlySplit'], 'growingSeasonFrostFirst')
+			config[stationType].init('growingSeasonFirst', 'growingSeasonFrostFirst')
 		},
 		html: function(doc){
 			var no = 18;
@@ -596,7 +596,7 @@ var rendF = {
 	'growingSeasonFrostLast': {
 		func: function(reset=false){
 			config[stationType].contFunc(reset);
-			config[stationType].init('growingSeasonLast', ['temperatures', 'yrlySplit'], 'growingSeasonFrostLast')
+			config[stationType].init('growingSeasonLast', 'growingSeasonFrostLast')
 		},
 		html: function(doc){
 			var no = 18;
