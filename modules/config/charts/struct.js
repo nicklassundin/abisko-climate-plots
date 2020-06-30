@@ -36,14 +36,13 @@ global.getID = function(param=urlParams){
 }
 
 var createDiv = function(id, no=null){
-	var div = document.createElement('div');
-	div.setAttribute("id",id);
-	var overlay = document.createElement('div');
-	overlay.setAttribute("id", id+"overlay");
-	overlay.setAttribute("class","overlay");
+	var el = document.createElement('div');
+	if(variables.debug) {
+		el = document.createElement('form')
+	}
+	el.setAttribute("id",id);
 	var fig = document.createElement('figure');
-	fig.appendChild(div);
-	fig.appendChild(overlay);
+	fig.appendChild(el);
 	return fig
 }
 exports.createDiv = createDiv;
@@ -56,7 +55,11 @@ global.buildChart = function(doc, ids, reset=false){
 				rendF[id].func(reset);
 				resolve(true);
 			}catch(err){
+				console.log(doc)
+				console.log(ids)
+				console.log(id)
 				reject(err)
+				throw err
 			}
 		})
 	}
@@ -66,16 +69,6 @@ global.buildChart = function(doc, ids, reset=false){
 		if(target){
 			call(target).then(function(){
 				sequence(array);
-			}).catch(function(err){
-				// TODO Improve quality
-				var div = document.createElement("div");
-				div.innerHTML = "[PLACEHOLDER ERROR] - Sorry we couldn't deliver the graph you deserved, if you have block adder on try turning in off. "
-				var error = document.createElement("div");
-				error.innerHTML = err;
-				doc.appendChild(div)
-				doc.appendChild(error)
-				console.log("failed to render: "+target)
-				throw error
 			})
 		}
 	};	

@@ -15,6 +15,7 @@ var today = new Date();
 global.variables = {
 	date: new Date(today.getFullYear()-1, 11, 24),
 	dateStr: function(){ return (this.date.getYear()+1900)+"-"+(this.date.getMonth()+1)+"-"+this.date.getDate() },
+	metas: {},
 }
 
 var charts = require('./config/charts/config.js');
@@ -44,8 +45,8 @@ lib = {
 	},
 	renderSets: function(div, set=(new URL(window.location.href).searchParams.get("set")), id=(new URL(window.location.href).searchParams.get("station")), url){
 		if(url) hostUrl = url;
-		variables.debug = (new URL(window.location.href).searchParams.get("debug"))
-		if(variables.debug == "true") {
+		variables.debug = (new URL(window.location.href).searchParams.get("debug") == "true" ? true : false)
+		if(variables.debug) {
 			var debug = document.createElement("div");
 			debug.setAttribute("class", "debug");
 			debug.innerHTML = "set: "+ set +"</br> station: "+ id
@@ -54,11 +55,15 @@ lib = {
 		sets[set].forEach(type => {
 			var container = document.createElement("div");
 			container.setAttribute("id", "mark_"+type);
-			if(variables.debug == "true") {
+			if(variables.debug) {
 				var debug = document.createElement("div");
 				debug.setAttribute("class", "debug");
 				debug.setAttribute("id", "debug_"+type);
 				debug.innerHTML = "type: "+ type +"</br> station: "+ id
+				var table = document.createElement("table");
+				table.setAttribute("class", "debug");
+				table.setAttribute("id", "debug_table_"+type);
+				debug.appendChild(table)
 				container.appendChild(debug)
 			}
 			div.appendChild(container);
@@ -66,3 +71,4 @@ lib = {
 		})
 	},
 }
+

@@ -10,12 +10,37 @@ var base = require('./base.js')
 const formatters = require('./tooltips.js').formatters;
 const help = require('../helpers.js');
 
+// require('textarea-markdown');
+
 // var constant = require('../../config/const.json')
 // global.baselineLower = constant.baselineLower;
 // global.baselineUpper = constant.baselineUpper;
 // global.startYear = constant.startYear;
 
 var chart = {
+	metaTable: function(id, json, i=0){
+			Object.keys(json).forEach(key => {
+				$('#'+id).append('<div id="'+id+'_cont"></div>');
+				$('#'+id+'_cont').append('<div id="'+id+'_button_'+key+'" class="mini_button">- '+key+'</div><br/>')
+				$('#'+id+'_cont').append('<div id="'+id+'_box_'+key+'" class="box"></div>');
+				$('#'+id+'_box_'+key).append('<textarea class="json" cols="80">'+JSON.stringify(json[key], undefined, 4)+'</textarea>')
+				$('#'+id+'_box_'+key).append('<br/>')
+				$("#"+id+'_button_'+key).click(function(){
+					$("#"+id+"_box_"+key).slideToggle();
+				});
+			})
+		},
+
+	getMeta: function(define, id){
+		var meta = {};
+		meta.config = require('../../config/charts/'+define.config+'.json')
+		meta.lang = require('../../config/charts/lang/'+nav_lang+'/'+define.lang+'.json');
+		meta.dataSource = require('../../config/charts/lang/'+nav_lang+'/dataSource.json')[define.data];
+		meta.month = (define.monthly ? require('../../config/charts/monthly.json') : { "month": false })
+		meta.set = require('../../config/charts/'+define.set+'.json');
+		meta.unitType = define.unitType != undefined ? require('../../config/charts/lang/'+nav_lang+'/units.json')[define.unitType] : {};
+		return meta;
+	},
 	textMorph: function(text, meta){
 		var res = "";
 		if(text){
@@ -32,16 +57,27 @@ var chart = {
 				throw error;
 			}
 		}
-		return res;
+		var onkeypress="this.style.width = ((this.value.length + 1) * 8) + 'px';"
+		var elType = (variables.debug ? "<input class=dbgIn type='text' onkeypress="+onkeypress+" onclick=selectText(this) value='"+text+"'></input>" : res)
+		return elType
+		// return res
 	},
 	id: undefined,
 	chart: undefined,
+	metaRef: undefined,
+	metaFiles: undefined,
 	meta: undefined,
-	setup: function(id, meta){
+	data: undefined,
+	setup: function(id, metaRef){
 		this.id = id;
-		this.meta = meta;
+		this.metaRef = metaRef;
+		this.metaFiles = Object.assign({}, metaRef);
+		this.metaFiles = this.getMeta(this.metaFiles, id)
+		this.meta = Object.values(this.metaFiles).reduce((x, y) => $.extend(true, x, y))
+		var meta = this.meta;
 		var title = this.title(0);
 		var textMorph = this.textMorph;
+		this.metaTable('debug_table_'+id, this.metaFiles);
 		this.chart = Highcharts.chart(id, {
 			dataSrc: '[placeholder]',
 			credits: {
@@ -164,7 +200,7 @@ var chart = {
 	title: function(gID){
 		var group = this.meta.groups[gID];
 		var title = '<label>'+
-			group.title+
+			this.textMorph(group.title, this.meta)+
 			'</label><br>';
 		if(group.select != undefined && group.select.enabled){
 			title = title + '<label style="font-size: 10px">'+
@@ -189,8 +225,9 @@ var chart = {
 		})
 		return "<div id='"+this.id+"_title' class='tab'>" + group.join("") + "</div>"
 	},
-	initiate: function(data){
+	initiate: function(data = this.data){
 		var id = this.id;
+		this.data = data;
 		// console.log(id)
 		// console.log(data)
 		// // console.log((data.max != undefined) ? (data.max.max != undefined ? data.max.max(false).values : undefined) : data.total.max(false).values)
@@ -601,7 +638,7 @@ var chart = {
 		try{
 			this.chart.update({
 				title: {
-					text: textMorph(title, meta),
+					text: title,
 					useHTML: true,
 				},
 				subtitle: {
@@ -704,10 +741,12 @@ var chart = {
 var render = {
 	charts: {},
 	setup: function(id, meta){
+		try{
 		if(meta.month){
 			this.charts[id] = new Promise(function(resolve, reject){
 				try{
 					var months = help.months()
+					if(variables.debug) months = [months.shift()];
 					var recurMonth = function(mnths){
 						var month = mnths.shift()
 						var cloneMeta = Object.assign({}, meta, {});
@@ -746,38 +785,58 @@ var render = {
 				}
 			})
 		}
+		}catch(error){
+			console.log(id);
+			console.log(meta)
+			throw error
+		}
 	},
 	initiate: function(id, data){
 		this.charts[id].then(function(result){
 			if(result.meta.month){
-				help.months().forEach((month, index) => {
-					result[month].initiate(data[index+1+'']);
-				})
+				if(variables.debug){
+					result[help.months().shift()].initiate(data['1']);
+				}else{
+
+					help.months().forEach((month, index) => {
+						result[month].initiate(data[index+1+'']);
+					})
+				}
 			}else{
 				result.initiate(data)
 			}
 		})
 	},
 	updatePlot: function(id, bl, bu, date){
-		if(date){
-			date = date.split("-");
-			variables.date = new Date(date[0],Number(date[1])-1,date[2]);
+		try{
+
+			if(date){
+				date = date.split("-");
+				variables.date = new Date(date[0],Number(date[1])-1,date[2]);
+			}
+			if(id.renderTo) id=id.renderTo.id;
+			if(id.id) id=id.id; // TODO fix why this it gets a div not id
+			var low = document.getElementById(id+"lowLabel") 
+			var upp = document.getElementById(id+"uppLabel") 
+			if(low){
+				if(!bl) bl = low.value;
+				if(!bu) bl = upp.value;
+			} 
+			if(bl<bu && bl>=1913) baselineLower=bl;
+			if(bu>bl && bu<2019) baselineUpper=bu;
+			this.charts[id].then(function(chart){
+				if(id.split('_')[1]) id = id.split('_')[0]
+				var div = document.getElementById(id);
+				chart.chart.destroy();
+			})
+		}catch(error){
+			console.log(id)
+			throw error;
 		}
-		if(id.id) id=id.id; // TODO fix why this it gets a div not id
-		if(id.renderTo) id=id.renderTo.id;
-		var low = document.getElementById(id+"lowLabel") 
-		var upp = document.getElementById(id+"uppLabel") 
-		if(low){
-			if(!bl) bl = low.value;
-			if(!bu) bl = upp.value;
-		} 
-		if(bl<bu && bl>=1913) baselineLower=bl;
-		if(bu>bl && bu<2019) baselineUpper=bu;
-		this.charts[id].then(function(chart){
-			if(id.split('_')[1]) id = id.split('_')[0]
-			var div = document.getElementById(id);
-			chart.chart.destroy();
-			buildChart(div,ids=id,reset=true)
+		var cont = this;
+		this.charts[id].then(function(result){
+			cont.setup(id, result.metaRef)
+			cont.initiate(id, result.data)
 		})
 	}
 }

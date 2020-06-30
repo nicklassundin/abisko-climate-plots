@@ -12,10 +12,9 @@
 		"temperatureDifference2",
 		"temperatureDifference3",
 		"Precipitation",
-		"summerPrecipitation",
 		"winterPrecipitation",
 		"monthlyPrecipitation",
-		"PrecipitationDifference",
+		"yearlyPrecipitationDifference",
 		"springPrecipitation", 
 		"summerPrecipitation",
 		"autumnPrecipitation", 
@@ -145,5 +144,13 @@
 		"abiskoLakeIceFreezeup",
 		"abiskoLakeIceTime",
 		"iceThicknessYear",
-		"iceThicknessDate"]
+		"iceThicknessDate"],
+	"v2": [
+		"slideTemperature",
+		"slideTemperaturesSpring",
+		"slideTemperaturesSummer",
+		"slideTemperaturesAutumn",
+		"slideTemperaturesWinter",
+		"slideMonthlyTemperatures"
+	]
 }

@@ -40,33 +40,6 @@ var struct = {
 	render: renderer, 
 	reader: Papa.parse,
 	metaRef: undefined,
-	getMeta: function(define){
-		if(define.config != undefined){
-			var metaConfig =require('../../../config/charts/'+define.config+'.json');
-			var meta = {};
-			$.extend(true, meta, metaConfig);
-			var metaLang = require('../../../config/charts/lang/'+nav_lang+'/'+define.lang+'.json')
-			$.extend(true, meta, metaLang);
-			var data = require('../../../config/charts/lang/'+nav_lang+'/dataSource.json')[define.data];
-			meta.data = {};
-			$.extend(true, meta.data, data);
-			if(define.monthly){
-				var monthly = require('../../../config/charts/monthly.json');
-				$.extend(true, meta, monthly);
-			}
-			if(define.set){
-				var set = require('../../../config/charts/'+define.set+'.json');
-				$.extend(true, meta, set);
-			}
-			if(meta.unitType){
-				meta.units = require('../../../config/charts/lang/'+nav_lang+'/units.json')[meta.unitType];
-			}
-			// DEBUG TODO link to config files
-			return meta;
-		}else{
-			return false
-		}
-	},
 	contFunc: function(reset=false, page=''){
 		if(typeof this.rawData !== 'undefined' && this.rawData.length > 0){
 			return this;
@@ -119,13 +92,13 @@ var struct = {
 		var render = this.render;
 		if(renderTag){
 			var meta = tagApply(this.metaRef, renderTag);
-			render.setup(id, this.getMeta(meta));
+			render.setup(id, meta);
 		}else{
 			try{
-				render.setup(id, this.getMeta(this.metaRef));
+				render.setup(id, this.metaRef);
 			}catch(error){
 				console.log(id)
-				console.log(this.getMeta);
+				console.log(this.metaRef);
 				throw error
 			}
 		}

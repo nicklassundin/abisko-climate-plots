@@ -168,45 +168,45 @@ var rendF = {
 	'slideTemperaturesSummer': {
 		func: function(reset=false){
 			config[stationType].contFunc(reset);
-			config[stationType].init('TemperaturesSummer', ['temperatures','summer'], ['temperatures', 'summerSlide']);
+			config[stationType].init('slideTemperaturesSummer', ['temperatures','summer'], ['temperatures', 'summerSlide']);
 		},
 		html: function(doc){
 			var no = 2;
 			if(!variables.debug) no = variables.debug;
-			return createDiv('TemperaturesSummer', no);
+			return createDiv('slideTemperaturesSummer', no);
 		},
 	}, 
 	'slideTemperaturesAutumn': {
 		func: function(reset=false){
 			config[stationType].contFunc(reset);
-			config[stationType].init('TemperaturesAutumn', ['temperatures','autumn'], ['temperatures', 'autumnSlide']);
+			config[stationType].init('slideTemperaturesAutumn', ['temperatures','autumn'], ['temperatures', 'autumnSlide']);
 		},
 		html: function(doc){
 			var no = 2;
 			if(!variables.debug) no = variables.debug;
-			return createDiv('TemperaturesAutumn', no);
+			return createDiv('slideTemperaturesAutumn', no);
 		},
 	}, 
 	'slideTemperaturesSpring': {
 		func: function(reset=false){
 			config[stationType].contFunc(reset);
-			config[stationType].init('TemperaturesSpring', ['temperatures','spring'], ['temperatures', 'springSlide']);
+			config[stationType].init('slideTemperaturesSpring', ['temperatures','spring'], ['temperatures', 'springSlide']);
 		},
 		html: function(doc){
 			var no = 2;
 			if(!variables.debug) no = variables.debug;
-			return createDiv('TemperaturesSpring', no);
+			return createDiv('slideTemperaturesSpring', no);
 		},
 	}, 
 	'slideTemperaturesWinter': {
 		func: function(reset=false){
 			config[stationType].contFunc(reset);
-			config[stationType].init('TemperaturesWinter', ['temperatures','winter'], ['temperatures', 'winterSlide']);
+			config[stationType].init('slideTemperaturesWinter', ['temperatures','winter'], ['temperatures', 'winterSlide']);
 		},
 		html: function(doc){
 			var no = 3;
 			if(!variables.debug) no = variables.debug;
-			return createDiv('TemperaturesWinter', no);
+			return createDiv('slideTemperaturesWinter', no);
 
 		},
 	},
