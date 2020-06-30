@@ -1,0 +1,27 @@
+{
+	"valueSuffix": "veckor",
+	"xAxis": {
+		"bott": "År", 
+		"top": "[Y-AXIS]"
+	},
+	"groups": {
+		"0": {
+			"title": "[stationName] Växtsäsong" ,
+			"subTitle": "Maximalt antal av sammanhängande veckor över 0 grader Celsius", 
+			"legend": "VäxtSäsong",
+			"caption": "Den frostfria säsongen är den ungefärliga längden på växtsäsongen (i veckor), under vilken det inte finns någon frysningstemperatur för att döda eller skada växter. Detta beräknas utifrån temperaturdata.", 
+			"yAxis": {
+				"left": "Växtsäsong [antal av på varandra följande veckor över fryspunkten (> 0°C)]",
+				"right": "[X-AXIS]"
+			}
+		}
+	},
+	"series": {
+		"avg": {
+			"name": "Veckor"
+		},  
+		"diff": {
+			"name": "Skillnad från baslinjen"
+		}
+	}
+}
