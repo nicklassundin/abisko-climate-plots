@@ -58,8 +58,7 @@ var chart = {
 			}
 		}
 		var onkeypress="this.style.width = ((this.value.length + 1) * 8) + 'px';"
-		var elType = (variables.debug ? "<input class=dbgIn type='text' onkeypress="+onkeypress+" onclick=selectText(this) value='"+text+"'></input>" : res)
-		return elType
+		return res
 		// return res
 	},
 	id: undefined,

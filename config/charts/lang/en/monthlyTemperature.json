@@ -6,8 +6,8 @@
 	},
 	"groups": {
 		"0": {
-			"title": "[stationName] [month] Average Temperature" ,
-			"subTitle": "",
+			"title": "[stationName] Average Temperature" ,
+			"subTitle": "[month]",
 			"caption": "Average monthly temperature. The lowest (min) and highest (max) temperature of the month.",
 			"legend": "Weather",
 			"yAxis": {

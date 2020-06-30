@@ -6,8 +6,8 @@
 	},
 	"groups": {
 		"0": {
-			"title": "[stationName] [month] Average Precipitation" ,
-			"subTitle": "[SUB-TITLE]",
+			"title": "[stationName] Average Precipitation" ,
+			"subTitle": "[month]",
 			"caption": "Average monthly precipitation. The lowest (min) and highest (max) precipitation of the month.",
 			"yAxis": {
 				"left": "Total Precipitation [mm]",
