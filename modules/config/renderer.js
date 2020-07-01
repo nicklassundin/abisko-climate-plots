@@ -16,6 +16,11 @@ const help = require('../helpers.js');
 // global.baselineLower = constant.baselineLower;
 // global.baselineUpper = constant.baselineUpper;
 // global.startYear = constant.startYear;
+//
+const units = {
+	sv: require('../../config/charts/lang/sv/units.json'),
+	en: require('../../config/charts/lang/en/units.json'),
+}
 
 var chart = {
 	metaTable: function(id, json, i=0){
@@ -38,18 +43,17 @@ var chart = {
 			})
 		}
 	},
-
-	getMeta: function(define, id){
+	getMeta: function(define){
 		var meta = {};
 		meta.config = require('../../config/charts/'+define.config+'.json')
 		meta.lang = require('../../config/charts/lang/'+nav_lang+'/'+define.lang+'.json');
 		meta.dataSource = require('../../config/charts/lang/'+nav_lang+'/dataSource.json')[define.data];
 		meta.month = (define.monthly ? require('../../config/charts/monthly.json') : { "month": false })
 		meta.set = require('../../config/charts/'+define.set+'.json');
-		meta.unitType = define.unitType != undefined ? require('../../config/charts/lang/'+nav_lang+'/units.json')[define.unitType] : {};
-		return meta;
+		meta.units = meta.set.unitType != undefined ? { units: units[nav_lang][meta.set.unitType] } : {};
+		return meta
 	},
-	textMorph: function(text, meta){
+	textMorph: function(text, meta=this.meta){
 		var res = "";
 		if(text){
 			try{
@@ -78,9 +82,8 @@ var chart = {
 	data: undefined,
 	setup: function(id, metaRef){
 		this.id = id;
-		this.metaRef = metaRef;
-		this.metaFiles = Object.assign({}, metaRef);
-		this.metaFiles = this.getMeta(this.metaFiles, id)
+		this.metaRef = Object.assign({}, metaRef);
+		this.metaFiles = this.getMeta(this.metaRef)
 		this.meta = Object.values(this.metaFiles).reduce((x, y) => $.extend(true, x, y))
 		var meta = this.meta;
 		var title = this.title(0);
@@ -182,7 +185,7 @@ var chart = {
 			},
 			tooltip: {
 				shared: true,
-				valueSuffix: ' '+textMorph(meta.valueSuffix, meta),
+				valueSuffix: ' '+textMorph(meta.valueSuffix),
 				valueDecimals: meta.decimals,
 				formatter: (meta.tooltip != undefined) ? formatters[meta.tooltip.type] : undefined
 			},
@@ -208,7 +211,7 @@ var chart = {
 	title: function(gID){
 		var group = this.meta.groups[gID];
 		var title = '<label>'+
-			this.textMorph(group.title, this.meta)+
+			this.textMorph(group.title)+
 			'</label><br>';
 		if(group.select != undefined && group.select.enabled){
 			title = title + '<label style="font-size: 10px">'+
@@ -236,12 +239,7 @@ var chart = {
 	initiate: function(data = this.data){
 		var id = this.id;
 		this.data = data;
-		// console.log(id)
-		// console.log(data)
-		// // console.log((data.max != undefined) ? (data.max.max != undefined ? data.max.max(false).values : undefined) : data.total.max(false).values)
-		// console.log((data.max != undefined) ? data.max.max(false) : data.total.max(false))
 		var meta = this.meta;
-		// console.log(meta)
 		var textMorph = this.textMorph;
 		var groups = Object.keys(meta.groups).map(key => ({
 			key: key,
@@ -261,7 +259,7 @@ var chart = {
 		// });
 		var seriesBuild = {
 			max: () => ({
-				name: meta.series.max.name,
+				name: textMorph(meta.series.max.name, meta),
 				lineWidth: 0,
 				marker: { radius: 2 },
 				states: { hover: { lineWidthPlus: 0 } },
@@ -271,7 +269,7 @@ var chart = {
 				type: meta.series.max.type,
 			}),
 			min: () => ({
-				name: meta.series.min.name,
+				name: textMorph(meta.series.min.name, meta),
 				lineWidth: 0,
 				marker: { radius: 2 },
 				states: { hover: { lineWidthPlus: 0 } },
@@ -281,7 +279,7 @@ var chart = {
 				type: meta.series.min.type,
 			}),
 			extreme: () => ({
-				name: meta.series.extreme.name,
+				name: textMorph(meta.series.extreme.name, meta),
 				lineWidth: 0,
 				marker: { radius: 2 },
 				states: { hover: { lineWidthPlus: 0 } },
@@ -291,7 +289,7 @@ var chart = {
 				type: meta.series.extreme.type,
 			}),
 			first: () => ({
-				name: meta.series.first.name,
+				name: textMorph(meta.series.first.name, meta),
 				lineWidth: 0,
 				marker: { radius: 2 },
 				states: { hover: { lineWidthPlus: 0 } },
@@ -301,7 +299,7 @@ var chart = {
 				type: meta.series.first.type,
 			}),
 			last: () => ({
-				name: meta.series.last.name,
+				name: textMorph(meta.series.last.name, meta),
 				lineWidth: 0,
 				marker: { radius: 2 },
 				states: { hover: { lineWidthPlus: 0 } },
@@ -311,7 +309,7 @@ var chart = {
 				type: meta.series.last.type,
 			}),
 			avg: () => ({
-				name: meta.series.avg.name,
+				name: textMorph(meta.series.avg.name, meta),
 				lineWidth: 0,
 				regression: true,
 				marker: { radius: 2 },
@@ -321,7 +319,7 @@ var chart = {
 				regressionSettings: {
 					// type: 'linear',
 					// color: meta.series.linjer.colour,
-					// name: meta.series.linjer.name,
+					// name: textMorph(meta.series.linjer.name,
 				},
 				visible: true,
 				type: meta.series.avg.type,
@@ -333,7 +331,7 @@ var chart = {
 					color: '#aa0000',
 					name: 'DUMMY',
 				},
-				name: meta.series.diff.name,
+				name: textMorph(meta.series.diff.name, meta),
 				type: meta.series.diff.type,
 				data: (data.difference != undefined ?
 					data.difference() : 
@@ -347,13 +345,13 @@ var chart = {
 				visible: true,
 			}),
 			linjer: () => ({
-				name: meta.series.linjer.name,
+				name: textMorph(meta.series.linjer.name, meta),
 				type: meta.series.linjer.typ,
 				visible: false,
 				showInLegend: false
 			}),
 			snow: () => ({
-				name: meta.series.snow.name,
+				name: textMorph(meta.series.snow.name, meta),
 				type: meta.series.snow.type,
 				stack: meta.groups[meta.series.snow.group].title,
 				stacking: 'normal',
@@ -371,7 +369,7 @@ var chart = {
 				}
 			}),
 			rain: () => ({
-				name: meta.series.rain.name,
+				name: textMorph(meta.series.rain.name, meta),
 				type: meta.series.rain.type,
 				stack: meta.groups[meta.series.rain.group].title,
 				stacking: 'normal',
@@ -396,7 +394,7 @@ var chart = {
 					color: '#00bb00',
 					name: '[placeholder]',
 				},
-				name: meta.series.iceTime.name,
+				name: textMorph(meta.series.iceTime.name, meta),
 				color: meta.series.iceTime.colour,
 				lineWidth: 0,
 				marker: { radius: 2 },
@@ -412,7 +410,7 @@ var chart = {
 					color: '#0000ee',
 					name: '[placeholder]',
 				},
-				name: meta.series.freeze.name,
+				name: textMorph(meta.series.freeze.name, meta),
 				color: meta.series.freeze.colour,
 				lineWidth: 0,
 				marker: { radius: 2 },
@@ -428,7 +426,7 @@ var chart = {
 					color: '#0000ee',
 					name: '[placeholder]',
 				},
-				name: meta.series.breakup.name,
+				name: textMorph(meta.series.breakup.name, meta),
 				color: meta.series.breakup.colour,
 				lineWidth: 0,
 				marker: { radius: 2 },
@@ -437,7 +435,7 @@ var chart = {
 				visible: true,
 			}),
 			iceThick: () => ({
-				name: meta.series.iceThick.name,
+				name: textMorph(meta.series.iceThick.name, meta),
 				color: meta.series.iceThick.colour,
 				lineWidth: 0,
 				marker: {
@@ -448,7 +446,7 @@ var chart = {
 				visible: true,
 			}),
 			iceThickDiff: () => ({
-				name: meta.series.iceThickDiff.name,
+				name: textMorph(meta.series.iceThickDiff.name, meta),
 				color: meta.series.iceThickDiff.colour,
 				lineWidth: 0,
 				marker: {
@@ -459,7 +457,7 @@ var chart = {
 				visible: true,
 			}),
 			perma: (p, s, k) => ({
-				name: (s.name == undefined) ? k : s.name,
+				name: textMorph((s.name == undefined) ? k : s.name, meta),
 				type: s.type,
 				color: s.colour,
 				opacity: 0.9,
@@ -467,7 +465,7 @@ var chart = {
 				visible: k == "Torneträsk",
 			}),
 			period: (p, s) => ({
-				name: s.name, 
+				name: textMorph(s.name, meta), 
 				type: s.type,
 				lineWidth: 1,
 				data: p.means.rotate(6).slice(2),
@@ -650,10 +648,10 @@ var chart = {
 					useHTML: true,
 				},
 				subtitle: {
-					text: (group.subTitle != undefined) ? textMorph(group.subTitle, meta) : "",
+					text: (group.subTitle != undefined) ? textMorph(group.subTitle) : "",
 				},
 				caption: {
-					text: textMorph(group.caption, meta),
+					text: textMorph(group.caption),
 					useHTML: true,
 				},
 				xAxis: {
@@ -662,7 +660,7 @@ var chart = {
 				},
 				yAxis: {
 					title: {
-						text: textMorph(group.yAxis.left, meta), 
+						text: textMorph(group.yAxis.left), 
 						useHTML: true,
 					},
 					plotLines: [{
