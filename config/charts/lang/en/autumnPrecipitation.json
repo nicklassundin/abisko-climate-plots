@@ -1,9 +1,5 @@
 {
 	"valueSuffix": "mm",
-	"xAxis": {
-		"bott": "Year", 
-		"top": "[Y-AXIS]"
-	},
 	"groups": {
 		"0": {
 			"title": "[stationName] Autumn Average Precipitation" ,
@@ -12,6 +8,10 @@
 			"yAxis": {
 				"left": "Total Precipitation [mm]",
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "Year", 
+				"top": "[Y-AXIS]"
 			},
 			"legend": "Weather"
 		},
@@ -22,6 +22,10 @@
 			"yAxis": {
 				"left": "Average Precipitation [mm]",
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "Year", 
+				"top": "[Y-AXIS]"
 			},
 			"legend": "Climate"
 		}

@@ -2,18 +2,22 @@
 	"type": "column",
 	"groups": {
 		"0": {
-			"baseline": false
+			"baseline": false,
+			"yAxis": {
+				"max": 250,
+				"min": 80
+			}
 		},
 		"1": {
-			"baseline": true
+			"baseline": true,
+			"yAxis": {
+				"max": 250,
+				"min": 80
+			}
 		}
 	},
 	"tooltip": {
 		"type": "winterValue"
-	},
-	"yAxis": {
-		"max": 250,
-		"min": 80
 	},
 	"decimals": 0,
 	"series": {

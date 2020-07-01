@@ -1,9 +1,5 @@
 {
 	"valueSuffix": "",
-	"xAxis": {
-		"bott": "Year", 
-		"top": "[Y-AXIS]"
-	},
 	"groups": {
 		"0": {
 			"title": "Troneträsk Break-up of lake ice vs ice time" ,
@@ -12,6 +8,10 @@
 			"yAxis": {
 				"left": "Ice break-up [day of year]",
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "Year", 
+				"top": "[Y-AXIS]"
 			},
 			"legend": "Weather"
 		},
@@ -22,6 +22,10 @@
 			"yAxis": {
 				"left": "Ice break-up [day of year]",
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "Year", 
+				"top": "[Y-AXIS]"
 			},
 			"legend": "Climate"
 		}

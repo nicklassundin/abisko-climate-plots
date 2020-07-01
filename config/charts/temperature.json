@@ -9,7 +9,10 @@
 			"baseline": true
 		},
 		"2": {
-			"baseline": false
+			"baseline": false,
+			"yAxis": {
+				"min": 15
+			}
 		}
 	},
 	"decimals": 2,

@@ -10,15 +10,16 @@
 				"plotLines": {
 					"text": "Ground"
 				} 
-			}
+			},
+			"xAxis": {
+				"bott": "Year", 
+				"top": "[Y-AXIS]"
+			},
+			"legend": "Weather"
 
 		}
 	},
 	"valueSuffix": "",
-	"xAxis": {
-		"bott": "Year", 
-		"top": "[Y-AXIS]"
-	},
 	"series": {
 		"avg": {
 			"name": "Average of all stations"

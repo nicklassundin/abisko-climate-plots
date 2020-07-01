@@ -11,14 +11,14 @@
 				"min": 300,
 				"max": 450,
 				"tickInterval": 10
+			},
+			"xAxis": {
+				"gridLineWidth": 1,
+				"type": "datetime"
 			}
 		}
 	},
 	"tooltip": {
-	},
-	"xAxis": {
-		"gridLineWidth": 1,
-		"type": "datetime"
 	},
 	"decimals": 2,
 	"series": {

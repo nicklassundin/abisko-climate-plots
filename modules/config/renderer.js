@@ -69,7 +69,6 @@ var chart = {
 				throw error;
 			}
 		}
-		var onkeypress="this.style.width = ((this.value.length + 1) * 8) + 'px';"
 		return res
 		// return res
 	},
@@ -171,17 +170,6 @@ var chart = {
 			},
 			legend: {
 				enabled: true,
-			},
-			xAxis: {
-				type: meta.xAxis.type,
-				title: {
-					useHTML: true,
-					text: meta.xAxis.bott, 
-				},
-				gridLineWidth: meta.xAxis.gridLineWidth,
-				categories: (meta.period) ? meta.xAxis.categories : undefined,
-				corsshair: true,
-				min: (meta.period) ? null : (meta.xAxis.min) ? meta.xAxis.min : startYear,
 			},
 			tooltip: {
 				shared: true,
@@ -658,6 +646,17 @@ var chart = {
 					plotLines: plotLinesX(group),
 					plotBands: group.baseline ? base.baseline.plotBandsDiff(id) : null, 
 				},
+				xAxis: {
+					type: textMorph(group.xAxis.type),
+					title: {
+						useHTML: true,
+						text: textMorph(group.xAxis.bott), 
+					},
+					gridLineWidth: group.xAxis.gridLineWidth,
+					categories: (meta.period) ? group.xAxis.categories : undefined,
+					corsshair: true,
+					min: (meta.period) ? null : (group.xAxis.min) ? group.xAxis.min : startYear,
+				},
 				yAxis: {
 					title: {
 						text: textMorph(group.yAxis.left), 
@@ -668,8 +667,8 @@ var chart = {
 						color: 'rgb(204, 214, 235)',
 						width: 2,
 					}],
-					max: group.yAxis.max,
-					min: group.yAxis.min,
+					max: group.yAxis.max ? group.yAxis.max : null,
+					min: group.yAxis.min ? group.yAxis.min : null,
 					tickInterval: (group.yAxis.left.tickInterval) ? group.yAxis.left.tickInterval : 1,
 					lineWidth: 1,
 					reversed: group.yAxis.reversed,
@@ -748,10 +747,11 @@ var render = {
 	charts: {},
 	setup: function(id, meta){
 		try{
-			if(meta.month){
+			if(meta.monthly){
 				this.charts[id] = new Promise(function(resolve, reject){
 					try{
 						var months = help.months()
+						// DEBUG only one example for speedup
 						if(variables.debug) months = [months.shift()];
 						var recurMonth = function(mnths){
 							var month = mnths.shift()
@@ -799,15 +799,12 @@ var render = {
 	},
 	initiate: function(id, data){
 		this.charts[id].then(function(result){
-			if(result.meta.month){
-				if(variables.debug){
-					result[help.months().shift()].initiate(data['1']);
-				}else{
-
-					help.months().forEach((month, index) => {
-						result[month].initiate(data[index+1+'']);
-					})
-				}
+			if(result.meta.monthly){
+				var months = help.months();
+				if(variables.debug) months = [months.shift()];
+				months.forEach((month, index) => {
+					result[month].initiate(data[index+1+'']);
+				})
 			}else{
 				result.initiate(data)
 			}

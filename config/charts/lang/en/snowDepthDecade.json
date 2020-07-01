@@ -1,10 +1,5 @@
 {
 	"valueSuffix": "cm",
-	"xAxis": {
-		"categories": ["Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Ju    n"],
-		"bott": "Month", 
-		"top": "[Y-AXIS]"
-	},
 	"groups": {
 		"0": {
 			"title": "[stationName] Snow Depth",
@@ -13,6 +8,11 @@
 			"yAxis": {
 				"left": "Snow depth [cm]", 
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"categories": ["Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Ju    n"],
+				"bott": "Month", 
+				"top": "[Y-AXIS]"
 			},
 			"legend": "Weather"
 		}

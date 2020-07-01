@@ -1,9 +1,5 @@
 {
 	"valueSuffix": "",
-	"xAxis": {
-		"bott": "Year", 
-		"top": "[Y-AXIS]"
-	},
 	"groups": {
 		"0": {
 			"title": "[stationName] Lake Ice Thickness (by Date)", 
@@ -15,6 +11,10 @@
 			"yAxis": {
 				"left": "Ice thickness [cm]", 
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "Year", 
+				"top": "[Y-AXIS]"
 			},
 			"legend": "Weather"
 		},
@@ -28,6 +28,10 @@
 			"yAxis": {
 				"left": "Ice thickness [cm]", 
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "Year", 
+				"top": "[Y-AXIS]"
 			},
 			"legend": "Climate"
 		}

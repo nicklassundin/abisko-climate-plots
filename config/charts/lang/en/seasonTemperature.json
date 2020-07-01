@@ -1,15 +1,15 @@
 {
 	"valueSuffix": "°C",
-	"xAxis": {
-		"bott": "Year", 
-		"top": "[Y-AXIS]"
-	},
 	"groups": {
 		"0": {
 			"title": "[stationName] [season] Average Temperature" ,
 			"subTitle": "[period]",
 			"caption": "[SOME TEXT]",
 			"legend": "Weather",
+			"xAxis": {
+				"bott": "Year", 
+				"top": "[Y-AXIS]"
+			},
 			"yAxis": {
 				"left": "Average temperature [°C]",
 				"right": "[X-AXIS]"

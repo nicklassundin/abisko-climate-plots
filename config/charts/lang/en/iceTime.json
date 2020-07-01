@@ -1,9 +1,5 @@
 {
 	"valueSuffix": "days",
-	"xAxis": {
-		"bott": "Year", 
-		"top": "[Y-AXIS]"
-	},
 	"groups": {
 		"0": {
 			"title": "", 
@@ -12,6 +8,10 @@
 			"yAxis": {
 				"left": "Ice time [number of days]",
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "Year", 
+				"top": "[Y-AXIS]"
 			},
 			"legend": "Weather"
 		},
@@ -22,6 +22,10 @@
 			"yAxis": {
 				"left": "Difference Ice time [number of days]",
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "Year", 
+				"top": "[Y-AXIS]"
 			},
 			"legend": "Climate"
 		}

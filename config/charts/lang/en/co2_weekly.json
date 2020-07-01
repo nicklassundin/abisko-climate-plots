@@ -1,9 +1,5 @@
 {
 	"valueSuffix": "ppm",
-	"xAxis": {
-		"bott": "Year", 
-		"top": "[Y-AXIS]"
-	},
 	"groups": {
 		"0": {
 			"title": "Global Atmospheric Carbon Dioxide Concentration", 
@@ -12,6 +8,10 @@
 			"yAxis": {
 				"left": "[CO2] Concentration (ppm)",
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "Year", 
+				"top": "[Y-AXIS]"
 			},
 			"legend": "Weather"
 		}

@@ -11,14 +11,14 @@
 				},
 				"min": 0,
 				"max": 1.5
+			},
+			"xAxis": {
+				"min": 1978
 			}
 		}
 	},
 	"tooltip": {
 		"type": "winterValue"
-	},
-	"xAxis": {
-		"min": 1978
 	},
 	"decimals": 2,
 	"series": {
