@@ -25,7 +25,7 @@
 		"avg": {
 			"group": 0,
 			"visible": true,
-			"colour": "bb9999",
+			"colour": "#bb9999",
 			"type": "column"
 		},
 		"Katterjokk": {

@@ -19,17 +19,25 @@ const help = require('../helpers.js');
 
 var chart = {
 	metaTable: function(id, json, i=0){
+		if($('#'+id+'_cont').length > 0){
+			Object.keys(json).forEach(key => {
+				//TODO
+				// $('#'+id+'_box_'+key+'_textarea').html(JSON.stringify(json[key], undefined, 4));
+			})
+		}else{
+
 			Object.keys(json).forEach(key => {
 				$('#'+id).append('<div id="'+id+'_cont"></div>');
 				$('#'+id+'_cont').append('<div id="'+id+'_button_'+key+'" class="mini_button">- '+key+'</div><br/>')
 				$('#'+id+'_cont').append('<div id="'+id+'_box_'+key+'" class="box"></div>');
-				$('#'+id+'_box_'+key).append('<textarea class="json" cols="80">'+JSON.stringify(json[key], undefined, 4)+'</textarea>')
+				$('#'+id+'_box_'+key).append('<textarea id="'+id+'_box'+key+'_textarea" class="json" cols="80">'+JSON.stringify(json[key], undefined, 4)+'</textarea>')
 				$('#'+id+'_box_'+key).append('<br/>')
 				$("#"+id+'_button_'+key).click(function(){
 					$("#"+id+"_box_"+key).slideToggle();
 				});
 			})
-		},
+		}
+	},
 
 	getMeta: function(define, id){
 		var meta = {};
@@ -62,6 +70,7 @@ var chart = {
 		// return res
 	},
 	id: undefined,
+	initiated: false,
 	chart: undefined,
 	metaRef: undefined,
 	metaFiles: undefined,
@@ -453,7 +462,7 @@ var chart = {
 				name: (s.name == undefined) ? k : s.name,
 				type: s.type,
 				color: s.colour,
-				opacity: 0.5,
+				opacity: 0.9,
 				data: p.values,
 				visible: k == "Torneträsk",
 			}),
@@ -741,49 +750,49 @@ var render = {
 	charts: {},
 	setup: function(id, meta){
 		try{
-		if(meta.month){
-			this.charts[id] = new Promise(function(resolve, reject){
-				try{
-					var months = help.months()
-					if(variables.debug) months = [months.shift()];
-					var recurMonth = function(mnths){
-						var month = mnths.shift()
-						var cloneMeta = Object.assign({}, meta, {});
-						cloneMeta.month = help.monthName(month);
-						var res = {};
-						res[month] = chart.clone();
-						try{
-							if(mnths.length > 0){
-								res[month].setup(id+"_"+month, cloneMeta)
-								return Object.assign(res, recurMonth(mnths), {});
-							}else{
-								res[month].setup(id+"_"+month, cloneMeta)
-								res.meta = meta;
-								return res
+			if(meta.month){
+				this.charts[id] = new Promise(function(resolve, reject){
+					try{
+						var months = help.months()
+						if(variables.debug) months = [months.shift()];
+						var recurMonth = function(mnths){
+							var month = mnths.shift()
+							var cloneMeta = Object.assign({}, meta, {});
+							cloneMeta.month = help.monthName(month);
+							var res = {};
+							res[month] = chart.clone();
+							try{
+								if(mnths.length > 0){
+									res[month].setup(id+"_"+month, cloneMeta)
+									return Object.assign(res, recurMonth(mnths), {});
+								}else{
+									res[month].setup(id+"_"+month, cloneMeta)
+									res.meta = meta;
+									return res
+								}
+							}catch(error){
+								console.log({ERROR: error, month: month, meta: meta})
+								reject(error)
 							}
-						}catch(error){
-							console.log({ERROR: error, month: month, meta: meta})
-							reject(error)
 						}
+						rest = recurMonth(months);
+						resolve(rest);
+					}catch(error){
+						console.log({ERROR: error, ID: id, meta: meta});
+						reject(error);
 					}
-					rest = recurMonth(months);
-					resolve(rest);
-				}catch(error){
-					console.log({ERROR: error, ID: id, meta: meta});
-					reject(error);
-				}
-			});
-		}else{
-			this.charts[id] = new Promise(function(resolve, reject){
-				try{
-					var res = chart.clone() 
-					res.setup(id, meta);
-					resolve(res);
-				}catch(error){
-					reject(error)
-				}
-			})
-		}
+				});
+			}else{
+				this.charts[id] = new Promise(function(resolve, reject){
+					try{
+						var res = chart.clone() 
+						res.setup(id, meta);
+						resolve(res);
+					}catch(error){
+						reject(error)
+					}
+				})
+			}
 		}catch(error){
 			console.log(id);
 			console.log(meta)
