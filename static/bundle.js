@@ -522,7 +522,7 @@ eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"°C\\\",\\\"groups\
 /*! exports provided: groups, valueSuffix, series, default */
 /***/ (function(module) {
 
-eval("module.exports = JSON.parse(\"{\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"Permafrost active layer depth\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"[SOME TEXT]\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Perma frost depth [m]\\\",\\\"right\\\":\\\"[X-AXIS]\\\",\\\"plotLines\\\":{\\\"text\\\":\\\"Ground\\\"}},\\\"xAxis\\\":{\\\"bott\\\":\\\"Year\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"legend\\\":\\\"Weather\\\"}},\\\"valueSuffix\\\":\\\"\\\",\\\"series\\\":{\\\"avg\\\":{\\\"name\\\":\\\"Average of all stations\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/en/perma.json?");
+eval("module.exports = JSON.parse(\"{\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"Permafrost active layer\\\",\\\"subTitle\\\":\\\"\\\",\\\"caption\\\":\\\"[SOME TEXT]\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Permafrost active layer [m]\\\",\\\"right\\\":\\\"[X-AXIS]\\\",\\\"plotLines\\\":{\\\"text\\\":\\\"Ground\\\"}},\\\"xAxis\\\":{\\\"bott\\\":\\\"Year\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"legend\\\":\\\"Weather\\\"}},\\\"valueSuffix\\\":\\\"\\\",\\\"series\\\":{\\\"avg\\\":{\\\"name\\\":\\\"Average of all stations\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/en/perma.json?");
 
 /***/ }),
 

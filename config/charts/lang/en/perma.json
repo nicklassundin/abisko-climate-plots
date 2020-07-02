@@ -1,11 +1,11 @@
 {
 	"groups": {
 		"0": {
-			"title": "Permafrost active layer depth", 
+			"title": "Permafrost active layer", 
 			"subTitle": "",
 			"caption": "[SOME TEXT]",
 			"yAxis": {
-				"left": "Perma frost depth [m]", 
+				"left": "Permafrost active layer [m]", 
 				"right": "[X-AXIS]",
 				"plotLines": {
 					"text": "Ground"
