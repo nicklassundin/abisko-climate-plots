@@ -6,7 +6,11 @@
 			"baseline": false
 		},
 		"1": {
-			"baseline": true
+			"baseline": true,
+			"yAxis": {
+				"min": -2,
+				"max": 4
+			}
 		},
 		"2": {
 			"baseline": false,

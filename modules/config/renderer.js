@@ -217,9 +217,9 @@ var chart = {
 		var meta = this.meta;
 		var group = Object.keys(meta.groups).filter((key) => meta.groups[key].enabled).map(function(each, index){
 			if(index == active){
-				return "<button class='tablinks_"+id+" active' id="+index+">"+meta.groups[each].legend+"</button>"
+				return "<button class='tablinks_"+id+" active' id="+index+" onclick='undefined'>"+meta.groups[each].legend+"</button>"
 			}else{
-				return "<button class='tablinks_"+id+"' id="+index+">"+meta.groups[each].legend+"</button>"
+				return "<button class='tablinks_"+id+"' id="+index+" onclick='undefined'>"+meta.groups[each].legend+"</button>"
 			}
 		})
 		return "<div id='"+this.id+"_title' class='tab'>" + group.join("") + "</div>"
@@ -516,6 +516,7 @@ var chart = {
 				$(".tablinks_"+id).toggleClass('active')
 				// e.currentTarget.className += " active";
 				chart.switchToGroup(e.target.id);
+				return false
 			})
 		}
 		if(meta.groups['0'].perma){
