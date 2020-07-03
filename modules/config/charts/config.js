@@ -6,38 +6,38 @@ var config = require('../dataset/config.js').config;
 var createDiv = require('./struct.js').createDiv;
 
 var rendF = {
-	'temperatureDifference1': {
+	'temperature_64n-90n': {
 		func: function(reset=false){
 			config['zonal'].contFunc(reset);
-			config['zonal'].init('temperatureDifference1', '64n-90n')
+			config['zonal'].init('temperature_64n-90n', '64n-90n')
 		},
 		html: function(doc){
 			var no = 20;
 			if(!variables.debug) no = variables.debug;
-			return createDiv('temperatureDifference1', no);
+			return createDiv('temperature_64n-90n', no);
 		},
 	},
-	'temperatureDifference2': {
+	'temperature_nhem': {
 		func: function(reset=false){
 			config['zonal'].contFunc(reset);
-			config['zonal'].init('temperatureDifference2', 'nhem')
+			config['zonal'].init('temperature_nhem', 'nhem')
 		},
 		html: function(doc){
 			var no = 21;
 			if(!variables.debug) no = variables.debug;
-			return createDiv('temperatureDifference2', no);
+			return createDiv('temperature_nhem', no);
 
 		},
 	},
-	'temperatureDifference3': {
+	'temperature_glob': {
 		func: function(reset=false){
 			config['zonal'].contFunc(reset);
-			config['zonal'].init('temperatureDifference3', 'glob')
+			config['zonal'].init('temperature_glob', 'glob')
 		},
 		html: function(doc){
 			var no = 22;
 			if(!variables.debug) no = variables.debug;
-			return createDiv('temperatureDifference3', no);
+			return createDiv('temperature_glob', no);
 
 		},
 	},
