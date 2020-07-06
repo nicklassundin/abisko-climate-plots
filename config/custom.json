@@ -47,6 +47,7 @@
 		"temperatureDifference"],
 	"tempMonth": ["monthlyTemperatures"],
 	"tempAvg": ["Temperatures"],
+	"tempAvgSlide": ["slideTemperature"],
 	"tempSeason": ["TemperaturesSummer", 
 		"TemperaturesAutumn",
 		"TemperaturesWinter",

@@ -217,9 +217,9 @@ var chart = {
 		var meta = this.meta;
 		var group = Object.keys(meta.groups).filter((key) => meta.groups[key].enabled).map(function(each, index){
 			if(index == active){
-				return "<button class='tablinks_"+id+" active' id="+index+" onclick='undefined'>"+meta.groups[each].legend+"</button>"
+				return "<button class='tablinks_"+id+" active' id="+index+">"+meta.groups[each].legend+"</button>"
 			}else{
-				return "<button class='tablinks_"+id+"' id="+index+" onclick='undefined'>"+meta.groups[each].legend+"</button>"
+				return "<button class='tablinks_"+id+"' id="+index+">"+meta.groups[each].legend+"</button>"
 			}
 		})
 		return "<div id='"+this.id+"_title' class='tab'>" + group.join("") + "</div>"
@@ -514,7 +514,6 @@ var chart = {
 			var chart = this;
 			$(".tablinks_"+id).click(function(e) {
 				$(".tablinks_"+id).toggleClass('active')
-				// e.currentTarget.className += " active";
 				chart.switchToGroup(e.target.id);
 				return false
 			})
@@ -577,10 +576,13 @@ var chart = {
 				}
 			})
 		}
-		var plotLinesX = function(group){
+		var baseline = function(group){
 			var res = [];
 			if(group.baseline){
-				return base.baseline.plotlines(id);
+				return {
+					plotLines: base.baseline.plotlines(id),
+					plotBands: base.baseline.plotBandsDiff(id), 
+				}
 			}
 			return null
 		}
@@ -630,6 +632,9 @@ var chart = {
 
 			return res.length < 0 ? null : res;
 		}
+		this.chart.update({
+			xAxis: baseline(group),
+		})
 		try{
 			this.chart.update({
 				title: {
@@ -642,10 +647,6 @@ var chart = {
 				caption: {
 					text: textMorph(group.caption),
 					useHTML: true,
-				},
-				xAxis: {
-					plotLines: plotLinesX(group),
-					plotBands: group.baseline ? base.baseline.plotBandsDiff(id) : null, 
 				},
 				xAxis: {
 					type: textMorph(group.xAxis.type),
