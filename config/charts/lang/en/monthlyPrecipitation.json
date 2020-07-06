@@ -15,7 +15,7 @@
 			},
 			"legend": "Weather"
 		},
-		"1"· {
+		"1": {
 			"title": "Precipitation Difference (from Baseline)",
 			"subTitle": "[month]",
 			"caption": "Average monthly precipitation. The lowest precipitation of the month (min). The highest precipitation of the month (max).",

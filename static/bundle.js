@@ -486,10 +486,10 @@ eval("module.exports = JSON.parse(\"{\\\"baselineform\\\":{\\\"title\\\":\\\"Ran
 /*!*********************************************************!*\
   !*** ./config/charts/lang/en/monthlyPrecipitation.json ***!
   \*********************************************************/
-/*! no static exports found */
+/*! exports provided: valueSuffix, groups, series, default */
 /***/ (function(module) {
 
-eval("!(function webpackMissingModule() { var e = new Error(\"Cannot find module './en/monthlyPrecipitation.json'\"); e.code = 'MODULE_NOT_FOUND'; throw e; }());\n\n\n//# sourceURL=webpack:///./config/charts/lang/en/monthlyPrecipitation.json?");
+eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"mm\\\",\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"[stationName] Average Precipitation\\\",\\\"subTitle\\\":\\\"[month]\\\",\\\"caption\\\":\\\"Average monthly precipitation. The lowest (min) and highest (max) precipitation of the month.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Total Precipitation [mm]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"xAxis\\\":{\\\"bott\\\":\\\"Year\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"legend\\\":\\\"Weather\\\"},\\\"1\\\":{\\\"title\\\":\\\"Precipitation Difference (from Baseline)\\\",\\\"subTitle\\\":\\\"[month]\\\",\\\"caption\\\":\\\"Average monthly precipitation. The lowest precipitation of the month (min). The highest precipitation of the month (max).\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Average precipitation [mm]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"xAxis\\\":{\\\"bott\\\":\\\"Year\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"legend\\\":\\\"Climate\\\"}},\\\"series\\\":{\\\"diff\\\":{\\\"name\\\":\\\"\\\"},\\\"snow\\\":{\\\"name\\\":\\\"Precipitation from snow\\\"},\\\"rain\\\":{\\\"name\\\":\\\"Precipitation from rain\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/en/monthlyPrecipitation.json?");
 
 /***/ }),
 
