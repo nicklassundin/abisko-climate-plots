@@ -14,6 +14,20 @@
 				"top": "[Y-AXIS]"
 			},
 			"legend": "Weather"
+		},
+		"1"· {
+			"title": "Precipitation Difference (from Baseline)",
+			"subTitle": "[month]",
+			"caption": "Average monthly precipitation. The lowest precipitation of the month (min). The highest precipitation of the month (max).",
+			"yAxis": {
+				"left": "Average precipitation [mm]",
+				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "Year", 
+				"top": "[Y-AXIS]"
+			},
+			"legend": "Climate"
 		}
 	},
 	"series": {

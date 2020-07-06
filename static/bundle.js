@@ -486,10 +486,10 @@ eval("module.exports = JSON.parse(\"{\\\"baselineform\\\":{\\\"title\\\":\\\"Ran
 /*!*********************************************************!*\
   !*** ./config/charts/lang/en/monthlyPrecipitation.json ***!
   \*********************************************************/
-/*! exports provided: valueSuffix, groups, series, default */
+/*! no static exports found */
 /***/ (function(module) {
 
-eval("module.exports = JSON.parse(\"{\\\"valueSuffix\\\":\\\"mm\\\",\\\"groups\\\":{\\\"0\\\":{\\\"title\\\":\\\"[stationName] Average Precipitation\\\",\\\"subTitle\\\":\\\"[month]\\\",\\\"caption\\\":\\\"Average monthly precipitation. The lowest (min) and highest (max) precipitation of the month.\\\",\\\"yAxis\\\":{\\\"left\\\":\\\"Total Precipitation [mm]\\\",\\\"right\\\":\\\"[X-AXIS]\\\"},\\\"xAxis\\\":{\\\"bott\\\":\\\"Year\\\",\\\"top\\\":\\\"[Y-AXIS]\\\"},\\\"legend\\\":\\\"Weather\\\"}},\\\"series\\\":{\\\"diff\\\":{\\\"name\\\":\\\"\\\"},\\\"snow\\\":{\\\"name\\\":\\\"Precipitation from snow\\\"},\\\"rain\\\":{\\\"name\\\":\\\"Precipitation from rain\\\"}}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/en/monthlyPrecipitation.json?");
+eval("!(function webpackMissingModule() { var e = new Error(\"Cannot find module './en/monthlyPrecipitation.json'\"); e.code = 'MODULE_NOT_FOUND'; throw e; }());\n\n\n//# sourceURL=webpack:///./config/charts/lang/en/monthlyPrecipitation.json?");
 
 /***/ }),
 
