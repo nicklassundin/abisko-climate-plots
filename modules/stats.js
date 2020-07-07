@@ -75,8 +75,14 @@ var struct = {
 	last: function(f = (e) => { return e.y <= 0 }, type=this.type){
 		var res = this.filter((entry) => {
 			var values = entry.values.filter(f);
+			var date = new Date(Math.max(...Object.values(values).map(each => (new Date(each.x).getTime())))) 
 			return {
-				y: help.dayOfYear(new Date(Math.max(...Object.values(values).map(each => new Date(each.x).getTime())))),
+				fullDate: date,
+				year: date.getYear() + 1900,
+				month:date.getMonth(),
+				date: date.getDate(),
+				strDate: date.getYear() + 1900+'-'+date.getMonth()+'-'+date.getDate(),
+				y: help.dayOfYear(date),
 				x: entry.x
 			}
 		})
@@ -86,8 +92,14 @@ var struct = {
 	first: function(f = (e) => { return e.y <= 0 }, type=this.type){
 		var res = this.filter((entry) => {
 			var values = entry.values.filter(f);
+			var date = new Date(Math.min(...Object.values(values).map(each => (new Date(each.x).getTime())))) 
 			return {
-				y: help.dayOfYear(new Date(Math.min(...Object.values(values).map(each => new Date(each.x).getTime())))),
+				fullDate: date,
+				year: date.getYear() + 1900,
+				month:date.getMonth(),
+				date: date.getDate(),
+				strDate: date.getYear() + 1900+'-'+date.getMonth()+'-'+date.getDate(),
+				y: help.dayOfYear(date),
 				x: entry.x
 			}
 		})
@@ -106,10 +118,16 @@ var struct = {
 				t = t+1;
 			}
 		})
-		max = max.map(each => ({
-			x: this.x,
-			y: each
-		}))
+		max = max.map(each => {
+			var result = {
+				x: this.x,
+				y: each,
+			}
+			this.keys.forEach(key => {
+				if(!result[key]) result[key] = each[key]
+			})
+			return result;
+		})
 		return struct.create(max,this.x).build('max')
 	},
 	variance: function(){
@@ -212,6 +230,11 @@ var struct = {
 	},
 	build: function(type=this.type, lower=baselineLower, upper=baselineUpper){
 		var result = this;
+		if(this.values[0].keys){
+			this.keys = this.values[0].keys
+		}else{
+			this.keys = Object.keys(this.values[0]);
+		}
 		result.type = type;
 		var values = result.values.filter(entry => (!isNaN(entry.y) || $.isNumeric(entry.y)));
 		// this.values = this.values.map(each => {
@@ -246,15 +269,23 @@ var struct = {
 			}
 			result.y = y;
 		}
-
+		
 		result.count = count;
-		// result.linReg = regression.linear(values.map((each,index) => [index, each.y]))
-		// result.linReg.points = values.map((each, index) => ([each.x, result.linReg.points[index][1]]))
+		return result;
+	},
+	Axis: function(key){
+		var keys = Object.values(this.values).map(each => each[key])
+		keys = keys.filter((element, i) => i === keys.indexOf(element)) 
+		var result = {}
+		keys.forEach(each => {
+			result[each] = this.values.filter(entry => each == entry[key]);
+		})
 		return result;
 	},
 	clone: function(){
 		return Object.assign({values: []},this);
 	},
+	keys: undefined,
 	create: function(values, x=undefined, src=''){
 		var result = struct.clone();
 		result.meta.src = src;
@@ -289,6 +320,7 @@ var parseByDate = function (values, type='mean', src='', custom) {
 		autumn: {},
 		winter: {},
 		customPeriod: {},
+		DOY: {},
 		meta: {
 			src: src,
 		}
@@ -306,6 +338,7 @@ var parseByDate = function (values, type='mean', src='', custom) {
 		autumn: {},
 		winter: {},	
 		customPeriod: {},
+		DOY: {},
 		meta: {
 			src: src,
 		},
@@ -314,6 +347,15 @@ var parseByDate = function (values, type='mean', src='', custom) {
 			// TODO build to general function to be use for all functions
 			var set = function(entry, key, date, year, month, week){
 				// console.log(entry)
+				// var DOY = help.dayOfYear(date);
+				// if(!result.DOY[DOY]){
+					// const doy = [date]
+					// result.DOY[DOY] = doy;
+				// }else{
+					// result.DOY[DOY].push(date);
+				// }
+				// entry.DOY = result.DOY[DOY];
+				
 				var decade = year - year % 10;
 				if(!result.yrly) result.yrly = {};
 				if(!result.yrly[key]) result.yrly[key] = {};

@@ -10,7 +10,7 @@
 		}
 	},
 	"tooltip": {
-		"type": "winterValue"
+		"type": "winterValueDateExtreme"
 	},
 	"decimals": 0,
 	"series": {

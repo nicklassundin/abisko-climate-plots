@@ -21,6 +21,10 @@ const units = {
 	sv: require('../../config/charts/lang/sv/units.json'),
 	en: require('../../config/charts/lang/en/units.json'),
 }
+const time = {
+	sv: require('../../config/charts/lang/sv/time.json'),
+	en: require('../../config/charts/lang/en/time.json'),
+}
 
 var chart = {
 	metaTable: function(id, json, i=0){
@@ -51,6 +55,7 @@ var chart = {
 		meta.month = (define.monthly ? require('../../config/charts/monthly.json') : { "month": false })
 		meta.set = require('../../config/charts/'+define.set+'.json');
 		meta.units = meta.set.unitType != undefined ? { units: units[nav_lang][meta.set.unitType] } : {};
+		meta.time = time[nav_lang];
 		return meta
 	},
 	textMorph: function(text, meta=this.meta){
@@ -225,6 +230,7 @@ var chart = {
 		return "<div id='"+this.id+"_title' class='tab'>" + group.join("") + "</div>"
 	},
 	initiate: function(data = this.data){
+		// console.log(data)
 		var id = this.id;
 		this.data = data;
 		var meta = this.meta;
@@ -675,6 +681,11 @@ var chart = {
 					lineWidth: 1,
 					reversed: group.yAxis.reversed,
 					plotLines: plotLinesY(group), 
+					labels: {
+						formatter: function(){
+							return this.value;
+						}
+					}
 				}
 			})
 		}catch(error){
@@ -800,6 +811,7 @@ var render = {
 		}
 	},
 	initiate: function(id, data){
+		// console.log(data.Axis('y'))
 		this.charts[id].then(function(result){
 			if(result.meta.monthly){
 				var months = help.months();

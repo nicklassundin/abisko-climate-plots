@@ -32,7 +32,7 @@
 	},
 	"series": {
 		"avg": {
-			"name": "Day of the year"
+			"name": "Date"
 		},
 		"diff": {
 			"name": "Difference"
