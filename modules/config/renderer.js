@@ -20,14 +20,14 @@ const help = require('../helpers.js');
 
 var chart = {
 	metaTable: function(id, json, i=0){
-		if($('#'+id+'_cont').length > 0){
-			Object.keys(json).forEach(key => {
+		// if($('#'+id+'_cont').length > 0){
+			// Object.keys(json).forEach(key => {
 				//TODO
 				// $('#'+id+'_box_'+key+'_textarea').html(JSON.stringify(json[key], undefined, 4));
-			})
-		}else{
-
-			Object.keys(json).forEach(key => {
+			// })
+		// }else{
+			Object.keys(json).forEach(index => {
+				var key = Object.keys(this.metaRef)[index];
 				$('#'+id).append('<div id="'+id+'_cont"></div>');
 				$('#'+id+'_cont').append('<div id="'+id+'_button_'+key+'" class="mini_button">- '+key+'</div><br/>')
 				$('#'+id+'_cont').append('<div id="'+id+'_box_'+key+'" class="box"></div>');
@@ -37,7 +37,7 @@ var chart = {
 					$("#"+id+"_box_"+key).slideToggle();
 				});
 			})
-		}
+		// }
 	},
 	getMeta: function(define){
 		var json = function(url){

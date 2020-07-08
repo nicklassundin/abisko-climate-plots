@@ -1,0 +1,16 @@
+{
+	"months": {
+		"jan": "January",
+		"feb": "February",
+		"mar": "Mars",
+		"apr": "April",
+		"may": "May",
+		"jun": "June",
+		"jul": "July",
+		"Aug": "August",
+		"sep": "September",
+		"oct": "October",
+		"nov": "November",
+		"dec": "December"
+	}
+}
