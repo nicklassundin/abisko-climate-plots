@@ -17,14 +17,6 @@ const help = require('../helpers.js');
 // global.baselineUpper = constant.baselineUpper;
 // global.startYear = constant.startYear;
 //
-const units = {
-	sv: require('../../config/charts/lang/sv/units.json'),
-	en: require('../../config/charts/lang/en/units.json'),
-}
-const time = {
-	sv: require('../../config/charts/lang/sv/time.json'),
-	en: require('../../config/charts/lang/en/time.json'),
-}
 
 var chart = {
 	metaTable: function(id, json, i=0){
@@ -48,15 +40,32 @@ var chart = {
 		}
 	},
 	getMeta: function(define){
-		var meta = {};
-		meta.config = require('../../config/charts/'+define.config+'.json')
-		meta.lang = require('../../config/charts/lang/'+nav_lang+'/'+define.lang+'.json');
-		meta.dataSource = require('../../config/charts/lang/'+nav_lang+'/dataSource.json')[define.data];
-		meta.month = (define.monthly ? require('../../config/charts/monthly.json') : { "month": false })
-		meta.set = require('../../config/charts/'+define.set+'.json');
-		meta.units = meta.set.unitType != undefined ? { units: units[nav_lang][meta.set.unitType] } : {};
-		meta.time = time[nav_lang];
-		return meta
+		var json = function(url){
+			return new Promise(function(resolve, reject){
+				$.getJSON(hostUrl+'/config/charts/'+url+'.json', function(result){
+					resolve(result);	
+				});
+			})
+		}
+		var files = {};
+		files.config = json(define.config);
+		files.lang = json('lang/'+nav_lang+'/'+define.lang);
+		files.dataSource = json('lang/'+nav_lang+'/dataSource')[define.data];
+		if(define.monthly) files.month = json('monthly');
+		files.set = json(define.set);
+		files.units = json('lang/'+nav_lang+'/units');
+		files.set.then(function(set){
+			files.units.then(function(units){
+				meta.units = set.unitType != undefined ? units[set.unitType] : undefined; 
+			})
+		})
+		files.time = json('lang/'+nav_lang+'/time');
+		return Promise.all(Object.values(files)).then(function(mF){
+			return {
+				files: mF,
+				aggr: mF.reduce((x, y) => $.extend(true, x, y))
+			}
+		})
 	},
 	textMorph: function(text, meta=this.meta){
 		var res = "";
@@ -84,15 +93,28 @@ var chart = {
 	metaFiles: undefined,
 	meta: undefined,
 	data: undefined,
-	setup: function(id, metaRef){
-		this.id = id;
-		this.metaRef = Object.assign({}, metaRef);
-		this.metaFiles = this.getMeta(this.metaRef)
-		this.meta = Object.values(this.metaFiles).reduce((x, y) => $.extend(true, x, y))
-		var meta = this.meta;
-		var title = this.title(0);
-		var textMorph = this.textMorph;
+	create: function(id, metaRef){
+		try{
+			return new Promise((resolve, reject) => {
+				var result = this.clone();
+				result.id = id;
+				result.metaRef = metaRef
+				var meta = chart.getMeta(metaRef).then((temp) => {
+					result.metaFiles = temp.files;
+					result.meta = temp.aggr
+					resolve(result)
+				})
+			})
+		}catch(error){
+			throw error;
+		}
+	},
+	setup: function(id){
+		console.log(this.meta)
 		this.metaTable('debug_table_'+id, this.metaFiles);
+		var textMorph = this.textMorph;
+		var title = this.title(0);
+		var meta = this.meta
 		this.chart = Highcharts.chart(id, {
 			dataSrc: '[placeholder]',
 			credits: {
@@ -191,35 +213,42 @@ var chart = {
 			key: key,
 			enabled: meta.groups[key].enabled
 		}));
+		console.log(Object.keys(meta.groups).map(key => meta.groups[key].enabled).filter(each => each).length > 1)
 		if(Object.keys(meta.groups).map(key => meta.groups[key].enabled).filter(each => each).length > 1){
 			var gTitle = this.groupTitle();
 			this.switchToGroup(groups[0].key, true, change = false)
 			$('#'+id).append(gTitle);
 			this.chart.showLoading();
 		}
-		return new Promise(function(resolve, reject){
-			resolve(true);
-		})
+		return this
 	},
 	title: function(gID){
-		var group = this.meta.groups[gID];
-		var title = '<label>'+
-			this.textMorph(group.title)+
-			'</label><br>';
-		if(group.select != undefined && group.select.enabled){
-			title = title + '<label style="font-size: 10px">'+
-				group.select.text+
-				' </label>'+
-				'<input type="date" value='+
-				variables.dateStr()+
-				' onclick=selectText(this) '+
-				'onchange=renderInterface.updatePlot('+this.id+','+baselineLower+','+baselineUpper+',this.value)></input>'
+		try{
+			var meta = this.meta;
+			var group = meta.groups[gID];
+			var title = '<label>'+
+				this.textMorph(group.title)+
+				'</label><br>';
+			if(group.select != undefined && group.select.enabled){
+				title = title + '<label style="font-size: 10px">'+
+					group.select.text+
+					' </label>'+
+					'<input type="date" value='+
+					variables.dateStr()+
+					' onclick=selectText(this) '+
+					'onchange=renderInterface.updatePlot('+this.id+','+baselineLower+','+baselineUpper+',this.value)></input>'
+			}	
+			return title
+		}catch(error){
+			console.log(gID)
+			console.log(this.meta)	
+			throw error
 		}
-		return title; 
 	},
 	groupTitle: function(active = 0){
 		var id = this.id
 		var meta = this.meta;
+
 		var group = Object.keys(meta.groups).filter((key) => meta.groups[key].enabled).map(function(each, index){
 			if(index == active){
 				return "<button class='tablinks_"+id+" active' id="+index+">"+meta.groups[each].legend+"</button>"
@@ -230,10 +259,10 @@ var chart = {
 		return "<div id='"+this.id+"_title' class='tab'>" + group.join("") + "</div>"
 	},
 	initiate: function(data = this.data){
+		var meta = this.meta;	
 		// console.log(data)
 		var id = this.id;
 		this.data = data;
-		var meta = this.meta;
 		var textMorph = this.textMorph;
 		var groups = Object.keys(meta.groups).map(key => ({
 			key: key,
@@ -590,7 +619,10 @@ var chart = {
 					plotBands: base.baseline.plotBandsDiff(id), 
 				}
 			}
-			return null
+			return {
+				plotLines: null,
+				plotBands: null,
+			}
 		}
 		var plotLinesY = function(group){
 			var res = [];
@@ -638,8 +670,9 @@ var chart = {
 
 			return res.length < 0 ? null : res;
 		}
+		console.log(baseline(group))
 		this.chart.update({
-			xAxis: baseline(group),
+			xAxis: baseline(group) 
 		})
 		try{
 			this.chart.update({
@@ -763,30 +796,34 @@ var render = {
 			if(meta.monthly){
 				this.charts[id] = new Promise(function(resolve, reject){
 					try{
+
+						// TODO
 						var months = help.months()
 						// DEBUG only one example for speedup
 						if(variables.debug) months = [months.shift()];
-						var recurMonth = function(mnths){
-							var month = mnths.shift()
-							var cloneMeta = Object.assign({}, meta, {});
-							cloneMeta.month = help.monthName(month);
-							var res = {};
-							res[month] = chart.clone();
+						var monthChart = function(month){
 							try{
-								if(mnths.length > 0){
-									res[month].setup(id+"_"+month, cloneMeta)
-									return Object.assign(res, recurMonth(mnths), {});
-								}else{
-									res[month].setup(id+"_"+month, cloneMeta)
-									res.meta = meta;
-									return res
-								}
+								return new Promise((resolve, reject) => {
+
+									var cloneMeta = Object.assign({}, meta, {});
+									cloneMeta.month = help.monthName(month);
+									var chrt = chart.create(id+'_'+month, cloneMeta)
+									chrt.then(plot => {
+										plot.setup(id+"_"+month, cloneMeta)
+										resolve(plot)
+									})
+								})
 							}catch(error){
 								console.log({ERROR: error, month: month, meta: meta})
 								reject(error)
 							}
 						}
-						rest = recurMonth(months);
+						var rest = {
+							meta: meta,
+						}
+						months.forEach(month => {
+							rest[month] = monthChart(month);
+						})
 						resolve(rest);
 					}catch(error){
 						console.log({ERROR: error, ID: id, meta: meta});
@@ -796,9 +833,11 @@ var render = {
 			}else{
 				this.charts[id] = new Promise(function(resolve, reject){
 					try{
-						var res = chart.clone() 
-						res.setup(id, meta);
-						resolve(res);
+						var res = chart.create(id, meta) 
+						res.then(chrt => {
+							chrt.setup(id, meta);
+							resolve(res)
+						})
 					}catch(error){
 						reject(error)
 					}
@@ -813,14 +852,22 @@ var render = {
 	initiate: function(id, data){
 		// console.log(data.Axis('y'))
 		this.charts[id].then(function(result){
-			if(result.meta.monthly){
-				var months = help.months();
-				if(variables.debug) months = [months.shift()];
-				months.forEach((month, index) => {
-					result[month].initiate(data[index+1+'']);
-				})
-			}else{
-				result.initiate(data)
+			try{
+				if(result.meta.monthly){
+					var months = help.months();
+					if(variables.debug) months = [months.shift()];
+					months.forEach((month, index) => {
+						result[month].then(plot => {
+							plot.initiate(data[index+1+'']);
+						})
+					})
+				}else{
+					result.initiate(data)
+				}
+			}catch(error){
+				console.log(id)
+				console.log(result)
+				throw error
 			}
 		})
 	},

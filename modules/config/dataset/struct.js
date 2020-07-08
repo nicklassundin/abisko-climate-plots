@@ -7,7 +7,7 @@ var months = help.months;
 
 var renderer = require('../renderer.js').render;
 
-var filePath = {
+global.filePath = {
 	station: function(fileName, id=station){
 		return hostUrl+"/data/"+id+"/"+fileName;
 	},
