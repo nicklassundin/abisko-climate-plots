@@ -110,7 +110,6 @@ var chart = {
 		}
 	},
 	setup: function(id){
-		console.log(this.meta)
 		this.metaTable('debug_table_'+id, this.metaFiles);
 		var textMorph = this.textMorph;
 		var title = this.title(0);
@@ -213,7 +212,6 @@ var chart = {
 			key: key,
 			enabled: meta.groups[key].enabled
 		}));
-		console.log(Object.keys(meta.groups).map(key => meta.groups[key].enabled).filter(each => each).length > 1)
 		if(Object.keys(meta.groups).map(key => meta.groups[key].enabled).filter(each => each).length > 1){
 			var gTitle = this.groupTitle();
 			this.switchToGroup(groups[0].key, true, change = false)
@@ -670,7 +668,6 @@ var chart = {
 
 			return res.length < 0 ? null : res;
 		}
-		console.log(baseline(group))
 		this.chart.update({
 			xAxis: baseline(group) 
 		})
