@@ -51,7 +51,7 @@ var chart = {
 		files.config = json(define.config);
 		files.lang = json('lang/'+nav_lang+'/'+define.lang);
 		files.dataSource = json('lang/'+nav_lang+'/dataSource')[define.data];
-		if(define.monthly) files.month = json('monthly');
+		if(define.monthly) files.months = json('monthly');
 		files.set = json(define.set);
 		files.units = json('lang/'+nav_lang+'/units');
 		files.set.then(function(set){
@@ -59,6 +59,7 @@ var chart = {
 				meta.units = set.unitType != undefined ? units[set.unitType] : undefined; 
 			})
 		})
+		files.month = { month: define.month };
 		files.time = json('lang/'+nav_lang+'/time');
 		return Promise.all(Object.values(files)).then(function(mF){
 			return {
@@ -71,7 +72,11 @@ var chart = {
 		var res = "";
 		if(text){
 			try{
-				var res = text.replace("[stationName]", stationName).replace("[month]", meta.month).replace("[baseline]", baselineLower +" - "+ baselineUpper).replace("[CO2]", 'CO'+("2".sub())).replace("[SOME TEXT]", "")
+				var res = text.replace("[stationName]", stationName)
+				res = res.replace("[month]", meta.month)
+				res = res.replace("[baseline]", baselineLower +" - "+ baselineUpper)
+				res = res.replace("[CO2]", 'CO'+("2".sub()))
+				res = res.replace("[SOME TEXT]", "")
 				if(meta.units){
 					var res = res.replace("[unit]", meta.units.singular).replace("[units]", meta.units.plural).replace("[interval]", meta.units.interval);
 				}
@@ -114,6 +119,12 @@ var chart = {
 		var textMorph = this.textMorph;
 		var title = this.title(0);
 		var meta = this.meta
+		if(variables.debug){
+			// console.log(id)
+			// console.log(this.metaRef)
+			// console.log(this.metaFiles)
+			// console.log(meta)
+		}
 		this.chart = Highcharts.chart(id, {
 			dataSrc: '[placeholder]',
 			credits: {
@@ -259,6 +270,7 @@ var chart = {
 	initiate: function(data = this.data){
 		var meta = this.meta;	
 		// console.log(data)
+		// console.log(meta)
 		var id = this.id;
 		this.data = data;
 		var textMorph = this.textMorph;
@@ -678,7 +690,7 @@ var chart = {
 					useHTML: true,
 				},
 				subtitle: {
-					text: (group.subTitle != undefined) ? textMorph(group.subTitle) : "",
+					text: (group.subTitle != undefined) ? textMorph(group.subTitle, meta) : "",
 				},
 				caption: {
 					text: textMorph(group.caption),
