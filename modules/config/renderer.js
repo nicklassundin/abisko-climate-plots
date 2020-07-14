@@ -21,22 +21,22 @@ const help = require('../helpers.js');
 var chart = {
 	metaTable: function(id, json, i=0){
 		// if($('#'+id+'_cont').length > 0){
-			// Object.keys(json).forEach(key => {
-				//TODO
-				// $('#'+id+'_box_'+key+'_textarea').html(JSON.stringify(json[key], undefined, 4));
-			// })
+		// Object.keys(json).forEach(key => {
+		//TODO
+		// $('#'+id+'_box_'+key+'_textarea').html(JSON.stringify(json[key], undefined, 4));
+		// })
 		// }else{
-			Object.keys(json).forEach(index => {
-				var key = Object.keys(this.metaRef)[index];
-				$('#'+id).append('<div id="'+id+'_cont"></div>');
-				$('#'+id+'_cont').append('<div id="'+id+'_button_'+key+'" class="mini_button">- '+key+'</div><br/>')
-				$('#'+id+'_cont').append('<div id="'+id+'_box_'+key+'" class="box"></div>');
-				$('#'+id+'_box_'+key).append('<textarea id="'+id+'_box'+key+'_textarea" class="json" cols="80">'+JSON.stringify(json[key], undefined, 4)+'</textarea>')
-				$('#'+id+'_box_'+key).append('<br/>')
-				$("#"+id+'_button_'+key).click(function(){
-					$("#"+id+"_box_"+key).slideToggle();
-				});
-			})
+		Object.keys(json).forEach(index => {
+			var key = Object.keys(this.metaRef)[index];
+			$('#'+id).append('<div id="'+id+'_cont"></div>');
+			$('#'+id+'_cont').append('<div id="'+id+'_button_'+key+'" class="mini_button">- '+key+'</div><br/>')
+			$('#'+id+'_cont').append('<div id="'+id+'_box_'+key+'" class="box"></div>');
+			$('#'+id+'_box_'+key).append('<textarea id="'+id+'_box'+key+'_textarea" class="json" cols="80">'+JSON.stringify(json[key], undefined, 4)+'</textarea>')
+			$('#'+id+'_box_'+key).append('<br/>')
+			$("#"+id+'_button_'+key).click(function(){
+				$("#"+id+"_box_"+key).slideToggle();
+			});
+		})
 		// }
 	},
 	getMeta: function(define){
@@ -53,10 +53,11 @@ var chart = {
 		files.dataSource = json('lang/'+nav_lang+'/dataSource')[define.data];
 		if(define.monthly) files.months = json('monthly');
 		files.set = json(define.set);
-		files.units = json('lang/'+nav_lang+'/units');
-		files.set.then(function(set){
-			files.units.then(function(units){
-				meta.units = set.unitType != undefined ? units[set.unitType] : undefined; 
+		files.units = new Promise((resolve, reject) => {
+			files.set.then(function(set){
+				json('lang/'+nav_lang+'/units').then(function(units){
+					resolve({ units: set.unitType != undefined ? units[set.unitType] : undefined }); 
+				})
 			})
 		})
 		files.month = { month: define.month };
