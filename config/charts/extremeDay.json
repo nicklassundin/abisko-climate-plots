@@ -1,5 +1,8 @@
 {
 	"unitType": "day",
+	"tooltip": {
+		"type": "valueDate"
+	},
 	"groups": {
 		"0": {
 			"enabled": false

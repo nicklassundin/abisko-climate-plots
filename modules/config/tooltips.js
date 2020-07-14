@@ -9,7 +9,18 @@ const time = {
 var dateFormat = (date) => {
 	return date.getFullYear() + ' ' + time[nav_lang].months[help.months()[date.getMonth()]] + ' ' + date.getDate();
 }
-	
+
+var dateFormats = {
+	YYYYMMDD: (date) => {
+		return date.getFullYear() + ' ' + time[nav_lang].months[help.months()[date.getMonth()]] + ' ' + date.getDate();
+	},
+	MMDD: (date) => {
+		return time[nav_lang].months[help.months()[date.getMonth()]] + ' ' + date.getDate();
+	}
+}
+
+
+
 exports.formatters = {
 	winterDOY: function(){
 		var tooltip = '<span style="font-size: 10px">' + (this.x-1) + '/' + this.x + '</span><br/>';
@@ -52,8 +63,27 @@ exports.formatters = {
 				'">\u25CF</span> ' +
 				point.series.name +
 				': <b>'+
-				dateFormat(point.point.fullDate)+
+				dateFormats.YYYYMMDD(point.point.fullDate)+
 				'</b><br/>'
+		});
+		return tooltip;
+
+	},
+	valueDate: function(){
+		var tooltip = '<span style="font-size: 10px">'+this.x+'</span><br/>';
+		this.points.forEach(point =>{
+			var dec = point.series.chart.options.tooltip.valueDecimals;
+			tooltip += '<span style="color:'+
+				point.color +
+				'">\u25CF</span> ' +
+				point.series.name +
+				': <b>'+
+				(point.y.toFixed(dec)) + 
+				'</b><br/>'
+			point.point.subX.forEach(date => {
+				tooltip += dateFormats.MMDD(date) + '</b><br/>'
+			})
+			tooltip += '<br/>'
 		});
 		return tooltip;
 

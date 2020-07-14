@@ -36,41 +36,33 @@ var struct = {
 			return struct.create(f(this.values), this.x, src)	
 		}
 	},
-	min: function(abs = true){
+	filterForm: function(f, type, abs) {
 		if(this.values[0].filter){
 			return struct.create(this.values.map(each => each.filter((entry) => {
+				var y = f(...entry.values.map(each => each.y));
+				var date = entry.values.filter((each) => each.y == y).map(each => new Date(each.x));
 				return {
-					y: Math.min(...entry.values.map(each => each.y)),
+					subX: date,
+					y: y,
 					x: entry.x
 				}
-			}, 'min', abs))).build();
+			}, type, abs))).build();
 		}else{
 			return struct.create(this.filter((entry) => {
+				var y = f(...entry.values.map(each => each.y));
 				return {
-					y: Math.min(...entry.values.map(each => each.y)),
+					subX: entry.values.filter((each) => each.y == y).map(each => new Date(each.x)),	
+					y: y, 
 					x: entry.x
 				}
-			}, 'min', abs)).build()
+			}, type, abs)).build()
 		}
 	},
+	min: function(abs = true){
+		return this.filterForm(Math.min, 'min', abs);
+	},
 	max: function(abs = false){
-		if(this.values[0].filter){
-			return struct.create(this.values.map(each => each.filter((entry) => {
-				return {
-					y: Math.max(...entry.values.map(each => each.y)),
-					x: entry.x
-				}
-
-			}, 'max', abs))).build()
-		}else{
-			return struct.create(this.filter((entry) => {
-				return {
-					y: Math.max(...entry.values.map(each => each.y)),
-					x: entry.x
-				}
-
-			}, 'max', abs)).build()
-		}
+		return this.filterForm(Math.max, 'max', abs);
 	},
 	last: function(f = (e) => { return e.y <= 0 }, type=this.type){
 		var res = this.filter((entry) => {
