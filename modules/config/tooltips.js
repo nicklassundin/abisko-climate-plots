@@ -15,7 +15,15 @@ var dateFormats = {
 		return date.getFullYear() + ' ' + time[nav_lang].months[help.months()[date.getMonth()]] + ' ' + date.getDate();
 	},
 	MMDD: (date) => {
-		return time[nav_lang].months[help.months()[date.getMonth()]] + ' ' + date.getDate();
+		var month = time[nav_lang].months[help.months()[date.getMonth()]];
+		var day = date.getDate();
+		if(month == undefined){
+			console.log(date)
+			console.log(time[nav_lang].months)
+			console.log(date.getMonth())
+			console.log(help.months()[date.getMonth()])
+		}
+		return month + ' ' + day;
 	},
 }
 exports.dateFormats = dateFormats;
