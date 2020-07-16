@@ -10,6 +10,7 @@ var base = require('./base.js')
 const tooltips = require('./tooltips.js');
 const formatters = tooltips.formatters;
 const dateFormats = tooltips.dateFormats;
+const yAxisFormats = tooltips.yAxis;
 const help = require('../helpers.js');
 
 // require('textarea-markdown');
@@ -727,22 +728,7 @@ var chart = {
 					reversed: group.yAxis.reversed,
 					plotLines: plotLinesY(group), 
 					labels: {
-						formatter: function(){
-							var month = '';
-							var regYear = dateFormats['MMDD'](new Date(1999, 1, 1).addDays(this.value - 1)).split(' ');	
-							var leapYear = dateFormats['MMDD'](new Date(2000, 1, 1).addDays(this.value - 1)).split(' ');
-							if(regYear[0] == leapYear[0]){
-								month = regYear[0]
-								if(regYear[1] == leapYear[1]){
-									return month + ' ' + regYear[1];
-								}else{
-									return month + ' ' + regYear[1] + '-' + leapYear[1];
-								}
-							}else{
-								return regYear[0] + ' ' + regYear[1] + ' - ' + leapYear[0] + ' ' + leapYear[1];
-							}
-
-						}
+						formatter: yAxisFormats[group.yAxis.formatter]
 					}
 				}
 			})

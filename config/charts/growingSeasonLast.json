@@ -3,7 +3,10 @@
 	"polar": false,
 	"groups": {
 		"0": {
-			"baseline": false
+			"baseline": false,
+			"yAxis": {
+				"formatter": "MMDD"
+			}
 		},
 		"1": {
 			"baseline": true
