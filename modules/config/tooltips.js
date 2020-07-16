@@ -18,6 +18,7 @@ var dateFormats = {
 		return time[nav_lang].months[help.months()[date.getMonth()]] + ' ' + date.getDate();
 	}
 }
+exports.dateFormats = dateFormats;
 
 
 

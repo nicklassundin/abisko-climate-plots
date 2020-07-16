@@ -1,5 +1,10 @@
 const regression = require('regression')
 
+Date.prototype.addDays = function(days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+}
 
 Date.prototype.getWeekNumber = function(date=this){
 	var d = new Date(Date.UTC(date.getFullYear(), this.getMonth(), this.getDate()));
