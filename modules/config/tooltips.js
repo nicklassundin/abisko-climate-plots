@@ -31,8 +31,8 @@ exports.dateFormats = dateFormats;
 var yAxis = {
 	MMDD: function(){
 		var month = '';
-		var regYear = dateFormats['MMDD'](new Date(1999, 1, 1).addDays(this.value - 1)).split(' ');	
-		var leapYear = dateFormats['MMDD'](new Date(2000, 1, 1).addDays(this.value - 1)).split(' ');
+		var regYear = dateFormats['MMDD'](new Date(1999, 0, 1).addDays(this.value - 1)).split(' ');	
+		var leapYear = dateFormats['MMDD'](new Date(2000, 0, 1).addDays(this.value - 1)).split(' ');
 		if(regYear[0] == leapYear[0]){
 			month = regYear[0]
 			if(regYear[1] == leapYear[1]){
