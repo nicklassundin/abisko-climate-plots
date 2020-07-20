@@ -6,6 +6,9 @@
 			"yAxis": {
 				"max": 250,
 				"min": 80
+			},
+			"tooltip": {
+				"type": "winterValue"
 			}
 		},
 		"1": {
@@ -13,11 +16,11 @@
 			"yAxis": {
 				"max": 250,
 				"min": 80
+			},
+			"tooltip": {
+				"type": "winterValue"
 			}
 		}
-	},
-	"tooltip": {
-		"type": "winterValue"
 	},
 	"decimals": 0,
 	"series": {

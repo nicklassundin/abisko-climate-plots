@@ -1,17 +1,23 @@
 {
 	"unitType": "day",
-	"tooltip": {
-		"type": "valueDate"
-	},
 	"groups": {
 		"0": {
-			"enabled": false
+			"enabled": false,
+			"tooltip": {
+				"type": "valueDate"
+			}
 		},
 		"1": {
-			"enabled": false
+			"enabled": false,
+			"tooltip": {
+				"type": "valueDate"
+			}
 		},
 		"2": {
-			"enabled": true
+			"enabled": true,
+			"tooltip": {
+				"type": "valueDate"
+			}
 		}
 	}
 }

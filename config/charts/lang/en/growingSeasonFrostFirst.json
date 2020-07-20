@@ -1,5 +1,5 @@
 {
-	"valueSuffix": "date",
+	"valueSuffix": "days",
 	"groups": {
 		"0": {
 			"title": "[stationName] First Frost of the Autumn" ,
@@ -11,7 +11,7 @@
 				"top": "[Y-AXIS]"
 			},
 			"yAxis": {
-				"left": "First date with temperatures record below 0°C",
+				"left": "Date",
 				"right": "[X-AXIS]"
 			}
 		},
@@ -25,17 +25,17 @@
 				"top": "[Y-AXIS]"
 			},
 			"yAxis": {
-				"left": "First date with temperatures record below 0°C Difference",
+				"left": "Difference [days]",
 				"right": "[X-AXIS]"
 			}
 		}
 	},
 	"series": {
 		"avg": {
-			"name": "Date"
+			"name": "First date with temperatures record below 0°C"
 		},
 		"diff": {
-			"name": "Difference"
+			"name": "First date with temperatures record below 0°C Difference"
 		}
 	}
 }

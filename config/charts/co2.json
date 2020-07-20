@@ -7,6 +7,9 @@
 			"ppm400": true,
 			"ppm350": true,
 			"pointSelect": true,
+			"tooltip": {
+			
+			},
 			"yAxis": {
 				"min": 300,
 				"max": 450,
@@ -17,8 +20,6 @@
 				"type": "datetime"
 			}
 		}
-	},
-	"tooltip": {
 	},
 	"decimals": 2,
 	"series": {

@@ -6,14 +6,14 @@
 			"baseline": false,
 			"yAxis": {
 				"formatter": "MMDD"
+			},
+			"tooltip": {
+				"type": "winterValueDateExtreme"
 			}
 		},
 		"1": {
 			"baseline": true
 		}
-	},
-	"tooltip": {
-		"type": "winterValueDateExtreme"
 	},
 	"decimals": 0,
 	"series": {

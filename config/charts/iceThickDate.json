@@ -8,6 +8,9 @@
 			},
 			"yAxis": {
 				"reversed": true
+			},
+			"tooltip": {
+				"type": "winterValueDate"
 			}
 		},
 		"1": {
@@ -17,11 +20,11 @@
 			},
 			"yAxis": {
 				"reversed": true
+			},
+			"tooltip": {
+				"type": "winterValueDate"
 			}
 		}
-	},
-	"tooltip": {
-		"type": "winterValueDate"
 	},
 	"decimals": 0,
 	"series": {

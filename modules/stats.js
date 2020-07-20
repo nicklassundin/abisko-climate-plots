@@ -220,7 +220,15 @@ var struct = {
 			(value.x >= lower && value.x <= upper)).map(each => each.y))
 		return Array.from(this.values.map(each => ([each.x, each.y - basevalue])))
 	},
+	xInterval: {},
 	build: function(type=this.type, lower=baselineLower, upper=baselineUpper){
+
+		this.xInterval.x = new Date(Math.min.apply(null, 
+			this.values.map(each => 
+				each.xInterval ? Math.min.apply(null, each.xInterval) : new Date(each.x)))).getTime();
+		this.xInterval.x2 = new Date(Math.max.apply(null,
+			this.values.map(each => 
+				each.xInterval ? Math.max.apply(null, each.xInterval) : new Date(each.x)))).getTime();
 		var result = this;
 		if(this.values[0].keys){
 			this.keys = this.values[0].keys
@@ -279,6 +287,7 @@ var struct = {
 	},
 	keys: undefined,
 	create: function(values, x=undefined, src=''){
+	 	
 		var result = struct.clone();
 		result.meta.src = src;
 		try{

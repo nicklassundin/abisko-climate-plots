@@ -5,14 +5,17 @@
 			"baseline": false,
 			"yAxis": {
 				"formatter": "MMDD"
+			},
+			"tooltip": {
+				"type": "winterDOY"
 			}
 		},
 		"1": {
-			"baseline": true
+			"baseline": true,
+			"tooltip": {
+				"type": "winterDOY"
+			}
 		}
-	},
-	"tooltip": {
-		"type": "winterDOY"
 	},
 	"decimals": 0,
 	"series": {

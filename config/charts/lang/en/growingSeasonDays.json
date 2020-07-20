@@ -11,7 +11,7 @@
 				"top": "[Y-AXIS]"
 			},
 			"yAxis": {
-				"left": "Growing Season [Number of consecutive days above freezing (> 0°C)]",
+				"left": "Days",
 				"right": "[X-AXIS]"
 			}
 		},
@@ -25,17 +25,17 @@
 				"top": "[Y-AXIS]"
 			},
 			"yAxis": {
-				"left": "Growing Season Difference [Number of consecutive days above freezing (> 0°C)]", 
+				"left": "Difference [days]", 
 				"right": "[X-AXIS]"
 			}
 		}
 	},
 	"series": {
 		"avg": {
-			"name": "Days"
+			"name": "Growing Season [Number of consecutive days above freezing (> 0°C)]"
 		},  
 		"diff": {
-			"name": "Difference"
+			"name": "Growing Season [Number of consecutive days above freezing (> 0°C)]"
 		}
 	}
 }

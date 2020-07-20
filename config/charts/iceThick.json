@@ -5,17 +5,20 @@
 			"baseline": false,
 			"yAxis": {
 				"reversed": true
+			},
+			"tooltip": {
+				"type": "winterValue"
 			}
 		},
 		"1": {
 			"baseline": true,
 			"yAxis": {
 				"reversed": true
+			},
+			"tooltip": {
+				"type": "winterValue"
 			}
 		}
-	},
-	"tooltip": {
-		"type": "winterValue"
 	},
 	"decimals": 0,
 	"series": {

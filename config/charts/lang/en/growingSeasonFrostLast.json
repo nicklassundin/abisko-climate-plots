@@ -1,5 +1,5 @@
 {
-	"valueSuffix": "Date",
+	"valueSuffix": "Days",
 	"groups": {
 		"0": {
 			"title": "[stationName] Last Frost of the Spring or Summer", 
@@ -11,7 +11,7 @@
 				"top": "[Y-AXIS]"
 			},
 			"yAxis": {
-				"left": "Last date with temperatures record below 0°C", 
+				"left": "Date",
 				"right": "[X-AXIS]"
 			}
 		},
@@ -25,17 +25,17 @@
 				"top": "[Y-AXIS]"
 			},
 			"yAxis": {
-				"left": "Last date with temperatures record below 0°C Difference", 
+				"left": "Difference [Days]",
 				"right": "[X-AXIS]"
 			}
 		}
 	},
 	"series": {
 		"avg": {
-			"name": "Date"
+			"name": "Last date with temperatures record below 0°C"
 		},
 		"diff": {
-			"name": "Difference"
+			"name": "Last date with temperatures record below 0°C Difference" 
 		}
 	}
 }

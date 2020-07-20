@@ -2,11 +2,11 @@
 	"type": "column",
 	"groups": {
 		"0": {
-			"baseline": false
+			"baseline": false,
+			"tooltip": {
+				"type": "winterDOY"
+			}
 		}
-	},
-	"tooltip": {
-		"type": "winterDOY"
 	},
 	"decimals": 0,
 	"series": {

@@ -5,6 +5,7 @@ require('highcharts/modules/series-label')(Highcharts);
 require('highcharts/modules/exporting')(Highcharts);
 require('highcharts/modules/export-data.js')(Highcharts);
 require('highcharts/modules/histogram-bellcurve')(Highcharts);
+require('highcharts/modules/xrange')(Highcharts);
 const highchart_help = require('../../config/highcharts_config.js');
 var base = require('./base.js')
 const tooltips = require('./tooltips.js');
@@ -134,6 +135,11 @@ var chart = {
 			credits: {
 				enabled: false
 			},
+			tooltip: {
+				shared: true,
+				valueSuffix: ' '+textMorph(meta.valueSuffix),
+				valueDecimals: meta.decimals,
+			},
 			lang: require('../../config/charts/lang/'+nav_lang+'/menu.json'),
 			exporting: {
 				chartOptions: {
@@ -211,12 +217,6 @@ var chart = {
 			},
 			legend: {
 				enabled: true,
-			},
-			tooltip: {
-				shared: true,
-				valueSuffix: ' '+textMorph(meta.valueSuffix),
-				valueDecimals: meta.decimals,
-				formatter: (meta.tooltip != undefined) ? formatters[meta.tooltip.type] : undefined
 			},
 			series: Object.keys(meta.series).map(each => ({
 				showInLegend: false,
@@ -349,6 +349,7 @@ var chart = {
 				name: textMorph(meta.series.avg.name, meta),
 				lineWidth: 0,
 				regression: true,
+				step: 'center',
 				marker: { radius: 2 },
 				states: { hover: { lineWidthPlus: 0 } },
 				color: meta.series.avg.colour,
@@ -360,6 +361,7 @@ var chart = {
 				},
 				visible: true,
 				type: meta.series.avg.type,
+				// type: 'xrange'
 			}),
 			diff: () => ({
 				regression: false,
@@ -693,6 +695,9 @@ var chart = {
 					text: title,
 					useHTML: true,
 				},
+				tooltip: {
+					formatter: (group.tooltip != undefined) ? formatters[group.tooltip.type] : undefined
+				},
 				subtitle: {
 					text: (group.subTitle != undefined) ? textMorph(group.subTitle, meta) : "",
 				},
@@ -791,6 +796,14 @@ var chart = {
 				plotOptions: {
 					series: {
 						allowPointSelect: true,
+						point: {
+							events: {
+								select: function (e) {
+									// console.log(e)
+									// console.log(this)
+								}
+							}
+						}
 					}
 				}
 			})
