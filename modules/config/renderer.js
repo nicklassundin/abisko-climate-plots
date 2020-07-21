@@ -7,6 +7,7 @@ require('highcharts/modules/export-data.js')(Highcharts);
 require('highcharts/modules/histogram-bellcurve')(Highcharts);
 require('highcharts/modules/xrange')(Highcharts);
 const highchart_help = require('../../config/highcharts_config.js');
+const seriesBuild = require('./series.js').series;
 var base = require('./base.js')
 const tooltips = require('./tooltips.js');
 const formatters = tooltips.formatters;
@@ -24,54 +25,76 @@ const help = require('../helpers.js');
 
 var chart = {
 	metaTable: function(id, json, i=0){
-		// if($('#'+id+'_cont').length > 0){
-		// Object.keys(json).forEach(key => {
-		//TODO
-		// $('#'+id+'_box_'+key+'_textarea').html(JSON.stringify(json[key], undefined, 4));
-		// })
-		// }else{
 		Object.keys(json).forEach(index => {
 			var key = Object.keys(this.metaRef)[index];
-			$('#'+id).append('<div id="'+id+'_cont"></div>');
-			$('#'+id+'_cont').append('<div id="'+id+'_button_'+key+'" class="mini_button">- '+key+'</div><br/>')
-			$('#'+id+'_cont').append('<div id="'+id+'_box_'+key+'" class="box"></div>');
-			$('#'+id+'_box_'+key).append('<textarea id="'+id+'_box'+key+'_textarea" class="json" cols="80">'+JSON.stringify(json[key], undefined, 4)+'</textarea>')
-			$('#'+id+'_box_'+key).append('<br/>')
-			$("#"+id+'_button_'+key).click(function(){
-				$("#"+id+"_box_"+key).slideToggle();
-			});
-		})
-		// }
-	},
-	getMeta: function(define){
-		var json = function(url){
-			return new Promise(function(resolve, reject){
-				$.getJSON(hostUrl+'/config/charts/'+url+'.json', function(result){
-					resolve(result);	
+			if(typeof(this.metaRef[key]) == 'string'){
+				$('#'+id).append('<div id="'+id+'_cont"></div>');
+				$('#'+id+'_cont').append('<div id="'+id+'_button_'+key+'" class="mini_button">- '+key+'</div><br/>')
+				$('#'+id+'_cont').append('<div id="'+id+'_box_'+key+'" class="box"></div>');
+				$('#'+id+'_box_'+key).append('<textarea id="'+id+'_box'+key+'_textarea" class="json" cols="80">'+JSON.stringify(json[index], undefined, 4)+'</textarea>')
+				$('#'+id+'_box_'+key).append('<br/>')
+				$("#"+id+'_button_'+key).click(function(){
+					$("#"+id+"_box_"+key).slideToggle();
 				});
-			})
-		}
-		var files = {};
-		files.config = json(define.config);
-		files.lang = json('lang/'+nav_lang+'/'+define.lang);
-		files.dataSource = json('lang/'+nav_lang+'/dataSource')[define.data];
-		if(define.monthly) files.months = json('monthly');
-		files.set = json(define.set);
-		files.units = new Promise((resolve, reject) => {
-			files.set.then(function(set){
-				json('lang/'+nav_lang+'/units').then(function(units){
-					resolve({ units: set.unitType != undefined ? units[set.unitType] : undefined }); 
-				})
-			})
-		})
-		files.month = { month: define.month };
-		files.time = json('lang/'+nav_lang+'/time');
-		return Promise.all(Object.values(files)).then(function(mF){
-			return {
-				files: mF,
-				aggr: mF.reduce((x, y) => $.extend(true, x, y))
 			}
 		})
+	},
+	getMeta: function(define){
+		try{
+			var json = function(url){
+				return new Promise(function(resolve, reject){
+					$.getJSON(hostUrl+'/config/charts/'+url+'.json', function(result){
+						resolve(result);	
+					});
+				})
+			}
+			var files = {};
+			files.config = json(define.config);
+			var textMorph = this.textMorph;	
+			files.lang = new Promise((resolve, reject) => {
+				var lang = json('lang/'+nav_lang+'/'+define.lang);
+				var iter = function(obj, meta=obj){
+					var res = {};
+					Object.keys(obj).forEach(key => {
+						if(typeof(obj[key]) == 'object'){
+							res[key] = iter(obj[key], meta)
+						}else{
+							res[key] = textMorph(obj[key], meta) 
+						}	
+					})
+					return res;
+				}
+				lang.then((json) => {
+					json.month = define.month;
+					resolve(iter(json))
+				})
+			})
+			files.dataSource = json('lang/'+nav_lang+'/dataSource')[define.data];
+			if(define.monthly != undefined){
+				files.months = json('monthly');
+			}else{
+				files.months = {};
+			}
+			files.set = json(define.set);
+			files.units = new Promise((resolve, reject) => {
+				files.set.then(function(set){
+					json('lang/'+nav_lang+'/units').then(function(units){
+						resolve({ units: set.unitType != undefined ? units[set.unitType] : {} }); 
+					})
+				})
+			})
+			files.time = json('lang/'+nav_lang+'/time');
+			return Promise.all(Object.values(files)).then(function(mF){
+				return {
+					files: mF,
+					aggr: mF.reduce((x, y) => $.extend(true, x, y))
+				}
+			})
+		}catch(ERROR){
+			console.log(files)
+			console.log(define)	
+			throw ERROR
+		}
 	},
 	textMorph: function(text, meta=this.meta){
 		var res = "";
@@ -121,7 +144,6 @@ var chart = {
 	},
 	setup: function(id){
 		this.metaTable('debug_table_'+id, this.metaFiles);
-		var textMorph = this.textMorph;
 		var title = this.title(0);
 		var meta = this.meta
 		if(variables.debug){
@@ -137,7 +159,7 @@ var chart = {
 			},
 			tooltip: {
 				shared: true,
-				valueSuffix: ' '+textMorph(meta.valueSuffix),
+				valueSuffix: ' '+meta.valueSuffix,
 				valueDecimals: meta.decimals,
 			},
 			lang: require('../../config/charts/lang/'+nav_lang+'/menu.json'),
@@ -240,7 +262,7 @@ var chart = {
 			var meta = this.meta;
 			var group = meta.groups[gID];
 			var title = '<label>'+
-				this.textMorph(group.title)+
+				group.title+
 				'</label><br>';
 			if(group.select != undefined && group.select.enabled){
 				title = title + '<label style="font-size: 10px">'+
@@ -277,7 +299,6 @@ var chart = {
 		// console.log(meta)
 		var id = this.id;
 		this.data = data;
-		var textMorph = this.textMorph;
 		var groups = Object.keys(meta.groups).map(key => ({
 			key: key,
 			enabled: meta.groups[key].enabled
@@ -294,243 +315,6 @@ var chart = {
 		// 	}
 		// 	return false;
 		// });
-		var seriesBuild = {
-			max: () => ({
-				name: textMorph(meta.series.max.name, meta),
-				lineWidth: 0,
-				marker: { radius: 2 },
-				states: { hover: { lineWidthPlus: 0 } },
-				color: meta.series.max.colour,
-				data: (data.max != undefined) ? ((data.max.max != undefined) ? data.max.max().values : data.max().values) : undefined ,
-				visible: false,
-				type: meta.series.max.type,
-			}),
-			min: () => ({
-				name: textMorph(meta.series.min.name, meta),
-				lineWidth: 0,
-				marker: { radius: 2 },
-				states: { hover: { lineWidthPlus: 0 } },
-				color: meta.series.min.colour,
-				data: (data.min != undefined) ? ((data.min.min != undefined) ? data.min.min().values : data.min().values) : undefined ,
-				visible: false,
-				type: meta.series.min.type,
-			}),
-			extreme: () => ({
-				name: textMorph(meta.series.extreme.name, meta),
-				lineWidth: 0,
-				marker: { radius: 2 },
-				states: { hover: { lineWidthPlus: 0 } },
-				color: meta.series.extreme.colour,
-				data: (data.max != undefined) ? (data.max.max != undefined ? data.max.max(false).values : undefined) : data.total.max(false).values, 
-				visible: false,
-				type: meta.series.extreme.type,
-			}),
-			first: () => ({
-				name: textMorph(meta.series.first.name, meta),
-				lineWidth: 0,
-				marker: { radius: 2 },
-				states: { hover: { lineWidthPlus: 0 } },
-				color: meta.series.first.colour,
-				data: data.min.first(),
-				visible: false,
-				type: meta.series.first.type,
-			}),
-			last: () => ({
-				name: textMorph(meta.series.last.name, meta),
-				lineWidth: 0,
-				marker: { radius: 2 },
-				states: { hover: { lineWidthPlus: 0 } },
-				color: meta.series.last.colour,
-				data: data.min.last(),
-				visible: false,
-				type: meta.series.last.type,
-			}),
-			avg: () => ({
-				name: textMorph(meta.series.avg.name, meta),
-				lineWidth: 0,
-				regression: true,
-				step: 'center',
-				marker: { radius: 2 },
-				states: { hover: { lineWidthPlus: 0 } },
-				color: meta.series.avg.colour,
-				data: (data.avg != undefined) ? data.avg.values : data.values,
-				regressionSettings: {
-					// type: 'linear',
-					// color: meta.series.linjer.colour,
-					// name: textMorph(meta.series.linjer.name,
-				},
-				visible: true,
-				type: meta.series.avg.type,
-				// type: 'xrange'
-			}),
-			diff: () => ({
-				regression: false,
-				regressionSettings: {
-					type: 'linear',
-					color: '#aa0000',
-					name: 'DUMMY',
-				},
-				name: textMorph(meta.series.diff.name, meta),
-				type: meta.series.diff.type,
-				data: (data.difference != undefined ?
-					data.difference() : 
-					(data.avg != undefined ?
-						data.avg.difference() : 
-						(data.total != undefined ? 
-							data.total.difference() : 
-							data(variables.date).difference()))),
-				color: 'red',
-				negativeColor: 'blue',
-				visible: true,
-			}),
-			linjer: () => ({
-				name: textMorph(meta.series.linjer.name, meta),
-				type: meta.series.linjer.typ,
-				visible: false,
-				showInLegend: false
-			}),
-			snow: () => ({
-				name: textMorph(meta.series.snow.name, meta),
-				type: meta.series.snow.type,
-				stack: meta.groups[meta.series.snow.group].title,
-				stacking: 'normal',
-				color: meta.series.snow.colour,
-				data: (data.snow != undefined) ? data.snow.values : undefined,
-				visible: true,
-				borderColor: meta.series.snow.borderColour,
-				states: {
-					hover: {
-						color: meta.series.snow.hoverColour,
-						animation: {
-							duration: 0,
-						}
-					}
-				}
-			}),
-			rain: () => ({
-				name: textMorph(meta.series.rain.name, meta),
-				type: meta.series.rain.type,
-				stack: meta.groups[meta.series.rain.group].title,
-				stacking: 'normal',
-				data: (data.rain != undefined) ? data.rain.values : undefined,
-				color: meta.series.rain.colour,
-				borderColor: meta.series.rain.borderColour,
-				states: {
-					hover: {
-						color: meta.series.rain.hoverColour,
-						animation: {
-							duration: 0,
-						}
-					}
-				},
-				visible: true,
-			}),
-			iceTime: () => ({
-				regression: false,
-				type: meta.series.iceTime.type,
-				regressionSettings: {
-					type: 'linear',
-					color: '#00bb00',
-					name: '[placeholder]',
-				},
-				name: textMorph(meta.series.iceTime.name, meta),
-				color: meta.series.iceTime.colour,
-				lineWidth: 0,
-				marker: { radius: 2 },
-				states: { hover: { lineWidthPlus: 0 } },
-				data: data,
-				visible: true,
-			}),
-			freeze: () => ({
-				regression: false,
-				type: meta.series.freeze.type,
-				regressionSettings: {
-					type: 'linear',
-					color: '#0000ee',
-					name: '[placeholder]',
-				},
-				name: textMorph(meta.series.freeze.name, meta),
-				color: meta.series.freeze.colour,
-				lineWidth: 0,
-				marker: { radius: 2 },
-				states: { hover: { lineWidthPlus: 0 } },
-				data: data.freeze.values,
-				visible: true,
-			}),
-			breakup: () => ({
-				regression: false,
-				type: meta.series.breakup.type,
-				regressionSettings: {
-					type: 'linear',
-					color: '#0000ee',
-					name: '[placeholder]',
-				},
-				name: textMorph(meta.series.breakup.name, meta),
-				color: meta.series.breakup.colour,
-				lineWidth: 0,
-				marker: { radius: 2 },
-				states: { hover: { lineWidthPlus: 0 } },
-				data: data.breakup.values,
-				visible: true,
-			}),
-			iceThick: () => ({
-				name: textMorph(meta.series.iceThick.name, meta),
-				color: meta.series.iceThick.colour,
-				lineWidth: 0,
-				marker: {
-					radius: 2,
-					symbol: 'circle',
-				},
-				data: (data.total != undefined) ? data.total.max().values : data(date = variables.date).values,
-				visible: true,
-			}),
-			iceThickDiff: () => ({
-				name: textMorph(meta.series.iceThickDiff.name, meta),
-				color: meta.series.iceThickDiff.colour,
-				lineWidth: 0,
-				marker: {
-					radius: 2,
-					symbol: 'circle',
-				},
-				data: (data.total != undefined) ? data.total.max().values : data(date = variables.date).difference(),
-				visible: true,
-			}),
-			perma: (p, s, k) => ({
-				name: textMorph((s.name == undefined) ? k : s.name, meta),
-				type: s.type,
-				color: s.colour,
-				opacity: 0.9,
-				data: p.values,
-				visible: k == "Torneträsk",
-			}),
-			period: (p, s) => ({
-				name: textMorph(s.name, meta), 
-				type: s.type,
-				lineWidth: 1,
-				data: p.means.rotate(6).slice(2),
-				visible: true,
-			}),
-			co2: () => ({
-				name: textMorph(meta.series.co2.name, meta),
-				color: meta.series.co2.colour,
-				type: meta.series.co2.type,
-				lineWidth: 2,
-				states: { hover: { lineWidthPlus: 0 } },
-				data: data.values,
-				turboThreshold: 4000,
-				fillOpacity: 0.2,
-				marker: {
-					states: {
-						select: {
-							fillColor: 'red',
-							lineWidth: 1,
-							radius: 5,
-						}
-					}
-				},
-				zIndex: 6,
-			})
-		}
 		this.chart.hideLoading();
 		var series = [];
 		// TODO clean up
@@ -538,11 +322,11 @@ var chart = {
 			Object.keys(meta.series).filter((s) => (meta.series[s].group != undefined) ? meta.groups[meta.series[s].group].enabled : false).forEach(key => {
 				try{
 					if(meta.period){
-						series.push(seriesBuild['period'](data[key], meta.series[key]))
+						series.push(seriesBuild['period'](data[key], meta, key))
 					}else if(meta.groups['0'].perma){
-						series.push(seriesBuild['perma'](data[key], meta.series[key], key))
+						series.push(seriesBuild['perma'](data[key], meta, key))
 					}else{
-						series.push(seriesBuild[key]());
+						series.push(seriesBuild[key](meta, data));
 					}
 				}catch(error){
 					console.log(key);
@@ -609,7 +393,6 @@ var chart = {
 		var meta = this.meta;
 		var id = this.id;
 		var title = this.title(gID);
-		var textMorph = this.textMorph;
 		var group = meta.groups[gID];
 		if(change) {
 			// Object.keys(meta.series).forEach((key, index) => {
@@ -699,17 +482,17 @@ var chart = {
 					formatter: (group.tooltip != undefined) ? formatters[group.tooltip.type] : undefined
 				},
 				subtitle: {
-					text: (group.subTitle != undefined) ? textMorph(group.subTitle, meta) : "",
+					text: (group.subTitle != undefined) ? group.subTitle : "",
 				},
 				caption: {
-					text: textMorph(group.caption),
+					text: group.caption,
 					useHTML: true,
 				},
 				xAxis: {
-					type: textMorph(group.xAxis.type),
+					type: group.xAxis.type,
 					title: {
 						useHTML: true,
-						text: textMorph(group.xAxis.bott), 
+						text: group.xAxis.bott, 
 					},
 					gridLineWidth: group.xAxis.gridLineWidth,
 					categories: (meta.period) ? group.xAxis.categories : undefined,
@@ -718,7 +501,7 @@ var chart = {
 				},
 				yAxis: {
 					title: {
-						text: textMorph(group.yAxis.left), 
+						text: group.yAxis.left, 
 						useHTML: true,
 					},
 					plotLines: [{
@@ -870,6 +653,7 @@ var render = {
 		}catch(error){
 			console.log(id);
 			console.log(meta)
+			console.log(this.metaRef)
 			throw error
 		}
 	},
