@@ -61,12 +61,12 @@ exports.series = {
 		name: meta.series.diff.name,
 		type: meta.series.diff.type,
 		data: (data.difference != undefined ?
-			data.difference(meta, data) : 
+			data.difference() : 
 			(data.avg != undefined ?
-				data.avg.difference(meta, data) : 
+				data.avg.difference() : 
 				(data.total != undefined ? 
-					data.total.difference(meta, data) : 
-					data(variables.date).difference(meta, data)))),
+					data.total.difference() : 
+					data(variables.date).difference()))),
 		color: 'red',
 		negativeColor: 'blue',
 		visible: true,
@@ -228,7 +228,7 @@ exports.series = {
 			radius: 2,
 			symbol: 'circle',
 		},
-		data: (data.total != undefined) ? data.total.max(meta, data).values : data(date = variables.date).difference(meta, data),
+		data: (data.total != undefined) ? data.total.max(meta, data).values : data(date = variables.date).difference(),
 		visible: true,
 	}),
 	perma: (s, p, k) => ({
