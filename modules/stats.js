@@ -216,9 +216,14 @@ var struct = {
 	},
 	difference: function(lower=baselineLower, upper=baselineUpper){
 		// console.log([lower, upper])
-		var basevalue = help.mean(this.values.filter(value => 
-			(value.x >= lower && value.x <= upper)).map(each => each.y))
-		return Array.from(this.values.map(each => ([each.x, each.y - basevalue])))
+		try{
+			var basevalue = help.mean(this.values.filter(value => 
+				(value.x >= lower && value.x <= upper)).map(each => each.y))
+			return Array.from(this.values.map(each => ([each.x, each.y - basevalue])))
+		}catch(ERROR){
+			console.log(ERROR);
+			console.log(this)
+		}
 	},
 	xInterval: {},
 	build: function(type=this.type, lower=baselineLower, upper=baselineUpper){
@@ -269,7 +274,7 @@ var struct = {
 			}
 			result.y = y;
 		}
-		
+
 		result.count = count;
 		return result;
 	},
@@ -287,7 +292,7 @@ var struct = {
 	},
 	keys: undefined,
 	create: function(values, x=undefined, src=''){
-	 	
+
 		var result = struct.clone();
 		result.meta.src = src;
 		try{
@@ -350,13 +355,13 @@ var parseByDate = function (values, type='mean', src='', custom) {
 				// console.log(entry)
 				// var DOY = help.dayOfYear(date);
 				// if(!result.DOY[DOY]){
-					// const doy = [date]
-					// result.DOY[DOY] = doy;
+				// const doy = [date]
+				// result.DOY[DOY] = doy;
 				// }else{
-					// result.DOY[DOY].push(date);
+				// result.DOY[DOY].push(date);
 				// }
 				// entry.DOY = result.DOY[DOY];
-				
+
 				var decade = year - year % 10;
 				if(!result.yrly) result.yrly = {};
 				if(!result.yrly[key]) result.yrly[key] = {};

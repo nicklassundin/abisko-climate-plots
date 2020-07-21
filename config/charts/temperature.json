@@ -8,7 +8,7 @@
 		"1": {
 			"baseline": true,
 			"yAxis": {
-				"min": -2,
+				"min": -3,
 				"max": 4
 			}
 		},
@@ -22,30 +22,35 @@
 	"decimals": 2,
 	"series": {
 		"max": {
+			"preset": "max",
 			"group": "0", 
 			"visible": false,
 			"colour": "#ff0000", 
 			"type": "line"
 		},
 		"min": {
+			"preset": "min",
 			"group": "0", 
 			"visible": false,
 			"colour": "#0000ff",
 			"type": "line"
 		},
 		"avg": {
+			"preset": "avg",
 			"group": "0",
 			"visible": true,
 			"colour": "#888888",
 			"type": "line"
 		},  
 		"diff": {
+			"preset": "diff",
 			"group": "1",
 			"visible": true,
 			"colour": "[example]",
 			"type": "column" 
 		},
 		"extreme": {
+			"preset": "extreme",
 			"group": "2", 
 			"visible": true,
 			"colour": "#ff0000", 

@@ -14,12 +14,14 @@
 	"decimals": 0,
 	"series": {
 		"diff": {
+			"preset": "diff",
 			"group": 1,
 			"visible": true,
 			"colour": "[example]",
 			"type": "column" 
 		},
 		"snow": {
+			"preset": "snow",
 			"group": 0,
 			"visible": true,
 			"colour": "#CDD8F0",
@@ -28,6 +30,7 @@
 			"type": "column"
 		},
 		"rain": {
+			"preset": "rain",
 			"group": 0,
 			"visible": true,
 			"colour": "#1000FB",
@@ -36,6 +39,7 @@
 			"type": "column"
 		},
 		"extreme": {
+			"preset": "extreme",
 			"group": 2,
 			"visible": true,
 			"colour": "#1000FF",

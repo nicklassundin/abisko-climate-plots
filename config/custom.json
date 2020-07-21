@@ -57,10 +57,12 @@
 		"autumnPrecipitation", 
 		"winterPrecipitation"],
 	"tempDiff": ["temperatureDifference"],
-	"extreme": ["dailyExtremeTemperature",
+	"extreme": [
+		"dailyExtremeTemperature",
 		"weeklyExtremeTemperature",
 	"dailyExtremePrecipitation",
-	"weeklyExtremePrecipitation"],
+	"weeklyExtremePrecipitation"
+	],
 	"precip": ["Precipitation",
 		"springPrecipitation", 
 		"summerPrecipitation",
@@ -123,10 +125,12 @@
 		"weeklyExtremeTemperature"],
 	"sqrt-prec-extreme": ["dailyExtremePrecipitation",
 	"weeklyExtremePrecipitation"],
-	"sqrt-growingSeason": ["growingSeason",
+	"sqrt-growingSeason": [
+		"growingSeason",
 		"growingSeasonDays",
 		"growingSeasonFrostFirst",
-		"growingSeasonFrostLast"],
+		"growingSeasonFrostLast"
+	],
 	"sqrt-temp-slide": ["slideTemperature",
 		"slideTemperaturesSpring",
 		"slideTemperaturesSummer",
@@ -134,16 +138,19 @@
 		"slideTemperaturesWinter",
 		"slideMonthlyTemperatures"
 	],
-	"sqrt-prec-slide": ["slidePrecipitation",
+	"sqrt-prec-slide": [
+		"slidePrecipitation",
 		"slideWinterPrecipitation",
 		"slideSpringPrecipitation", 
 		"slideSummerPrecipitation",
 		"slideAutumnPrecipitation",
 		"slideMonthlyPrecipitation"
 	],
-		"sqrt-snowDepth-v2": ["yrlyAvgSnowDepth",
+		"sqrt-snowDepth-v2": [
+			"yrlyAvgSnowDepth",
 			"abiskoSnowDepthPeriodMeans",
-			"abiskoSnowDepthPeriodMeans2"],
+			"abiskoSnowDepthPeriodMeans2"
+		],
 	"sqrt-lakeIce-v2": [
 		"abiskoLakeIceBreakup",
 		"abiskoLakeIceFreezeup",
@@ -156,6 +163,23 @@
 		"slideTemperaturesSummer",
 		"slideTemperaturesAutumn",
 		"slideTemperaturesWinter",
-		"slideMonthlyTemperatures"
+		"slideMonthlyTemperatures",
+		"slidePrecipitation",
+		"slideWinterPrecipitation",
+		"slideSpringPrecipitation", 
+		"slideSummerPrecipitation",
+		"slideAutumnPrecipitation",
+		"slideMonthlyPrecipitation",
+		"yrlyAvgSnowDepth",
+		"abiskoSnowDepthPeriodMeans",
+		"abiskoSnowDepthPeriodMeans2",
+		"growingSeason",
+		"growingSeasonDays",
+		"growingSeasonFrostFirst",
+		"growingSeasonFrostLast",
+		"dailyExtremeTemperature",
+		"weeklyExtremeTemperature",
+		"dailyExtremePrecipitation",
+		"weeklyExtremePrecipitation"
 	]
 }

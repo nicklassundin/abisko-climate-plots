@@ -1,4 +1,8 @@
+// Series definitions/configuration
 exports.series = {
+	getPreset: (series, data) => {
+		// TODO	
+	},
 	max: (meta, data) => ({
 		name: meta.series.max.name,
 		lineWidth: 0,
@@ -28,26 +32,6 @@ exports.series = {
 		data: (data.max != undefined) ? (data.max.max != undefined ? data.max.max(false).values : undefined) : data.total.max(false).values, 
 		visible: false,
 		type: meta.series.extreme.type,
-	}),
-	first: (meta, data) => ({
-		name: meta.series.first.name,
-		lineWidth: 0,
-		marker: { radius: 2 },
-		states: { hover: { lineWidthPlus: 0 } },
-		color: meta.series.first.colour,
-		data: data.min.first(meta, data),
-		visible: false,
-		type: meta.series.first.type,
-	}),
-	last: (meta, data) => ({
-		name: meta.series.last.name,
-		lineWidth: 0,
-		marker: { radius: 2 },
-		states: { hover: { lineWidthPlus: 0 } },
-		color: meta.series.last.colour,
-		data: data.min.last(meta, data),
-		visible: false,
-		type: meta.series.last.type,
 	}),
 	avg: (meta, data) => ({
 		name: meta.series.avg.name,
@@ -83,6 +67,54 @@ exports.series = {
 				(data.total != undefined ? 
 					data.total.difference(meta, data) : 
 					data(variables.date).difference(meta, data)))),
+		color: 'red',
+		negativeColor: 'blue',
+		visible: true,
+	}),
+	first: (meta, data) => ({
+		name: meta.series.first.name,
+		lineWidth: 0,
+		marker: { radius: 2 },
+		states: { hover: { lineWidthPlus: 0 } },
+		color: meta.series.first.colour,
+		data: data.values,
+		visible: false,
+		type: meta.series.first.type,
+	}),
+	firstDiff: (meta, data) => ({
+		regression: false,
+		regressionSettings: {
+			type: 'linear',
+			color: '#aa0000',
+			name: 'DUMMY',
+		},
+		name: meta.series.diff.name,
+		type: meta.series.diff.type,
+		data: data.difference(),
+		color: 'red',
+		negativeColor: 'blue',
+		visible: true,
+	}),
+	last: (meta, data) => ({
+		name: meta.series.last.name,
+		lineWidth: 0,
+		marker: { radius: 2 },
+		states: { hover: { lineWidthPlus: 0 } },
+		color: meta.series.last.colour,
+		data: data.values,
+		visible: false,
+		type: meta.series.last.type,
+	}),
+	lastDiff: (meta, data) => ({
+		regression: false,
+		regressionSettings: {
+			type: 'linear',
+			color: '#aa0000',
+			name: 'DUMMY',
+		},
+		name: meta.series.diff.name,
+		type: meta.series.diff.type,
+		data: data.difference(),
 		color: 'red',
 		negativeColor: 'blue',
 		visible: true,
@@ -199,7 +231,7 @@ exports.series = {
 		data: (data.total != undefined) ? data.total.max(meta, data).values : data(date = variables.date).difference(meta, data),
 		visible: true,
 	}),
-	perma: (p, s, k) => ({
+	perma: (s, p, k) => ({
 		name: (s.series[k].name == undefined) ? k : s.series[k].name,
 		type: s.series[k].type,
 		color: s.series[k].colour,
@@ -207,11 +239,11 @@ exports.series = {
 		data: p.values,
 		visible: k == "Torneträsk",
 	}),
-	period: (p, s, k) => ({
+	period: (s, p, k) => ({
 		name: s.series[k].name, 
 		type: s.series[k].type,
 		lineWidth: 1,
-		data: p.means.rotate(6).slice(2),
+		data: p[k].means.rotate(6).slice(2),
 		visible: true,
 	}),
 	co2: (meta, data) => ({

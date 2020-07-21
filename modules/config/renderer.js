@@ -321,15 +321,9 @@ var chart = {
 		try{
 			Object.keys(meta.series).filter((s) => (meta.series[s].group != undefined) ? meta.groups[meta.series[s].group].enabled : false).forEach(key => {
 				try{
-					if(meta.period){
-						series.push(seriesBuild['period'](data[key], meta, key))
-					}else if(meta.groups['0'].perma){
-						series.push(seriesBuild['perma'](data[key], meta, key))
-					}else{
-						series.push(seriesBuild[key](meta, data));
-					}
+					series.push(seriesBuild[meta.series[key].preset](meta, data, key));
 				}catch(error){
-					console.log(key);
+					console.log(meta.series[key].preset);
 					console.log(error);
 					console.log(meta);
 					console.log(data)

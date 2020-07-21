@@ -18,12 +18,14 @@
 	"decimals": 0,
 	"series": {
 		"avg": {
+			"preset": "avg",
 			"group": 0,
 			"visible": true,
 			"colour": "#0000ee",
 			"type": "line"
 		},
 		"diff": {
+			"preset": "firstDiff",
 			"group": 1,
 			"type": "column"
 		}

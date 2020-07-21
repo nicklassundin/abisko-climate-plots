@@ -10,36 +10,43 @@
 	"period": true,
 	"series": {
 		"1961": {
+			"preset": "period",
 			"group": 0,
 			"visible": true,
 			"type": "line"
 		},
 		"1971": {
+			"preset": "period",
 			"group": 0,
 			"visible": true,
 			"type": "line"
 		},
 		"1981": {
+			"preset": "period",
 			"group": 0,
 			"visible": true,
 			"type": "line"
 		},
 		"1991": {
+			"preset": "period",
 			"group": 0,
 			"visible": true,
 			"type": "line"
 		},
 		"2001": {
+			"preset": "period",
 			"group": 0,
 			"visible": true,
 			"type": "line"
 		},
 		"2011": {
+			"preset": "period",
 			"group": 0,
 			"visible": true,
 			"type": "line"
 		},
 		"allTime": {
+			"preset": "period",
 			"group": 0,
 			"visible": true,
 			"type": "line"

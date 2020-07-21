@@ -11,12 +11,14 @@
 	"decimals": 0,
 	"series": {
 		"freeze": {
+			"preset": "freeze",
 			"group": 0,
 			"visible": true,
 			"colour": "#0000ee",
 			"type": "line"
 		},
 		"breakup": {
+			"preset": "breakup",
 			"group": 0,
 			"visible": true,
 			"colour": "#ee0000",
