@@ -523,5 +523,5 @@ var parseByDate = function (values, type='mean', src='', custom) {
 	}
 	return data.insert(values);
 }
-exports.parseByyDate = parseByDate;
+exports.parseByDate = parseByDate;
 

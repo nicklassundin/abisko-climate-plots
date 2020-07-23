@@ -1,7 +1,7 @@
 var $ = require('jquery')
 
 const Papa = require('papaparse');
-const parse = require('../../stats.js').parsers;
+const parse = require('../../stats/config.js').parsers;
 
 var renderer = require('./../renderer.js').render;
 
