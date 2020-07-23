@@ -584,7 +584,7 @@ var rendF = {
 	'growingSeasonFrostFirst': {
 		func: function(reset=false){
 			config[stationType].contFunc(reset);
-			config[stationType].init('growingSeasonFirst', 'growingSeasonFrostFirst')
+			config[stationType].init('growingSeasonFirst', ['growingSeason', 'first'])
 		},
 		html: function(doc){
 			var no = 18;
@@ -596,7 +596,7 @@ var rendF = {
 	'growingSeasonFrostLast': {
 		func: function(reset=false){
 			config[stationType].contFunc(reset);
-			config[stationType].init('growingSeasonLast', 'growingSeasonFrostLast')
+			config[stationType].init('growingSeasonLast', ['growingSeason', 'last'])
 		},
 		html: function(doc){
 			var no = 18;
@@ -609,7 +609,7 @@ var rendF = {
 		func: function(reset=false){
 
 			config[stationType].contFunc(reset);
-			config[stationType].init('growingSeasonDays', 'growingSeasonDays')
+			config[stationType].init('growingSeasonDays', ['growingSeason', 'days'])
 		},
 		html: function(doc){
 			var no = 18;
@@ -622,7 +622,7 @@ var rendF = {
 		func: function(reset=false){
 
 			config[stationType].contFunc(reset);
-			config[stationType].init('growingSeason', 'growingSeason')
+			config[stationType].init('growingSeason', ['growingSeason', 'weeks'])
 		},
 		html: function(doc){
 			var no = 18;
