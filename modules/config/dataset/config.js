@@ -67,6 +67,9 @@ var config = {
 				'autumn': meta_struct.create(config =  'temperature', lang =  'autumnTemperature', data =  'ANS', set =  'weather'), 
 				'spring': meta_struct.create(config =  'temperature', lang =  'springTemperature', data =  'ANS', set =  'weather'), 
 				'monthly': meta_struct.create(config =  'temperature', lang =  'monthlyTemperature', data =  'ANS', set = 'weather', monthly =  true),
+				//TODO
+				'months': meta_struct.create(config =  'temperature', lang =  'monthlyTemperature', data =  'ANS', set =  'monthSet'), 
+				// END
 				'difference': meta_struct.create(config =  'temperature', lang =  'yrlyTemperature', data =  'ANS', set =  'climate'), 
 				'dailyExtreme': meta_struct.create(config =  'temperature', lang =  'yrlyTemperature', data =  'ANS' , set =  'extremeDay'), 
 				'weeklyExtreme': meta_struct.create(config =  'temperature', lang =  'yrlyTemperature', data =  'ANS' , set =  'extremeWeek'), 
@@ -131,6 +134,9 @@ var config = {
 				'autumn': meta_struct.create(config =  'temperature', lang =  'autumnTemperature', data =  'ANS', set =  'weather'), 
 				'spring': meta_struct.create(config =  'temperature', lang =  'springTemperature', data =  'ANS', set =  'weather'), 
 				'monthly': meta_struct.create(config =  'temperature', lang =  'monthlyTemperature', data =  'ANS', set =  'weather', monthly =  true), 
+				//TODO
+				'months': meta_struct.create(config =  'temperature', lang =  'monthlyTemperature', data =  'ANS', set =  'monthSet'), 
+				// END
 				'difference': meta_struct.create(config =  'temperature', lang =  'yrlyTemperature', data =  'ANS', set =  'climate'), 
 				'dailyExtreme': meta_struct.create(config =  'temperature', lang =  'yrlyTemperature', data =  'ANS' , set =  'extremeDay'), 
 				'weeklyExtreme': meta_struct.create(config =  'temperature', lang =  'yrlyTemperature', data =  'ANS' , set =  'extremeWeek'), 

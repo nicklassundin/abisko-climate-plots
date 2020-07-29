@@ -45,7 +45,7 @@
 		"TemperaturesWinter",
 		"monthlyTemperatures",
 		"temperatureDifference"],
-	"tempMonth": ["monthlyTemperatures"],
+	"monthTemp": ["monthlyTemperatures"],
 	"tempAvg": ["Temperatures"],
 	"tempAvgSlide": ["slideTemperature"],
 	"tempSeason": ["TemperaturesSummer", 
@@ -74,7 +74,7 @@
 		"temperature_nhem",
 		"temperature_glob"],
 	"precipAvg": ["Precipitation"],
-	"precipMonth": ["monthlyPrecipitation"],
+	"monthPrec": ["monthlyPrecipitation"],
 	"diff": ["temperatureDifference", "PrecipitationDifference"],
 	"snowDepth": ["abiskoSnowDepthPeriodMeans",
 		"abiskoSnowDepthPeriodMeans2"],
@@ -181,5 +181,6 @@
 		"weeklyExtremeTemperature",
 		"dailyExtremePrecipitation",
 		"weeklyExtremePrecipitation"
-	]
+	],
+	"months": ["monthsTemperatures"]
 }

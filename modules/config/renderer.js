@@ -49,31 +49,12 @@ var chart = {
 				})
 			}
 			var files = {};
+			var textMorph = this.textMorph;
 			files.config = json(define.config);
-			var textMorph = this.textMorph;	
-			files.lang = new Promise((resolve, reject) => {
-				var lang = json('lang/'+nav_lang+'/'+define.lang);
-				var iter = function(obj, meta=obj){
-					var res = {};
-					Object.keys(obj).forEach(key => {
-						if(typeof(obj[key]) == 'object'){
-							res[key] = iter(obj[key], meta)
-						}else{
-							res[key] = textMorph(obj[key], meta) 
-						}	
-					})
-					return res;
-				}
-				lang.then((json) => {
-					json.month = define.month;
-					resolve(iter(json))
-				})
-			})
 			files.dataSource = json('lang/'+nav_lang+'/dataSource')[define.data];
-			if(define.monthly != undefined){
+			if(define.monthly){
 				files.months = json('monthly');
-			}else{
-				files.months = {};
+				files.month = { month: define.month }
 			}
 			files.set = json(define.set);
 			files.units = new Promise((resolve, reject) => {
@@ -84,10 +65,26 @@ var chart = {
 				})
 			})
 			files.time = json('lang/'+nav_lang+'/time');
+			files.lang = json('lang/'+nav_lang+'/'+define.lang);
 			return Promise.all(Object.values(files)).then(function(mF){
+				var iter = function(obj, meta=obj){
+					var res = {};
+					Object.keys(obj).forEach(key => {
+						if(typeof(obj[key]) == 'object'){
+							res[key] = iter(obj[key], meta)
+						}else if(typeof(obj[key]) == 'string'){
+							res[key] = textMorph(obj[key], meta) 
+						}else{
+							res[key] = obj[key];
+						}
+					})
+					return res;
+				}
+				var red = iter(mF.reduce((x, y) => $.extend(true, x, y)))
+
 				return {
 					files: mF,
-					aggr: mF.reduce((x, y) => $.extend(true, x, y))
+					aggr: red
 				}
 			})
 		}catch(ERROR){
@@ -100,8 +97,9 @@ var chart = {
 		var res = "";
 		if(text){
 			try{
+				// TODO order of month replace for subsets
 				var res = text.replace("[stationName]", stationName)
-				res = res.replace("[month]", meta.month)
+				res = (meta.subSet ? meta.subSet.enabled : false) ? res.replace("[month]", meta.months[meta.set]) : res.replace("[month]", meta.month)
 				res = res.replace("[baseline]", baselineLower +" - "+ baselineUpper)
 				res = res.replace("[CO2]", 'CO'+("2".sub()))
 				res = res.replace("[SOME TEXT]", "")
@@ -120,6 +118,7 @@ var chart = {
 		// return res
 	},
 	id: undefined,
+	set: undefined,
 	initiated: false,
 	chart: undefined,
 	metaRef: undefined,
@@ -321,7 +320,12 @@ var chart = {
 		try{
 			Object.keys(meta.series).filter((s) => (meta.series[s].group != undefined) ? meta.groups[meta.series[s].group].enabled : false).forEach(key => {
 				try{
-					series.push(seriesBuild[meta.series[key].preset](meta, data, key));
+					if(meta.subSet) {
+						this.set = Object.keys(meta[meta.subSet.type])[0];
+						series.push(seriesBuild[meta.series[key].preset](meta, data[this.set], key));
+					}else{
+						series.push(seriesBuild[meta.series[key].preset](meta, data, key));
+					}
 				}catch(error){
 					console.log(meta.series[key].preset);
 					console.log(error);
@@ -338,7 +342,6 @@ var chart = {
 		this.chart.update({
 			series: series
 		})
-
 		if(Object.keys(meta.groups).map(key => meta.groups[key].enabled).filter(each => each).length > 1){
 			var chart = this;
 			$(".tablinks_"+id).click(function(e) {
@@ -658,9 +661,9 @@ var render = {
 				if(result.meta.monthly){
 					var months = help.months();
 					if(variables.debug) months = [months.shift()];
-					months.forEach((month, index) => {
+					months.forEach((month) => {
 						result[month].then(plot => {
-							plot.initiate(data[index+1+'']);
+							plot.initiate(data[month]);
 						})
 					})
 				}else{

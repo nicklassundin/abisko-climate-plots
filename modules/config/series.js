@@ -265,5 +265,5 @@ exports.series = {
 			}
 		},
 		zIndex: 6,
-	})
+	}),
 }

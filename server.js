@@ -153,28 +153,59 @@ app.post('/admin/create/table', function(request, response, next){
 })
 
 const url = require('url');
-const custom = require('./config/custom.json');
+const custom = new Promise((resolve, reject) => {
+	var res = require('./config/preset.json')
+	require('./config/preset.js').preset.then(data => {
+		var str = JSON.stringify(data);
+		if(str != JSON.stringify(res)){
+		fs.writeFile('config/preset.json', str, (error) => {
+			if(error){
+				console.log(error)
+			}else{
+			
+			}
+		})
+		}
+	}).then(() => {
+			resolve(require('./config/preset.json'))
+	})
+})
 const constants = require('./config/const.json');
 
-app.get( '/chart', (req, res) => {
-	const queryObject = url.parse(req.url,true).query;
-	var id;
-	var ids; 
-	if(!queryObject.id) {
-		ids = custom.all;
-	}else if(!custom[queryObject.id]){
-		ids = queryObject.id.split(",");
-	}else{
-		ids = custom[queryObject.id];
-	}
-	var charts = ids.map(id => {
-		return {
-			id: id,
-			station: queryObject.station
-		}
+var charts = (req) => {
+	return new Promise((res, rej) => {
+		custom.then(IDs => {
+			const queryObject = url.parse(req.url,true).query;
+			var id;
+			var ids; 
+			if(!queryObject.id) {
+				ids = IDs.all;
+			}else if(!custom[queryObject.id]){
+				ids = queryObject.id.split(",");
+			}else{
+				ids = IDs[queryObject.id];
+			}
+			res(ids.map(id => {
+				return {
+					id: id,
+					station: queryObject.station
+				}
+			}))
+		})
 	})
-	res.render('chart.hbs', {
-		charts
+}
+app.get( '/chart', (req, res) => {
+	charts(req).then(chrts => {
+		res.render('chart.hbs', {
+			chrts
+		})
+	})
+});
+app.get('/d3-map', (req, res) => {
+	charts(req).then(chrts => {
+		res.render('d3-map.hbs', {
+			chrts
+		})
 	})
 });
 
@@ -206,23 +237,3 @@ app.get('/map', (req, res) => {
 
 	})
 })
-app.get('/d3-map', (req, res) => {
-	const queryObject = url.parse(req.url,true).query;
-	var ids; 
-	if(!queryObject.id) {
-		ids = custom.all;
-	}else if(!custom[queryObject.id]){
-		ids = queryObject.id.split(",");
-	}else{
-		ids = custom[queryObject.id];
-	}
-	var charts = ids.map(id => {
-		return {
-			id: id,
-			station: queryObject.station
-		}
-	})
-	res.render('d3-map.hbs', {
-		charts
-	})
-});

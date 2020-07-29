@@ -27,6 +27,7 @@
 		"mariadb": "^2.4.1",
 		"mariasql": "^0.2.6",
 		"material-ui": "^0.20.2",
+		"merge": "^1.2.1",
 		"mongodb": "^3.5.9",
 		"multer": "^1.4.2",
 		"mysql": "^2.18.1",
@@ -68,8 +69,8 @@
 	"scripts": {
 		"test": "npm run test-unit",
 		"test-unit": "NODE_ENV=test mocha 'modules/*.spec.js' --delay",
-		"start": "npx nodemon server.js [PLACEHOLDER] --ignore 'client/*.js' 'temp/*' 'cms/*' 'node_modules/*' 'doc/*'",
-		"start-full": "npm test && npx nodemon server.js --ignore 'client/*.js' 'temp/*' 'cms/*' 'doc/*' && npm run static",
+		"start": "npx nodemon server.js [PLACEHOLDER] --ignore 'client/*.js' 'temp/*' 'cms/*' 'node_modules/*' 'doc/*' 'config/preset.json'",
+		"start-full": "npm test && npx nodemon server.js --ignore 'client/*.js' 'temp/*' 'cms/*' 'doc/*' 'config/preset.json' && npm run static",
 		"static": "cp static/temp.html index.html && cp client/bundle.js static/bundle.js"
 	},
 	"repository": {

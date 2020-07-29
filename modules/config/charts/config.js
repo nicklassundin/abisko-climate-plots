@@ -210,6 +210,18 @@ var rendF = {
 
 		},
 	},
+	'monthsTemperatures': {
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('monthsTemperatures', ['temperatures','monthly'], ['temperatures', 'months']);
+		},
+		html: function(doc){
+			var no = 3;
+			if(!variables.debug) no = variables.debug;
+			return createDiv('monthsTemperatures', no);
+
+		},
+	},
 	'slideMonthlyTemperatures': {
 		func: function(reset=false){
 			config[stationType].contFunc(reset);
