@@ -231,12 +231,12 @@ exports.series = {
 		data: (data.total != undefined) ? data.total.max(meta, data).values : data(date = variables.date).difference(),
 		visible: true,
 	}),
-	perma: (s, p, k) => ({
-		name: (s.series[k].name == undefined) ? k : s.series[k].name,
-		type: s.series[k].type,
-		color: s.series[k].colour,
+	perma: (meta, data, k) => ({
+		name: (meta.series[k].name == undefined) ? k : meta.series[k].name,
+		type: meta.series[k].type,
+		color: meta.series[k].colour,
 		opacity: 0.9,
-		data: p.values,
+		data: data[k].values,
 		visible: k == "Torneträsk",
 	}),
 	period: (s, p, k) => ({

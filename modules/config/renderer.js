@@ -334,6 +334,7 @@ var chart = {
 					throw error
 				}
 			})
+		// console.log(series)
 		}catch(error){
 			console.log(meta.groups)
 			console.log(meta.series)
@@ -506,8 +507,8 @@ var chart = {
 						color: 'rgb(204, 214, 235)',
 						width: 2,
 					}],
-					max: group.yAxis.max ? group.yAxis.max : null,
-					min: group.yAxis.min ? group.yAxis.min : null,
+					max: (group.yAxis.max != undefined) ? group.yAxis.max : null,
+					min: (group.yAxis.min != undefined) ? group.yAxis.min : null,
 					tickInterval: (group.yAxis.left.tickInterval) ? group.yAxis.left.tickInterval : 1,
 					lineWidth: 1,
 					reversed: group.yAxis.reversed,
