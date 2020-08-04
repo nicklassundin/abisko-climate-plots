@@ -52,7 +52,7 @@ var chart = {
 			var textMorph = this.textMorph;
 			files.config = json(define.config);
 			files.dataSource = json('lang/'+nav_lang+'/dataSource')[define.data];
-			files.subSet = json(define.subSet);
+			if(define.subSet) files.subSet = json(define.subSet);
 			files.set = json(define.set);
 			files.units = new Promise((resolve, reject) => {
 				files.set.then(function(set){
