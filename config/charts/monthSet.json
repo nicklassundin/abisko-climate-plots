@@ -1,6 +1,6 @@
 {
 	"subSet": {
-		"set": false,
+		"set": "jan",
 		"sets": ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"],
 		"enabled": true,
 		"type": "months",

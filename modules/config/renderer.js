@@ -52,10 +52,7 @@ var chart = {
 			var textMorph = this.textMorph;
 			files.config = json(define.config);
 			files.dataSource = json('lang/'+nav_lang+'/dataSource')[define.data];
-			if(define.monthly){
-				files.months = json('monthly');
-				files.month = { month: define.month }
-			}
+			files.subSet = json(define.subSet);
 			files.set = json(define.set);
 			files.units = new Promise((resolve, reject) => {
 				files.set.then(function(set){
@@ -67,24 +64,25 @@ var chart = {
 			files.time = json('lang/'+nav_lang+'/time');
 			files.lang = json('lang/'+nav_lang+'/'+define.lang);
 			return Promise.all(Object.values(files)).then(function(mF){
-				var iter = function(obj, meta=obj){
-					var res = {};
-					Object.keys(obj).forEach(key => {
-						if(typeof(obj[key]) == 'object'){
-							res[key] = iter(obj[key], meta)
-						}else if(typeof(obj[key]) == 'string'){
-							res[key] = textMorph(obj[key], meta) 
-						}else{
-							res[key] = obj[key];
-						}
-					})
-					return res;
-				}
-				var red = iter(mF.reduce((x, y) => $.extend(true, x, y)))
-
 				return {
 					files: mF,
-					aggr: red
+					aggr: mF.reduce((x, y) => $.extend(true, x, y)),
+					text: function(){
+						var iter = function(obj, meta=obj){
+							var res = {};
+							Object.keys(obj).forEach(key => {
+								if(typeof(obj[key]) == 'object'){
+									res[key] = iter(obj[key], meta)
+								}else if(typeof(obj[key]) == 'string'){
+									res[key] = textMorph(obj[key], meta) 
+								}else{
+									res[key] = obj[key];
+								}
+							})
+							return res;
+						}
+						return iter(this.aggr)
+					} 
 				}
 			})
 		}catch(ERROR){
@@ -99,7 +97,9 @@ var chart = {
 			try{
 				// TODO order of month replace for subsets
 				var res = text.replace("[stationName]", stationName)
-				res = (meta.subSet ? meta.subSet.enabled : false) ? res.replace("[month]", meta.months[meta.set]) : res.replace("[month]", meta.month)
+
+				var set = (meta.subSet ? meta.subSet.enabled : false) ? meta.months[meta.subSet.set] : undefined;
+				res = (meta.subSet ? meta.subSet.enabled : false) ? res.replace("[month]", set) : res.replace("[month]", meta.month)
 				res = res.replace("[baseline]", baselineLower +" - "+ baselineUpper)
 				res = res.replace("[CO2]", 'CO'+("2".sub()))
 				res = res.replace("[SOME TEXT]", "")
@@ -118,7 +118,6 @@ var chart = {
 		// return res
 	},
 	id: undefined,
-	set: undefined,
 	initiated: false,
 	chart: undefined,
 	metaRef: undefined,
@@ -127,30 +126,59 @@ var chart = {
 	data: undefined,
 	create: function(id, metaRef){
 		try{
+			var result = {
+				sets: undefined,
+				setup: function(){
+					this.sets.forEach(key => {
+						this[key].setup();
+					})
+				},
+				initiate: function(data){
+					this.sets.forEach(key => {
+						this[key].initiate(data);
+					})
+				}
+			}
+			var res = this.clone();
 			return new Promise((resolve, reject) => {
-				var result = this.clone();
-				result.id = id;
-				result.metaRef = metaRef
-				var meta = chart.getMeta(metaRef).then((temp) => {
-					result.metaFiles = temp.files;
-					result.meta = temp.aggr
-					resolve(result)
+				chart.getMeta(metaRef).then((temp) => {
+					var meta = temp.aggr;
+					if(meta.subSet ? !meta.subSet.set : false){
+						meta.subSet.sets = Object.keys(meta.subSet.sets).map(key => { return meta.subSet.sets[key] }).filter(e => typeof e == "string");
+						if(variables.debug){
+							meta.subSet.sets = [meta.subSet.sets[0]];
+						}
+						result.sets = meta.subSet.sets;
+						meta.subSet.sets.forEach(set => {
+							var tmp = res.clone();
+							tmp.id = id+'_'+set;
+							tmp.metaRef = metaRef;
+							tmp.metaFiles = temp.files;
+							temp.aggr.subSet.set = set;
+							var metaTemp = {}; 
+							$.extend(true, metaTemp, temp.text())
+							tmp.meta = metaTemp;
+							result[set] = tmp;
+						})
+						resolve(result)
+					}else{
+						res.id = id;
+						res.metaRef = metaRef
+						res.metaFiles = temp.files;
+						res.meta = temp.text();
+						resolve(res)
+					}
 				})
 			})
 		}catch(error){
 			throw error;
 		}
 	},
-	setup: function(id){
+	setup: function(){
+		var id = this.id
 		this.metaTable('debug_table_'+id, this.metaFiles);
 		var title = this.title(0);
 		var meta = this.meta
-		if(variables.debug){
-			// console.log(id)
-			// console.log(this.metaRef)
-			// console.log(this.metaFiles)
-			// console.log(meta)
-		}
 		this.chart = Highcharts.chart(id, {
 			dataSrc: '[placeholder]',
 			credits: {
@@ -294,10 +322,16 @@ var chart = {
 	},
 	initiate: function(data = this.data){
 		var meta = this.meta;	
+		// console.log(this.metaRef)
 		// console.log(data)
 		// console.log(meta)
 		var id = this.id;
-		this.data = data;
+		if(this.meta.subSet){
+			this.data = data[this.meta.subSet.set] 
+		}else{
+			this.data = data;
+		}
+
 		var groups = Object.keys(meta.groups).map(key => ({
 			key: key,
 			enabled: meta.groups[key].enabled
@@ -321,12 +355,12 @@ var chart = {
 			Object.keys(meta.series).filter((s) => (meta.series[s].group != undefined) ? meta.groups[meta.series[s].group].enabled : false).forEach(key => {
 				try{
 					if(meta.subSet) {
-						this.set = Object.keys(meta[meta.subSet.type])[0];
-						series.push(seriesBuild[meta.series[key].preset](meta, data[this.set], key));
+						series.push(seriesBuild[meta.series[key].preset](meta, data[meta.subSet.set], key));
 					}else{
 						series.push(seriesBuild[meta.series[key].preset](meta, data, key));
 					}
 				}catch(error){
+					console.log("Series Error")
 					console.log(meta.series[key].preset);
 					console.log(error);
 					console.log(meta);
@@ -334,7 +368,7 @@ var chart = {
 					throw error
 				}
 			})
-		// console.log(series)
+			// console.log(series)
 		}catch(error){
 			console.log(meta.groups)
 			console.log(meta.series)
@@ -598,56 +632,17 @@ var render = {
 	charts: {},
 	setup: function(id, meta){
 		try{
-			if(meta.monthly){
-				this.charts[id] = new Promise(function(resolve, reject){
-					try{
-
-						// TODO
-						var months = help.months()
-						// DEBUG only one example for speedup
-						if(variables.debug) months = [months.shift()];
-						var monthChart = function(month){
-							try{
-								return new Promise((resolve, reject) => {
-
-									var cloneMeta = Object.assign({}, meta, {});
-									cloneMeta.month = help.monthName(month);
-									var chrt = chart.create(id+'_'+month, cloneMeta)
-									chrt.then(plot => {
-										plot.setup(id+"_"+month, cloneMeta)
-										resolve(plot)
-									})
-								})
-							}catch(error){
-								console.log({ERROR: error, month: month, meta: meta})
-								reject(error)
-							}
-						}
-						var rest = {
-							meta: meta,
-						}
-						months.forEach(month => {
-							rest[month] = monthChart(month);
-						})
-						resolve(rest);
-					}catch(error){
-						console.log({ERROR: error, ID: id, meta: meta});
-						reject(error);
-					}
-				});
-			}else{
-				this.charts[id] = new Promise(function(resolve, reject){
-					try{
-						var res = chart.create(id, meta) 
-						res.then(chrt => {
-							chrt.setup(id, meta);
-							resolve(res)
-						})
-					}catch(error){
-						reject(error)
-					}
-				})
-			}
+			this.charts[id] = new Promise(function(resolve, reject){
+				try{
+					var res = chart.create(id, meta) 
+					res.then(chrt => {
+						chrt.setup(id, meta);
+						resolve(res)
+					})
+				}catch(error){
+					reject(error)
+				}
+			})
 		}catch(error){
 			console.log(id);
 			console.log(meta)
@@ -659,17 +654,7 @@ var render = {
 		// console.log(data.Axis('y'))
 		this.charts[id].then(function(result){
 			try{
-				if(result.meta.monthly){
-					var months = help.months();
-					if(variables.debug) months = [months.shift()];
-					months.forEach((month) => {
-						result[month].then(plot => {
-							plot.initiate(data[month]);
-						})
-					})
-				}else{
-					result.initiate(data)
-				}
+				result.initiate(data)
 			}catch(error){
 				console.log(id)
 				console.log(result)
