@@ -6,7 +6,7 @@ require('highcharts/modules/exporting')(Highcharts);
 require('highcharts/modules/export-data.js')(Highcharts);
 require('highcharts/modules/histogram-bellcurve')(Highcharts);
 require('highcharts/modules/xrange')(Highcharts);
-const highchart_help = require('../../config/highcharts_config.js');
+// const highchart_help = require('./highcharts/config.js');
 const seriesBuild = require('./series.js').series;
 var base = require('./base.js')
 const tooltips = require('./tooltips.js');
@@ -51,7 +51,9 @@ var chart = {
 			var files = {};
 			var textMorph = this.textMorph;
 			files.config = json(define.config);
-			files.dataSource = json('lang/'+nav_lang+'/dataSource')[define.data];
+			files.dataSource = json('lang/'+nav_lang+'/dataSource').then(data => {
+				return { meta: data[define.data] }
+			})
 			if(define.subSet) files.subSet = json(define.subSet);
 			files.set = json(define.set);
 			files.units = new Promise((resolve, reject) => {
@@ -180,7 +182,6 @@ var chart = {
 		var title = this.title(0);
 		var meta = this.meta
 		this.chart = Highcharts.chart(id, {
-			dataSrc: '[placeholder]',
 			credits: {
 				enabled: false
 			},
@@ -246,17 +247,17 @@ var chart = {
 						},{
 							textKey: 'dataCredit',
 							onclick: function(){
-								if(this.options.dataSrc){
-									console.log(meta.data)
-									window.location.href = meta.data.src;
-								}
+								console.log(meta.meta.src)
+								window.location.href = meta.meta.src;
 							},
-						},{
-							textKey: 'contribute',
-							onclick: function(){
-								window.location.href = 'https://github.com/nicklassundin/abisko-climate-plots/wiki';
-							},
-						}],
+						}
+							// ,{
+							// textKey: 'contribute',
+							// onclick: function(){
+								// window.location.href = 'https://github.com/nicklassundin/abisko-climate-plots/wiki';
+							// },
+						// }
+						],
 					},
 				},
 			},
@@ -265,7 +266,7 @@ var chart = {
 				zoomType: 'x',
 			},
 			legend: {
-				enabled: true,
+				enabled: false 
 			},
 			series: Object.keys(meta.series).map(each => ({
 				showInLegend: false,
@@ -426,6 +427,7 @@ var chart = {
 		var id = this.id;
 		var title = this.title(gID);
 		var group = meta.groups[gID];
+		var series_count = 0;
 		if(change) {
 			// Object.keys(meta.series).forEach((key, index) => {
 			Object.keys(meta.series).filter((s) => (meta.series[s].group != undefined) ? meta.groups[meta.series[s].group].enabled : false).forEach((key, index) => {
@@ -434,6 +436,7 @@ var chart = {
 						visible: meta.series[key].visible,
 						showInLegend: true,
 					})
+					series_count += 1;
 				}else{
 					$('#' + id).highcharts().series[index].update({
 						visible: false,
@@ -512,6 +515,9 @@ var chart = {
 				},
 				tooltip: {
 					formatter: (group.tooltip != undefined) ? formatters[group.tooltip.type] : undefined
+				},
+				legend: {
+					enabled: series_count > 1 
 				},
 				subtitle: {
 					text: (group.subTitle != undefined) ? group.subTitle : "",
