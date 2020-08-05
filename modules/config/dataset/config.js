@@ -101,10 +101,12 @@ var config = {
 				'monthlySlide': meta_struct.create(config =  'precipitation', lang =  'monthlyPrecipitation', data =  'ANS', set = 'slide', subSet = 'monthly'), 
 			},
 			'growingSeason': {
-				'weeks': meta_struct.create(config =  'growingSeason', lang =  'growingSeason', data =  'ANS', set =  'slide'), 
-				'days': meta_struct.create(config =  'growingSeason', lang =  'growingSeasonDays', data =  'ANS', set =  'slide'), 
-				'first': meta_struct.create(config =  'growingSeasonFirst', lang =  'growingSeasonFrostFirst', data =  'ANS', set =  'slide'), 
-				'last': meta_struct.create(config =  'growingSeasonLast', lang =  'growingSeasonFrostLast', data =  'ANS', set =  'slide'), 
+				'weeks': meta_struct.create(config =  'growingSeason', lang =  'growingSeason', data = 'ANS', set = 'weather'), 
+				// 'weeks': meta_struct.create(config =  'growingSeason', lang =  'growingSeason', data =  'ANS', set =  'slide'), 
+				'days': meta_struct.create(config =  'growingSeason', lang =  'growingSeasonDays', data = 'ANS', set = 'weather'), 
+				// 'days': meta_struct.create(config =  'growingSeason', lang =  'growingSeasonDays', data = 'ANS', set = 'slide'), 
+				'first': meta_struct.create(config =  'growingSeasonFirst', lang =  'growingSeasonFrostFirst', data = 'ANS', set = 'slide'), 
+				'last': meta_struct.create(config =  'growingSeasonLast', lang =  'growingSeasonFrostLast', data = 'ANS', set = 'slide'), 
 			},
 			'slideTemperature': meta_struct.create(config =  'temperature', lang =  'yrlyTemperature', data =  'ANS', set =  'slide'), 
 		},
@@ -168,8 +170,10 @@ var config = {
 				'monthlySlide': meta_struct.create(config =  'precipitation', lang =  'monthlyPrecipitation', data =  'SMHI-Hydrology' , set = 'slide', subSet = 'monthly'), 
 			},
 			'growingSeason': {
-				'weeks': meta_struct.create(config =  'growingSeason', lang =  'growingSeason', data =  'SMHI-Weather', set =  'slide'), 
-				'days': meta_struct.create(config =  'growingSeason', lang =  'growingSeasonDays', data =  'SMHI-Weather', set =  'slide'), 
+				'weeks': meta_struct.create(config =  'growingSeason', lang =  'growingSeason', data =  'SMHI-Weather', set =  'weather'), 
+				// 'weeks': meta_struct.create(config =  'growingSeason', lang =  'growingSeason', data =  'SMHI-Weather', set =  'slide'), 
+				'days': meta_struct.create(config =  'growingSeason', lang =  'growingSeasonDays', data =  'SMHI-Weather', set =  'weather'), 
+				// 'days': meta_struct.create(config =  'growingSeason', lang =  'growingSeasonDays', data =  'SMHI-Weather', set =  'slide'), 
 				'first': meta_struct.create(config =  'growingSeasonFirst', lang =  'growingSeasonFrostFirst', data =  'SMHI-Weather', set =  'slide'), 
 				'last': meta_struct.create(config =  'growingSeasonLast', lang =  'growingSeasonFrostLast', data = 'SMHI-Weather', set =  'slide'), 
 			},
@@ -187,9 +191,9 @@ var config = {
 		parser = parse.AbiskoIceData,
 		meta = {
 			DOY: meta_struct.create(config =  'ice', lang =  'ice', data =  'ANS', set =  'weather'),
-			breakupDOY: meta_struct.create(config =  'iceBreakup', lang =  'iceBreakup', data =  'ANS', set =  'slide'),
-			freezeDOY: meta_struct.create(config =  'iceFreeze', lang =  'iceFreeze', data =  'ANS', set =  'slide'),
-			iceTime: meta_struct.create(config =  'iceTime', lang =  'iceTime', data =  'ANS', set =  'slide'),
+			breakupDOY: meta_struct.create(config =  'iceBreakup', lang =  'iceBreakup', data =  'ANS', set =  'weather'),
+			freezeDOY: meta_struct.create(config =  'iceFreeze', lang =  'iceFreeze', data =  'ANS', set =  'weather'),
+			iceTime: meta_struct.create(config =  'iceTime', lang =  'iceTime', data =  'ANS', set =  'weather'),
 		},
 		reader = Papa.parse),
 	abiskoSnowDepth: dataset_struct.create(
@@ -243,9 +247,9 @@ var config = {
 		parser = parse.AbiskoLakeThickness,
 		meta = {
 			'yrly': {
-				'max': meta_struct.create(config =  'iceThick', lang =  'iceThick', data =  'ANS', set =  'slide'),
+				'max': meta_struct.create(config =  'iceThick', lang =  'iceThick', data =  'ANS', set =  'weather'),
 			}, 
-			'date': meta_struct.create(config =  'iceThickDate', lang =  'iceThickDate', data =  'ANS', set =  'slide'),
+			'date': meta_struct.create(config =  'iceThickDate', lang =  'iceThickDate', data =  'ANS', set =  'weather'),
 		},
 		reader = Papa.parse,
 		local = true)

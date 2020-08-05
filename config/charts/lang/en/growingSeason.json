@@ -32,10 +32,10 @@
 	},
 	"series": {
 		"avg": {
-			"name": "Growing Season [Number of consecutive weeks above freezing (> 0°C)]"
+			"name": "Weeks"
 		},  
 		"diff": {
-			"name": "Growing Season Difference [Number of consecutive weeks above freezing (> 0°C)]"
+			"name": "Weeks Difference" 
 		}
 	}
 }
