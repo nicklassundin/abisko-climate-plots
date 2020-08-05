@@ -2,9 +2,9 @@
 	"valueSuffix": "",
 	"groups": {
 		"0": {
-			"title": "Torneträsk Freeze-up and break-up of lake ice" ,
-			"subTitle": "[SUB-TITLE]",
-			"caption": "[SOME TEXT]",
+			"title": "Freeze-up and break-up of lake ice" ,
+			"subTitle": "Torneträsk",
+			"caption": "", 
 			"yAxis": {
 				"left": "Ice break-up / freeze-up [day of year]",
 				"right": "[X-AXIS]"
