@@ -3,7 +3,7 @@
 	"groups": {
 		"0": {
 			"title": "Global Atmospheric Carbon Dioxide Concentration", 
-			"subTitle": "[SUB-TITLE]",
+			"subTitle": "",
 			"caption": "Carbon dioxide ([CO2]) Concentration (ppm) at the Mauna Loa Observatory in Hawaii.",
 			"yAxis": {
 				"left": "[CO2] Concentration (ppm)",
