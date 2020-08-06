@@ -3,6 +3,9 @@
 	"groups": {
 		"0": {
 			"baseline": false,
+			"yAxis": {
+				"formatter": "MMDD"
+			},
 			"tooltip": {
 				"type": "winterDOY"
 			}

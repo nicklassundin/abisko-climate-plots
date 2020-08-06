@@ -1,9 +1,5 @@
 {
 	"valueSuffix": "",
-	"xAxis": {
-		"bott": "År", 
-		"top": "[Y-AXIS]"
-	},
 	"groups": {
 		"0": {
 			"title": "[stationName] Sjöisdjupet (datum)",
@@ -15,6 +11,10 @@
 			"yAxis": {
 				"left": "Isens tjocklek [cm]", 
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "År", 
+				"top": "[Y-AXIS]"
 			},
 			"legend": "Väder"
 		},
@@ -28,6 +28,10 @@
 			"yAxis": {
 				"left": "Isens tjocklek [cm]", 
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "År", 
+				"top": "[Y-AXIS]"
 			},
 			"legend": "Klimat"
 		}

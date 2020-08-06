@@ -12,7 +12,8 @@ var base = require('./base.js')
 const tooltips = require('./tooltips.js');
 const formatters = tooltips.formatters;
 const dateFormats = tooltips.dateFormats;
-const yAxisFormats = tooltips.yAxis;
+const axisFormats = require('./axis.js');
+const yAxisFormats = axisFormats.yAxis;
 const help = require('../helpers.js');
 
 // require('textarea-markdown');

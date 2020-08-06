@@ -1,9 +1,5 @@
 {
 	"valueSuffix": "dagar",
-	"xAxis": {
-		"bott": "År", 
-		"top": "[Y-AXIS]"
-	},
 	"groups": {
 		"0": {
 			"title": "[stationName] Isperiodens längd", 
@@ -12,6 +8,10 @@
 			"yAxis": {
 				"left": "Istid [antal dagar]",
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "År", 
+				"top": "[Y-AXIS]"
 			},
 			"legend": "Väder"
 		},
@@ -22,6 +22,10 @@
 			"yAxis": {
 				"left": "Istid [antal dagar]", 
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "År", 
+				"top": "[Y-AXIS]"
 			},
 			"legend": "Klimat"
 		}

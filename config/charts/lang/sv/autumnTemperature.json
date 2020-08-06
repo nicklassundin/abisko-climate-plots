@@ -1,9 +1,5 @@
 {
 	"valueSuffix": "°C",
-	"xAxis": {
-		"bott": "År", 
-		"top": "[Y-AXIS]"
-	},
 	"groups": {
 		"0": {
 			"title": "[stationName] Höstens medeltemperatur",
@@ -13,6 +9,10 @@
 			"yAxis": {
 				"left": "Medeltemperatur [°C]",
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "År", 
+				"top": "[Y-AXIS]"
 			}
 		},
 		"1": {
@@ -23,6 +23,10 @@
 			"yAxis": {
 				"left": "Temperaturskillnad [°C]", 
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "År", 
+				"top": "[Y-AXIS]"
 			}
 		}
 	},

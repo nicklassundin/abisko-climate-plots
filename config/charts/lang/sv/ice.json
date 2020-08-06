@@ -1,9 +1,5 @@
 {
 	"valueSuffix": "",
-	"xAxis": {
-		"bott": "År", 
-		"top": "[Y-AXIS]"
-	},
 	"groups": {
 		"0": {
 			"title": "Troneträsk Isläggning och Islossning samt Tiden isen ligger på sjön" ,
@@ -12,6 +8,10 @@
 			"yAxis": {
 				"left": "Islossning / Isläggning [årets dag]",
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "År", 
+				"top": "[Y-AXIS]"
 			},
 			"legend": "Väder"
 		}

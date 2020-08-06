@@ -6,7 +6,7 @@
 			"subTitle": "Torneträsk",
 			"caption": "", 
 			"yAxis": {
-				"left": "Ice break-up / freeze-up [day of year]",
+				"left": "Ice break-up / freeze-up [date]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {

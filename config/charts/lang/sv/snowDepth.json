@@ -1,9 +1,5 @@
 {
 	"valueSuffix": "cm",
-	"xAxis": {
-		"bott": "Månad", 
-		"top": "[Y-AXIS]"
-	},
 	"groups": {
 		"0": {
 			"title": "[stationName] Snödjup", 
@@ -12,6 +8,10 @@
 			"yAxis": {
 				"left": "Genomsnittligt snödjup [cm]", 
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "Månad", 
+				"top": "[Y-AXIS]"
 			},
 			"legend": "Väder"
 		}

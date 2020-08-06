@@ -1,9 +1,5 @@
 {
 	"valueSuffix": "mm",
-	"xAxis": {
-		"bott": "År", 
-		"top": "[Y-AXIS]"
-	},
 	"groups": {
 		"0": {
 			"title": "[stationName] Sommarens genomsnittliga nederbörd",
@@ -12,6 +8,10 @@
 			"yAxis": {
 				"left": "Genomsnittlig nederbörd [mm]", 
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "År", 
+				"top": "[Y-AXIS]"
 			},
 			"legend": "Väder"
 		},
@@ -22,6 +22,10 @@
 			"yAxis": {
 				"left": "Genomsnittlig nederbörd [mm]", 
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "År", 
+				"top": "[Y-AXIS]"
 			},
 			"legend": "Klimat"
 		}

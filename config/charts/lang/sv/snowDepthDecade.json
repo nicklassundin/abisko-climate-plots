@@ -1,10 +1,5 @@
 {
 	"valueSuffix": "cm",
-	"xAxis": {
-		"categories": ["Sep", "Okt", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "Maj", "Ju    n"],
-		"bott": "Månad", 
-		"top": "[Y-AXIS]"
-	},
 	"groups": {
 		"0": {
 			"title": "[stationName] Snödjup",
@@ -13,6 +8,11 @@
 			"yAxis": {
 				"left": "Snödjup [cm]", 
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"categories": ["Sep", "Okt", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "Maj", "Ju    n"],
+				"bott": "Månad", 
+				"top": "[Y-AXIS]"
 			},
 			"legend": "Väder"
 		}

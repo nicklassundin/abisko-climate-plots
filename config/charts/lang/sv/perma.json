@@ -10,15 +10,15 @@
 				"plotLines": {
 					"text": "Jord ytan"
 				} 
+			},
+			"xAxis": {
+				"bott": "År", 
+				"top": "[Y-AXIS]"
 			}
 
 		}
 	},
 	"valueSuffix": "",
-	"xAxis": {
-		"bott": "År", 
-		"top": "[Y-AXIS]"
-	},
 	"series": {
 		"avg": {
 			"name": "Genomsnitt av alla stationer"

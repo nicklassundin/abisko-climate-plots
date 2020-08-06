@@ -1,9 +1,5 @@
 {
 	"valueSuffix": "veckor",
-	"xAxis": {
-		"bott": "År", 
-		"top": "[Y-AXIS]"
-	},
 	"groups": {
 		"0": {
 			"title": "[stationName] Växtsäsong" ,
@@ -13,6 +9,10 @@
 			"yAxis": {
 				"left": "Växtsäsong [antal av på varandra följande veckor över fryspunkten (> 0°C)]",
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "År", 
+				"top": "[Y-AXIS]"
 			}
 		}
 	},

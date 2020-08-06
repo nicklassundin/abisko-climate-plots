@@ -1,62 +1,6 @@
 // TODO create a builder instead of this mess
 
-const help = require('../helpers.js');
-const time = {
-	sv: require('../../config/charts/lang/sv/time.json'),
-	en: require('../../config/charts/lang/en/time.json'),
-}
-
-var dateFormat = (date) => {
-	return date.getFullYear() + ' ' + time[nav_lang].months[help.months()[date.getMonth()]] + ' ' + date.getDate();
-}
-
-var dateFormats = {
-	YYYYMMDD: (date) => {
-		try{
-
-			return date.getFullYear() + ' ' + time[nav_lang].months[help.months()[date.getMonth()]] + ' ' + date.getDate();
-		}catch(error){
-			return ''
-		}
-	},
-	MMDD: (date) => {
-		try{
-			var month = time[nav_lang].months[help.months()[date.getMonth()]];
-			var day = date.getDate();
-			if(month == undefined){
-				console.log(date)
-				console.log(time[nav_lang].months)
-				console.log(date.getMonth())
-				console.log(help.months()[date.getMonth()])
-			}
-			return month + ' ' + day;
-		}catch(error){
-			return ''
-		}
-	},
-}
-exports.dateFormats = dateFormats;
-
-var yAxis = {
-	MMDD: function(){
-		var month = '';
-		var regYear = dateFormats['MMDD'](new Date(1999, 0, 1).addDays(this.value - 1)).split(' ');	
-		var leapYear = dateFormats['MMDD'](new Date(2000, 0, 1).addDays(this.value - 1)).split(' ');
-		if(regYear[0] == leapYear[0]){
-			month = regYear[0]
-			if(regYear[1] == leapYear[1]){
-				return month + ' ' + regYear[1];
-			}else{
-				return month + ' ' + regYear[1] + '-' + leapYear[1];
-			}
-		}else{
-			return regYear[0] + ' ' + regYear[1] + ' - ' + leapYear[0] + ' ' + leapYear[1];
-		}
-
-	}
-}
-exports.yAxis = yAxis;
-
+var dateFormats = require('./dateformatter').dateFormats
 
 exports.formatters = {
 	winterDOY: function(){

@@ -1,9 +1,5 @@
 {
 	"valueSuffix": "ppm",
-	"xAxis": {
-		"bott": "År", 
-		"top": "[Y-AXIS]"
-	},
 	"groups": {
 		"0": {
 			"title": "Global Atmosfärisk CO2 koncentration", 
@@ -12,6 +8,10 @@
 			"yAxis": {
 				"left": "[CO2] koncentration (ppm)", 
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "År", 
+				"top": "[Y-AXIS]"
 			},
 			"legend": "Väder"
 		}

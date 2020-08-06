@@ -1,9 +1,5 @@
 {
 	"valueSuffix": "",
-	"xAxis": {
-		"bott": "År", 
-		"top": "[Y-AXIS]"
-	},
 	"groups": {
 		"0": {
 			"title": "Troneträsk Isläggningsdag", 
@@ -12,6 +8,10 @@
 			"yAxis": {
 				"left": "Isläggning av sjöisen (årets dag)", 
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "År", 
+				"top": "[Y-AXIS]"
 			},
 			"legend": "Väder"
 		},
@@ -22,6 +22,10 @@
 			"yAxis": {
 				"left": "Isläggning [årets dag]",
 				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "År", 
+				"top": "[Y-AXIS]"
 			},
 			"legend": "Klimat"
 		}
