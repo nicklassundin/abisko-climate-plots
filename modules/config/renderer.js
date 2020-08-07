@@ -8,11 +8,11 @@ require('highcharts/modules/histogram-bellcurve')(Highcharts);
 require('highcharts/modules/xrange')(Highcharts);
 // const highchart_help = require('./highcharts/config.js');
 const seriesBuild = require('./series.js').series;
-var base = require('./base.js')
-const tooltips = require('./tooltips.js');
+var base = require('./highcharts_config/base.js')
+const tooltips = require('./formatters/tooltips.js');
 const formatters = tooltips.formatters;
 const dateFormats = tooltips.dateFormats;
-const axisFormats = require('./axis.js');
+const axisFormats = require('./formatters/axis.js');
 const yAxisFormats = axisFormats.yAxis;
 const help = require('../helpers.js');
 

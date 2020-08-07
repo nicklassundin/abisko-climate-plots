@@ -1,14 +1,14 @@
-const help = require('../helpers.js');
+const help = require('../../helpers.js');
 const time = {
-	sv: require('../../config/charts/lang/sv/time.json'),
-	en: require('../../config/charts/lang/en/time.json'),
+	sv: require('../../../config/charts/lang/sv/time.json'),
+	en: require('../../../config/charts/lang/en/time.json'),
 }
 
 var dateFormat = (date) => {
 	return date.getFullYear() + ' ' + time[nav_lang].months[help.months()[date.getMonth()]] + ' ' + date.getDate();
 }
 
-var dateFormats = {
+var formats = {
 	YYYYMMDD: (date) => {
 		try{
 
@@ -33,4 +33,10 @@ var dateFormats = {
 		}
 	},
 }
-exports.dateFormats = dateFormats;
+exports.spectrum = function(value){
+	return {
+		regular: new Date(1999, 0, 1).addDays(value - 1),
+		leap: new Date(2000, 0, 1).addDays(value -1)
+	}
+}
+exports.formats = formats;

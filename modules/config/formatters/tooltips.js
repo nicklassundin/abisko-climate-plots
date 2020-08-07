@@ -1,6 +1,6 @@
 // TODO create a builder instead of this mess
 
-var dateFormats = require('./dateformatter').dateFormats
+var dateFormats = require('./date').dateFormats
 
 exports.formatters = {
 	winterDOY: function(){
