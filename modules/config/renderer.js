@@ -450,8 +450,8 @@ var chart = {
 			var res = [];
 			if(group.baseline){
 				return {
-					plotLines: base.baseline.plotlines(id),
-					plotBands: base.baseline.plotBandsDiff(id), 
+					plotLines: base.plotLines.baseline(id),
+					plotBands: base.plotBands.diff(id), 
 				}
 			}
 			return {
@@ -687,8 +687,11 @@ var render = {
 			if(bl<bu && bl>=1913) baselineLower=bl;
 			if(bu>bl && bu<2019) baselineUpper=bu;
 			this.charts[id].then(function(chart){
-				if(id.split('_')[1]) id = id.split('_')[0]
 				var div = document.getElementById(id);
+				if(!div){
+					id = id.split('_')[0]
+					div = document.getElementById(id);
+				}
 				chart.chart.destroy();
 			})
 		}catch(error){

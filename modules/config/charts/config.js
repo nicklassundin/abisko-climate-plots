@@ -6,15 +6,15 @@ var config = require('../dataset/config.js').config;
 var createDiv = require('./struct.js').createDiv;
 
 var rendF = {
-	'temperature_64n-90n': {
+	'temperature_64n90n': {
 		func: function(reset=false){
 			config['zonal'].contFunc(reset);
-			config['zonal'].init('temperature_64n-90n', '64n-90n')
+			config['zonal'].init('temperature_64n90n', '64n-90n')
 		},
 		html: function(doc){
 			var no = 20;
 			if(!variables.debug) no = variables.debug;
-			return createDiv('temperature_64n-90n', no);
+			return createDiv('temperature_64n90n', no);
 		},
 	},
 	'temperature_nhem': {
