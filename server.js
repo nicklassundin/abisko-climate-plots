@@ -17,7 +17,9 @@ app.engine('handlebars', engines.handlebars);
 
 
 // Starts webserver
-const config = require('./config/server.json');
+var cust = require('./config/server.json');
+var defa = require('./config/default.server.json')
+const config = (cust ? cust : defa) 
 require('./modules/webserver.js').webserver["http"](app);
 require('./modules/webserver.js').webserver["https"](app);
 
@@ -153,24 +155,9 @@ app.post('/admin/create/table', function(request, response, next){
 })
 
 const url = require('url');
-const custom = new Promise((resolve, reject) => {
-	var res = require('./config/preset.json')
-	require('./config/preset.js').preset.then(data => {
-		var str = JSON.stringify(data);
-		if(str != JSON.stringify(res)){
-		fs.writeFile('config/preset.json', str, (error) => {
-			if(error){
-				console.log(error)
-			}else{
-			
-			}
-		})
-		}
-	}).then(() => {
-			resolve(require('./config/preset.json'))
-	})
-})
-const constants = require('./config/const.json');
+var preset = require('./modules/preset/gen.js');
+const custom = preset.custom;
+const constants = preset.constants;
 
 var charts = (req) => {
 	return new Promise((res, rej) => {

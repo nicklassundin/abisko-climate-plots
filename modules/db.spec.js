@@ -12,9 +12,9 @@ setTimeout(function() {
 
 
 describe('database connection test', function () {
-	
 	it('SSH: ', function(done) {
 		db.ssh().then(function(response){
+			console.log(response)
 			if(response) done()
 		});
 	})

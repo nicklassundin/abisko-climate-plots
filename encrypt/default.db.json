@@ -1,9 +1,9 @@
 {
 	"ssh": {
-		"host": "host",
+		"host": "[HOST]",
 		"port": 22,
-		"user": "user",
-		"password": "password"
+		"user": "[USER]",
+		"password": "[PASSWORD]"
 	},
 	"database": {
 		"admin": {

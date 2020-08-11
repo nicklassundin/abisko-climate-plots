@@ -4,7 +4,13 @@ var Client = require('ssh2').Client;
 var ssh = new Client();
 var csv = require('fast-csv');
 
-var db_config = require('../encrypt/db.json');
+// var config = require('../encrypt/db.json')
+var config = false;
+var defa = require('../encrypt/default.db.json')
+
+var db_config = (config ? config : defa);
+
+
 
 const HOST = db_config.ssh.host; 
 const PORT = db_config.ssh.port;
@@ -58,29 +64,38 @@ var connect = function(account=db_config.database.admin){
 	})
 }
 
-var db = connect
 
 
 module.exports = {
 	ssh: function(account=db_config.database.admin){
-		return new Promise(function(resolve, reject){
-			// console.log("START SSH connection")
-			ssh.on('ready', function() {
-				resolve(ssh)	
-			}).on('error', function(err){
-				console.error('Error during connecting to the device: ' + err);
-			}).connect({
-				host: HOST,
-				port: PORT,
-				username: USER,
-				password: PASSWORD
-			});
-		}).catch(function(error){
-			// console.log(error)
-		})
+		if(config){
+			return new Promise(function(resolve, reject){
+				// console.log("START SSH connection")
+				ssh.on('ready', function() {
+					resolve(ssh)	
+				}).on('error', function(err){
+					console.error('Error during connecting to the device: ' + err);
+				}).connect({
+					host: HOST,
+					port: PORT,
+					username: USER,
+					password: PASSWORD
+				});
+			}).catch(function(error){
+				// console.log(error)
+			})
+		}else{
+			return new Promise((resolve, reject) => {
+				resolve("SSH not configured create a copy of default.db.json named db.json, and configure that file");
+			})
+		}
 	},
 	connect: connect,
-	admin: connect(db_config.database.admin),
+	admin: (config ? connect(db_config.database.admin) : function(){
+		return new Promise((resolve, reject) => {
+				resolve("SSH not configured create a copy of default.db.json named db.json, and configure that file");
+		})
+	}()),
 	makeQuery: function(database, query){
 		return new Promise(function(resolve, reject){
 			database.then(function(connection){
