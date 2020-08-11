@@ -1,11 +1,11 @@
 var date = require('./date');
 
 var yAxis = {
-	DOY: function(value, form){
+	DOY: function(value, form, shrt = false){
 		var month = '';
 		var year = date.spectrum(value); 
-		var reg = form(year.regular);
-		var leap = form(year.leap);
+		var reg = form(year.regular, shrt);
+		var leap = form(year.leap, shrt);
 		if(year.regular.getMonth() == year.leap.getMonth()){
 			if(year.regular.getDate() == year.leap.getDate()){
 				return reg
@@ -16,11 +16,11 @@ var yAxis = {
 			return reg + ' - ' + leap;
 		}
 	},
-	MMDD: function(){
-		return yAxis['DOY'](this.value, date.formats['MMDD'])
+	MMDD: function(shrt = true){
+		return yAxis['DOY'](this.value, date.formats['MMDD'], shrt)
 	},
-	MM: function(){
-				
+	MM: function(shrt = false){
+		return yAxis['DOY'](this.value, date.formats['MM'], shrt)				
 	}
 }
 exports.yAxis = yAxis;

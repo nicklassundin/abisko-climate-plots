@@ -12,31 +12,29 @@ var formats = {
 	YYYYMMDD: (date) => {
 		try{
 
-			return date.getFullYear() + ' ' + time[nav_lang].months[help.months()[date.getMonth()]] + ' ' + date.getDate();
+			return date.getFullYear() + ' ' + formats['MM'](date) + ' ' + formats['DD'](date) 
 		}catch(error){
 			return ''
 		}
 	},
-	MMDD: (date) => {
+	MMDD: (date, shrt=false) => {
 		try{
-			var month = time[nav_lang].months[help.months()[date.getMonth()]];
-			var day = date.getDate();
-			if(month == undefined){
-				console.log(date)
-				console.log(time[nav_lang].months)
-				console.log(date.getMonth())
-				console.log(help.months()[date.getMonth()])
-			}
-			return month + ' ' + day;
+			return formats['MM'](date, shrt) + ' ' + formats['DD'](date, shrt);
 		}catch(error){
 			return ''
 		}
+	},
+	DD: (date) => {
+		return date.getDate();	
+	},
+	MM: (date, shrt=false) => {
+		return (shrt ? time[nav_lang].monthShort : time[nav_lang].months)[help.months()[date.getMonth()]]
 	},
 }
+exports.formats = formats;
 exports.spectrum = function(value){
 	return {
 		regular: new Date(1999, 0, 1).addDays(value - 1),
 		leap: new Date(2000, 0, 1).addDays(value -1)
 	}
 }
-exports.formats = formats;
