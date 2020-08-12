@@ -7,9 +7,9 @@ exports.preset = new Promise((resolve, reject) => {
 			.map(function(file) {
 				try{
 					return require("./preset/" + file);
-				}catch(error){
-					console.log(error)
-					return {};
+				}catch(ERROR){
+					console.log(ERROR)
+					throw ERROR
 				}
 			})).then((res) => {
 				resolve(res.reduce((x, y) => {
