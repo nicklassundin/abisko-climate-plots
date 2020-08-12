@@ -1,9 +1,8 @@
 
-var preset = require('preset.js')
-
-decribe('Preset IDs static', function() {
+describe('Preset IDs static', function() {
 	it('check if compiling', function * () {
-		//TODO 
-		Done()
+		var preset = require('preset.js').custom.then(() => {
+			Done()
+		})
 	})
 })
