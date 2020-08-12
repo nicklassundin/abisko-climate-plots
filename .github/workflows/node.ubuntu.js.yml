@@ -5,9 +5,9 @@ name: Ubuntu Test CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, release, development ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, release, development ]
 
 jobs:
   build:
