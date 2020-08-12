@@ -6,7 +6,7 @@ global.baselineLower = constant.baselineLower;
 global.baselineUpper = constant.baselineUpper;
 
 global.stationType = "abisko" 
-// TODO example IDs
+// TODO example IDs test
 // global.station = 159880;
 // global.station = 188790;
 global.stationName = "";
