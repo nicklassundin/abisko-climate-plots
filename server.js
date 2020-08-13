@@ -17,12 +17,6 @@ app.engine('handlebars', engines.handlebars);
 
 
 // Starts webserver
-var config = undefined;
-try{
-	config = require('./config/server.json');
-}catch(ERROR){
-	config = require('./config/default.server.json')
-}
 require('./modules/webserver.js').webserver["http"](app);
 require('./modules/webserver.js').webserver["https"](app);
 
