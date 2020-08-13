@@ -17,9 +17,12 @@ app.engine('handlebars', engines.handlebars);
 
 
 // Starts webserver
-var cust = require('./config/server.json');
-var defa = require('./config/default.server.json')
-const config = (cust ? cust : defa) 
+var config = undefined;
+try{
+	config = require('./config/server.json');
+}catch(ERROR){
+	config = require('./config/default.server.json')
+}
 require('./modules/webserver.js').webserver["http"](app);
 require('./modules/webserver.js').webserver["https"](app);
 
