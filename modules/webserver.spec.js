@@ -7,15 +7,14 @@ const express = require('express');
 const webserver = require('./webserver.js')
 
 describe('javascript statistic module', function () {
-		
-	it('HTTP - start', function * () {
-		var app = express();
-		var result = webserver.http(app).then(function(){Done()});
-		//TODO 
-	})
-	it('HTTPS - start', function * () {
-		var app = express();
-		var result = webserver.https(app).then(function(){Done()}); 
-		//TODO 
-	})
+	//it('HTTP - start', function * () {
+	//	var app = express();
+	//	var result = webserver.http(app).then(function(){Done()});
+	//	//TODO 
+	//})
+	//it('HTTPS - start', function * () {
+	//	var app = express();
+	//	var result = webserver.https(app).then(function(){Done()}); 
+	//	//TODO 
+	//})
 })
