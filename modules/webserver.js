@@ -1,9 +1,11 @@
 
 const fs = require('fs');
-const defa = require('../config/default.server.json')
-const custom = require('../config/server.json')
-
-const config = (custom ? custom : defa)
+var config = undefined;
+try{
+	config = require('../config/server.json')
+}catch(ERROR){
+	config = require('../config/default.server.json')
+}
 
 var pem = require('pem');
 
