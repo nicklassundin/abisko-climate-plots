@@ -224,3 +224,4 @@ app.get('/map', (req, res) => {
 
 	})
 })
+exports.app = app;
