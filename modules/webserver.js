@@ -1,6 +1,9 @@
 
 const fs = require('fs');
-const config = require('../config/server.json')
+const defa = require('../config/default.server.json')
+const custom = require('../config/server.json')
+
+const config = (custom ? custom : defa)
 
 var pem = require('pem');
 
