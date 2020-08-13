@@ -6,6 +6,8 @@ var should = chai.should();
 chai.use(chaiHttp);
 
 describe('server test', function() {
+	try{
+
 	before(function(){
 	})
 	it('should list ALL / GET', function(done) {
@@ -31,4 +33,7 @@ describe('server test', function() {
 				// TODO
 			// });
 	// })
+	}catch(ERROR){
+
+	}
 })
