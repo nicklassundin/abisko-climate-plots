@@ -3,7 +3,7 @@
 	"port": 80,
 	"serverURL": "https://localhost",
 	"domain": "localhost",
-	"protocol": "http",
+	"protocol": "https",
 	"https" :{
 		"port": 443
 	}
