@@ -6,7 +6,7 @@ var csv = require('fast-csv');
 
 // var config = require('../encrypt/db.json')
 var config = false;
-var defa = require('../encrypt/default.db.json')
+var defa = require('../../../encrypt/default.db.json')
 
 var db_config = (config ? config : defa);
 
