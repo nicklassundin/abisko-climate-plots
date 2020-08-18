@@ -20,7 +20,7 @@ global.variables = {
 }
 
 var charts = require('./config/charts/config.js');
-var sets = require('../config/preset.json');
+var sets = require('./preset/gen.js').custom;
 
 lib = {
 	renderChart: function(div, type, id="abisko", url){ 
