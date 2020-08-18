@@ -148,14 +148,12 @@ app.post('/admin/create/table', function(request, response, next){
 })
 
 const url = require('url');
-var preset = require('./modules/preset/gen.js');
-const custom = preset.custom;
-const constants = preset.constants;
-// custom.then((json) => {
-// 	fs.writeFile(__dirname+'/config/preset.json', JSON.stringify(json), (ERROR) => {
-// 		if(ERROR) throw ERROR
-// 	})
-// })
+const custom = require('./config/preset.js').preset;
+custom.then((json) => {
+	fs.writeFile(__dirname+'/temp/preset.json', JSON.stringify(json), (ERROR) => {
+		if(ERROR) throw ERROR
+	})
+})
 
 var charts = (req) => {
 	return new Promise((res, rej) => {
