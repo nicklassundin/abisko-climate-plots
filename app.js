@@ -193,7 +193,7 @@ app.get('/d3-map', (req, res) => {
 });
 
 app.render('chart-release.hbs',{ charts: [{ id: "Temperatures", station: "abisko" } ] }, (err, str) => {
-	fs.writeFile('static/temp.html', str, err => {
+	fs.writeFile('temp/index.html', str, err => {
 		if (err) {
 			console.error(err)
 			return
