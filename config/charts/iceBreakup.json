@@ -6,12 +6,18 @@
 			"yAxis": {
 				"formatter": "MMDD"
 			},
+			"xAxis": {
+				"ticketInterval": 10
+			},
 			"tooltip": {
 				"type": "winterDOY"
 			}
 		},
 		"1": {
 			"baseline": true,
+			"xAxis": {
+				"ticketInterval": 10
+			},
 			"tooltip": {
 				"type": "winterDOY"
 			}
