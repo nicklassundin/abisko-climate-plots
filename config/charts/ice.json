@@ -6,6 +6,9 @@
 			"yAxis": {
 				"formatter": "MMDD"
 			},
+			"xAxis": {
+				"ticketInterval": 10
+			},
 			"tooltip": {
 				"type": "winterDOY"
 			}
@@ -17,7 +20,8 @@
 			"preset": "freeze",
 			"group": 0,
 			"visible": true,
-			"colour": "#0000ee",
+			"colour": "#CDD8F0",
+			"borderColour": "#5F7CB9",
 			"type": "line"
 		},
 		"breakup": {

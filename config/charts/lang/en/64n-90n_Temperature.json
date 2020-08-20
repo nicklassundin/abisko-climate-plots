@@ -2,8 +2,8 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "Average Temperature for Arctic (65N-90N)", 
-			"subTitle": "",
+			"title": "Average Temperature for Arctic", 
+			"subTitle": "64N-90N",
 			"caption": "[SOME TEXT]",
 			"yAxis": {
 				"left": "Average Temperature [°C]",
@@ -16,8 +16,8 @@
 			"legend": "Weather"
 		},
 		"1": {
-			"title": "Temperature Difference for Arctic (65N-90N)", 
-			"subTitle": "Difference between yearly average and average for [baseline]",
+			"title": "Temperature Difference for Arctic", 
+			"subTitle": "64N-90N Difference between yearly average and average for [baseline]",
 			"caption": "[SOME TEXT]",
 			"yAxis": {
 				"left": "Temperature [°C]",

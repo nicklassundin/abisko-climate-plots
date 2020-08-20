@@ -1,10 +1,10 @@
 {
 	"sqrt-IceThick": ["iceThicknessYear", "iceThicknessDate"],
 	"sqrt-temp": ["temperatureDifference","temperature_64n90n","temperature_nhem","temperature_glob"],
-	"sqrt-season-temp": ["Temperatures","TemperaturesSummer","TemperaturesWinter"],
+	"sqrt-season-temp": ["Temperatures","TemperaturesSpring","TemperaturesSummer","TemperaturesAutumn","TemperaturesWinter"],
 	"sqrt-growing": ["growingSeason","Temperatures","temperatureDifference"],
 	"sqrt-mTemp": ["monthlyTemperatures"],
-	"sqrt-prec": ["Precipitation","summerPrecipitation","winterPrecipitation"],
+	"sqrt-prec": ["Precipitation","springPrecipitation","summerPrecipitation","autumnPrecipitation","winterPrecipitation"],
 	"sqrt-mPrec": ["monthlyPrecipitation"],
 	"sqrt-snowDepth": ["abiskoSnowDepthPeriodMeans",
 		"abiskoSnowDepthPeriodMeans2"],

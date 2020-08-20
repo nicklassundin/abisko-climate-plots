@@ -1,6 +1,11 @@
 
 const fs = require('fs');
-const config = require('../config/server.json')
+var config = undefined;
+try{
+	config = require('../../config/server.json')
+}catch(ERROR){
+	config = require('../../config/default.server.json')
+}
 
 var pem = require('pem');
 

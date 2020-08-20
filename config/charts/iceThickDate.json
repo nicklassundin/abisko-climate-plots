@@ -9,6 +9,9 @@
 			"yAxis": {
 				"reversed": true
 			},
+			"xAxis": {
+				"ticketInterval": 10
+			},
 			"tooltip": {
 				"type": "winterValueDate"
 			}
@@ -20,6 +23,9 @@
 			},
 			"yAxis": {
 				"reversed": true
+			},
+			"xAxis": {
+				"ticketInterval": 10
 			},
 			"tooltip": {
 				"type": "winterValueDate"

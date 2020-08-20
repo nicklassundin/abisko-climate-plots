@@ -57,12 +57,8 @@ var chart = {
 			})
 			if(define.subSet) files.subSet = json(define.subSet);
 			files.set = json(define.set);
-			files.units = new Promise((resolve, reject) => {
-				files.set.then(function(set){
-					json('lang/'+nav_lang+'/units').then(function(units){
-						resolve({ units: set.unitType != undefined ? units[set.unitType] : {} }); 
-					})
-				})
+			files.units = json('lang/'+nav_lang+'/units').then(units => {
+				return { units: units }
 			})
 			files.time = json('lang/'+nav_lang+'/time');
 			files.lang = json('lang/'+nav_lang+'/'+define.lang);
@@ -106,8 +102,8 @@ var chart = {
 				res = res.replace("[baseline]", baselineLower +" - "+ baselineUpper)
 				res = res.replace("[CO2]", 'CO'+("2".sub()))
 				res = res.replace("[SOME TEXT]", "")
-				if(meta.units){
-					var res = res.replace("[unit]", meta.units.singular).replace("[units]", meta.units.plural).replace("[interval]", meta.units.interval);
+				if(meta.unitType && meta.units){
+					var res = res.replace("[unit]", meta.units[meta.unitType].singular).replace("[units]", meta.units[meta.unitType].plural).replace("[interval]", meta.units[meta.unitType].interval);
 				}
 			}catch(error){
 				console.log(this.id)
@@ -248,8 +244,7 @@ var chart = {
 						},{
 							textKey: 'dataCredit',
 							onclick: function(){
-								console.log(meta.meta.src)
-								window.location.href = meta.meta.src;
+								window.open(meta.meta.src, '_blank');
 							},
 						}
 							// ,{
@@ -515,7 +510,7 @@ var chart = {
 					useHTML: true,
 				},
 				tooltip: {
-					formatter: (group.tooltip != undefined) ? formatters[group.tooltip.type] : undefined
+					formatter: (group.tooltip != undefined) ? formatters(meta)[group.tooltip.type] : undefined
 				},
 				legend: {
 					enabled: series_count > 1 
@@ -537,6 +532,7 @@ var chart = {
 					categories: (meta.period) ? group.xAxis.categories : undefined,
 					corsshair: true,
 					min: (meta.period) ? null : (group.xAxis.min) ? group.xAxis.min : startYear,
+					tickInterval: group.xAxis.ticketInterval
 				},
 				yAxis: {
 					title: {

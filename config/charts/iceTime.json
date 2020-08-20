@@ -1,4 +1,5 @@
 {
+	"unitType": "day",
 	"type": "column",
 	"groups": {
 		"0": {
@@ -6,6 +7,9 @@
 			"yAxis": {
 				"max": 250,
 				"min": 80
+			},
+			"xAxis": {
+				"ticketInterval": 10
 			},
 			"tooltip": {
 				"type": "winterValue"
@@ -16,6 +20,9 @@
 			"yAxis": {
 				"max": 250,
 				"min": 80
+			},
+			"xAxis": {
+				"ticketInterval": 10
 			},
 			"tooltip": {
 				"type": "winterValue"

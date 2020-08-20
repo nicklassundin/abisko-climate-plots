@@ -2,8 +2,8 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "Global Average Temperature", 
-			"subTitle": "",
+			"title": "Average Temperature", 
+			"subTitle": "Global",
 			"caption": "[SOME TEXT]",
 			"yAxis": {
 				"left": "Average Temperature [°C]",
@@ -16,8 +16,8 @@
 			"legend": "Weather"
 		},
 		"1": {
-			"title": "Global Temperature Difference", 
-			"subTitle": "Difference between yearly average and average for [baseline]",
+			"title": "Temperature Difference", 
+			"subTitle": "Global Difference between yearly average and average for [baseline]",
 			"caption": "",
 			"yAxis": {
 				"left": "Temperature [°C]",

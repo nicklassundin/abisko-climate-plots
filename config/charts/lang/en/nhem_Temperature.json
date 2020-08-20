@@ -2,8 +2,8 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "Average Temperature for Northern Hemisphere", 
-			"subTitle": "",
+			"title": "Average Temperature", 
+			"subTitle": "Northern Hemisphere",
 			"caption": "[SOME TEXT]",
 			"yAxis": {
 				"left": "Average Temperature [°C]",
@@ -16,8 +16,8 @@
 			"legend": "Weather"
 		},
 		"1": {
-			"title": "Temperature Difference for Northern Hemisphere", 
-			"subTitle": "Difference between yearly average and average for [baseline]",
+			"title": "Temperature Difference", 
+			"subTitle": "Northern Hemisphere Difference between yearly average and average for [baseline]",
 			"caption": "[SOME TEXT]",
 			"yAxis": {
 				"left": "Temperature [°C]",
