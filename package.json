@@ -72,7 +72,7 @@
 		"test-dev": "mocha  './modules/**/*.spec.js' '*.spec.dev.js' 'modules/**/*.spec.dev.js' --delay",
 		"start": "npx nodemon server.js [PLACEHOLDER]",
 		"start-full": "npm test && npx nodemon server.js && npm run static",
-		"static": "cp static/temp.html index.html && cp client/bundle.js static/bundle.js && cp temp/preset.json config/preset.json"
+		"static": "cp temp/index.html index.html && cp temp/bundle.js static/bundle.js && cp temp/preset.json static/preset.json"
 	},
 	"repository": {
 		"type": "git",
