@@ -99,6 +99,28 @@ exports.formatters = function(meta){
 				return undefined;
 			}
 		},
+		value: function(){
+			try{
+				var tooltip = '<span style="font-size: 10px">'+this.x+'</span><br/>';
+				this.points.forEach(point => {
+					var dec = point.series.chart.options.tooltip.valueDecimals;
+					tooltip += '<span style="color:'+
+						point.color +
+						'">\u25CF</span> ' +
+						point.series.name +
+						(meta.unitType ? ' ['+meta.units[meta.unitType].plural+']' : '') +
+						': <b>'+
+						(point.y.toFixed(dec)) + 
+						'</b><br/>'
+					tooltip += '<br/>'
+
+				})
+				return tooltip
+			}catch(error){
+				console.log(error)
+				return undefined
+			}
+		},
 		default: undefined,
 	}
 }

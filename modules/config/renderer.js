@@ -178,7 +178,6 @@ var chart = {
 		this.metaTable('debug_table_'+id, this.metaFiles);
 		var title = this.title(0);
 		var meta = this.meta
-		console.log(meta)
 		this.chart = Highcharts.chart(id, {
 			credits: {
 				enabled: false

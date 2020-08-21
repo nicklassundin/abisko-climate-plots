@@ -101,9 +101,9 @@ var config = {
 				'monthlySlide': meta_struct.create(config =  'precipitation', lang =  'monthlyPrecipitation', data =  'ANS', set = 'slide', subSet = 'monthly'), 
 			},
 			'growingSeason': {
-				'weeks': meta_struct.create(config =  'growingSeason', lang =  'growingSeason', data = 'ANS', set = 'weather'), 
+				'weeks': meta_struct.create(config =  'growingSeasonWeeks', lang =  'growingSeason', data = 'ANS', set = 'weather'), 
 				// 'weeks': meta_struct.create(config =  'growingSeason', lang =  'growingSeason', data =  'ANS', set =  'slide'), 
-				'days': meta_struct.create(config =  'growingSeason', lang =  'growingSeasonDays', data = 'ANS', set = 'weather'), 
+				'days': meta_struct.create(config =  'growingSeasonDays', lang =  'growingSeasonDays', data = 'ANS', set = 'weather'), 
 				// 'days': meta_struct.create(config =  'growingSeason', lang =  'growingSeasonDays', data = 'ANS', set = 'slide'), 
 				'first': meta_struct.create(config =  'growingSeasonFirst', lang =  'growingSeasonFrostFirst', data = 'ANS', set = 'slide'), 
 				'last': meta_struct.create(config =  'growingSeasonLast', lang =  'growingSeasonFrostLast', data = 'ANS', set = 'slide'), 

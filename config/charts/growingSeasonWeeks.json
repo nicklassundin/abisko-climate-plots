@@ -1,12 +1,19 @@
 {
 	"type": "line",
+	"unitType": "week",
 	"polar": false,
 	"groups": {
 		"0": {
-			"baseline": false
+			"baseline": false,
+			"tooltip": {
+				"type": "value"
+			}
 		},
 		"1": {
-			"baseline": true
+			"baseline": true,
+			"tooltip": {
+				"type": "value"
+			}
 		}
 	},
 	"decimals": 0,

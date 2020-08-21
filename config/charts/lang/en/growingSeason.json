@@ -32,10 +32,10 @@
 	},
 	"series": {
 		"avg": {
-			"name": "Weeks"
+			"name": "Growing Season"
 		},  
 		"diff": {
-			"name": "Weeks Difference" 
+			"name": "Growing Season Difference" 
 		}
 	}
 }
