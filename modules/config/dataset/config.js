@@ -39,9 +39,9 @@ var config = {
 		},
 		parser = parse.GISSTEMPzonalMeans,
 		meta = {
-			'64n-90n': meta_struct.create(config = 'temperature', lang = '64n-90n_Temperature', data = undefined, set = 'climate'), 
-			'nhem': meta_struct.create(config =  'temperature', lang =  'nhem_Temperature', data =  undefined, set =  'climate'), 
-			'glob': meta_struct.create(config =  'temperature', lang =  'glob_Temperature', data =  undefined, set =  'climate'), 
+			'64n-90n': meta_struct.create(config = 'temperature', lang = '64n-90n_Temperature', data = 'NASA-GISS-TEMP', set = 'climate'), 
+			'nhem': meta_struct.create(config =  'temperature', lang =  'nhem_Temperature', data =  'NASA-GISS-TEMP', set =  'climate'), 
+			'glob': meta_struct.create(config =  'temperature', lang =  'glob_Temperature', data =  'NASA-GISS-TEMP', set =  'climate'), 
 		},
 		reader = Papa.parse,
 		local = false),

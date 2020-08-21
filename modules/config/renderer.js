@@ -178,6 +178,7 @@ var chart = {
 		this.metaTable('debug_table_'+id, this.metaFiles);
 		var title = this.title(0);
 		var meta = this.meta
+		console.log(meta)
 		this.chart = Highcharts.chart(id, {
 			credits: {
 				enabled: false
@@ -244,7 +245,12 @@ var chart = {
 						},{
 							textKey: 'dataCredit',
 							onclick: function(){
-								window.open(meta.meta.src, '_blank');
+								try{
+									window.open(meta.meta.src, '_blank');
+								}catch(error){
+									console.log(meta);
+									throw error
+								}
 							},
 						}
 							// ,{

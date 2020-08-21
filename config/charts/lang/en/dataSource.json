@@ -48,7 +48,7 @@
 		"desc": "Integrated Carbon Observation System Sweden",
 		"descLong": "Integrated Carbon Observation System Sweden"
 	},
-	"NASA-GISS_TEMP": {
+	"NASA-GISS-TEMP": {
 		"src": "https://www.icos-sweden.se/data.html",
 		"downloadDate": "",
 		"citation": "GISTEMP Team, 2020: GISS Surface Temperature Analysis (GISTEMP), version 4. NASA Goddard Institute for Space Studies. Dataset accessed 20YY-MM-DD at https://data.giss.nasa.gov/gistemp/",
