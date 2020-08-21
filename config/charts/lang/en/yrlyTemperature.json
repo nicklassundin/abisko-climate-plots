@@ -4,7 +4,7 @@
 		"0": {
 			"title": "[stationName] Annual Average Temperature" ,
 			"subTitle": "",
-			"caption": "Average annual temperature. The lowest (min) and highest (max) temperature of the month.",
+			"caption": "Average annual temperature. The lowest (min) and highest (max) temperature of the year.",
 			"yAxis": {
 				"left": "Average temperature [°C]",
 				"right": "[X-AXIS]"
