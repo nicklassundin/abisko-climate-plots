@@ -151,6 +151,12 @@ var chart = {
 						meta.subSet.sets.forEach(set => {
 							var tmp = res.clone();
 							tmp.id = id+'_'+set;
+							tmp.chart = Highcharts.chart(tmp.id, {
+								credits: {
+									enabled: false
+								},
+							});
+							tmp.chart.showLoading();
 							tmp.metaRef = metaRef;
 							tmp.metaFiles = temp.files;
 							temp.aggr.subSet.set = set;
@@ -161,10 +167,17 @@ var chart = {
 						})
 						resolve(result)
 					}else{
+						res.chart = Highcharts.chart(id, {
+							credits: {
+								enabled: false
+							},
+						});
+						res.chart.showLoading();
 						res.id = id;
 						res.metaRef = metaRef
 						res.metaFiles = temp.files;
 						res.meta = temp.text();
+						res.setup()
 						resolve(res)
 					}
 				})
@@ -178,10 +191,7 @@ var chart = {
 		this.metaTable('debug_table_'+id, this.metaFiles);
 		var title = this.title(0);
 		var meta = this.meta
-		this.chart = Highcharts.chart(id, {
-			credits: {
-				enabled: false
-			},
+		this.chart.update({
 			tooltip: {
 				shared: true,
 				valueSuffix: ' '+meta.valueSuffix,
@@ -244,15 +254,20 @@ var chart = {
 						},{
 							textKey: 'dataCredit',
 							onclick: function(){
-								window.open(meta.meta.src, '_blank');
+								try{
+									window.open(meta.meta.src, '_blank');
+								}catch(error){
+									console.log(meta);
+									throw error
+								}
 							},
 						}
 							// ,{
 							// textKey: 'contribute',
 							// onclick: function(){
-								// window.location.href = 'https://github.com/nicklassundin/abisko-climate-plots/wiki';
+							// window.location.href = 'https://github.com/nicklassundin/abisko-climate-plots/wiki';
 							// },
-						// }
+							// }
 						],
 					},
 				},
@@ -264,10 +279,10 @@ var chart = {
 			legend: {
 				enabled: false 
 			},
-			series: Object.keys(meta.series).map(each => ({
-				showInLegend: false,
-				data: [null, null],
-			}))
+			// series: Object.keys(meta.series).map(each => ({
+			// showInLegend: false,
+			// data: [null, null],
+			// }))
 		})
 		var groups = Object.keys(meta.groups).map(key => ({
 			key: key,
@@ -277,7 +292,6 @@ var chart = {
 			var gTitle = this.groupTitle();
 			this.switchToGroup(groups[0].key, true, change = false)
 			$('#'+id).append(gTitle);
-			this.chart.showLoading();
 		}
 		return this
 	},
@@ -345,34 +359,21 @@ var chart = {
 		// 	}
 		// 	return false;
 		// });
-		this.chart.hideLoading();
 		var series = [];
 		// TODO clean up
-		try{
-			Object.keys(meta.series).filter((s) => (meta.series[s].group != undefined) ? meta.groups[meta.series[s].group].enabled : false).forEach(key => {
-				try{
-					if(meta.subSet) {
-						series.push(seriesBuild[meta.series[key].preset](meta, data[meta.subSet.set], key));
-					}else{
-						series.push(seriesBuild[meta.series[key].preset](meta, data, key));
-					}
-				}catch(error){
-					console.log("Series Error")
-					console.log(meta.series[key].preset);
-					console.log(error);
-					console.log(meta);
-					console.log(data)
-					throw error
+		Object.keys(meta.series).filter(s => meta.series[s].visible != undefined ).forEach(key => {
+			try{
+				if(meta.subSet) {
+					series.push(seriesBuild[meta.series[key].preset](meta, data[meta.subSet.set], key));
+				}else{
+					series.push(seriesBuild[meta.series[key].preset](meta, data, key));
 				}
-			})
-			// console.log(series)
-		}catch(error){
-			console.log(meta.groups)
-			console.log(meta.series)
-			throw error
-		}
-		this.chart.update({
-			series: series
+			}catch(error){
+				throw error
+			}
+		})
+		series.forEach((serie) => {
+			this.chart.addSeries(serie)
 		})
 		if(Object.keys(meta.groups).map(key => meta.groups[key].enabled).filter(each => each).length > 1){
 			var chart = this;
@@ -409,7 +410,9 @@ var chart = {
 				}
 			})	
 		}
-		this.switchToGroup(groups[0].key)	
+		this.switchToGroup(groups[0].key)
+		this.chart.redraw();
+		this.chart.hideLoading();
 	},
 	switch: function(){
 		if(index){
@@ -425,19 +428,18 @@ var chart = {
 		var group = meta.groups[gID];
 		var series_count = 0;
 		if(change) {
-			// Object.keys(meta.series).forEach((key, index) => {
-			Object.keys(meta.series).filter((s) => (meta.series[s].group != undefined) ? meta.groups[meta.series[s].group].enabled : false).forEach((key, index) => {
+			Object.keys(meta.series).filter(s => meta.series[s].visible != undefined).forEach((key, index) => {
 				if(meta.series[key].group == gID){
 					$('#' + id).highcharts().series[index].update({
 						visible: meta.series[key].visible,
 						showInLegend: true,
-					})
+					}, false)
 					series_count += 1;
 				}else{
 					$('#' + id).highcharts().series[index].update({
 						visible: false,
 						showInLegend: false,
-					})
+					}, false)
 				}
 			})
 		}
@@ -631,21 +633,12 @@ var chart = {
 		return Object.assign({}, this);
 	}
 }
+// TODO merge into main function above
 var render = {
 	charts: {},
 	setup: function(id, meta){
 		try{
-			this.charts[id] = new Promise(function(resolve, reject){
-				try{
-					var res = chart.create(id, meta) 
-					res.then(chrt => {
-						chrt.setup(id, meta);
-						resolve(res)
-					})
-				}catch(error){
-					reject(error)
-				}
-			})
+			this.charts[id] = chart.create(id, meta) 
 		}catch(error){
 			console.log(id);
 			console.log(meta)
@@ -654,20 +647,12 @@ var render = {
 		}
 	},
 	initiate: function(id, data){
-		// console.log(data.Axis('y'))
 		this.charts[id].then(function(result){
-			try{
-				result.initiate(data)
-			}catch(error){
-				console.log(id)
-				console.log(result)
-				throw error
-			}
+			result.initiate(data)
 		})
 	},
 	updatePlot: function(id, bl, bu, date){
 		try{
-
 			if(date){
 				date = date.split("-");
 				variables.date = new Date(date[0],Number(date[1])-1,date[2]);

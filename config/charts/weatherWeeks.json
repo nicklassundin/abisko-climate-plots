@@ -1,0 +1,11 @@
+{
+	"unitType": "week",
+	"groups": {
+		"0": {
+			"enabled": true
+		},
+		"1": {
+			"enabled": false
+		}
+	}
+}

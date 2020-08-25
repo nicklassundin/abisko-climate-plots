@@ -4,7 +4,7 @@
 		"0": {
 			"title": "Average Temperature", 
 			"subTitle": "Northern Hemisphere",
-			"caption": "[SOME TEXT]",
+			"caption": "Average annual temperature. The lowest (min) and highest (ma    x) temperature of the year.",
 			"yAxis": {
 				"left": "Average Temperature [°C]",
 				"right": "[X-AXIS]"
@@ -18,7 +18,7 @@
 		"1": {
 			"title": "Temperature Difference", 
 			"subTitle": "Northern Hemisphere Difference between yearly average and average for [baseline]",
-			"caption": "[SOME TEXT]",
+			"caption": "Difference between the yearly average temperature and the av    erage temperature for the baseline period, typically 1961 to 1990.",
 			"yAxis": {
 				"left": "Temperature [°C]",
 				"right": "[X-AXIS]"
