@@ -1,0 +1,35 @@
+{
+	"type": "line",
+	"polar": false,
+	"groups": {
+		"0": {
+			"baseline": false,
+			"tooltip": {
+				"type": "value"
+			}
+		},
+		"1": {
+			"baseline": true,
+			"tooltip": {
+				"type": "value"
+			}
+		}
+	},
+	"decimals": 0,
+	"series": {
+		"avg": {
+			"preset": "avg",
+			"group": 0,
+			"visible": true,
+			"colour": "#00aa00",
+			"type": "line"
+		},  
+		"diff": {
+			"preset": "diff",
+			"group": 1,
+			"visible": true,
+			"colour": "[example]",
+			"type": "column" 
+		}
+	}
+}
