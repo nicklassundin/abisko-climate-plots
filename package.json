@@ -5,6 +5,7 @@
 	"main": "abisko-climate-plots-lib.js",
 	"dependencies": {
 		"@material-ui/core": "^4.11.0",
+		"chai-http": "^4.3.0",
 		"commonjs-highcharts": "^4.0.3",
 		"connect": "^3.7.0",
 		"consolidate": "^0.15.1",
@@ -31,6 +32,7 @@
 		"mysql": "^2.18.1",
 		"mysql2": "^2.1.0",
 		"node-highcharts": "0.0.2",
+		"nodemon": "^2.0.4",
 		"papaparse": "^5.2.0",
 		"pem": "^1.14.4",
 		"pug": "^2.0.4",
@@ -66,10 +68,11 @@
 	},
 	"scripts": {
 		"test": "npm run test-unit",
-		"test-unit": "mocha 'modules/*.spec.js' 'modules/preset/*.spec.js' 'modules/stats/*.spec.js' --delay",
-		"start": "npx nodemon server.js [PLACEHOLDER] --ignore 'client/*.js' 'temp/*' 'cms/*' 'node_modules/*' 'doc/*' 'config/preset.json'",
-		"start-full": "npm test && npx nodemon server.js --ignore 'client/*.js' 'temp/*' 'cms/*' 'doc/*' 'config/preset.json' && npm run static",
-		"static": "cp static/temp.html index.html && cp client/bundle.js static/bundle.js"
+		"test-unit": "mocha './modules/**/*.spec.js' --delay",
+		"test-dev": "mocha  './modules/**/*.spec.js' '*.spec.dev.js' 'modules/**/*.spec.dev.js' --delay",
+		"start": "npx nodemon server.js [PLACEHOLDER]",
+		"start-full": "npm test && npx nodemon server.js && npm run static",
+		"static": "cp temp/index.html index.html && cp client/bundle.js static/bundle.js && cp temp/preset.json static/preset.json"
 	},
 	"repository": {
 		"type": "git",
@@ -83,6 +86,7 @@
 	},
 	"homepage": "https://github.com/nicklassundin/abisko-climate-plots#readme",
 	"nodemonConfig": {
+			"ignore": ["client/*.js", "docs/*", "temp/*", "cms/*", "node_modules/*"],
 		"events": {
 			"start": "webpack --mode=development"
 		}

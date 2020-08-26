@@ -1,6 +1,6 @@
 var $ = require('jquery');
 // var fs = require('fs');
-var stations = require('./smhi.js').stations();
+var stations = require('./server/smhi.js').stations();
 // var Highcharts = require('highcharts/highmaps');
 var series = new Promise((resolve, reject) => {
 	stations.then((entries) => {

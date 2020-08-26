@@ -188,7 +188,13 @@ exports.series = {
 		name: meta.series.freeze.name,
 		color: meta.series.freeze.colour,
 		lineWidth: 0,
-		marker: { radius: 2 },
+		marker: { 
+			enabled: true,
+			fillColor: meta.series.freeze.colour,
+			lineColor: meta.series.freeze.borderColour,
+			lineWidth: 1,
+			radius: 2 
+		},
 		states: { hover: { lineWidthPlus: 0 } },
 		data: data.freeze.values,
 		visible: true,
@@ -255,6 +261,9 @@ exports.series = {
 		data: data.values,
 		turboThreshold: 4000,
 		fillOpacity: 0.2,
+		label: {
+			enabled: false,
+		},
 		marker: {
 			states: {
 				select: {

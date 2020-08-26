@@ -6,7 +6,7 @@
 			"subTitle": "Torneträsk",
 			"caption": "Number of days the lake is covered completely by ice.<Paste>",
 			"yAxis": {
-				"left": "Ice time [number of days]",
+				"left": "Ice time [units]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
@@ -20,7 +20,7 @@
 			"subTitle": "Torneträsk",
 			"caption": "Number of days the lake is covered completely by ice  difference from baseline period.",
 			"yAxis": {
-				"left": "Difference Ice time [number of days]",
+				"left": "Difference Ice time [units]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {

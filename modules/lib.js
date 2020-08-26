@@ -10,7 +10,7 @@ global.stationType = "abisko"
 // global.station = 159880;
 // global.station = 188790;
 global.stationName = "";
-global.hostUrl = location.protocol +"//"+ require("../config/server.json").domain;
+global.hostUrl = undefined; 
 
 var today = new Date();
 global.variables = {
@@ -20,11 +20,14 @@ global.variables = {
 }
 
 var charts = require('./config/charts/config.js');
-var sets = require('../config/preset.json');
-
+var sets = require('../static/preset.json');
 lib = {
 	renderChart: function(div, type, id="abisko", url){ 
-		if(url) hostUrl = url;
+		if(url){
+			hostUrl = url;
+		}else{
+			hostUrl = location.protocol +"//"+ require("../config/server.json").domain;
+		}
 		global.station = id;
 		// TODO refractor later
 		if(id=="abisko"){
@@ -45,7 +48,12 @@ lib = {
 		})
 	},
 	renderSets: function(div, set=(new URL(window.location.href).searchParams.get("set")), id=(new URL(window.location.href).searchParams.get("station")), url){
-		if(url) hostUrl = url;
+		if(url){
+
+			hostUrl = url;
+		}else{
+			hostUrl = location.protocol +"//"+ require("../config/server.json").domain;
+		} 
 		variables.debug = (new URL(window.location.href).searchParams.get("debug") == "true" ? true : false)
 		if(variables.debug) {
 			var debug = document.createElement("div");
