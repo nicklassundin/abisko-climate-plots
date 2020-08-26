@@ -9,9 +9,11 @@ var renderer = require('../renderer.js').render;
 
 global.filePath = {
 	station: function(fileName, id=station){
+		console.log(hostUrl)
 		return hostUrl+"/data/"+id+"/"+fileName;
 	},
 	other: function(fileName){
+		console.log(hostUrl)
 		return hostUrl+"/data/"+fileName;
 	}
 }
