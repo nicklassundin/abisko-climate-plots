@@ -8,7 +8,8 @@
 	<body>
 		<div id="mark"></div>
 	<script type="text/javascript">
-			var addr = location.origin + location.pathname.replace('/index.html','')
+		var addr = window.location.href.replace('/index.html', '');
+		console.log(window.location)
 			lib.renderSets(document.getElementById("mark"), undefined, undefined, url=addr);
 		</script>
 	</body>

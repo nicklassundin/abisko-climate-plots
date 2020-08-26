@@ -20,7 +20,7 @@ global.variables = {
 }
 
 var charts = require('./config/charts/config.js');
-var sets = require('../static/preset.json');
+var sets = require('../config/preset.json');
 lib = {
 	renderChart: function(div, type, id="abisko", url){ 
 		if(url){
@@ -49,7 +49,6 @@ lib = {
 	},
 	renderSets: function(div, set=(new URL(window.location.href).searchParams.get("set")), id=(new URL(window.location.href).searchParams.get("station")), url){
 		if(url){
-
 			hostUrl = url;
 		}else{
 			hostUrl = location.protocol +"//"+ require("../config/server.json").domain;
