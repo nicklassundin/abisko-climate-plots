@@ -23,10 +23,12 @@ var charts = require('./config/charts/config.js');
 var sets = require('../config/preset.json');
 lib = {
 	renderChart: function(div, type, id="abisko", url){ 
-		if(url){
-			hostUrl = url;
-		}else{
-			hostUrl = location.protocol +"//"+ require("../config/server.json").domain;
+		if(hostUrl){
+			if(url){
+				hostUrl = url;
+			}else{
+				hostUrl = location.protocol +"//"+ require("../config/server.json").domain;
+			}
 		}
 		global.station = id;
 		// TODO refractor later
@@ -76,7 +78,7 @@ lib = {
 				container.appendChild(debug)
 			}
 			div.appendChild(container);
-			this.renderChart(container, type, id)
+			this.renderChart(container, type, id, url)
 		})
 	},
 }
