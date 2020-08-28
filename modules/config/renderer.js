@@ -15,6 +15,10 @@ const dateFormats = tooltips.dateFormats;
 const axisFormats = require('./formatters/axis.js');
 const yAxisFormats = axisFormats.yAxis;
 const help = require('../helpers.js');
+const language = {
+	sv: require('../../config/charts/lang/sv/menu.json'),
+	en: require('../../config/charts/lang/en/menu.json'),
+}
 
 // require('textarea-markdown');
 
@@ -168,6 +172,7 @@ var chart = {
 						resolve(result)
 					}else{
 						res.chart = Highcharts.chart(id, {
+							lang: language[nav_lang], 
 							credits: {
 								enabled: false
 							},
@@ -197,7 +202,6 @@ var chart = {
 				valueSuffix: ' '+meta.valueSuffix,
 				valueDecimals: meta.decimals,
 			},
-			lang: require('../../config/charts/lang/'+nav_lang+'/menu.json'),
 			exporting: {
 				chartOptions: {
 					// annotationsOptions: undefined,
@@ -284,6 +288,7 @@ var chart = {
 			// data: [null, null],
 			// }))
 		})
+		this.chart.redraw();
 		var groups = Object.keys(meta.groups).map(key => ({
 			key: key,
 			enabled: meta.groups[key].enabled
