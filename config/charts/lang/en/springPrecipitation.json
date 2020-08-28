@@ -2,7 +2,7 @@
 	"valueSuffix": "mm",
 	"groups": {
 		"0": {
-			"title": "Spring (March to May) Average Precipitation" ,
+			"title": "Spring Average Precipitation" ,
 			"subTitle": "[stationName]",
 			"caption": "Average annual spring (March to May) precipitation. The lowest (min) and highest (max) precipitation of the month.",
 			"yAxis": {
@@ -16,7 +16,7 @@
 			"legend": "Weather"
 		},
 		"1": {
-			"title": "Spring (March to May) Average Precipitation Difference from Baseline" ,
+			"title": "Spring Average Precipitation Difference From Baseline" ,
 			"subTitle": "[stationName]",
 			"caption": "Difference between the spring (March-May) seasonal averages and the average for the baseline period, typically 1961 to 1990.", 
 			"yAxis": {
