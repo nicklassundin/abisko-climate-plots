@@ -4,7 +4,7 @@
 		"0": {
 			"title": "Average Temperature", 
 			"subTitle": "Global",
-			"caption": "Average annual temperature. The lowest (min) and highest (ma    x) temperature of the year.",
+			"caption": "Average annual temperature for the globe. The lowest (min) and highest (max) temperature of the year.",
 			"yAxis": {
 				"left": "Average Temperature [°C]",
 				"right": "[X-AXIS]"
@@ -17,8 +17,8 @@
 		},
 		"1": {
 			"title": "Temperature Difference", 
-			"subTitle": "Global Difference between yearly average and average for [baseline]",
-			"caption": "Difference between the yearly average temperature and the av    erage temperature for the baseline period, typically 1961 to 1990.",
+			"subTitle": "Global",
+			"caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990, for the globe.",
 			"yAxis": {
 				"left": "Temperature [°C]",
 				"right": "[X-AXIS]"

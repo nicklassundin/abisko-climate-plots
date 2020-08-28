@@ -2,8 +2,8 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "[stationName] Spring Average Temperature" ,
-			"subTitle": "March to May",
+			"title": "Spring (March to May) Average Temperature" ,
+			"subTitle": "[stationName]",
 			"caption": "Average annual spring (March to May) temperature. The lowest (min) and highest (max) temperature of the month.",
 			"legend": "Weather",
 			"xAxis": {
@@ -16,8 +16,8 @@
 			}
 		},
 		"1": {
-			"title": "[stationName] Spring Average Temperature Difference from Baseline" ,
-			"subTitle": "March to May",
+			"title": "Spring (March to May) Average Temperature Difference from Baseline" ,
+			"subTitle": "[stationName]",
 			"caption": "Difference between the spring (March-May) seasonal averages and the average for the baseline period, typically 1961 to 1990.",
 			"legend": "Climate",
 			"xAxis": {
