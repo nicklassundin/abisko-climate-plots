@@ -115,7 +115,7 @@ eval("module.exports = JSON.parse(\"{\\\"baselineform\\\":{\\\"title\\\":\\\"Ran
 /*! exports provided: months, monthShort, default */
 /***/ (function(module) {
 
-eval("module.exports = JSON.parse(\"{\\\"months\\\":{\\\"jan\\\":\\\"January\\\",\\\"feb\\\":\\\"February\\\",\\\"mar\\\":\\\"Mars\\\",\\\"apr\\\":\\\"April\\\",\\\"may\\\":\\\"May\\\",\\\"jun\\\":\\\"June\\\",\\\"jul\\\":\\\"July\\\",\\\"aug\\\":\\\"August\\\",\\\"sep\\\":\\\"September\\\",\\\"oct\\\":\\\"October\\\",\\\"nov\\\":\\\"November\\\",\\\"dec\\\":\\\"December\\\"},\\\"monthShort\\\":{\\\"jan\\\":\\\"Jan\\\",\\\"feb\\\":\\\"Feb\\\",\\\"mar\\\":\\\"Mar\\\",\\\"apr\\\":\\\"Apr\\\",\\\"may\\\":\\\"May\\\",\\\"jun\\\":\\\"Jun\\\",\\\"jul\\\":\\\"Jul\\\",\\\"aug\\\":\\\"Aug\\\",\\\"sep\\\":\\\"Sep\\\",\\\"oct\\\":\\\"Oct\\\",\\\"nov\\\":\\\"Nov\\\",\\\"dec\\\":\\\"Dec\\\"}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/en/time.json?");
+eval("module.exports = JSON.parse(\"{\\\"months\\\":{\\\"jan\\\":\\\"January\\\",\\\"feb\\\":\\\"February\\\",\\\"mar\\\":\\\"March\\\",\\\"apr\\\":\\\"April\\\",\\\"may\\\":\\\"May\\\",\\\"jun\\\":\\\"June\\\",\\\"jul\\\":\\\"July\\\",\\\"aug\\\":\\\"August\\\",\\\"sep\\\":\\\"September\\\",\\\"oct\\\":\\\"October\\\",\\\"nov\\\":\\\"November\\\",\\\"dec\\\":\\\"December\\\"},\\\"monthShort\\\":{\\\"jan\\\":\\\"Jan\\\",\\\"feb\\\":\\\"Feb\\\",\\\"mar\\\":\\\"Mar\\\",\\\"apr\\\":\\\"Apr\\\",\\\"may\\\":\\\"May\\\",\\\"jun\\\":\\\"Jun\\\",\\\"jul\\\":\\\"Jul\\\",\\\"aug\\\":\\\"Aug\\\",\\\"sep\\\":\\\"Sep\\\",\\\"oct\\\":\\\"Oct\\\",\\\"nov\\\":\\\"Nov\\\",\\\"dec\\\":\\\"Dec\\\"}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/en/time.json?");
 
 /***/ }),
 
