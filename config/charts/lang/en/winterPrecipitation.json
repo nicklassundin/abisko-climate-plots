@@ -2,8 +2,8 @@
 	"valueSuffix": "mm",
 	"groups": {
 		"0": {
-			"title": "[stationName] Winter Average Precipitation" ,
-			"subTitle": "December to February",
+			"title": "Winter (December to February) Average Precipitation" ,
+			"subTitle": "[stationName]",
 			"caption": "Average annual winter (December to February) precipitation. The lowest (min) and highest (max) precipitation of the month.",
 			"yAxis": {
 				"left": "Total Precipitation [mm]",
@@ -16,8 +16,8 @@
 			"legend": "Weather"
 		},
 		"1": {
-			"title": "[stationName] Winter Average Precipitation Difference from Baseline",
-			"subTitle": "",
+			"title": "Winter (December to February) Average Precipitation Difference from Baseline",
+			"subTitle": "[stationName]",
 			"caption": "Difference between the winter (December-February) seasonal averages and the average for the baseline period, typically 1961 to 1990.", 
 			"yAxis": {
 				"left": "Average Precipitation [mm]",

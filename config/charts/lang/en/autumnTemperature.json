@@ -2,8 +2,8 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "[stationName] Autumn Average Temperature" ,
-			"subTitle": "September to November",
+			"title": "Autumn (September to November) Average Temperature" ,
+			"subTitle": "[stationName]",
 			"caption": "Average annual autumn (Septembe to November) temperature. The lowest (min) and highest (max) temperature of the month.", 
 			"legend": "Weather",
 			"xAxis": {
@@ -16,8 +16,8 @@
 			}
 		},
 		"1": {
-			"title": "[stationName] Autumn Average Temperature Difference from baseline" ,
-			"subTitle": "September to November",
+			"title": "Autumn (September to November) Average Temperature Difference from baseline" ,
+			"subTitle": "[stationName]",
 			"caption": "Difference between the autumn (September-November)seasonal averages and the average for the baseline period, typically 1961 to 1990.", 
 			"legend": "Climate",
 			"xAxis": {
