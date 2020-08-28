@@ -2,7 +2,7 @@
 	"valueSuffix": "mm",
 	"groups": {
 		"0": {
-			"title": "Summer (June to August) Average Precipitation" ,
+			"title": "Summer Average Precipitation" ,
 			"subTitle": "[stationName]",
 			"caption": "Average annual summer (June to August) precipitation. The lowest (min) and highest (max) precipitation of the month.",
 			"yAxis": {
@@ -16,7 +16,7 @@
 			"legend": "Weather"
 		},
 		"1": {
-			"title": "Summer (June to August) Average Precipitation Difference from Baseline" ,
+			"title": "Summer Average Precipitation Difference from Baseline" ,
 			"subTitle": "[stationName]",
 			"caption": "Difference between the summer (June-August) seasonal averages and the average for the baseline period, typically 1961 to 1990.", 
 			"yAxis": {
