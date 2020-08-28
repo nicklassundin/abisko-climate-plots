@@ -2,9 +2,9 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "Average Temperature for Arctic", 
-			"subTitle": "64N-90N",
-			"caption": "Average annual temperature. The lowest (min) and highest (ma    x) temperature of the year.",
+			"title": "Average Annual Temperature", 
+			"subTitle": "",
+			"caption": "Average annual temperature for the Arctic (64N-90N). The lowest (min) and highest (max) temperature of the year.",
 			"yAxis": {
 				"left": "Average Temperature [°C]",
 				"right": "[X-AXIS]"
@@ -16,9 +16,9 @@
 			"legend": "Weather"
 		},
 		"1": {
-			"title": "Temperature Difference for Arctic", 
-			"subTitle": "64N-90N Difference between yearly average and average for [baseline]",
-			"caption": "Difference between the yearly average temperature and the av    erage temperature for the baseline period, typically 1961 to 1990.",
+			"title": "Temperature Difference From Baseline", 
+			"subTitle": "",
+			"caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990, for  the Arctic Region (64N-90N).",
 			"yAxis": {
 				"left": "Temperature [°C]",
 				"right": "[X-AXIS]"

@@ -2,8 +2,8 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "[stationName] Annual Average Temperature" ,
-			"subTitle": "",
+			"title": "Annual Average Temperature" ,
+			"subTitle": "[stationName]",
 			"caption": "Average annual temperature. The lowest (min) and highest (max) temperature of the year.",
 			"yAxis": {
 				"left": "Average temperature [°C]",
@@ -16,8 +16,8 @@
 			"legend": "Weather"
 		},
 		"1": {
-			"title": "[stationName] Annual Average Temperature Difference from Baseline",
-			"subTitle": "Difference between yearly average and average for [baseline]",
+			"title": "Annual Average Temperature Difference from Baseline",
+			"subTitle": "[stationName] Difference between yearly average and average for [baseline]",
 			"caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
 			"yAxis": {
 				"left": "Temperature [°C]",
@@ -30,8 +30,8 @@
 			"legend": "Climate"
 		},
 		"2": {
-			"title": "[stationName] Warmest [unit] of the year",
-			"subTitle": "",
+			"title": "Warmest [unit] of the year",
+			"subTitle": "[stationName]",
 			"caption": "Average temperature of warmest [unit] of the year.",
 			"yAxis": {
 				"left": "Average temperature of warmest [unit] of the year [°C]",
