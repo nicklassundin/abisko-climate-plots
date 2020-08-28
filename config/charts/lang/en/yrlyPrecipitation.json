@@ -2,8 +2,8 @@
 	"valueSuffix": "mm",
 	"groups": {
 		"0": {
-			"title": "[stationName] Annual Average Precipitation" ,
-			"subTitle": "",
+			"title": "Annual Average Precipitation" ,
+			"subTitle": "[stationName]",
 			"caption": "Average annual precipitation. The lowest (min) and highest (max) precipitation of the month.",
 			"yAxis": {
 				"left": "Total Precipitation [mm]",
@@ -16,8 +16,8 @@
 			"legend": "Weather"
 		},
 		"1": {
-			"title": "[stationName] Annual Average Precipitation Difference from Baseline" ,
-			"subTitle": "Difference between yearly average and average for [baseline]", 
+			"title": "Annual Average Precipitation Difference from Baseline" ,
+			"subTitle": "[stationName] Difference between yearly average and average for [baseline]", 
 			"yAxis": {
 				"left": "Precipitation [mm]",
 				"right": "[X-AXIS]"
@@ -30,8 +30,8 @@
 			"legend": "Climate"
 		},
 		"2": {
-			"title": "[stationName] Wettest [unit] of the year",
-			"subTitle": "",
+			"title": "Wettest [unit] of the year",
+			"subTitle": "[stationName]",
 			"yAxis": {
 				"left": "Total precipitation [mm]",
 				"right": "[X-Axis]"
