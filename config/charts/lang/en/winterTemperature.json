@@ -2,7 +2,7 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "Winter (December to February) Average Temperature" ,
+			"title": "Winter Average Temperature" ,
 			"subTitle": "[stationName]",
 			"caption": "Average annual winter (December to February) temperature. The lowest (min) and highest (max) temperature of the month.",
 			"legend": "Weather",
@@ -16,9 +16,9 @@
 			}
 		},
 		"1": {
-			"title": "Winter (December to February) Average Temperature Difference from Baseline" ,
+			"title": "Winter Average Temperature Difference From Baseline" ,
 			"subTitle": "[stationName]",
-			"caption": "Difference between the winter (December-February)seasonal averages and the average for the baseline period, typically 1961 to 1990.", 
+			"caption": "Difference between the winter (December-February) seasonal averages and the average for the baseline period, typically 1961 to 1990.", 
 			"legend": "Climate",
 			"xAxis": {
 				"bott": "Year", 
