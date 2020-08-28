@@ -2,8 +2,8 @@
 	"valueSuffix": "mm",
 	"groups": {
 		"0": {
-			"title": "[stationName] Autumn Average Precipitation" ,
-			"subTitle": "September to November",
+			"title": "Autumn (September to November) Average Precipitation" ,
+			"subTitle": "[stationName]",
 			"caption": "Average annual autumn (Septembe to November) precipitation. The lowest (min) and highest (max) precipitation of the month.",
 			"yAxis": {
 				"left": "Total Precipitation [mm]",
@@ -16,8 +16,8 @@
 			"legend": "Weather"
 		},
 		"1": {
-			"title": "[stationName] Autumn Average Precipitation Difference from Baseline", 
-			"subTitle": "", 
+			"title": "Autumn (September to November) Average Precipitation Difference from Baseline", 
+			"subTitle": "[stationName]", 
 			"caption": "Difference between the autumn (September-November) seasonal averages and the average for the baseline period, typically 1961 to 1990.",
 			"yAxis": {
 				"left": "Average Precipitation [mm]",
