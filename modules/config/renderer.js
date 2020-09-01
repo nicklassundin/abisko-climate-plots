@@ -154,13 +154,14 @@ var chart = {
 						result.sets = meta.subSet.sets;
 						meta.subSet.sets.forEach(set => {
 							var tmp = res.clone();
-							// tmp.id = id+'_'+set;
-							// tmp.chart = Highcharts.chart(tmp.id, {
-							// 	credits: {
-							// 		enabled: false
-							// 	},
-							// });
-							// tmp.chart.showLoading();
+							tmp.id = id+'_'+set;
+							tmp.chart = Highcharts.chart(tmp.id, {
+								lang: language[nav_lang], 
+								credits: {
+									enabled: false
+								},
+							});
+							tmp.chart.showLoading();
 							tmp.metaRef = metaRef;
 							tmp.metaFiles = temp.files;
 							temp.aggr.subSet.set = set;
@@ -196,8 +197,8 @@ var chart = {
 		this.metaTable('debug_table_'+id, this.metaFiles);
 		var title = this.title(0);
 		var meta = this.meta
-		this.chart = Highcharts.chart(id, {
-		// this.chart.update({
+		// this.chart = Highcharts.chart(id, {
+		this.chart.update({
 			credits: {
 				enabled: false
 			},
@@ -293,7 +294,7 @@ var chart = {
 			// }))
 		})
 		this.chart.showLoading();
-		this.chart.redraw();
+		// this.chart.redraw();
 		var groups = Object.keys(meta.groups).map(key => ({
 			key: key,
 			enabled: meta.groups[key].enabled

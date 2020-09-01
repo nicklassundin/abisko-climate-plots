@@ -11,6 +11,7 @@ exports.series = {
 		color: meta.series.max.colour,
 		data: (data.max != undefined) ? ((data.max.max != undefined) ? data.max.max(meta, data).values : data.max(meta, data).values) : undefined ,
 		visible: false,
+		tooltip: { valueDecimals: meta.decimals },
 		type: meta.series.max.type,
 	}),
 	min: (meta, data) => ({
@@ -21,6 +22,7 @@ exports.series = {
 		color: meta.series.min.colour,
 		data: (data.min != undefined) ? ((data.min.min != undefined) ? data.min.min(meta, data).values : data.min(meta, data).values) : undefined ,
 		visible: false,
+		tooltip: { valueDecimals: meta.decimals },
 		type: meta.series.min.type,
 	}),
 	extreme: (meta, data) => ({
@@ -31,6 +33,7 @@ exports.series = {
 		color: meta.series.extreme.colour,
 		data: (data.max != undefined) ? (data.max.max != undefined ? data.max.max(false).values : undefined) : data.total.max(false).values, 
 		visible: false,
+		tooltip: { valueDecimals: meta.decimals },
 		type: meta.series.extreme.type,
 	}),
 	avg: (meta, data) => ({
@@ -48,6 +51,7 @@ exports.series = {
 			// name: (meta.series.linjer.name,
 		},
 		visible: true,
+		tooltip: { valueDecimals: meta.decimals },
 		type: meta.series.avg.type,
 		// type: 'xrange'
 	}),
@@ -70,6 +74,7 @@ exports.series = {
 		color: 'red',
 		negativeColor: 'blue',
 		visible: true,
+		tooltip: { valueDecimals: meta.decimals },
 	}),
 	first: (meta, data) => ({
 		name: meta.series.first.name,
@@ -79,6 +84,7 @@ exports.series = {
 		color: meta.series.first.colour,
 		data: data.values,
 		visible: false,
+		tooltip: { valueDecimals: meta.decimals },
 		type: meta.series.first.type,
 	}),
 	firstDiff: (meta, data) => ({
@@ -94,6 +100,7 @@ exports.series = {
 		color: 'red',
 		negativeColor: 'blue',
 		visible: true,
+		tooltip: { valueDecimals: meta.decimals },
 	}),
 	last: (meta, data) => ({
 		name: meta.series.last.name,
@@ -103,6 +110,7 @@ exports.series = {
 		color: meta.series.last.colour,
 		data: data.values,
 		visible: false,
+		tooltip: { valueDecimals: meta.decimals },
 		type: meta.series.last.type,
 	}),
 	lastDiff: (meta, data) => ({
@@ -118,11 +126,13 @@ exports.series = {
 		color: 'red',
 		negativeColor: 'blue',
 		visible: true,
+		tooltip: { valueDecimals: meta.decimals },
 	}),
 	linjer: (meta, data) => ({
 		name: meta.series.linjer.name,
 		type: meta.series.linjer.typ,
 		visible: false,
+		tooltip: { valueDecimals: meta.decimals },
 		showInLegend: false
 	}),
 	snow: (meta, data) => ({
@@ -133,6 +143,7 @@ exports.series = {
 		color: meta.series.snow.colour,
 		data: (data.snow != undefined) ? data.snow.values : undefined,
 		visible: true,
+		tooltip: { valueDecimals: meta.decimals },
 		borderColor: meta.series.snow.borderColour,
 		states: {
 			hover: {
@@ -160,6 +171,7 @@ exports.series = {
 			}
 		},
 		visible: true,
+		tooltip: { valueDecimals: meta.decimals },
 	}),
 	iceTime: (meta, data) => ({
 		regression: false,
@@ -176,6 +188,7 @@ exports.series = {
 		states: { hover: { lineWidthPlus: 0 } },
 		data: data,
 		visible: true,
+		tooltip: { valueDecimals: meta.decimals },
 	}),
 	freeze: (meta, data) => ({
 		regression: false,
@@ -198,6 +211,7 @@ exports.series = {
 		states: { hover: { lineWidthPlus: 0 } },
 		data: data.freeze.values,
 		visible: true,
+		tooltip: { valueDecimals: meta.decimals },
 	}),
 	breakup: (meta, data) => ({
 		regression: false,
@@ -225,6 +239,7 @@ exports.series = {
 		},
 		data: (data.total != undefined) ? data.total.max(meta, data).values : data(date = variables.date).values,
 		visible: true,
+		tooltip: { valueDecimals: meta.decimals },
 	}),
 	iceThickDiff: (meta, data) => ({
 		name: meta.series.iceThickDiff.name,
@@ -236,6 +251,7 @@ exports.series = {
 		},
 		data: (data.total != undefined) ? data.total.max(meta, data).values : data(date = variables.date).difference(),
 		visible: true,
+		tooltip: { valueDecimals: meta.decimals },
 	}),
 	perma: (meta, data, k) => ({
 		name: (meta.series[k].name == undefined) ? k : meta.series[k].name,
@@ -244,6 +260,7 @@ exports.series = {
 		opacity: 0.9,
 		data: data[k].values,
 		visible: k == "Torneträsk",
+		tooltip: { valueDecimals: meta.decimals },
 	}),
 	period: (s, p, k) => ({
 		name: s.series[k].name, 
@@ -251,6 +268,7 @@ exports.series = {
 		lineWidth: 1,
 		data: p[k].means.rotate(6).slice(2),
 		visible: true,
+		tooltip: { valueDecimals: meta.decimals },
 	}),
 	co2: (meta, data) => ({
 		name: meta.series.co2.name,
@@ -274,5 +292,6 @@ exports.series = {
 			}
 		},
 		zIndex: 6,
+		tooltip: { valueDecimals: meta.decimals },
 	}),
 }
