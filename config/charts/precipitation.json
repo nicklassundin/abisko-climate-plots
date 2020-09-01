@@ -11,7 +11,7 @@
 			"baseline": false
 		}
 	},
-	"decimals": 0,
+	"decimals": 2,
 	"series": {
 		"diff": {
 			"preset": "diff",

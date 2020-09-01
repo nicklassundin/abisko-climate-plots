@@ -154,13 +154,13 @@ var chart = {
 						result.sets = meta.subSet.sets;
 						meta.subSet.sets.forEach(set => {
 							var tmp = res.clone();
-							tmp.id = id+'_'+set;
-							tmp.chart = Highcharts.chart(tmp.id, {
-								credits: {
-									enabled: false
-								},
-							});
-							tmp.chart.showLoading();
+							// tmp.id = id+'_'+set;
+							// tmp.chart = Highcharts.chart(tmp.id, {
+							// 	credits: {
+							// 		enabled: false
+							// 	},
+							// });
+							// tmp.chart.showLoading();
 							tmp.metaRef = metaRef;
 							tmp.metaFiles = temp.files;
 							temp.aggr.subSet.set = set;
@@ -196,7 +196,11 @@ var chart = {
 		this.metaTable('debug_table_'+id, this.metaFiles);
 		var title = this.title(0);
 		var meta = this.meta
-		this.chart.update({
+		this.chart = Highcharts.chart(id, {
+		// this.chart.update({
+			credits: {
+				enabled: false
+			},
 			tooltip: {
 				shared: true,
 				valueSuffix: ' '+meta.valueSuffix,
@@ -288,6 +292,7 @@ var chart = {
 			// data: [null, null],
 			// }))
 		})
+		this.chart.showLoading();
 		this.chart.redraw();
 		var groups = Object.keys(meta.groups).map(key => ({
 			key: key,
@@ -510,14 +515,18 @@ var chart = {
 		this.chart.update({
 			xAxis: baseline(group) 
 		})
+		if(group.tooltip){
+			this.chart.update({
+				tooltip: {
+					formatter: (group.tooltip != undefined) ? formatters(meta)[group.tooltip.type] : undefined
+				},
+			})
+		}
 		try{
 			this.chart.update({
 				title: {
 					text: title,
 					useHTML: true,
-				},
-				tooltip: {
-					formatter: (group.tooltip != undefined) ? formatters(meta)[group.tooltip.type] : undefined
 				},
 				legend: {
 					enabled: series_count > 1 
