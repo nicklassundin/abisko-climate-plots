@@ -17,7 +17,7 @@
 		},
 		"1": {
 			"title": "Annual Average Temperature Difference from Baseline",
-			"subTitle": "[stationName] Difference between yearly average and average for [baseline]",
+			"subTitle": "[stationName]",
 			"caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
 			"yAxis": {
 				"left": "Temperature [°C]",
@@ -60,7 +60,7 @@
 		"extreme": {
 			"name": "Average warmest maximum [interval] temperature",
 			"week": "weekly",
-			"day": "dayly"
+			"day": "daily"
 		}
 	}
 }
