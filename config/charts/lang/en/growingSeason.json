@@ -2,10 +2,10 @@
 	"valueSuffix": "[units]",
 	"groups": {
 		"0": {
-			"title": "[stationName] Growing Season" ,
-			"subTitle": "Maximum number of consecutive [units] above zero Celcius",
+			"title": "Growing Season ([units])" ,
+			"subTitle": "[stationName]",
 			"legend": "Weather",
-			"caption": "The Frost-free season is the approximate length of the growing season, during which there are no freezing temperatures to kill or damage plants. This is calculated from temperature data.",
+			"caption": "Maximum number of consecutive [units] above zero Celcius. This frost-free season is the approximate length of the growing season, during which there are no freezing temperatures to kill or damage plants. This is calculated from temperature data.",
 			"xAxis": {
 				"bott": "Year", 
 				"top": "[Y-AXIS]"
@@ -16,16 +16,16 @@
 			}
 		},
 		"1": {
-			"title": "[stationName] Growing Season Difference ([units]) from Baseline<Paste>" ,
-			"subTitle": "", 
+			"title": "Growing Season Difference ([units]) From Baseline" ,
+			"subTitle": "[stationName]", 
 			"legend": "Climate",
-			"caption": "Difference between the maximum number of [units] above zero for the year and the average for the baseline period, typically 1961 to 1990. This is calculated from temperature data.", 
+			"caption": "Difference between the maximum number of [units] above zero for the year (the frost-free season) and the average for the baseline period, [baseline]. This is calculated from temperature data.", 
 			"xAxis": {
 				"bott": "Year", 
 				"top": "[Y-AXIS]"
 			},
 			"yAxis": {
-				"left": "Difference [days]", 
+				"left": "Difference [units]", 
 				"right": "[X-AXIS]"
 			}
 		}
