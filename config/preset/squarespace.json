@@ -2,7 +2,7 @@
 	"sqrt-IceThick": ["iceThicknessYear", "iceThicknessDate"],
 	"sqrt-temp": ["temperatureDifference","temperature_64n90n","temperature_nhem","temperature_glob"],
 	"sqrt-season-temp": ["Temperatures","TemperaturesSpring","TemperaturesSummer","TemperaturesAutumn","TemperaturesWinter"],
-	"sqrt-growing": ["growingSeason","Temperatures","temperatureDifference"],
+	"sqrt-growing": ["growingSeason","growingSeasonDays"],
 	"sqrt-mTemp": ["monthlyTemperatures"],
 	"sqrt-prec": ["Precipitation","springPrecipitation","summerPrecipitation","autumnPrecipitation","winterPrecipitation"],
 	"sqrt-mPrec": ["monthlyPrecipitation"],
@@ -12,25 +12,25 @@
 		"abiskoLakeIceTime","iceThicknessYear", "iceThicknessDate"],
 	"sqrt-perma": ["permaHistogramCALM"],
 	"sqrt-carbon": ["weeklyCO2"],
-	"sqrt-temp-climate-weather": ["slideTemperature"],
-	"sqrt-temp-extreme": ["dailyExtremeTemperature",
+	"sqrt-temp-climate-weather-v2": ["slideTemperature"],
+	"sqrt-temp-extreme-v2": ["dailyExtremeTemperature",
 		"weeklyExtremeTemperature"],
-	"sqrt-prec-extreme": ["dailyExtremePrecipitation",
+	"sqrt-prec-extreme-v2": ["dailyExtremePrecipitation",
 	"weeklyExtremePrecipitation"],
-	"sqrt-growingSeason": [
+	"sqrt-growingSeason-v2": [
 		"growingSeason",
 		"growingSeasonDays",
 		"growingSeasonFrostFirst",
 		"growingSeasonFrostLast"
 	],
-	"sqrt-temp-slide": ["slideTemperature",
+	"sqrt-temp-v2": ["slideTemperature",
 		"slideTemperaturesSpring",
 		"slideTemperaturesSummer",
 		"slideTemperaturesAutumn",
 		"slideTemperaturesWinter",
 		"slideMonthlyTemperatures"
 	],
-	"sqrt-prec-slide": [
+	"sqrt-prec-v2": [
 		"slidePrecipitation",
 		"slideWinterPrecipitation",
 		"slideSpringPrecipitation", 
