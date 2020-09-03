@@ -3,7 +3,7 @@
 	"groups": {
 		"0": {
 			"title": "Average Annual Temperature", 
-			"subTitle": "",
+			"subTitle": "Arctic",
 			"caption": "Average annual temperature for the Arctic (64N-90N). The lowest (min) and highest (max) temperature of the year.",
 			"yAxis": {
 				"left": "Average Temperature [°C]",
@@ -17,8 +17,8 @@
 		},
 		"1": {
 			"title": "Temperature Difference From Baseline", 
-			"subTitle": "",
-			"caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990, for  the Arctic Region (64N-90N).",
+			"subTitle": "Arctic",
+			"caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990, for the Arctic Region (64N-90N).",
 			"yAxis": {
 				"left": "Temperature [°C]",
 				"right": "[X-AXIS]"
