@@ -2,8 +2,8 @@
 	"valueSuffix": "cm",
 	"groups": {
 		"0": {
-			"title": "[stationName] Snow Depth",
-			"subTitle": "30-year period average by month",
+			"title": "Snow Depth",
+			"subTitle": "[stationName]",
 			"caption": "Average monthly snow depth in centimeters by 30-year period.",
 			"yAxis": {
 				"left": "Snow depth [cm]", 
