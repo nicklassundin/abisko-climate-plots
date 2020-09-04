@@ -2,9 +2,9 @@
 	"valueSuffix": "cm",
 	"groups": {
 		"0": {
-			"title": "Monthly mean snow depth for Abisko",
-			"subTitle": "[SUB-TITLE]",
-			"caption": "[SOME TEXT]",
+			"title": "Monthly Mean Snow Depth",
+			"subTitle": "[stationName]",
+			"caption": "Average monthly snow depth in centimeters by ...",
 			"yAxis": {
 				"left": "Snow depth [cm]", 
 				"right": "[X-AXIS]"
