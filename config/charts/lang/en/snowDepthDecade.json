@@ -2,15 +2,15 @@
 	"valueSuffix": "cm",
 	"groups": {
 		"0": {
-			"title": "[stationName] Snow Depth",
-			"subTitle": "Decadal average by month",
+			"title": "Snow Depth",
+			"subTitle": "[stationName]",
 			"caption": "Average monthly snow depth in centimeters by decade.",
 			"yAxis": {
 				"left": "Snow depth [cm]", 
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"categories": ["Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Ju    n"],
+				"categories": ["Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun"],
 				"bott": "Month", 
 				"top": "[Y-AXIS]"
 			},
