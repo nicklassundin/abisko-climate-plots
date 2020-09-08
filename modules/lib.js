@@ -20,7 +20,8 @@ global.variables = {
 }
 
 var charts = require('./config/charts/config.js');
-var sets = require('../config/preset.json');
+var sets = require('../static/preset.json');
+// var sets = require('../config/preset.js').preset;
 lib = {
 	renderChart: function(div, type, id="abisko", url){ 
 		if(hostUrl){
@@ -62,7 +63,6 @@ lib = {
 			debug.innerHTML = "set: "+ set +"</br> station: "+ id
 			div.appendChild(debug)
 		}
-
 		sets[set].forEach(type => {
 			var container = document.createElement("div");
 			container.setAttribute("id", "mark_"+type);
