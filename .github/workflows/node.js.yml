@@ -5,9 +5,9 @@ name: Unit test
 
 on:
   push:
-    branches: [ master, development, release ]
+    branches: [ master, release ]
   pull_request:
-    branches: [ master, development, release ]
+    branches: [ master, release ]
 
 jobs:
   build:
