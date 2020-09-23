@@ -2,9 +2,9 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "Autumn Average Temperature" ,
+			"title": "Spring Average Temperature" ,
 			"subTitle": "[stationName]",
-			"caption": "Average annual autumn (September to November) temperature. The lowest (min) and highest (max) temperature of the month.", 
+			"caption": "Average annual spring (March to May) temperature. The lowest (min) and highest (max) temperature of the month.",
 			"legend": "Weather",
 			"xAxis": {
 				"bott": "Year", 
@@ -16,16 +16,16 @@
 			}
 		},
 		"1": {
-			"title": " Autumn Average Temperature Difference From Baseline" ,
+			"title": "Spring Average Temperature Difference from Baseline" ,
 			"subTitle": "[stationName]",
-			"caption": "Difference between the autumn (September-November)seasonal averages and the average for the baseline period, typically 1961 to 1990.", 
+			"caption": "Difference between the spring (March-May) seasonal averages and the average for the baseline period, typically 1961 to 1990.",
 			"legend": "Climate",
 			"xAxis": {
 				"bott": "Year", 
 				"top": "[Y-AXIS]"
 			},
 			"yAxis": {
-				"left": "Temperature difference [°C]",
+				"left": "Temperature Difference [°C]",
 				"right": "[X-AXIS]"
 			}
 		}

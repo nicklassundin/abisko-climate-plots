@@ -2,26 +2,26 @@
 	"valueSuffix": "",
 	"groups": {
 		"0": {
-			"title": "Troneträsk Isläggning och Islossning samt Tiden isen ligger på sjön" ,
-			"subTitle": "[SUB-TITLE]",
-			"caption": "[SOME TEXT]",
+			"title": "Freeze-up and break-up of lake ice" ,
+			"subTitle": "Torneträsk",
+			"caption": "", 
 			"yAxis": {
-				"left": "Islossning / Isläggning [årets dag]",
+				"left": "Ice break-up / freeze-up [date]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "År", 
+				"bott": "Year", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Väder"
+			"legend": "Weather"
 		}
 	},
 	"series": {
 		"freeze": {
-			"name": "Isläggning" 
+			"name": "Freeze-up"
 		},
 		"breakup": {
-			"name": "Islossning"
+			"name": "Break-up"
 		}
 	}
 }

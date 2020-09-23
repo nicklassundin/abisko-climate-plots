@@ -2,18 +2,18 @@
 	"valueSuffix": "ppm",
 	"groups": {
 		"0": {
-			"title": "Global Atmosfärisk CO2 koncentration", 
-			"subTitle": "[SUB-TITLE]",
-			"caption": "Koldioxidkoncentration (ppm) vid Mauna Loa-observatoriet på Hawaii.", 
+			"title": "Global Atmospheric Carbon Dioxide ([CO2]) Concentration", 
+			"subTitle": "",
+			"caption": "Carbon dioxide ([CO2]) Concentration (ppm) at the Mauna Loa Observatory in Hawaii.",
 			"yAxis": {
-				"left": "[CO2] koncentration (ppm)", 
+				"left": "[CO2] Concentration (ppm)",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "År", 
+				"bott": "Year", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Väder"
+			"legend": "Weather"
 		}
 	},
 	"series": {

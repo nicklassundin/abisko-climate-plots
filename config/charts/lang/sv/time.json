@@ -2,15 +2,29 @@
 	"months": {
 		"jan": "January",
 		"feb": "February",
-		"mar": "Mars",
+		"mar": "March",
 		"apr": "April",
 		"may": "May",
 		"jun": "June",
 		"jul": "July",
-		"Aug": "August",
+		"aug": "August",
 		"sep": "September",
 		"oct": "October",
 		"nov": "November",
 		"dec": "December"
+	},
+	"monthShort": {
+		"jan": "Jan",
+		"feb": "Feb",
+		"mar": "Mar",
+		"apr": "Apr",
+		"may": "May",
+		"jun": "Jun",
+		"jul": "Jul",
+		"aug": "Aug",
+		"sep": "Sep",
+		"oct": "Oct",
+		"nov": "Nov",
+		"dec": "Dec"
 	}
 }

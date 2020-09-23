@@ -2,46 +2,46 @@
 	"valueSuffix": "",
 	"groups": {
 		"0": {
-			"title": "[stationName] Sjöisdjupet (datum)",
+			"title": "[stationName] Lake Ice Thickness (by Date)", 
 			"subTitle": "",
-			"caption": "Istjocklek för ett visst datum över alla år (om det inte mäts på ett valt datum, presenteras data från närmaste tidigare mätning).", 
+			"caption": "Ice thickness for a given date across all years (if not measured on a selected date, data presented from the closest previous measurement).",
 			"select": {
-				"text": "Välj ett datum"
+				"text": "Choose date"
 			},
 			"yAxis": {
-				"left": "Isens tjocklek [cm]", 
+				"left": "Ice thickness [cm]", 
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "År", 
+				"bott": "Year", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Väder"
+			"legend": "Weather"
 		},
 		"1": {
-			"title": "[stationName] Sjöisdjupet Skillnad från baslinjen (datum)",
+			"title": "[stationName] Lake Ice Thickness Difference (by Date)", 
 			"subTitle": "",
-			"caption": "[PlaceHolder]", 
+			"caption": "Ice thickness for a given date across all years (if not measured on a selected date, data presented from the closest previous measurement).",
 			"select": {
-				"text": "Välj ett datum"
+				"text": "Choose date"
 			},
 			"yAxis": {
-				"left": "Isens tjocklek [cm]", 
+				"left": "Ice thickness [cm]", 
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "År", 
+				"bott": "Year", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Klimat"
+			"legend": "Climate"
 		}
 	},
 	"series": {
 		"iceThick": {
-			"name": "Isens tjocklek" 
+			"name": "Ice thickness (cm)"
 		},
 		"diff": {
-			"name": "Isens tjocklek skillnad från baslinjen"
+			"name": "Ice thickness difference (cm)"
 		}
 	}
 }

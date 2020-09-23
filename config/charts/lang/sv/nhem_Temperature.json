@@ -2,32 +2,32 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "Årlig genomsnittlig Temperatur Norra Halvklotet", 
-			"subTitle": "",
-			"caption": "[SOME TEXT]",
+			"title": "Average Temperature", 
+			"subTitle": "Northern Hemisphere",
+			"caption": "Average annual temperature. The lowest (min) and highest (max) temperature of the year.",
 			"yAxis": {
-				"left": "Genomsnittlig Temperatur [°C]",
+				"left": "Average Temperature [°C]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "År", 
+				"bott": "Year", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Väder"
+			"legend": "Weather"
 		},
 		"1": {
-			"title": "Årlig genomsnittlig temperaturskillnad från baslinjen för norra halvklotet", 
-			"subTitle": "", 
-			"caption": "Skillnaden mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.", 
+			"title": "Temperature Difference From Baseline", 
+			"subTitle": "Northern Hemisphere",
+			"caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baseline], for the Northern Hemisphere.",
 			"yAxis": {
-				"left": "Temperaturskillnad [°C]", 
+				"left": "Temperature [°C]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "År", 
+				"bott": "Year", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Klimat"
+			"legend": "Climate"
 		}
 	},
 	"series": {
@@ -38,10 +38,10 @@
 			"name": "Min"
 		},
 		"avg": {
-			"name": "Genomsnittlig Temperature" 
+			"name": "Yearly Average"
 		},  
 		"diff": {
-			"name": "Temperaturskillnad" 
+			"name": "Difference"
 		},
 		"linjer": {
 			"name": "[example]"

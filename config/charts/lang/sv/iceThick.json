@@ -2,40 +2,40 @@
 	"valueSuffix": "",
 	"groups": {
 		"0": {
-			"title": "[stationName] Största sjöisdjupet",
+			"title": "[stationName] Maximum Lake Ice Thickness",
 			"subTitle": "",
-			"caption": "Den maximala istjockleken för en viss vinter.",
+			"caption": "The maximum ice thickness for a given winter.",
 			"yAxis": {
-				"left": "Isens tjocklek [cm]", 
+				"left": "Ice thickness [cm]", 
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "År", 
+				"bott": "Year", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Väder"
+			"legend": "Weather"
 		},
 		"1": {
-			"title": "[stationName] Största sjöisdjupet skillnad från baslinjen", 
+			"title": "[stationName] Maximum Lake Ice Thickness Difference",
 			"subTitle": "",
-			"caption": "[Placeholder]",
+			"caption": "The maximum ice thickness for a given winter.",
 			"yAxis": {
-				"left": "Isens tjocklek [cm]", 
+				"left": "Ice thickness [cm]", 
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "År", 
+				"bott": "Year", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Klimat"
+			"legend": "Climate"
 		}
 	},
 	"series": {
 		"iceThick": {
-			"name": "Isens tjocklek"
+			"name": "Ice thickness (cm)"
 		},
 		"diff": {
-			"name": "Isens tjocklek skillnad från baslinjen"
+			"name": "Ice thickess Difference (cm)"
 		}
 	}
 }

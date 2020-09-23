@@ -2,40 +2,40 @@
 	"valueSuffix": "",
 	"groups": {
 		"0": {
-			"title": "Troneträsk Islossningsdag", 
+			"title": "Torneträsk Break-up of lake ice" ,
 			"subTitle": "",
-			"caption": "Årets dag för islossning av sjöisen",
+			"caption": "Day of year for the start of the lake ice breaking-up.", 
 			"yAxis": {
-				"left": "Islossning av sjöisen [årets dag]",
+				"left": "Ice break-up [day of year]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "År", 
+				"bott": "Year", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Väder"
+			"legend": "Weather"
 		},
 		"1": {
-			"title": "Troneträsk Skillnad i datum för islossning från baslinjen", 
+			"title": "Troneträsk Break-Up Date of Lake Ice Difference from Baseline",
 			"subTitle": "",
-			"caption": "Skillnad i isläggning och islossning från utgångsperioden, vanligtvis 1961 till 1991", 
+			"caption": "Break-up difference from baseline period, typically 1961 to 1990.", 
 			"yAxis": {
-				"left": "Islossning [årets dag]", 
+				"left": "Ice break-up [day of year]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "År", 
+				"bott": "Year", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Klimat"
+			"legend": "Climate"
 		}
 	},
 	"series": {
 		"avg": {
-			"name": "Islossning"
+			"name": "Break-up"
 		},
 		"diff": {
-			"name": "Skillnad från baslinjen"
+			"name": "Difference"
 		}
 	}
 }

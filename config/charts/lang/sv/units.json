@@ -1,12 +1,12 @@
 {
 	"day": {
-		"plural": "dagar",
-		"singular": "dag",
-		"interval": "dagligen"
+		"plural": "days",
+		"singular": "day",
+		"interval": "daily"
 	},
 	"week": {
-		"plural": "veckor",
-		"singular": "vecka",
-		"interval": "veckovis"
+		"plural": "weeks",
+		"singular": "week",
+		"interval": "weekly"
 	}
 }

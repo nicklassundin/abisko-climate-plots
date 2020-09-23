@@ -1,0 +1,33 @@
+{
+	"valueSuffix": "°C",
+	"groups": {
+		"0": {
+			"title": "[season] Average Temperature" ,
+			"subTitle": "[stationName] ",
+			"caption": "Average [season] ([period]) temperature. The lowest (min) and highest (max) temperature.",
+			"legend": "Weather",
+			"xAxis": {
+				"bott": "Year", 
+				"top": "[Y-AXIS]"
+			},
+			"yAxis": {
+				"left": "Average temperature [°C]",
+				"right": "[X-AXIS]"
+			}
+		}
+	},
+	"series": {
+		"max": {
+			"name": "Max"
+		},
+		"min": {
+			"name": "Min"
+		},
+		"avg": {
+			"name": "Yearly Average"
+		},  
+		"diff": {
+			"name": "Difference"
+		}
+	}
+}

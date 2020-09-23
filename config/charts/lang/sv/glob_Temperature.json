@@ -2,32 +2,32 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "Årlig genomsnittlig Temperatur Globalt", 
-			"subTitle": "",
-			"caption": "[SOME TEXT]",
+			"title": "Average Temperature", 
+			"subTitle": "Global",
+			"caption": "Average annual temperature for the globe. The lowest (min) and highest (max) temperature of the year.",
 			"yAxis": {
-				"left": "Genomsnittlig Temperatur [°C]",
+				"left": "Average Temperature [°C]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "År", 
+				"bott": "Year", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Väder"
+			"legend": "Weather"
 		},
 		"1": {
-			"title": "Årlig genomsnittlig temperaturskillnad från baslinjen, Globalt", 
-			"subTitle": "", 
-			"caption": "Skillnaden mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.", 
+			"title": "Temperature Difference From Baseline", 
+			"subTitle": "Global",
+			"caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990, for the globe.",
 			"yAxis": {
-				"left": "Temperaturskillnad [°C]", 
+				"left": "Temperature [°C]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "År", 
+				"bott": "Year", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Klimat"
+			"legend": "Climate"
 		}
 	},
 	"series": {
@@ -38,10 +38,10 @@
 			"name": "Min"
 		},
 		"avg": {
-			"name": "Genomsnittlig Temperature" 
+			"name": "Yearly Average"
 		},  
 		"diff": {
-			"name": "Temperaturskillnad" 
+			"name": "Difference"
 		},
 		"linjer": {
 			"name": "[example]"

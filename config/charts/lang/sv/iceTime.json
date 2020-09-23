@@ -1,41 +1,41 @@
 {
-	"valueSuffix": "dagar",
+	"valueSuffix": "days",
 	"groups": {
 		"0": {
-			"title": "[stationName] Isperiodens längd", 
-			"subTitle": "",
-			"caption": "Antal dagar under en viss vinter där sjön är helt täckt av is.",
+			"title": "Lake Ice Time", 
+			"subTitle": "Torneträsk",
+			"caption": "Number of days the lake is covered completely by ice.<Paste>",
 			"yAxis": {
-				"left": "Istid [antal dagar]",
+				"left": "Ice time [units]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "År", 
+				"bott": "Year", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Väder"
+			"legend": "Weather"
 		},
 		"1": {
-			"title": "[stationName] Skillnad från baslinjen för isperiodens längd", 
-			"subTitle": "",
-			"caption": "Antal dagar där sjön täcks helt av is skillnad från baslinjeperioden, vanligtvis 1961 till 1990.",
+			"title": "Lake Ice Time Difference (from Baseline)", 
+			"subTitle": "Torneträsk",
+			"caption": "Number of days the lake is covered completely by ice  difference from baseline period.",
 			"yAxis": {
-				"left": "Istid [antal dagar]", 
+				"left": "Difference Ice time [units]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "År", 
+				"bott": "Year", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Klimat"
+			"legend": "Climate"
 		}
 	},
 	"series": {
 		"avg": {
-			"name": "Istid" 
+			"name": "Ice time" 
 		},
 		"diff": {
-			"name": "Skillnad från baslinjen"
+			"name": "Difference"
 		}
 	}
 }
