@@ -15,7 +15,7 @@
 		"Precipitation",
 		"winterPrecipitation",
 		"monthlyPrecipitation",
-		"yearlyPrecipitationDifference",
+		"annualPrecipitationDifference",
 		"springPrecipitation",
 		"summerPrecipitation",
 		"autumnPrecipitation",
@@ -48,7 +48,7 @@
 		"slideSpringPrecipitation",
 		"abiskoLakeIceBreakup",
 		"abiskoLakeIceFreezeup",
-		"yrlyAvgSnowDepth"
+		"annualAvgSnowDepth"
 	],
 	"Temperatures" : ["Temperatures"],
 	"TemperaturesSpring" : ["TemperaturesSpring"],
@@ -65,7 +65,7 @@
 	"Precipitation" : ["Precipitation"],
 	"winterPrecipitation" : ["winterPrecipitation"],
 	"monthlyPrecipitation" : ["monthlyPrecipitation"],
-	"yearlyPrecipitationDifference" : ["yearlyPrecipitationDifference"],
+	"annualPrecipitationDifference" : ["annualPrecipitationDifference"],
 	"springPrecipitation" : ["springPrecipitation"],
 	"summerPrecipitation" : ["summerPrecipitation"],
 	"autumnPrecipitation" : ["autumnPrecipitation"],
@@ -98,5 +98,5 @@
 	"slideSpringPrecipitation" : ["slideSpringPrecipitation"],
 	"abiskoLakeIceBreakup" : ["abiskoLakeIceBreakup"],
 	"abiskoLakeIceFreezeup" : ["abiskoLakeIceFreezeup"],
-	"yrlyAvgSnowDepth" : ["yrlyAvgSnowDepth"]
+	"annualAvgSnowDepth" : ["annualAvgSnowDepth"]
 }

@@ -1,0 +1,87 @@
+{
+	"zonal": {
+		"file": ["ZonAnn.Ts.csv"],
+		"preset": {
+			"header": true,
+			"delimiter": ",",
+			"download": true,
+			"skipEmptyLines": true,
+			"dynamicTyping": true
+		},
+		"parser": "GISSTEMPzonalMeans",
+		"local": false
+	}, 
+	"abisko": { 
+		"file": ["ANS_Temp_Prec.csv", "AWS_Daily_1984-2019.csv", "ANS_Prec.csv"],
+		"preset": {
+			"header": true,
+			"download": true,
+			"skipEmptyLines": true,
+			"beforeFirstChunk": "function(result){ global.stationName = 'Abisko'; }",
+			"dynamicTyping": false
+		},
+		"parser": "AbiskoCsv",
+		"local": true
+	},
+	"smhi": { 
+		"file": ["temperature.csv", "precipitation.csv"],
+		"preset": {
+			"header": true,
+			"download": true,
+			"skipEmptyLines": true,
+			"beforeFirstChunk": "function(result){ result = result.split('\n') var line = result.findIndex(x => x.indexOf('Tidsutsnitt:') > -1) var rest = result.splice(0,line); result = result.join('\r\n'); rest = rest[1].split(';'); global.stationName = rest[0]; return result }",
+			"fastMode": true
+		},
+		"parser": "smhiTemp",
+		"local": true
+	},
+	"tornetrask": {
+		"file": ["Tornetrask_islaggning_islossning.csv"], 
+		"preset": {
+			"header": true,
+			"download": true,
+			"skipEmptyLines": true
+		},
+		"parser": "AbiskoIceData",
+		"local": true
+	},
+	"abiskoSnowDepth": {
+		"file": ["ANS_SnowDepth.csv"], 
+		"preset": {
+			"header": true,
+			"download": true,
+			"skipEmptyLines": true
+		},
+		"parser": "AbiskoSnowData",
+		"local": true
+	},
+	"weeklyCO2": {
+		"file": ["weekly_in_situ_co2_mlo.csv"],
+		"preset": {
+			"download": true,
+			"skipEmptyLines": true
+		},
+		"parser": "SCRIPPS_CO2",
+		"local": false
+	},
+	"permaHistogramCALM": { 
+		"file": ["CALM.csv"], 
+		"preset": {
+			"header": true,
+			"download": true,
+			"skipEmptyLines": true
+		},
+		"parser": "CALM",
+		"local": false
+	},
+	"iceThick": { 
+		"file": ["Tornetrask-data.csv"],
+		"preset": {
+			"header": true,
+			"download": true,
+			"skipEmptyLines": true
+		},
+		"parser": "AbiskoLakeThickness",
+		"local": true
+	}
+}

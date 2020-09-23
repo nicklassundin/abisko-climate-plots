@@ -11,7 +11,6 @@ var dateFormat = (date) => {
 var formats = {
 	YYYYMMDD: (date) => {
 		try{
-
 			return date.getFullYear() + ' ' + formats['MM'](date) + ' ' + formats['DD'](date) 
 		}catch(error){
 			return ''
