@@ -38,7 +38,7 @@ var config = {
 		preset.abisko,
 		meta = {
 			'temperatures': {
-				'yrly': meta_struct.create(config =  'temperature', lang =  'yrlyTemperature', data =  'ANS', set =  'weather'), 
+				'yrly': meta_struct.create(config =  'temperature', lang =  'annualTemperature', data =  'ANS', set =  'weather'), 
 				'summer': meta_struct.create(config =  'temperature', lang =  'summerTemperature', data =  'ANS', set =  'weather'),  
 				'winter': meta_struct.create(config =  'temperature', lang =  'winterTemperature', data =  'ANS', set =  'weather'), 
 				'autumn': meta_struct.create(config =  'temperature', lang =  'autumnTemperature', data =  'ANS', set =  'weather'), 
@@ -47,11 +47,11 @@ var config = {
 				//TODO
 				'months': meta_struct.create(config =  'temperature', lang =  'monthlyTemperature', data =  'ANS', set = 'slide', subSet = 'monthSet'), 
 				// END
-				'difference': meta_struct.create(config =  'temperature', lang =  'yrlyTemperature', data =  'ANS', set =  'climate'), 
-				'dailyExtreme': meta_struct.create(config =  'temperature', lang =  'yrlyTemperature', data =  'ANS' , set =  'extremeDay'), 
-				'weeklyExtreme': meta_struct.create(config =  'temperature', lang =  'yrlyTemperature', data =  'ANS' , set =  'extremeWeek'), 
+				'difference': meta_struct.create(config =  'temperature', lang =  'annualTemperature', data =  'ANS', set =  'climate'), 
+				'dailyExtreme': meta_struct.create(config =  'temperature', lang =  'annualTemperature', data =  'ANS' , set =  'extremeDay'), 
+				'weeklyExtreme': meta_struct.create(config =  'temperature', lang =  'annualTemperature', data =  'ANS' , set =  'extremeWeek'), 
 				'polar': meta_struct.create(config =  undefined, lang =  undefined, data =  'ANS'), 
-				'yrlySlide': meta_struct.create(config =  'temperature', lang =  'yrlyTemperature', data =  'ANS', set =  'slide'), 
+				'yrlySlide': meta_struct.create(config =  'temperature', lang =  'annualTemperature', data =  'ANS', set =  'slide'), 
 				'summerSlide': meta_struct.create(config =  'temperature', lang =  'summerTemperature', data =  'ANS', set =  'slide'),  
 				'winterSlide': meta_struct.create(config =  'temperature', lang =  'winterTemperature', data =  'ANS', set =  'slide'), 
 				'autumnSlide': meta_struct.create(config =  'temperature', lang =  'autumnTemperature', data =  'ANS', set =  'slide'), 
@@ -59,17 +59,17 @@ var config = {
 				'monthlySlide': meta_struct.create(config =  'temperature', lang =  'monthlyTemperature', data =  'ANS', set = 'slide',  subSet = 'monthly')
 			},
 			'precipitation':{
-				'yrly': meta_struct.create(config =  'precipitation', lang =  'yrlyPrecipitation', data =  'ANS' , set =  'weather'), 
+				'yrly': meta_struct.create(config =  'precipitation', lang =  'annualPrecipitation', data =  'ANS' , set =  'weather'), 
 				'summer': meta_struct.create(config =  'precipitation', lang =  'summerPrecipitation', data =  'ANS', set =  'weather'), 
 				'spring': meta_struct.create(config =  'precipitation', lang =  'springPrecipitation', data =  'ANS', set =  'weather'), 
 				'winter': meta_struct.create(config =  'precipitation', lang =  'winterPrecipitation', data =  'ANS', set =  'weather'), 
 				'autumn': meta_struct.create(config =  'precipitation', lang =  'autumnPrecipitation', data =  'ANS', set =  'weather'), 
 				'monthly': meta_struct.create(config =  'precipitation', lang =  'monthlyPrecipitation', data =  'ANS', set = 'weather', subSet = 'monthly'),
-				'difference': meta_struct.create(config =  'precipitation', lang =  'yrlyPrecipitation', data =  'ANS', set =  'climate'), 
-				'dailyExtreme': meta_struct.create(config =  'precipitation', lang =  'yrlyPrecipitation', data =  'ANS' , set =  'extremeDay'), 
-				'weeklyExtreme': meta_struct.create(config =  'precipitation', lang =  'yrlyPrecipitation', data =  'ANS' , set =  'extremeWeek'), 
+				'difference': meta_struct.create(config =  'precipitation', lang =  'annualPrecipitation', data =  'ANS', set =  'climate'), 
+				'dailyExtreme': meta_struct.create(config =  'precipitation', lang =  'annualPrecipitation', data =  'ANS' , set =  'extremeDay'), 
+				'weeklyExtreme': meta_struct.create(config =  'precipitation', lang =  'annualPrecipitation', data =  'ANS' , set =  'extremeWeek'), 
 				'polar': meta_struct.create(config =  undefined, lang =  undefined), 
-				'yrlySlide': meta_struct.create(config =  'precipitation', lang =  'yrlyPrecipitation', data =  'ANS' , set =  'slide'), 
+				'yrlySlide': meta_struct.create(config =  'precipitation', lang =  'annualPrecipitation', data =  'ANS' , set =  'slide'), 
 				'summerSlide': meta_struct.create(config =  'precipitation', lang =  'summerPrecipitation', data =  'ANS', set =  'slide'), 
 				'springSlide': meta_struct.create(config =  'precipitation', lang =  'springPrecipitation', data =  'ANS', set =  'slide'), 
 				'winterSlide': meta_struct.create(config =  'precipitation', lang =  'winterPrecipitation', data =  'ANS', set =  'slide'), 
@@ -84,13 +84,13 @@ var config = {
 				'first': meta_struct.create(config =  'growingSeasonFirst', lang =  'growingSeasonFrostFirst', data = 'ANS', set = 'slide'), 
 				'last': meta_struct.create(config =  'growingSeasonLast', lang =  'growingSeasonFrostLast', data = 'ANS', set = 'slide'), 
 			},
-			'slideTemperature': meta_struct.create(config =  'temperature', lang =  'yrlyTemperature', data =  'ANS', set =  'slide'), 
+			'slideTemperature': meta_struct.create(config =  'temperature', lang =  'annualTemperature', data =  'ANS', set =  'slide'), 
 		}),
 	smhi: dataset_struct.create(
 		preset.smhi, 
 		meta = {
 			'temperatures': {
-				'yrly': meta_struct.create(config =  'temperature', lang =  'yrlyTemperature', data = 'SMHI-Weather', set =  'weather'), 
+				'yrly': meta_struct.create(config =  'temperature', lang =  'annualTemperature', data = 'SMHI-Weather', set =  'weather'), 
 				'summer': meta_struct.create(config =  'temperature', lang =  'summerTemperature', data = 'SMHI-Weather', set =  'weather'),  
 				'winter': meta_struct.create(config =  'temperature', lang =  'winterTemperature', data = 'SMHI-Weather', set =  'weather'), 
 				'autumn': meta_struct.create(config =  'temperature', lang =  'autumnTemperature', data = 'SMHI-Weather', set =  'weather'), 
@@ -99,11 +99,11 @@ var config = {
 				//TODO
 				'months': meta_struct.create(config =  'temperature', lang =  'monthlyTemperature', data = 'SMHI-Weather', set = 'slide', subset = 'monthSet'), 
 				// END
-				'difference': meta_struct.create(config =  'temperature', lang =  'yrlyTemperature', data = 'SMHI-Weather', set =  'climate'), 
-				'dailyExtreme': meta_struct.create(config =  'temperature', lang =  'yrlyTemperature', data = 'SMHI-Weather' , set =  'extremeDay'), 
-				'weeklyExtreme': meta_struct.create(config =  'temperature', lang =  'yrlyTemperature', data = 'SMHI-Weather' , set =  'extremeWeek'), 
+				'difference': meta_struct.create(config =  'temperature', lang =  'annualTemperature', data = 'SMHI-Weather', set =  'climate'), 
+				'dailyExtreme': meta_struct.create(config =  'temperature', lang =  'annualTemperature', data = 'SMHI-Weather' , set =  'extremeDay'), 
+				'weeklyExtreme': meta_struct.create(config =  'temperature', lang =  'annualTemperature', data = 'SMHI-Weather' , set =  'extremeWeek'), 
 				// 'polar': meta_struct.create(config =  undefined, lang =  undefined, data =  'SMHI-Weather'), 
-				'yrlySlide': meta_struct.create(config =  'temperature', lang =  'yrlyTemperature', data =  'ANS', set =  'slide'), 
+				'yrlySlide': meta_struct.create(config =  'temperature', lang =  'annualTemperature', data =  'ANS', set =  'slide'), 
 				'summerSlide': meta_struct.create(config =  'temperature', lang =  'summerTemperature', data =  'SMHI-Weather', set =  'slide'),  
 				'winterSlide': meta_struct.create(config =  'temperature', lang =  'winterTemperature', data =  'SMHI-Weather', set =  'slide'), 
 				'autumnSlide': meta_struct.create(config =  'temperature', lang =  'autumnTemperature', data =  'SMHI-Weather', set =  'slide'), 
@@ -111,17 +111,17 @@ var config = {
 				'monthlySlide': meta_struct.create(config =  'temperature', lang =  'monthlyTemperature', data =  'SMHI-Weather', set = 'slide', subSet = 'monthly'), 
 			},
 			'precipitation':{
-				'yrly': meta_struct.create(config =  'precipitation', lang =  'yrlyPrecipitation', data =  'SMHI-Hydrology' , set =  'weather'), 
+				'yrly': meta_struct.create(config =  'precipitation', lang =  'annualPrecipitation', data =  'SMHI-Hydrology' , set =  'weather'), 
 				'summer': meta_struct.create(config =  'precipitation', lang =  'summerPrecipitation', data =  'SMHI-Hydrology', set =  'weather'), 
 				'spring': meta_struct.create(config =  'precipitation', lang =  'springPrecipitation', data =  'SMHI-Hydrology', set =  'weather'), 
 				'winter': meta_struct.create(config =  'precipitation', lang =  'winterPrecipitation', data =  'SMHI-Hydrology', set =  'weather'), 
 				'autumn': meta_struct.create(config =  'precipitation', lang =  'autumnPrecipitation', data =  'SMHI-Hydrology', set =  'weather'), 
 				'monthly': meta_struct.create(config =  'precipitation', lang =  'monthlyPrecipitation', data =  'SMHI-Hydrology' , set = 'weather', subSet = 'monthly'), 
-				'difference': meta_struct.create(config =  'precipitation', lang =  'yrlyPrecipitation', data =  'SMHI-Hydrology', set =  'climate'), 
-				'dailyExtreme': meta_struct.create(config =  'precipitation', lang =  'yrlyPrecipitation', data =  'SMHI-Hydrology' , set =  'extremeDay'), 
-				'weeklyExtreme': meta_struct.create(config =  'precipitation', lang =  'yrlyPrecipitation', data =  'SMHI-Hydrology' , set =  'extremeWeek'), 
+				'difference': meta_struct.create(config =  'precipitation', lang =  'annualPrecipitation', data =  'SMHI-Hydrology', set =  'climate'), 
+				'dailyExtreme': meta_struct.create(config =  'precipitation', lang =  'annualPrecipitation', data =  'SMHI-Hydrology' , set =  'extremeDay'), 
+				'weeklyExtreme': meta_struct.create(config =  'precipitation', lang =  'annualPrecipitation', data =  'SMHI-Hydrology' , set =  'extremeWeek'), 
 				'polar': meta_struct.create(config =  undefined, lang =  undefined), 
-				'yrlySlide': meta_struct.create(config =  'precipitation', lang =  'yrlyPrecipitation', data =  'SMHI-Hydrology' , set =  'slide'), 
+				'yrlySlide': meta_struct.create(config =  'precipitation', lang =  'annualPrecipitation', data =  'SMHI-Hydrology' , set =  'slide'), 
 				'summerSlide': meta_struct.create(config =  'precipitation', lang =  'summerPrecipitation', data =  'SMHI-Hydrology', set =  'slide'), 
 				'springSlide': meta_struct.create(config =  'precipitation', lang =  'springPrecipitation', data =  'SMHI-Hydrology', set =  'slide'), 
 				'winterSlide': meta_struct.create(config =  'precipitation', lang =  'winterPrecipitation', data =  'SMHI-Hydrology', set =  'slide'), 
@@ -136,7 +136,7 @@ var config = {
 				'first': meta_struct.create(config =  'growingSeasonFirst', lang =  'growingSeasonFrostFirst', data =  'SMHI-Weather', set =  'slide'), 
 				'last': meta_struct.create(config =  'growingSeasonLast', lang =  'growingSeasonFrostLast', data = 'SMHI-Weather', set =  'slide'), 
 			},
-			'slideTemperature': meta_struct.create(config =  'temperature', lang =  'yrlyTemperature', data =  'SMHI-Weather', set =  'slide'), 
+			'slideTemperature': meta_struct.create(config =  'temperature', lang =  'annualTemperature', data =  'SMHI-Weather', set =  'slide'), 
 		}),
 	// TODO Bake together
 	tornetrask: dataset_struct.create(
@@ -153,7 +153,7 @@ var config = {
 			'periodMeans': meta_struct.create(config =  'snowDepthPeriod', lang =  'snowDepthPeriod', data =  'ANS', set =  'weather'),
 			'decadeMeans': meta_struct.create(config =  'snowDepthDecade', lang =  'snowDepthDecade', data =  'ANS', set =  'weather'),
 			'snowDepth': {
-				'yrly': meta_struct.create(config =  'avgSnowDepth', lang =  'yrlyAvgSnowDepth', data =  'ANS', set =  'slide'),
+				'yrly': meta_struct.create(config =  'avgSnowDepth', lang =  'annualAvgSnowDepth', data =  'ANS', set =  'slide'),
 			}
 		}),
 	weeklyCO2: dataset_struct.create(
