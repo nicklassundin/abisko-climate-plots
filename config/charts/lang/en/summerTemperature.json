@@ -2,7 +2,7 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "Summer (June to August) Average Temperature" ,
+			"title": "Summer Average Temperature" ,
 			"subTitle": "[stationName]", 
 			"caption": "Average annual summer (June to August) temperature. The lowest (min) and highest (max) temperature of the month.", 
 			"legend": "Weather",
@@ -16,7 +16,7 @@
 			}
 		},
 		"1": {
-			"title": "Summer (June to August) Average Temperature Difference from Baseline" ,
+			"title": "Summer Average Temperature Difference from Baseline" ,
 			"subTitle": "[stationName]",
 			"caption": "Difference between the summer (June-August) seasonal averages and the average for the baseline period, typically 1961 to 1990.",
 			"legend": "Climate",

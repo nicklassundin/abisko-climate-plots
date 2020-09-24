@@ -171,7 +171,7 @@ var parsers = {
 				'glob': build('Glob') 
 			}
 			temperatures.src = src;
-			console.log(temperatures)
+			// console.log(temperatures)
 			resolve(temperatures)
 		})
 	},

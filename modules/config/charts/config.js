@@ -143,7 +143,7 @@ var rendF = {
 			return createDiv('abiskoSnowDepthPeriodMeans2',no)
 		},
 	},
-	'yrlyAvgSnowDepth':{
+	'annualAvgSnowDepth':{
 		func: function(reset=false) {
 			config['abiskoSnowDepth'].contFunc(reset);
 			config['abiskoSnowDepth'].init("yrlyAvgSnowDepth",["snowDepth", 'singleStake', 'yrly'], ['snowDepth', 'yrly'])
@@ -534,15 +534,15 @@ var rendF = {
 
 		},
 	}, 
-	'yearlyPrecipitationDifference': {
+	'annualPrecipitationDifference': {
 		func: function(reset=false){
 			config[stationType].contFunc(reset);
-			config[stationType].init('yearlyPrecipitationDifference', ['precipitation','yrly'], ['precipitation','difference']);
+			config[stationType].init('annualPrecipitationDifference', ['precipitation','yrly'], ['precipitation','difference']);
 		},
 		html: function(doc){
 			var no = 38;
 			if(!variables.debug) no = variables.debug;
-			return createDiv('yearlyPrecipitationDifference', no);
+			return createDiv('annualPrecipitationDifference', no);
 
 		},
 	}, 

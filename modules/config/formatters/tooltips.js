@@ -1,6 +1,6 @@
 // TODO create a builder instead of this mess
 
-var dateFormats = require('./date').dateFormats
+var dateFormats = require('./date').formats
 
 exports.formatters = function(meta){
 	return {

@@ -39,7 +39,7 @@
 		"slideMonthlyPrecipitation"
 	],
 		"sqrt-snowDepth-v2": [
-			"yrlyAvgSnowDepth",
+			"annualAvgSnowDepth",
 			"abiskoSnowDepthPeriodMeans",
 			"abiskoSnowDepthPeriodMeans2"
 		],

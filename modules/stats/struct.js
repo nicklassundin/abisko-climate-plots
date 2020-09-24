@@ -58,6 +58,7 @@ var struct = {
 				}, type, abs)).build()
 			}
 		}catch(error){
+			// console.log(this.values)
 			console.log(error);
 			return { values: undefined }
 		}

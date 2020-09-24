@@ -8,14 +8,13 @@ var months = help.months;
 var renderer = require('../renderer.js').render;
 
 global.filePath = {
-	station: function(fileName, id=station){
-		console.log(hostUrl)
-		return hostUrl+"/data/"+id+"/"+fileName;
+	station: function(fileName, id){
+		if(id){
+			return hostUrl+"/data/"+id+"/"+fileName;
+		}else{
+			return hostUrl+"/data/"+fileName;
+		}
 	},
-	other: function(fileName){
-		console.log(hostUrl)
-		return hostUrl+"/data/"+fileName;
-	}
 }
 
 // wander down the data structure with tag input example: [high, medium, low]
@@ -126,7 +125,13 @@ var struct = {
 	clone: function(){
 		return Object.assign({}, this);
 	},
-	create: function(file, preset, parser, meta, reader = Papa.parse, local=true){
+	create: function(config, meta){
+		var file = config.file;
+		var preset = config.preset;
+		if(preset.beforeFirstChuck) preset.beforeFirstChuck = preset.beforeFirstChuck.parseFunction();
+		var parser = parse[config.parser];
+		var local = config.local;
+
 		var res = this.clone();
 		res.rawData = [];
 		if(!Array.isArray(file)){
@@ -134,14 +139,10 @@ var struct = {
 		}
 		res.metaRef = meta;
 		res.file = file;	
-		if(local){
-			res.filePath = (files) => files.map(x => filePath.station(x)); 
-		}else{
-			res.filePath = (files) => files.map(x => filePath.other(x)); 
-		}
+		res.filePath = (files) => files.map(x => filePath.station(x, (local ? station : undefined))); 
 		res.preset = preset;
 		res.parser = parser;
-		res.reader = reader;
+		res.reader = Papa.parse;
 		return res;
 	},
 }
