@@ -563,7 +563,7 @@ var chart = {
 					}],
 					max: (group.yAxis.max != undefined) ? group.yAxis.max : null,
 					min: (group.yAxis.min != undefined) ? group.yAxis.min : null,
-					tickInterval: (group.yAxis.left.tickInterval) ? group.yAxis.left.tickInterval : 1,
+					tickInterval: (group.yAxis.ticketInterval) ? group.yAxis.ticketInterval : 1,
 					lineWidth: 1,
 					reversed: group.yAxis.reversed,
 					plotLines: plotLinesY(group), 

@@ -9,8 +9,9 @@
 				"plotLines": {
 					"color": "#88dd88"
 				},
+				"ticketInterval": 25,
 				"min": 0,
-				"max": 1.5
+				"max": 150
 			},
 			"xAxis": {
 				"min": 1978
