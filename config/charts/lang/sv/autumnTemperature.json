@@ -2,30 +2,30 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "Autumn Average Temperature" ,
+			"title": "Höstens genomsnittliga temperatur" ,
 			"subTitle": "[stationName]",
-			"caption": "Average annual autumn (September to November) temperature. The lowest (min) and highest (max) temperature of the month.", 
-			"legend": "Weather",
+			"caption": "Genomsnittlig årlig höst (september till november) temperatur. Månadens lägsta (min) och högsta (max) temperatur.", 
+			"legend": "Väder",
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
 			"yAxis": {
-				"left": "Average temperature [°C]",
+				"left": "Genomsnittlig temperatur [°C]",
 				"right": "[X-AXIS]"
 			}
 		},
 		"1": {
-			"title": " Autumn Average Temperature Difference From Baseline" ,
+			"title": "Höstens genomsnittliga temperaturskillnad från baslinjen" ,
 			"subTitle": "[stationName]",
-			"caption": "Difference between the autumn (September-November)seasonal averages and the average for the baseline period, typically 1961 to 1990.", 
-			"legend": "Climate",
+			"caption": "Skillnad mellan höstens (september-november) säsongsgenomsnitt och genomsnittet för basperioden, vanligtvis 1961 till 1990.", 
+			"legend": "Klimat",
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
 			"yAxis": {
-				"left": "Temperature difference [°C]",
+				"left": "Temperaturskillnad [°C]",
 				"right": "[X-AXIS]"
 			}
 		}
@@ -38,10 +38,10 @@
 			"name": "Min"
 		},
 		"avg": {
-			"name": "Yearly Average"
+			"name": "Årligt genomsnitt"
 		},  
 		"diff": {
-			"name": "Difference"
+			"name": "Skillnad"
 		}
 	}
 }
