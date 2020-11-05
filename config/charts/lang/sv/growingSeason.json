@@ -2,12 +2,12 @@
 	"valueSuffix": "[units]",
 	"groups": {
 		"0": {
-			"title": "Growing Season ([units])" ,
+			"title": "Växtsäsong ([units])" ,
 			"subTitle": "[stationName]",
-			"legend": "Weather",
-			"caption": "Maximum number of consecutive [units] above zero Celcius. This frost-free season is the approximate length of the growing season, during which there are no freezing temperatures to kill or damage plants. This is calculated from temperature data.",
+			"legend": "Väder",
+			"caption": "Maximalt antal på [units] i rad över noll grader Celcius. Denna frostfria säsong är den ungefärliga längden på växtsäsongen, där det inte förekommer någon frost för att döda eller skada växter. Detta beräknas utifrån temperaturdata.",
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
 			"yAxis": {
@@ -16,26 +16,26 @@
 			}
 		},
 		"1": {
-			"title": "Growing Season Difference ([units]) From Baseline" ,
+			"title": "Skillnad i växtsäsongens längd [units] från baslinjen" ,
 			"subTitle": "[stationName]", 
-			"legend": "Climate",
-			"caption": "Difference between the maximum number of [units] above zero for the year (the frost-free season) and the average for the baseline period, [baseline]. This is calculated from temperature data.", 
+			"legend": "Klimat",
+			"caption": "Skillnad mellan det maximala antalet [units] över noll för året (den frostfria säsongen) och genomsnittet för baslinjeperioden, [baseline]. Detta beräknas utifrån temperaturdata.", 
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
 			"yAxis": {
-				"left": "Difference [units]", 
+				"left": "Skillnad [units]", 
 				"right": "[X-AXIS]"
 			}
 		}
 	},
 	"series": {
 		"avg": {
-			"name": "Growing Season"
+			"name": "Växtsäsong"
 		},  
 		"diff": {
-			"name": "Growing Season Difference" 
+			"name": "Skillnad i växtsäsongens längd" 
 		}
 	}
 }
