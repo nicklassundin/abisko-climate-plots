@@ -2,42 +2,42 @@
 	"valueSuffix": "cm",
 	"groups": {
 		"0": {
-			"title": "[stationName] Snow Depth",
-			"subTitle": "Annual average", 
-			"caption": "Average annual snow depth in centimeters.", 
+			"title": "[stationName] Snödjup",
+			"subTitle": "Årlig genomsnitt", 
+			"caption": "Genomsnittligt årligt snödjup i centimeter.", 
 			"yAxis": {
-				"left": "Average Snow depth [cm]", 
+				"left": "Genomsnittligt snödjup [cm]", 
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"categories": ["Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Ju    n"],
-				"bott": "Month", 
+				"categories": ["sep", "okt", "nov", "dec", "jan", "feb", "mars", "april", "maj", "juni"],
+				"bott": "Månad", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Weather"
+			"legend": "Väder"
 		},
 		"1": {
-			"title": "[stationName] Annual Average Snow Depth Difference from Baseline",
+			"title": "[stationName] Årlig genomsnittlig snödjupskillnad från baslinjen",
 			"subTitle": "", 
-			"caption": "Difference between annual snow depth in centimeters and the average for the baseline period, typically 1961 to 1990.",
+			"caption": "Skillnad mellan årligt snödjup i centimeter och genomsnittet för baslinjeperioden, vanligtvis 1961 till 1990.",
 			"yAxis": {
-				"left": "Average Snow depth [cm]", 
+				"left": "Genomsnittligt snödjup [cm]", 
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"categories": ["Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Ju    n"],
-				"bott": "Month", 
+				"categories": ["sep", "okt", "nov", "dec", "jan", "feb", "mars", "april", "maj", "juni"],
+				"bott": "Månad", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Climate"
+			"legend": "Klimat"
 		}
 	},
 	"series": {
 		"avg": {
-			"name": "Average snow depth"
+			"name": "Genomsnittligt snödjup"
 		},
 		"diff": {
-			"name": "Difference"
+			"name": "Skillnad"
 		}
 	}
 }
