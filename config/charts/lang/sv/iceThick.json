@@ -2,40 +2,40 @@
 	"valueSuffix": "",
 	"groups": {
 		"0": {
-			"title": "[stationName] Maximum Lake Ice Thickness",
+			"title": "[stationName] Maximal tjocklek av sjöis",
 			"subTitle": "",
-			"caption": "The maximum ice thickness for a given winter.",
+			"caption": "Den maximala istjockleken för en viss vinter.",
 			"yAxis": {
-				"left": "Ice thickness [cm]", 
+				"left": "Isens tjocklek [cm]", 
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Weather"
+			"legend": "Väder"
 		},
 		"1": {
-			"title": "[stationName] Maximum Lake Ice Thickness Difference",
+			"title": "[stationName] Skillnad i maximal tjocklek av sjöis",
 			"subTitle": "",
-			"caption": "The maximum ice thickness for a given winter.",
+			"caption": "Den maximala istjockleken för en viss vinter.",
 			"yAxis": {
-				"left": "Ice thickness [cm]", 
+				"left": "Isens tjocklek [cm]", 
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Climate"
+			"legend": "Klimat"
 		}
 	},
 	"series": {
 		"iceThick": {
-			"name": "Ice thickness (cm)"
+			"name": "Isens tjocklek (cm)"
 		},
 		"diff": {
-			"name": "Ice thickess Difference (cm)"
+			"name": "Skillnad i isens tjocklek  (cm)"
 		}
 	}
 }
