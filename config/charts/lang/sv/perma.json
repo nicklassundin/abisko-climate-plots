@@ -1,28 +1,28 @@
 {
 	"groups": {
 		"0": {
-			"title": "Permafrost active layer", 
-			"subTitle": "Northern Sweden",
-			"caption": "Site specific and regional mean of active layer depth.",
+			"title": "Permafrostens aktiva lager", 
+			"subTitle": "Norra Sverige",
+			"caption": "Platsspecifikt och regionalt medelvärde för djupet av det aktiva lagret.",
 			"yAxis": {
-				"left": "Permafrost active layer [m]", 
+				"left": "Permafrostens aktiva lager [m]", 
 				"right": "[X-AXIS]",
 				"plotLines": {
-					"text": "Ground"
+					"text": "Marknivå"
 				} 
 			},
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Weather"
+			"legend": "Väder"
 
 		}
 	},
 	"valueSuffix": "",
 	"series": {
 		"avg": {
-			"name": "Average of all stations"
+			"name": "Genomsnitt av alla stationer"
 		}
 	}
 }
