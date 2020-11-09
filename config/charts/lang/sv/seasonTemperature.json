@@ -2,16 +2,16 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "[season] Average Temperature" ,
+			"title": "[season] Genomsnittlig temperatur" ,
 			"subTitle": "[stationName] ",
-			"caption": "Average [season] ([period]) temperature. The lowest (min) and highest (max) temperature.",
-			"legend": "Weather",
+			"caption": "Genomsnittlig [season] ([period]) temperatur. Lägsta (min) och högsta (max) temperatur.",
+			"legend": "Väder",
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
 			"yAxis": {
-				"left": "Average temperature [°C]",
+				"left": "Genomsnittlig temperatur [°C]",
 				"right": "[X-AXIS]"
 			}
 		}
@@ -24,10 +24,10 @@
 			"name": "Min"
 		},
 		"avg": {
-			"name": "Yearly Average"
+			"name": "Årets medelvärde"
 		},  
 		"diff": {
-			"name": "Difference"
+			"name": "Skillnad"
 		}
 	}
 }
