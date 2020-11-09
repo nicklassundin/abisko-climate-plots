@@ -2,7 +2,7 @@
 	"day": {
 		"plural": "dagar",
 		"singular": "dag",
-		"interval": "dagligen"
+		"interval": "daglig"
 	},
 	"week": {
 		"plural": "veckor",

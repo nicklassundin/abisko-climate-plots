@@ -1,12 +1,12 @@
 {
-	"valueSuffix": "dagar",
+	"valueSuffix": "Dagar",
 	"groups": {
 		"0": {
-			"title": "[stationName] Isperiodens längd", 
-			"subTitle": "",
-			"caption": "Antal dagar under en viss vinter där sjön är helt täckt av is.",
+			"title": "Sjöisens varande", 
+			"subTitle": "Torneträsk",
+			"caption": "Antal dagar som sjön täcks helt av is.<Paste>",
 			"yAxis": {
-				"left": "Istid [antal dagar]",
+				"left": "Isens varande [units]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
@@ -16,11 +16,11 @@
 			"legend": "Väder"
 		},
 		"1": {
-			"title": "[stationName] Skillnad från baslinjen för isperiodens längd", 
-			"subTitle": "",
-			"caption": "Antal dagar där sjön täcks helt av is skillnad från baslinjeperioden, vanligtvis 1961 till 1990.",
+			"title": "Skillnad i sjöisens varande (från baslinjen)", 
+			"subTitle": "Torneträsk",
+			"caption": "Skillnad från baslinjen i antal dagar som sjön täcks helt av is.",
 			"yAxis": {
-				"left": "Istid [antal dagar]", 
+				"left": "Skillnad i isens varande [units]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
@@ -32,10 +32,10 @@
 	},
 	"series": {
 		"avg": {
-			"name": "Istid" 
+			"name": "Isens varande" 
 		},
 		"diff": {
-			"name": "Skillnad från baslinjen"
+			"name": "Skillnad"
 		}
 	}
 }

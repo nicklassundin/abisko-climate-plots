@@ -1,0 +1,66 @@
+{
+	"valueSuffix": "°C",
+	"groups": {
+		"0": {
+			"title": "Årlig genomsnittstemperatur" ,
+			"subTitle": "[stationName]",
+			"caption": "Årlig genomsnittstemperatur. Årets lägsta (min) och högsta (max) temperatur.",
+			"yAxis": {
+				"left": "Genomsnittstemperatur [°C]",
+				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "År", 
+				"top": "[Y-AXIS]"
+			},
+			"legend": "Väder"
+		},
+		"1": {
+			"title": "Temperaturskillnaden från baslinjen",
+			"subTitle": "[stationName]",
+			"caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
+			"yAxis": {
+				"left": "Temperatur [°C]",
+				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "År", 
+				"top": "[Y-AXIS]"
+			},
+			"legend": "Klimat"
+		},
+		"2": {
+			"title": "Årets varmaste [unit]",
+			"subTitle": "[stationName]",
+			"caption": "Medeltemperaturen på årets varmaste [unit].",
+			"yAxis": {
+				"left": "Medeltemperaturen på årets varmaste [unit] [°C]",
+				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "År", 
+				"top": "[Y-AXIS]"
+			},
+			"legend": "Väder"
+		}
+	},
+	"series": {
+		"max": {
+			"name": "Max"
+		},
+		"min": {
+			"name": "Min"
+		},
+		"avg": {
+			"name": "Årlig genomsnitt"
+		},
+		"diff": {
+			"name": "Skillnad"
+		},
+		"extreme": {
+			"name": "Genomsnittlig varmaste högsta temperatur [interval]",
+			"week": "veckovis",
+			"day": "dagligen"
+		}
+	}
+}

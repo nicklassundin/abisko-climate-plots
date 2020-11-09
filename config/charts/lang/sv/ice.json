@@ -2,11 +2,11 @@
 	"valueSuffix": "",
 	"groups": {
 		"0": {
-			"title": "Troneträsk Isläggning och Islossning samt Tiden isen ligger på sjön" ,
-			"subTitle": "[SUB-TITLE]",
-			"caption": "[SOME TEXT]",
+			"title": "Isläggning och islossning av sjöis" ,
+			"subTitle": "Torneträsk",
+			"caption": "", 
 			"yAxis": {
-				"left": "Islossning / Isläggning [årets dag]",
+				"left": "Islossning/isläggning [date]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
@@ -18,7 +18,7 @@
 	},
 	"series": {
 		"freeze": {
-			"name": "Isläggning" 
+			"name": "Isläggning"
 		},
 		"breakup": {
 			"name": "Islossning"

@@ -1,16 +1,30 @@
 {
 	"months": {
-		"jan": "January",
-		"feb": "February",
+		"jan": "Januari",
+		"feb": "Februari",
 		"mar": "Mars",
 		"apr": "April",
-		"may": "May",
-		"jun": "June",
-		"jul": "July",
-		"Aug": "August",
+		"may": "Maj",
+		"jun": "Juni",
+		"jul": "Juli",
+		"aug": "Augusti",
 		"sep": "September",
-		"oct": "October",
+		"oct": "Oktober",
 		"nov": "November",
 		"dec": "December"
+	},
+	"monthShort": {
+		"jan": "Jan",
+		"feb": "Feb",
+		"mar": "March",
+		"apr": "April",
+		"may": "Maj",
+		"jun": "Juni",
+		"jul": "Juli",
+		"aug": "Aug",
+		"sep": "Sep",
+		"oct": "Okt",
+		"nov": "Nov",
+		"dec": "Dec"
 	}
 }

@@ -2,11 +2,11 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "Årlig genomsnittlig Temperatur för Arktis (64N-90N)", 
-			"subTitle": "",
-			"caption": "[SOME TEXT]",
+			"title": "Årlig medeltemperatur", 
+			"subTitle": "Arktis",
+			"caption": "Genomsnittlig årstemperatur för Arktis (64N-90N). Årets lägsta (min) och högsta (max) temperatur.",
 			"yAxis": {
-				"left": "Genomsnittlig Temperatur [°C]",
+				"left": "Medeltemperatur [°C]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
@@ -16,11 +16,11 @@
 			"legend": "Väder"
 		},
 		"1": {
-			"title": "Årlig genomsnittlig temperaturskillnad från baslinjen för Akrktis (64N-90N)", 
-			"subTitle": "", 
-			"caption": "Skillnaden mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.", 
+			"title": "Temperaturskillnad från baslinjen", 
+			"subTitle": "Arktis",
+			"caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för basperioden, vanligtvis 1961 till 1990, för den arktiska regionen (64N-90N).",
 			"yAxis": {
-				"left": "Temperaturskillnad [°C]", 
+				"left": "Temperatur [°C]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
@@ -38,10 +38,10 @@
 			"name": "Min"
 		},
 		"avg": {
-			"name": "Genomsnittlig Temperature" 
+			"name": "Årligt genomsnitt"
 		},  
 		"diff": {
-			"name": "Temperaturskillnad" 
+			"name": "Skillnad"
 		},
 		"linjer": {
 			"name": "[example]"

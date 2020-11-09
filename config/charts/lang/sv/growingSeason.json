@@ -1,27 +1,41 @@
 {
-	"valueSuffix": "veckor",
+	"valueSuffix": "[units]",
 	"groups": {
 		"0": {
-			"title": "[stationName] Växtsäsong" ,
-			"subTitle": "Maximalt antal av sammanhängande veckor över 0 grader Celsius", 
-			"legend": "VäxtSäsong",
-			"caption": "Den frostfria säsongen är den ungefärliga längden på växtsäsongen (i veckor), under vilken det inte finns någon frysningstemperatur för att döda eller skada växter. Detta beräknas utifrån temperaturdata.", 
-			"yAxis": {
-				"left": "Växtsäsong [antal av på varandra följande veckor över fryspunkten (> 0°C)]",
-				"right": "[X-AXIS]"
-			},
+			"title": "Växtsäsong ([units])" ,
+			"subTitle": "[stationName]",
+			"legend": "Väder",
+			"caption": "Maximalt antal på [units] i rad över noll grader Celcius. Denna frostfria säsong är den ungefärliga längden på växtsäsongen, där det inte förekommer någon frost för att döda eller skada växter. Detta beräknas utifrån temperaturdata.",
 			"xAxis": {
 				"bott": "År", 
 				"top": "[Y-AXIS]"
+			},
+			"yAxis": {
+				"left": "[units]",
+				"right": "[X-AXIS]"
+			}
+		},
+		"1": {
+			"title": "Skillnad i växtsäsongens längd [units] från baslinjen" ,
+			"subTitle": "[stationName]", 
+			"legend": "Klimat",
+			"caption": "Skillnad mellan det maximala antalet [units] över noll för året (den frostfria säsongen) och genomsnittet för baslinjeperioden, [baseline]. Detta beräknas utifrån temperaturdata.", 
+			"xAxis": {
+				"bott": "År", 
+				"top": "[Y-AXIS]"
+			},
+			"yAxis": {
+				"left": "Skillnad [units]", 
+				"right": "[X-AXIS]"
 			}
 		}
 	},
 	"series": {
 		"avg": {
-			"name": "Veckor"
+			"name": "Växtsäsong"
 		},  
 		"diff": {
-			"name": "Skillnad från baslinjen"
+			"name": "Skillnad i växtsäsongens längd" 
 		}
 	}
 }
