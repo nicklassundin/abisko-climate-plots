@@ -2,40 +2,40 @@
 	"valueSuffix": "",
 	"groups": {
 		"0": {
-			"title": "Torneträsk Freeze-up of lake ice" ,
+			"title": "Torneträsk - isläggning av sjöis" ,
 			"subTitle": "",
-			"caption": "Day of year for freeze-up of lake ice.",
+			"caption": "Årets dag för isläggning av sjöis",
 			"yAxis": {
-				"left": "freeze-up [day of year]",
+				"left": "Isläggning [day of year]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Weather"
+			"legend": "Väder"
 		},
 		"1": {
-			"title": "Troneträsk Freeze-Up Date of Lake Ice Difference from Baseline",
+			"title": "Torneträsk - Skillnad från baslinjen i datum för isläggningen av sjöis",
 			"subTitle": "",
-			"caption": "Freeze-up difference from baseline period, typically 1961 to 1990.", 
+			"caption": "Skillnad från baslinjeperioden, vanligtvis 1961 to 1990, i datum för isläggningen.", 
 			"yAxis": {
-				"left": "Ice freeze-up [day of year]",
+				"left": "Isläggning [day of year]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Climate"
+			"legend": "Klimat"
 		}
 	},
 	"series": {
 		"avg": {
-			"name": "Freeze-up"
+			"name": "Isläggning"
 		},
 		"diff": {
-			"name": "Difference"
+			"name": "Skillnad"
 		}
 	}
 }
