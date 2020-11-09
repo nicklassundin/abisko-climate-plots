@@ -1,41 +1,41 @@
 {
-	"valueSuffix": "Days",
+	"valueSuffix": "Dagar",
 	"groups": {
 		"0": {
-			"title": "[stationName] Last Frost of the Spring or Summer", 
+			"title": "[stationName] Vårens eller sommarens sista frost", 
 			"subTitle": "",
-			"legend": "Weather",
-			"caption": "The date of the last spring or summer frost, which marks the approximate beginning of the growing season for frost-sensitive crops and plants. This is calculated from temperature data.", 
+			"legend": "Väder",
+			"caption": "Datumet för den senaste vår- eller sommarfrosten, vilket markerar den ungefärliga början av växtsäsongen för frostkänsliga grödor och växter. Detta beräknas utifrån temperaturdata.", 
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
 			"yAxis": {
-				"left": "Date",
+				"left": "Datum",
 				"right": "[X-AXIS]"
 			}
 		},
 		"1": {
-			"title": "[stationName] Last Spring Frost - Difference from Baseline", 
+			"title": "[stationName] Vårens sista frost - Skillnad från baslinjen", 
 			"subTitle": "",
-			"legend": "Climate",
-			"caption": "The difference between the date of the last spring or summer frost and the average for the baseline period, typically 1961 to 1990. This is calculated from temperature data.", 
+			"legend": "Klimat",
+			"caption": "Skillnaden mellan datumet för den senaste vår- eller sommarfrosten och genomsnittet för basperioden, vanligtvis 1961 till 1990. Detta beräknas utifrån temperaturdata.", 
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
 			"yAxis": {
-				"left": "Difference [Days]",
+				"left": "Skillnad [Days]",
 				"right": "[X-AXIS]"
 			}
 		}
 	},
 	"series": {
 		"avg": {
-			"name": "Last date with temperatures record below 0°C"
+			"name": "Sista datumet med temperatur registrerad under 0 grader Celsius"
 		},
 		"diff": {
-			"name": "Last date with temperatures record below 0°C Difference" 
+			"name": "Skillnaden i sista datumet med temperatur registrerad under 0 grader Celsius" 
 		}
 	}
 }
