@@ -2,43 +2,43 @@
 	"valueSuffix": "mm",
 	"groups": {
 		"0": {
-			"title": "Summer Average Precipitation" ,
+			"title": "Sommarens genomsnittliga nederbörd",
 			"subTitle": "[stationName]",
-			"caption": "Average annual summer (June to August) precipitation. The lowest (min) and highest (max) precipitation of the month. Note the measurement of snow from precipitation is estimated from precipitation taking place when the temperature was simultaneously recorded as below 0 C. These values should be considered estimates and not a precise value.",
+			"caption": "Genomsnittlig årlig nederbörd under sommaren (juni till augusti). Månadens lägsta (min) och högsta (max) nederbörd. Observera att mätning av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
 			"yAxis": {
-				"left": "Total Precipitation [mm]",
+				"left": "Summa av all nederbörd [mm]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Weather"
+			"legend": "Väder"
 		},
 		"1": {
-			"title": "Summer Average Precipitation Difference from Baseline" ,
+			"title": "Skillnad från baslinjen för sommarens genomsnittliga nederbörd",
 			"subTitle": "[stationName]",
-			"caption": "Difference between the summer (June to August) seasonal averages and the average for the baseline period, typically 1961 to 1990.", 
+			"caption": "Skillnad mellan sommarens (juni till augusti) säsongsgenomsnitt och genomsnittet för basperioden, vanligtvis 1961 till 1990.", 
 			"yAxis": {
-				"left": "Average precipitation [mm]",
+				"left": "Genomsnittlig nederbörd[mm]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Climate"
+			"legend": "Klimat"
 		}
 	},
 	"series": {
 		"diff": {
-			"name": "Difference"
+			"name": "Skillnad"
 		},
 		"snow": {
-			"name": "Precipitation from snow"
+			"name": "Nederbörd från snö"
 		},
 		"rain": {
-			"name": "Precipitation from rain"
+			"name": "Nederbörd från regn"
 		}
 	}
 }
