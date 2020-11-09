@@ -2,60 +2,61 @@
 	"valueSuffix": "mm",
 	"groups": {
 		"0": {
-			"title": "Annual Average Precipitation" ,
+			"title": "Årlig genomsnittlig nederbörd" ,
 			"subTitle": "[stationName]",
-			"caption": "Average annual precipitation. The lowest (min) and highest (max) precipitation of the month.",
+			"caption": "Genomsnittlig årlig nederbörd. Månadens lägsta (min) och högsta (max) nederbörd.",
 			"yAxis": {
-				"left": "Total Precipitation [mm]",
+				"left": "Summerad nederbörd [mm]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Weather"
+			"legend": "Väder"
 		},
 		"1": {
-			"title": "Annual Average Precipitation Difference from Baseline" ,
-			"subTitle": "[stationName] Difference between yearly average and average for [baseline]", 
+			"title": "Årlig genomsnittlig nederbördsskillnad från baslinjen" ,
+			"subTitle": "[stationName] Skillnad mellan årligt genomsnitt och genomsnitt för [baseline]", 
 			"yAxis": {
-				"left": "Precipitation [mm]",
+				"left": "Nederbörd [mm]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
-			"caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
-			"legend": "Climate"
+			"caption": "Skillnad mellan den årliga genomsnittliga nederbörden och den genomsnittliga nederbörden för baslinjeperioden, vanligtvis 1961 till 1990.",
+			"legend": "Klimat"
 		},
 		"2": {
-			"title": "Wettest [unit] of the year",
+			"title": "Årets blötaste [unit]",
 			"subTitle": "[stationName]",
 			"yAxis": {
-				"left": "Total precipitation [mm]",
+				"left": "Summerad nederbörd [mm]",
 				"right": "[X-Axis]"
 			},
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
-			"caption": "The wettest [unit] of the year (total precipitation in mm).",
-			"legend": "Weather"
+			"caption": "Årets blötaste [unit] (Summerad nederbörd i mm).",
+			"legend": "Väder"
 		}
 	},
 	"series": {
 		"diff": {
-			"name": "Difference"
+			"name": "Skillnad"
 		},
 		"snow": {
-			"name": "Precipitation from snow"
+			"name": "Nederbörd från snö"
 		},
 		"rain": {
-			"name": "Precipitation from rain"
+			"name": "Nederbörd från regn"
+		"rain"
 		},
 		"extreme": {
-			"name": "wettest [interval] of the year (total precipitation in mm)"
+			"name": "Årets blötaste [interval] (Summerad nederbörd i mm)"
 		}
 	}
 }
