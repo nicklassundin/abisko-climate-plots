@@ -2,42 +2,42 @@
 	"valueSuffix": "cm",
 	"groups": {
 		"0": {
-			"title": "Snow Depth",
+			"title": "Snödjup",
 			"subTitle": "[stationName]",
-			"caption": "Average monthly snow depth in centimeters by decade.",
+			"caption": "Genomsnittligt snödjup per månad i centimeter per decennium.",
 			"yAxis": {
-				"left": "Snow depth [cm]", 
+				"left": "Snödjup [cm]", 
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
 				"categories": ["Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-				"bott": "Month", 
+				"bott": "Månad", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Weather"
+			"legend": "Väder"
 		}
 	},
 	"series": {
 		"1961": {
-			"name": "From 1961 to 1970"
+			"name": "Från 1961 till 1970"
 		},
 		"1971": {
-			"name": "From 1971 to 1980"
+			"name": "Från 1971 till 1980"
 		},
 		"1981": {
-			"name": "From 1981 to 1990"
+			"name": "Från 1981 till 1990"
 		},
 		"1991": {
-			"name": "From 1991 to 2000"
+			"name": "Från 1991 till 2000"
 		},
 		"2001": {
-			"name": "From 2001 to 2010"
+			"name": "Från 2001 till 2010"
 		},
 		"2011": {
-			"name": "From 2011 to present"
+			"name": "Från 2011 fram till nu"
 		},
 		"allTime": {
-			"name": "Entire period"
+			"name": "Hela tidsperioden"
 		}
 	}
 }
