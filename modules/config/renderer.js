@@ -241,6 +241,7 @@ var chart = {
 							onclick: function(){
 								if(nav_lang=='en') nav_lang='sv';
 								else nav_lang='en';
+									console.log(nav_lang)
 								Highcharts.setOptions({
 									lang: require('../../config/charts/lang/'+nav_lang+'/menu.json') 
 								})	
@@ -363,7 +364,6 @@ var chart = {
 		// 	delta = delta + e.originalEvent.deltaY;
 		// 	if(delta < -100){
 		// 		delta = 0;
-		// 		switchFocus.weather();
 		// 	}else if(delta > 100){
 		// 		delta = 0;
 		// 		switchFocus.climate();
@@ -670,6 +670,7 @@ var render = {
 		try{
 			if(date){
 				date = date.split("-");
+				variables.date = new Date(date[0],Number(date[1])-1,date[2]);
 				variables.date = new Date(date[0],Number(date[1])-1,date[2]);
 			}
 			if(id.renderTo) id=id.renderTo.id;
