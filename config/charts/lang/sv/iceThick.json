@@ -2,7 +2,7 @@
 	"valueSuffix": "",
 	"groups": {
 		"0": {
-			"title": "[stationName] Största sjöisdjupet",
+			"title": "[stationName] Maximal tjocklek av sjöis",
 			"subTitle": "",
 			"caption": "Den maximala istjockleken för en viss vinter.",
 			"yAxis": {
@@ -16,9 +16,9 @@
 			"legend": "Väder"
 		},
 		"1": {
-			"title": "[stationName] Största sjöisdjupet skillnad från baslinjen", 
+			"title": "[stationName] Skillnad i maximal tjocklek av sjöis",
 			"subTitle": "",
-			"caption": "[Placeholder]",
+			"caption": "Den maximala istjockleken för en viss vinter.",
 			"yAxis": {
 				"left": "Isens tjocklek [cm]", 
 				"right": "[X-AXIS]"
@@ -32,10 +32,10 @@
 	},
 	"series": {
 		"iceThick": {
-			"name": "Isens tjocklek"
+			"name": "Isens tjocklek (cm)"
 		},
 		"diff": {
-			"name": "Isens tjocklek skillnad från baslinjen"
+			"name": "Skillnad i isens tjocklek  (cm)"
 		}
 	}
 }

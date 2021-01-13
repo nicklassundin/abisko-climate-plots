@@ -2,11 +2,11 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "Årlig genomsnittlig Temperatur Norra Halvklotet", 
-			"subTitle": "",
-			"caption": "[SOME TEXT]",
+			"title": "Genomsnittlig temperatur", 
+			"subTitle": "Norra halvklotet",
+			"caption": "Genomsnittlig årstemperatur. Årets lägsta (min) och högsta (max) temperatur.",
 			"yAxis": {
-				"left": "Genomsnittlig Temperatur [°C]",
+				"left": "Genomsnittlig temperatur [°C]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
@@ -16,11 +16,11 @@
 			"legend": "Väder"
 		},
 		"1": {
-			"title": "Årlig genomsnittlig temperaturskillnad från baslinjen för norra halvklotet", 
-			"subTitle": "", 
-			"caption": "Skillnaden mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.", 
+			"title": "Temperaturskillnaden från baslinjen", 
+			"subTitle": "Norra halvklotet",
+			"caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis [baseline], för norra halvklotet.",
 			"yAxis": {
-				"left": "Temperaturskillnad [°C]", 
+				"left": "Temperatur [°C]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
@@ -38,10 +38,10 @@
 			"name": "Min"
 		},
 		"avg": {
-			"name": "Genomsnittlig Temperature" 
+			"name": "Årligt genomsnitt"
 		},  
 		"diff": {
-			"name": "Temperaturskillnad" 
+			"name": "Skillnad"
 		},
 		"linjer": {
 			"name": "[example]"

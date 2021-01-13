@@ -9,6 +9,7 @@
 				"plotLines": {
 					"color": "#88dd88"
 				},
+				"ticketInterval": 0.25,
 				"min": 0,
 				"max": 1.5
 			},

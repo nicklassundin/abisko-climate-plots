@@ -2,11 +2,11 @@
 	"valueSuffix": "",
 	"groups": {
 		"0": {
-			"title": "[stationName] Sjöisdjupet (datum)",
+			"title": "[stationName] Isens tjocklek (efter datum)", 
 			"subTitle": "",
-			"caption": "Istjocklek för ett visst datum över alla år (om det inte mäts på ett valt datum, presenteras data från närmaste tidigare mätning).", 
+			"caption": "Isens tjocklek för ett visst datum över alla år (om det inte mäts på ett valt datum presenteras data från närmaste tidigare mätning).",
 			"select": {
-				"text": "Välj ett datum"
+				"text": "Välj datum"
 			},
 			"yAxis": {
 				"left": "Isens tjocklek [cm]", 
@@ -19,11 +19,11 @@
 			"legend": "Väder"
 		},
 		"1": {
-			"title": "[stationName] Sjöisdjupet Skillnad från baslinjen (datum)",
+			"title": "[stationName] Skillnad i isens tjocklek (efter datum)", 
 			"subTitle": "",
-			"caption": "[PlaceHolder]", 
+			"caption": "Isens tjocklek för ett visst datum över alla år (om det inte mäts på ett valt datum presenteras data från närmaste tidigare mätning).",
 			"select": {
-				"text": "Välj ett datum"
+				"text": "Välj datum"
 			},
 			"yAxis": {
 				"left": "Isens tjocklek [cm]", 
@@ -38,10 +38,10 @@
 	},
 	"series": {
 		"iceThick": {
-			"name": "Isens tjocklek" 
+			"name": "Isens tjocklek (cm)"
 		},
 		"diff": {
-			"name": "Isens tjocklek skillnad från baslinjen"
+			"name": "Skillnad i isens tjocklek (cm)"
 		}
 	}
 }

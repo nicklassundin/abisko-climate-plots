@@ -19,7 +19,7 @@
 
 		}
 	},
-	"valueSuffix": "",
+	"valueSuffix": "m",
 	"series": {
 		"avg": {
 			"name": "Average of all stations"

@@ -2,9 +2,9 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "Höstens genomsnittliga temperatur" ,
+			"title": "Vinterns medeltemperatur" ,
 			"subTitle": "[stationName]",
-			"caption": "Genomsnittlig årlig höst (september till november) temperatur. Månadens lägsta (min) och högsta (max) temperatur.", 
+			"caption": "Genomsnittlig årlig vintertemperatur (december till februari). Månadens lägsta (min) och högsta (max) temperatur.",
 			"legend": "Väder",
 			"xAxis": {
 				"bott": "År", 
@@ -16,9 +16,9 @@
 			}
 		},
 		"1": {
-			"title": "Höstens genomsnittliga temperaturskillnad från baslinjen" ,
+			"title": "Skillnad från baslinjen för vinterns genomsnittliga temperatur" ,
 			"subTitle": "[stationName]",
-			"caption": "Skillnad mellan höstens (september-november) säsongsgenomsnitt och genomsnittet för basperioden, vanligtvis 1961 till 1990.", 
+			"caption": "Skillnad mellan vinterns (december till februari) säsongsgenomsnitt och genomsnittet för baslinjeperioden, vanligtvis 1961 till 1990.", 
 			"legend": "Klimat",
 			"xAxis": {
 				"bott": "År", 
@@ -38,7 +38,7 @@
 			"name": "Min"
 		},
 		"avg": {
-			"name": "Årligt genomsnitt"
+			"name": "Årligt genomsnitte"
 		},  
 		"diff": {
 			"name": "Skillnad"
