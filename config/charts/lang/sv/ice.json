@@ -2,26 +2,26 @@
 	"valueSuffix": "",
 	"groups": {
 		"0": {
-			"title": "Freeze-up and break-up of lake ice" ,
+			"title": "Isläggning och islossning av sjöis" ,
 			"subTitle": "Torneträsk",
 			"caption": "", 
 			"yAxis": {
-				"left": "Ice break-up / freeze-up [date]",
+				"left": "Islossning/isläggning [date]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Weather"
+			"legend": "Väder"
 		}
 	},
 	"series": {
 		"freeze": {
-			"name": "Freeze-up"
+			"name": "Isläggning"
 		},
 		"breakup": {
-			"name": "Break-up"
+			"name": "Islossning"
 		}
 	}
 }

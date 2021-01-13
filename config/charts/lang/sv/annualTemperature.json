@@ -2,46 +2,46 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "Annual Average Temperature" ,
+			"title": "Årlig genomsnittstemperatur" ,
 			"subTitle": "[stationName]",
-			"caption": "Average annual temperature. The lowest (min) and highest (max) temperature of the year.",
+			"caption": "Årlig genomsnittstemperatur. Årets lägsta (min) och högsta (max) temperatur.",
 			"yAxis": {
-				"left": "Average temperature [°C]",
+				"left": "Genomsnittstemperatur [°C]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Weather"
+			"legend": "Väder"
 		},
 		"1": {
-			"title": "Temperature Difference From Baseline",
+			"title": "Temperaturskillnaden från baslinjen",
 			"subTitle": "[stationName]",
-			"caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
+			"caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
 			"yAxis": {
-				"left": "Temperature [°C]",
+				"left": "Temperatur [°C]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Climate"
+			"legend": "Klimat"
 		},
 		"2": {
-			"title": "Warmest [unit] of the year",
+			"title": "Årets varmaste [unit]",
 			"subTitle": "[stationName]",
-			"caption": "Average temperature of warmest [unit] of the year.",
+			"caption": "Medeltemperaturen på årets varmaste [unit].",
 			"yAxis": {
-				"left": "Average temperature of warmest [unit] of the year [°C]",
+				"left": "Medeltemperaturen på årets varmaste [unit] [°C]",
 				"right": "[X-AXIS]"
 			},
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
-			"legend": "Weather"
+			"legend": "Väder"
 		}
 	},
 	"series": {
@@ -52,15 +52,15 @@
 			"name": "Min"
 		},
 		"avg": {
-			"name": "Yearly Average"
+			"name": "Årlig genomsnitt"
 		},
 		"diff": {
-			"name": "Difference"
+			"name": "Skillnad"
 		},
 		"extreme": {
-			"name": "Average warmest maximum [interval] temperature",
-			"week": "weekly",
-			"day": "daily"
+			"name": "Genomsnittlig varmaste högsta temperatur [interval]",
+			"week": "veckovis",
+			"day": "dagligen"
 		}
 	}
 }

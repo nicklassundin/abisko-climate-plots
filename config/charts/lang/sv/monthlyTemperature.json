@@ -2,30 +2,30 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "Average Temperature" ,
+			"title": "Genomsnittlig temperatur" ,
 			"subTitle": "[stationName]",
-			"caption": "Average monthly temperature for [month]. The lowest (min) and highest (max) temperature of the month.",
-			"legend": "Weather",
+			"caption": "Genomsnittlig temperatur per månad för [month]. Månadens lägsta (min) och högsta (max) temperatur.",
+			"legend": "Väder",
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
 			"yAxis": {
-				"left": "Average temperature [°C]",
+				"left": "Genomsnittlig temperatur [°C]",
 				"right": "[X-AXIS]"
 			}
 		},
 		"1": {
-			"title": "Average Temperature Difference From Baseline" ,
+			"title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
 			"subTitle": "[stationName]",
-			"caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.", 
-			"legend": "Climate",
+			"caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.", 
+			"legend": "Klimat",
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
 			"yAxis": {
-				"left": "Temperature difference [°C]",
+				"left": "Temperaturskillnad [°C]",
 				"right": "[X-AXIS]"
 			}
 		}
@@ -38,10 +38,10 @@
 			"name": "Min"
 		},
 		"avg": {
-			"name": "Yearly Average"
+			"name": "Årlig genomsnitt"
 		},  
 		"diff": {
-			"name": "Difference"
+			"name": "Skillnad"
 		}
 	}
 }

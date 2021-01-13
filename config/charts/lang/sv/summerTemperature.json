@@ -2,30 +2,30 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "Summer Average Temperature" ,
+			"title": "Sommarens medeltemperatur" ,
 			"subTitle": "[stationName]", 
-			"caption": "Average annual summer (June to August) temperature. The lowest (min) and highest (max) temperature of the month.", 
-			"legend": "Weather",
+			"caption": "Genomsnittlig årlig sommartemperatur (juni till augusti). Månadens lägsta (min) och högsta (max) temperatur.", 
+			"legend": "Väder",
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
 			"yAxis": {
-				"left": "Average temperature [°C]",
+				"left": "Genomsnittlig temperatur [°C]",
 				"right": "[X-AXIS]"
 			}
 		},
 		"1": {
-			"title": "Summer Average Temperature Difference from Baseline" ,
+			"title": "Skillnad från baslinjen för sommarens genomsnittliga temperatur" ,
 			"subTitle": "[stationName]",
-			"caption": "Difference between the summer (June-August) seasonal averages and the average for the baseline period, typically 1961 to 1990.",
-			"legend": "Climate",
+			"caption": "Skillnad mellan sommarens (juni till augusti) säsongsgenomsnitt och genomsnittet för baslinjeperioden, vanligtvis 1961 till 1990.",
+			"legend": "Klimat",
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
 			"yAxis": {
-				"left": "Temperature Difference [°C]",
+				"left": "Temperaturskillnad [°C]",
 				"right": "[X-AXIS]"
 			}
 		}
@@ -38,10 +38,10 @@
 			"name": "Min"
 		},
 		"avg": {
-			"name": "Yearly Average"
+			"name": "Årligt genomsnitt"
 		},  
 		"diff": {
-			"name": "Difference"
+			"name": "Skillnad"
 		}
 	}
 }

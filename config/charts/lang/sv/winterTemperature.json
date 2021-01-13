@@ -2,30 +2,30 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "Winter Average Temperature" ,
+			"title": "Vinterns medeltemperatur" ,
 			"subTitle": "[stationName]",
-			"caption": "Average annual winter (December to February) temperature. The lowest (min) and highest (max) temperature of the month.",
-			"legend": "Weather",
+			"caption": "Genomsnittlig årlig vintertemperatur (december till februari). Månadens lägsta (min) och högsta (max) temperatur.",
+			"legend": "Väder",
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
 			"yAxis": {
-				"left": "Average temperature [°C]",
+				"left": "Genomsnittlig temperatur [°C]",
 				"right": "[X-AXIS]"
 			}
 		},
 		"1": {
-			"title": "Winter Average Temperature Difference From Baseline" ,
+			"title": "Skillnad från baslinjen för vinterns genomsnittliga temperatur" ,
 			"subTitle": "[stationName]",
-			"caption": "Difference between the winter (December-February) seasonal averages and the average for the baseline period, typically 1961 to 1990.", 
-			"legend": "Climate",
+			"caption": "Skillnad mellan vinterns (december till februari) säsongsgenomsnitt och genomsnittet för baslinjeperioden, vanligtvis 1961 till 1990.", 
+			"legend": "Klimat",
 			"xAxis": {
-				"bott": "Year", 
+				"bott": "År", 
 				"top": "[Y-AXIS]"
 			},
 			"yAxis": {
-				"left": "Temperature difference [°C]",
+				"left": "Temperaturskillnad [°C]",
 				"right": "[X-AXIS]"
 			}
 		}
@@ -38,10 +38,10 @@
 			"name": "Min"
 		},
 		"avg": {
-			"name": "Yearly Average"
+			"name": "Årligt genomsnitte"
 		},  
 		"diff": {
-			"name": "Difference"
+			"name": "Skillnad"
 		}
 	}
 }
