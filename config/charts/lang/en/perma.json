@@ -5,7 +5,7 @@
 			"subTitle": "Northern Sweden",
 			"caption": "Site specific and regional mean of active layer depth.",
 			"yAxis": {
-				"left": "Permafrost active layer [cm]", 
+				"left": "Permafrost active layer [m]", 
 				"right": "[X-AXIS]",
 				"plotLines": {
 					"text": "Ground"
@@ -19,7 +19,7 @@
 
 		}
 	},
-	"valueSuffix": "cm",
+	"valueSuffix": "m",
 	"series": {
 		"avg": {
 			"name": "Average of all stations"
