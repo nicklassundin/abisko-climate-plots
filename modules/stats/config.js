@@ -40,7 +40,7 @@ var parsers = {
 						}
 						var entry = {
 							x: Number(each[""]),
-							y: !Number.isNaN(Number(each[key])) ? Number(each[key])*100 : undefined 
+							y: !Number.isNaN(Number(each[key])) ? Number(each[key]): undefined 
 						}
 						stations[key].push(entry)
 						if(!stations['avg'][each[""]]){
@@ -49,7 +49,7 @@ var parsers = {
 						if(entry.y){
 							stations['avg'][each[""]].push({
 								x: Number(each[""]),
-								y: !Number.isNaN(Number(each[key])) ? Number(each[key])*100 : undefined 
+								y: !Number.isNaN(Number(each[key])) ? Number(each[key]) : undefined 
 							})
 						}
 					}
