@@ -126,7 +126,7 @@ eval("module.exports = JSON.parse(\"{\\\"months\\\":{\\\"jan\\\":\\\"January\\\"
 /*! exports provided: baselineform, dataCredit, contribute, showDataTable, langOption, downloadJPEG, downloadPDF, downloadSVG, default */
 /***/ (function(module) {
 
-eval("module.exports = JSON.parse(\"{\\\"baselineform\\\":{\\\"title\\\":\\\"Range for baseline\\\",\\\"lower\\\":\\\"Lower limit\\\",\\\"upper\\\":\\\"Upper limit\\\"},\\\"dataCredit\\\":\\\"Data source\\\",\\\"contribute\\\":\\\"Contribute - Github [dummy]\\\",\\\"showDataTable\\\":\\\"Show/hide data\\\",\\\"langOption\\\":\\\"Svenska\\\",\\\"downloadJPEG\\\":\\\"Download as JPEG\\\",\\\"downloadPDF\\\":\\\"Download as PDF\\\",\\\"downloadSVG\\\":\\\"Download as SVG\\\"}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/menu.json?");
+eval("module.exports = JSON.parse(\"{\\\"baselineform\\\":{\\\"title\\\":\\\"Interval för baslinje\\\",\\\"lower\\\":\\\"Undregräns\\\",\\\"upper\\\":\\\"Övregräns\\\"},\\\"dataCredit\\\":\\\"Data källa\\\",\\\"contribute\\\":\\\"Bidra - Github [dummy]\\\",\\\"showDataTable\\\":\\\"Vissa/göm data\\\",\\\"langOption\\\":\\\"English\\\",\\\"downloadJPEG\\\":\\\"Laddaner som JPEG\\\",\\\"downloadPDF\\\":\\\"Laddaner som  PDF\\\",\\\"downloadSVG\\\":\\\"Laddaner som SVG\\\"}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/menu.json?");
 
 /***/ }),
 
@@ -137,7 +137,7 @@ eval("module.exports = JSON.parse(\"{\\\"baselineform\\\":{\\\"title\\\":\\\"Ran
 /*! exports provided: months, monthShort, default */
 /***/ (function(module) {
 
-eval("module.exports = JSON.parse(\"{\\\"months\\\":{\\\"jan\\\":\\\"January\\\",\\\"feb\\\":\\\"February\\\",\\\"mar\\\":\\\"March\\\",\\\"apr\\\":\\\"April\\\",\\\"may\\\":\\\"May\\\",\\\"jun\\\":\\\"June\\\",\\\"jul\\\":\\\"July\\\",\\\"aug\\\":\\\"August\\\",\\\"sep\\\":\\\"September\\\",\\\"oct\\\":\\\"October\\\",\\\"nov\\\":\\\"November\\\",\\\"dec\\\":\\\"December\\\"},\\\"monthShort\\\":{\\\"jan\\\":\\\"Jan\\\",\\\"feb\\\":\\\"Feb\\\",\\\"mar\\\":\\\"Mar\\\",\\\"apr\\\":\\\"Apr\\\",\\\"may\\\":\\\"May\\\",\\\"jun\\\":\\\"Jun\\\",\\\"jul\\\":\\\"Jul\\\",\\\"aug\\\":\\\"Aug\\\",\\\"sep\\\":\\\"Sep\\\",\\\"oct\\\":\\\"Oct\\\",\\\"nov\\\":\\\"Nov\\\",\\\"dec\\\":\\\"Dec\\\"}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/time.json?");
+eval("module.exports = JSON.parse(\"{\\\"months\\\":{\\\"jan\\\":\\\"Januari\\\",\\\"feb\\\":\\\"Februari\\\",\\\"mar\\\":\\\"Mars\\\",\\\"apr\\\":\\\"April\\\",\\\"may\\\":\\\"Maj\\\",\\\"jun\\\":\\\"Juni\\\",\\\"jul\\\":\\\"Juli\\\",\\\"aug\\\":\\\"Augusti\\\",\\\"sep\\\":\\\"September\\\",\\\"oct\\\":\\\"Oktober\\\",\\\"nov\\\":\\\"November\\\",\\\"dec\\\":\\\"December\\\"},\\\"monthShort\\\":{\\\"jan\\\":\\\"Jan\\\",\\\"feb\\\":\\\"Feb\\\",\\\"mar\\\":\\\"March\\\",\\\"apr\\\":\\\"April\\\",\\\"may\\\":\\\"Maj\\\",\\\"jun\\\":\\\"Juni\\\",\\\"jul\\\":\\\"Juli\\\",\\\"aug\\\":\\\"Aug\\\",\\\"sep\\\":\\\"Sep\\\",\\\"oct\\\":\\\"Okt\\\",\\\"nov\\\":\\\"Nov\\\",\\\"dec\\\":\\\"Dec\\\"}}\");\n\n//# sourceURL=webpack:///./config/charts/lang/sv/time.json?");
 
 /***/ }),
 

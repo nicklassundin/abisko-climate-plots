@@ -1,14 +1,14 @@
 {
 	"baselineform": {
-		"title": "Range for baseline",
-		"lower": "Lower limit",
-		"upper": "Upper limit"
+		"title": "Interval för baslinje",
+		"lower": "Undregräns",
+		"upper": "Övregräns"
 	},
-	"dataCredit": "Data source",
-	"contribute": "Contribute - Github [dummy]",
-	"showDataTable": "Show/hide data",
-	"langOption": "Svenska",
-	"downloadJPEG": "Download as JPEG",
-	"downloadPDF": "Download as PDF",
-	"downloadSVG": "Download as SVG"
+	"dataCredit": "Data källa",
+	"contribute": "Bidra - Github [dummy]",
+	"showDataTable": "Vissa/göm data",
+	"langOption": "English",
+	"downloadJPEG": "Laddaner som JPEG",
+	"downloadPDF": "Laddaner som  PDF",
+	"downloadSVG": "Laddaner som SVG"
 }
