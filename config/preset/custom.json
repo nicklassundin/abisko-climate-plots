@@ -107,5 +107,7 @@
 	"temperature_64n90n",
 	"temperature_nhem",
 	"temperature_glob"],
-	"months": ["monthsTemperatures"]
+	"months": ["monthsTemperatures"],
+	"growFirstnLast": ["growingSeasonFrostFirst",
+		"growingSeasonFrostLast"]
 }

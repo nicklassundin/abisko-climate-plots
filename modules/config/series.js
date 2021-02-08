@@ -88,6 +88,7 @@ exports.series = {
 		type: meta.series.first.type,
 	}),
 	firstDiff: (meta, data) => ({
+		// TODO outdated
 		regression: false,
 		regressionSettings: {
 			type: 'linear',
@@ -114,6 +115,7 @@ exports.series = {
 		type: meta.series.last.type,
 	}),
 	lastDiff: (meta, data) => ({
+		// TODO outdated
 		regression: false,
 		regressionSettings: {
 			type: 'linear',
