@@ -12,7 +12,7 @@
 		"local": false
 	}, 
 	"abisko": { 
-		"file": ["ANS_Temp_Prec.csv", "AWS_Daily_1984-2019.csv", "ANS_Prec.csv"],
+		"file": ["ANS_Temp_Prec.csv", "AWS.csv", "ANS_Prec.csv"],
 		"preset": {
 			"header": true,
 			"download": true,
