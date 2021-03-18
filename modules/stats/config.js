@@ -5,8 +5,6 @@ const parser = require('./struct.js');
 var struct = parser.struct;
 var parseByDate = parser.parseByDate;
 
-
-
 var parsers = {
 	TempPrec:  function (blocks){
 		return new Promise(function(resolve, reject){
@@ -513,6 +511,7 @@ var parsers = {
 		})
 	},
 	smhiTemp: function(result){
+		// console.log(result)
 		var blocks = {};
 		var avgs = {};
 		var parse = function(entry){
@@ -564,6 +563,7 @@ var parsers = {
 			var prec = [each["Representativt dygn"], each["Nederbördsmängd"]]
 			return parsePrecip(prec);
 		}));
+		console.log(blocks)
 		return parsers.TempPrec(blocks)
 	}
 

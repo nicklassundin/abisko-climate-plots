@@ -1,11 +1,17 @@
 var $ = require('jquery')
 
 const Papa = require('papaparse');
-const parse = require('../../stats/config.js').parsers;
-const preset = require('./config.json');
-var renderer = require('./../renderer.js').render;
+const parse = require('../../../stats/config.js').parsers;
+const preset = require('./help.js') 
 
-var dataset_struct = require('./struct.js').struct;
+var pres = preset.preset; 
+
+
+var renderer = require('./../../renderer.js').render;
+
+var dataset_struct = require('./../struct.js').struct;
+
+
 
 var meta_struct = {
 	config: undefined,
@@ -28,14 +34,14 @@ var meta_struct = {
 
 var config = {
 	zonal: dataset_struct.create(
-		preset.zonal,
+		pres('zonal'),
 		meta = {
 			'64n-90n': meta_struct.create(config = 'temperature', lang = '64n-90n_Temperature', data = 'NASA-GISS-TEMP', set = 'climate'), 
 			'nhem': meta_struct.create(config =  'temperature', lang =  'nhem_Temperature', data =  'NASA-GISS-TEMP', set =  'climate'), 
 			'glob': meta_struct.create(config =  'temperature', lang =  'glob_Temperature', data =  'NASA-GISS-TEMP', set =  'climate'), 
 		}),
 	abisko: dataset_struct.create(
-		preset.abisko,
+		pres('abisko'),
 		meta = {
 			'temperatures': {
 				'yrly': meta_struct.create(config =  'temperature', lang =  'annualTemperature', data =  'ANS', set =  'weather'), 
@@ -87,7 +93,7 @@ var config = {
 			'slideTemperature': meta_struct.create(config =  'temperature', lang =  'annualTemperature', data =  'ANS', set =  'slide'), 
 		}),
 	smhi: dataset_struct.create(
-		preset.smhi, 
+		pres('smhi'), 
 		meta = {
 			'temperatures': {
 				'yrly': meta_struct.create(config =  'temperature', lang =  'annualTemperature', data = 'SMHI-Weather', set =  'weather'), 
@@ -140,7 +146,7 @@ var config = {
 		}),
 	// TODO Bake together
 	tornetrask: dataset_struct.create(
-		preset.tornetrask,
+		pres('tornetrask'),
 		meta = {
 			DOY: meta_struct.create(config =  'ice', lang =  'ice', data =  'ANS', set =  'weather'),
 			breakupDOY: meta_struct.create(config =  'iceBreakup', lang =  'iceBreakup', data =  'ANS', set =  'weather'),
@@ -148,7 +154,7 @@ var config = {
 			iceTime: meta_struct.create(config =  'iceTime', lang =  'iceTime', data =  'ANS', set =  'weather'),
 		}),
 	abiskoSnowDepth: dataset_struct.create(
-		preset.abiskoSnowDepth,
+		pres('abiskoSnowDepth'),
 		meta = {
 			'periodMeans': meta_struct.create(config =  'snowDepthPeriod', lang =  'snowDepthPeriod', data =  'ANS', set =  'weather'),
 			'decadeMeans': meta_struct.create(config =  'snowDepthDecade', lang =  'snowDepthDecade', data =  'ANS', set =  'weather'),
@@ -157,16 +163,16 @@ var config = {
 			}
 		}),
 	weeklyCO2: dataset_struct.create(
-		preset.weeklyCO2,
+		pres('weeklyCO2'),
 		meta = {
 			'weekly': meta_struct.create(config =  'co2', lang =  'co2_weekly', data =  'Scipps-CO2', set =  'weather'),
 			'monthly': meta_struct.create(config =  'co2', lang =  'co2_monthly', data =  'Scipps-CO2', set =  'weather'),
 		}),
 	permaHistogramCALM: dataset_struct.create(
-		preset.permaHistogramCALM,
+		pres('permaHistogramCALM'),
 		meta = meta_struct.create(config =  'perma', lang =  'perma', data =  'GTNP-ANL', set =  'weather' )),
 	iceThick: dataset_struct.create(
-		preset.iceThick,
+		pres('iceThick'),
 		meta = {
 			'yrly': {
 				'max': meta_struct.create(config =  'iceThick', lang =  'iceThick', data =  'ANS', set =  'weather'),

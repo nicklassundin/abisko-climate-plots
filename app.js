@@ -184,6 +184,15 @@ app.get( '/chart', (req, res) => {
 		})
 	})
 });
+app.get( '/browse', (req, res) => {
+	charts(req).then(chrts => {
+		stations = ["abisko", "53430", "global"];
+		res.render('browse.hbs', {
+			chrts,
+			stations
+		})
+	})
+});
 app.get('/d3-map', (req, res) => {
 	charts(req).then(chrts => {
 		res.render('d3-map.hbs', {
