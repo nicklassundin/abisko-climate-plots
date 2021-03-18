@@ -25,7 +25,7 @@
 			"type": "line"
 		},
 		"diff": {
-			"preset": "lastDiff",
+			"preset": "diff",
 			"group": 1,
 			"visible": true,
 			"type": "column"

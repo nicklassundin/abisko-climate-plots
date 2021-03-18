@@ -1,0 +1,27 @@
+{
+	"v2": [
+		"slideTemperature",
+		"slideTemperaturesSpring",
+		"slideTemperaturesSummer",
+		"slideTemperaturesAutumn",
+		"slideTemperaturesWinter",
+		"slideMonthlyTemperatures",
+		"slidePrecipitation",
+		"slideWinterPrecipitation",
+		"slideSpringPrecipitation", 
+		"slideSummerPrecipitation",
+		"slideAutumnPrecipitation",
+		"slideMonthlyPrecipitation",
+		"annualAvgSnowDepth",
+		"abiskoSnowDepthPeriodMeans",
+		"abiskoSnowDepthPeriodMeans2",
+		"growingSeason",
+		"growingSeasonDays",
+		"growingSeasonFrostFirst",
+		"growingSeasonFrostLast",
+		"dailyExtremeTemperature",
+		"weeklyExtremeTemperature",
+		"dailyExtremePrecipitation",
+		"weeklyExtremePrecipitation"
+	]
+}

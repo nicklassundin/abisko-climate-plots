@@ -12,12 +12,12 @@
 		"local": false
 	}, 
 	"abisko": { 
-		"file": ["ANS_Temp_Prec.csv", "AWS_Daily_1984-2019.csv", "ANS_Prec.csv"],
+		"file": ["ANS_Temp_Prec.csv", "AWS.csv", "ANS_Prec.csv"],
 		"preset": {
 			"header": true,
 			"download": true,
 			"skipEmptyLines": true,
-			"beforeFirstChunk": "function(result){ global.stationName = 'Abisko'; }",
+			"beforeFirstChunk": "abisko", 
 			"dynamicTyping": false
 		},
 		"parser": "AbiskoCsv",
@@ -29,7 +29,7 @@
 			"header": true,
 			"download": true,
 			"skipEmptyLines": true,
-			"beforeFirstChunk": "function(result){ result = result.split('\n') var line = result.findIndex(x => x.indexOf('Tidsutsnitt:') > -1) var rest = result.splice(0,line); result = result.join('\r\n'); rest = rest[1].split(';'); global.stationName = rest[0]; return result }",
+			"beforeFirstChunk": "smhi", 
 			"fastMode": true
 		},
 		"parser": "smhiTemp",

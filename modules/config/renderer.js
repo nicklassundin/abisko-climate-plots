@@ -347,6 +347,7 @@ var chart = {
 		var meta = this.meta;	
 		// console.log(this.metaRef)
 		// console.log(data)
+		// console.log(data.difference())
 		// console.log(meta)
 		var id = this.id;
 		if(this.meta.subSet){
