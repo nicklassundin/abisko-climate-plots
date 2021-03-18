@@ -226,7 +226,13 @@ exports.series = {
 		name: meta.series.breakup.name,
 		color: meta.series.breakup.colour,
 		lineWidth: 0,
-		marker: { radius: 2 },
+		marker: {
+			enabled: true,
+			fillColor: meta.series.breakup.colour,
+			lineColor: meta.series.breakup.borderColour,
+			lineWidth: 1,
+			radius: 2
+		},
 		states: { hover: { lineWidthPlus: 0 } },
 		data: data.breakup.values,
 		visible: true,
