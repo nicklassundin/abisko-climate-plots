@@ -29,7 +29,8 @@
 			"preset": "avg",
 			"group": 0,
 			"visible": true,
-			"colour": "#ee0000",
+			"colour": "#f48c9d",
+			"borderColour": "#ee0000",
 			"type": "line"
 		},
 		"diff": {

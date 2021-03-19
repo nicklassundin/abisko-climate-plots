@@ -2,7 +2,7 @@ var $ = require('jquery')
 const help = require('../../helpers.js')
 var months = help.months;
 
-var config = require('../dataset/config.js').config;
+var config = require('../dataset/config/config.js').config;
 var createDiv = require('./struct.js').createDiv;
 
 var rendF = {

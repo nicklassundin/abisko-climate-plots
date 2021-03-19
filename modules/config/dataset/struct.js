@@ -7,6 +7,9 @@ var months = help.months;
 
 var renderer = require('../renderer.js').render;
 
+//TODO Demo
+// var demo = require('../../../data/demo.js').data;
+
 global.filePath = {
 	station: function(fileName, id){
 		if(id){
@@ -39,7 +42,7 @@ var struct = {
 	rawData: [],
 	parser: undefined, 
 	render: renderer, 
-	reader: Papa.parse,
+	reader: Papa.parse, // TODO be a module that are self contained
 	metaRef: undefined,
 	contFunc: function(reset=false, page=''){
 		if(typeof this.rawData !== 'undefined' && this.rawData.length > 0){
@@ -49,26 +52,35 @@ var struct = {
 		if(reset) this.cached = {};
 		var ref = this;
 		if(!this.rawData.then){
+			var path = ref.filePath(ref.file);
 			this.rawData = new Promise(function(resolve, reject){
-				ref.filePath(ref.file).forEach(file => {
-					function data(file){
-						return new Promise(function(resolve, reject){
-							ref.preset.complete = function(result){
-								resolve(result);
-							};
-							ref.reader(file, ref.preset)
-						}).catch(function(error){
-							console.log("FAILED TO LOAD DATA")
-							console.log(error);
-						})
-					};
-					try{
-						ref.rawData.push(data(file));
-					}catch(error){
-						console.log(file)
-						console.log(ref.rawData);
-						throw error;
-					}
+				function data(file){
+					return new Promise(function(resolve, reject){
+						ref.preset.complete = function(result){
+							resolve(result);
+						};
+						ref.reader(file, ref.preset)
+					}).catch(function(error){
+						console.log("FAILED TO LOAD DATA")
+						console.log(error);
+					})
+				};
+				ref.file.forEach((file, index) => {
+					// TODO Demo
+					// if(demo[station] && demo[station][file]){
+
+						// console.log(demo[station][file])
+						// ref.rawData.push(
+							// data(demo[station][file]))
+					// }else{
+						try{
+							ref.rawData.push(data(path[index]));
+						}catch(error){
+							console.log(file)
+							console.log(ref.rawData);
+							throw error;
+						}
+					// }
 				})
 				resolve(ref.rawData);
 			})
@@ -79,11 +91,9 @@ var struct = {
 		var parser = this.parser;
 		var rawDataPromise = this.rawData;
 		return new Promise(function(resolve, reject){
-
 			rawDataPromise.then(function(rawData){
 				resolve(Promise.all(rawData).then(function(rawData){
 					var data = parser(rawData);
-					// console.log(data)
 					return data;	
 				}))
 			})
@@ -128,7 +138,6 @@ var struct = {
 	create: function(config, meta){
 		var file = config.file;
 		var preset = config.preset;
-		if(preset.beforeFirstChuck) preset.beforeFirstChuck = preset.beforeFirstChuck.parseFunction();
 		var parser = parse[config.parser];
 		var local = config.local;
 
