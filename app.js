@@ -2,7 +2,7 @@
 var $ = require("jquery");
 
 // process.argv.forEach(function (val, index, array) {
-	//TODO argument on start up	
+//TODO argument on start up	
 // });
 
 var fs = require('fs');
@@ -193,6 +193,31 @@ app.get( '/browse', (req, res) => {
 		})
 	})
 });
+app.get('/static', (req, res) => {
+	charts(req).then(chrts => {
+		stations = ["abisko", "53430", "global"];
+		app.render('browse-release.hbs', {chrts, stations }, (err, str) => {
+			fs.writeFile('temp/index.html', str, err => {
+				if (err) {
+					console.error(err)
+					return
+				}
+			})
+			res.send(str);
+			app.use('/static', express.static(__dirname + '/static'));
+			app.use('/static/css', express.static(__dirname + '/css'));
+			app.use('/static/dep', express.static(__dirname + '/dep'));
+			app.use('/static/modules', express.static(__dirname + '/modules'));
+			app.use('/static/config', express.static(__dirname + '/config'));
+			app.use('/static/data', express.static(__dirname + '/data'));
+			app.use('/static/data/abisko', express.static(__dirname + '/data/abisko'));
+			app.use('/static/client', express.static(__dirname + '/client'));
+			app.use('/static/tmp', express.static(__dirname + '/tmp'));
+			app.use('/static/maps', express.static(__dirname + '/maps'));
+		})	
+	})
+})
+
 app.get('/d3-map', (req, res) => {
 	charts(req).then(chrts => {
 		res.render('d3-map.hbs', {
@@ -201,28 +226,6 @@ app.get('/d3-map', (req, res) => {
 	})
 });
 
-app.render('chart-release.hbs',{ charts: [{ id: "Temperatures", station: "abisko" } ] }, (err, str) => {
-	fs.writeFile('temp/index.html', str, err => {
-		if (err) {
-			console.error(err)
-			return
-		}
-	})
-	app.get('/static', (req, res) => {
-		res.send(str);
-	})
-	app.use('/static', express.static(__dirname + '/static'));
-	app.use('/static/css', express.static(__dirname + '/css'));
-	app.use('/static/dep', express.static(__dirname + '/dep'));
-	app.use('/static/modules', express.static(__dirname + '/modules'));
-	app.use('/static/config', express.static(__dirname + '/config'));
-	app.use('/static/data', express.static(__dirname + '/data'));
-	app.use('/static/data/abisko', express.static(__dirname + '/data/abisko'));
-	app.use('/static/client', express.static(__dirname + '/client'));
-	app.use('/static/tmp', express.static(__dirname + '/tmp'));
-	app.use('/static/maps', express.static(__dirname + '/maps'));
-
-});
 
 app.get('/map', (req, res) => {
 	res.render('map.hbs', {
