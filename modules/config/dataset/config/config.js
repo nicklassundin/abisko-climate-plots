@@ -62,7 +62,8 @@ var config = {
 				'winterSlide': meta_struct.create(config =  'temperature', lang =  'winterTemperature', data =  'ANS', set =  'slide'), 
 				'autumnSlide': meta_struct.create(config =  'temperature', lang =  'autumnTemperature', data =  'ANS', set =  'slide'), 
 				'springSlide': meta_struct.create(config =  'temperature', lang =  'springTemperature', data =  'ANS', set =  'slide'), 
-				'monthlySlide': meta_struct.create(config =  'temperature', lang =  'monthlyTemperature', data =  'ANS', set = 'slide',  subSet = 'monthly')
+				'monthlySlide': meta_struct.create(config =  'temperature', lang =  'monthlyTemperature', data =  'ANS', set = 'slide',  subSet = 'monthly'),
+				'avgByYear': meta_struct.create(config =  '[placeholder]', lang =  'annualTemperature', data =  'ANS', set =  'weather'), 
 			},
 			'precipitation':{
 				'yrly': meta_struct.create(config =  'precipitation', lang =  'annualPrecipitation', data =  'ANS' , set =  'weather'), 
@@ -115,6 +116,7 @@ var config = {
 				'autumnSlide': meta_struct.create(config =  'temperature', lang =  'autumnTemperature', data =  'SMHI-Weather', set =  'slide'), 
 				'springSlide': meta_struct.create(config =  'temperature', lang =  'springTemperature', data =  'SMHI-Weather', set =  'slide'), 
 				'monthlySlide': meta_struct.create(config =  'temperature', lang =  'monthlyTemperature', data =  'SMHI-Weather', set = 'slide', subSet = 'monthly'), 
+				'avgByYear': meta_struct.create(config =  '[placeholder]', lang =  'annualTemperature', data =  'SMHI-Weather', set =  'weather'), 
 			},
 			'precipitation':{
 				'yrly': meta_struct.create(config =  'precipitation', lang =  'annualPrecipitation', data =  'SMHI-Hydrology' , set =  'weather'), 
@@ -152,6 +154,7 @@ var config = {
 			breakupDOY: meta_struct.create(config =  'iceBreakup', lang =  'iceBreakup', data =  'ANS', set =  'weather'),
 			freezeDOY: meta_struct.create(config =  'iceFreeze', lang =  'iceFreeze', data =  'ANS', set =  'weather'),
 			iceTime: meta_struct.create(config =  'iceTime', lang =  'iceTime', data =  'ANS', set =  'weather'),
+			slideIceTime: meta_struct.create(config =  'iceTime', lang =  'iceTime', data =  'ANS', set =  'slide'),
 		}),
 	abiskoSnowDepth: dataset_struct.create(
 		pres('abiskoSnowDepth'),

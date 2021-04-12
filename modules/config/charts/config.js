@@ -98,6 +98,18 @@ var rendF = {
 
 		},
 	},
+	'slideLakeIceTime':{
+		func: function(reset=false){
+			config['tornetrask'].contFunc(reset);
+			config['tornetrask'].init('slideLakeIceTime', 'iceTime', 'slideIceTime')
+		},
+		html: function(doc){
+			var no = 43;
+			if(!variables.debug) no = variables.debug;
+			return createDiv('slideLakeIceTime', no);
+
+		},
+	},
 	'iceThicknessYear': {
 		func: function(reset=false){
 			config['iceThick'].contFunc(reset);
@@ -386,6 +398,18 @@ var rendF = {
 
 		},
 	},
+	'avgTemperaturesByYear':{
+		func: function(reset=false){
+			config[stationType].contFunc(reset);
+			config[stationType].init('avgTemperaturesByYear',['temperatures'], ['temperatures', 'avgByYear']);
+		},
+		html: function(doc){
+			var no = 1;
+			if(!variables.debug) no = variables.debug;
+			return createDiv('avgTemperaturesByYear', no);
+		},
+
+	}, 
 	'temperatureDifference': {
 		func: function(reset=false){
 			config[stationType].contFunc(reset);

@@ -94,12 +94,11 @@ var chart = {
 			throw ERROR
 		}
 	},
-	textMorph: function(text, meta=this.meta){
-		var res = "";
-		if(text){
+	textMorph: function(res, meta=this.meta){
+		if(res){
 			try{
 				// TODO order of month replace for subsets
-				var res = text.replace("[stationName]", stationName)
+				var res = res.replace("[stationName]", stationName)
 
 				var set = (meta.subSet ? meta.subSet.enabled : false) ? meta.months[meta.subSet.set] : undefined;
 				res = (meta.subSet ? meta.subSet.enabled : false) ? res.replace("[month]", set) : res.replace("[month]", meta.month)
@@ -116,6 +115,8 @@ var chart = {
 				console.log(error)
 				throw error;
 			}
+		}else{
+			res = "";
 		}
 		return res
 		// return res

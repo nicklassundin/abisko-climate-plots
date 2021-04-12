@@ -23,7 +23,7 @@ var charts = require('./config/charts/config.js');
 var sets = require('../static/preset.json');
 // var sets = require('../config/preset.js').preset;
 lib = {
-	renderChart: function(div, type, id="abisko", url){ 
+	renderChart: function(div, type, id="abisko", url){
 		if(hostUrl){
 			if(url){
 				hostUrl = url;

@@ -22,6 +22,7 @@
 		"dailyExtremeTemperature",
 		"weeklyExtremeTemperature",
 		"dailyExtremePrecipitation",
-		"weeklyExtremePrecipitation"
+		"weeklyExtremePrecipitation",
+		"slideLakeIceTime"
 	]
 }

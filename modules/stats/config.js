@@ -11,7 +11,7 @@ var parsers = {
 			blocks.temperatures = parseByDate(blocks.temperatures);
 			blocks.precipitation = parseByDate(blocks.precipitation, 'sum');
 			blocks.growingSeason = {
-				weeks:struct.create(
+				weeks: struct.create(
 					blocks.temperatures.weeks.avg.values.map(each => each.sequence())).build(),
 				days: struct.create(Object.keys(blocks.temperatures.yrly.avg.values).map(year =>  blocks.temperatures.yrly.avg.values[year].sequence())).build(),
 				first: blocks.temperatures.yrlySplit.min.first(),
