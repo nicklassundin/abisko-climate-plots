@@ -113,13 +113,17 @@ var struct = {
 				throw error
 			}
 		}
-		var renderProc = function(data){
-		}
+		// var renderProc = function(data){
+		// }
 		if(!this.cached) this.cached = this.parseRawData();
 		this.cached.then(function(data){
+			// console.log(data)
+			// console.log(tag)
 			if(tag){
 				data = tagApply(data, tag);
 			}
+			console.log(data)
+			console.log(data)
 			try{
 				render.initiate(id, data)
 			}catch(error){
