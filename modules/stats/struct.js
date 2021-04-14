@@ -36,8 +36,7 @@ var struct = {
 	},
 	filterForm: function(f, type, abs) {
 		try{
-
-			if(this.values[0].filter){
+			if(this.values[0].values){ // .values replace .filter ? TODO check
 				return struct.create(this.values.map(each => each.filter((entry) => {
 					var y = f(...entry.values.map(each => each.y));
 					var date = entry.values.filter((each) => each.y == y).map(each => new Date(each.x));
