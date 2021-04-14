@@ -347,15 +347,17 @@ var chart = {
 	initiate: function(data = this.data){
 		var meta = this.meta;	
 		// console.log(this.metaRef)
-		// console.log(data)
 		// console.log(data.difference())
 		// console.log(meta)
 		var id = this.id;
 		if(this.meta.subSet){
+			data = data[this.meta.subSet.set] 
 			this.data = data[this.meta.subSet.set] 
 		}else{
 			this.data = data;
 		}
+		// console.log(this.data)
+		// console.log(this.meta)
 
 		var groups = Object.keys(meta.groups).map(key => ({
 			key: key,
@@ -376,8 +378,9 @@ var chart = {
 		// TODO clean up
 		Object.keys(meta.series).filter(s => meta.series[s].visible != undefined ).forEach(key => {
 			try{
-				if(meta.subSet) {
-					series.push(seriesBuild[meta.series[key].preset](meta, data[meta.subSet.set], key));
+				if(meta.selector){
+					// console.log(data.values[98])
+					series.push(seriesBuild[meta.series[key].preset](meta, data.values[98], key));
 				}else{
 					series.push(seriesBuild[meta.series[key].preset](meta, data, key));
 				}
@@ -440,6 +443,7 @@ var chart = {
 		var title = this.title(gID);
 		var group = meta.groups[gID];
 		var series_count = 0;
+
 		if(change) {
 			Object.keys(meta.series).filter(s => meta.series[s].visible != undefined).forEach((key, index) => {
 				if(meta.series[key].group == gID){

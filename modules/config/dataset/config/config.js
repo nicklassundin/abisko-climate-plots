@@ -63,7 +63,7 @@ var config = {
 				'autumnSlide': meta_struct.create(config =  'temperature', lang =  'autumnTemperature', data =  'ANS', set =  'slide'), 
 				'springSlide': meta_struct.create(config =  'temperature', lang =  'springTemperature', data =  'ANS', set =  'slide'), 
 				'monthlySlide': meta_struct.create(config =  'temperature', lang =  'monthlyTemperature', data =  'ANS', set = 'slide',  subSet = 'monthly'),
-				'avgByYear': meta_struct.create(config =  '[placeholder]', lang =  'annualTemperature', data =  'ANS', set =  'weather'), 
+				'avgByYear': meta_struct.create(config =  'temperature', lang =  'annualTemperature', data =  'ANS', set =  'select'), 
 			},
 			'precipitation':{
 				'yrly': meta_struct.create(config =  'precipitation', lang =  'annualPrecipitation', data =  'ANS' , set =  'weather'), 
@@ -116,7 +116,7 @@ var config = {
 				'autumnSlide': meta_struct.create(config =  'temperature', lang =  'autumnTemperature', data =  'SMHI-Weather', set =  'slide'), 
 				'springSlide': meta_struct.create(config =  'temperature', lang =  'springTemperature', data =  'SMHI-Weather', set =  'slide'), 
 				'monthlySlide': meta_struct.create(config =  'temperature', lang =  'monthlyTemperature', data =  'SMHI-Weather', set = 'slide', subSet = 'monthly'), 
-				'avgByYear': meta_struct.create(config =  '[placeholder]', lang =  'annualTemperature', data =  'SMHI-Weather', set =  'weather'), 
+				'avgByYear': meta_struct.create(config =  'temperature', lang =  'annualTemperature', data =  'SMHI-Weather', set = 'select'), 
 			},
 			'precipitation':{
 				'yrly': meta_struct.create(config =  'precipitation', lang =  'annualPrecipitation', data =  'SMHI-Hydrology' , set =  'weather'), 
