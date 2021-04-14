@@ -401,7 +401,7 @@ var rendF = {
 	'avgTemperaturesByYear':{
 		func: function(reset=false){
 			config[stationType].contFunc(reset);
-			config[stationType].init('avgTemperaturesByYear',['temperatures'], ['temperatures', 'avgByYear']);
+			config[stationType].init('avgTemperaturesByYear',['temperatures', 'yrly', 'avg'], ['temperatures', 'avgByYear']);
 		},
 		html: function(doc){
 			var no = 1;

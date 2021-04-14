@@ -122,8 +122,6 @@ var struct = {
 			if(tag){
 				data = tagApply(data, tag);
 			}
-			console.log(data)
-			console.log(data)
 			try{
 				render.initiate(id, data)
 			}catch(error){
