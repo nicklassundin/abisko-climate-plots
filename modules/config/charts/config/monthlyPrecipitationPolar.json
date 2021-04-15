@@ -1,0 +1,9 @@
+{
+	"id": "monthlyPrecipitationPolar",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["precipitation","polar"],
+		"data": ["precipitation","yrlyFull"]
+	},
+	"months": false
+}

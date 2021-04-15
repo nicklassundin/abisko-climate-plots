@@ -1,0 +1,9 @@
+{
+	"id": "growingSeasonFrostLast",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["growingSeason", "last"],
+		"data": ["growingSeason", "larst"]
+	},
+	"months": false
+}

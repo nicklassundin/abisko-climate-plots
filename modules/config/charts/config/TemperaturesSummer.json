@@ -1,0 +1,9 @@
+{
+	"id": "TemperaturesSummer",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["temperatures","summer"],
+		"data": ["temperatures","summer"]
+	},
+	"months": false
+}

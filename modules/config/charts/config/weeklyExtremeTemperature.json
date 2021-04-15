@@ -1,0 +1,9 @@
+{
+	"id": "weeklyExtremeTemperature",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["temperatures","weeklyExtreme"],
+		"data": ["temperatures","weeks"]
+	},
+	"months": false
+}

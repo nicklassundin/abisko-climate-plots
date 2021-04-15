@@ -1,0 +1,9 @@
+{
+	"id": "slideTemperature",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["temperatures","yrlySlide"],
+		"data": ["temperatures","yrly"]
+	},
+	"months": false
+}

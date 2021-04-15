@@ -1,0 +1,9 @@
+{
+	"id": "iceThicknessDate",
+	"type": "iceThick",
+	"tag": {
+		"render": "date",
+		"data": "date"
+	},
+	"months": false
+}

@@ -1,0 +1,9 @@
+{
+	"id": "slideTemperaturesWinter",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["temperatures","winterSlide"],
+		"data": ["temperatures","winter"]
+	},
+	"months": false
+}

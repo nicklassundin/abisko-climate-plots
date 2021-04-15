@@ -1,0 +1,9 @@
+{
+	"id": "weeklyCO2",
+	"type": "weeklyCO2",
+	"tag": {
+		"render": "weekly",
+		"data": "weekly"
+	},
+	"months": false
+}

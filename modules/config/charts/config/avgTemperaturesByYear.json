@@ -1,0 +1,9 @@
+{
+	"id": "avgTemperaturesByYear",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["temperatures","avgByYear"],
+		"data": ["temperatures","yrly","avg"]
+	},
+	"months": false
+}

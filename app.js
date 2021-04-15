@@ -154,6 +154,12 @@ custom.then((json) => {
 		if(ERROR) throw ERROR
 	})
 })
+const merger = require('./modules/config/charts/merge.js').preset;
+merger.then((json) => {
+	fs.writeFile(__dirname+'/temp/modules.config.charts.merge.json', JSON.stringify(json), (ERROR) => {
+		if(ERROR) throw ERROR
+	})
+})
 
 var charts = (req) => {
 	return new Promise((res, rej) => {

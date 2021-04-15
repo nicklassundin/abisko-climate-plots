@@ -1,0 +1,9 @@
+{
+	"id": "slideTemperaturesSpring",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["temperatures","springSlide"],
+		"data": ["temperatures","spring"]
+	},
+	"months": false
+}

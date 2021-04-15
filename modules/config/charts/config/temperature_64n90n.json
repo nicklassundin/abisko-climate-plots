@@ -1,0 +1,9 @@
+{
+	"id": "temperature_64n90n",
+	"type": "zonal",
+	"tag": {
+		"render": "64n-90n",
+		"data": "64n-90n"
+	},
+	"months": false
+}

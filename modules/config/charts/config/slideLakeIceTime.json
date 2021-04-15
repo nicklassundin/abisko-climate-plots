@@ -1,0 +1,9 @@
+{
+	"id": "slideLakeIceTime",
+	"type": "tornetrask",
+	"tag": {
+		"render": "slideIceTime",
+		"data": "iceTime"
+	},
+	"months": false
+}

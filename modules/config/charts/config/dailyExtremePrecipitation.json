@@ -1,0 +1,9 @@
+{
+	"id": "dailyExtremePrecipitation",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["precipitation","dailyExtreme"],
+		"data": ["precipitation","yrly"]
+	},
+	"months": false
+}
