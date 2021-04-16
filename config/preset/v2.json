@@ -15,7 +15,7 @@
 		"annualAvgSnowDepth",
 		"abiskoSnowDepthPeriodMeans",
 		"abiskoSnowDepthPeriodMeans2",
-		"growingSeason",
+		"growingSeasonWeeks",
 		"growingSeasonDays",
 		"growingSeasonFrostFirst",
 		"growingSeasonFrostLast",

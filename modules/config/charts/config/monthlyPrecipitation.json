@@ -2,8 +2,8 @@
 	"id": "monthlyTemperatures",
 	"type": "[stationType]",
 	"tag": {
-		"render": ["temperatures","monthly"],
-		"data": ["temperatures","monthly"]
+		"render": ["precipitation","monthly"],
+		"data": ["precipitation","monthly"]
 	},
 	"months": true
 }
