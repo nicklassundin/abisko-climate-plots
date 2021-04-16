@@ -1,0 +1,9 @@
+{
+	"id": "abiskoLakeIceFreezeup",
+	"type": "tornetrask",
+	"tag": {
+		"render": "freezeDOY",
+		"data": ["DOY","freeze"]
+	},
+	"months": false
+}

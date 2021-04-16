@@ -1,0 +1,9 @@
+{
+	"id": "diffLakeIceTime",
+	"type": "tornetrask",
+	"tag": {
+		"render": "difference",
+		"data": "iceTime"
+	},
+	"months": false
+}

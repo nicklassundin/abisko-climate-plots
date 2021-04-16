@@ -1,0 +1,9 @@
+{
+	"id": "temperature_glob",
+	"type": "zonal",
+	"tag": {
+		"render": "glob",
+		"data": "glob"
+	},
+	"months": false
+}

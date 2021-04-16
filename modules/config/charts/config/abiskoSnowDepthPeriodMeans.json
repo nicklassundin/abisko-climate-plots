@@ -1,0 +1,9 @@
+{
+	"id": "abiskoSnowDepthPeriodMeans",
+	"type": "abiskoSnowDepth",
+	"tag": {
+		"render": "periodMeans",
+		"data": "periodMeans"
+	},
+	"months": false
+}

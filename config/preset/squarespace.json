@@ -9,7 +9,7 @@
 	"sqrt-snowDepth": ["abiskoSnowDepthPeriodMeans",
 		"abiskoSnowDepthPeriodMeans2"],
 	"sqrt-lakeIce": ["abiskoLakeIce",
-		"slideLakeIceTime","iceThicknessYear", "iceThicknessDate"],
+		"abiskoLakeIceTime", "diffLakeIceTime","iceThicknessYear", "iceThicknessDate"],
 	"sqrt-perma": ["permaHistogramCALM"],
 	"sqrt-carbon": ["weeklyCO2"],
 	"sqrt-temp-climate-weather-v2": ["slideTemperature"],

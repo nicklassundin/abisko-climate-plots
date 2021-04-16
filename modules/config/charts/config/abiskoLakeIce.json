@@ -1,0 +1,9 @@
+{
+	"id": "abiskoLakeIce",
+	"type": "tornetrask",
+	"tag": {
+		"render": "DOY",
+		"data": "DOY"
+	},
+	"months": false
+}

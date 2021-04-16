@@ -1,0 +1,9 @@
+{
+	"id": "iceThicknessYear",
+	"type": "iceThick",
+	"tag": {
+		"render": ["yrly","max"],
+		"data": ["yrly"]
+	},
+	"months": false
+}

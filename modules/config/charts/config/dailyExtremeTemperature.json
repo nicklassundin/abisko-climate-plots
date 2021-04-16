@@ -1,0 +1,9 @@
+{
+	"id": "dailyExtremeTemperature",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["temperatures","dailyExtreme"],
+		"data": ["temperatures","yrly"]
+	},
+	"months": false
+}
