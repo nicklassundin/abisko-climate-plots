@@ -1,0 +1,9 @@
+{
+	"id": "growingSeasonDays",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["growingSeason", "diffDays"],
+		"data": ["growingSeason", "days"]
+	},
+	"months": false
+}

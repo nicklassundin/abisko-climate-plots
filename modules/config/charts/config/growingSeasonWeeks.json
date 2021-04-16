@@ -1,0 +1,9 @@
+{
+	"id": "growingSeasonWeeks",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["growingSeason", "weeks"],
+		"data": ["growingSeason", "weeks"]
+	},
+	"months": false
+}

@@ -166,7 +166,7 @@ var charts = (req) => {
 		custom.then(IDs => {
 			const queryObject = url.parse(req.url,true).query;
 			var id;
-			var ids; 
+			var ids;
 			if(!queryObject.id) {
 				ids = IDs.all;
 			}else if(!custom[queryObject.id]){
