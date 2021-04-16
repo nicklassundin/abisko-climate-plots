@@ -1,0 +1,9 @@
+{
+	"id": "monthlyTemperaturesPolar",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["temperatures","polar"],
+		"data": ["temperatures","yrlyFull"]
+	},
+	"months": false
+}

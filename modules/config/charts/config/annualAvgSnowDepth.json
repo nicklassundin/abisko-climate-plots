@@ -1,0 +1,9 @@
+{
+	"id": "annualAvgSnowDepth",
+	"type": "abiskoSnowDepth",
+	"tag": {
+		"render": ["snowDepth", "yrly"],
+		"data": ["snowDepth", "singleStake", "yrly"]
+	},
+	"months": false
+}

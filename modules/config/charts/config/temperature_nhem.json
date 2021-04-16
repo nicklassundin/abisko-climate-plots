@@ -1,0 +1,9 @@
+{
+	"id": "temperature_nhem",
+	"type": "zonal",
+	"tag": {
+		"render": "nhem",
+		"data": "nhem"
+	},
+	"months": false
+}

@@ -1,0 +1,37 @@
+<!-- extends default--><!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/styles.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="client/bundle.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<label for="type">Choose chart:</label>
+		<select id="type" class="form">
+			{{#each chrts}}
+				<option href="#">{{this.id}}</option>
+			{{/each}}
+		</select><br>
+		<label for="station">Choose station:</label>
+		<select id="station" class="form">
+			{{#each stations}}
+				<option href="#">{{this}}</option>
+			{{/each}}
+		</select>
+		<div id="mark"></div>
+		{{!-- <input type="submit"> --}}
+	<script type="text/javascript">
+		
+		var addr = window.location.origin + window.location.pathname.replace('/index.html','')
+			lib.renderSets(document.getElementById("mark"),
+				document.getElementById("type").value,
+				document.getElementById("station").value, addr);
+$("select").change(function() {
+	document.getElementById("mark").innerHTML = "";
+	lib.renderSets(document.getElementById("mark"),
+		document.getElementById("type").value,
+		document.getElementById("station").value, addr)
+});
+		</script>
+	</body>
+</html>

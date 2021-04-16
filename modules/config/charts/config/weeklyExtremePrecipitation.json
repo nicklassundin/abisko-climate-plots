@@ -1,0 +1,9 @@
+{
+	"id": "weeklyExtremePrecipitation",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["precipitation","weeklyExtreme"],
+		"data": ["precipitation","weeks"]
+	},
+	"months": false
+}

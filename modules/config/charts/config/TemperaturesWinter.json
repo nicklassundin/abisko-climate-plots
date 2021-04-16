@@ -1,0 +1,9 @@
+{
+	"id": "TemperaturesWinter",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["temperatures","winter"],
+		"data": ["temperatures","winter"]
+	},
+	"months": false
+}

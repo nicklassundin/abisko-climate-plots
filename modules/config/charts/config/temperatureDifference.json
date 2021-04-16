@@ -1,0 +1,9 @@
+{
+	"id": "TemperatureDifference",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["temperatures","difference"],
+		"data": ["temperatures","yrly"]
+	},
+	"months": false
+}

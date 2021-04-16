@@ -155,6 +155,7 @@ var config = {
 			freezeDOY: meta_struct.create(config =  'iceFreeze', lang =  'iceFreeze', data =  'ANS', set =  'weather'),
 			iceTime: meta_struct.create(config =  'iceTime', lang =  'iceTime', data =  'ANS', set =  'weather'),
 			slideIceTime: meta_struct.create(config =  'iceTime', lang =  'iceTime', data =  'ANS', set =  'slide'),
+			difference: meta_struct.create(config =  'iceTime', lang =  'iceTime', data =  'ANS', set =  'climate'),
 		}),
 	abiskoSnowDepth: dataset_struct.create(
 		pres('abiskoSnowDepth'),

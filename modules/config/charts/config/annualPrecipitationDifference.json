@@ -1,0 +1,9 @@
+{
+	"id": "annualPrecipitationDifference",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["precipitation","difference"],
+		"data": ["precipitation","yrly"]
+	},
+	"months": false
+}

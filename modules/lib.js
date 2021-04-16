@@ -45,8 +45,9 @@ lib = {
 			}
 		}
 		$(function(){
-			div.appendChild(charts.rendF[type].html());
-			charts.rendF[type].func();
+			var chrt = charts.rendF.build(type)
+			div.appendChild(chrt.html());
+			chrt.func();
 			return div;
 		})
 	},

@@ -51,8 +51,9 @@ global.buildChart = function(doc, ids, reset=false){
 	var call = function(id){
 		return new Promise(function(resolve,reject){
 			try{
-				doc.appendChild(rendF[id].html(doc));	
-				rendF[id].func(reset);
+				var chrt = rendF.build(id);
+				doc.appendChild(chrt.html(doc));	
+				chrt.func(reset);
 				resolve(true);
 			}catch(err){
 				console.log(doc)

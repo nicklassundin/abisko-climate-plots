@@ -1,0 +1,9 @@
+{
+	"id": "slideMonthlyPrecipitation",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["precipitation","monthlySlide"],
+		"data": ["precipitation","monthly"]
+	},
+	"months": true
+}

@@ -1,0 +1,9 @@
+{
+	"id": "abiskoLakeIceBreakup",
+	"type": "tornetrask",
+	"tag": {
+		"render": "breakupDOY",
+		"data": ["DOY","breakup"]
+	},
+	"months": false
+}

@@ -1,0 +1,9 @@
+{
+	"id": "winterPrecipitation",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["precipitation", "winter"],
+		"data": ["precipitation", "winter"]
+	},
+	"months": false
+}

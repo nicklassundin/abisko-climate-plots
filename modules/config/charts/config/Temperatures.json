@@ -1,0 +1,9 @@
+{
+	"id": "Temperatures",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["temperatures","yrly"],
+		"data": ["temperatures","yrly"]
+	},
+	"months": false
+}

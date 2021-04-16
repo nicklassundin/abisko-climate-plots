@@ -1,0 +1,9 @@
+{
+	"id": "monthlyTemperatures",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["temperatures","monthly"],
+		"data": ["temperatures","monthly"]
+	},
+	"months": true
+}

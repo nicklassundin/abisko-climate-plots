@@ -1,0 +1,9 @@
+{
+	"id": "Precipitation",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["precipitation", "yrly"],
+		"data": ["precipitation", "yrly"]
+	},
+	"months": false
+}
