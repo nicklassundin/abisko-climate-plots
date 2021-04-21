@@ -1,3 +1,7 @@
+const ucid = require('unique-commit-id');
+const latestCommit = ucid.latest(); // ex: '01ef00a'
+
+
 // Pre-setup
 var $ = require("jquery");
 
@@ -175,12 +179,13 @@ custom.then(chrts => {
 	app.get('/browse', (req, res) => {
 		res.render('browse.hbs', {
 			chrts,
-			stations
+			stations,
+			latestCommit
 		})
 	})
 	app.get('/static', (req, res) => {
 		stations = ["abisko", "53430", "global"];
-		app.render('browse-release.hbs', {chrts, stations }, (err, str) => {
+		app.render('browse-release.hbs', {chrts, stations, latestCommit }, (err, str) => {
 			fs.writeFile('temp/index.html', str, err => {
 				if (err) {
 					console.error(err)

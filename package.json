@@ -51,6 +51,7 @@
 		"topo": "^3.0.3",
 		"topojson-client": "^3.1.0",
 		"uniq": "^1.0.1",
+		"unique-commit-id": "^1.0.0",
 		"webpack": "^4.43.0"
 	},
 	"devDependencies": {
