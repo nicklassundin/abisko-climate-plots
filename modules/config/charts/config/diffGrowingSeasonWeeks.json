@@ -1,5 +1,5 @@
 {
-	"id": "growingSeasonWeeks",
+	"id": "diffGrowingSeasonWeeks",
 	"type": "[stationType]",
 	"tag": {
 		"render": ["growingSeason", "diffWeeks"],

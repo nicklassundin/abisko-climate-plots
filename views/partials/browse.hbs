@@ -1,0 +1,18 @@
+<label for="type">Choose chart:</label>
+<select id="type" class="form">
+	{{!-- {{#each chrts}} --}}
+		<optgroup label="All">
+			{{#each chrts.all}}
+				<option href="#">{{this}}</option>
+			{{/each}}
+		</optgroup>
+		{{!-- {{/each}} --}}
+</select><br>
+<label for="station">Choose station:</label>
+<select id="station" class="form">
+	{{#each stations}}
+		<option href="#">{{this}}</option>
+	{{/each}}
+</select>
+<div id="mark"></div>
+<hr/>
