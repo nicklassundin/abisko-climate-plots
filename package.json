@@ -13,6 +13,7 @@
 		"d3": "^5.16.0",
 		"express": "^4.17.1",
 		"express-force-ssl": "^0.3.2",
+		"express-handlebars": "^5.3.0",
 		"express-session": "^1.17.1",
 		"fast-csv": "^4.3.6",
 		"formidable": "^1.2.2",
@@ -68,12 +69,12 @@
 	},
 	"scripts": {
 		"test": "npm run test-unit",
-		"test-respons:w": "artillery quick --count 10 -n 20 https://localhost/charts", 
+		"test-respons:w": "artillery quick --count 10 -n 20 https://localhost/charts",
 		"test-unit": "mocha './modules/**/*.spec.js' --delay",
 		"test-dev": "mocha  './modules/**/*.spec.js' '*.spec.dev.js' 'modules/**/*.spec.dev.js' --delay",
 		"start": "npx nodemon server.js [PLACEHOLDER]",
 		"start-full": "npm test && npx nodemon server.js && npm run static",
-		"static": "cp temp/index.html index.html && cp client/bundle.js static/bundle.js && cp temp/preset.json static/preset.json && cp temp/modules.config.charts.merge.json static/modules.config.charts.merge.json" 
+		"static": "cp temp/index.html index.html && cp client/bundle.js static/bundle.js && cp temp/preset.json static/preset.json && cp temp/modules.config.charts.merge.json static/modules.config.charts.merge.json"
 	},
 	"repository": {
 		"type": "git",
@@ -87,7 +88,13 @@
 	},
 	"homepage": "https://github.com/nicklassundin/abisko-climate-plots#readme",
 	"nodemonConfig": {
-			"ignore": ["client/*.js", "docs/*", "temp/*", "cms/*", "node_modules/*"],
+		"ignore": [
+			"client/*.js",
+			"docs/*",
+			"temp/*",
+			"cms/*",
+			"node_modules/*"
+		],
 		"events": {
 			"start": "webpack --mode=development"
 		}

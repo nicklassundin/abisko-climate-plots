@@ -11,9 +11,11 @@ const request = require('request');
 
 // Setup
 const app = express();
-var engines = require('consolidate');
-app.engine('pug', engines.pug);
-app.engine('handlebars', engines.handlebars);
+// var Handlebars = require('handlebars');
+var hbs = require('hbs');
+// var engines = require('consolidate');
+// app.engine('pug', engines.pug);
+// app.engine('handlebars', engines.handlebars);
 
 
 // Local Database
@@ -97,32 +99,6 @@ app.post('/auth', function(request, response) {
 	}
 });
 
-var multer = require('multer');
-var storage = multer.memoryStorage()
-var upload = multer({ storage: storage })
-app.post('/admin/upload', upload.single('file'), function(request, response, next){
-	if(request.session.loggedin){
-		var username = request.body.username;
-		var password = request.body.password;
-		var filename = request.body.type;
-		const file = request.file
-		fs.writeFile("temp/"+filename ,file.buffer,  "binary",function(err) {
-			if(err) {
-				console.log(err);
-			} else {
-				console.log("The file was saved!");
-				database.importCSV("temp/"+filename, filename, database.admin);
-				response.send(file)
-			}
-		});
-	} else {
-		response.send('Please login to view this page!')
-	}
-})
-
-app.get('/', (req, res) => {
-	res.render('login.pug', {})	
-})
 
 app.get('/home', function(request, response) {
 	if (request.session.loggedin) {
@@ -190,17 +166,19 @@ app.get( '/chart', (req, res) => {
 		})
 	})
 });
-app.get( '/browse', (req, res) => {
-	charts(req).then(chrts => {
-		stations = ["abisko", "53430", "global"];
+
+
+// console.log(Handlebars)
+hbs.registerPartials(__dirname + '/views/partials');
+custom.then(chrts => {
+	stations = ["abisko", "53430", "global"];
+	app.get('/browse', (req, res) => {
 		res.render('browse.hbs', {
 			chrts,
 			stations
 		})
 	})
-});
-app.get('/static', (req, res) => {
-	charts(req).then(chrts => {
+	app.get('/static', (req, res) => {
 		stations = ["abisko", "53430", "global"];
 		app.render('browse-release.hbs', {chrts, stations }, (err, str) => {
 			fs.writeFile('temp/index.html', str, err => {
