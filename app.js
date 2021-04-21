@@ -1,6 +1,5 @@
 const ucid = require('unique-commit-id');
-const latestCommit = ucid.latest(); // ex: '01ef00a'
-
+const latestCommit = ucid.latest();
 
 // Pre-setup
 var $ = require("jquery");
@@ -192,7 +191,6 @@ custom.then(chrts => {
 					return
 				}
 			})
-			res.send(str);
 			app.use('/static', express.static(__dirname + '/static'));
 			app.use('/static/css', express.static(__dirname + '/css'));
 			app.use('/static/dep', express.static(__dirname + '/dep'));
@@ -203,6 +201,7 @@ custom.then(chrts => {
 			app.use('/static/client', express.static(__dirname + '/client'));
 			app.use('/static/tmp', express.static(__dirname + '/tmp'));
 			app.use('/static/maps', express.static(__dirname + '/maps'));
+			res.send(str);
 		})	
 	})
 })
