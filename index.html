@@ -8,39 +8,41 @@
 	<body>
 		<label for="type">Choose chart:</label>
 		<select id="type" class="form">
-				<option href="#">Temperatures</option>
-				<option href="#">TemperaturesSpring</option>
-				<option href="#">TemperaturesSummer</option>
-				<option href="#">TemperaturesAutumn</option>
-				<option href="#">TemperaturesWinter</option>
-				<option href="#">monthlyTemperatures</option>
-				<option href="#">growingSeasonWeeks</option>
-				<option href="#">diffGrowingSeasonWeeks</option>
-				<option href="#">growingSeasonDays</option>
-				<option href="#">diffGrowingSeasonDays</option>
-				<option href="#">temperatureDifference</option>
-				<option href="#">temperature_64n90n</option>
-				<option href="#">temperature_nhem</option>
-				<option href="#">temperature_glob</option>
-				<option href="#">annualPrecipitation</option>
-				<option href="#">winterPrecipitation</option>
-				<option href="#">monthlyPrecipitation</option>
-				<option href="#">annualPrecipitationDifference</option>
-				<option href="#">springPrecipitation</option>
-				<option href="#">summerPrecipitation</option>
-				<option href="#">autumnPrecipitation</option>
-				<option href="#">abiskoSnowDepthPeriodMeans</option>
-				<option href="#">abiskoSnowDepthPeriodMeans2</option>
-				<option href="#">abiskoLakeIce</option>
-				<option href="#">abiskoLakeIceTime</option>
-				<option href="#">iceThicknessYear</option>
-				<option href="#">iceThicknessDate</option>
-				<option href="#">weeklyCO2</option>
-				<option href="#">permaHistogramCALM</option>
-				<option href="#">slideTemperature</option>
-				<option href="#">avgTemperaturesByYear</option>
-				<option href="#">slideLakeIceTime</option>
-				<option href="#">diffLakeIceTime</option>
+				<optgroup label="All">
+						<option href="#">Temperatures</option>
+						<option href="#">TemperaturesSpring</option>
+						<option href="#">TemperaturesSummer</option>
+						<option href="#">TemperaturesAutumn</option>
+						<option href="#">TemperaturesWinter</option>
+						<option href="#">monthlyTemperatures</option>
+						<option href="#">growingSeasonWeeks</option>
+						<option href="#">diffGrowingSeasonWeeks</option>
+						<option href="#">growingSeasonDays</option>
+						<option href="#">diffGrowingSeasonDays</option>
+						<option href="#">temperatureDifference</option>
+						<option href="#">temperature_64n90n</option>
+						<option href="#">temperature_nhem</option>
+						<option href="#">temperature_glob</option>
+						<option href="#">annualPrecipitation</option>
+						<option href="#">winterPrecipitation</option>
+						<option href="#">monthlyPrecipitation</option>
+						<option href="#">annualPrecipitationDifference</option>
+						<option href="#">springPrecipitation</option>
+						<option href="#">summerPrecipitation</option>
+						<option href="#">autumnPrecipitation</option>
+						<option href="#">abiskoSnowDepthPeriodMeans</option>
+						<option href="#">abiskoSnowDepthPeriodMeans2</option>
+						<option href="#">abiskoLakeIce</option>
+						<option href="#">abiskoLakeIceTime</option>
+						<option href="#">iceThicknessYear</option>
+						<option href="#">iceThicknessDate</option>
+						<option href="#">weeklyCO2</option>
+						<option href="#">permaHistogramCALM</option>
+						<option href="#">slideTemperature</option>
+						<option href="#">avgTemperaturesByYear</option>
+						<option href="#">slideLakeIceTime</option>
+						<option href="#">diffLakeIceTime</option>
+				</optgroup>
 		</select><br>
 		<label for="station">Choose station:</label>
 		<select id="station" class="form">
@@ -49,18 +51,19 @@
 				<option href="#">global</option>
 		</select>
 		<div id="mark"></div>
-	<script type="text/javascript">
+		<hr/>
+		<script type="text/javascript">
 		
-		var addr = window.location.origin + window.location.pathname.replace('/index.html','')
+			var addr = window.location.origin + window.location.pathname.replace('/index.html','')
+		lib.renderSets(document.getElementById("mark"),
+			document.getElementById("type").value,
+			document.getElementById("station").value, addr);
+		$("select").change(function() {
+			document.getElementById("mark").innerHTML = "";
 			lib.renderSets(document.getElementById("mark"),
 				document.getElementById("type").value,
-				document.getElementById("station").value, addr);
-$("select").change(function() {
-	document.getElementById("mark").innerHTML = "";
-	lib.renderSets(document.getElementById("mark"),
-		document.getElementById("type").value,
-		document.getElementById("station").value, addr)
-});
+				document.getElementById("station").value, addr)
+		});
 		</script>
 	</body>
 </html>
