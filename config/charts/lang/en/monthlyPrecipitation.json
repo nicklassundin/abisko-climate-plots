@@ -2,7 +2,7 @@
 	"valueSuffix": "mm",
 	"groups": {
 		"0": {
-			"title": "Average Precipitation" ,
+			"title": "Average [month] Precipitation" ,
 			"subTitle": "[stationName]",
 			"caption": "Average monthly precipitation for [month]. The lowest (min) and highest (max) precipitation of the month. Note the measurement of snow from precipitation is estimated from precipitation taking place when the temperature was simultaneously recorded as below 0 C. These values should be considered estimates and not a precise value.",
 			"yAxis": {
@@ -18,7 +18,7 @@
 		"1": {
 			"title": "Precipitation Difference From Baseline",
 			"subTitle": "[stationName]",
-			"caption": "Average monthly precipitation for [month]. The lowest precipitation of the month (min). The highest precipitation of the month (max).",
+			"caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
 			"yAxis": {
 				"left": "Average precipitation [mm]",
 				"right": "[X-AXIS]"

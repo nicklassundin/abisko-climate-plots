@@ -4,7 +4,7 @@
 		"0": {
 			"title": "Annual Average Precipitation" ,
 			"subTitle": "[stationName]",
-			"caption": "Average annual precipitation. The lowest (min) and highest (max) precipitation of the month.",
+			"caption": "Average annual precipitation. The lowest (min) and highest (max) precipitation of the month. Note the measurement of snow from precipitation is estimated from precipitation taking place when the temperature was simultaneously recorded as below 0 C. These values should be considered estimates and not a precise value.",
 			"yAxis": {
 				"left": "Total Precipitation [mm]",
 				"right": "[X-AXIS]"
@@ -16,8 +16,9 @@
 			"legend": "Weather"
 		},
 		"1": {
-			"title": "Annual Average Precipitation Difference from Baseline" ,
-			"subTitle": "[stationName] Difference between yearly average and average for [baseline]", 
+			"title": "Annual Average Precipitation Difference From Baseline" ,
+			"subTitle": "[stationName]", 
+			"caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
 			"yAxis": {
 				"left": "Precipitation [mm]",
 				"right": "[X-AXIS]"
@@ -26,7 +27,6 @@
 				"bott": "Year", 
 				"top": "[Y-AXIS]"
 			},
-			"caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
 			"legend": "Climate"
 		},
 		"2": {
