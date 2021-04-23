@@ -5,5 +5,13 @@
 		"render": ["precipitation","dailyExtreme"],
 		"data": ["precipitation","yrly"]
 	},
+	"config": {
+		"meta": {
+			"config": "precipitation",
+			"lang": "annualPrecipitation",
+			"data": "[data]",
+			"set": "extremeDay"
+		}
+	},
 	"months": false
 }

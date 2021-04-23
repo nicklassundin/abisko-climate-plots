@@ -5,5 +5,13 @@
 		"render": ["precipitation", "yrlySlide"],
 		"data": ["precipitation", "yrly"]
 	},
+	"config": {
+		"meta": {
+			"config": "precipitation",
+			"lang": "annualPricipitation",
+			"data": "[data]",
+			"set": "slide"
+		}
+	},
 	"months": false
 }

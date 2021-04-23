@@ -5,5 +5,13 @@
 		"render": ["temperatures","dailyExtreme"],
 		"data": ["temperatures","yrly"]
 	},
+	"config": {
+		"meta": {
+			"config": "temperature",
+			"lang": "annualTemperature",
+			"data": "[data]",
+			"set": "extremeDay"
+		}
+	},
 	"months": false
 }

@@ -1,16 +1,16 @@
 {
-	"id": "weeklyExtremeTemperature",
+	"id": "annualTemperatures",
 	"type": "[stationType]",
 	"tag": {
-		"render": ["temperatures","weeklyExtreme"],
-		"data": ["temperatures","weeks"]
+		"render": ["temperatures","yrly"],
+		"data": ["temperatures","yrly"]
 	},
 	"config": {
 		"meta": {
 			"config": "temperature",
 			"lang": "annualTemperature",
 			"data": "[data]",
-			"set": "extremeWeek"
+			"set":"weather"
 		}
 	},
 	"months": false

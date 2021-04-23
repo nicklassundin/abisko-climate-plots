@@ -5,5 +5,14 @@
 		"render": ["temperatures","monthly"],
 		"data": ["temperatures","monthly"]
 	},
+	"config": {
+		"meta": {
+			"config": "temperature",
+			"lang": "monthlyTemperature",
+			"data": "[data]",
+			"set": "weather",
+			"subset": "monthly"
+		}
+	},
 	"months": true
 }

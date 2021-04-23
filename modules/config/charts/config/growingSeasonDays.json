@@ -5,5 +5,13 @@
 		"render": ["growingSeason", "days"],
 		"data": ["growingSeason", "days"]
 	},
+	"config": {
+		"meta": {
+			"config": "growingSeason",
+			"lang": "growingSeason",
+			"data": "[data]",
+			"set": "weatherDays"
+		}
+	},
 	"months": false
 }

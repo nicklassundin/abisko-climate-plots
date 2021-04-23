@@ -5,5 +5,13 @@
 		"render": ["precipitation", "springSlide"],
 		"data": ["precipitation", "spring"]
 	},
+	"config": {
+		"meta": {
+			"config": "temperature",
+			"lang": "springTemperature",
+			"data": "[data]",
+			"set": "slide"
+		}
+	},
 	"months": false
 }

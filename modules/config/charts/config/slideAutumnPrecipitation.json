@@ -5,5 +5,13 @@
 		"render": ["precipitation", "autumnSlide"],
 		"data": ["precipitation", "autumn"]
 	},
+	"config": {
+		"meta": {
+			"config": "temperature",
+			"lang": "autumnTemperature",
+			"data": "[data]",
+			"set": "slide"
+		}
+	},
 	"months": false
 }

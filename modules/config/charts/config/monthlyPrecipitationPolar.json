@@ -5,5 +5,13 @@
 		"render": ["precipitation","polar"],
 		"data": ["precipitation","yrlyFull"]
 	},
+	"config": {
+		"meta": {
+			"config": "",
+			"lang": "",
+			"data": "[data]",
+			"set": "weather"
+		}
+	},
 	"months": false
 }

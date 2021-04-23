@@ -5,5 +5,13 @@
 		"render": ["precipitation", "summer"],
 		"data": ["precipitation", "summer"]
 	},
+	"config": {
+		"meta": {
+			"config": "precipitation",
+			"lang": "summerPrecipitation",
+			"data": "[data]",
+			"set": "weather"
+		}
+	},
 	"months": false
 }

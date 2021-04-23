@@ -5,5 +5,13 @@
 		"render": ["temperatures","summerSlide"],
 		"data": ["temperatures","summer"]
 	},
+	"config": {
+		"meta": {
+			"config": "temperature",
+			"lang": "summerTemperature",
+			"data": "[data]",
+			"set": "slide"
+		}
+	},
 	"months": false
 }

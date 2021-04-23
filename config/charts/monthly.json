@@ -1,5 +1,5 @@
 {
-	"subSet": {
+	"subset": {
 		"set": false,
 		"sets": ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"],
 		"enabled": true,

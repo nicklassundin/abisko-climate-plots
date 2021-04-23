@@ -5,5 +5,13 @@
 		"render": ["growingSeason", "diffWeeks"],
 		"data": ["growingSeason", "weeks"]
 	},
+	"config": {
+		"meta": {
+			"config": "growingSeason",
+			"lang": "growingSeason",
+			"data": "[data]",
+			"set": "climateWeeks"
+		}
+	},
 	"months": false
 }

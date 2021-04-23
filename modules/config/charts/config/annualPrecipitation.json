@@ -1,9 +1,17 @@
 {
-	"id": "Precipitation",
+	"id": "annualPrecipitation",
 	"type": "[stationType]",
 	"tag": {
 		"render": ["precipitation", "yrly"],
 		"data": ["precipitation", "yrly"]
+	},
+	"config": {
+		"meta": {
+			"config": "precipitation",
+			"lang": "annualPrecipitation",
+			"data": "[data]",
+			"set": "weather"
+		}
 	},
 	"months": false
 }

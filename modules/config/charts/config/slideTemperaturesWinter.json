@@ -5,5 +5,13 @@
 		"render": ["temperatures","winterSlide"],
 		"data": ["temperatures","winter"]
 	},
+	"config": {
+		"meta": {
+			"config": "temperature",
+			"lang": "winterTemperature",
+			"data": "[data]",
+			"set": "slide"
+		}
+	},
 	"months": false
 }

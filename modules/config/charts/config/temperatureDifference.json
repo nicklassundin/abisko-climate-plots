@@ -1,9 +1,17 @@
 {
-	"id": "TemperatureDifference",
+	"id": "temperatureDifference",
 	"type": "[stationType]",
 	"tag": {
 		"render": ["temperatures","difference"],
 		"data": ["temperatures","yrly"]
+	},
+	"config": {
+		"meta": {
+			"config": "temperature",
+			"lang": "annualTemperature",
+			"data": "[data]",
+			"set": "climate"
+		}
 	},
 	"months": false
 }

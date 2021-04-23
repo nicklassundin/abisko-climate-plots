@@ -5,5 +5,13 @@
 		"render": ["growingSeason", "last"],
 		"data": ["growingSeason", "larst"]
 	},
+	"config": {
+		"meta": {
+			"config": "growingSeasonLast",
+			"lang": "growingSeasonFrostLast",
+			"data": "[data]",
+			"set": "slide"
+		}
+	},
 	"months": false
 }

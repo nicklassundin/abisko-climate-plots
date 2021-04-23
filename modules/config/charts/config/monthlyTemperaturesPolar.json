@@ -5,5 +5,13 @@
 		"render": ["temperatures","polar"],
 		"data": ["temperatures","yrlyFull"]
 	},
+	"config": {
+		"meta": {
+			"config": "",
+			"lang": "",
+			"data": "[data]",
+			"set": "weather"
+		}
+	},
 	"months": false
 }

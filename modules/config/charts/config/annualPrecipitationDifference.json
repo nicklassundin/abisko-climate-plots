@@ -5,5 +5,13 @@
 		"render": ["precipitation","difference"],
 		"data": ["precipitation","yrly"]
 	},
+	"config": {
+		"meta": {
+			"config": "precipitation",
+			"lang": "annualPrecipitation",
+			"data": "[data]",
+			"set": "climate"
+		}
+	},
 	"months": false
 }

@@ -5,5 +5,13 @@
 		"render": ["precipitation","weeklyExtreme"],
 		"data": ["precipitation","weeks"]
 	},
+	"config": {
+		"meta": {
+			"config": "precipitation",
+			"lang": "annualPrecipitation",
+			"data": "[data]",
+			"set":"extremeWeek"
+		}
+	},
 	"months": false
 }

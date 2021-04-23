@@ -2,19 +2,29 @@ var $ = require('jquery')
 const help = require('../../helpers.js')
 var months = help.months;
 
-var config = require('../dataset/config/config.js').config;
 var createDiv = require('./struct.js').createDiv;
+
+const preset = require('./help.js');
+const pres = preset.preset;
+var datastr = require('../dataset/struct.js').struct;
 
 var merged = require('../../../static/modules.config.charts.merge.json');
 var rendF = {
+	container: {},
 	configs: merged, 
 	build: function(id){
+		var type = rendF.configs[id].type.replace('[stationType]',stationType);
+		if(!rendF.container[type]){
+			rendF.container[type] = datastr.create(pres(type))	
+		}
 		res = {
-			type: rendF.configs[id].type.replace('[stationType]',stationType),
+			type: type,
 			config: rendF.configs[id],
 			func: function(reset=false){
-				config[this.type].contFunc(reset);
-				config[this.type].init(this.config.id, this.config.tag.data, this.config.tag.render);
+				var meta = {}
+				meta[id] = rendF.configs[id].config.meta
+				rendF.container[this.type].contFunc(reset, meta);
+				rendF.container[this.type].init(this.config.id, this.config.tag.data);
 			},
 			html: function(doc){
 				if(this.config.months){

@@ -5,5 +5,13 @@
 		"render": ["precipitation", "winterSlide"],
 		"data": ["precipitation", "winter"]
 	},
+	"config": {
+		"meta": {
+			"config": "precipitation",
+			"lang": "winterPrecipitation",
+			"data": "[data]",
+			"set": "slide"
+		}
+	},
 	"months": false
 }

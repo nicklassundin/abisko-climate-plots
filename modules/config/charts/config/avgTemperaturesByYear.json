@@ -5,5 +5,13 @@
 		"render": ["temperatures","avgByYear"],
 		"data": ["temperatures","yrly","avg"]
 	},
+	"config": {
+		"meta": {
+			"config": "temperatures",
+			"lang": "autumnTemperature",
+			"data": "[data]",
+			"set": "select"
+		}
+	},
 	"months": false
 }

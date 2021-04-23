@@ -1,9 +1,18 @@
 {
-	"id": "monthlyTemperatures",
+	"id": "monthlyPrecipitation",
 	"type": "[stationType]",
 	"tag": {
 		"render": ["precipitation","monthly"],
 		"data": ["precipitation","monthly"]
+	},
+	"config": {
+		"meta": {
+			"config": "precipitation",
+			"lang": "monthlyPrecipitation",
+			"data": "[data]",
+			"set": "weather",
+			"subset": "monthly"
+		}
 	},
 	"months": true
 }

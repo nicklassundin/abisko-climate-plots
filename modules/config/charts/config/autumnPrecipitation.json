@@ -5,5 +5,13 @@
 		"render": ["precipitation", "autumn"],
 		"data": ["precipitation", "autumn"]
 	},
+	"config": {
+		"meta": {
+			"config": "precipitation",
+			"lang": "autumnPrecipitation",
+			"data": "[data]",
+			"set": "weather"
+		}
+	},
 	"months": false
 }

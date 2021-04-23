@@ -44,7 +44,8 @@ var struct = {
 	render: renderer, 
 	reader: Papa.parse, // TODO be a module that are self contained
 	metaRef: undefined,
-	contFunc: function(reset=false, page=''){
+	contFunc: function(reset=false, meta){
+		this.metaRef = meta;
 		if(typeof this.rawData !== 'undefined' && this.rawData.length > 0){
 			return this;
 		}	
@@ -101,18 +102,8 @@ var struct = {
 	},
 	init: function(id, tag, renderTag=tag){
 		var render = this.render;
-		if(renderTag){
-			var meta = tagApply(this.metaRef, renderTag);
-			render.setup(id, meta);
-		}else{
-			try{
-				render.setup(id, this.metaRef);
-			}catch(error){
-				console.log(id)
-				console.log(this.metaRef);
-				throw error
-			}
-		}
+		var meta = this.metaRef[id]
+		render.setup(id, meta);
 		// var renderProc = function(data){
 		// }
 		if(!this.cached) this.cached = this.parseRawData();
@@ -137,7 +128,7 @@ var struct = {
 	clone: function(){
 		return Object.assign({}, this);
 	},
-	create: function(config, meta){
+	create: function(config){ 
 		var file = config.file;
 		var preset = config.preset;
 		var parser = parse[config.parser];
@@ -148,7 +139,6 @@ var struct = {
 		if(!Array.isArray(file)){
 			file = [file];
 		}
-		res.metaRef = meta;
 		res.file = file;	
 		res.filePath = (files) => files.map(x => filePath.station(x, (local ? station : undefined))); 
 		res.preset = preset;

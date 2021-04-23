@@ -5,5 +5,14 @@
 		"render": ["precipitation","monthlySlide"],
 		"data": ["precipitation","monthly"]
 	},
+	"config": {
+		"meta": {
+			"config": "precipitation",
+			"lang": "monthlyPrecipitation",
+			"data": "[data]",
+			"set": "slide",
+			"subSet": "monthly"
+		}
+	},
 	"months": true
 }

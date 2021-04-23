@@ -1,8 +1,8 @@
 {
-	"id": "diffGrowingSeasonDays",
+	"id": "slideGrowingSeasonDays",
 	"type": "[stationType]",
 	"tag": {
-		"render": ["growingSeason", "diffDays"],
+		"render": ["growingSeason","slide","days"],
 		"data": ["growingSeason", "days"]
 	},
 	"config": {
@@ -10,7 +10,7 @@
 			"config": "growingSeason",
 			"lang": "growingSeason",
 			"data": "[data]",
-			"set": "climateDays"
+			"set": "slide"
 		}
 	},
 	"months": false
