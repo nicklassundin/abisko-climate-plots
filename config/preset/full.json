@@ -107,5 +107,7 @@
 	"slideLakeIceTime": ["slideLakeIceTime"],
 	"diffLakeIceTime" : ["diffLakeIceTime"],
 	"diffGrowingSeasonDays": ["diffGrowingSeasonDays"],
-	"diffGrowingSeasonWeeks": ["diffGrowingSeasonWeeks"]
+	"diffGrowingSeasonWeeks": ["diffGrowingSeasonWeeks"],
+	"slideGrowingSeasonDays": ["slideGrowingSeasonDays"],
+	"slideGrowingSeasonWeeks": ["slideGrowingSeasonWeeks"]
 }
