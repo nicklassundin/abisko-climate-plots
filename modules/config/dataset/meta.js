@@ -71,9 +71,7 @@ exports.getMeta = function(src, parser){
 		},
 		'growingSeason': {
 			'weeks': meta_struct.create(config =  'growingSeason', lang =  'growingSeason', data =src, set = 'weatherWeeks'), 
-			// 'weeks': meta_struct.create(config =  'growingSeason', lang =  'growingSeason', data = src, set =  'slide'), 
 			'days': meta_struct.create(config =  'growingSeason', lang =  'growingSeason', data =src, set = 'weatherDays'), 
-			// 'days': meta_struct.create(config =  'growingSeason', lang =  'growingSeasonDays', data = src, set = 'slide'), 
 			'first': meta_struct.create(config =  'growingSeasonFirst', lang =  'growingSeasonFrostFirst', data =src, set = 'slide'), 
 			'last': meta_struct.create(config =  'growingSeasonLast', lang =  'growingSeasonFrostLast', data =src, set = 'slide'), 
 		},

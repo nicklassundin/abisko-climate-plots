@@ -2,7 +2,7 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "Average Temperature" ,
+			"title": "Average [month] Temperature" ,
 			"subTitle": "[stationName]",
 			"caption": "Average monthly temperature for [month]. The lowest (min) and highest (max) temperature of the month.",
 			"legend": "Weather",

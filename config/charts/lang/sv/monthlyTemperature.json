@@ -2,7 +2,7 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "Genomsnittlig temperatur" ,
+			"title": "Genomsnittlig temperatur för [month]" ,
 			"subTitle": "[stationName]",
 			"caption": "Genomsnittlig temperatur per månad för [month]. Månadens lägsta (min) och högsta (max) temperatur.",
 			"legend": "Väder",

@@ -92,6 +92,10 @@ var config = {
 				'last': meta_struct.create(config =  'growingSeasonLast', lang =  'growingSeasonFrostLast', data = 'ANS', set = 'slide'), 
 				'diffWeeks': meta_struct.create(config =  'growingSeason', lang =  'growingSeason', data =  'ANS', set =  'climateWeeks'), 
 				'diffDays': meta_struct.create(config =  'growingSeason', lang =  'growingSeason', data =  'ANS', set =  'climateDays'), 
+				'slide': {
+					'weeks': meta_struct.create(config =  'growingSeason', lang =  'growingSeason', data =  'ANS', set =  'slide'), 
+					'days': meta_struct.create(config =  'growingSeason', lang =  'growingSeason', data =  'ANS', set =  'slide'), 
+				}
 			},
 			'slideTemperature': meta_struct.create(config =  'temperature', lang =  'annualTemperature', data =  'ANS', set =  'slide'), 
 		}),
@@ -145,6 +149,10 @@ var config = {
 				'last': meta_struct.create(config =  'growingSeasonLast', lang =  'growingSeasonFrostLast', data = 'SMHI-Weather', set =  'slide'), 
 				'diffWeeks': meta_struct.create(config =  'growingSeason', lang =  'growingSeason', data =  'SMHI-Weather', set =  'climateWeeks'), 
 				'diffDays': meta_struct.create(config =  'growingSeason', lang =  'growingSeason', data =  'SMHI-Weather', set =  'climateDays'), 
+				'slide': {
+					'weeks': meta_struct.create(config =  'growingSeason', lang =  'growingSeason', data =  'SMHI-Weather', set =  'slide'), 
+					'days': meta_struct.create(config =  'growingSeason', lang =  'growingSeason', data =  'SMHI-Weather', set =  'slide'), 
+				}
 			},
 			'slideTemperature': meta_struct.create(config =  'temperature', lang =  'annualTemperature', data =  'SMHI-Weather', set =  'slide'), 
 		}),

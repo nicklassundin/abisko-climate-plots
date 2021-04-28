@@ -9,6 +9,8 @@
 		"diffGrowingSeasonWeeks",
 		"growingSeasonDays",
 		"diffGrowingSeasonDays",
+		"slideGrowingSeasonWeeks",
+		"slideGrowingSeasonDays",
 		"temperatureDifference",
 		"temperature_64n90n",
 		"temperature_nhem",
@@ -43,7 +45,8 @@
 		"summerPrecipitation",
 		"winterPrecipitation",
 		"monthlyPrecipitation",
-		"annualPrecipitationDifference"],
+		"annualPrecipitationDifference"
+	],
 	"localSmall": ["Temperatures", "annualPrecipitation"],
 	"temp": ["Temperatures",
 		"TemperaturesSummer",
