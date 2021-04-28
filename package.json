@@ -4,7 +4,7 @@
 	"description": "Original work from https://github.com/antoneri/abisko-climate-plots",
 	"main": "abisko-climate-plots-lib.js",
 	"dependencies": {
-		"@material-ui/core": "^4.11.0",
+		"@material-ui/core": "^4.11.4",
 		"chai-http": "^4.3.0",
 		"commonjs-highcharts": "^4.0.3",
 		"connect": "^3.7.0",
