@@ -89,23 +89,26 @@ const url = require('url');
 const custom = require('./config/preset.js').preset;
 custom.then((json) => {
 	fs.exists(__dirname+'/temp/preset.json', function (exists) {
-		if(exists)
-		{
-			fs.writeFile(__dirname+'/temp/preset.json', JSON.stringify(json), (ERROR) => {
-				if(ERROR) throw ERROR
-			})
-		}else
-		{
-			fs.writeFile(__dirname+'/temp/preset.json', {flag: 'wx'}, function (err, data) 
-				{ 
-				})
+		if(!exists){
+			fs.writeFile(__dirname+'/temp/preset.json', {flag: 'wx'}, function (err) {})
 		}
+		fs.writeFile(__dirname+'/temp/preset.json', JSON.stringify(json), (ERROR) => {
+			if(ERROR) throw ERROR
+		})
 	})
 })
 const merger = require('./modules/config/charts/merge.js').preset;
 merger.then((json) => {
-	fs.writeFile(__dirname+'/temp/modules.config.charts.merge.json', JSON.stringify(json), (ERROR) => {
-		if(ERROR) throw ERROR
+	fs.exists(__dirname+'/temp/preset.json', function (exists) {
+		if(!exists){
+			fs.writeFile(__dirname+'/temp/preset.json', {flag: 'wx'}, function (err) {})
+		}
+		fs.writeFile(__dirname+'/temp/preset.json', JSON.stringify(json), (ERROR) => {
+			if(ERROR) throw ERROR
+		})
+		fs.writeFile(__dirname+'/temp/modules.config.charts.merge.json', JSON.stringify(json), (ERROR) => {
+			if(ERROR) throw ERROR
+		})
 	})
 })
 
