@@ -57,22 +57,22 @@ require('./modules/server/smhi').init(app, TYPE);
 // require('./modules/api/api').lang(app, __dirname, '/lang');
 
 // Database
-var database = require('./modules/server/db/db');
+// var database = require('./modules/server/db/db');
 
-app.get('/databases', (req, res) => {
-	database.webserver.then(function(connection){
-		console.log("Server Connected Success")
-		// console.log(connection)
-		connection.query('SHOW DATABASES;', function(error, result, fields){
-			console.log(" - Query Success")
-			if(error){
-				console.log(error);
-				return;
-			}
-			res.send(result)
-		})
-	})
-})
+// app.get('/databases', (req, res) => {
+// 	database.webserver.then(function(connection){
+// 		console.log("Server Connected Success")
+// 		// console.log(connection)
+// 		connection.query('SHOW DATABASES;', function(error, result, fields){
+// 			console.log(" - Query Success")
+// 			if(error){
+// 				console.log(error);
+// 				return;
+// 			}
+			// res.send(result)
+		// })
+	// })
+// })
 
 var session = require('express-session');
 var bodyParser = require('body-parser');
