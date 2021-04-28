@@ -33,9 +33,9 @@ var hbs = require('hbs');
 
 // cache.createTable('datafiles');
 // fs.readdir('data/abisko', (err, files) => {
-	// TODO read files and enter them
-	// cache.insertInto('datafiles', files);
-	// cache.initApi(app, 'datafiles')
+// TODO read files and enter them
+// cache.insertInto('datafiles', files);
+// cache.initApi(app, 'datafiles')
 // });
 
 // Open file access
@@ -69,9 +69,9 @@ require('./modules/server/smhi').init(app, TYPE);
 // 				console.log(error);
 // 				return;
 // 			}
-			// res.send(result)
-		// })
-	// })
+// res.send(result)
+// })
+// })
 // })
 
 var session = require('express-session');
@@ -88,8 +88,18 @@ app.use(session({
 const url = require('url');
 const custom = require('./config/preset.js').preset;
 custom.then((json) => {
-	fs.writeFile(__dirname+'/temp/preset.json', JSON.stringify(json), (ERROR) => {
-		if(ERROR) throw ERROR
+	fs.exists(__dirname+'/temp/preset.json', function (exists) {
+		if(exists)
+		{
+			fs.writeFile(__dirname+'/temp/preset.json', JSON.stringify(json), (ERROR) => {
+				if(ERROR) throw ERROR
+			})
+		}else
+		{
+			fs.writeFile(__dirname+'/temp/preset.json', {flag: 'wx'}, function (err, data) 
+				{ 
+				})
+		}
 	})
 })
 const merger = require('./modules/config/charts/merge.js').preset;
