@@ -87,14 +87,14 @@ app.use(session({
 
 const url = require('url');
 const custom = require('./config/preset.js').preset;
-var fileWrite = function(json, name){
-	fs.exists(name, function (exists) {
+var fileWrite = function(json, file){
+	fs.exists(file, function (exists) {
 		if(exists){
-			fs.writeFile(name, JSON.stringify(json), (ERROR) => {
+			fs.writeFile(file, JSON.stringify(json), (ERROR) => {
 				if(ERROR) throw ERROR
 			})
 		}else{
-			fs.writeFile(json, data, {flag: 'wx'}, function (err,data) {})
+			fs.writeFile(file, JSON.stringify(json), {flag: 'wx'}, function (err,data) {})
 		}
 	})
 }
