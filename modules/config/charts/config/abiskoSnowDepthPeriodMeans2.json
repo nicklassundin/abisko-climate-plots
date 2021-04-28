@@ -5,5 +5,13 @@
 		"render": "decadeMeans",
 		"data": "decadeMeans"
 	},
+	"config": {
+		"meta": {
+			"config": "snowDepthDecade",
+			"lang": "snowDepthDecade",
+			"data": "ANS",
+			"set": "weather"
+		}
+	},
 	"months": false
 }

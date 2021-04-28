@@ -1,9 +1,27 @@
 {
-	"id": "monthlyTemperatures",
+	"id": "monthlyPrecipitation",
 	"type": "[stationType]",
 	"tag": {
 		"render": ["precipitation","monthly"],
 		"data": ["precipitation","monthly"]
+	},
+	"config": {
+		"meta": {
+			"smhi": {
+				"data": "SMHI-Hydrology",
+				"config": "precipitation",
+				"lang": "monthlyPrecipitation",
+				"set": "weather",
+				"subset": "monthly"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "precipitation",
+				"lang": "monthlyPrecipitation",
+				"set": "weather",
+				"subset": "monthly"
+			}
+		}
 	},
 	"months": true
 }

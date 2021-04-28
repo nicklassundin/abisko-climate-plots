@@ -5,5 +5,21 @@
 		"render": ["temperatures","polar"],
 		"data": ["temperatures","yrlyFull"]
 	},
+	"config": {
+		"meta": {
+			"smhi": {
+				"data": "SMHI-Weather",
+				"config": "",
+				"lang": "",
+				"set": "weather"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "",
+				"lang": "",
+				"set": "weather"
+			}
+		}
+	},
 	"months": false
 }

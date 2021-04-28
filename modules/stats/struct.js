@@ -328,7 +328,6 @@ var struct = {
 exports.struct = struct;
 
 var parseByDate = function (values, type='mean', src='', custom) {
-	// console.log(values)
 	var keys = Object.keys(values[0])
 	var frame = {
 		weeks: {},
@@ -366,27 +365,31 @@ var parseByDate = function (values, type='mean', src='', custom) {
 		insert: function(entries){
 			var result = Object.assign({}, frame);
 			// TODO build to general function to be use for all functions
-			var set = function(entry, key, date, year, month, week){
+			var set = function(entry, key, date){
+				var year = date.getFullYear();
+				var month = date.getMonth();
+				var week = date.getWeekNumber();
+				if(!years[year+'']) years[year] = year+'';
 				var monthName = help.monthByIndex(month)
-				var insert = (...k) => function(data = result, e = entry){
-					var kn = k[0]
-					if(!data[kn]){
-						if(k.length > 1){
-							data[kn] = insert(...(k.slice(1)))({})
+				var insert = (...k) => {
+					return function(data = result, e = entry){
+						var kn = k[0]
+						if(!data[kn]){
+							if(k.length > 1){
+								data[kn] = insert(...(k.slice(1)))({})
+							}else{
+								data[kn] = struct.create([],kn,type);
+							}
 						}else{
-							const cont = struct.create([],kn,type);
-							data[kn] = cont;
+							if(k.length > 1){
+								data[kn] = insert(...(k.slice(1)))(data[kn]);
+							}else{
+								data[kn].values.push(e)
+							}
 						}
-					}else{
-						if(k.length > 1){
-							data[kn] = insert(...(k.slice(1)))(data[kn]);
-						}else{
-							data[kn].values.push(e)
-						}
+						return data;
 					}
-					return data;
 				}
-
 				// Seasons	
 				var season = help.getSeasonByIndex(month);
 				insert(season, key, year)();
@@ -429,20 +432,12 @@ var parseByDate = function (values, type='mean', src='', custom) {
 				entries.forEach(entry => {
 					var date = undefined; 
 					keys.forEach(key => {
-						// console.log(entry(key).x)
-						var date = new Date(entry[key].x);
-						var year = date.getFullYear();
-						// console.log(year)
-						var month = date.getMonth();
-						var week = date.getWeekNumber();
-						if(!years[year+'']) years[year] = year+'';
 
-						values = set(entry[key], key, date, year, month, week);
+						values = set(entry[key], key, new Date(entry[key].x));
 					})
 				})
 				var construct = function(bValues, x){
 					const str = [];
-
 					try{
 						Object.keys(bValues).forEach(key => {
 							const entry = bValues[key];

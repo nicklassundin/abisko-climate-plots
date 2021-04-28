@@ -5,5 +5,21 @@
 		"render": ["growingSeason", "days"],
 		"data": ["growingSeason", "days"]
 	},
+	"config": {
+		"meta": {
+			"smhi": {
+				"data": "SMHI-Weather",
+				"config": "growingSeason",
+				"lang": "growingSeason",
+				"set": "weatherDays"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "growingSeason",
+				"lang": "growingSeason",
+				"set": "weatherDays"
+			}
+		}
+	},
 	"months": false
 }

@@ -5,5 +5,21 @@
 		"render": ["growingSeason", "last"],
 		"data": ["growingSeason", "larst"]
 	},
+	"config": {
+		"meta": {
+			"smhi": {
+				"data": "SMHI-Weather",
+				"config": "growingSeasonLast",
+				"lang": "growingSeasonFrostLast",
+				"set": "slide"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "growingSeasonLast",
+				"lang": "growingSeasonFrostLast",
+				"set": "slide"
+			}
+		}
+	},
 	"months": false
 }

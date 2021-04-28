@@ -3,6 +3,7 @@ var $ = require("jquery");
 
 // process.argv.forEach(function (val, index, array) {
 	//TODO argument on start up	
+	// TODO server config file create
 // });
 
 // var fs = require('fs');

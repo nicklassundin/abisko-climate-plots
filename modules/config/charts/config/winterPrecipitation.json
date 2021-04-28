@@ -5,5 +5,21 @@
 		"render": ["precipitation", "winter"],
 		"data": ["precipitation", "winter"]
 	},
+	"config": {
+		"meta": {
+			"smhi": {
+				"data": "SMHI-Hydrology",
+				"config": "precipitation",
+				"lang": "winterPrecipitation",
+				"set": "weather"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "precipitation",
+				"lang": "winterPrecipitation",
+				"set": "weather"
+			}
+		}
+	},
 	"months": false
 }

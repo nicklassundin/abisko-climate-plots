@@ -5,5 +5,21 @@
 		"render": ["precipitation", "spring"],
 		"data": ["precipitation", "spring"]
 	},
+	"config": {
+		"meta": {
+			"smhi": {
+				"data": "SMHI-Hydrology",
+				"config": "precipitation",
+				"lang": "springPrecipitation",
+				"set": "weather"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "precipitation",
+				"lang": "springPrecipitation",
+				"set": "weather"
+			}
+		}
+	},
 	"months": false
 }

@@ -1,5 +1,11 @@
 const ucid = require('unique-commit-id');
-const latestCommit = ucid.latest();
+var latestCommit;
+try{
+	latestCommit = ucid.latest();
+}catch(error){
+	latestCommit = error;
+	console.log(error);
+}
 
 // Pre-setup
 var $ = require("jquery");
@@ -22,14 +28,15 @@ var hbs = require('hbs');
 
 
 // Local Database
-var cache = require('./modules/server/db/core.js').struct;
+// TODO remove
+// var cache = require('./modules/server/db/core.js').struct;
 
-cache.createTable('datafiles');
-fs.readdir('data/abisko', (err, files) => {
+// cache.createTable('datafiles');
+// fs.readdir('data/abisko', (err, files) => {
 	// TODO read files and enter them
 	// cache.insertInto('datafiles', files);
-	cache.initApi(app, 'datafiles')
-});
+	// cache.initApi(app, 'datafiles')
+// });
 
 // Open file access
 app.use('/css', express.static(__dirname + '/css'));

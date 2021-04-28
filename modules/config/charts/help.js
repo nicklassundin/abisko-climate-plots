@@ -1,5 +1,5 @@
 
-const preset = require('./config.json');
+const preset = require('./parse.config.json');
 var before = {
 	smhi:  function(result){ 
 		result = result.split('\n') 

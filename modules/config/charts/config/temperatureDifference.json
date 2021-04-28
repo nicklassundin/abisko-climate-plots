@@ -1,9 +1,25 @@
 {
-	"id": "TemperatureDifference",
+	"id": "temperatureDifference",
 	"type": "[stationType]",
 	"tag": {
 		"render": ["temperatures","difference"],
 		"data": ["temperatures","yrly"]
+	},
+	"config": {
+		"meta": {
+			"smhi": {
+				"data": "SMHI-Weather",
+				"config": "temperature",
+				"lang": "annualTemperature",
+				"set": "climate"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "temperature",
+				"lang": "annualTemperature",
+				"set": "climate"
+			}
+		}
 	},
 	"months": false
 }

@@ -5,5 +5,21 @@
 		"render": ["precipitation", "summerSlide"],
 		"data": ["precipitation", "summer"]
 	},
+	"config": {
+		"meta": {
+			"smhi": {
+				"data": "SMHI-Hydrology",
+				"config": "precipitation",
+				"lang": "summerPricipitation",
+				"set": "slide"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "precipitation",
+				"lang": "summerPricipitation",
+				"set": "slide"
+			}
+		}
+	},
 	"months": false
 }

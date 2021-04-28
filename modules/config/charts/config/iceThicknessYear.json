@@ -5,5 +5,13 @@
 		"render": ["yrly","max"],
 		"data": ["yrly"]
 	},
+	"config": {
+		"meta": {
+			"config": "iceThick",
+			"lang": "iceThick",
+			"data": "ANS",
+			"set": "weather"
+		}
+	},
 	"months": false
 }

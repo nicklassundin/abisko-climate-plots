@@ -5,5 +5,21 @@
 		"render": ["temperatures","avgByYear"],
 		"data": ["temperatures","yrly","avg"]
 	},
+	"config": {
+		"meta": {
+			"smhi": {
+				"config": "temperatures",
+				"lang": "autumnTemperature",
+				"data": "SMHI-Weather",
+				"set": "select"
+			},
+			"abisko": {
+				"config": "temperatures",
+				"lang": "autumnTemperature",
+				"data": "ANS",
+				"set": "select"
+			}
+		}
+	},
 	"months": false
 }

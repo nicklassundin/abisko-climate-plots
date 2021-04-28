@@ -1,8 +1,8 @@
 {
-	"id": "diffGrowingSeasonWeeks",
+	"id": "slideGrowingSeasonWeeks",
 	"type": "[stationType]",
 	"tag": {
-		"render": ["growingSeason", "diffWeeks"],
+		"render": ["growingSeason","slide","weeks"],
 		"data": ["growingSeason", "weeks"]
 	},
 	"config": {
@@ -11,13 +11,13 @@
 				"data": "SMHI-Weather",
 				"config": "growingSeason",
 				"lang": "growingSeason",
-				"set": "climateWeeks"
+				"set": "slide"
 			},
 			"abisko": {
 				"data": "ANS",
 				"config": "growingSeason",
 				"lang": "growingSeason",
-				"set": "climateWeeks"
+				"set": "slide"
 			}
 		}
 	},

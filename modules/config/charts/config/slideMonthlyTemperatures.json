@@ -5,5 +5,23 @@
 		"render": ["temperatures","monthlySlide"],
 		"data": ["temperatures","monthly"]
 	},
+	"config": {
+		"meta": {
+			"smhi": {
+				"data": "SMHI-Weather",
+				"config": "temperature",
+				"lang": "monthlyTemperature",
+				"set": "slide",
+				"subSet": "monthly"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "temperature",
+				"lang": "monthlyTemperature",
+				"set": "slide",
+				"subSet": "monthly"
+			}
+		}
+	},
 	"months": true
 }

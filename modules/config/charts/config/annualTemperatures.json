@@ -1,23 +1,23 @@
 {
-	"id": "TemperaturesSpring",
+	"id": "annualTemperatures",
 	"type": "[stationType]",
 	"tag": {
-		"render": ["temperatures","spring"],
-		"data": ["temperatures","spring"]
+		"render": ["temperatures","yrly"],
+		"data": ["temperatures","yrly"]
 	},
 	"config": {
 		"meta": {
 			"smhi": {
 				"config": "temperature",
-				"lang": "springTemperature",
+				"lang": "annualTemperature",
 				"data": "SMHI-Weather",
-				"set": "weather"
+				"set":"weather"
 			},
 			"abisko": {
 				"config": "temperature",
-				"lang": "springTemperature",
+				"lang": "annualTemperature",
 				"data": "ANS",
-				"set": "weather"
+				"set":"weather"
 			}
 		}
 	},

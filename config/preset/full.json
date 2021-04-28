@@ -1,6 +1,6 @@
 {
 	"all_plots": [
-		"Temperatures",
+		"annualTemperatures",
 		"TemperaturesSpring",
 		"TemperaturesSummer",
 		"TemperaturesAutumn",
@@ -54,7 +54,7 @@
 		"diffGrowingSeasonDays",
 		"diffGrowingSeasonWeeks"
 	],
-	"Temperatures" : ["Temperatures"],
+	"annualTemperatures" : ["annualTemperatures"],
 	"TemperaturesSpring" : ["TemperaturesSpring"],
 	"TemperaturesSummer" : ["TemperaturesSummer"],
 	"TemperaturesAutumn" : ["TemperaturesAutumn"],

@@ -5,5 +5,13 @@
 		"render": ["snowDepth", "yrly"],
 		"data": ["snowDepth", "singleStake", "yrly"]
 	},
+	"config": {
+		"meta": {
+			"config": "avgSnowDepth",
+			"lang": "annualAvgSnowDepth",
+			"data": "ANS",
+			"set": "slide"
+		}
+	},
 	"months": false
 }
