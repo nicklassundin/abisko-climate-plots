@@ -1,0 +1,9 @@
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		var url = new URL(document.location);
+		var params = url.searchParams;
+		var id = params.get("id");
+		if(id) $("#type").val(id);
+	});
+</script>

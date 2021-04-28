@@ -7,10 +7,18 @@
 	},
 	"config": {
 		"meta": {
-			"config": "precipitation",
-			"lang": "annualPricipitation",
-			"data": "[data]",
-			"set": "slide"
+			"smhi": {
+				"data": "SMHI-Hydrology",
+				"config": "precipitation",
+				"lang": "annualPricipitation",
+				"set": "slide"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "precipitation",
+				"lang": "annualPricipitation",
+				"set": "slide"
+			}
 		}
 	},
 	"months": false

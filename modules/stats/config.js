@@ -563,7 +563,6 @@ var parsers = {
 			var prec = [each["Representativt dygn"], each["Nederbördsmängd"]]
 			return parsePrecip(prec);
 		}));
-		console.log(blocks)
 		return parsers.TempPrec(blocks)
 	}
 

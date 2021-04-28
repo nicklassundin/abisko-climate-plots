@@ -8,6 +8,7 @@ const preset = require('./help.js');
 const pres = preset.preset;
 var datastr = require('../dataset/struct.js').struct;
 
+
 var merged = require('../../../static/modules.config.charts.merge.json');
 var rendF = {
 	container: {},
@@ -22,7 +23,8 @@ var rendF = {
 			config: rendF.configs[id],
 			func: function(reset=false){
 				var meta = {}
-				meta[id] = rendF.configs[id].config.meta
+				meta[id] = rendF.configs[id].config.meta;
+				if(meta[id][type]) meta[id] = meta[id][type]
 				rendF.container[this.type].contFunc(reset, meta);
 				rendF.container[this.type].init(this.config.id, this.config.tag.data);
 			},

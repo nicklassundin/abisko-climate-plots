@@ -7,10 +7,18 @@
 	},
 	"config": {
 		"meta": {
-			"config": "temperature",
-			"lang": "annualTemperature",
-			"data": "[data]",
-			"set": "extremeDay"
+			"smhi": {
+				"data": "SMHI-Weather",
+				"config": "temperature",
+				"lang": "annualTemperature",
+				"set": "extremeDay"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "temperature",
+				"lang": "annualTemperature",
+				"set": "extremeDay"
+			}
 		}
 	},
 	"months": false

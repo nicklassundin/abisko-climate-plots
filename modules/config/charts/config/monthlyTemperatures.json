@@ -7,11 +7,20 @@
 	},
 	"config": {
 		"meta": {
-			"config": "temperature",
-			"lang": "monthlyTemperature",
-			"data": "[data]",
-			"set": "weather",
-			"subset": "monthly"
+			"smhi": {
+				"data": "SMHI-Weather",
+				"config": "temperature",
+				"lang": "monthlyTemperature",
+				"set": "weather",
+				"subset": "monthly"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "temperature",
+				"lang": "monthlyTemperature",
+				"set": "weather",
+				"subset": "monthly"
+			}
 		}
 	},
 	"months": true

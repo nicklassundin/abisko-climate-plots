@@ -7,10 +7,18 @@
 	},
 	"config": {
 		"meta": {
-			"config": "",
-			"lang": "",
-			"data": "[data]",
-			"set": "weather"
+			"smhi": {
+				"data": "SMHI-Hydrology",
+				"config": "",
+				"lang": "",
+				"set": "weather"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "",
+				"lang": "",
+				"set": "weather"
+			}
 		}
 	},
 	"months": false

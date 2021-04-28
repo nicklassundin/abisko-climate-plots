@@ -7,10 +7,18 @@
 	},
 	"config": {
 		"meta": {
-			"config": "precipitation",
-			"lang": "springPrecipitation",
-			"data": "[data]",
-			"set": "weather"
+			"smhi": {
+				"data": "SMHI-Hydrology",
+				"config": "precipitation",
+				"lang": "springPrecipitation",
+				"set": "weather"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "precipitation",
+				"lang": "springPrecipitation",
+				"set": "weather"
+			}
 		}
 	},
 	"months": false

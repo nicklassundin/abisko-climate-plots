@@ -7,10 +7,18 @@
 	},
 	"config": {
 		"meta": {
-			"config": "growingSeason",
-			"lang": "growingSeason",
-			"data": "[data]",
-			"set": "weatherWeeks"
+			"smhi": {
+				"data": "SMHI-Weather",
+				"config": "growingSeason",
+				"lang": "growingSeason",
+				"set": "weatherWeeks"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "growingSeason",
+				"lang": "growingSeason",
+				"set": "weatherWeeks"
+			}
 		}
 	},
 	"months": false
