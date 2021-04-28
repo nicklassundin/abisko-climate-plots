@@ -89,17 +89,12 @@ const url = require('url');
 const custom = require('./config/preset.js').preset;
 custom.then((json) => {
 	fs.exists(__dirname+'/temp/preset.json', function (exists) {
-		if(exists)
-		{
+		if(!exists){
+			fs.writeFile(__dirname+'/temp/preset.json', {flag: 'wx'}, function (err) {})
+		}
 			fs.writeFile(__dirname+'/temp/preset.json', JSON.stringify(json), (ERROR) => {
 				if(ERROR) throw ERROR
 			})
-		}else
-		{
-			fs.writeFile(__dirname+'/temp/preset.json', {flag: 'wx'}, function (err, data) 
-				{ 
-				})
-		}
 	})
 })
 const merger = require('./modules/config/charts/merge.js').preset;
