@@ -69,7 +69,7 @@
 		"test-respons:w": "artillery quick --count 10 -n 20 https://localhost/charts",
 		"test-unit": "mocha './modules/**/*.spec.js' --delay",
 		"test-dev": "mocha  './modules/**/*.spec.js' '*.spec.dev.js' 'modules/**/*.spec.dev.js' --delay",
-		"start": "npx nodemon server.js",
+		"start": "node server.js",
 		"start-dev": "npx nodemon server.js d",
 		"start-full": "npm test && npx nodemon server.js && npm run static",
 		"static": "cp temp/index.html index.html && cp client/bundle.js static/bundle.js && cp temp/preset.json static/preset.json && cp temp/modules.config.charts.merge.json static/modules.config.charts.merge.json"
