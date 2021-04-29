@@ -1,5 +1,5 @@
 const ucid = require('unique-commit-id');
-var latestCommit;
+var latestCommit = "[Commit-id]";
 try{
 	latestCommit = ucid.latest();
 }catch(error){
@@ -10,9 +10,6 @@ try{
 // Pre-setup
 var $ = require("jquery");
 
-// process.argv.forEach(function (val, index, array) {
-//TODO argument on start up	
-// });
 
 var fs = require('fs');
 const express = require('express');
@@ -20,24 +17,7 @@ const request = require('request');
 
 // Setup
 const app = express();
-// var Handlebars = require('handlebars');
 var hbs = require('hbs');
-// var engines = require('consolidate');
-// app.engine('pug', engines.pug);
-// app.engine('handlebars', engines.handlebars);
-
-
-// Local Database
-// TODO remove
-// var cache = require('./modules/server/db/core.js').struct;
-
-// cache.createTable('datafiles');
-// fs.readdir('data/abisko', (err, files) => {
-// TODO read files and enter them
-// cache.insertInto('datafiles', files);
-// cache.initApi(app, 'datafiles')
-// });
-
 // Open file access
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/dep', express.static(__dirname + '/dep'));
@@ -54,25 +34,6 @@ app.use('/maps', express.static(__dirname + '/maps'));
 const TYPE = 'corrected-archive';
 require('./modules/server/smhi').init(app, TYPE);
 
-// require('./modules/api/api').lang(app, __dirname, '/lang');
-
-// Database
-// var database = require('./modules/server/db/db');
-
-// app.get('/databases', (req, res) => {
-// 	database.webserver.then(function(connection){
-// 		console.log("Server Connected Success")
-// 		// console.log(connection)
-// 		connection.query('SHOW DATABASES;', function(error, result, fields){
-// 			console.log(" - Query Success")
-// 			if(error){
-// 				console.log(error);
-// 				return;
-// 			}
-// res.send(result)
-// })
-// })
-// })
 
 var session = require('express-session');
 var bodyParser = require('body-parser');
@@ -84,27 +45,9 @@ app.use(session({
 	saveUninitialized: true
 }));
 
-
 const url = require('url');
 const custom = require('./config/preset.js').preset;
-var fileWrite = function(json, file){
-	fs.exists(file, function (exists) {
-		if(exists){
-			fs.writeFile(file, JSON.stringify(json), (ERROR) => {
-				if(ERROR) throw ERROR
-			})
-		}else{
-			fs.writeFile(file, JSON.stringify(json), {flag: 'wx'}, function (err,data) {})
-		}
-	})
-}
-custom.then((json) => {
-	fileWrite(json, __dirname+'/temp/preset.json') 
-})
-const merger = require('./modules/config/charts/merge.js').preset;
-merger.then((json) => {
-	fileWrite(json, __dirname+'/temp/modules.config.charts.merge.json')
-})
+exports.custom = custom;
 
 var charts = (req) => {
 	return new Promise((res, rej) => {
@@ -136,8 +79,6 @@ app.get( '/chart', (req, res) => {
 	})
 });
 
-
-// console.log(Handlebars)
 hbs.registerPartials(__dirname + '/views/partials');
 custom.then(chrts => {
 	stations = ["abisko", "53430", "global"];
@@ -148,42 +89,6 @@ custom.then(chrts => {
 			latestCommit
 		})
 	})
-	app.get('/static', (req, res) => {
-		stations = ["abisko", "53430", "global"];
-		app.render('browse-release.hbs', {chrts, stations, latestCommit }, (err, str) => {
-			fs.writeFile('temp/index.html', str, err => {
-				if (err) {
-					console.error(err)
-					return
-				}
-			})
-			app.use('/static', express.static(__dirname + '/static'));
-			app.use('/static/css', express.static(__dirname + '/css'));
-			app.use('/static/dep', express.static(__dirname + '/dep'));
-			app.use('/static/modules', express.static(__dirname + '/modules'));
-			app.use('/static/config', express.static(__dirname + '/config'));
-			app.use('/static/data', express.static(__dirname + '/data'));
-			app.use('/static/data/abisko', express.static(__dirname + '/data/abisko'));
-			app.use('/static/client', express.static(__dirname + '/client'));
-			app.use('/static/tmp', express.static(__dirname + '/tmp'));
-			app.use('/static/maps', express.static(__dirname + '/maps'));
-			res.send(str);
-		})	
-	})
 })
 
-app.get('/d3-map', (req, res) => {
-	charts(req).then(chrts => {
-		res.render('d3-map.hbs', {
-			chrts
-		})
-	})
-});
-
-
-app.get('/map', (req, res) => {
-	res.render('map.hbs', {
-
-	})
-})
 exports.app = app;
