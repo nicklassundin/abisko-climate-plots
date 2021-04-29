@@ -3,9 +3,16 @@
 		document.getElementById("type").value,
 		document.getElementById("station").value);
 $("select").change(function() {
+	var type = document.getElementById("type").value;
+	var station = document.getElementById("station").value;
+	var q = queryString.parse(location.search);
+	q.id = type;
+	q.station = station
+	location.search = queryString.stringify(q);
 	document.getElementById("mark").innerHTML = "";
 	lib.renderSets(document.getElementById("mark"),
-		document.getElementById("type").value,
-		document.getElementById("station").value)
+		type,
+		station
+	)
 });
 </script>
