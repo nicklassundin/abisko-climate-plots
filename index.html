@@ -6,7 +6,7 @@
 		<script src="client/bundle.js" type="text/javascript"></script>
 	</head>
 	<body>
-		<label>38b3b345</label><hr/>
+		<label>14d9144d</label><hr/>
 		<label for="type">Choose chart:</label>
 		<select id="type" class="form">
 				<optgroup label="All">
@@ -143,6 +143,8 @@
 				var params = url.searchParams;
 				var id = params.get("id");
 				if(id) $("#type").val(id);
+				var station = params.get("station");
+				if(station) $("#station").val(station);
 			});
 		</script>
 	</body>

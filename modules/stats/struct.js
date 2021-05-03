@@ -248,7 +248,6 @@ var struct = {
 		this.xInterval.x2 = new Date(Math.max.apply(null,
 			this.values.map(each => 
 				each.xInterval ? Math.max.apply(null, each.xInterval) : new Date(each.x)))).getTime();
-		var result = this;
 		if(this.values.length > 0){
 
 			if(this.values[0].keys){
@@ -257,43 +256,34 @@ var struct = {
 				this.keys = Object.keys(this.values[0]);
 			}
 		}
-		result.type = type;
-		var values = result.values.filter(entry => (!isNaN(entry.y) || $.isNumeric(entry.y)));
-		// this.values = this.values.map(each => {
-		// if(each.build){
-		// return each.build(type, lower, upper);
-		// }else{
-		// return each;
-		// }
-		// })
-		result.values = values;
-		var count = values.length;
+		this.type = type;
+		this.values = this.values.filter(entry => (!isNaN(entry.y) || $.isNumeric(entry.y)));
+		var count = this.values.length;
+		this.count = count;
 
 		var y;
-		if(result.y == undefined){
+		if(this.y == undefined){
 			switch(type){
 				case "mean":
-					y = help.sum(values.map(each => each.y));
+					y = help.sum(this.values.map(each => each.y));
 					y = y/count;
 					break;
 				case "max":
-					y = Math.max(...values.map(each => each.y));
+					y = Math.max(...this.values.map(each => each.y));
 					break;
 				case "min":
-					y = Math.min(...values.map(each => each.y));
+					y = Math.min(...this.values.map(each => each.y));
 					break;
 				case "sum":
-					y = help.sum(values.map(each => each.y));
+					y = help.sum(this.values.map(each => each.y));
 					break;
 				default:
 					console.log("default: "+type)
 
 			}
-			result.y = y;
+			this.y = y;
 		}
-
-		result.count = count;
-		return result;
+		return this;
 	},
 	Axis: function(key){
 		var keys = Object.values(this.values).map(each => each[key])

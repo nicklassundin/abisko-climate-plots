@@ -4,7 +4,6 @@ var $ = require("jquery");
 
 
 var fs = require('fs');
-const express = require('express');
 const request = require('request');
 
 // Setup
@@ -78,7 +77,7 @@ custom.then(chrts => {
 		res.render('browse.hbs', {
 			chrts,
 			stations,
-			latestCommit: "release"
+			"release"
 		})
 	})
 })
