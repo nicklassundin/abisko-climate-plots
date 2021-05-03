@@ -5,5 +5,13 @@
 		"render": "",
 		"data": ""
 	},
+	"config": {
+		"meta": {
+			"config": "perma",
+			"lang": "perma",
+			"data": "GTNP-ANL",
+			"set": "weather"
+		}
+	},
 	"months": false
 }

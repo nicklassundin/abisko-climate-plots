@@ -177,9 +177,7 @@ var parsers = {
 		var blocks = { precipitation: [], temperatures: [] };
 		var parseEntry = function(y){
 			if(y != undefined){
-				y = parseFloat(y.replace(",","."));
-			}else{
-				y = undefined;
+				return parseFloat(y.replace(",","."));
 			}
 			return y;
 		}
@@ -563,7 +561,6 @@ var parsers = {
 			var prec = [each["Representativt dygn"], each["Nederbördsmängd"]]
 			return parsePrecip(prec);
 		}));
-		console.log(blocks)
 		return parsers.TempPrec(blocks)
 	}
 

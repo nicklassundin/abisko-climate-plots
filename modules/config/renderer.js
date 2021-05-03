@@ -59,7 +59,7 @@ var chart = {
 			files.dataSource = json('lang/'+nav_lang+'/dataSource').then(data => {
 				return { meta: data[define.data] }
 			})
-			if(define.subSet) files.subSet = json(define.subSet);
+			if(define.subset) files.subset = json(define.subset);
 			files.set = json(define.set);
 			files.units = json('lang/'+nav_lang+'/units').then(units => {
 				return { units: units }
@@ -100,8 +100,8 @@ var chart = {
 				// TODO order of month replace for subsets
 				var res = res.replace("[stationName]", stationName)
 
-				var set = (meta.subSet ? meta.subSet.enabled : false) ? meta.months[meta.subSet.set] : undefined;
-				res = (meta.subSet ? meta.subSet.enabled : false) ? res.replace("[month]", set) : res.replace("[month]", meta.month)
+				var set = (meta.subset ? meta.subset.enabled : false) ? meta.months[meta.subset.set] : undefined;
+				res = (meta.subset ? meta.subset.enabled : false) ? res.replace("[month]", set) : res.replace("[month]", meta.month)
 				res = res.replace("[baseline]", baselineLower +" - "+ baselineUpper)
 				res = res.replace("[CO2]", 'CO'+("2".sub()))
 				res = res.replace("[SOME TEXT]", "")
@@ -145,15 +145,16 @@ var chart = {
 			}
 			var res = this.clone();
 			return new Promise((resolve, reject) => {
+				
 				chart.getMeta(metaRef).then((temp) => {
 					var meta = temp.aggr;
-					if(meta.subSet ? !meta.subSet.set : false){
-						meta.subSet.sets = Object.keys(meta.subSet.sets).map(key => { return meta.subSet.sets[key] }).filter(e => typeof e == "string");
+					if(meta.subset ? !meta.subset.set : false){
+						meta.subset.sets = Object.keys(meta.subset.sets).map(key => { return meta.subset.sets[key] }).filter(e => typeof e == "string");
 						if(variables.debug){
-							meta.subSet.sets = [meta.subSet.sets[0]];
+							meta.subset.sets = [meta.subset.sets[0]];
 						}
-						result.sets = meta.subSet.sets;
-						meta.subSet.sets.forEach(set => {
+						result.sets = meta.subset.sets;
+						meta.subset.sets.forEach(set => {
 							var tmp = res.clone();
 							tmp.id = id+'_'+set;
 							tmp.chart = Highcharts.chart(tmp.id, {
@@ -165,7 +166,7 @@ var chart = {
 							tmp.chart.showLoading();
 							tmp.metaRef = metaRef;
 							tmp.metaFiles = temp.files;
-							temp.aggr.subSet.set = set;
+							temp.aggr.subset.set = set;
 							var metaTemp = {}; 
 							$.extend(true, metaTemp, temp.text())
 							tmp.meta = metaTemp;
@@ -198,7 +199,7 @@ var chart = {
 		this.metaTable('debug_table_'+id, this.metaFiles);
 		var title = this.title(0);
 		var meta = this.meta
-		// this.chart = Highcharts.chart(id, {
+
 		this.chart.update({
 			credits: {
 				enabled: false
@@ -272,14 +273,7 @@ var chart = {
 									throw error
 								}
 							},
-						}
-							// ,{
-							// textKey: 'contribute',
-							// onclick: function(){
-							// window.location.href = 'https://github.com/nicklassundin/abisko-climate-plots/wiki';
-							// },
-							// }
-						],
+						}],
 					},
 				},
 			},
@@ -346,13 +340,10 @@ var chart = {
 	},
 	initiate: function(data = this.data){
 		var meta = this.meta;	
-		// console.log(this.metaRef)
-		// console.log(data.difference())
-		// console.log(meta)
 		var id = this.id;
-		if(this.meta.subSet){
-			data = data[this.meta.subSet.set] 
-			this.data = data[this.meta.subSet.set] 
+		if(this.meta.subset){
+			data = data[this.meta.subset.set] 
+			this.data = data[this.meta.subset.set] 
 		}else{
 			this.data = data;
 		}
@@ -379,12 +370,14 @@ var chart = {
 		Object.keys(meta.series).filter(s => meta.series[s].visible != undefined ).forEach(key => {
 			try{
 				if(meta.selector){
-					// console.log(data.values[98])
 					series.push(seriesBuild[meta.series[key].preset](meta, data.values[98], key));
 				}else{
 					series.push(seriesBuild[meta.series[key].preset](meta, data, key));
 				}
 			}catch(error){
+				console.log(data)
+				console.log(key)
+				console.log(meta)
 				throw error
 			}
 		})

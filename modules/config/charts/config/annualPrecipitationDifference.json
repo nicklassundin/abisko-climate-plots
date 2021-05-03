@@ -5,5 +5,21 @@
 		"render": ["precipitation","difference"],
 		"data": ["precipitation","yrly"]
 	},
+	"config": {
+		"meta": {
+			"smhi": {
+				"data": "SMHI-Hydrology",
+				"config": "precipitation",
+				"lang": "annualPrecipitation",
+				"set": "climate"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "precipitation",
+				"lang": "annualPrecipitation",
+				"set": "climate"
+			}
+		}
+	},
 	"months": false
 }

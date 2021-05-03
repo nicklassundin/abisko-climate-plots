@@ -1,11 +1,7 @@
 <script type="text/javascript">
+	var q = queryString.parse(location.search);
+	var type = q.id ? q.id : document.getElementById("type").value;
+	var station = q.station ? q.station : document.getElementById("station").value;
 	lib.renderSets(document.getElementById("mark"),
-		document.getElementById("type").value,
-		document.getElementById("station").value);
-$("select").change(function() {
-	document.getElementById("mark").innerHTML = "";
-	lib.renderSets(document.getElementById("mark"),
-		document.getElementById("type").value,
-		document.getElementById("station").value)
-});
+		type,station);
 </script>

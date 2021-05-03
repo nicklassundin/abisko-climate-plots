@@ -5,5 +5,21 @@
 		"render": ["temperatures","winterSlide"],
 		"data": ["temperatures","winter"]
 	},
+	"config": {
+		"meta": {
+			"smhi": {
+				"data": "SMHI-Weather",
+				"config": "temperature",
+				"lang": "winterTemperature",
+				"set": "slide"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "temperature",
+				"lang": "winterTemperature",
+				"set": "slide"
+			}
+		}
+	},
 	"months": false
 }

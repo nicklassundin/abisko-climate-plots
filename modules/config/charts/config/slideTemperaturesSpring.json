@@ -5,5 +5,21 @@
 		"render": ["temperatures","springSlide"],
 		"data": ["temperatures","spring"]
 	},
+	"config": {
+		"meta": {
+			"smhi": {
+				"data": "SMHI-Weather",
+				"config": "temperature",
+				"lang": "springTemperature",
+				"set": "slide"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "temperature",
+				"lang": "springTemperature",
+				"set": "slide"
+			}
+		}
+	},
 	"months": false
 }

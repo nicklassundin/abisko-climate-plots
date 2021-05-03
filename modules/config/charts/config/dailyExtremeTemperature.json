@@ -5,5 +5,21 @@
 		"render": ["temperatures","dailyExtreme"],
 		"data": ["temperatures","yrly"]
 	},
+	"config": {
+		"meta": {
+			"smhi": {
+				"data": "SMHI-Weather",
+				"config": "temperature",
+				"lang": "annualTemperature",
+				"set": "extremeDay"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "temperature",
+				"lang": "annualTemperature",
+				"set": "extremeDay"
+			}
+		}
+	},
 	"months": false
 }

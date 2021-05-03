@@ -5,5 +5,13 @@
 		"render": "slideIceTime",
 		"data": "iceTime"
 	},
+	"config": {
+		"meta": {
+			"config": "iceTime",
+			"lang": "iceTime",
+			"data": "ANS",
+			"set": "slide"
+		}
+	},
 	"months": false
 }

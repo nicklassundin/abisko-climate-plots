@@ -5,5 +5,13 @@
 		"render": "periodMeans",
 		"data": "periodMeans"
 	},
+	"config": {
+		"meta": {
+			"config": "snowDepthPeriod",
+			"lang": "snowDepthPeriod",
+			"data": "ANS",
+			"set": "weather"
+		}
+	},
 	"months": false
 }

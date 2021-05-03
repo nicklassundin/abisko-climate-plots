@@ -3,7 +3,23 @@
 	"type": "[stationType]",
 	"tag": {
 		"render": ["growingSeason", "last"],
-		"data": ["growingSeason", "larst"]
+		"data": ["growingSeason", "last"]
+	},
+	"config": {
+		"meta": {
+			"smhi": {
+				"data": "SMHI-Weather",
+				"config": "growingSeasonLast",
+				"lang": "growingSeasonFrostLast",
+				"set": "slide"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "growingSeasonLast",
+				"lang": "growingSeasonFrostLast",
+				"set": "slide"
+			}
+		}
 	},
 	"months": false
 }

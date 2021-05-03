@@ -28,14 +28,14 @@
 		"descLong": "Global Terrestrial Network for Permafrost, Permafrost temperatures"
 	},
 	"SMHI-Weather": {
-		"src": "",
+		"src": "https://www.smhi.se/data/utforskaren-oppna-data/?p=1&q=&r=Lufttemperatur",
 		"downloadDate": "",
 		"citation": "",
 		"desc": "",
 		"descLong": ""
 	},
 	"SMHI-Hydrology": {
-		"src": "",
+		"src": "https://www.smhi.se/data/utforskaren-oppna-data/?p=1&q=&r=Nederbördsmängd",
 		"downloadDate": "",
 		"citation": "",
 		"desc": "",

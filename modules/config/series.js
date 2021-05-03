@@ -270,9 +270,9 @@ exports.series = {
 		visible: k == "Torneträsk",
 		tooltip: { valueDecimals: meta.decimals },
 	}),
-	period: (s, p, k) => ({
-		name: s.series[k].name, 
-		type: s.series[k].type,
+	period: (meta, p, k) => ({
+		name: meta.series[k].name, 
+		type: meta.series[k].type,
 		lineWidth: 1,
 		data: p[k].means.rotate(6).slice(2),
 		visible: true,
