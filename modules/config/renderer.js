@@ -375,6 +375,7 @@ var chart = {
 					series.push(seriesBuild[meta.series[key].preset](meta, data, key));
 				}
 			}catch(error){
+				console.log(data)
 				console.log(key)
 				console.log(meta)
 				throw error

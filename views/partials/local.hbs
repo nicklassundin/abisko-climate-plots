@@ -2,9 +2,6 @@
 	var q = queryString.parse(location.search);
 	var type = q.id ? q.id : document.getElementById("type").value;
 	var station = q.station ? q.station : document.getElementById("station").value;
-	console.log("start")
-	console.log(type)
-	console.log(station)
 	lib.renderSets(document.getElementById("mark"),
 		type,station);
 </script>
