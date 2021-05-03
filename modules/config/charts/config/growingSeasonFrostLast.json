@@ -3,7 +3,7 @@
 	"type": "[stationType]",
 	"tag": {
 		"render": ["growingSeason", "last"],
-		"data": ["growingSeason", "larst"]
+		"data": ["growingSeason", "last"]
 	},
 	"config": {
 		"meta": {
