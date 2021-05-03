@@ -309,7 +309,6 @@ var struct = {
 	},
 	keys: undefined,
 	create: function(values, x=undefined, src=''){
-
 		var result = struct.clone();
 		result.meta.src = src;
 		try{
