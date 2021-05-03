@@ -177,9 +177,7 @@ var parsers = {
 		var blocks = { precipitation: [], temperatures: [] };
 		var parseEntry = function(y){
 			if(y != undefined){
-				y = parseFloat(y.replace(",","."));
-			}else{
-				y = undefined;
+				return parseFloat(y.replace(",","."));
 			}
 			return y;
 		}
