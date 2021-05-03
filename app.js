@@ -78,7 +78,7 @@ custom.then(chrts => {
 		res.render('browse.hbs', {
 			chrts,
 			stations,
-			"release"
+			latestCommit: "release"
 		})
 	})
 })
