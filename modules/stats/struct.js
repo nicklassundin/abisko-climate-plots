@@ -366,6 +366,14 @@ var parseByDate = function (values, type='mean', src='', custom) {
 			var result = Object.assign({}, frame);
 			// TODO build to general function to be use for all functions
 			var set = function(entry, key, date){
+
+				// entry.year = date.getFullYear();
+				// entry.month = date.getMonth();
+				// entry.week = date.getWeekNumber();
+				// entry.monthName = help.monthByIndex(entry.month)
+				// entry.season = help.getSeasonByIndex(entry.month);
+				// entry.decade = entry.year - entry.year % 10;
+
 				var year = date.getFullYear();
 				var month = date.getMonth();
 				var week = date.getWeekNumber();

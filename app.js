@@ -1,11 +1,3 @@
-const ucid = require('unique-commit-id');
-var latestCommit = "[Commit-id]";
-try{
-	latestCommit = ucid.latest();
-}catch(error){
-	latestCommit = error;
-	console.log(error);
-}
 
 // Pre-setup
 var $ = require("jquery");
@@ -86,7 +78,7 @@ custom.then(chrts => {
 		res.render('browse.hbs', {
 			chrts,
 			stations,
-			latestCommit
+			"release"
 		})
 	})
 })
