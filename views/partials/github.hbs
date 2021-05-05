@@ -1,6 +1,7 @@
 <script type="text/javascript">
-	var addr = window.location.origin + window.location.pathname.replace('/index.html','')
+console.log(addr)
 	$("select").change(function() {
+		var addr = window.location.origin + window.location.pathname.replace('/index.html','')
 		document.getElementById("mark").innerHTML = "";
 		var q = queryString.parse(location.search);
 		q.set = document.getElementById("set").value;
@@ -8,6 +9,7 @@
 		window.history.replaceState(null, null,'?'+queryString.stringify(q));
 		lib.renderSets(document.getElementById("mark",undefined,undefined,addr));
 	});
+	var addr = window.location.origin + window.location.pathname.replace('/index.html','')
 	var q = queryString.parse(location.search);
 	q.set = q.set ? q.set : document.getElementById("set").value;
 	q.station = q.station ? q.station : document.getElementById("station").value;
