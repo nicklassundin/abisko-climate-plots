@@ -116,28 +116,24 @@ merger.then((json) => {
 
 custom.then(chrts => {
 	stations = ["abisko", "53430", "global"];
-	app.get('/static', (req, res) => {
-		stations = ["abisko", "53430", "global"];
-		app.render('browse-release.hbs', {chrts, stations, latestCommit }, (err, str) => {
-			fs.writeFile('temp/index.html', str, err => {
-				if (err) {
-					console.error(err)
-					return
-				}
-			})
-			app.use('/static', express.static(__dirname + '/static'));
-			app.use('/static/css', express.static(__dirname + '/css'));
-			app.use('/static/dep', express.static(__dirname + '/dep'));
-			app.use('/static/modules', express.static(__dirname + '/modules'));
-			app.use('/static/config', express.static(__dirname + '/config'));
-			app.use('/static/data', express.static(__dirname + '/data'));
-			app.use('/static/data/abisko', express.static(__dirname + '/data/abisko'));
-			app.use('/static/client', express.static(__dirname + '/client'));
-			app.use('/static/tmp', express.static(__dirname + '/tmp'));
-			app.use('/static/maps', express.static(__dirname + '/maps'));
-			res.send(str);
-		})	
-	})
+	app.render('browse-release.hbs', {chrts, stations, latestCommit }, (err, str) => {
+		fs.writeFile('index.html', str, err => {
+			if (err) {
+				console.error(err)
+				return
+			}
+		})
+		app.use('/static', express.static(__dirname + '/static'));
+		app.use('/static/css', express.static(__dirname + '/css'));
+		app.use('/static/dep', express.static(__dirname + '/dep'));
+		app.use('/static/modules', express.static(__dirname + '/modules'));
+		app.use('/static/config', express.static(__dirname + '/config'));
+		app.use('/static/data', express.static(__dirname + '/data'));
+		app.use('/static/data/abisko', express.static(__dirname + '/data/abisko'));
+		app.use('/static/client', express.static(__dirname + '/client'));
+		app.use('/static/tmp', express.static(__dirname + '/tmp'));
+		app.use('/static/maps', express.static(__dirname + '/maps'));
+	})	
 })
 
 app.get('/d3-map', (req, res) => {

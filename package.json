@@ -92,7 +92,8 @@
 			"docs/*",
 			"temp/*",
 			"cms/*",
-			"node_modules/*"
+			"node_modules/*",
+			"index.html"
 		],
 		"events": {
 			"start": "webpack --mode=development"
