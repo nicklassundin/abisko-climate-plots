@@ -62,15 +62,8 @@ var charts = (req) => {
 		})
 	})
 }
-app.get( '/chart', (req, res) => {
-	charts(req).then(chrts => {
-		res.render('chart.hbs', {
-			chrts
-		})
-	})
-});
 
-hbs.registerPartials(__dirname + '/views/partials');
+hbs.registerPartials(__dirname+'/views/partials');
 custom.then(chrts => {
 	stations = ["abisko", "53430", "global"];
 	app.get('/browse', (req, res) => {
