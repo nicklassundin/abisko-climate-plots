@@ -70,17 +70,29 @@ var charts = (req) => {
 	})
 }
 
-hbs.registerPartials(__dirname + '/views/partials');
-custom.then(chrts => {
-	stations = ["abisko", "53430", "global"];
-	app.get('/browse', (req, res) => {
-		res.render('browse.hbs', {
-			chrts,
-			stations,
-			latestCommit
+hbs.registerPartials(__dirname + '/views/partials', function (err) {
+	custom.then(chrts => {
+		stations = ["abisko", "53430", "global"];
+		app.render('browse-release.hbs', {chrts, stations, latestCommit }, (err, str) => {
+			if(err) throw err
+			fs.writeFile('index.html', str, err => {
+				if (err) {
+					console.error(err)
+					return
+				}
+			})
+		})	
+		stations = ["abisko", "53430", "global"];
+		app.get('/browse', (req, res) => {
+			res.render('browse.hbs', {
+				chrts,
+				stations,
+				latestCommit
+			})
 		})
+		fileWrite(chrts, __dirname+'/static/preset.json') 
 	})
-})
+});
 
 /////
 
@@ -95,63 +107,24 @@ var fileWrite = function(json, file){
 		}
 	})
 }
-custom.then((json) => {
-	fileWrite(json, __dirname+'/temp/preset.json') 
-})
 const merger = require('./modules/config/charts/merge.js').preset;
 merger.then((json) => {
-	fileWrite(json, __dirname+'/temp/modules.config.charts.merge.json')
+	fileWrite(json, __dirname+'/static/modules.config.charts.merge.json')
 })
 
-// custom.then(chrts => {
-// 	stations = ["abisko", "53430", "global"];
-// 	app.get('/static', (req, res) => {
-// 		res.render('browse-release.hbs', {
-// 			chrts,
-// 			stations,
-// 			latestCommit
+
+// app.get('/d3-map', (req, res) => {
+// 	charts(req).then(chrts => {
+// 		res.render('d3-map.hbs', {
+// 			chrts
 // 		})
 // 	})
+// });
+
+
+// app.get('/map', (req, res) => {
+// 	res.render('map.hbs', {
+
 // })
-
-custom.then(chrts => {
-	stations = ["abisko", "53430", "global"];
-	app.get('/static', (req, res) => {
-		stations = ["abisko", "53430", "global"];
-		app.render('browse-release.hbs', {chrts, stations, latestCommit }, (err, str) => {
-			fs.writeFile('temp/index.html', str, err => {
-				if (err) {
-					console.error(err)
-					return
-				}
-			})
-			app.use('/static', express.static(__dirname + '/static'));
-			app.use('/static/css', express.static(__dirname + '/css'));
-			app.use('/static/dep', express.static(__dirname + '/dep'));
-			app.use('/static/modules', express.static(__dirname + '/modules'));
-			app.use('/static/config', express.static(__dirname + '/config'));
-			app.use('/static/data', express.static(__dirname + '/data'));
-			app.use('/static/data/abisko', express.static(__dirname + '/data/abisko'));
-			app.use('/static/client', express.static(__dirname + '/client'));
-			app.use('/static/tmp', express.static(__dirname + '/tmp'));
-			app.use('/static/maps', express.static(__dirname + '/maps'));
-			res.send(str);
-		})	
-	})
-})
-
-app.get('/d3-map', (req, res) => {
-	charts(req).then(chrts => {
-		res.render('d3-map.hbs', {
-			chrts
-		})
-	})
-});
-
-
-app.get('/map', (req, res) => {
-	res.render('map.hbs', {
-
-	})
-})
+// })
 exports.app = app;
