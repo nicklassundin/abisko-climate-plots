@@ -17,7 +17,6 @@ var parsers = {
 				first: blocks.temperatures.yrlySplit.min.first(),
 				last: blocks.temperatures.yrlySplit.min.last(),
 			}
-			parseAbiskoCached = blocks
 			resolve(blocks)
 		})
 	},

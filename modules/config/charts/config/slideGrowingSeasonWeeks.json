@@ -11,13 +11,13 @@
 				"data": "SMHI-Weather",
 				"config": "growingSeason",
 				"lang": "growingSeason",
-				"set": "slide"
+				"set": "slideWeeks"
 			},
 			"abisko": {
 				"data": "ANS",
 				"config": "growingSeason",
 				"lang": "growingSeason",
-				"set": "slide"
+				"set": "slideWeeks"
 			}
 		}
 	},
