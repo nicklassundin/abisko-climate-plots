@@ -56,8 +56,10 @@ lib = {
 	},
 	renderSets: function(div, set=(new URL(window.location.href).searchParams.get("set")), id=(new URL(window.location.href).searchParams.get("station")), url){
 		if(url){
+			Console.log("Hosting from: "+url)
 			hostUrl = url;
 		}else{
+			Console.log("Running Local setup")
 			hostUrl = location.protocol +"//"+ require("../config/server.json").domain;
 		} 
 		variables.debug = (new URL(window.location.href).searchParams.get("debug") == "true" ? true : false)
