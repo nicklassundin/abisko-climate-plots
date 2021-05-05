@@ -6,7 +6,7 @@
 		<script src="client/bundle.js" type="text/javascript"></script>
 	</head>
 	<body>
-		<label>8a3fe891</label><hr/>
+		<label>91ddc98a</label><hr/>
 		<label for="type">Choose chart:</label>
 		<select id="set" class="form">
 				<optgroup label="All">
@@ -118,15 +118,19 @@
 		<div id="mark"></div>
 		<hr/>
 		<script type="text/javascript">
+			var addr = window.location.origin + window.location.pathname.replace('/index.html','')
 			$("select").change(function() {
 				document.getElementById("mark").innerHTML = "";
 				var q = queryString.parse(location.search);
-				q.set = document.getElementById("set").value;
-				q.station = document.getElementById("station").value;
+				q.set = q.set ? q.set : document.getElementById("set").value;
+				q.station = q.station ? q.station : document.getElementById("station").value;
 				window.history.replaceState(null, null,'?'+queryString.stringify(q));
 				lib.renderSets(document.getElementById("mark",undefined,undefined,addr));
 			});
-			var addr = window.location.origin + window.location.pathname.replace('/index.html','')
+			var q = queryString.parse(location.search);
+			q.set = q.set ? q.set : document.getElementById("set").value;
+			q.station = q.station ? q.station : document.getElementById("station").value;
+			window.history.replaceState(null, null,'?'+queryString.stringify(q));
 			lib.renderSets(document.getElementById("mark",undefined,undefined,addr));
 		</script>
 		
