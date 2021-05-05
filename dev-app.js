@@ -69,13 +69,6 @@ var charts = (req) => {
 		})
 	})
 }
-app.get( '/chart', (req, res) => {
-	charts(req).then(chrts => {
-		res.render('chart.hbs', {
-			chrts
-		})
-	})
-});
 
 hbs.registerPartials(__dirname + '/views/partials');
 custom.then(chrts => {
