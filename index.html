@@ -6,7 +6,7 @@
 		<script src="client/bundle.js" type="text/javascript"></script>
 	</head>
 	<body>
-		<label>14d9144d</label><hr/>
+		<label>8a3fe891</label><hr/>
 		<label for="type">Choose chart:</label>
 		<select id="type" class="form">
 				<optgroup label="All">
@@ -118,34 +118,32 @@
 		<div id="mark"></div>
 		<hr/>
 		<script type="text/javascript">
-		
 			var addr = window.location.origin + window.location.pathname.replace('/index.html','')
-		lib.renderSets(document.getElementById("mark"),
-			document.getElementById("type").value,
-			document.getElementById("station").value, addr);
-		$("select").change(function() {
-			var type = document.getElementById("type").value;
-			var station = document.getElementById("station").value;
 			var q = queryString.parse(location.search);
-			q.id = type;
-			q.station = station
-			location.search = queryString.stringify(q);
-			document.getElementById("mark").innerHTML = "";
+			var type = q.id ? q.id : document.getElementById("type").value;
+			var station = q.station ? q.station : document.getElementById("station").value;
 			lib.renderSets(document.getElementById("mark"),
 				type,
-				station)
-		});
+			station, addr);
 		</script>
 		
 		<script type="text/javascript">
-			$(document).ready(function() {
-				var url = new URL(document.location);
-				var params = url.searchParams;
-				var id = params.get("id");
-				if(id) $("#type").val(id);
-				var station = params.get("station");
-				if(station) $("#station").val(station);
-			});
+		$("select").change(function() {
+			var q = queryString.parse(location.search);
+			q.id = document.getElementById("type").value;
+			q.station = document.getElementById("station").value;
+			location.search = queryString.stringify(q);
+			document.getElementById("mark").innerHTML = "";
+		});
+		$(document).ready(function(e) {
+			e.preventDefault();
+			var url = new URL(document.location);
+			var params = url.searchParams;
+			var id = params.get("id");
+			if(id) $("#type").val(id);
+			var station = params.get("station");
+			if(station) $("#station").val(station);
+		});
 		</script>
 	</body>
 </html>

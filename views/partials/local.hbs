@@ -1,7 +1,11 @@
 <script type="text/javascript">
-	var q = queryString.parse(location.search);
-	var type = q.id ? q.id : document.getElementById("type").value;
-	var station = q.station ? q.station : document.getElementById("station").value;
-	lib.renderSets(document.getElementById("mark"),
-		type,station);
+	$("select").change(function() {
+		document.getElementById("mark").innerHTML = "";
+		var q = queryString.parse(location.search);
+		q.set = document.getElementById("set").value;
+		q.station = document.getElementById("station").value;
+		window.history.replaceState(null, null,'?'+queryString.stringify(q));
+		lib.renderSets(document.getElementById("mark"));
+	});
+	lib.renderSets(document.getElementById("mark"));
 </script>

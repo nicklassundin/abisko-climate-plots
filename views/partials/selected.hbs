@@ -1,18 +1,7 @@
 
 <script type="text/javascript">
-	$("select").change(function() {
-		var q = queryString.parse(location.search);
-		q.id = document.getElementById("type").value;
-		q.station = document.getElementById("station").value;
-		location.search = queryString.stringify(q);
-		document.getElementById("mark").innerHTML = "";
+	$(document).ready(function() {
+		(new URL(window.location)).searchParams.forEach((x, y) =>
+			document.getElementById(y).value = x);
 	});
-$(document).ready(function() {
-	var url = new URL(document.location);
-	var params = url.searchParams;
-	var id = params.get("id");
-	if(id) $("#type").val(id);
-	var station = params.get("station");
-	if(station) $("#station").val(station);
-});
 </script>
