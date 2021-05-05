@@ -1,9 +1,12 @@
 <script type="text/javascript">
 	var addr = window.location.origin + window.location.pathname.replace('/index.html','')
-	var q = queryString.parse(location.search);
-	var type = q.id ? q.id : document.getElementById("type").value;
-	var station = q.station ? q.station : document.getElementById("station").value;
-	lib.renderSets(document.getElementById("mark"),
-		type,
-	station, addr);
+	$("select").change(function() {
+		document.getElementById("mark").innerHTML = "";
+		var q = queryString.parse(location.search);
+		q.set = document.getElementById("set").value;
+		q.station = document.getElementById("station").value;
+		window.history.replaceState(null, null,'?'+queryString.stringify(q));
+		lib.renderSets(document.getElementById("mark",undefined,undefined,addr));
+	});
+	lib.renderSets(document.getElementById("mark",undefined,undefined,addr));
 </script>

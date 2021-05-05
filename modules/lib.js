@@ -1,3 +1,5 @@
+
+console.log("Visual Change Library Restart")
 var $ = require('jquery')
 global.queryString = require('query-string');
 global.nav_lang = 'en';
