@@ -72,8 +72,7 @@
 		"test-dev": "mocha  './modules/**/*.spec.js' '*.spec.dev.js' 'modules/**/*.spec.dev.js' --delay",
 		"start": "node server.js",
 		"start-dev": "npx nodemon server.js d",
-		"start-full": "npm test && npx nodemon server.js && npm run static",
-		"static": "cp temp/index.html index.html && cp client/bundle.js static/bundle.js && cp temp/preset.json static/preset.json && cp temp/modules.config.charts.merge.json static/modules.config.charts.merge.json"
+		"start-full": "npm test && npx nodemon server.js"
 	},
 	"repository": {
 		"type": "git",
@@ -91,8 +90,10 @@
 			"client/*.js",
 			"docs/*",
 			"temp/*",
+			"static/*",
 			"cms/*",
-			"node_modules/*"
+			"node_modules/*",
+			"index.html"
 		],
 		"events": {
 			"start": "webpack --mode=development"
