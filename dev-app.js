@@ -103,6 +103,17 @@ merger.then((json) => {
 	fileWrite(json, __dirname+'/temp/modules.config.charts.merge.json')
 })
 
+// custom.then(chrts => {
+// 	stations = ["abisko", "53430", "global"];
+// 	app.get('/static', (req, res) => {
+// 		res.render('browse-release.hbs', {
+// 			chrts,
+// 			stations,
+// 			latestCommit
+// 		})
+// 	})
+// })
+
 custom.then(chrts => {
 	stations = ["abisko", "53430", "global"];
 	app.get('/static', (req, res) => {
