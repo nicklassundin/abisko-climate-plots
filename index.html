@@ -8,7 +8,7 @@
 	<body>
 		<label>8a3fe891</label><hr/>
 		<label for="type">Choose chart:</label>
-		<select id="type" class="form">
+		<select id="set" class="form">
 				<optgroup label="All">
 						<option href="#">annualTemperatures</option>
 						<option href="#">TemperaturesSpring</option>
@@ -118,32 +118,23 @@
 		<div id="mark"></div>
 		<hr/>
 		<script type="text/javascript">
+			$("select").change(function() {
+				document.getElementById("mark").innerHTML = "";
+				var q = queryString.parse(location.search);
+				q.set = document.getElementById("set").value;
+				q.station = document.getElementById("station").value;
+				window.history.replaceState(null, null,'?'+queryString.stringify(q));
+				lib.renderSets(document.getElementById("mark",undefined,undefined,addr));
+			});
 			var addr = window.location.origin + window.location.pathname.replace('/index.html','')
-			var q = queryString.parse(location.search);
-			var type = q.id ? q.id : document.getElementById("type").value;
-			var station = q.station ? q.station : document.getElementById("station").value;
-			lib.renderSets(document.getElementById("mark"),
-				type,
-			station, addr);
+			lib.renderSets(document.getElementById("mark",undefined,undefined,addr));
 		</script>
 		
 		<script type="text/javascript">
-		$("select").change(function() {
-			var q = queryString.parse(location.search);
-			q.id = document.getElementById("type").value;
-			q.station = document.getElementById("station").value;
-			location.search = queryString.stringify(q);
-			document.getElementById("mark").innerHTML = "";
-		});
-		$(document).ready(function(e) {
-			e.preventDefault();
-			var url = new URL(document.location);
-			var params = url.searchParams;
-			var id = params.get("id");
-			if(id) $("#type").val(id);
-			var station = params.get("station");
-			if(station) $("#station").val(station);
-		});
+			$(document).ready(function() {
+				(new URL(window.location)).searchParams.forEach((x, y) =>
+					document.getElementById(y).value = x);
+			});
 		</script>
 	</body>
 </html>
