@@ -31,7 +31,8 @@ lib = {
 			if(url){
 				hostUrl = url;
 			}else{
-				hostUrl = location.protocol +"//"+ require("../config/server.json").domain;
+				// hostUrl = location.protocol +"//"+ require("../config/server.json").domain;
+				hostUrl = window.location.origin
 			}
 		}
 		global.station = id;
@@ -61,7 +62,7 @@ lib = {
 			hostUrl = url;
 		}else{
 			console.log("Running Local setup: ")
-			hostUrl = location.protocol +"//"+ require("../config/server.json").domain;
+			hostUrl = window.location.origin
 		} 
 		console.log(hostUrl)
 		
