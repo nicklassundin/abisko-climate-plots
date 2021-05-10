@@ -6,7 +6,7 @@
 		<script src="client/bundle.js" type="text/javascript"></script>
 	</head>
 	<body>
-		<label>b1556fe9</label><hr/>
+		<label>dbdd8627</label><hr/>
 		<label for="type">Choose chart:</label>
 		<select id="set" class="form">
 				<optgroup label="All">
@@ -118,8 +118,8 @@
 		<div id="mark"></div>
 		<hr/>
 		<script type="text/javascript">
-			$("select").change(function() {
 			var addr = "https://nicklassundin.github.io/abisko-climate-plots";
+			$("select").change(function() {
 				document.getElementById("mark").innerHTML = "";
 				var q = queryString.parse(location.search);
 				q.set = document.getElementById("set").value;
@@ -127,7 +127,6 @@
 				window.history.replaceState(null, null,'?'+queryString.stringify(q));
 				lib.renderSets(document.getElementById("mark",undefined,undefined,addr));
 			});
-			var addr = "https://nicklassundin.github.io/abisko-climate-plots/index.html";
 			var q = queryString.parse(location.search);
 			q.set = q.set ? q.set : document.getElementById("set").value;
 			q.station = q.station ? q.station : document.getElementById("station").value;
