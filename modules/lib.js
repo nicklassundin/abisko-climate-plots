@@ -29,12 +29,14 @@ lib = {
 	renderChart: function(div, type, id="abisko", url){
 		if(hostUrl){
 			if(url){
+				console.log("Hosting from: ")
 				hostUrl = url;
 			}else{
-				// hostUrl = location.protocol +"//"+ require("../config/server.json").domain;
+				console.log("Running Local setup: ")
 				hostUrl = window.location.origin
 			}
 		}
+		console.log(hostUrl)
 		global.station = id;
 		// TODO refractor later
 		if(id=="abisko"){
