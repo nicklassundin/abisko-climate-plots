@@ -82,6 +82,14 @@ hbs.registerPartials(__dirname + '/views/partials', function (err) {
 				}
 			})
 		})	
+		app.get('/static', (req, res) => {
+			res.render('browse-release.hbs', {
+				chrts,
+				stations,
+				latestCommit
+			})
+		})
+
 		stations = ["abisko", "53430", "global"];
 		app.get('/browse', (req, res) => {
 			res.render('browse.hbs', {

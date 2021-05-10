@@ -57,7 +57,11 @@ lib = {
 			return div;
 		})
 	},
-	renderSets: function(div, set=(new URL(window.location.href).searchParams.get("set")), id=(new URL(window.location.href).searchParams.get("station")), url){
+	renderSets: function(div, 
+		set=(new URL(window.location.href).searchParams.get("set")), 
+		id=(new URL(window.location.href).searchParams.get("station")), 
+		url){
+		console.log("Input url")
 		console.log(url)
 		if(url){
 			console.log("Hosting from: ")
