@@ -21,17 +21,28 @@ global.filePath = {
 }
 
 // wander down the data structure with tag input example: [high, medium, low]
-var tagApply = function(data, tag){
-	var result = data;
-	try{
-		tag.forEach(each => {
-			result = result[each];
-		})	
-	}catch(err){
-		// console.log(err)
-		result = result[tag]
+var tagApply = function(data, tags){
+	if(Array.isArray(tags) && tags.length == 1){
+		tags = tags[0];
 	}
-	return result;
+	return new Promise((res, rej) => {
+		var result = data;
+		if(data.then){
+			data.then(d => {
+				res(tagApply(d, tags))
+			})
+		}else{
+			if(Array.isArray(tags)){
+				var tag = tags.shift()
+				res(tagApply(result[tag], tags))
+			}else{
+				res(result[tags])
+			}
+		}
+	}).catch(error=>{
+		console.log(data)
+		throw error
+	})
 }
 
 var struct = {
@@ -57,6 +68,7 @@ var struct = {
 			this.rawData = new Promise(function(resolve, reject){
 				function data(file){
 					return new Promise(function(resolve, reject){
+						// console.log(file)
 						ref.preset.complete = function(result){
 							resolve(result);
 						};
@@ -70,17 +82,17 @@ var struct = {
 					// TODO Demo
 					// if(demo[station] && demo[station][file]){
 
-						// console.log(demo[station][file])
-						// ref.rawData.push(
-							// data(demo[station][file]))
+					// console.log(demo[station][file])
+					// ref.rawData.push(
+					// data(demo[station][file]))
 					// }else{
-						try{
-							ref.rawData.push(data(path[index]));
-						}catch(error){
-							console.log(file)
-							console.log(ref.rawData);
-							throw error;
-						}
+					try{
+						ref.rawData.push(data(path[index]));
+					}catch(error){
+						console.log(file)
+						console.log(ref.rawData);
+						throw error;
+					}
 					// }
 				})
 				resolve(ref.rawData);
@@ -88,33 +100,68 @@ var struct = {
 		}
 		return this;
 	},
-	parseRawData: function(reset=false){
+	parseRawData: function(tags){
+		var tag = tags[0]
+		var temp = this.parser;
 		var parser = this.parser;
+		// console.log("Parser")
+		// console.log(this.parser)
+		if(!(typeof parser === "function")){
+			parser = parser[tag]
+		}
 		var rawDataPromise = this.rawData;
 		return new Promise(function(resolve, reject){
 			rawDataPromise.then(function(rawData){
 				resolve(Promise.all(rawData).then(function(rawData){
-					var data = parser(rawData);
-					return data;	
-				}))
+					// $.ajax({
+					// type: "POST",
+					// url: hostUrl+'/receive',
+					// data: {
+					// data: JSON.stringify(rawData)
+					// },
+					// success: success,
+					// dataType: 'script'
+					// });
+					var data = parser(rawData);	
+					return data
+				})
+					.catch(error =>{
+						console.log(tags)
+						console.log(tag)
+						console.log(parser)
+						console.log(temp)
+						throw error}))
 			})
 		})
 	},
 	init: function(id, tag, renderTag=tag){
+		// console.log(this.parser)
 		var render = this.render;
 		var meta = this.metaRef[id]
 		render.setup(id, meta);
 		// var renderProc = function(data){
 		// }
-		if(!this.cached) this.cached = this.parseRawData();
-		this.cached.then(function(data){
-			// console.log(data)
-			// console.log(tag)
+		if(!Array.isArray(tag)) tag = [tag];
+		if(!this.cached){
+			this.cached = {};
+			this.cached[tag[0]] = this.parseRawData(tag);
+		}
+		if(!this.cached[tag[0]]){
+			console.log("re-run")
+			console.log(this.cached)
+			this.cached[tag[0]] = this.parseRawData(tag);
+		}
+		// console.log(this.cached)
+		// console.log(tag)
+		this.cached[tag[0]].then(function(data){
 			if(tag){
-				data = tagApply(data, tag);
+				data = tagApply(data, [...tag]);
 			}
+			console.log(data)
 			try{
-				render.initiate(id, data)
+				data.then(d => {
+					render.initiate(id, d)
+				})
 			}catch(error){
 				console.log(id);
 				console.log(data);

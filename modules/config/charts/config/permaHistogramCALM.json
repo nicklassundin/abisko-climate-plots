@@ -3,7 +3,7 @@
 	"type": "permaHistogramCALM",
 	"tag": {
 		"render": "",
-		"data": ""
+		"data": ["perma"]
 	},
 	"config": {
 		"meta": {
