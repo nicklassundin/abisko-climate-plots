@@ -8,13 +8,13 @@
 	"config": {
 		"meta": {
 			"smhi": {
-				"config": "temperatures",
+				"config": "temperature",
 				"lang": "autumnTemperature",
 				"data": "SMHI-Weather",
 				"set": "select"
 			},
 			"abisko": {
-				"config": "temperatures",
+				"config": "temperature",
 				"lang": "autumnTemperature",
 				"data": "ANS",
 				"set": "select"
