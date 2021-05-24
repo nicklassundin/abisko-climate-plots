@@ -1,6 +1,8 @@
-
 const help = require('./../helpers.js');
 const regression = require('regression')
+// const { JSDOM } = require( "jsdom" );
+// const { window } = new JSDOM( "" );
+// const $ = require( "jquery" )( window );
 
 var struct = {
 	type: 'mean',
@@ -241,7 +243,6 @@ var struct = {
 	},
 	xInterval: {},
 	build: function(type=this.type, lower=baselineLower, upper=baselineUpper){
-
 		this.xInterval.x = new Date(Math.min.apply(null, 
 			this.values.map(each => 
 				each.xInterval ? Math.min.apply(null, each.xInterval) : new Date(each.x)))).getTime();
@@ -257,7 +258,7 @@ var struct = {
 			}
 		}
 		this.type = type;
-		this.values = this.values.filter(entry => (!isNaN(entry.y) || $.isNumeric(entry.y)));
+		this.values = this.values.filter(entry => !isNaN(parseFloat(entry.y)) && isFinite(entry.y));
 		var count = this.values.length;
 		this.count = count;
 
@@ -302,8 +303,12 @@ var struct = {
 		var result = struct.clone();
 		result.meta.src = src;
 		try{
-			values = values.filter(entry => !isNaN(entry.y) && $.isNumeric(entry.y));
+			values = values.filter(entry => !isNaN(parseFloat(entry.y)) && isFinite(entry.y));
 		}catch(err){
+			console.log(Object.keys($))
+			console.log(values[0])
+			console.log(this)
+			console.log(err)
 			return undefined;
 		}
 		result.values = values.filter(each => each.y || each.y == 0);
@@ -317,210 +322,258 @@ var struct = {
 exports.struct = struct;
 
 var parseByDate = function (values, type='mean', src='', custom) {
-	var keys = Object.keys(values[0])
-	var frame = {
-		weeks: {},
-		yrly: {},
-		yrlyFull: {},
-		yrlySplit: {},
-		decades: {},
-		monthly: {},
-		spring: {},
-		summer: {},
-		autumn: {},
-		winter: {},
-		customPeriod: {},
-		DOY: {},
-		meta: {
-			src: src,
-		}
-	}
-	const data = {
-		weeks: {},
-		yrly: {},
-		yrlyFull: {},
-		yrlySplit: {},
-		decades: {},
-		monthly: {},
-		spring: {},
-		summer: {}, 
-		autumn: {},
-		winter: {},	
-		customPeriod: {},
-		DOY: {},
-		meta: {
-			src: src,
-		},
-		insert: function(entries){
-			var result = Object.assign({}, frame);
-			// TODO build to general function to be use for all functions
-			var set = function(entry, key, date){
+	return new Promise((res, rej) => {
 
-				// entry.year = date.getFullYear();
-				// entry.month = date.getMonth();
-				// entry.week = date.getWeekNumber();
-				// entry.monthName = help.monthByIndex(entry.month)
-				// entry.season = help.getSeasonByIndex(entry.month);
-				// entry.decade = entry.year - entry.year % 10;
-
-				var year = date.getFullYear();
-				var month = date.getMonth();
-				var week = date.getWeekNumber();
-				if(!years[year+'']) years[year] = year+'';
-				var monthName = help.monthByIndex(month)
-				var insert = (...k) => {
-					return function(data = result, e = entry){
-						var kn = k[0]
-						if(!data[kn]){
-							if(k.length > 1){
-								data[kn] = insert(...(k.slice(1)))({})
-							}else{
-								data[kn] = struct.create([],kn,type);
-							}
-						}else{
-							if(k.length > 1){
-								data[kn] = insert(...(k.slice(1)))(data[kn]);
-							}else{
-								data[kn].values.push(e)
-							}
-						}
-						return data;
-					}
-				}
-				// Seasons	
-				var season = help.getSeasonByIndex(month);
-				insert(season, key, year)();
-				insert('yrly', key, year)()
-				// Decades
-				var decade = year - year % 10;
-				insert('decades', key, decade)()
-
-				// split year over 6 month
-				var splitYear = year;
-				if(help.isFirstHalfYear(month)){
-					splitYear = year - 1;	
-				}	
-				// split for Winter
-				insert('yrlySplit', key, splitYear)();
-
-				// decade month split
-				insert('yrlyFull', decade, key, monthName)()
-
-				// Monthly
-				insert('monthly', monthName, key, year)()
-				// Week
-				insert('weeks', key, year, week)();
-				// custom period
-				if(custom){
-					if(!result.customPeriod) result.customPeriod = {};
-					if(!result.customPeriod[key]) result.customPeriod[key] = {};
-					var pkey = custom(date);
-					if(pkey) {
-						if(!result.customPeriod[key][pkey]) result.customPeriod[key][pkey] = struct.create([],pkey,type);
-						result.customPeriod[key][pkey].values.push(entry);
-					}
-				}
-
-				return result;					
+		var keys = Object.keys(values[0])
+		var frame = {
+			weeks: {},
+			yrly: {},
+			yrlyFull: {},
+			yrlySplit: {},
+			decades: {},
+			monthly: {},
+			spring: {},
+			summer: {},
+			autumn: {},
+			winter: {},
+			customPeriod: {},
+			DOY: {},
+			meta: {
+				src: src,
 			}
-			var years = []
-			var build = function(entries){
-				var values = {};
-				entries.forEach(entry => {
-					var date = undefined; 
-					keys.forEach(key => {
+		}
+		const data = {
+			weeks: {},
+			yrly: {},
+			yrlyFull: {},
+			yrlySplit: {},
+			decades: {},
+			monthly: {},
+			spring: {},
+			summer: {}, 
+			autumn: {},
+			winter: {},	
+			customPeriod: {},
+			DOY: {},
+			meta: {
+				src: src,
+			},
+			insert: function(entries){
+				var result = Object.assign({}, frame);
+				// TODO build to general function to be use for all functions
+				var set = function(entry, key, date){
 
-						values = set(entry[key], key, new Date(entry[key].x));
-					})
-				})
-				var construct = function(bValues, x){
-					const str = [];
-					try{
-						Object.keys(bValues).forEach(key => {
-							const entry = bValues[key];
-							if(entry.build){
-								str.push(entry.build(type))	
+					// entry.year = date.getFullYear();
+					// entry.month = date.getMonth();
+					// entry.week = date.getWeekNumber();
+					// entry.monthName = help.monthByIndex(entry.month)
+					// entry.season = help.getSeasonByIndex(entry.month);
+					// entry.decade = entry.year - entry.year % 10;
+
+					var year = date.getFullYear();
+					var month = date.getMonth();
+					var week = date.getWeekNumber();
+					if(!years[year+'']) years[year] = year+'';
+					var monthName = help.monthByIndex(month)
+					var insert = (...k) => {
+						return function(data = result, e = entry){
+							var kn = k[0]
+							if(!data[kn]){
+								if(k.length > 1){
+									data[kn] = insert(...(k.slice(1)))({})
+								}else{
+									data[kn] = struct.create([],kn,type);
+								}
 							}else{
-								str.push(construct(entry, parseInt(key)))
+								if(k.length > 1){
+									data[kn] = insert(...(k.slice(1)))(data[kn]);
+								}else{
+									data[kn].values.push(e)
+								}
 							}
-						})
-						return struct.create(str, x).build(type);
-					}catch(error){
-						console.log(bValues)
-						console.log(str)
-						console.log(x)
-						console.log(struct.create(str, x))
-						throw error
+							return data;
+						}
 					}
+					// Seasons	
+					var season = help.getSeasonByIndex(month);
+					insert(season, key, year)();
+					insert('yrly', key, year)()
+					// Decades
+					var decade = year - year % 10;
+					insert('decades', key, decade)()
+
+					// split year over 6 month
+					var splitYear = year;
+					if(help.isFirstHalfYear(month)){
+						splitYear = year - 1;	
+					}	
+					// split for Winter
+					insert('yrlySplit', key, splitYear)();
+
+					// decade month split
+					insert('yrlyFull', decade, key, monthName)()
+
+					// Monthly
+					insert('monthly', monthName, key, year)()
+					// Week
+					insert('weeks', key, year, week)();
+					// custom period
+					if(custom){
+						if(!result.customPeriod) result.customPeriod = {};
+						if(!result.customPeriod[key]) result.customPeriod[key] = {};
+						var pkey = custom(date);
+						if(pkey) {
+							if(!result.customPeriod[key][pkey]) result.customPeriod[key][pkey] = struct.create([],pkey,type);
+							result.customPeriod[key][pkey].values.push(entry);
+						}
+					}
+
+					return result;					
 				}
-				// console.log(values.decades)
-				Object.keys(frame).forEach(key => {
-					switch(key){
-						case 'monthly':
-							Object.keys(values[key]).forEach(month => {
-								keys.forEach(tkey => {
-									values[key][month][tkey] = construct(values[key][month][tkey], parseInt(month))
-								})
-							})
-							break;
-						case 'weeks':
-							// TODO
-							keys.forEach(tkey => {
-								// console.log(key)
-								// console.log(tkey)
-								// console.log(values[key][tkey])
-								values[key][tkey] = construct(values[key][tkey])
-							})
-							break;
-						case 'yrly':
-							keys.forEach(tkey => {
-								values[key][tkey] = construct(values[key][tkey])
-							})
-							break;
-						case 'yrlyFull': 
-							Object.keys(values[key]).forEach(year => {
-								keys.forEach(tkey => {
-									values[key][year][tkey] = construct(values[key][year][tkey], parseInt(year));
-								})
-							})
-							break;
-						case 'yrlySplit':
-							keys.forEach(tkey => {
-								values[key][tkey] = construct(values[key][tkey])
-							})
-							break;
-						case 'decades':
-							Object.keys(values[key]).forEach(tkey => {
-								values[key][tkey] = struct.create(Object.keys(values[key][tkey]).map(decade => {
-									return values[key][tkey][decade] = values[key][tkey][decade].build(type);
-								})).build(type);
-							}) 
-							break;
-						case 'customPeriod': 
-							Object.keys(values[key]).forEach(tkey => {
-								values[key][tkey] = struct.create(Object.keys(values[key][tkey]).map(decade => {
-									return values[key][tkey][decade] = values[key][tkey][decade].build(type);
-								})).build(type);
-							})
-							break;
-						case 'meta':
-							break;
-						default:
-							keys.forEach(tkey => {
-								if(values[key][tkey]){
-									values[key][tkey] = construct(values[key][tkey], help.seasons[key])
+				var years = []
+				var build = function(entries){
+					var values = {};
+					entries.forEach(entry => {
+						var date = undefined; 
+						keys.forEach(key => {
+
+							values = set(entry[key], key, new Date(entry[key].x));
+						})
+					})
+					var construct = function(bValues, x){
+						const str = [];
+						try{
+							Object.keys(bValues).forEach(key => {
+								const entry = bValues[key];
+								if(entry.build){
+									str.push(entry.build(type))	
+								}else{
+									str.push(construct(entry, parseInt(key)))
 								}
 							})
-							break;
+							var temp = struct.create(str, x);
+							return temp
+							try{
+								resolve(temp.build(type))
+							}catch(error){
+								console.log("struct.create(str,x)")
+								console.log(temp)
+								// console.log("str")
+								// console.log(str);
+								console.log("x");
+								console.log(x);
+								throw error
+							}
+						}catch(error){
+							// console.log(str)
+							// console.log(x)
+							// console.log(bValues)
+							// console.log(struct.create(str, x))
+							// console.log(entries)
+							throw error
+						}
 					}
-				})
-				return values
+					// console.log(values.decades)
+					Object.keys(frame).forEach(key => {
+						switch(key){
+							case 'monthly':
+								values[key] = new Promise((res,rej)=>{
+								var val = values[key];
+								Object.keys(values[key]).forEach(month => {
+									keys.forEach(tkey => {
+										val[month][tkey] = construct(val[month][tkey], parseInt(month))
+									})
+								})
+									res(val)
+								})
+								break;
+							case 'weeks':
+								// TODO
+								values[key] = new Promise((res,rej)=>{
+								var val = values[key];
+								keys.forEach(tkey => {
+									// console.log(key)
+									// console.log(tkey)
+									// console.log(values[key][tkey])
+									val[tkey] = construct(val[tkey])
+								})
+									res(val)
+								})
+								break;
+							case 'yrly':
+								values[key] = new Promise((res,rej)=>{
+								var val = values[key];
+								keys.forEach(tkey => {
+									val[tkey] = construct(val[tkey])
+								})
+									res(val)
+								})
+								break;
+							case 'yrlyFull': 
+								values[key] = new Promise((res,rej)=>{
+								var val = values[key];
+								Object.keys(val).forEach(year => {
+									keys.forEach(tkey => {
+										val[year][tkey] = construct(val[year][tkey], parseInt(year));
+									})
+								})
+									res(val)
+								})
+								break;
+							case 'yrlySplit':
+								values[key] = new Promise((res,rej)=>{
+								var val = values[key];
+								keys.forEach(tkey => {
+									val[tkey] = construct(val[tkey])
+								})
+									res(val)
+								})
+								break;
+							case 'decades':
+								values[key] = new Promise((res,rej)=>{
+								var val = values[key];
+								Object.keys(val).forEach(tkey => {
+									val[tkey] = struct.create(Object.keys(val[tkey]).map(decade => {
+										return val[tkey][decade] = val[tkey][decade].build(type);
+									})).build(type);
+								}) 
+									res(val)
+								})
+								break;
+							case 'customPeriod': 
+								values[key] = new Promise((res,rej)=>{
+								var val = values[key];
+								Object.keys(values[key]).forEach(tkey => {
+									valu[tkey] = struct.create(Object.keys(values[key][tkey]).map(decade => {
+										return val[tkey][decade].build(type);
+									})).build(type);
+								})
+									res(val)
+								})
+								break;
+							case 'meta':
+								break;
+							default:
+								values[key] = new Promise((res,rej)=>{
+								var val = values[key];
+								keys.forEach(tkey => {
+									if(val[tkey]){
+										val[tkey] = construct(values[key][tkey], help.seasons[key])
+									}
+								})
+									res(val)
+								})
+								break;
+						}
+					})
+					return values
+				}
+				var answer = build(entries);
+				return answer
 			}
-			var answer = build(entries);
-			return answer
 		}
-	}
-	return data.insert(values);
+		res(data.insert(values));
+	})
 }
 exports.parseByDate = parseByDate;
 

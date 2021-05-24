@@ -1,4 +1,6 @@
 const path = require('path');
+const webpack = require('webpack');
+const $ = require('jquery')
 
 module.exports = [{
 	entry: {
@@ -24,8 +26,16 @@ module.exports = [{
 			}
 		]
 	},
+	// plugins: [
+		// new webpack.ProvidePlugin({
+			// $: "jquery",
+			// jQuery: "jquery",
+			// "window.jQuery": "jquery"
+		// })
+	// ],
 	node: {
 		console: true,
+		child_process: "empty",
 		fs: 'empty',
 		net: 'empty',
 		tls: 'empty'

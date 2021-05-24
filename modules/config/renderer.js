@@ -378,6 +378,7 @@ var chart = {
 				console.log(data)
 				console.log(key)
 				console.log(meta)
+				console.log(meta.series)
 				throw error
 			}
 		})

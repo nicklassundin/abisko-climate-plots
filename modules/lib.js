@@ -25,18 +25,21 @@ global.variables = {
 var charts = require('./config/charts/config.js');
 var sets = require('../static/preset.json');
 // var sets = require('../config/preset.js').preset;
+exports.stats = require('./stats/config.js')
+
+
 lib = {
 	renderChart: function(div, type, id="abisko", url){
 		if(hostUrl){
 			if(url){
-				console.log("Hosting from: ")
+				// console.log("Hosting from: ")
 				hostUrl = url;
 			}else{
-				console.log("Running Local setup: ")
+				// console.log("Running Local setup: ")
 				hostUrl = window.location.origin
 			}
 		}
-		console.log(hostUrl)
+		// console.log(hostUrl)
 		global.station = id;
 		// TODO refractor later
 		if(id=="abisko"){
@@ -61,16 +64,16 @@ lib = {
 		set=(new URL(window.location.href).searchParams.get("set")), 
 		id=(new URL(window.location.href).searchParams.get("station")), 
 		url){
-		console.log("Input url")
-		console.log(url)
+		// console.log("Input url")
+		// console.log(url)
 		if(url){
-			console.log("Hosting from: ")
+			// console.log("Hosting from: ")
 			hostUrl = url;
 		}else{
-			console.log("Running Local setup: ")
+			// console.log("Running Local setup: ")
 			hostUrl = window.location.origin
 		} 
-		console.log(hostUrl)
+		// console.log(hostUrl)
 		
 		variables.debug = (new URL(window.location.href).searchParams.get("debug") == "true" ? true : false)
 		if(variables.debug) {
