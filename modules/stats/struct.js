@@ -510,15 +510,15 @@ var parseByDate = function (values, type='mean', src='', custom) {
 								})
 								break;
 							case 'yrlyFull': 
-								values[key] = new Promise((res,rej)=>{
-								var val = values[key];
-								Object.keys(val).forEach(year => {
-									keys.forEach(tkey => {
-										val[year][tkey] = construct(val[year][tkey], parseInt(year));
-									})
-								})
-									res(val)
-								})
+								// values[key] = new Promise((res,rej)=>{
+								// var val = values[key];
+								// Object.keys(val).forEach(year => {
+									// keys.forEach(tkey => {
+										// val[year][tkey] = construct(val[year][tkey], parseInt(year));
+									// })
+								// })
+									// res(val)
+								// })
 								break;
 							case 'yrlySplit':
 								values[key] = new Promise((res,rej)=>{
