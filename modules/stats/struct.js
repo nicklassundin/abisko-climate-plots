@@ -452,8 +452,9 @@ var parseByDate = function (values, type='mean', src='', custom) {
 								}
 							})
 							var temp = struct.create(str, x);
+							return temp
 							try{
-								return temp.build(type);
+								resolve(temp.build(type))
 							}catch(error){
 								console.log("struct.create(str,x)")
 								console.log(temp)
@@ -476,59 +477,91 @@ var parseByDate = function (values, type='mean', src='', custom) {
 					Object.keys(frame).forEach(key => {
 						switch(key){
 							case 'monthly':
+								values[key] = new Promise((res,rej)=>{
+								var val = values[key];
 								Object.keys(values[key]).forEach(month => {
 									keys.forEach(tkey => {
-										values[key][month][tkey] = construct(values[key][month][tkey], parseInt(month))
+										val[month][tkey] = construct(val[month][tkey], parseInt(month))
 									})
+								})
+									res(val)
 								})
 								break;
 							case 'weeks':
 								// TODO
+								values[key] = new Promise((res,rej)=>{
+								var val = values[key];
 								keys.forEach(tkey => {
 									// console.log(key)
 									// console.log(tkey)
 									// console.log(values[key][tkey])
-									values[key][tkey] = construct(values[key][tkey])
+									val[tkey] = construct(val[tkey])
+								})
+									res(val)
 								})
 								break;
 							case 'yrly':
+								values[key] = new Promise((res,rej)=>{
+								var val = values[key];
 								keys.forEach(tkey => {
-									values[key][tkey] = construct(values[key][tkey])
+									val[tkey] = construct(val[tkey])
+								})
+									res(val)
 								})
 								break;
 							case 'yrlyFull': 
-								Object.keys(values[key]).forEach(year => {
+								values[key] = new Promise((res,rej)=>{
+								var val = values[key];
+								Object.keys(val).forEach(year => {
 									keys.forEach(tkey => {
-										values[key][year][tkey] = construct(values[key][year][tkey], parseInt(year));
+										val[year][tkey] = construct(val[year][tkey], parseInt(year));
 									})
+								})
+									res(val)
 								})
 								break;
 							case 'yrlySplit':
+								values[key] = new Promise((res,rej)=>{
+								var val = values[key];
 								keys.forEach(tkey => {
-									values[key][tkey] = construct(values[key][tkey])
+									val[tkey] = construct(val[tkey])
+								})
+									res(val)
 								})
 								break;
 							case 'decades':
-								Object.keys(values[key]).forEach(tkey => {
-									values[key][tkey] = struct.create(Object.keys(values[key][tkey]).map(decade => {
-										return values[key][tkey][decade] = values[key][tkey][decade].build(type);
+								values[key] = new Promise((res,rej)=>{
+								var val = values[key];
+								Object.keys(val).forEach(tkey => {
+									val[tkey] = struct.create(Object.keys(val[tkey]).map(decade => {
+										return val[tkey][decade] = val[tkey][decade].build(type);
 									})).build(type);
 								}) 
+									res(val)
+								})
 								break;
 							case 'customPeriod': 
+								values[key] = new Promise((res,rej)=>{
+								var val = values[key];
 								Object.keys(values[key]).forEach(tkey => {
-									values[key][tkey] = struct.create(Object.keys(values[key][tkey]).map(decade => {
-										return values[key][tkey][decade] = values[key][tkey][decade].build(type);
+									valu[tkey] = struct.create(Object.keys(values[key][tkey]).map(decade => {
+										return val[tkey][decade].build(type);
 									})).build(type);
+								})
+									res(val)
 								})
 								break;
 							case 'meta':
 								break;
 							default:
+								values[key] = new Promise((res,rej)=>{
+								var val = values[key];
 								keys.forEach(tkey => {
-									if(values[key][tkey]){
-										values[key][tkey] = construct(values[key][tkey], help.seasons[key])
+									if(val[tkey]){
+										val[tkey] = construct(values[key][tkey], help.seasons[key])
 									}
+								})
+									res(val)
 								})
 								break;
 						}

@@ -1,7 +1,7 @@
 // Series definitions/configuration
 exports.series = {
 	getPreset: (series, data) => {
-		// TODO	
+		//TODO
 	},
 	max: (meta, data) => ({
 		name: meta.series.max.name,
