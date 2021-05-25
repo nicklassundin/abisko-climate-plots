@@ -451,13 +451,10 @@ var parseByDate = function (values, type='mean', src='', custom) {
 									str.push(construct(entry, parseInt(key)))
 								}
 							})
-							var temp = struct.create(str, x);
-							return temp
 							try{
-								resolve(temp.build(type))
+								return struct.create(str, x).build(type)
 							}catch(error){
 								console.log("struct.create(str,x)")
-								console.log(temp)
 								// console.log("str")
 								// console.log(str);
 								console.log("x");
@@ -465,9 +462,11 @@ var parseByDate = function (values, type='mean', src='', custom) {
 								throw error
 							}
 						}catch(error){
+							console.log(error)
 							// console.log(str)
-							// console.log(x)
-							// console.log(bValues)
+							console.log(x)
+							console.log(bValues)
+							// console.log(values)
 							// console.log(struct.create(str, x))
 							// console.log(entries)
 							throw error
@@ -492,9 +491,8 @@ var parseByDate = function (values, type='mean', src='', custom) {
 								values[key] = new Promise((res,rej)=>{
 								var val = values[key];
 								keys.forEach(tkey => {
-									// console.log(key)
-									// console.log(tkey)
-									// console.log(values[key][tkey])
+									// console.log(val[tkey])
+									
 									val[tkey] = construct(val[tkey])
 								})
 									res(val)
@@ -510,15 +508,15 @@ var parseByDate = function (values, type='mean', src='', custom) {
 								})
 								break;
 							case 'yrlyFull': 
-								// values[key] = new Promise((res,rej)=>{
-								// var val = values[key];
-								// Object.keys(val).forEach(year => {
-									// keys.forEach(tkey => {
-										// val[year][tkey] = construct(val[year][tkey], parseInt(year));
-									// })
-								// })
-									// res(val)
-								// })
+								values[key] = new Promise((res,rej)=>{
+								var val = values[key];
+								Object.keys(val).forEach(year => {
+									keys.forEach(tkey => {
+										val[year][tkey] = construct(val[year][tkey], parseInt(year));
+									})
+								})
+									res(val)
+								})
 								break;
 							case 'yrlySplit':
 								values[key] = new Promise((res,rej)=>{

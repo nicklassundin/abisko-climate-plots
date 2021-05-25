@@ -22,16 +22,12 @@ global.baselineUpper = constant.baselineUpper;
 var parsers = {
 	Temp:  function (blocks){
 		return new Promise(function(resolve, reject){
-			resolve({
-				temperatures: parseByDate(blocks.temperatures),
-			})
+			resolve(parseByDate(blocks.temperatures))
 		})
 	},
 	Prec:  function (blocks){
 		return new Promise(function(resolve, reject){
-			resolve({
-				precipitation: parseByDate(blocks.precipitation, 'sum'),
-			})
+			resolve(parseByDate(blocks.precipitation, 'sum'))
 		})
 	},
 	Growth:  function (blocks){
@@ -39,61 +35,73 @@ var parsers = {
 			var result = {}
 			var temperatures = parseByDate(blocks.temperatures);
 			temperatures.then(temp => {
-				result.growingSeason = {
-					weeks:  struct.create(temp.weeks.avg.values.map(each => each.sequence())).build(),
-					days: struct.create(Object.keys(temp.yrly.avg.values).map(year =>  temp.yrly.avg.values[year].sequence())).build(),
-					first: temp.yrlySplit.min.first(),
-					last: temp.yrlySplit.min.last(),
-				}
+				result.weeks = new Promise((res,rej) => {
+					temp.weeks.then(weeks => {
+						res(struct.create(weeks.avg.values.map(each => each.sequence())).build())
+					})
+				})
+				result.days = new Promise((res,rej) => {
+					temp.yrly.then(yrly => {
+						res(struct.create(Object.keys(yrly.avg.values).map(year =>  yrly.avg.values[year].sequence())).build())
+					})
+				})
+				result.first = new Promise((res,rej) => {
+					temp.yrlySplit.then(split => {
+						res(split.min.first())
+					})
+				})
+				result.last= new Promise((res,rej) => {
+					temp.yrlySplit.then(split => {
+						res(split.min.last())
+					})
+				})
+				resolve(result)
 			})
-			resolve(result)
 		})
 	},
 	CALM: {
 		perma: function(result, src=''){
-			return {
-				perma: new Promise(function(resolve, reject){
-					result = result[0];
-					var fields = result.meta.fields;
-					fields.shift()
-					var data = result.data;
-					data.splice(0,4)
-					var stations = { avg: {} };
+			return  new Promise(function(resolve, reject){
+				result = result[0];
+				var fields = result.meta.fields;
+				fields.shift()
+				var data = result.data;
+				data.splice(0,4)
+				var stations = { avg: {} };
 
-					data.forEach(function(each){
-						Object.keys(each).forEach(key => {
-							if(key != ""){
-								if(!stations[key]){
-									stations[key] = [];
-								}
-								var entry = {
-									x: Number(each[""]),
-									y: !Number.isNaN(Number(each[key])) ? Number(each[key]): undefined 
-								}
-								stations[key].push(entry)
-								if(!stations['avg'][each[""]]){
-									stations['avg'][each[""]] = [];
-								}
-								if(entry.y){
-									stations['avg'][each[""]].push({
-										x: Number(each[""]),
-										y: !Number.isNaN(Number(each[key])) ? Number(each[key]) : undefined 
-									})
-								}
+				data.forEach(function(each){
+					Object.keys(each).forEach(key => {
+						if(key != ""){
+							if(!stations[key]){
+								stations[key] = [];
 							}
-						})
+							var entry = {
+								x: Number(each[""]),
+								y: !Number.isNaN(Number(each[key])) ? Number(each[key]): undefined 
+							}
+							stations[key].push(entry)
+							if(!stations['avg'][each[""]]){
+								stations['avg'][each[""]] = [];
+							}
+							if(entry.y){
+								stations['avg'][each[""]].push({
+									x: Number(each[""]),
+									y: !Number.isNaN(Number(each[key])) ? Number(each[key]) : undefined 
+								})
+							}
+						}
 					})
-
-					stations['avg'] = Object.keys(stations['avg']).map(year => ({
-						x: Number(year),
-						y: (stations['avg'][year].map(each => each.y)).reduce((a, b) => a + b, 0)/stations['avg'][year].length
-					}))
-					Object.keys(stations).forEach(key => {
-						stations[key] = struct.create(stations[key]).build()
-					})
-					resolve(stations)
 				})
-			}
+
+				stations['avg'] = Object.keys(stations['avg']).map(year => ({
+					x: Number(year),
+					y: (stations['avg'][year].map(each => each.y)).reduce((a, b) => a + b, 0)/stations['avg'][year].length
+				}))
+				Object.keys(stations).forEach(key => {
+					stations[key] = struct.create(stations[key]).build()
+				})
+				resolve(stations)
+			})
 		},
 	},
 	SCRIPPS_CO2: function(result, src=''){
@@ -110,9 +118,7 @@ var parsers = {
 			}
 			var data = struct;
 			data.values = Object.values(result.data.slice(44).map(each => parse(each)));
-			resolve({
-				weekly: data.build()
-			})
+			resolve(data.build())
 		})
 	},
 	GISSTEMP: function (result, src='') {
@@ -215,18 +221,13 @@ var parsers = {
 			}
 		},
 		'64n-90n': function(result){
-			return {
-				'64n-90n': parsers.GISSTEMPzonalMeans.parse(result, '64N-90N')
-			}
+			return parsers.GISSTEMPzonalMeans.parse(result, '64N-90N')
 		},
 		'nhem': function(result){
-			return {
-				'nhem': parsers.GISSTEMPzonalMeans.parse(result, 'NHem')}
+			return parsers.GISSTEMPzonalMeans.parse(result, 'NHem')
 		},
 		'glob': function(result){ 
-			return {
-				'glob': parsers.GISSTEMPzonalMeans.parse(result, 'Glob')
-			} 
+			return parsers.GISSTEMPzonalMeans.parse(result, 'Glob')
 		}
 	},
 	AbiskoCsv: {
@@ -327,178 +328,213 @@ var parsers = {
 			return parsers.Growth(parsers.AbiskoCsv.pre(result));
 		},
 	},
-	AbiskoIceData: function (result) {
-		result = result[0]
-		var fields = result.meta.fields;
-		var data = result.data;
-		// console.log(data)
-		var iceData = [];
-		data.forEach((row) => {
-			function isLeapYear(year) {
-				return year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0);
-			}
-			// console.log(row)
-			var winterYear = +row[fields[0]] || undefined;
-			var springYear = +row[fields[1]] || undefined;
-			var freezeDate = help.parseDate(row[fields[2]]);
-			var freezeWeek = freezeDate.year > 0 ? help.weekNumber(help.createDate(freezeDate)) : null;
-			var freezeDOY = freezeDate.year > 0 ? help.dayOfYear(help.createDate(freezeDate)) : null
-			var breakupDate = help.parseDate(row[fields[3]]);
-			var breakupWeek = breakupDate.year > 0 ? help.weekNumber(help.createDate(breakupDate)) : null;
-			var breakupDOY = breakupDate.year > 0 ? help.dayOfYear(help.createDate(breakupDate)) : null
-			var iceTime = help.validNumber(row[fields[4]]) || null;
+	AbiskoIceData: {
+		pre: function (result) {
+			result = result[0]
+			var fields = result.meta.fields;
+			var data = result.data;
+			// console.log(data)
+			var iceData = [];
+			data.forEach((row) => {
+				function isLeapYear(year) {
+					return year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0);
+				}
+				// console.log(row)
+				var winterYear = +row[fields[0]] || undefined;
+				var springYear = +row[fields[1]] || undefined;
+				var freezeDate = help.parseDate(row[fields[2]]);
+				var freezeWeek = freezeDate.year > 0 ? help.weekNumber(help.createDate(freezeDate)) : null;
+				var freezeDOY = freezeDate.year > 0 ? help.dayOfYear(help.createDate(freezeDate)) : null
+				var breakupDate = help.parseDate(row[fields[3]]);
+				var breakupWeek = breakupDate.year > 0 ? help.weekNumber(help.createDate(breakupDate)) : null;
+				var breakupDOY = breakupDate.year > 0 ? help.dayOfYear(help.createDate(breakupDate)) : null
+				var iceTime = help.validNumber(row[fields[4]]) || null;
 
-			var yearDays = (isLeapYear(freezeDate.year) ? 366 : 365);
-			if (springYear) {
-				iceData[springYear] = {
-					breakupDate: breakupDate.year > 0 ? help.createDate(breakupDate) : null,
-					breakupDOY: breakupDOY,
-					breakupWeek,
-					freezeDate: freezeDate.year > 0 ? help.createDate(freezeDate) : null,
-					freezeDOY: freezeDOY + (freezeDOY < breakupDOY ? yearDays : 0),
-					// freezeDOY: freezeDOY,
-					// freezeWeek: freezeWeek + (freezeWeek < breakupWeek ? 52 : 0),
-					freezeWeek: freezeWeek,
-					iceTime,
-				};
-			}
-		});
+				var yearDays = (isLeapYear(freezeDate.year) ? 366 : 365);
+				if (springYear) {
+					iceData[springYear] = {
+						breakupDate: breakupDate.year > 0 ? help.createDate(breakupDate) : null,
+						breakupDOY: breakupDOY,
+						breakupWeek,
+						freezeDate: freezeDate.year > 0 ? help.createDate(freezeDate) : null,
+						freezeDOY: freezeDOY + (freezeDOY < breakupDOY ? yearDays : 0),
+						// freezeDOY: freezeDOY,
+						// freezeWeek: freezeWeek + (freezeWeek < breakupWeek ? 52 : 0),
+						freezeWeek: freezeWeek,
+						iceTime,
+					};
+				}
+			});
 
-		var yearly = (statistic) => iceData.map((each, year) => ({
-			x: +year,
-			y: each[statistic],
-		})).filter(each => each.y).filter(each => each.x >= 1909);
+			var yearly = (statistic) => iceData.map((each, year) => ({
+				x: +year,
+				y: each[statistic],
+			})).filter(each => each.y).filter(each => each.x >= 1909);
 
-		var dateFormat = date => (date.getFullYear() + ' ' + help.monthName(help.monthByIndex(date.getMonth())) + ' ' + date.getDate());
+			var dateFormat = date => (date.getFullYear() + ' ' + help.monthName(help.monthByIndex(date.getMonth())) + ' ' + date.getDate());
 
-		var breakupDOY = struct.create(iceData.map((each, year) => ({
-			x: +year,
-			y: each.breakupDOY,
-			name: each.breakupDate ? dateFormat(each.breakupDate) : null,
-			week: each.breakupDate ? help.weekNumber(each.breakupDate) : null,
-			date: each.breakupDate,
-		})).filter(each => each.y).filter(each => each.x >= 1909).filter(each => each.name != null)).build();
+			var breakupDOY = struct.create(iceData.map((each, year) => ({
+				x: +year,
+				y: each.breakupDOY,
+				name: each.breakupDate ? dateFormat(each.breakupDate) : null,
+				week: each.breakupDate ? help.weekNumber(each.breakupDate) : null,
+				date: each.breakupDate,
+			})).filter(each => each.y).filter(each => each.x >= 1909).filter(each => each.name != null)).build();
 
-		var freezeDOY = struct.create(iceData.map((each, year) => ({
-			x: +year,
-			y: each.freezeDOY,
-			name: each.freezeDate ? dateFormat(each.freezeDate) : null,
-			week: each.freezeDate ? help.weekNumber(each.freezeDate) : null,
-			date: each.freezeDate,
-		})).filter(each => each.y).filter(each => each.x >= 1909).filter(each => each.name != null)).build();
-		var breakup = {
-			week: breakupDOY.map(each => ({
-				x: each.x,
-				y: each.date, 
-				name: each.name,
-			})),
-			date: breakupDOY.map(each => ({
-				x: each.x,
-				y: each.date,
-				name: each.name,
-			}))
-		}
-
-
-		var freeze = {
-			week: freezeDOY.map(each => {
-				var weekNo = help.weekNumber(help.dateFromDayOfYear(each.x, each.y));
-				return {
+			var freezeDOY = struct.create(iceData.map((each, year) => ({
+				x: +year,
+				y: each.freezeDOY,
+				name: each.freezeDate ? dateFormat(each.freezeDate) : null,
+				week: each.freezeDate ? help.weekNumber(each.freezeDate) : null,
+				date: each.freezeDate,
+			})).filter(each => each.y).filter(each => each.x >= 1909).filter(each => each.name != null)).build();
+			var breakup = {
+				week: breakupDOY.map(each => ({
 					x: each.x,
-					y: weekNo + (weekNo < 10 ? 52 : 0),
+					y: each.date, 
 					name: each.name,
-				}
-			}),
-			date: freezeDOY.map(each => ({
-				x: each.x,
-				y: each.date, 
-				name: each.name,
+				})),
+				date: breakupDOY.map(each => ({
+					x: each.x,
+					y: each.date,
+					name: each.name,
+				}))
+			}
+
+
+			var freeze = {
+				week: freezeDOY.map(each => {
+					var weekNo = help.weekNumber(help.dateFromDayOfYear(each.x, each.y));
+					return {
+						x: each.x,
+						y: weekNo + (weekNo < 10 ? 52 : 0),
+						name: each.name,
+					}
+				}),
+				date: freezeDOY.map(each => ({
+					x: each.x,
+					y: each.date, 
+					name: each.name,
+				}))
+			}
+			var calculateMovingAverages = (values) => movingAverages(values.map(v => v.y), 10).map((avg, i) => ({
+				x: values[i].x, 
+				y: avg,
 			}))
-		}
-		var calculateMovingAverages = (values) => movingAverages(values.map(v => v.y), 10).map((avg, i) => ({
-			x: values[i].x, 
-			y: avg,
-		}))
 
 
-		var iceTime = struct.create(yearly('iceTime')).build();
+			var iceTime = struct.create(yearly('iceTime')).build();
 
-		// equal weighted confidence interval
-		// var equal_weight = help.confidenceInterval_EQ_ND(iceTime, 10)	
+			// equal weighted confidence interval
+			// var equal_weight = help.confidenceInterval_EQ_ND(iceTime, 10)	
 
-		// var iceTimeMovAvgVar = equal_weight.movAvgVar;
-		// var iceTimeCIMovAvg = equal_weight.ciMovAvg;
-		// var iceTimeLinear = help.linearRegression(iceTime.map(w => w.x), iceTime.map(w => w.y));
-		// var iceTimeMovAvgLinear = help.linearRegression(iceTimeMovAvg.map(w => w.x), iceTimeMovAvg.map(w => w.y));
+			// var iceTimeMovAvgVar = equal_weight.movAvgVar;
+			// var iceTimeCIMovAvg = equal_weight.ciMovAvg;
+			// var iceTimeLinear = help.linearRegression(iceTime.map(w => w.x), iceTime.map(w => w.y));
+			// var iceTimeMovAvgLinear = help.linearRegression(iceTimeMovAvg.map(w => w.x), iceTimeMovAvg.map(w => w.y));
 
-		var yearMax = iceData.length - 1;
-		// console.log(data);
-		// console.log(breakup);
+			var yearMax = iceData.length - 1;
+			// console.log(data);
+			// console.log(breakup);
 
-		return {
-			yearMax: new Promise((res,rej)=>{
-				res(yearMax)
-			}),
-			breakup: new Promise((res,rej)=>{
-				res(breakup)
-			}),
-			freeze: new Promise((res,rej)=>{
-				res(freeze)
-			}),
-			DOY: new Promise((res,rej)=>{
-				res({
-					breakup: breakupDOY,
-					freeze: freezeDOY,
-				})
-			}),
-			iceTime: new Promise((res,rej)=>{
-				res(iceTime)
-			}),
-		}
-	},
-	AbiskoLakeThickness: function(result){
-		return new Promise(function(resolve, reject){
-			var data = result[0].data;
-			var rawData = new Array();
-			data.forEach(each => {
-				var res = {
-					y: Number(each['Hela istäcket']),
-					x: each['Datum']
-				}
-				rawData.push(res)
-			})
-			data = rawData.map(each => {
-				var temp = {
-					'total': each
-				}
-				return temp;
-			})
-			parseByDate(data).then(res => {
-				var yrly = res.yrlySplit;
-				// console.log(yrly)
-				var dateSelect = function(date){
-					var close = new Array();
-					yrly.total.values.forEach(each => {
-						var res = each.closest(date);
-						var resDate = new Date(res.data.x);
-						var xYear = resDate.getFullYear();
-						if(help.isFirstHalfYear(resDate.getMonth()+1)){
-							xYear = xYear - 1;
-						}
-						close.push({ 
-							x: xYear, 
-							y: res.data.y,
-							date: res.data.x
-						})
+			return {
+				yearMax: new Promise((res,rej)=>{
+					res(yearMax)
+				}),
+				breakup: new Promise((res,rej)=>{
+					res(breakup)
+				}),
+				freeze: new Promise((res,rej)=>{
+					res(freeze)
+				}),
+				DOY: new Promise((res,rej)=>{
+					res({
+						breakup: breakupDOY,
+						freeze: freezeDOY,
 					})
-					return struct.create(close).build(); 
-				}
-				resolve({'yrly': yrly, 'date': dateSelect })
-			})
-		})
+				}),
+				iceTime: new Promise((res,rej)=>{
+					res(iceTime)
+				}),
+			}
+		},
+		yearMax: function(blocks){
+			return parsers.AbiskoIceData.pre(blocks)['yearMax']
+		},
+		breakup: function(blocks){
+			return parsers.AbiskoIceData.pre(blocks)['breakup']
+		},
+		freeze: function(blocks){
+			return parsers.AbiskoIceData.pre(blocks)['freeze']
+		},
+		DOY: function(blocks){
+			return parsers.AbiskoIceData.pre(blocks)['DOY']
+		},
+		iceTime: function(blocks){
+			return parsers.AbiskoIceData.pre(blocks)['iceTime']
+		},
 	},
-	AbiskoSnowData: function (result) {
-		return new Promise(function(resolve, reject){
+	AbiskoLakeThickness: {
+		cache: undefined,
+		pre: function(result){
+			parsers.AbiskoLakeThickness.cache = new Promise(function(resolve, reject){
+				var data = result[0].data;
+				var rawData = new Array();
+				data.forEach(each => {
+					var res = {
+						y: Number(each['Hela istäcket']),
+						x: each['Datum']
+					}
+					rawData.push(res)
+				})
+				data = rawData.map(each => {
+					var temp = {
+						'total': each
+					}
+					return temp;
+				})
+				parseByDate(data).then(res => {
+					var yrly = res.yrlySplit;
+					// console.log(yrly)
+					resolve(yrly)
+				})
+			})
+			return parsers.AbiskoLakeThickness.cache;
+		},
+		yrly: function(blocks){
+			return parsers.AbiskoLakeThickness.pre(blocks)
+		},
+		date: function(blocks){
+			return new Promise((res,rej) => {
+
+				parsers.AbiskoLakeThickness.pre(blocks).then(yrly => {
+
+					var dateSelect = function(date){
+						var close = new Array();
+						yrly.total.values.forEach(each => {
+							var res = each.closest(date);
+							var resDate = new Date(res.data.x);
+							var xYear = resDate.getFullYear();
+							if(help.isFirstHalfYear(resDate.getMonth()+1)){
+								xYear = xYear - 1;
+							}
+							close.push({ 
+								x: xYear, 
+								y: res.data.y,
+								date: res.data.x
+							})
+						})
+						return struct.create(close).build(); 
+					}
+					res(dateSelect)
+				})
+			})
+		}
+	},
+	AbiskoSnowData: {
+		cache: undefined,
+		pre: function (result) {
+
 			result = result[0];
 			var data = result.data;
 			var fields = result.meta.fields;
@@ -557,10 +593,10 @@ var parsers = {
 			var calculateMeans = (periods) => {
 				return new Promise((res,rej) => {
 
-					var periodMeans = {};
+					var set = {};
 					periods.forEach((period) => {
 						var key = period.start === -Infinity ? 'allTime' : period.start.toString();
-						var means = periodMeans[key] = {
+						var means = set[key] = {
 							period,
 							means: [],
 						};
@@ -584,19 +620,27 @@ var parsers = {
 							means.means[i] = m ? m.sum / m.count : NaN;
 						}
 					});
-					res(periodMeans)
+					res(set)
 				})
 			};
 
 			var periodMeans = calculateMeans(periods);
 			var decadeMeans = calculateMeans(decades);
-			AbiskoSnowCached = {periodMeans, decadeMeans,}
-			resolve({
+			return {
 				periodMeans,
 				decadeMeans,
 				snowDepth: all
-			})
-		})
+			}
+		},
+		periodMeans: function(blocks){
+			return parsers.AbiskoSnowData.pre(blocks)['periodMeans']
+		},
+		decadeMeans: function(blocks){
+			return parsers.AbiskoSnowData.pre(blocks)['decadeMeans']
+		},
+		snowDepth: function(blocks){
+			return parsers.AbiskoSnowData.pre(blocks)['snowDepth']
+		}
 	},
 	smhiTemp: {
 		pre: function(result){
