@@ -40,6 +40,7 @@ var tagApply = function(data, tags){
 			}
 		}
 	}).catch(error=>{
+		console.log(tags)
 		console.log(data)
 		throw error
 	})
@@ -151,24 +152,29 @@ var struct = {
 			console.log(this.cached)
 			this.cached[tag[0]] = this.parseRawData(tag);
 		}
-		// console.log(this.cached)
-		// console.log(tag)
-		this.cached[tag[0]].then(function(data){
-			if(tag){
-				data = tagApply(data, [...tag]);
-			}
-			console.log(data)
-			try{
+		console.log(this.cached)
+		console.log(tag)
+		// this.cached[tag[0]].then(function(data){
+		if(tag){
+			data = tagApply(this.cached, [...tag]);
+		}
+		console.log(data)
+		try{
+			if(data.then){
 				data.then(d => {
 					render.initiate(id, d)
 				})
-			}catch(error){
-				console.log(id);
-				console.log(data);
-				console.log(error);
-				throw error;
+			}else{
+
+				render.initiate(id, data)
 			}
-		})
+		}catch(error){
+			console.log(id);
+			console.log(data);
+			console.log(error);
+			throw error;
+		}
+		// })
 		this.render = render;
 		return this;
 	},
