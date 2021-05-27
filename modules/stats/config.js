@@ -31,33 +31,55 @@ var parsers = {
 		})
 	},
 	Growth:  function (blocks){
-		return new Promise(function(resolve, reject){
-			var result = {}
-			var temperatures = parseByDate(blocks.temperatures);
-			temperatures.then(temp => {
-				result.weeks = new Promise((res,rej) => {
-					temp.weeks.then(weeks => {
-						res(struct.create(weeks.avg.values.map(each => each.sequence())).build())
+		return {
+			request: function(key){
+				var temperature = this.temp;
+				return new Promise((res,rej) => {
+					temperature.then(temp => {
+						switch(key){
+							case 'last':
+								temp.yrlySplit.then(split => {
+									res(split.min.last())
+								})
+								break;
+							case 'first':
+								temp.yrlySplit.then(split => {
+									res(split.min.first())
+								})
+								break;
+							case 'days':
+								temp.yrly.then(yrly => {
+									res(struct.create(Object.keys(yrly.avg.values).map(year =>  yrly.avg.values[year].sequence())).build())
+								})
+								break;
+							case 'weeks':
+								temp.weeks.then(weeks => {
+									res(struct.create(weeks.avg.values.map(each => each.sequence())).build())
+								})
+								break;
+							case 'default':
+								rej('wrong keys')
+								break;
+
+						}		
+
 					})
 				})
-				result.days = new Promise((res,rej) => {
-					temp.yrly.then(yrly => {
-						res(struct.create(Object.keys(yrly.avg.values).map(year =>  yrly.avg.values[year].sequence())).build())
-					})
-				})
-				result.first = new Promise((res,rej) => {
-					temp.yrlySplit.then(split => {
-						res(split.min.first())
-					})
-				})
-				result.last= new Promise((res,rej) => {
-					temp.yrlySplit.then(split => {
-						res(split.min.last())
-					})
-				})
-				resolve(result)
-			})
-		})
+			},
+			temp: parseByDate(blocks.temperatures),
+			get last() {
+				return this.request('last')
+			},
+			get first() {
+				return this.request('first')
+			},
+			get days() {
+				return this.request('days')
+			},
+			get weeks() {
+				return this.request('weeks')
+			},
+		}
 	},
 	CALM: {
 		perma: function(result, src=''){
@@ -506,9 +528,7 @@ var parsers = {
 		},
 		date: function(blocks){
 			return new Promise((res,rej) => {
-
 				parsers.AbiskoLakeThickness.pre(blocks).then(yrly => {
-
 					var dateSelect = function(date){
 						var close = new Array();
 						yrly.total.values.forEach(each => {

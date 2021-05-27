@@ -149,16 +149,16 @@ var struct = {
 		}
 		if(!this.cached[tag[0]]){
 			console.log("re-run")
-			console.log(this.cached)
+			// console.log(this.cached)
 			this.cached[tag[0]] = this.parseRawData(tag);
 		}
-		console.log(this.cached)
-		console.log(tag)
+		// console.log(this.cached)
+		// console.log(tag)
 		// this.cached[tag[0]].then(function(data){
 		if(tag){
 			data = tagApply(this.cached, [...tag]);
 		}
-		console.log(data)
+		// console.log(data)
 		try{
 			if(data.then){
 				data.then(d => {
