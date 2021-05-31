@@ -14,6 +14,7 @@
 		"temperatureDifference",
 		"temperature_64n90n",
 		"temperature_nhem",
+		"unscaled_temperature_nhem",
 		"temperature_glob",
 		"annualPrecipitation",
 		"winterPrecipitation",

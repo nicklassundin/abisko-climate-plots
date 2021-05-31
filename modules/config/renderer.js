@@ -217,7 +217,8 @@ var chart = {
 				// showTable: true, // TODO DATA TABLE
 				// printMaxWidth: 1200,
 				sourceWidth: 900,
-				// sourceHeight: 800,
+				// sourceWidth: 700*1.2,
+				// sourceHeight: 350*1.2,
 				scale: 8,
 				// allowHTML: true,
 				buttons: {
