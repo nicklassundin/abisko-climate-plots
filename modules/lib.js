@@ -29,7 +29,7 @@ exports.stats = require('./stats/config.js')
 
 
 lib = {
-	renderChart: function(div, type, id="abisko", url){
+	renderChart: function(div, type, id="abisko", url=window.location.origin){
 		if(hostUrl){
 			if(url){
 				// console.log("Hosting from: ")
