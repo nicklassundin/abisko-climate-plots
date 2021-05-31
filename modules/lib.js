@@ -63,7 +63,7 @@ lib = {
 	renderSets: function(div, 
 		set=(new URL(window.location.href).searchParams.get("set")), 
 		id=(new URL(window.location.href).searchParams.get("station")), 
-		url){
+		url=window.location.origin){
 		// console.log("Input url")
 		// console.log(url)
 		if(url){
