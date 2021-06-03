@@ -1,5 +1,5 @@
 
-const preset = require('./parse.config.json');
+// const preset = require('./parse.config.json');
 var before = {
 	smhi:  function(result){ 
 		result = result.split('\n') 
@@ -16,7 +16,7 @@ var before = {
 		global.stationName = 'Abisko'; 
 	}
 }
-exports.preset = function(id){
+exports.preset = function(meta){
 	var res = preset[id];
 	if(res.preset.beforeFirstChunk){
 		var be = res.preset.beforeFirstChunk;

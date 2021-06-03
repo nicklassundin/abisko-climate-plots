@@ -4,29 +4,28 @@ var months = help.months;
 
 var createDiv = require('./struct.js').createDiv;
 
-const preset = require('./help.js');
-const pres = preset.preset;
+// const preset = require('./help.js');
+// const pres = preset.preset;
 var datastr = require('../dataset/struct.js').struct;
 
 
-var merged = require('../../../static/modules.config.charts.merge.json');
+// var merged = require('../../../static/modules.config.charts.merge.json');
 var rendF = {
 	container: {},
-	configs: merged, 
-	build: function(id){
-		var type = rendF.configs[id].type.replace('[stationType]',stationType);
+	build: function(config){
+		var ref = config.files.ref;
+		var id = ref.id
+		var type = ref.type.replace('[stationType]',stationType);
 		if(!rendF.container[type]){
-			rendF.container[type] = datastr.create(pres(type))	
+			rendF.container[type] = datastr.create(id, config)	
 		}
 		res = {
 			type: type,
-			config: rendF.configs[id],
+			config: config, 
 			func: function(reset=false){
-				var meta = {}
-				meta[id] = rendF.configs[id].config.meta;
-				if(meta[id][type]) meta[id] = meta[id][type]
-				rendF.container[this.type].contFunc(reset, meta);
-				rendF.container[this.type].init(this.config.id, this.config.tag.data);
+				var id = config.files.ref.id;
+				rendF.container[this.type].contFunc(reset, id, config);
+				rendF.container[this.type].init(id);
 			},
 			html: function(doc){
 				if(this.config.months){
@@ -43,7 +42,7 @@ var rendF = {
 
 					}
 				}else{
-					return createDiv(this.config.id, false)
+					return createDiv(this.config.files.ref.id, false)
 				}	
 				return div
 			}
@@ -52,4 +51,3 @@ var rendF = {
 	}
 }
 exports.rendF = rendF;
-exports.ids = Object.keys(merged);

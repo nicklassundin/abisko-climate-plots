@@ -27,9 +27,11 @@ var sets = require('../static/preset.json');
 // var sets = require('../config/preset.js').preset;
 exports.stats = require('./stats/config.js')
 
+var meta = require('./config/metaMngr.js').meta
 
 lib = {
 	renderChart: function(div, type, id="abisko", url=window.location.origin){
+		var config = meta.getMeta(id, type);
 		if(hostUrl){
 			if(url){
 				// console.log("Hosting from: ")
@@ -53,11 +55,14 @@ lib = {
 				charts = require('./config/charts/config.js');
 			}
 		}
-		$(function(){
-			var chrt = charts.rendF.build(type)
-			div.appendChild(chrt.html());
-			chrt.func();
-			return div;
+		config.then(cfg =>{
+			$(function(){
+				// console.log(cfg)
+				var chrt = charts.rendF.build(cfg)
+				div.appendChild(chrt.html());
+				chrt.func();
+				return div;
+			})
 		})
 	},
 	renderSets: function(div, 
@@ -74,7 +79,7 @@ lib = {
 			hostUrl = window.location.origin
 		} 
 		// console.log(hostUrl)
-		
+
 		variables.debug = (new URL(window.location.href).searchParams.get("debug") == "true" ? true : false)
 		if(variables.debug) {
 			var debug = document.createElement("div");

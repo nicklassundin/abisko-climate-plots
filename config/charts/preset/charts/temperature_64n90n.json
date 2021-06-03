@@ -1,0 +1,19 @@
+{
+	"id": "temperature_64n90n",
+	"type": "zonal",
+	"tag": {
+		"render": "64n-90n",
+		"data": "64n-90n"
+	},
+	"config": {
+		"meta": {
+			"64n-90n": {
+				"config": "temperature",
+				"lang": "64n-90n_Temperature",
+				"data": "NASA-GISS_TEMP",
+				"set": "climate"
+			}
+		}
+	},
+	"months": false
+}

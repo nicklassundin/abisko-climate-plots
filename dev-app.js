@@ -26,7 +26,7 @@ app.use('/data/abisko', express.static(__dirname + '/data/abisko'));
 app.use('/client', express.static(__dirname + '/client'));
 app.use('/tmp', express.static(__dirname + '/tmp'));
 app.use('/maps', express.static(__dirname + '/maps'));
-
+app.use('/static', express.static(__dirname + '/static'));
 
 // SMHI DB connection
 const TYPE = 'corrected-archive';
@@ -82,7 +82,7 @@ hbs.registerPartials(__dirname + '/views/partials', function (err) {
 				}
 			})
 		})	
-		app.get('/static', (req, res) => {
+		app.get('/github', (req, res) => {
 			res.render('browse-release.hbs', {
 				chrts,
 				stations,
@@ -107,23 +107,36 @@ hbs.registerPartials(__dirname + '/views/partials', function (err) {
 var fileWrite = function(json, file){
 	fs.exists(file, function (exists) {
 		if(exists){
-			fs.writeFile(file, JSON.stringify(json), (ERROR) => {
+			fs.writeFile(file, JSON.stringify(json,null,2), (ERROR) => {
 				if(ERROR) throw ERROR
 			})
 		}else{
-			fs.writeFile(file, JSON.stringify(json), {flag: 'wx'}, function (err,data) {})
+			fs.writeFile(file, JSON.stringify(json,null,2), {flag: 'wx'}, function (err,data) {})
 		}
 	})
 }
-const merger = require('./modules/config/charts/merge.js').preset;
-merger.then((json) => {
-	fileWrite(json, __dirname+'/static/modules.config.charts.merge.json')
+// const merger = require('./modules/config/charts/merge.js').preset;
+// merger.then((json) => {
+	// fileWrite(json, __dirname+'/static/modules.config.charts.merge.json')
+// })
+// TODO new
+const merge = require('./config/charts/preset/merge.js').preset;
+merge.then((json) => {
+	json.forEach(entry => {
+		Object.keys(entry).forEach(station => {
+			var dir = __dirname+'/static/charts/'+station;
+			if(!fs.existsSync(dir)) fs.mkdirSync(dir);
+			Object.keys(entry[station]).forEach(key => {
+					fileWrite(entry[station][key], __dirname+'/static/charts/'+station+'/'+key+'.json')
+			})
+		})
+	})
 })
 var R = require('r-script');
 
 
 require("require.async")(require);
-var sets = require('./modules/config/charts/parse.config.json')
+// var sets = require('./modules/config/charts/parse.config.json')
 const parsers = require('./modules/stats/config.js').parsers;
 var rparse = R('./modules/stats/rscript/parser.r');
 const Papa = require('papaparse')
@@ -133,64 +146,63 @@ var async = require("async");
 
 var save = {};
 
-var vischange = {};
-vischange = sets['abisko'];
-vischange.station = 'abisko';
+// var vischange = {};
+// vischange = sets['abisko'];
+// vischange.station = 'abisko';
 // vischange.preset.beforeFirstChunk = before(vischange.preset.beforeFirstChunk);
-vischange.fields = {
-	date: 'Time',
-	precip: 'Precipitation',
-}
-vischange.preset.worker = true;
-vischange.preset.download = false;
+// vischange.fields = {
+// 	date: 'Time',
+// 	precip: 'Precipitation',
+// }
+// vischange.preset.worker = true;
+// vischange.preset.download = false;
 
-app.get('/parser/rscript', (req, res) => {
-	req.vischange = vischange;
-	if(!save[req.vischange.station]){
-		var temp = {};
-		req.vischange.file.forEach(name => {
-			temp[name] = new Promise((result, reject) => {
-				var path = './data/'+req.vischange.station+'/'+name;
-				const file = fs.createReadStream(path);
-				// req.vischange.preset.step = function(d){
-				// return d	
-				// }
-				req.vischange.preset.complete = function(d, f){
-					result(d)
-				};
-				Papa.parse(file,req.vischange.preset)
-			}).catch(function(error){
-				console.log("FAIL TO LOAD DATA")
-				console.log(error)
-			})
-		});
-		Promise.all(Object.values(temp)).then(async function(data){
-			res.json(data)
+// app.get('/parser/rscript', (req, res) => {
+// 	req.vischange = vischange;
+// 	if(!save[req.vischange.station]){
+// 		var temp = {};
+// 		req.vischange.file.forEach(name => {
+// 			temp[name] = new Promise((result, reject) => {
+// 				var path = './data/'+req.vischange.station+'/'+name;
+// 				const file = fs.createReadStream(path);
+// 				// req.vischange.preset.step = function(d){
+// 				// return d	
+// 				// }
+// 				req.vischange.preset.complete = function(d, f){
+// 					result(d)
+// 				};
+// 				Papa.parse(file,req.vischange.preset)
+// 			}).catch(function(error){
+// 				console.log("FAIL TO LOAD DATA")
+// 				console.log(error)
+// 			})
+// 		});
+// 		Promise.all(Object.values(temp)).then(async function(data){
+// 			res.json(data)
 
-			// save[req.vischange.station] = parsers[req.vischange.parser](data);
-			// save[req.vischange.station].then(data => {
-			// res.json(data)
-			// })
-		})
-	}else{
-		res.json(save[req.vischange.station]);	
-	}
-})
-var python = require('python').shell;
+// 			// save[req.vischange.station] = parsers[req.vischange.parser](data);
+// 			// save[req.vischange.station].then(data => {
+// 			// res.json(data)
+// 			// })
+// 		})
+// 	}else{
+// 		res.json(save[req.vischange.station]);	
+	// }
+// })
+// var python = require('python').shell;
 exports.app = app;
 
-
-app.post('/receive', (req, res) => {
-	console.log(Object.keys(req.body))
-	console.log(Object.keys(req.body.data))
-	var data = req.body.data;
-	// console.log(req.body)
-	// var data = JSON.parse(req.body);
-	// console.log(data)
-	fs.writeFile('./temp/test.js', data, err => {
-		if (err) {
-			console.error(err)
-			return
-		}
-	})
-})
+// app.post('/receive', (req, res) => {
+// 	console.log(Object.keys(req.body))
+// 	console.log(Object.keys(req.body.data))
+// 	var data = req.body.data;
+// 	// console.log(req.body)
+// 	// var data = JSON.parse(req.body);
+// 	// console.log(data)
+// 	fs.writeFile('./temp/test.js', data, err => {
+// 		if (err) {
+// 			console.error(err)
+// 			return
+// 		}
+// 	})
+// })

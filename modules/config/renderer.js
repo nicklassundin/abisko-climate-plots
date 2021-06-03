@@ -29,98 +29,6 @@ const language = {
 //
 
 var chart = {
-	metaTable: function(id, json, i=0){
-		Object.keys(json).forEach(index => {
-			var key = Object.keys(this.metaRef)[index];
-			if(typeof(this.metaRef[key]) == 'string'){
-				$('#'+id).append('<div id="'+id+'_cont"></div>');
-				$('#'+id+'_cont').append('<div id="'+id+'_button_'+key+'" class="mini_button">- '+key+'</div><br/>')
-				$('#'+id+'_cont').append('<div id="'+id+'_box_'+key+'" class="box"></div>');
-				$('#'+id+'_box_'+key).append('<textarea id="'+id+'_box'+key+'_textarea" class="json" cols="80">'+JSON.stringify(json[index], undefined, 4)+'</textarea>')
-				$('#'+id+'_box_'+key).append('<br/>')
-				$("#"+id+'_button_'+key).click(function(){
-					$("#"+id+"_box_"+key).slideToggle();
-				});
-			}
-		})
-	},
-	getMeta: function(define){
-		try{
-			var json = function(url){
-				return new Promise(function(resolve, reject){
-					$.getJSON(hostUrl+'/config/charts/'+url+'.json', function(result){
-						resolve(result);	
-					});
-				})
-			}
-			var files = {};
-			var textMorph = this.textMorph;
-			files.config = json(define.config);
-			files.dataSource = json('lang/'+nav_lang+'/dataSource').then(data => {
-				return { meta: data[define.data] }
-			})
-			if(define.subset) files.subset = json(define.subset);
-			files.set = json(define.set);
-			files.units = json('lang/'+nav_lang+'/units').then(units => {
-				return { units: units }
-			})
-			files.time = json('lang/'+nav_lang+'/time');
-			files.lang = json('lang/'+nav_lang+'/'+define.lang);
-			return Promise.all(Object.values(files)).then(function(mF){
-				return {
-					files: mF,
-					aggr: mF.reduce((x, y) => $.extend(true, x, y)),
-					text: function(){
-						var iter = function(obj, meta=obj){
-							var res = {};
-							Object.keys(obj).forEach(key => {
-								if(typeof(obj[key]) == 'object'){
-									res[key] = iter(obj[key], meta)
-								}else if(typeof(obj[key]) == 'string'){
-									res[key] = textMorph(obj[key], meta) 
-								}else{
-									res[key] = obj[key];
-								}
-							})
-							return res;
-						}
-						return iter(this.aggr)
-					} 
-				}
-			})
-		}catch(ERROR){
-			console.log(files)
-			console.log(define)	
-			throw ERROR
-		}
-	},
-	textMorph: function(res, meta=this.meta){
-		if(res){
-			try{
-				// TODO order of month replace for subsets
-				var res = res.replace("[stationName]", stationName)
-
-				var set = (meta.subset ? meta.subset.enabled : false) ? meta.months[meta.subset.set] : undefined;
-				res = (meta.subset ? meta.subset.enabled : false) ? res.replace("[month]", set) : res.replace("[month]", meta.month)
-				res = res.replace("[baseline]", baselineLower +" - "+ baselineUpper)
-				res = res.replace("[CO2]", 'CO'+("2".sub()))
-				res = res.replace("[SOME TEXT]", "")
-				if(meta.unitType && meta.units){
-					var res = res.replace("[unit]", meta.units[meta.unitType].singular).replace("[units]", meta.units[meta.unitType].plural).replace("[interval]", meta.units[meta.unitType].interval);
-				}
-			}catch(error){
-				console.log(this.id)
-				console.log(text)
-				console.log(meta)
-				console.log(error)
-				throw error;
-			}
-		}else{
-			res = "";
-		}
-		return res
-		// return res
-	},
 	id: undefined,
 	initiated: false,
 	chart: undefined,
@@ -128,7 +36,11 @@ var chart = {
 	metaFiles: undefined,
 	meta: undefined,
 	data: undefined,
-	create: function(id, metaRef){
+	create: function(meta){
+		this.metaRef = meta;
+		var metaRef = this.metaRef;
+		var id = metaRef.files.ref.id;
+		this.id = id;
 		try{
 			var result = {
 				sets: undefined,
@@ -145,9 +57,7 @@ var chart = {
 			}
 			var res = this.clone();
 			return new Promise((resolve, reject) => {
-				
-				chart.getMeta(metaRef).then((temp) => {
-					var meta = temp.aggr;
+					var meta = metaRef.aggr;
 					if(meta.subset ? !meta.subset.set : false){
 						meta.subset.sets = Object.keys(meta.subset.sets).map(key => { return meta.subset.sets[key] }).filter(e => typeof e == "string");
 						if(variables.debug){
@@ -165,10 +75,10 @@ var chart = {
 							});
 							tmp.chart.showLoading();
 							tmp.metaRef = metaRef;
-							tmp.metaFiles = temp.files;
-							temp.aggr.subset.set = set;
+							// tmp.metaFiles = temp.files;
+							metaRef.aggr.subset.set = set;
 							var metaTemp = {}; 
-							$.extend(true, metaTemp, temp.text())
+							$.extend(true, metaTemp, metaRef.text())
 							tmp.meta = metaTemp;
 							result[set] = tmp;
 						})
@@ -183,12 +93,13 @@ var chart = {
 						res.chart.showLoading();
 						res.id = id;
 						res.metaRef = metaRef
-						res.metaFiles = temp.files;
-						res.meta = temp.text();
+						res.metaFiles = meta.files;
+						res.meta = {}
+						$.extend(true, res.meta, metaRef.text())
 						res.setup()
 						resolve(res)
 					}
-				})
+					
 			})
 		}catch(error){
 			throw error;
@@ -196,7 +107,7 @@ var chart = {
 	},
 	setup: function(){
 		var id = this.id
-		this.metaTable('debug_table_'+id, this.metaFiles);
+		// this.metaTable('debug_table_'+id, this.metaFiles);
 		var title = this.title(0);
 		var meta = this.meta
 
@@ -216,10 +127,11 @@ var chart = {
 				},
 				// showTable: true, // TODO DATA TABLE
 				// printMaxWidth: 1200,
-				sourceWidth: 900,
-				// sourceWidth: 700*1.2,
-				// sourceHeight: 350*1.2,
+				// sourceWidth: 900,
+				sourceWidth: 700*1.2,
+				sourceHeight: 350*1.2,
 				scale: 8,
+				filename: 'id',
 				// allowHTML: true,
 				buttons: {
 					contextButton: {
@@ -244,7 +156,7 @@ var chart = {
 							onclick: function(){
 								if(nav_lang=='en') nav_lang='sv';
 								else nav_lang='en';
-									console.log(nav_lang)
+								console.log(nav_lang)
 								Highcharts.setOptions({
 									lang: require('../../config/charts/lang/'+nav_lang+'/menu.json') 
 								})	
@@ -322,7 +234,8 @@ var chart = {
 			return title
 		}catch(error){
 			console.log(gID)
-			console.log(this.meta)	
+			console.log(this.meta)
+			console.log(this)
 			throw error
 		}
 	},
@@ -652,9 +565,10 @@ var chart = {
 // TODO merge into main function above
 var render = {
 	charts: {},
-	setup: function(id, meta){
+	setup: function(meta){
+		var id = meta.files.ref.id;
 		try{
-			this.charts[id] = chart.create(id, meta) 
+			this.charts[id] = chart.create(meta) 
 		}catch(error){
 			console.log(id);
 			console.log(meta)
@@ -698,8 +612,8 @@ var render = {
 		}
 		var cont = this;
 		this.charts[id].then(function(result){
-			cont.setup(id, result.metaRef)
-			cont.initiate(id, result.data)
+			cont.setup(result.metaRef)
+			cont.initiate(result.data)
 		})
 	}
 }

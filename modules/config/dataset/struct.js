@@ -55,9 +55,9 @@ var struct = {
 	parser: undefined, 
 	render: renderer, 
 	reader: Papa.parse, // TODO be a module that are self contained
-	metaRef: undefined,
-	contFunc: function(reset=false, meta){
-		this.metaRef = meta;
+	metaRef: {}, 
+	contFunc: function(reset=false, id, config){
+		if(!this.metaRef[id]) this.metaRef[id] = config
 		if(typeof this.rawData !== 'undefined' && this.rawData.length > 0){
 			return this;
 		}	
@@ -135,13 +135,11 @@ var struct = {
 			})
 		})
 	},
-	init: function(id, tag, renderTag=tag){
-		// console.log(this.parser)
+	init: function(id){
+		var tag = this.metaRef[id].files.ref.tag.data
 		var render = this.render;
 		var meta = this.metaRef[id]
-		render.setup(id, meta);
-		// var renderProc = function(data){
-		// }
+		render.setup(meta);
 		if(!Array.isArray(tag)) tag = [tag];
 		if(!this.cached){
 			this.cached = {};
@@ -158,7 +156,6 @@ var struct = {
 		if(tag){
 			data = tagApply(this.cached, [...tag]);
 		}
-		// console.log(data)
 		try{
 			if(data.then){
 				data.then(d => {
@@ -181,14 +178,18 @@ var struct = {
 	clone: function(){
 		return Object.assign({}, this);
 	},
-	create: function(config){ 
-		var file = config.file;
-		var preset = config.preset;
-		var parser = parse[config.parser];
-		var local = config.local;
+	create: function(id, config){
+		console.log()
+		if(!this.metaRef[id]) this.metaRef[id] = config
+		var cfg = config.files.config.parse;
+		var file = cfg.file;
+		var preset = cfg.preset;
+		var parser = parse[cfg.parser];
+		var local = cfg.local;
 
 		var res = this.clone();
-		res.rawData = [];
+		res.metRef = this.metaRef[id];
+		this.rawData = [];
 		if(!Array.isArray(file)){
 			file = [file];
 		}

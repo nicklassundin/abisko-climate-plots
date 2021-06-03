@@ -56,7 +56,7 @@ exports.plotBands = {
 			to: baselineUpper,
 			label: {
 				useHTML: true,
-				text: "<div id="+id+"-plotBands-Label>Baseline</div>",
+				text: "<div id="+id+"-plotBands-Label class=plotband>Baseline</div>",
 			},
 		};
 	},

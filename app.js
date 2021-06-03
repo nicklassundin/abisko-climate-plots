@@ -20,7 +20,7 @@ app.use('/data/abisko', express.static(__dirname + '/data/abisko'));
 app.use('/client', express.static(__dirname + '/client'));
 app.use('/tmp', express.static(__dirname + '/tmp'));
 app.use('/maps', express.static(__dirname + '/maps'));
-
+app.use('/static', express.static(__dirname + '/static'));
 
 // SMHI DB connection
 const TYPE = 'corrected-archive';
