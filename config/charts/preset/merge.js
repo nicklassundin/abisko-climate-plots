@@ -12,6 +12,7 @@ const language = {
 var par = require('./parse.config.json');
 
 exports.preset = new Promise((resolve, reject) => {
+	var struct = {};
 	fs.readdir(normPath, (err, FILES) => {
 		Promise.all(FILES.filter((name) => { return name.includes(".json") && !name.includes('[BETA]') })
 			.map(function(file){
@@ -27,8 +28,17 @@ exports.preset = new Promise((resolve, reject) => {
 						var define = temp.config.meta[station]
 						var files = {};
 						files.ref = temp;
-						files.config = require('../'+define.config+'.json');
-						files.config.parse = par[temp.type]
+						struct[define.config] = require('../'+define.config+'.json');
+						files.config = {};
+						$.extend(true, files.config, struct[define.config]);
+
+						files.config.parse = {};
+						$.extend(true, files.config.parse, par[temp.type])
+						// console.log('-----')
+						// console.log(par[temp.type])	
+						// console.log(temp.type)
+						// console.log(files.config.parse)
+						// console.log('-----')
 						if(define.subset) files.subset = require('../'+define.subset+'.json');
 						files.set = require('../'+define.set+'.json');
 						['en', 'sv'].forEach(lang => {
@@ -43,7 +53,6 @@ exports.preset = new Promise((resolve, reject) => {
 
 						})
 							f[station][file.replace('.json','')] = files 
-								
 					})
 					return f;
 				}catch(ERROR){

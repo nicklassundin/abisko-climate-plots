@@ -1,6 +1,5 @@
 
 const help = require('./../helpers.js');
-const regression = require('regression')
 const parser = require('./struct.js');
 var struct = parser.struct;
 var parseByDate = parser.parseByDate;
@@ -447,17 +446,7 @@ var parsers = {
 
 			var iceTime = struct.create(yearly('iceTime')).build();
 
-			// equal weighted confidence interval
-			// var equal_weight = help.confidenceInterval_EQ_ND(iceTime, 10)	
-
-			// var iceTimeMovAvgVar = equal_weight.movAvgVar;
-			// var iceTimeCIMovAvg = equal_weight.ciMovAvg;
-			// var iceTimeLinear = help.linearRegression(iceTime.map(w => w.x), iceTime.map(w => w.y));
-			// var iceTimeMovAvgLinear = help.linearRegression(iceTimeMovAvg.map(w => w.x), iceTimeMovAvg.map(w => w.y));
-
 			var yearMax = iceData.length - 1;
-			// console.log(data);
-			// console.log(breakup);
 
 			return {
 				yearMax: new Promise((res,rej)=>{
@@ -731,7 +720,6 @@ var parsers = {
 
 }
 
-// preparse['AbiskoCsv'] = parsers['AbiskoCsv'](preload['abisko'])
 
 exports.parsers = parsers;
 

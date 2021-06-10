@@ -39,7 +39,7 @@ var chart = {
 	create: function(meta){
 		this.metaRef = meta;
 		var metaRef = this.metaRef;
-		var id = metaRef.files.ref.id;
+		var id = metaRef.files.stationDef.id;
 		this.id = id;
 		try{
 			var result = {
@@ -57,49 +57,51 @@ var chart = {
 			}
 			var res = this.clone();
 			return new Promise((resolve, reject) => {
-					var meta = metaRef.aggr;
-					if(meta.subset ? !meta.subset.set : false){
-						meta.subset.sets = Object.keys(meta.subset.sets).map(key => { return meta.subset.sets[key] }).filter(e => typeof e == "string");
-						if(variables.debug){
-							meta.subset.sets = [meta.subset.sets[0]];
-						}
-						result.sets = meta.subset.sets;
-						meta.subset.sets.forEach(set => {
-							var tmp = res.clone();
-							tmp.id = id+'_'+set;
-							tmp.chart = Highcharts.chart(tmp.id, {
-								lang: language[nav_lang], 
-								credits: {
-									enabled: false
-								},
-							});
-							tmp.chart.showLoading();
-							tmp.metaRef = metaRef;
-							// tmp.metaFiles = temp.files;
-							metaRef.aggr.subset.set = set;
-							var metaTemp = {}; 
-							$.extend(true, metaTemp, metaRef.text())
-							tmp.meta = metaTemp;
-							result[set] = tmp;
-						})
-						resolve(result)
-					}else{
-						res.chart = Highcharts.chart(id, {
+				var meta = metaRef.aggr();
+				if(meta.subset ? !meta.subset.set : false){
+					meta.subset.sets = Object.keys(meta.subset.sets).map(key => { return meta.subset.sets[key] }).filter(e => typeof e == "string");
+					if(variables.debug){
+						meta.subset.sets = [meta.subset.sets[0]];
+					}
+					result.sets = meta.subset.sets;
+					meta.subset.sets.forEach(set => {
+						var tmp = res.clone();
+						tmp.id = id+'_'+set;
+						tmp.chart = Highcharts.chart(tmp.id, {
 							lang: language[nav_lang], 
 							credits: {
 								enabled: false
 							},
 						});
-						res.chart.showLoading();
-						res.id = id;
-						res.metaRef = metaRef
-						res.metaFiles = meta.files;
-						res.meta = {}
-						$.extend(true, res.meta, metaRef.text())
-						res.setup()
-						resolve(res)
-					}
-					
+						tmp.chart.showLoading();
+						tmp.metaRef = metaRef;
+						// tmp.metaFiles = temp.files;
+						// console.log(metaRef.aggr)
+						// metaRef.aggr().subset.set = set;
+						var metaTemp = {}; 
+						$.extend(true, metaTemp, metaRef.text())
+						metaTemp.subset.set = set	
+						tmp.meta = metaTemp;
+						result[set] = tmp;
+					})
+					resolve(result)
+				}else{
+					res.chart = Highcharts.chart(id, {
+						lang: language[nav_lang], 
+						credits: {
+							enabled: false
+						},
+					});
+					res.chart.showLoading();
+					res.id = id;
+					res.metaRef = metaRef
+					res.metaFiles = meta.files;
+					res.meta = {}
+					$.extend(true, res.meta, metaRef.text())
+					res.setup()
+					resolve(res)
+				}
+
 			})
 		}catch(error){
 			throw error;
@@ -566,22 +568,28 @@ var chart = {
 var render = {
 	charts: {},
 	setup: function(meta){
-		var id = meta.files.ref.id;
+		// console.log(this.charts)
+		// console.log("Setupt Render")
+		var id = meta.files.stationDef.id
 		try{
 			this.charts[id] = chart.create(meta) 
+			// console.log(this.charts[id])
 		}catch(error){
 			console.log(id);
-			console.log(meta)
-			console.log(this.metaRef)
 			throw error
 		}
 	},
 	initiate: function(id, data){
-		this.charts[id].then(function(result){
-			result.initiate(data)
-		})
+		try{
+			this.charts[id].then(function(result){
+				result.initiate(data)
+			})
+		}catch(error){
+			throw error
+		}
 	},
 	updatePlot: function(id, bl, bu, date){
+		if(id.id) id=id.id; // TODO fix why this it gets a div not id
 		try{
 			if(date){
 				date = date.split("-");
@@ -613,7 +621,7 @@ var render = {
 		var cont = this;
 		this.charts[id].then(function(result){
 			cont.setup(result.metaRef)
-			cont.initiate(result.data)
+			cont.initiate(id, result.data)
 		})
 	}
 }

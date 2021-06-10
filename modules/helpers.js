@@ -14,56 +14,12 @@ Date.prototype.getWeekNumber = function(date=this){
 	return Math.ceil((((d - yearStart) / 86400000) + 1)/7)
 };
 
-// (function (w) {
-
-// 	w.URLSearchParams = w.URLSearchParams || function (searchString) {
-// 		var self = this;
-// 		self.searchString = searchString;
-// 		self.get = function (name) {
-// 			var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(self.searchString);
-// 			if (results == null) {
-// 				return null;
-// 			}
-// 			else {
-// 				return decodeURI(results[1]) || 0;
-// 			}
-// 		};
-// 	}
-
-// })(window)
-
 
 {
 
 	exports.isFirstHalfYear = function(month){
 		return month < 7
 	}
-
-
-	// TODO maybe reuse for new baseline better way to do it?!
-	// $('#baseline').submit((e) => {
-	// 	e.preventDefault();
-	// 	var lower = +e.target[0].value;
-	// 	var upper = +e.target[1].value;
-	// 	if (!lower || !upper) {
-	// 		alert('Something went wrong!');
-	// 		return;
-	// 	} else if (lower < 1913) {
-	// 		alert("Lower limit must be above 1913!");
-	// 		return;
-	// 	} else if (lower >= upper) {
-	// 		alert("Lower limit cant be larger or equal to upper limit!");
-	// 		return;
-	// 	} else if (upper > 2017) {
-	// 		alert("Upper limit must be below 2017!");
-	// 		return;
-	// 	}
-	//
-	// 	baselineLower = lower;
-	// 	baselineUpper = upper;
-	// 	parseZonal();
-	// 	parseAbisko();
-	// });
 
 	var useWebWorker = true;
 

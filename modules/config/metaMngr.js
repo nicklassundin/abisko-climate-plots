@@ -1,3 +1,5 @@
+var before = require('./charts/help.js').preset
+// var station = require('../../static/charts/stationIDs.json');
 exports.meta = {
 	// metaTable: function(id, json, i=0){
 	// 	Object.keys(json).forEach(index => {
@@ -14,9 +16,12 @@ exports.meta = {
 			// }
 		// })
 	// },
-	getMeta: function(station, id){
+	getMeta: function(type){
+		var st = type.stationType.config;
+		var id = type.plot;
 		var metaRef = new Promise((res,rej) => {
-			$.getJSON(hostUrl+'/static/charts/'+station+'/'+id+'.json', function(result){
+			$.getJSON(hostUrl+'/static/charts/stationType/'+st+'/'+id+'.json', function(result){
+				result.config.parse = before(result.config.parse)
 				res(result)
 			})
 		}).catch(error => {
@@ -28,12 +33,15 @@ exports.meta = {
 		try{
 			return new Promise((res,rej) => {
 				metaRef.then(files => {
-
+					files.stationDef = type;
 				res({
 					files: files,
 					aggr: function(){
-						var aggr = {};
-						$.extend(true, aggr, files.config, files.set, files[nav_lang])
+						var aggr = {
+							stationDef: files.stationDef
+						};
+						$.extend(true, aggr, files.config, files.set, files[nav_lang], files.subset)
+
 						return aggr;
 					},
 					text: function(){
@@ -65,9 +73,9 @@ exports.meta = {
 		if(res){
 			try{
 				// TODO order of month replace for subsets
-				var res = res.replace("[stationName]", stationName)
+				var res = res.replace("[stationName]", meta.stationDef.stationName)
 
-				var set = (meta.subset ? meta.subset.enabled : false) ? meta.months[meta.subset.set] : undefined;
+				var set = (meta.subset ? meta.subset.enabled : false) ? meta.subset.sets : undefined;
 				res = (meta.subset ? meta.subset.enabled : false) ? res.replace("[month]", set) : res.replace("[month]", meta.month)
 				res = res.replace("[baseline]", baselineLower +" - "+ baselineUpper)
 				res = res.replace("[CO2]", 'CO'+("2".sub()))
@@ -77,9 +85,7 @@ exports.meta = {
 				}
 			}catch(error){
 				console.log(this.id)
-				console.log(text)
 				console.log(meta)
-				console.log(error)
 				throw error;
 			}
 		}else{

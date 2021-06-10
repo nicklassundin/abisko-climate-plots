@@ -15,6 +15,8 @@ var $ = require("jquery");
 
 // Setup
 const app = express();
+// const compression = require('compression')
+// app.use(compression)
 var hbs = require('hbs');
 // Open file access
 app.use('/css', express.static(__dirname + '/css'));
@@ -70,10 +72,31 @@ var charts = (req) => {
 	})
 }
 
+var stati = require('./static/charts/stations.json')
+// hbs.registerHelper('isdefined', (value, station) => {
+// 	return stati[station].includes(value);
+// })
+// var stationIDs = require('./static/charts/stationIds.json');
+
 hbs.registerPartials(__dirname + '/views/partials', function (err) {
 	custom.then(chrts => {
-		stations = ["abisko", "53430", "global"];
-		app.render('browse-release.hbs', {chrts, stations, latestCommit }, (err, str) => {
+		var stations = Object.keys(stati).map(st => {
+			if(st === "smhi"){
+				return "53430";
+			}else{
+				return st
+			}
+		})
+		// var stations = []
+		// Object.keys(stati).forEach(each => {
+			// console.log(each)
+			// console.log(stationIDs.sets[each])
+			// stationIDs.sets[each].forEach(id => {
+				// stations.push(id)
+			// })
+		// });
+		var sets = stati;
+		app.render('browse-release.hbs', {sets, chrts, stations, latestCommit}, (err, str) => {
 			if(err) throw err
 			fs.writeFile('index.html', str, err => {
 				if (err) {
@@ -84,15 +107,15 @@ hbs.registerPartials(__dirname + '/views/partials', function (err) {
 		})	
 		app.get('/github', (req, res) => {
 			res.render('browse-release.hbs', {
+				sets,
 				chrts,
 				stations,
-				latestCommit
+				latestCommit,
 			})
 		})
-
-		stations = ["abisko", "53430", "global"];
 		app.get('/browse', (req, res) => {
 			res.render('browse.hbs', {
+				sets,
 				chrts,
 				stations,
 				latestCommit
@@ -117,20 +140,38 @@ var fileWrite = function(json, file){
 }
 // const merger = require('./modules/config/charts/merge.js').preset;
 // merger.then((json) => {
-	// fileWrite(json, __dirname+'/static/modules.config.charts.merge.json')
+// fileWrite(json, __dirname+'/static/modules.config.charts.merge.json')
 // })
 // TODO new
 const merge = require('./config/charts/preset/merge.js').preset;
 merge.then((json) => {
+	fileWrite(json, __dirname+'/static/charts/merged.json')
+	var stations = {};
 	json.forEach(entry => {
 		Object.keys(entry).forEach(station => {
-			var dir = __dirname+'/static/charts/'+station;
-			if(!fs.existsSync(dir)) fs.mkdirSync(dir);
+			if(!stations[station]) stations[station]= [];
 			Object.keys(entry[station]).forEach(key => {
-					fileWrite(entry[station][key], __dirname+'/static/charts/'+station+'/'+key+'.json')
+				// var type = entry[station][key].ref.type
+				var type = station
+				var dir = __dirname+'/static/charts/stationType/'+type;
+				if(!fs.existsSync(dir)) fs.mkdirSync(dir);
+				// console.log('-----')
+				// console.log(station)
+				// console.log(entry[station][key].config.parse)
+				// console.log('-----')
+				if(entry[station][key].ref.type === 'zonal'){
+					// TODO temporarly special case
+					entry[station][key].ref.tag.data = [station]
+					entry[station][key].ref.tag.render = [station]
+				}
+				
+				fileWrite(entry[station][key], __dirname+'/static/charts/stationType/'+type+'/'+key+'.json')
+
+				stations[station].push(key);
 			})
 		})
 	})
+	fileWrite(stations, __dirname+'/static/charts/stations.json');
 })
 var R = require('r-script');
 
@@ -187,7 +228,7 @@ var save = {};
 // 		})
 // 	}else{
 // 		res.json(save[req.vischange.station]);	
-	// }
+// }
 // })
 // var python = require('python').shell;
 exports.app = app;

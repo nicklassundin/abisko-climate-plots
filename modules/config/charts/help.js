@@ -7,6 +7,7 @@ var before = {
 		var rest = result.splice(0,line);
 		result = result.join('\r\n'); 
 		rest = rest[1].split(';');
+		// TODO repalce
 		global.stationName = rest[0];
 		result.name = rest[0];
 		return result 
@@ -17,12 +18,16 @@ var before = {
 	}
 }
 exports.preset = function(meta){
-	var res = preset[id];
-	if(res.preset.beforeFirstChunk){
-		var be = res.preset.beforeFirstChunk;
-		res.preset.beforeFirstChunk = before[be];
+	try{
+		if(meta.preset.beforeFirstChunk){
+			var be = meta.preset.beforeFirstChunk;
+			meta.preset.beforeFirstChunk = before[be];
+		}
+		return meta;
+	}catch(error){
+		console.log(meta)
+		throw error
 	}
-	return res;
 }
 
 

@@ -8,11 +8,11 @@ global.startYear = constant.startYear;
 global.baselineLower = constant.baselineLower;
 global.baselineUpper = constant.baselineUpper;
 
-global.stationType = "abisko" 
+// global.stationType = "abisko" 
 // TODO example IDs test
 // global.station = 159880;
 // global.station = 188790;
-global.stationName = "";
+// global.stationName = "";
 global.hostUrl = undefined; 
 
 var today = new Date();
@@ -22,16 +22,17 @@ global.variables = {
 	metas: {},
 }
 
-var charts = require('./config/charts/config.js');
+// var charts = require('./config/charts/config.js');
+var charts = require('./config/dataset/struct.js').struct
 var sets = require('../static/preset.json');
 // var sets = require('../config/preset.js').preset;
 exports.stats = require('./stats/config.js')
 
 var meta = require('./config/metaMngr.js').meta
 
+const stationTypeMap = require('../static/charts/stationTypeMap.json');
 lib = {
-	renderChart: function(div, type, id="abisko", url=window.location.origin){
-		var config = meta.getMeta(id, type);
+	renderChart: function(div, type, url=window.location.origin){
 		if(hostUrl){
 			if(url){
 				// console.log("Hosting from: ")
@@ -41,27 +42,12 @@ lib = {
 				hostUrl = window.location.origin
 			}
 		}
-		// console.log(hostUrl)
-		global.station = id;
-		// TODO refractor later
-		if(id=="abisko"){
-			if(stationType != "abisko"){
-				global.stationType = "abisko";
-				charts = require('./config/charts/config.js');
-			}
-		}else{
-			if(stationType != "smhi"){
-				global.stationType = "smhi";
-				charts = require('./config/charts/config.js');
-			}
-		}
-		config.then(cfg =>{
+		meta.getMeta(type).then(cfg =>{
 			$(function(){
-				// console.log(cfg)
-				var chrt = charts.rendF.build(cfg)
-				div.appendChild(chrt.html());
-				chrt.func();
-				return div;
+				var chrt = charts.build(cfg, div)
+				// div.appendChild(chrt.html(div_id));
+				// chrt.func(false, id);
+				// return div;
 			})
 		})
 	},
@@ -87,9 +73,22 @@ lib = {
 			debug.innerHTML = "set: "+ set +"</br> station: "+ id
 			div.appendChild(debug)
 		}
-		sets[set].forEach(type => {
+		var ids = sets[set] ? sets[set] : [set];
+		if(!Array.isArray(ids)){
+			ids = Object.values(ids);
+		}else{
+			ids = ids.map(each => {
+				return {
+					"station": id,
+					"plot": each,
+				}
+			})
+		}
+		ids.forEach(type => {
 			var container = document.createElement("div");
-			container.setAttribute("id", "mark_"+type);
+			type.id = type.station+'_'+type.plot;
+			$.extend(true, type, stationTypeMap[type.station]);
+			container.setAttribute("id", "mark_"+type.id);
 			if(variables.debug) {
 				var debug = document.createElement("div");
 				debug.setAttribute("class", "debug");
@@ -97,12 +96,12 @@ lib = {
 				debug.innerHTML = "type: "+ type +"</br> station: "+ id
 				var table = document.createElement("table");
 				table.setAttribute("class", "debug");
-				table.setAttribute("id", "debug_table_"+type);
+				table.setAttribute("id", "debug_table_"+type.id);
 				debug.appendChild(table)
 				container.appendChild(debug)
 			}
 			div.appendChild(container);
-			this.renderChart(container, type, id, url)
+			this.renderChart(container, type, url)
 		})
 	},
 }
