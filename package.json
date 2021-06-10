@@ -9,6 +9,7 @@
 		"chai-http": "^4.3.0",
 		"child_process": "^1.0.2",
 		"commonjs-highcharts": "^4.0.3",
+		"compression": "^1.7.4",
 		"connect": "^3.7.0",
 		"consolidate": "^0.15.1",
 		"csr-gen": "^0.2.1",

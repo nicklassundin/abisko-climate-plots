@@ -15,6 +15,8 @@ var $ = require("jquery");
 
 // Setup
 const app = express();
+// const compression = require('compression')
+// app.use(compression)
 var hbs = require('hbs');
 // Open file access
 app.use('/css', express.static(__dirname + '/css'));
@@ -26,7 +28,7 @@ app.use('/data/abisko', express.static(__dirname + '/data/abisko'));
 app.use('/client', express.static(__dirname + '/client'));
 app.use('/tmp', express.static(__dirname + '/tmp'));
 app.use('/maps', express.static(__dirname + '/maps'));
-
+app.use('/static', express.static(__dirname + '/static'));
 
 // SMHI DB connection
 const TYPE = 'corrected-archive';
@@ -70,10 +72,31 @@ var charts = (req) => {
 	})
 }
 
+var stati = require('./static/charts/stations.json')
+// hbs.registerHelper('isdefined', (value, station) => {
+// 	return stati[station].includes(value);
+// })
+// var stationIDs = require('./static/charts/stationIds.json');
+
 hbs.registerPartials(__dirname + '/views/partials', function (err) {
 	custom.then(chrts => {
-		stations = ["abisko", "53430", "global"];
-		app.render('browse-release.hbs', {chrts, stations, latestCommit }, (err, str) => {
+		var stations = Object.keys(stati).map(st => {
+			if(st === "smhi"){
+				return "53430";
+			}else{
+				return st
+			}
+		})
+		// var stations = []
+		// Object.keys(stati).forEach(each => {
+			// console.log(each)
+			// console.log(stationIDs.sets[each])
+			// stationIDs.sets[each].forEach(id => {
+				// stations.push(id)
+			// })
+		// });
+		var sets = stati;
+		app.render('browse-release.hbs', {sets, chrts, stations, latestCommit}, (err, str) => {
 			if(err) throw err
 			fs.writeFile('index.html', str, err => {
 				if (err) {
@@ -82,17 +105,17 @@ hbs.registerPartials(__dirname + '/views/partials', function (err) {
 				}
 			})
 		})	
-		app.get('/static', (req, res) => {
+		app.get('/github', (req, res) => {
 			res.render('browse-release.hbs', {
+				sets,
 				chrts,
 				stations,
-				latestCommit
+				latestCommit,
 			})
 		})
-
-		stations = ["abisko", "53430", "global"];
 		app.get('/browse', (req, res) => {
 			res.render('browse.hbs', {
+				sets,
 				chrts,
 				stations,
 				latestCommit
@@ -107,23 +130,54 @@ hbs.registerPartials(__dirname + '/views/partials', function (err) {
 var fileWrite = function(json, file){
 	fs.exists(file, function (exists) {
 		if(exists){
-			fs.writeFile(file, JSON.stringify(json), (ERROR) => {
+			fs.writeFile(file, JSON.stringify(json,null,2), (ERROR) => {
 				if(ERROR) throw ERROR
 			})
 		}else{
-			fs.writeFile(file, JSON.stringify(json), {flag: 'wx'}, function (err,data) {})
+			fs.writeFile(file, JSON.stringify(json,null,2), {flag: 'wx'}, function (err,data) {})
 		}
 	})
 }
-const merger = require('./modules/config/charts/merge.js').preset;
-merger.then((json) => {
-	fileWrite(json, __dirname+'/static/modules.config.charts.merge.json')
+// const merger = require('./modules/config/charts/merge.js').preset;
+// merger.then((json) => {
+// fileWrite(json, __dirname+'/static/modules.config.charts.merge.json')
+// })
+// TODO new
+const merge = require('./config/charts/preset/merge.js').preset;
+merge.then((json) => {
+	fileWrite(json, __dirname+'/static/charts/merged.json')
+	var stations = {};
+	json.forEach(entry => {
+		Object.keys(entry).forEach(station => {
+			if(!stations[station]) stations[station]= [];
+			Object.keys(entry[station]).forEach(key => {
+				// var type = entry[station][key].ref.type
+				var type = station
+				var dir = __dirname+'/static/charts/stationType/'+type;
+				if(!fs.existsSync(dir)) fs.mkdirSync(dir);
+				// console.log('-----')
+				// console.log(station)
+				// console.log(entry[station][key].config.parse)
+				// console.log('-----')
+				if(entry[station][key].ref.type === 'zonal'){
+					// TODO temporarly special case
+					entry[station][key].ref.tag.data = [station]
+					entry[station][key].ref.tag.render = [station]
+				}
+				
+				fileWrite(entry[station][key], __dirname+'/static/charts/stationType/'+type+'/'+key+'.json')
+
+				stations[station].push(key);
+			})
+		})
+	})
+	fileWrite(stations, __dirname+'/static/charts/stations.json');
 })
 var R = require('r-script');
 
 
 require("require.async")(require);
-var sets = require('./modules/config/charts/parse.config.json')
+// var sets = require('./modules/config/charts/parse.config.json')
 const parsers = require('./modules/stats/config.js').parsers;
 var rparse = R('./modules/stats/rscript/parser.r');
 const Papa = require('papaparse')
@@ -133,64 +187,63 @@ var async = require("async");
 
 var save = {};
 
-var vischange = {};
-vischange = sets['abisko'];
-vischange.station = 'abisko';
+// var vischange = {};
+// vischange = sets['abisko'];
+// vischange.station = 'abisko';
 // vischange.preset.beforeFirstChunk = before(vischange.preset.beforeFirstChunk);
-vischange.fields = {
-	date: 'Time',
-	precip: 'Precipitation',
-}
-vischange.preset.worker = true;
-vischange.preset.download = false;
+// vischange.fields = {
+// 	date: 'Time',
+// 	precip: 'Precipitation',
+// }
+// vischange.preset.worker = true;
+// vischange.preset.download = false;
 
-app.get('/parser/rscript', (req, res) => {
-	req.vischange = vischange;
-	if(!save[req.vischange.station]){
-		var temp = {};
-		req.vischange.file.forEach(name => {
-			temp[name] = new Promise((result, reject) => {
-				var path = './data/'+req.vischange.station+'/'+name;
-				const file = fs.createReadStream(path);
-				// req.vischange.preset.step = function(d){
-				// return d	
-				// }
-				req.vischange.preset.complete = function(d, f){
-					result(d)
-				};
-				Papa.parse(file,req.vischange.preset)
-			}).catch(function(error){
-				console.log("FAIL TO LOAD DATA")
-				console.log(error)
-			})
-		});
-		Promise.all(Object.values(temp)).then(async function(data){
-			res.json(data)
+// app.get('/parser/rscript', (req, res) => {
+// 	req.vischange = vischange;
+// 	if(!save[req.vischange.station]){
+// 		var temp = {};
+// 		req.vischange.file.forEach(name => {
+// 			temp[name] = new Promise((result, reject) => {
+// 				var path = './data/'+req.vischange.station+'/'+name;
+// 				const file = fs.createReadStream(path);
+// 				// req.vischange.preset.step = function(d){
+// 				// return d	
+// 				// }
+// 				req.vischange.preset.complete = function(d, f){
+// 					result(d)
+// 				};
+// 				Papa.parse(file,req.vischange.preset)
+// 			}).catch(function(error){
+// 				console.log("FAIL TO LOAD DATA")
+// 				console.log(error)
+// 			})
+// 		});
+// 		Promise.all(Object.values(temp)).then(async function(data){
+// 			res.json(data)
 
-			// save[req.vischange.station] = parsers[req.vischange.parser](data);
-			// save[req.vischange.station].then(data => {
-			// res.json(data)
-			// })
-		})
-	}else{
-		res.json(save[req.vischange.station]);	
-	}
-})
-var python = require('python').shell;
+// 			// save[req.vischange.station] = parsers[req.vischange.parser](data);
+// 			// save[req.vischange.station].then(data => {
+// 			// res.json(data)
+// 			// })
+// 		})
+// 	}else{
+// 		res.json(save[req.vischange.station]);	
+// }
+// })
+// var python = require('python').shell;
 exports.app = app;
 
-
-app.post('/receive', (req, res) => {
-	console.log(Object.keys(req.body))
-	console.log(Object.keys(req.body.data))
-	var data = req.body.data;
-	// console.log(req.body)
-	// var data = JSON.parse(req.body);
-	// console.log(data)
-	fs.writeFile('./temp/test.js', data, err => {
-		if (err) {
-			console.error(err)
-			return
-		}
-	})
-})
+// app.post('/receive', (req, res) => {
+// 	console.log(Object.keys(req.body))
+// 	console.log(Object.keys(req.body.data))
+// 	var data = req.body.data;
+// 	// console.log(req.body)
+// 	// var data = JSON.parse(req.body);
+// 	// console.log(data)
+// 	fs.writeFile('./temp/test.js', data, err => {
+// 		if (err) {
+// 			console.error(err)
+// 			return
+// 		}
+// 	})
+// })

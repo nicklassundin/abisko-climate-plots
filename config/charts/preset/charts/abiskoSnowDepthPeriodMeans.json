@@ -1,0 +1,19 @@
+{
+	"id": "abiskoSnowDepthPeriodMeans",
+	"type": "abiskoSnowDepth",
+	"tag": {
+		"render": "periodMeans",
+		"data": "periodMeans"
+	},
+	"config": {
+		"meta": {
+			"abisko": {
+				"config": "snowDepthPeriod",
+				"lang": "snowDepthPeriod",
+				"data": "ANS",
+				"set": "weather"
+			}
+		}
+	},
+	"months": false
+}

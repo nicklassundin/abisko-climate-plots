@@ -3,15 +3,18 @@ var $ = require('jquery')
 const Papa = require('papaparse');
 const parse = require('../../stats/config.js').parsers;
 const help = require('../../helpers.js')
-var months = help.months;
+
+var createDiv = require('../charts/struct.js').createDiv;
 
 var renderer = require('../renderer.js').render;
 
 //TODO Demo
 // var demo = require('../../../data/demo.js').data;
 
+
 global.filePath = {
 	station: function(fileName, id){
+		//TODO hotfix
 		if(id){
 			return hostUrl+"/data/"+id+"/"+fileName;
 		}else{
@@ -22,6 +25,8 @@ global.filePath = {
 
 // wander down the data structure with tag input example: [high, medium, low]
 var tagApply = function(data, tags){
+	// console.log(tags)
+	// console.log(data)
 	if(Array.isArray(tags) && tags.length == 1){
 		tags = tags[0];
 	}
@@ -36,28 +41,73 @@ var tagApply = function(data, tags){
 				var tag = tags.shift()
 				res(tagApply(result[tag], tags))
 			}else{
-				res(result[tags])
+				// console.log(result)
+				// console.log(tags)
+				// console.log(result[tags])
+				// fdsfds
+				res(result[tags.replace('[stationName]', station)])
 			}
 		}
 	}).catch(error=>{
-		console.log(tags)
-		console.log(data)
+		// console.log(tags)
+		// console.log(data)
 		throw error
 	})
 }
 
+/// 
+///////
+
+// var merged = require('../../../static/modules.config.charts.merge.json');
+var container = {};
+
+///////
+
 var struct = {
+	type: undefined,
+	config: undefined, 
+	html: function(config){
+		var id = config.files.stationDef.id;
+		var subset = config.files.subset;
+		if(subset){
+			subset = subset.subset;
+			var div = document.createElement("div");
+			subset.sets.forEach(month => {
+				div.appendChild(createDiv(id+'_'+month));
+			})
+		}else{
+			return createDiv(id, false)
+		}	
+		return div
+	},
+	build: function(config, div){
+		this.config = config;
+		var ref = config.files.ref;
+		var id = ref.id
+		this.metaRef[id] = config;
+		var stationType = config.files.stationDef.stationType;
+		var type = config.files.ref.type; 
+		this.type = type;
+		div.appendChild(this.html(config))
+		if(!container[type]){
+			container[type] = this.create(id, config)	
+		}
+		container[type].contFunc(false, id, container[type].metaRef[id]);
+		container[type].init(id);
+		return container[type];
+	},
 	file: undefined,
 	filePath: undefined,
 	preset: undefined,
-	cached: undefined,
+	cached: {},
 	rawData: [],
 	parser: undefined, 
 	render: renderer, 
 	reader: Papa.parse, // TODO be a module that are self contained
-	metaRef: undefined,
-	contFunc: function(reset=false, meta){
-		this.metaRef = meta;
+	metaRef: {}, 
+	contFunc: function(reset=false, id, config){
+		id = config.files.stationDef.id;
+		if(!this.metaRef[id]) this.metaRef[id] = config
 		if(typeof this.rawData !== 'undefined' && this.rawData.length > 0){
 			return this;
 		}	
@@ -70,7 +120,9 @@ var struct = {
 				function data(file){
 					return new Promise(function(resolve, reject){
 						// console.log(file)
+						// console.log(ref.preset)
 						ref.preset.complete = function(result){
+							// console.log(result)
 							resolve(result);
 						};
 						ref.reader(file, ref.preset)
@@ -106,7 +158,7 @@ var struct = {
 		var temp = this.parser;
 		var parser = this.parser;
 		// console.log("Parser")
-		// console.log(this.parser)
+		// console.log(this.parser.pre)
 		if(!(typeof parser === "function")){
 			parser = parser[tag]
 		}
@@ -124,9 +176,12 @@ var struct = {
 					// dataType: 'script'
 					// });
 					var data = parser(rawData);	
+					// console.log(rawData)
+					// console.log(data)
 					return data
 				})
 					.catch(error =>{
+						console.log("FAILED DATA PARSE")
 						console.log(tags)
 						console.log(tag)
 						console.log(parser)
@@ -135,38 +190,34 @@ var struct = {
 			})
 		})
 	},
-	init: function(id, tag, renderTag=tag){
-		// console.log(this.parser)
+	init: function(id){
+		// console.log(this.metaRef)
+		// console.log(id)
+		var tag = this.metaRef[id].files.ref.tag.data
 		var render = this.render;
 		var meta = this.metaRef[id]
-		render.setup(id, meta);
-		// var renderProc = function(data){
-		// }
+		var st_id = meta.files.stationDef.id;
+		render.setup(meta);
 		if(!Array.isArray(tag)) tag = [tag];
-		if(!this.cached){
-			this.cached = {};
-			this.cached[tag[0]] = this.parseRawData(tag);
+		if(!this.cached[id]) this.cached[id] = {};
+		if(!this.cached[id][tag[0]]){
+			// console.log('parse')
+			this.cached[id][tag[0]] = this.parseRawData(tag)
 		}
-		if(!this.cached[tag[0]]){
-			console.log("re-run")
-			// console.log(this.cached)
-			this.cached[tag[0]] = this.parseRawData(tag);
-		}
-		// console.log(this.cached)
-		// console.log(tag)
-		// this.cached[tag[0]].then(function(data){
-		if(tag){
-			data = tagApply(this.cached, [...tag]);
-		}
-		// console.log(data)
+		var data = new Promise((res, rej) => {
+			if(tag){
+				res(tagApply(this.cached[id], [...tag]))
+			}else{
+				res(this.cached[id])
+			}
+		})
 		try{
 			if(data.then){
 				data.then(d => {
-					render.initiate(id, d)
+					render.initiate(st_id, d)
 				})
 			}else{
-
-				render.initiate(id, data)
+				render.initiate(st_id, data)
 			}
 		}catch(error){
 			console.log(id);
@@ -181,19 +232,29 @@ var struct = {
 	clone: function(){
 		return Object.assign({}, this);
 	},
-	create: function(config){ 
-		var file = config.file;
-		var preset = config.preset;
-		var parser = parse[config.parser];
-		var local = config.local;
-
+	create: function(id, config){
+		// console.log(id)
+		// console.log(config)
+		if(!this.metaRef[id]){
+			this.metaRef[id] = {}
+			$.extend(true, this.metaRef[id], config)
+		}
+		var cfg = config.files.config.parse;
+		var file = cfg.file;
+		var preset = cfg.preset;
+		var parser = parse[cfg.parser];
+		var local = cfg.local;
+		// console.log(file)
 		var res = this.clone();
-		res.rawData = [];
+		res.metRef = this.metaRef[id];
+		this.rawData = [];
 		if(!Array.isArray(file)){
 			file = [file];
 		}
-		res.file = file;	
-		res.filePath = (files) => files.map(x => filePath.station(x, (local ? station : undefined))); 
+		res.file = file;
+		var station = config.files.stationDef.stationType.data
+		res.filePath = (files) => files.map(x => filePath.station(x, station)); 
+
 		res.preset = preset;
 		res.parser = parser;
 		res.reader = Papa.parse;

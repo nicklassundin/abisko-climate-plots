@@ -20,7 +20,7 @@ app.use('/data/abisko', express.static(__dirname + '/data/abisko'));
 app.use('/client', express.static(__dirname + '/client'));
 app.use('/tmp', express.static(__dirname + '/tmp'));
 app.use('/maps', express.static(__dirname + '/maps'));
-
+app.use('/static', express.static(__dirname + '/static'));
 
 // SMHI DB connection
 const TYPE = 'corrected-archive';
@@ -41,36 +41,37 @@ const url = require('url');
 const custom = require('./config/preset.js').preset;
 exports.custom = custom;
 
-var charts = (req) => {
-	return new Promise((res, rej) => {
-		custom.then(IDs => {
-			const queryObject = url.parse(req.url,true).query;
-			var id;
-			var ids;
-			if(!queryObject.id) {
-				ids = IDs.all;
-			}else if(!custom[queryObject.id]){
-				ids = queryObject.id.split(",");
-			}else{
-				ids = IDs[queryObject.id];
-			}
-			res(ids.map(id => {
-				return {
-					id: id,
-					station: queryObject.station
-				}
-			}))
-		})
-	})
-}
+// var charts = (req) => {
+// 	return new Promise((res, rej) => {
+// 		custom.then(IDs => {
+// 			const queryObject = url.parse(req.url,true).query;
+// 			var id;
+// 			var ids;
+// 			if(!queryObject.id) {
+// 				ids = IDs.all;
+// 			}else if(!custom[queryObject.id]){
+// 				ids = queryObject.id.split(",");
+// 			}else{
+// 				ids = IDs[queryObject.id];
+// 			}
+// 			res(ids.map(id => {
+// 				return {
+// 					id: id,
+// 					station: queryObject.station
+// 				}
+// 			}))
+// 		})
+// 	})
+// }
 
 hbs.registerPartials(__dirname+'/views/partials');
+const stations = require('./static/charts/stations.json');
 custom.then(chrts => {
-	stations = ["abisko", "53430", "global"];
+	var temp = Object.keys(stations);	
 	app.get('/browse', (req, res) => {
 		res.render('browse.hbs', {
 			chrts,
-			stations,
+			temp,
 			latestCommit: "release"
 		})
 	})

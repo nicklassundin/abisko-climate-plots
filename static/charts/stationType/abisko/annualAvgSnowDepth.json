@@ -1,0 +1,447 @@
+{
+  "ref": {
+    "id": "annualAvgSnowDepth",
+    "type": "abiskoSnowDepth",
+    "tag": {
+      "render": [
+        "snowDepth",
+        "yrly"
+      ],
+      "data": [
+        "snowDepth",
+        "singleStake",
+        "yrly"
+      ]
+    },
+    "config": {
+      "meta": {
+        "abisko": {
+          "config": "avgSnowDepth",
+          "lang": "annualAvgSnowDepth",
+          "data": "ANS",
+          "set": "slide"
+        }
+      }
+    },
+    "months": false
+  },
+  "config": {
+    "type": "column",
+    "groups": {
+      "0": {
+        "baseline": false,
+        "xAxis": {
+          "min": 1930
+        }
+      },
+      "1": {
+        "baseline": true,
+        "xAxis": {
+          "min": 1930
+        }
+      }
+    },
+    "decimals": 0,
+    "month": false,
+    "period": false,
+    "series": {
+      "avg": {
+        "preset": "avg",
+        "group": 0,
+        "visible": true,
+        "type": "line",
+        "colour": "#1000FB"
+      },
+      "diff": {
+        "preset": "diff",
+        "group": 1,
+        "visible": true,
+        "type": "column"
+      }
+    },
+    "parse": {
+      "file": [
+        "ANS_SnowDepth.csv"
+      ],
+      "preset": {
+        "header": true,
+        "download": true,
+        "skipEmptyLines": true
+      },
+      "parser": "AbiskoSnowData",
+      "local": true
+    }
+  },
+  "set": {
+    "groups": {
+      "0": {
+        "enabled": true
+      },
+      "1": {
+        "enabled": true
+      }
+    }
+  },
+  "en": {
+    "valueSuffix": "cm",
+    "groups": {
+      "0": {
+        "title": "[stationName] Snow Depth",
+        "subTitle": "Annual average",
+        "caption": "Average annual snow depth in centimeters.",
+        "yAxis": {
+          "left": "Average Snow depth [cm]",
+          "right": "[X-AXIS]"
+        },
+        "xAxis": {
+          "categories": [
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Ju    n"
+          ],
+          "bott": "Month",
+          "top": "[Y-AXIS]"
+        },
+        "legend": "Weather"
+      },
+      "1": {
+        "title": "[stationName] Annual Average Snow Depth Difference from Baseline",
+        "subTitle": "",
+        "caption": "Difference between annual snow depth in centimeters and the average for the baseline period, typically 1961 to 1990.",
+        "yAxis": {
+          "left": "Average Snow depth [cm]",
+          "right": "[X-AXIS]"
+        },
+        "xAxis": {
+          "categories": [
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Ju    n"
+          ],
+          "bott": "Month",
+          "top": "[Y-AXIS]"
+        },
+        "legend": "Climate"
+      }
+    },
+    "series": {
+      "avg": {
+        "name": "Average snow depth"
+      },
+      "diff": {
+        "name": "Difference"
+      }
+    },
+    "dataSource": {
+      "meta": {
+        "ANS": {
+          "src": "https://polar.se/en/research-in-abisko/research-data/",
+          "downloadDate": "7 January 2020",
+          "citation": "",
+          "desc": "Abisko Scientific Research Station",
+          "descLong": "Swedish Polar Research Secretariet, Abisko Scientific Research Station, Research Data"
+        },
+        "Scipps-CO2": {
+          "src": "https://scripps.ucsd.edu/programs/keelingcurve/permissions-and-data-sources/",
+          "downloadDate": "7 January 2020",
+          "citation": "C. D. Keeling, S. C. Piper, R. B. Bacastow, M. Wahlen, T. P. Whorf, M. Heimann, and H. A. Meijer, Exchanges of atmospheric CO2 and 13CO2 with the terrestrial biosphere and oceans from 1978 to 2000. I. Global aspects, SIO Reference Series, No. 01-06, Scripps Institution of Oceanography, San Diego, 88 pages, 2001. http://escholarship.org/uc/item/09v319r9",
+          "desc": "Scripps Institution of Oceanography",
+          "descLong": "University of California San Diego"
+        },
+        "GTNP-ANL": {
+          "src": "http://gtnpdatabase.org/",
+          "downloadDate": "7 January 2020",
+          "citation": "Nelson, F.E., and Hinkel, K.M. (2003). Methods for measuring active-layer thickness. In: Humlum, O. and Matsuoka, N. (eds.) A Handbook on Periglacial Field Methods. Longyearbyen, Norway: University of the North in Svalbard.",
+          "desc": "Active Layer - Annual Thaw Depths",
+          "descLong": "Global Terrestrial Network for Permafrost, Active Layer - Annual Thaw Depths"
+        },
+        "GTNP-PT": {
+          "src": "http://gtnpdatabase.org/",
+          "downloadDate": "7 January 2020",
+          "citation": "",
+          "desc": "Permafrost temperatures",
+          "descLong": "Global Terrestrial Network for Permafrost, Permafrost temperatures"
+        },
+        "SMHI-Weather": {
+          "src": "https://www.smhi.se/data/utforskaren-oppna-data/?p=1&q=&r=Lufttemperatur",
+          "downloadDate": "",
+          "citation": "",
+          "desc": "",
+          "descLong": ""
+        },
+        "SMHI-Hydrology": {
+          "src": "https://www.smhi.se/data/utforskaren-oppna-data/?p=1&q=&r=Nederbördsmängd",
+          "downloadDate": "",
+          "citation": "",
+          "desc": "",
+          "descLong": ""
+        },
+        "ICOS": {
+          "src": "https://www.icos-sweden.se/data.html",
+          "downloadDate": "",
+          "citation": "",
+          "desc": "Integrated Carbon Observation System Sweden",
+          "descLong": "Integrated Carbon Observation System Sweden"
+        },
+        "NASA-GISS-TEMP": {
+          "src": "https://data.giss.nasa.gov/gistemp/",
+          "downloadDate": "7 January 2020",
+          "citation": "GISTEMP Team, 2020: GISS Surface Temperature Analysis (GISTEMP), version 4. NASA Goddard Institute for Space Studies.",
+          "desc": "GISS Surface Temperature Analysis (GISTEMP v4)",
+          "descLong": "NASA Goddard Institute for Space Studies, Earth Sciences Division, GISS Surface Temperature Analysis (GISTEMP v4)"
+        }
+      }
+    },
+    "units": {
+      "day": {
+        "plural": "days",
+        "singular": "day",
+        "interval": "daily"
+      },
+      "week": {
+        "plural": "weeks",
+        "singular": "week",
+        "interval": "weekly"
+      }
+    },
+    "time": {
+      "months": {
+        "jan": "January",
+        "feb": "February",
+        "mar": "March",
+        "apr": "April",
+        "may": "May",
+        "jun": "June",
+        "jul": "July",
+        "aug": "August",
+        "sep": "September",
+        "oct": "October",
+        "nov": "November",
+        "dec": "December"
+      },
+      "monthShort": {
+        "jan": "Jan",
+        "feb": "Feb",
+        "mar": "Mar",
+        "apr": "Apr",
+        "may": "May",
+        "jun": "Jun",
+        "jul": "Jul",
+        "aug": "Aug",
+        "sep": "Sep",
+        "oct": "Oct",
+        "nov": "Nov",
+        "dec": "Dec"
+      }
+    },
+    "menu": {
+      "baselineform": {
+        "title": "Range for baseline",
+        "lower": "Lower limit",
+        "upper": "Upper limit"
+      },
+      "dataCredit": "Data source",
+      "contribute": "Contribute - Github [dummy]",
+      "showDataTable": "Show/hide data",
+      "langOption": "Svenska",
+      "downloadJPEG": "Download as JPEG",
+      "downloadPDF": "Download as PDF",
+      "downloadSVG": "Download as SVG"
+    }
+  },
+  "sv": {
+    "valueSuffix": "cm",
+    "groups": {
+      "0": {
+        "title": "[stationName] Snödjup",
+        "subTitle": "Årlig genomsnitt",
+        "caption": "Genomsnittligt årligt snödjup i centimeter.",
+        "yAxis": {
+          "left": "Genomsnittligt snödjup [cm]",
+          "right": "[X-AXIS]"
+        },
+        "xAxis": {
+          "categories": [
+            "sep",
+            "okt",
+            "nov",
+            "dec",
+            "jan",
+            "feb",
+            "mars",
+            "april",
+            "maj",
+            "juni"
+          ],
+          "bott": "Månad",
+          "top": "[Y-AXIS]"
+        },
+        "legend": "Väder"
+      },
+      "1": {
+        "title": "[stationName] Årlig genomsnittlig snödjupskillnad från baslinjen",
+        "subTitle": "",
+        "caption": "Skillnad mellan årligt snödjup i centimeter och genomsnittet för baslinjeperioden, vanligtvis 1961 till 1990.",
+        "yAxis": {
+          "left": "Genomsnittligt snödjup [cm]",
+          "right": "[X-AXIS]"
+        },
+        "xAxis": {
+          "categories": [
+            "sep",
+            "okt",
+            "nov",
+            "dec",
+            "jan",
+            "feb",
+            "mars",
+            "april",
+            "maj",
+            "juni"
+          ],
+          "bott": "Månad",
+          "top": "[Y-AXIS]"
+        },
+        "legend": "Klimat"
+      }
+    },
+    "series": {
+      "avg": {
+        "name": "Genomsnittligt snödjup"
+      },
+      "diff": {
+        "name": "Skillnad"
+      }
+    },
+    "dataSource": {
+      "meta": {
+        "ANS": {
+          "src": "https://polar.se/en/research-in-abisko/research-data/",
+          "downloadDate": "7 Januari 2020",
+          "citation": "",
+          "desc": "Abisko Naturvetenskapliga Station",
+          "descLong": "Polarforskningssekretariatet, Abisko Naturvetenskapliga Station, forskningsdata"
+        },
+        "Scipps-CO2": {
+          "src": "https://scripps.ucsd.edu/programs/keelingcurve/permissions-and-data-sources/",
+          "downloadDate": "7 Januari 2020",
+          "citation": "C. D. Keeling, S. C. Piper, R. B. Bacastow, M. Wahlen, T. P. Whorf, M. Heimann, and H. A. Meijer, Exchanges of atmospheric CO2 and 13CO2 with the terrestrial biosphere and oceans from 1978 to 2000. I. Global aspects, SIO Reference Series, No. 01-06, Scripps Institution of Oceanography, San Diego, 88 pages, 2001. http://escholarship.org/uc/item/09v319r9",
+          "desc": "Scripps Institution of Oceanography",
+          "descLong": "University of California San Diego"
+        },
+        "GTNP-ANL": {
+          "src": "http://gtnpdatabase.org/",
+          "downloadDate": "7 Januari 2020",
+          "citation": "Nelson, F.E., and Hinkel, K.M. (2003). Methods for measuring active-layer thickness. In: Humlum, O. and Matsuoka, N. (eds.) A Handbook on Periglacial Field Methods. Longyearbyen, Norway: University of the North in Svalbard.",
+          "desc": "Active Layer - Annual Thaw Depths",
+          "descLong": "Global Terrestrial Network for Permafrost, Active Layer - Annual Thaw Depths"
+        },
+        "GTNP-PT": {
+          "src": "http://gtnpdatabase.org/",
+          "downloadDate": "7 Januari 2020",
+          "citation": "",
+          "desc": "Permafrost temperaturer",
+          "descLong": "Global Terrestrial Network for Permafrost, Permafrost temperatures"
+        },
+        "SMHI-Weather": {
+          "src": "",
+          "downloadDate": "",
+          "citation": "",
+          "desc": "",
+          "descLong": ""
+        },
+        "SMHI-Hydrology": {
+          "src": "",
+          "downloadDate": "",
+          "citation": "",
+          "desc": "",
+          "descLong": ""
+        },
+        "ICOS": {
+          "src": "https://www.icos-sweden.se/data.html",
+          "downloadDate": "",
+          "citation": "",
+          "desc": "Integrated Carbon Observation System Sweden",
+          "descLong": "Integrated Carbon Observation System Sweden"
+        },
+        "NASA-GISS-TEMP": {
+          "src": "https://data.giss.nasa.gov/gistemp/",
+          "downloadDate": "7 Januari 2020",
+          "citation": "GISTEMP Team, 2020: GISS Surface Temperature Analysis (GISTEMP), version 4. NASA Goddard Institute for Space Studies.",
+          "desc": "GISS Surface Temperature Analysis (GISTEMP v4)",
+          "descLong": "NASA Goddard Institute for Space Studies, Earth Sciences Division, GISS Surface Temperature Analysis (GISTEMP v4)"
+        }
+      }
+    },
+    "units": {
+      "day": {
+        "plural": "dagar",
+        "singular": "dag",
+        "interval": "daglig"
+      },
+      "week": {
+        "plural": "veckor",
+        "singular": "vecka",
+        "interval": "veckovis"
+      }
+    },
+    "time": {
+      "months": {
+        "jan": "Januari",
+        "feb": "Februari",
+        "mar": "Mars",
+        "apr": "April",
+        "may": "Maj",
+        "jun": "Juni",
+        "jul": "Juli",
+        "aug": "Augusti",
+        "sep": "September",
+        "oct": "Oktober",
+        "nov": "November",
+        "dec": "December"
+      },
+      "monthShort": {
+        "jan": "Jan",
+        "feb": "Feb",
+        "mar": "March",
+        "apr": "April",
+        "may": "Maj",
+        "jun": "Juni",
+        "jul": "Juli",
+        "aug": "Aug",
+        "sep": "Sep",
+        "oct": "Okt",
+        "nov": "Nov",
+        "dec": "Dec"
+      }
+    },
+    "menu": {
+      "baselineform": {
+        "title": "Interval för baslinje",
+        "lower": "Undregräns",
+        "upper": "Övregräns"
+      },
+      "dataCredit": "Data källa",
+      "contribute": "Bidra - Github [dummy]",
+      "showDataTable": "Vissa/göm data",
+      "langOption": "English",
+      "downloadJPEG": "Laddaner som JPEG",
+      "downloadPDF": "Laddaner som  PDF",
+      "downloadSVG": "Laddaner som SVG"
+    }
+  }
+}
