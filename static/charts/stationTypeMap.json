@@ -1,0 +1,44 @@
+{
+	"53430": {
+		"stationName": "Lund",
+		"stationType": {
+			"data": "53430",
+			"config": "smhi"
+		}
+	},
+	"abisko": {
+		"stationName": "Abisko",
+		"stationType": {
+			"data": "abisko",
+			"config": "abisko"
+		}
+	},
+	"glob": {
+		"stationName": "glob",	
+		"stationType": {
+			"data": "glob",
+			"config": "glob"
+		}
+	},
+	"nhem": {
+		"stationName": "nhem",
+		"stationType": {
+			"data": "glob",
+			"config": "nhem"
+		}
+	},
+	"64n-90n": {
+		"stationName": "64n-90n",	
+		"stationType": {
+			"data": "glob",
+			"config": "64n-90n"
+		}
+	},
+	"CALM": {
+		"stationName": "CALM",
+		"stationType": {
+			"data": "CALM",
+			"config": "CALM"
+		}
+	}
+}
