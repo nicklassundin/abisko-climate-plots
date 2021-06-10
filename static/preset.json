@@ -1,1 +1,388 @@
-{"all":["annualTemperatures","TemperaturesSpring","TemperaturesSummer","TemperaturesAutumn","TemperaturesWinter","monthlyTemperatures","growingSeasonWeeks","diffGrowingSeasonWeeks","growingSeasonDays","diffGrowingSeasonDays","slideGrowingSeasonWeeks","slideGrowingSeasonDays","temperatureDifference","temperature_64n90n","temperature_nhem","unscaled_temperature_nhem","temperature_glob","annualPrecipitation","winterPrecipitation","monthlyPrecipitation","annualPrecipitationDifference","springPrecipitation","summerPrecipitation","autumnPrecipitation","abiskoSnowDepthPeriodMeans","abiskoSnowDepthPeriodMeans2","abiskoLakeIce","abiskoLakeIceTime","iceThicknessYear","iceThicknessDate","weeklyCO2","permaHistogramCALM","slideTemperature","avgTemperaturesByYear","slideLakeIceTime","diffLakeIceTime"],"local":["annualTemperatures","TemperaturesSummer","TemperaturesWinter","monthlyTemperatures","growingSeasonWeeks","growingSeasonDays","temperatureDifference","annualPrecipitation","summerPrecipitation","winterPrecipitation","monthlyPrecipitation","annualPrecipitationDifference"],"localSmall":["annualTemperatures","annualPrecipitation"],"temp":["annualTemperatures","TemperaturesSummer","TemperaturesWinter","monthlyTemperatures","temperatureDifference"],"monthTemp":["monthlyTemperatures"],"tempAvg":["annualTemperatures"],"tempAvgSlide":["slideTemperature"],"tempSeason":["TemperaturesSummer","TemperaturesAutumn","TemperaturesWinter","TemperaturesSpring"],"precipSeason":["springPrecipitation","summerPrecipitation","autumnPrecipitation","winterPrecipitation"],"tempDiff":["temperatureDifference"],"extreme":["dailyExtremeTemperature","weeklyExtremeTemperature","dailyExtremePrecipitation","weeklyExtremePrecipitation"],"precip":["annualPrecipitation","springPrecipitation","summerPrecipitation","autumnPrecipitation","winterPrecipitation","monthlyPrecipitation","annualPrecipitationDifference"],"tempZoneDiff":["temperature_64n90n","temperature_nhem","temperature_glob"],"precipAvg":["annualPrecipitation"],"monthPrec":["monthlyPrecipitation"],"diff":["temperatureDifference","annualPrecipitationDifference"],"snowDepth":["abiskoSnowDepthPeriodMeans","abiskoSnowDepthPeriodMeans2"],"ice":["abiskoLakeIce","abiskoLakeIceTime"],"iceThick":["iceThicknessYear","iceThicknessDate"],"perma":["permaHistogramCALM"],"exper":["monthlyPrecipitationPolar"],"tempClimateWeather":["slideTemperature"],"growingSeasonAll":["growingSeasonWeeks","growingSeasonDays","growingSeasonFrostFirst","growingSeasonFrostLast"],"co2":["weeklyCO2"],"slideMonthTemp":["slideMonthlyTemperatures"],"slideMonthPrec":["slideMonthlyPrecipitation"],"slideTemp":["slideTemperature"],"slidePrec":["slidePrecipitation"],"slideTempMin":["slideTemperature","slideTemperaturesSpring","slideTemperaturesSummer","slideTemperaturesAutumn","slideTemperaturesWinter"],"slidePrecMin":["slidePrecipitation","slideSummerPrecipitation","slideAutumnPrecipitation","slideWinterPrecipitation","slideSpringPrecipitation"],"temp-zonal":["temperatureDifference","temperature_64n90n","temperature_nhem","temperature_glob"],"months":["monthsTemperatures"],"growFirstnLast":["growingSeasonFrostFirst","growingSeasonFrostLast"],"all_plots":["annualTemperatures","TemperaturesSpring","TemperaturesSummer","TemperaturesAutumn","TemperaturesWinter","monthlyTemperatures","growingSeasonWeeks","growingSeasonDays","temperatureDifference","temperature_64n90n","temperature_nhem","unscaled_temperature_nhem","temperature_glob","annualPrecipitation","winterPrecipitation","monthlyPrecipitation","annualPrecipitationDifference","springPrecipitation","summerPrecipitation","autumnPrecipitation","abiskoSnowDepthPeriodMeans","abiskoSnowDepthPeriodMeans2","abiskoLakeIce","abiskoLakeIceTime","iceThicknessYear","iceThicknessDate","weeklyCO2","permaHistogramCALM","slideTemperature","dailyExtremeTemperature","weeklyExtremeTemperature","dailyExtremePrecipitation","weeklyExtremePrecipitation","monthlyPrecipitationPolar","growingSeasonFrostFirst","growingSeasonFrostLast","slideMonthlyTemperatures","slideMonthlyPrecipitation","slidePrecipitation","slideTemperaturesSpring","slideTemperaturesSummer","slideTemperaturesAutumn","slideTemperaturesWinter","slideSummerPrecipitation","slideAutumnPrecipitation","slideWinterPrecipitation","slideSpringPrecipitation","slideLakeIceTime","abiskoLakeIceBreakup","abiskoLakeIceFreezeup","annualAvgSnowDepth","diffLakeIceTime","diffGrowingSeasonDays","diffGrowingSeasonWeeks"],"annualTemperatures":["annualTemperatures"],"TemperaturesSpring":["TemperaturesSpring"],"TemperaturesSummer":["TemperaturesSummer"],"TemperaturesAutumn":["TemperaturesAutumn"],"TemperaturesWinter":["TemperaturesWinter"],"monthlyTemperatures":["monthlyTemperatures"],"growingSeasonWeeks":["growingSeasonWeeks"],"growingSeasonDays":["growingSeasonDays"],"temperatureDifference":["temperatureDifference"],"temperature_64n90n":["temperature_64n90n"],"temperature_nhem":["temperature_nhem"],"unscaled_temperature_nhem":["unscaled_temperature_nhem"],"temperature_glob":["temperature_glob"],"annualPrecipitation":["annualPrecipitation"],"winterPrecipitation":["winterPrecipitation"],"monthlyPrecipitation":["monthlyPrecipitation"],"annualPrecipitationDifference":["annualPrecipitationDifference"],"springPrecipitation":["springPrecipitation"],"summerPrecipitation":["summerPrecipitation"],"autumnPrecipitation":["autumnPrecipitation"],"abiskoSnowDepthPeriodMeans":["abiskoSnowDepthPeriodMeans"],"abiskoSnowDepthPeriodMeans2":["abiskoSnowDepthPeriodMeans2"],"abiskoLakeIce":["abiskoLakeIce"],"abiskoLakeIceTime":["abiskoLakeIceTime"],"iceThicknessYear":["iceThicknessYear"],"iceThicknessDate":["iceThicknessDate"],"weeklyCO2":["weeklyCO2"],"permaHistogramCALM":["permaHistogramCALM"],"slideTemperature":["slideTemperature"],"dailyExtremeTemperature":["dailyExtremeTemperature"],"weeklyExtremeTemperature":["weeklyExtremeTemperature"],"dailyExtremePrecipitation":["dailyExtremePrecipitation"],"weeklyExtremePrecipitation":["weeklyExtremePrecipitation"],"monthlyPrecipitationPolar":["monthlyPrecipitationPolar"],"growingSeasonFrostFirst":["growingSeasonFrostFirst"],"growingSeasonFrostLast":["growingSeasonFrostLast"],"slideMonthlyTemperatures":["slideMonthlyTemperatures"],"slideMonthlyPrecipitation":["slideMonthlyPrecipitation"],"slidePrecipitation":["slidePrecipitation"],"slideTemperaturesSpring":["slideTemperaturesSpring"],"slideTemperaturesSummer":["slideTemperaturesSummer"],"slideTemperaturesAutumn":["slideTemperaturesAutumn"],"slideTemperaturesWinter":["slideTemperaturesWinter"],"slideSummerPrecipitation":["slideSummerPrecipitation"],"slideAutumnPrecipitation":["slideAutumnPrecipitation"],"slideWinterPrecipitation":["slideWinterPrecipitation"],"slideSpringPrecipitation":["slideSpringPrecipitation"],"abiskoLakeIceBreakup":["abiskoLakeIceBreakup"],"abiskoLakeIceFreezeup":["abiskoLakeIceFreezeup"],"annualAvgSnowDepth":["annualAvgSnowDepth"],"avgTemperaturesByYear":["avgTemperaturesByYear"],"slideLakeIceTime":["slideLakeIceTime"],"diffLakeIceTime":["diffLakeIceTime"],"diffGrowingSeasonDays":["diffGrowingSeasonDays"],"diffGrowingSeasonWeeks":["diffGrowingSeasonWeeks"],"slideGrowingSeasonDays":["slideGrowingSeasonDays"],"slideGrowingSeasonWeeks":["slideGrowingSeasonWeeks"],"sqrt-IceThick":["iceThicknessYear","iceThicknessDate"],"sqrt-temp":["temperatureDifference","temperature_64n90n","temperature_nhem","temperature_glob"],"sqrt-season-temp":["annualTemperatures","TemperaturesSpring","TemperaturesSummer","TemperaturesAutumn","TemperaturesWinter"],"sqrt-growing":["growingSeasonWeeks","diffGrowingSeasonWeeks","growingSeasonDays","diffGrowingSeasonDays"],"sqrt-mTemp":["monthlyTemperatures"],"sqrt-prec":["annualPrecipitation","springPrecipitation","summerPrecipitation","autumnPrecipitation","winterPrecipitation"],"sqrt-mPrec":["monthlyPrecipitation"],"sqrt-snowDepth":["abiskoSnowDepthPeriodMeans","abiskoSnowDepthPeriodMeans2"],"sqrt-lakeIce":["abiskoLakeIce","abiskoLakeIceTime","diffLakeIceTime","iceThicknessYear","iceThicknessDate"],"sqrt-perma":["permaHistogramCALM"],"sqrt-carbon":["weeklyCO2"],"sqrt-temp-climate-weather-v2":["slideTemperature"],"sqrt-temp-extreme-v2":["dailyExtremeTemperature","weeklyExtremeTemperature"],"sqrt-prec-extreme-v2":["dailyExtremePrecipitation","weeklyExtremePrecipitation"],"sqrt-growingSeason-v2":["growingSeasonWeeks","diffGrowingSeasonWeeks","growingSeasonDays","diffGrowingSeasonDays","growingSeasonFrostFirst","growingSeasonFrostLast"],"sqrt-temp-v2":["slideTemperature","slideTemperaturesSpring","slideTemperaturesSummer","slideTemperaturesAutumn","slideTemperaturesWinter","slideMonthlyTemperatures"],"sqrt-prec-v2":["slidePrecipitation","slideWinterPrecipitation","slideSpringPrecipitation","slideSummerPrecipitation","slideAutumnPrecipitation","slideMonthlyPrecipitation"],"sqrt-snowDepth-v2":["annualAvgSnowDepth","abiskoSnowDepthPeriodMeans","abiskoSnowDepthPeriodMeans2"],"sqrt-lakeIce-v2":["abiskoLakeIceBreakup","abiskoLakeIceFreezeup","abiskoLakeIceTime","iceThicknessYear","iceThicknessDate"],"v1":["annualTemperatures","TemperaturesSpring","TemperaturesSummer","TemperaturesAutumn","TemperaturesWinter","monthlyTemperatures","growingSeasonWeeks","growingSeasonDays","temperatureDifference","temperature_64n90n","temperature_nhem","temperature_glob","annualPrecipitation","winterPrecipitation","monthlyPrecipitation","annualPrecipitationDifference","springPrecipitation","summerPrecipitation","autumnPrecipitation","abiskoSnowDepthPeriodMeans","abiskoSnowDepthPeriodMeans2","abiskoLakeIce","abiskoLakeIceTime","iceThicknessYear","iceThicknessDate","weeklyCO2","permaHistogramCALM","dailyExtremePrecipitation","weeklyExtremePrecipitation","growingSeasonFrostFirst","growingSeasonFrostLast","abiskoLakeIceBreakup","abiskoLakeIceFreezeup","annualAvgSnowDepth"],"v2":["slideTemperature","slideTemperaturesSpring","slideTemperaturesSummer","slideTemperaturesAutumn","slideTemperaturesWinter","slideMonthlyTemperatures","slidePrecipitation","slideWinterPrecipitation","slideSpringPrecipitation","slideSummerPrecipitation","slideAutumnPrecipitation","slideMonthlyPrecipitation","annualAvgSnowDepth","abiskoSnowDepthPeriodMeans","abiskoSnowDepthPeriodMeans2","growingSeasonWeeks","growingSeasonDays","growingSeasonFrostFirst","growingSeasonFrostLast","dailyExtremeTemperature","weeklyExtremeTemperature","dailyExtremePrecipitation","weeklyExtremePrecipitation","slideLakeIceTime"]}
+{
+  "local": [
+    "annualTemperatures",
+    "TemperaturesSummer",
+    "TemperaturesWinter",
+    "monthlyTemperatures",
+    "growingSeasonWeeks",
+    "growingSeasonDays",
+    "temperatureDifference",
+    "annualPrecipitation",
+    "summerPrecipitation",
+    "winterPrecipitation",
+    "monthlyPrecipitation",
+    "annualPrecipitationDifference"
+  ],
+  "localSmall": [
+    "annualTemperatures",
+    "annualPrecipitation"
+  ],
+  "temp": [
+    "annualTemperatures",
+    "TemperaturesSummer",
+    "TemperaturesWinter",
+    "monthlyTemperatures",
+    "temperatureDifference"
+  ],
+  "monthTemp": [
+    "monthlyTemperatures"
+  ],
+  "tempAvg": [
+    "annualTemperatures"
+  ],
+  "tempAvgSlide": [
+    "slideTemperature"
+  ],
+  "tempSeason": [
+    "TemperaturesSummer",
+    "TemperaturesAutumn",
+    "TemperaturesWinter",
+    "TemperaturesSpring"
+  ],
+  "precipSeason": [
+    "springPrecipitation",
+    "summerPrecipitation",
+    "autumnPrecipitation",
+    "winterPrecipitation"
+  ],
+  "tempDiff": [
+    "temperatureDifference"
+  ],
+  "extreme": [
+    "dailyExtremeTemperature",
+    "weeklyExtremeTemperature",
+    "dailyExtremePrecipitation",
+    "weeklyExtremePrecipitation"
+  ],
+  "precip": [
+    "annualPrecipitation",
+    "springPrecipitation",
+    "summerPrecipitation",
+    "autumnPrecipitation",
+    "winterPrecipitation",
+    "monthlyPrecipitation",
+    "annualPrecipitationDifference"
+  ],
+  "tempZoneDiff": [
+    "temperature_64n90n",
+    "temperature_nhem",
+    "temperature_glob"
+  ],
+  "precipAvg": [
+    "annualPrecipitation"
+  ],
+  "monthPrec": [
+    "monthlyPrecipitation"
+  ],
+  "diff": [
+    "temperatureDifference",
+    "annualPrecipitationDifference"
+  ],
+  "snowDepth": [
+    "abiskoSnowDepthPeriodMeans",
+    "abiskoSnowDepthPeriodMeans2"
+  ],
+  "ice": [
+    "abiskoLakeIce",
+    "abiskoLakeIceTime"
+  ],
+  "iceThick": [
+    "iceThicknessYear",
+    "iceThicknessDate"
+  ],
+  "perma": [
+    "permaHistogramCALM"
+  ],
+  "exper": [
+    "monthlyPrecipitationPolar"
+  ],
+  "tempClimateWeather": [
+    "slideTemperature"
+  ],
+  "growingSeasonAll": [
+    "growingSeasonWeeks",
+    "growingSeasonDays",
+    "growingSeasonFrostFirst",
+    "growingSeasonFrostLast"
+  ],
+  "co2": [
+    "weeklyCO2"
+  ],
+  "slideMonthTemp": [
+    "slideMonthlyTemperatures"
+  ],
+  "slideMonthPrec": [
+    "slideMonthlyPrecipitation"
+  ],
+  "slideTemp": [
+    "slideTemperature"
+  ],
+  "slidePrec": [
+    "slidePrecipitation"
+  ],
+  "slideTempMin": [
+    "slideTemperature",
+    "slideTemperaturesSpring",
+    "slideTemperaturesSummer",
+    "slideTemperaturesAutumn",
+    "slideTemperaturesWinter"
+  ],
+  "slidePrecMin": [
+    "slidePrecipitation",
+    "slideSummerPrecipitation",
+    "slideAutumnPrecipitation",
+    "slideWinterPrecipitation",
+    "slideSpringPrecipitation"
+  ],
+  "temp-zonal": [
+    "temperatureDifference",
+    "temperature_64n90n",
+    "temperature_nhem",
+    "temperature_glob"
+  ],
+  "months": [
+    "monthsTemperatures"
+  ],
+  "growFirstnLast": [
+    "growingSeasonFrostFirst",
+    "growingSeasonFrostLast"
+  ],
+  "custom": [
+    "local",
+    "localSmall",
+    "temp",
+    "monthTemp",
+    "tempAvg",
+    "tempAvgSlide",
+    "tempSeason",
+    "precipSeason",
+    "tempDiff",
+    "extreme",
+    "precip",
+    "tempZoneDiff",
+    "precipAvg",
+    "monthPrec",
+    "diff",
+    "snowDepth",
+    "ice",
+    "iceThick",
+    "perma",
+    "exper",
+    "tempClimateWeather",
+    "growingSeasonAll",
+    "co2",
+    "slideMonthTemp",
+    "slideMonthPrec",
+    "slideTemp",
+    "slidePrec",
+    "slideTempMin",
+    "slidePrecMin",
+    "temp-zonal",
+    "months",
+    "growFirstnLast"
+  ],
+  "all": [
+    "annualTemperatures",
+    "TemperaturesSpring",
+    "TemperaturesSummer",
+    "TemperaturesAutumn",
+    "TemperaturesWinter",
+    "monthlyTemperatures",
+    "growingSeasonWeeks",
+    "growingSeasonDays",
+    "temperatureDifference",
+    "temperature_64n90n",
+    "temperature_nhem",
+    "unscaled_temperature_nhem",
+    "temperature_glob",
+    "annualPrecipitation",
+    "winterPrecipitation",
+    "monthlyPrecipitation",
+    "annualPrecipitationDifference",
+    "springPrecipitation",
+    "summerPrecipitation",
+    "autumnPrecipitation",
+    "abiskoSnowDepthPeriodMeans",
+    "abiskoSnowDepthPeriodMeans2",
+    "abiskoLakeIce",
+    "abiskoLakeIceTime",
+    "iceThicknessYear",
+    "iceThicknessDate",
+    "weeklyCO2",
+    "permaHistogramCALM",
+    "slideTemperature",
+    "dailyExtremeTemperature",
+    "weeklyExtremeTemperature",
+    "dailyExtremePrecipitation",
+    "weeklyExtremePrecipitation",
+    "monthlyPrecipitationPolar",
+    "growingSeasonFrostFirst",
+    "growingSeasonFrostLast",
+    "slideMonthlyTemperatures",
+    "slideMonthlyPrecipitation",
+    "slidePrecipitation",
+    "slideTemperaturesSpring",
+    "slideTemperaturesSummer",
+    "slideTemperaturesAutumn",
+    "slideTemperaturesWinter",
+    "slideSummerPrecipitation",
+    "slideAutumnPrecipitation",
+    "slideWinterPrecipitation",
+    "slideSpringPrecipitation",
+    "abiskoLakeIceBreakup",
+    "abiskoLakeIceFreezeup",
+    "annualAvgSnowDepth",
+    "avgTemperaturesByYear",
+    "slideLakeIceTime",
+    "diffLakeIceTime",
+    "diffGrowingSeasonDays",
+    "diffGrowingSeasonWeeks",
+    "slideGrowingSeasonDays",
+    "slideGrowingSeasonWeeks"
+  ],
+  "sqrt-IceThick": [
+    "iceThicknessYear",
+    "iceThicknessDate"
+  ],
+  "sqrt-temp": {
+    "temperatureDifference": {
+      "station": "abisko",
+      "plot": "temperatureDifference"
+    },
+    "temperature_64n90n": {
+      "station": "64n-90n",
+      "plot": "temperature_zonal"
+    },
+    "temperature_nhem": {
+      "station": "nhem",
+      "plot": "temperature_zonal"
+    },
+    "temperature_glob": {
+      "station": "glob",
+      "plot": "temperature_zonal"
+    }
+  },
+  "sqrt-season-temp": [
+    "annualTemperatures",
+    "TemperaturesSpring",
+    "TemperaturesSummer",
+    "TemperaturesAutumn",
+    "TemperaturesWinter"
+  ],
+  "sqrt-growing": [
+    "growingSeasonWeeks",
+    "diffGrowingSeasonWeeks",
+    "growingSeasonDays",
+    "diffGrowingSeasonDays"
+  ],
+  "sqrt-mTemp": [
+    "monthlyTemperatures"
+  ],
+  "sqrt-prec": [
+    "annualPrecipitation",
+    "springPrecipitation",
+    "summerPrecipitation",
+    "autumnPrecipitation",
+    "winterPrecipitation"
+  ],
+  "sqrt-mPrec": [
+    "monthlyPrecipitation"
+  ],
+  "sqrt-snowDepth": [
+    "abiskoSnowDepthPeriodMeans",
+    "abiskoSnowDepthPeriodMeans2"
+  ],
+  "sqrt-lakeIce": [
+    "abiskoLakeIce",
+    "abiskoLakeIceTime",
+    "diffLakeIceTime",
+    "iceThicknessYear",
+    "iceThicknessDate"
+  ],
+  "sqrt-perma": {
+    "permaHistogramCALM": {
+      "station": "CALM",
+      "plot": "permaHistogramCALM"
+    }
+  },
+  "sqrt-carbon": {
+    "weeklyCO2": {
+      "station": "glob",
+      "plot": "weeklyCO2"
+    }
+  },
+  "sqrt-temp-climate-weather-v2": [
+    "slideTemperature"
+  ],
+  "sqrt-temp-extreme-v2": [
+    "dailyExtremeTemperature",
+    "weeklyExtremeTemperature"
+  ],
+  "sqrt-prec-extreme-v2": [
+    "dailyExtremePrecipitation",
+    "weeklyExtremePrecipitation"
+  ],
+  "sqrt-growingSeason-v2": [
+    "growingSeasonWeeks",
+    "diffGrowingSeasonWeeks",
+    "growingSeasonDays",
+    "diffGrowingSeasonDays",
+    "growingSeasonFrostFirst",
+    "growingSeasonFrostLast"
+  ],
+  "sqrt-temp-v2": [
+    "slideTemperature",
+    "slideTemperaturesSpring",
+    "slideTemperaturesSummer",
+    "slideTemperaturesAutumn",
+    "slideTemperaturesWinter",
+    "slideMonthlyTemperatures"
+  ],
+  "sqrt-prec-v2": [
+    "slidePrecipitation",
+    "slideWinterPrecipitation",
+    "slideSpringPrecipitation",
+    "slideSummerPrecipitation",
+    "slideAutumnPrecipitation",
+    "slideMonthlyPrecipitation"
+  ],
+  "sqrt-snowDepth-v2": [
+    "annualAvgSnowDepth",
+    "abiskoSnowDepthPeriodMeans",
+    "abiskoSnowDepthPeriodMeans2"
+  ],
+  "sqrt-lakeIce-v2": [
+    "abiskoLakeIceBreakup",
+    "abiskoLakeIceFreezeup",
+    "abiskoLakeIceTime",
+    "iceThicknessYear",
+    "iceThicknessDate"
+  ],
+  "squarespace": [
+    "sqrt-IceThick",
+    "sqrt-temp",
+    "sqrt-season-temp",
+    "sqrt-growing",
+    "sqrt-mTemp",
+    "sqrt-prec",
+    "sqrt-mPrec",
+    "sqrt-snowDepth",
+    "sqrt-lakeIce",
+    "sqrt-perma",
+    "sqrt-carbon",
+    "sqrt-temp-climate-weather-v2",
+    "sqrt-temp-extreme-v2",
+    "sqrt-prec-extreme-v2",
+    "sqrt-growingSeason-v2",
+    "sqrt-temp-v2",
+    "sqrt-prec-v2",
+    "sqrt-snowDepth-v2",
+    "sqrt-lakeIce-v2"
+  ],
+  "v1": [
+    "v1"
+  ],
+  "v2": [
+    "v2"
+  ]
+}

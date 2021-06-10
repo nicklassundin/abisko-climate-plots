@@ -33,7 +33,11 @@
 	border: none;
 	padding: 0px 0px;
 	width: 35px;
+	color: #333333
 	background-color: transparent;
+}
+.plotband{
+	color: #333333
 }
 .input:focus{
 	border: solid;

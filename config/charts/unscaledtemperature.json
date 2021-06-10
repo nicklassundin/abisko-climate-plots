@@ -1,0 +1,55 @@
+{
+	"type": "column",
+	"polar": false,
+	"groups": {
+		"0": {
+			"baseline": false
+		},
+		"1": {
+			"baseline": true
+		},
+		"2": {
+			"baseline": false,
+			"yAxis": {
+			}
+		}
+	},
+	"decimals": 2,
+	"series": {
+		"max": {
+			"preset": "max",
+			"group": "0", 
+			"visible": false,
+			"colour": "#ff0000", 
+			"type": "line"
+		},
+		"min": {
+			"preset": "min",
+			"group": "0", 
+			"visible": false,
+			"colour": "#0000ff",
+			"type": "line"
+		},
+		"avg": {
+			"preset": "avg",
+			"group": "0",
+			"visible": true,
+			"colour": "#888888",
+			"type": "line"
+		},  
+		"diff": {
+			"preset": "diff",
+			"group": "1",
+			"visible": true,
+			"colour": "[example]",
+			"type": "column" 
+		},
+		"extreme": {
+			"preset": "extreme",
+			"group": "2", 
+			"visible": true,
+			"colour": "#ff0000", 
+			"type": "line"
+		}
+	}
+}

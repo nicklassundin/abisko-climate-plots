@@ -1,0 +1,19 @@
+{
+	"id": "diffLakeIceTime",
+	"type": "tornetrask",
+	"tag": {
+		"render": "difference",
+		"data": "iceTime"
+	},
+	"config": {
+		"meta": {
+			"abisko": {
+				"config": "iceTime",
+				"lang": "iceTime",
+				"data": "ANS",
+				"set": "climate"
+			}
+		}
+	},
+	"months": false
+}

@@ -305,10 +305,10 @@ var struct = {
 		try{
 			values = values.filter(entry => !isNaN(parseFloat(entry.y)) && isFinite(entry.y));
 		}catch(err){
-			console.log(Object.keys($))
-			console.log(values[0])
-			console.log(this)
-			console.log(err)
+			// console.log(Object.keys($))
+			// console.log(values[0])
+			// console.log(this)
+			// console.log(err)
 			return undefined;
 		}
 		result.values = values.filter(each => each.y || each.y == 0);

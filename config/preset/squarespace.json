@@ -1,6 +1,23 @@
 {
 	"sqrt-IceThick": ["iceThicknessYear", "iceThicknessDate"],
-	"sqrt-temp": ["temperatureDifference","temperature_64n90n","temperature_nhem","temperature_glob"],
+	"sqrt-temp": {
+		"temperatureDifference": {
+			"station": "abisko",
+			"plot": "temperatureDifference"
+		},
+		"temperature_64n90n": {
+			"station": "64n-90n",
+			"plot": "temperature_zonal"
+		},
+		"temperature_nhem": {
+			"station": "nhem",
+			"plot": "temperature_zonal"
+		},
+		"temperature_glob": {
+			"station": "glob",
+			"plot": "temperature_zonal"
+		}
+	},
 	"sqrt-season-temp": ["annualTemperatures","TemperaturesSpring","TemperaturesSummer","TemperaturesAutumn","TemperaturesWinter"],
 	"sqrt-growing": ["growingSeasonWeeks",
 		"diffGrowingSeasonWeeks","growingSeasonDays",
@@ -12,8 +29,18 @@
 		"abiskoSnowDepthPeriodMeans2"],
 	"sqrt-lakeIce": ["abiskoLakeIce",
 		"abiskoLakeIceTime", "diffLakeIceTime","iceThicknessYear", "iceThicknessDate"],
-	"sqrt-perma": ["permaHistogramCALM"],
-	"sqrt-carbon": ["weeklyCO2"],
+		"sqrt-perma": {
+			"permaHistogramCALM": {
+				"station": "CALM",
+				"plot": "permaHistogramCALM"
+			}
+		},
+		"sqrt-carbon": {
+			"weeklyCO2": {
+				"station": "glob",
+				"plot": "weeklyCO2"
+			}
+		}, 
 	"sqrt-temp-climate-weather-v2": ["slideTemperature"],
 	"sqrt-temp-extreme-v2": ["dailyExtremeTemperature",
 		"weeklyExtremeTemperature"],

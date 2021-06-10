@@ -1,0 +1,25 @@
+{
+	"id": "slideSummerPrecipitation",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["precipitation", "summerSlide"],
+		"data": ["precipitation", "summer"]
+	},
+	"config": {
+		"meta": {
+			"smhi": {
+				"data": "SMHI-Hydrology",
+				"config": "precipitation",
+				"lang": "summerPrecipitation",
+				"set": "slide"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "precipitation",
+				"lang": "summerPrecipitation",
+				"set": "slide"
+			}
+		}
+	},
+	"months": false
+}

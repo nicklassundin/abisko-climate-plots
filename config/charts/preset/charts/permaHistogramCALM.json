@@ -1,0 +1,19 @@
+{
+	"id": "permaHistogramCALM",
+	"type": "permaHistogramCALM",
+	"tag": {
+		"render": "",
+		"data": ["perma"]
+	},
+	"config": {
+		"meta": {
+			"CALM": {
+				"config": "perma",
+				"lang": "perma",
+				"data": "GTNP-ANL",
+				"set": "weather"
+			}
+		}
+	},
+	"months": false
+}

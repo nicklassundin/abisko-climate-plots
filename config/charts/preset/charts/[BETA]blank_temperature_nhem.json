@@ -1,0 +1,17 @@
+{
+	"id": "unscaled_temperature_nhem",
+	"type": "zonal",
+	"tag": {
+		"render": "nhem",
+		"data": "nhem"
+	},
+	"config": {
+		"meta": {
+			"config": "unscaledtemperature",
+			"lang": "blank_nhem_Temperature",
+			"data": "NASA-GISS_TEMP",
+			"set": "climate"
+		}
+	},
+	"months": false
+}

@@ -10,6 +10,9 @@ module.exports = [{
 		filename: './bundle.js',
 		path: __dirname + '/client'
 	},
+	optimization: {
+    		minimize: true,
+  	},
 	module: {
 		rules: [
 			{
