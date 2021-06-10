@@ -38,9 +38,9 @@ exports.meta = {
 					files: files,
 					aggr: function(){
 						var aggr = {
-							stationDef: files.stationDef
+							stationDef: this.files.stationDef
 						};
-						$.extend(true, aggr, files.config, files.set, files[nav_lang], files.subset)
+						$.extend(true, aggr, this.files.config, this.files.set, this.files[nav_lang], this.files.subset)
 
 						return aggr;
 					},
@@ -75,7 +75,8 @@ exports.meta = {
 				// TODO order of month replace for subsets
 				var res = res.replace("[stationName]", meta.stationDef.stationName)
 
-				var set = (meta.subset ? meta.subset.enabled : false) ? meta.subset.sets : undefined;
+				var set = (meta.subset ? meta.subset.enabled : false) ? meta.subset.set : undefined;
+				if(meta.time.months[set]) set = meta.time.months[set]
 				res = (meta.subset ? meta.subset.enabled : false) ? res.replace("[month]", set) : res.replace("[month]", meta.month)
 				res = res.replace("[baseline]", baselineLower +" - "+ baselineUpper)
 				res = res.replace("[CO2]", 'CO'+("2".sub()))

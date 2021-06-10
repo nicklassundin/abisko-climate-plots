@@ -74,14 +74,8 @@ var chart = {
 							},
 						});
 						tmp.chart.showLoading();
-						tmp.metaRef = metaRef;
-						// tmp.metaFiles = temp.files;
-						// console.log(metaRef.aggr)
-						// metaRef.aggr().subset.set = set;
-						var metaTemp = {}; 
-						$.extend(true, metaTemp, metaRef.text())
-						metaTemp.subset.set = set	
-						tmp.meta = metaTemp;
+						tmp.metaRef.files.subset.subset.set = set;
+						tmp.meta = tmp.metaRef.text();
 						result[set] = tmp;
 					})
 					resolve(result)
@@ -561,19 +555,16 @@ var chart = {
 		}
 	},
 	clone: function(){
-		return Object.assign({}, this);
+		return $.extend(true, {}, this);
 	}
 }
 // TODO merge into main function above
 var render = {
 	charts: {},
 	setup: function(meta){
-		// console.log(this.charts)
-		// console.log("Setupt Render")
 		var id = meta.files.stationDef.id
 		try{
 			this.charts[id] = chart.create(meta) 
-			// console.log(this.charts[id])
 		}catch(error){
 			console.log(id);
 			throw error
