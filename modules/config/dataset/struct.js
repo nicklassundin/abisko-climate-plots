@@ -194,10 +194,10 @@ var struct = {
 		// console.log(this.metaRef)
 		// console.log(id)
 		var tag = this.metaRef[id].files.ref.tag.data
-		var render = this.render;
+		// var render = this.render;
 		var meta = this.metaRef[id]
 		var st_id = meta.files.stationDef.id;
-		render.setup(meta);
+		this.render.setup(meta);
 		if(!Array.isArray(tag)) tag = [tag];
 		if(!this.cached[id]) this.cached[id] = {};
 		if(!this.cached[id][tag[0]]){
@@ -214,10 +214,10 @@ var struct = {
 		try{
 			if(data.then){
 				data.then(d => {
-					render.initiate(st_id, d)
+					this.render.initiate(st_id, d)
 				})
 			}else{
-				render.initiate(st_id, data)
+				this.render.initiate(st_id, data)
 			}
 		}catch(error){
 			console.log(id);
@@ -226,7 +226,7 @@ var struct = {
 			throw error;
 		}
 		// })
-		this.render = render;
+		// this.render = render;
 		return this;
 	},
 	clone: function(){
