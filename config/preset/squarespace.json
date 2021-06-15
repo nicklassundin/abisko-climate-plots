@@ -114,5 +114,221 @@
 		"abiskoLakeIceFreezeup",
 		"abiskoLakeIceTime",
 		"iceThicknessYear",
-		"iceThicknessDate"]
+		"iceThicknessDate"],
+	"viz-vizchange-annual-temp": {
+		"annualTemperatures": {
+			"station": "abisko",
+			"plot": "annualTemperatures"
+		}
+	},
+	"viz-annual-prec": {
+		"annualPrecipitation": {
+			"station": "abisko",
+			"plot": "annualPrecipitation"
+		}
+	},
+	"viz-grow-weeks": {
+		"growingSeasonWeeks": {
+			"station": "abisko",
+			"plot": "growingSeasonWeeks" 
+		}
+	},
+	"viz-grow-days": {
+		"growingSeasonDays": {
+			"station": "abisko",
+			"plot": "growingSeasonDays" 
+		}
+	},
+	"viz-spring-prec": {
+		"springPrecipitation": {
+			"station": "abisko",
+			"plot": "springPrecipitation" 
+		}
+	},
+	"viz-summer-prec": {
+		"summerPrecipitation": {
+			"station": "abisko",
+			"plot": "summerPrecipitation" 
+		}
+	},
+	"viz-autumn-prec": {
+		"autumnPrecipitation": {
+			"station": "abisko",
+			"plot": "autumnPrecipitation" 
+		}
+	},
+	"viz-winter-prec": {
+		"winterPrecipitation": {
+			"station": "abisko",
+			"plot": "winterPrecipitation" 
+		}
+	},
+	"viz-jan-prec": {
+		"precipitation_jan": {
+			"station": "abisko",
+			"plot": "precipitation_jan" 
+		}
+	},
+	"viz-feb-prec": {
+		"precipitation_feb": {
+			"station": "abisko",
+			"plot": "precipitation_feb" 
+		}
+	},
+	"viz-mar-prec": {
+		"precipitation_mar": {
+			"station": "abisko",
+			"plot": "precipitation_mar" 
+		}
+	},
+	"viz-apr-prec": {
+		"precipitation_apr": {
+			"station": "abisko",
+			"plot": "precipitation_apr" 
+		}
+	},
+	"viz-may-prec": {
+		"precipitation_may": {
+			"station": "abisko",
+			"plot": "precipitation_may" 
+		}
+	},
+	"viz-jun-prec": {
+		"precipitation_jun": {
+			"station": "abisko",
+			"plot": "precipitation_jun" 
+		}
+	},
+	"viz-jul-prec": {
+		"precipitation_jul": {
+			"station": "abisko",
+			"plot": "precipitation_jul" 
+		}
+	},
+	"viz-aug-prec": {
+		"precipitation_aug": {
+			"station": "abisko",
+			"plot": "precipitation_aug" 
+		}
+	},
+	"viz-sep-prec": {
+		"precipitation_sep": {
+			"station": "abisko",
+			"plot": "precipitation_sep" 
+		}
+	},
+	"viz-oct-prec": {
+		"precipitation_oct": {
+			"station": "abisko",
+			"plot": "precipitation_oct" 
+		}
+	},
+	"viz-nov-prec": {
+		"precipitation_nov": {
+			"station": "abisko",
+			"plot": "precipitation_nov" 
+		}
+	},
+	"viz-dec-prec": {
+		"precipitation_dec": {
+			"station": "abisko",
+			"plot": "precipitation_dec" 
+		}
+	},
+	"viz-spring-temp": {
+		"TemperaturesSpring": {
+			"station": "abisko",
+			"plot": "TemperaturesSpring" 
+		}
+	},
+	"viz-summer-temp": {
+		"TemperaturesSummer": {
+			"station": "abisko",
+			"plot": "TemperaturesSummer" 
+		}
+	},
+	"viz-autumn-temp": {
+		"TemperaturesAutumn": {
+			"station": "abisko",
+			"plot": "TemperaturesAutumn" 
+		}
+	},
+	"viz-winter-temp": {
+		"TemperaturesWinter": {
+			"station": "abisko",
+			"plot": "TemperaturesWinter" 
+		}
+	},
+	"viz-jan-temp": {
+		"jan_temperatures": {
+			"station": "abisko",
+			"plot": "jan_temperatures"
+		}
+	},
+	"viz-feb-temp": {
+		"feb_temperatures": {
+			"station": "abisko",
+			"plot": "feb_temperatures"
+		}
+	},
+	"viz-mar-temp": {
+		"mar_temperatures": {
+			"station": "abisko",
+			"plot": "mar_temperatures"
+		}
+	},
+	"viz-apr-temp": {
+		"apr_temperatures": {
+			"station": "abisko",
+			"plot": "apr_temperatures"
+		}
+	},
+	"viz-may-temp": {
+		"may_temperatures": {
+			"station": "abisko",
+			"plot": "may_temperatures"
+		}
+	},
+	"viz-jun-temp": {
+		"jun_temperatures": {
+			"station": "abisko",
+			"plot": "jun_temperatures"
+		}
+	},
+	"viz-jul-temp": {
+		"jul_temperatures": {
+			"station": "abisko",
+			"plot": "jul_temperatures"
+		}
+	},
+	"viz-aug-temp": {
+		"aug_temperatures": {
+			"station": "abisko",
+			"plot": "aug_temperatures"
+		}
+	},
+	"viz-sep-temp": {
+		"sep_temperatures": {
+			"station": "abisko",
+			"plot": "sep_temperatures"
+		}
+	},
+	"viz-oct-temp": {
+		"oct_temperatures": {
+			"station": "abisko",
+			"plot": "oct_temperatures"
+		}
+	},
+	"viz-nov-temp": {
+		"nov_temperatures": {
+			"station": "abisko",
+			"plot": "nov_temperatures"
+		}
+	},
+	"viz-dec-temp": {
+		"dec_temperatures": {
+			"station": "abisko",
+			"plot": "dec_temperatures" 
+		}
+	}
 }
