@@ -1,9 +1,13 @@
 {
-	"id": "monthlyTemperatures",
+	"id": "oct_temperatures",
 	"type": "[stationType]",
+	"subset": {
+		"type": "months",
+		"set": "oct"
+	},
 	"tag": {
 		"render": ["temperatures","monthly"],
-		"data": ["temperatures","monthly"]
+		"data": ["temperatures","monthly", "oct"]
 	},
 	"config": {
 		"meta": {

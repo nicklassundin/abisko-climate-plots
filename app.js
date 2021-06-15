@@ -65,13 +65,23 @@ exports.custom = custom;
 // }
 
 hbs.registerPartials(__dirname+'/views/partials');
+var stati = require('./static/charts/stations.json');
 const stations = require('./static/charts/stations.json');
 custom.then(chrts => {
+	var sets = stati;
+	var stations = Object.keys(stati).map(st => {
+		if(st === "smhi"){
+			return "53430"
+		}else{
+			return st
+		}
+	})
 	var temp = Object.keys(stations);	
 	app.get('/browse', (req, res) => {
 		res.render('browse.hbs', {
+			sets,
 			chrts,
-			temp,
+			stations,
 			latestCommit: "release"
 		})
 	})

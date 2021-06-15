@@ -33,6 +33,7 @@
 		"growingSeasonFrostLast",
 		"abiskoLakeIceBreakup",
 		"abiskoLakeIceFreezeup",
-		"annualAvgSnowDepth"
+		"annualAvgSnowDepth",
+		"jan_temperatures"
 	]
 }

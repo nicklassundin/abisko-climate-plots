@@ -58,28 +58,28 @@ var chart = {
 			var res = this.clone();
 			return new Promise((resolve, reject) => {
 				var meta = metaRef.aggr();
-				if(meta.subset ? !meta.subset.set : false){
-					meta.subset.sets = Object.keys(meta.subset.sets).map(key => { return meta.subset.sets[key] }).filter(e => typeof e == "string");
-					if(variables.debug){
-						meta.subset.sets = [meta.subset.sets[0]];
-					}
-					result.sets = meta.subset.sets;
-					meta.subset.sets.forEach(set => {
-						var tmp = res.clone();
-						tmp.id = id+'_'+set;
-						tmp.chart = Highcharts.chart(tmp.id, {
-							lang: language[nav_lang], 
-							credits: {
-								enabled: false
-							},
-						});
-						tmp.chart.showLoading();
-						tmp.metaRef.files.subset.subset.set = set;
-						tmp.meta = tmp.metaRef.text();
-						result[set] = tmp;
-					})
-					resolve(result)
-				}else{
+				// if(meta.subset ? !meta.subset.set : false){
+				// 	meta.subset.sets = Object.keys(meta.subset.sets).map(key => { return meta.subset.sets[key] }).filter(e => typeof e == "string");
+				// 	if(variables.debug){
+				// 		meta.subset.sets = [meta.subset.sets[0]];
+				// 	}
+				// 	result.sets = meta.subset.sets;
+				// 	meta.subset.sets.forEach(set => {
+				// 		var tmp = res.clone();
+				// 		tmp.id = id+'_'+set;
+				// 		tmp.chart = Highcharts.chart(tmp.id, {
+				// 			lang: language[nav_lang], 
+							// credits: {
+							// 	enabled: false
+							// },
+						// });
+						// tmp.chart.showLoading();
+						// tmp.metaRef.files.subset.subset.set = set;
+						// tmp.meta = tmp.metaRef.text();
+						// result[set] = tmp;
+					// })
+					// resolve(result)
+				// }else{
 					res.chart = Highcharts.chart(id, {
 						lang: language[nav_lang], 
 						credits: {
@@ -94,7 +94,7 @@ var chart = {
 					$.extend(true, res.meta, metaRef.text())
 					res.setup()
 					resolve(res)
-				}
+				// }
 
 			})
 		}catch(error){
@@ -251,12 +251,12 @@ var chart = {
 	initiate: function(data = this.data){
 		var meta = this.meta;	
 		var id = this.id;
-		if(this.meta.subset){
-			data = data[this.meta.subset.set] 
-			this.data = data[this.meta.subset.set] 
-		}else{
+		// if(this.meta.subset){
+			// data = data[this.meta.subset.set] 
+			// this.data = data[this.meta.subset.set] 
+		// }else{
 			this.data = data;
-		}
+		// }
 		// console.log(this.data)
 		// console.log(this.meta)
 
