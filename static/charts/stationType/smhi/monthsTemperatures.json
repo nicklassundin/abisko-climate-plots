@@ -19,14 +19,14 @@
           "config": "temperature",
           "lang": "monthlyTemperature",
           "set": "slide",
-          "subset": "monthSet"
+          "subset": "monthly"
         },
         "abisko": {
           "data": "ANS",
           "config": "temperature",
           "lang": "monthlyTemperature",
           "set": "slide",
-          "subset": "monthSet"
+          "subset": "monthly"
         }
       }
     },
@@ -108,26 +108,23 @@
     }
   },
   "subset": {
-    "subset": {
-      "set": "jan",
-      "sets": [
-        "jan",
-        "feb",
-        "mar",
-        "apr",
-        "may",
-        "jun",
-        "jul",
-        "aug",
-        "sep",
-        "oct",
-        "nov",
-        "dec"
-      ],
-      "enabled": true,
-      "type": "months",
-      "point": 0
-    }
+    "sets": [
+      "jan",
+      "feb",
+      "mar",
+      "apr",
+      "may",
+      "jun",
+      "jul",
+      "aug",
+      "sep",
+      "oct",
+      "nov",
+      "dec"
+    ],
+    "enabled": true,
+    "type": "months",
+    "set": "sep"
   },
   "set": {
     "groups": {

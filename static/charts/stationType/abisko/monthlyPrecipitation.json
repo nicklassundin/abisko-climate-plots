@@ -98,26 +98,23 @@
     }
   },
   "subset": {
-    "subset": {
-      "set": false,
-      "sets": [
-        "jan",
-        "feb",
-        "mar",
-        "apr",
-        "may",
-        "jun",
-        "jul",
-        "aug",
-        "sep",
-        "oct",
-        "nov",
-        "dec"
-      ],
-      "enabled": true,
-      "type": "months",
-      "point": 0
-    }
+    "sets": [
+      "jan",
+      "feb",
+      "mar",
+      "apr",
+      "may",
+      "jun",
+      "jul",
+      "aug",
+      "sep",
+      "oct",
+      "nov",
+      "dec"
+    ],
+    "enabled": true,
+    "type": "months",
+    "set": "sep"
   },
   "set": {
     "groups": {

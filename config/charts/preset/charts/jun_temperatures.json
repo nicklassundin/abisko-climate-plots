@@ -1,0 +1,31 @@
+{
+	"id": "jun_temperatures",
+	"type": "[stationType]",
+	"subset": {
+		"type": "months",
+		"set": "jun"
+	},
+	"tag": {
+		"render": ["temperatures","monthly"],
+		"data": ["temperatures","monthly", "jun"]
+	},
+	"config": {
+		"meta": {
+			"smhi": {
+				"data": "SMHI-Weather",
+				"config": "temperature",
+				"lang": "monthlyTemperature",
+				"set": "weather",
+				"subset": "monthly"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "temperature",
+				"lang": "monthlyTemperature",
+				"set": "weather",
+				"subset": "monthly"
+			}
+		}
+	},
+	"months": true
+}

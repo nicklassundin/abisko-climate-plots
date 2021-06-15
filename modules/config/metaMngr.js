@@ -40,7 +40,9 @@ exports.meta = {
 						var aggr = {
 							stationDef: this.files.stationDef
 						};
-						$.extend(true, aggr, this.files.config, this.files.set, this.files[nav_lang], this.files.subset)
+						$.extend(true, aggr, this.files.config, this.files.set, this.files[nav_lang])
+						aggr.subset = {};
+						$.extend(true, aggr.subset, this.files.subset, this.files.ref.subset);
 
 						return aggr;
 					},
