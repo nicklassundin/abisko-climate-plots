@@ -1,5 +1,14 @@
 {
-	"sqrt-IceThick": ["iceThicknessYear", "iceThicknessDate"],
+	"sqrt-IceThick": {
+		"iceThicknessYear": {
+			"station": "abisko",
+			"plot": "iceThicknessYear" 
+		},
+		"iceThicknessDate": {
+			"station": "abisko",
+			"plot": "iceThicknessDate" 
+		}
+	},
 	"sqrt-temp": {
 		"temperatureDifference": {
 			"station": "abisko",
@@ -22,9 +31,35 @@
 	"sqrt-growing": ["growingSeasonWeeks",
 		"diffGrowingSeasonWeeks","growingSeasonDays",
 		"diffGrowingSeasonDays"],
-	"sqrt-mTemp": ["monthlyTemperatures"],
+	"sqrt-mTemp": [
+		"jan_temperatures",
+		"feb_temperatures",
+		"mar_temperatures",
+		"apr_temperatures",
+		"may_temperatures",
+		"jun_temperatures",
+		"jul_temperatures",
+		"aug_temperatures",
+		"sep_temperatures",
+		"oct_temperatures",
+		"nov_temperatures",
+		"dec_temperatures"
+	],
 	"sqrt-prec": ["annualPrecipitation","springPrecipitation","summerPrecipitation","autumnPrecipitation","winterPrecipitation"],
-	"sqrt-mPrec": ["monthlyPrecipitation"],
+	"sqrt-mPrec": [
+		"precipitation_jan",
+		"precipitation_feb",
+		"precipitation_mar",
+		"precipitation_apr",
+		"precipitation_may",
+		"precipitation_jun",
+		"precipitation_jul",
+		"precipitation_aug",
+		"precipitation_sep",
+		"precipitation_oct",
+		"precipitation_nov",
+		"precipitation_dec"
+	], 
 	"sqrt-snowDepth": ["abiskoSnowDepthPeriodMeans",
 		"abiskoSnowDepthPeriodMeans2"],
 	"sqrt-lakeIce": ["abiskoLakeIce",

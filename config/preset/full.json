@@ -4,7 +4,6 @@
 	"TemperaturesSummer" : ["TemperaturesSummer"],
 	"TemperaturesAutumn" : ["TemperaturesAutumn"],
 	"TemperaturesWinter" : ["TemperaturesWinter"],
-	"monthlyTemperatures" : ["monthlyTemperatures"],
 	"growingSeasonWeeks" : ["growingSeasonWeeks"],
 	"growingSeasonDays" : ["growingSeasonDays"],
 	"temperatureDifference" : ["temperatureDifference"],
@@ -14,7 +13,6 @@
 	"temperature_glob" : ["temperature_glob"],
 	"annualPrecipitation" : ["annualPrecipitation"],
 	"winterPrecipitation" : ["winterPrecipitation"],
-	"monthlyPrecipitation" : ["monthlyPrecipitation"],
 	"annualPrecipitationDifference" : ["annualPrecipitationDifference"],
 	"springPrecipitation" : ["springPrecipitation"],
 	"summerPrecipitation" : ["summerPrecipitation"],
@@ -32,7 +30,6 @@
 	"weeklyExtremeTemperature" : ["weeklyExtremeTemperature"],
 	"dailyExtremePrecipitation" : ["dailyExtremePrecipitation"],
 	"weeklyExtremePrecipitation" : ["weeklyExtremePrecipitation"],
-	"monthlyPrecipitationPolar" : ["monthlyPrecipitationPolar"],
 	"growingSeasonFrostFirst" : ["growingSeasonFrostFirst"],
 	"growingSeasonFrostLast" : ["growingSeasonFrostLast"],
 	"slideMonthlyTemperatures" : ["slideMonthlyTemperatures"],
@@ -55,5 +52,7 @@
 	"diffGrowingSeasonDays": ["diffGrowingSeasonDays"],
 	"diffGrowingSeasonWeeks": ["diffGrowingSeasonWeeks"],
 	"slideGrowingSeasonDays": ["slideGrowingSeasonDays"],
-	"slideGrowingSeasonWeeks": ["slideGrowingSeasonWeeks"]
+	"slideGrowingSeasonWeeks": ["slideGrowingSeasonWeeks"],
+	"jan_temperatures": ["jan_temperatures"],
+	"precipitation_jan": ["precipitation_jan"]
 }

@@ -1,18 +1,4 @@
 {
-  "local": [
-    "annualTemperatures",
-    "TemperaturesSummer",
-    "TemperaturesWinter",
-    "monthlyTemperatures",
-    "growingSeasonWeeks",
-    "growingSeasonDays",
-    "temperatureDifference",
-    "annualPrecipitation",
-    "summerPrecipitation",
-    "winterPrecipitation",
-    "monthlyPrecipitation",
-    "annualPrecipitationDifference"
-  ],
   "localSmall": [
     "annualTemperatures",
     "annualPrecipitation"
@@ -23,6 +9,20 @@
     "TemperaturesWinter",
     "monthlyTemperatures",
     "temperatureDifference"
+  ],
+  "monthlyTemperatures": [
+    "jan_temperatures",
+    "feb_temperatures",
+    "mar_temperatures",
+    "apr_temperatures",
+    "may_temperatures",
+    "jun_temperatures",
+    "jul_temperatures",
+    "aug_temperatures",
+    "sep_temperatures",
+    "oct_temperatures",
+    "nov_temperatures",
+    "dec_temperatures"
   ],
   "monthTemp": [
     "monthlyTemperatures"
@@ -45,6 +45,19 @@
     "autumnPrecipitation",
     "winterPrecipitation"
   ],
+  "monthlyPrecipitation": [
+    "precipitation_jan",
+    "precipitation_mar",
+    "precipitation_apr",
+    "precipitation_may",
+    "precipitation_jun",
+    "precipitation_jul",
+    "precipitation_aug",
+    "precipitation_sep",
+    "precipitation_oct",
+    "precipitation_nov",
+    "precipitation_dec"
+  ],
   "tempDiff": [
     "temperatureDifference"
   ],
@@ -53,15 +66,6 @@
     "weeklyExtremeTemperature",
     "dailyExtremePrecipitation",
     "weeklyExtremePrecipitation"
-  ],
-  "precip": [
-    "annualPrecipitation",
-    "springPrecipitation",
-    "summerPrecipitation",
-    "autumnPrecipitation",
-    "winterPrecipitation",
-    "monthlyPrecipitation",
-    "annualPrecipitationDifference"
   ],
   "tempZoneDiff": [
     "temperature_64n90n",
@@ -148,17 +152,17 @@
     "growingSeasonFrostLast"
   ],
   "custom": [
-    "local",
     "localSmall",
     "temp",
+    "monthlyTemperatures",
     "monthTemp",
     "tempAvg",
     "tempAvgSlide",
     "tempSeason",
     "precipSeason",
+    "monthlyPrecipitation",
     "tempDiff",
     "extreme",
-    "precip",
     "tempZoneDiff",
     "precipAvg",
     "monthPrec",
@@ -187,7 +191,6 @@
     "TemperaturesSummer",
     "TemperaturesAutumn",
     "TemperaturesWinter",
-    "monthlyTemperatures",
     "growingSeasonWeeks",
     "growingSeasonDays",
     "temperatureDifference",
@@ -197,7 +200,6 @@
     "temperature_glob",
     "annualPrecipitation",
     "winterPrecipitation",
-    "monthlyPrecipitation",
     "annualPrecipitationDifference",
     "springPrecipitation",
     "summerPrecipitation",
@@ -215,7 +217,6 @@
     "weeklyExtremeTemperature",
     "dailyExtremePrecipitation",
     "weeklyExtremePrecipitation",
-    "monthlyPrecipitationPolar",
     "growingSeasonFrostFirst",
     "growingSeasonFrostLast",
     "slideMonthlyTemperatures",
@@ -238,7 +239,9 @@
     "diffGrowingSeasonDays",
     "diffGrowingSeasonWeeks",
     "slideGrowingSeasonDays",
-    "slideGrowingSeasonWeeks"
+    "slideGrowingSeasonWeeks",
+    "jan_temperatures",
+    "precipitation_jan"
   ],
   "sqrt-IceThick": [
     "iceThicknessYear",
@@ -276,7 +279,18 @@
     "diffGrowingSeasonDays"
   ],
   "sqrt-mTemp": [
-    "monthlyTemperatures"
+    "jan_temperatures",
+    "feb_temperatures",
+    "mar_temperatures",
+    "apr_temperatures",
+    "may_temperatures",
+    "jun_temperatures",
+    "jul_temperatures",
+    "aug_temperatures",
+    "sep_temperatures",
+    "oct_temperatures",
+    "nov_temperatures",
+    "dec_temperatures"
   ],
   "sqrt-prec": [
     "annualPrecipitation",
@@ -286,7 +300,18 @@
     "winterPrecipitation"
   ],
   "sqrt-mPrec": [
-    "monthlyPrecipitation"
+    "precipitation_jan",
+    "precipitation_feb",
+    "precipitation_mar",
+    "precipitation_apr",
+    "precipitation_may",
+    "precipitation_jun",
+    "precipitation_jul",
+    "precipitation_aug",
+    "precipitation_sep",
+    "precipitation_oct",
+    "precipitation_nov",
+    "precipitation_dec"
   ],
   "sqrt-snowDepth": [
     "abiskoSnowDepthPeriodMeans",

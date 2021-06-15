@@ -1,0 +1,31 @@
+{
+	"id": "may_temperatures",
+	"type": "[stationType]",
+	"subset": {
+		"type": "months",
+		"set": "may"
+	},
+	"tag": {
+		"render": ["temperatures","monthly"],
+		"data": ["temperatures","monthly", "may"]
+	},
+	"config": {
+		"meta": {
+			"smhi": {
+				"data": "SMHI-Weather",
+				"config": "temperature",
+				"lang": "monthlyTemperature",
+				"set": "weather",
+				"subset": "monthly"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "temperature",
+				"lang": "monthlyTemperature",
+				"set": "weather",
+				"subset": "monthly"
+			}
+		}
+	},
+	"months": true
+}

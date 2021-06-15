@@ -120,7 +120,6 @@ var parseByDate = function (values, type='mean', src='', custom) {
 					entries.forEach(entry => {
 						var date = undefined; 
 						keys.forEach(key => {
-
 							values = set(entry[key], key, new Date(entry[key].x));
 						})
 					})

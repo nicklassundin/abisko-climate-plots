@@ -34,13 +34,15 @@ exports.preset = new Promise((resolve, reject) => {
 
 						files.config.parse = {};
 						$.extend(true, files.config.parse, par[temp.type])
-						// console.log('-----')
-						// console.log(par[temp.type])	
-						// console.log(temp.type)
-						// console.log(files.config.parse)
-						// console.log('-----')
-						if(define.subset) files.subset = require('../'+define.subset+'.json');
+						
+						
+
+						if(define.subset) {
+							files.subset = require('../'+define.subset+'.json').subset;
+						}
 						files.set = require('../'+define.set+'.json');
+							
+							
 						['en', 'sv'].forEach(lang => {
 							files[lang] = require('../lang/'+lang+'/'+define.lang+'.json');
 

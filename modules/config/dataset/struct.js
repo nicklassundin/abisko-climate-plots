@@ -69,16 +69,16 @@ var struct = {
 	html: function(config){
 		var id = config.files.stationDef.id;
 		var subset = config.files.subset;
-		if(subset){
-			subset = subset.subset;
-			var div = document.createElement("div");
-			subset.sets.forEach(month => {
-				div.appendChild(createDiv(id+'_'+month));
-			})
-		}else{
+		// if(subset){
+			// subset = subset.subset;
+			// var div = document.createElement("div");
+			// subset.sets.forEach(month => {
+				// div.appendChild(createDiv(id+'_'+month));
+			// })
+		// }else{
 			return createDiv(id, false)
-		}	
-		return div
+		// }	
+		// return div
 	},
 	build: function(config, div){
 		this.config = config;

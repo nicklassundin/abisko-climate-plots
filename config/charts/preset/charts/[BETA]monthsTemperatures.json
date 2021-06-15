@@ -12,14 +12,14 @@
 				"config": "temperature",
 				"lang": "monthlyTemperature",
 				"set": "slide",
-				"subset": "monthSet"
+				"subset": "monthly"
 			},
 			"abisko": {
 				"data": "ANS",
 				"config": "temperature",
 				"lang": "monthlyTemperature",
 				"set": "slide",
-				"subset": "monthSet"
+				"subset": "monthly"
 			}
 		}
 	},
