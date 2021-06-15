@@ -243,10 +243,16 @@
     "jan_temperatures",
     "precipitation_jan"
   ],
-  "sqrt-IceThick": [
-    "iceThicknessYear",
-    "iceThicknessDate"
-  ],
+  "sqrt-IceThick": {
+    "iceThicknessYear": {
+      "station": "abisko",
+      "plot": "iceThicknessYear"
+    },
+    "iceThicknessDate": {
+      "station": "abisko",
+      "plot": "iceThicknessDate"
+    }
+  },
   "sqrt-temp": {
     "temperatureDifference": {
       "station": "abisko",
