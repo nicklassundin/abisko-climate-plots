@@ -41,11 +41,8 @@ var tagApply = function(data, tags){
 				var tag = tags.shift()
 				res(tagApply(result[tag], tags))
 			}else{
-				// console.log(result)
-				// console.log(tags)
-				// console.log(result[tags])
-				// fdsfds
-				res(result[tags.replace('[stationName]', station)])
+				// res(result[tags.replace('[stationName]', station)])
+				res(result[tags])
 			}
 		}
 	}).catch(error=>{
