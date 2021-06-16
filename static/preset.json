@@ -389,10 +389,37 @@
     "iceThicknessYear",
     "iceThicknessDate"
   ],
+  "squarespace": [
+    "sqrt-IceThick",
+    "sqrt-temp",
+    "sqrt-season-temp",
+    "sqrt-growing",
+    "sqrt-mTemp",
+    "sqrt-prec",
+    "sqrt-mPrec",
+    "sqrt-snowDepth",
+    "sqrt-lakeIce",
+    "sqrt-perma",
+    "sqrt-carbon",
+    "sqrt-temp-climate-weather-v2",
+    "sqrt-temp-extreme-v2",
+    "sqrt-prec-extreme-v2",
+    "sqrt-growingSeason-v2",
+    "sqrt-temp-v2",
+    "sqrt-prec-v2",
+    "sqrt-snowDepth-v2",
+    "sqrt-lakeIce-v2"
+  ],
+  "v1": [
+    "v1"
+  ],
+  "v2": [
+    "v2"
+  ],
   "viz-vizchange-annual-temp": {
-    "annualTemperatures": {
+    "slideTemperatures": {
       "station": "abisko",
-      "plot": "annualTemperatures"
+      "plot": "slideTemperatures"
     }
   },
   "viz-annual-prec": {
@@ -404,37 +431,37 @@
   "viz-grow-weeks": {
     "growingSeasonWeeks": {
       "station": "abisko",
-      "plot": "growingSeasonWeeks"
+      "plot": "slideGrowingSeasonWeeks"
     }
   },
   "viz-grow-days": {
     "growingSeasonDays": {
       "station": "abisko",
-      "plot": "growingSeasonDays"
+      "plot": "slideGrowingSeasonDays"
     }
   },
   "viz-spring-prec": {
-    "springPrecipitation": {
+    "slideSpringPrecipitation": {
       "station": "abisko",
-      "plot": "springPrecipitation"
+      "plot": "slideSpringPrecipitation"
     }
   },
   "viz-summer-prec": {
-    "summerPrecipitation": {
+    "slideSummerPrecipitation": {
       "station": "abisko",
-      "plot": "summerPrecipitation"
+      "plot": "slideSummerPrecipitation"
     }
   },
   "viz-autumn-prec": {
-    "autumnPrecipitation": {
+    "slideAutumnPrecipitation": {
       "station": "abisko",
-      "plot": "autumnPrecipitation"
+      "plot": "slideAutumnPrecipitation"
     }
   },
   "viz-winter-prec": {
-    "winterPrecipitation": {
+    "slideWinterPrecipitation": {
       "station": "abisko",
-      "plot": "winterPrecipitation"
+      "plot": "slideWinterPrecipitation"
     }
   },
   "viz-jan-prec": {
@@ -510,27 +537,27 @@
     }
   },
   "viz-spring-temp": {
-    "TemperaturesSpring": {
+    "slideTemperaturesSpring": {
       "station": "abisko",
-      "plot": "TemperaturesSpring"
+      "plot": "slideTemperaturesSpring"
     }
   },
   "viz-summer-temp": {
-    "TemperaturesSummer": {
+    "slideTemperaturesSummer": {
       "station": "abisko",
-      "plot": "TemperaturesSummer"
+      "plot": "slideTemperaturesSummer"
     }
   },
   "viz-autumn-temp": {
-    "TemperaturesAutumn": {
+    "slideTemperaturesAutumn": {
       "station": "abisko",
-      "plot": "TemperaturesAutumn"
+      "plot": "slideTemperaturesAutumn"
     }
   },
   "viz-winter-temp": {
-    "TemperaturesWinter": {
+    "slideTemperaturesWinter": {
       "station": "abisko",
-      "plot": "TemperaturesWinter"
+      "plot": "slideTemperaturesWinter"
     }
   },
   "viz-jan-temp": {
@@ -605,26 +632,7 @@
       "plot": "dec_temperatures"
     }
   },
-  "squarespace": [
-    "sqrt-IceThick",
-    "sqrt-temp",
-    "sqrt-season-temp",
-    "sqrt-growing",
-    "sqrt-mTemp",
-    "sqrt-prec",
-    "sqrt-mPrec",
-    "sqrt-snowDepth",
-    "sqrt-lakeIce",
-    "sqrt-perma",
-    "sqrt-carbon",
-    "sqrt-temp-climate-weather-v2",
-    "sqrt-temp-extreme-v2",
-    "sqrt-prec-extreme-v2",
-    "sqrt-growingSeason-v2",
-    "sqrt-temp-v2",
-    "sqrt-prec-v2",
-    "sqrt-snowDepth-v2",
-    "sqrt-lakeIce-v2",
+  "vizchange": [
     "viz-vizchange-annual-temp",
     "viz-annual-prec",
     "viz-grow-weeks",
@@ -661,11 +669,5 @@
     "viz-oct-temp",
     "viz-nov-temp",
     "viz-dec-temp"
-  ],
-  "v1": [
-    "v1"
-  ],
-  "v2": [
-    "v2"
   ]
 }
