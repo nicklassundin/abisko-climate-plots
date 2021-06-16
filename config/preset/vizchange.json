@@ -214,5 +214,17 @@
 			"station": "abisko",
 			"plot": "dec_temperatures" 
 		}
+	},
+	"viz-perma": {
+		"permaHistogram": {
+			"station": "CALM",
+			"plot": "permaHistogramCALM"
+		}
+	},
+	"viz-lakeice": {
+		"slideLakeIceTime": {
+			"station": "abisko",
+			"plot": "slideLakeIceTime"
+		}
 	}
 }

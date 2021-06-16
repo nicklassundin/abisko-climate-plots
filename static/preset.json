@@ -632,6 +632,18 @@
       "plot": "dec_temperatures"
     }
   },
+  "viz-perma": {
+    "permaHistogram": {
+      "station": "CALM",
+      "plot": "permaHistogramCALM"
+    }
+  },
+  "viz-lakeice": {
+    "slideLakeIceTime": {
+      "station": "abisko",
+      "plot": "slideLakeIceTime"
+    }
+  },
   "vizchange": [
     "viz-annual-prec",
     "viz-grow-weeks",
@@ -668,6 +680,8 @@
     "viz-sep-temp",
     "viz-oct-temp",
     "viz-nov-temp",
-    "viz-dec-temp"
+    "viz-dec-temp",
+    "viz-perma",
+    "viz-lakeice"
   ]
 }
