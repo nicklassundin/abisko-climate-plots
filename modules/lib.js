@@ -43,7 +43,6 @@ lib = {
 			}
 		}
 		meta.getMeta(type).then(cfg =>{
-			console.log(cfg)
 			$(function(){
 				var chrt = charts.build(cfg, div)
 				// div.appendChild(chrt.html(div_id));
