@@ -1,14 +1,8 @@
 {
-	"viz-vizchange-annual-temp": {
-		"slideTemperatures": {
-			"station": "abisko",
-			"plot": "slideTemperatures"
-		}
-	},
 	"viz-annual-prec": {
-		"annualPrecipitation": {
+		"slidePrecipitation": {
 			"station": "abisko",
-			"plot": "annualPrecipitation"
+			"plot": "slidePrecipitation"
 		}
 	},
 	"viz-grow-weeks": {
@@ -117,6 +111,12 @@
 		"precipitation_dec": {
 			"station": "abisko",
 			"plot": "precipitation_dec" 
+		}
+	},
+	"viz-annual-temp": {
+		"slideTemperatures": {
+			"station": "abisko",
+			"plot": "slideTemperatures"
 		}
 	},
 	"viz-spring-temp": {
