@@ -49280,7 +49280,7 @@
   },
   {
     "smhi": {
-      "slideTemperature": {
+      "slideTemperatures": {
         "ref": {
           "id": "slideTemperature",
           "type": "smhi",
@@ -49764,7 +49764,7 @@
       }
     },
     "abisko": {
-      "slideTemperature": {
+      "slideTemperatures": {
         "ref": {
           "id": "slideTemperature",
           "type": "abisko",

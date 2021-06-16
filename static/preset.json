@@ -416,16 +416,10 @@
   "v2": [
     "v2"
   ],
-  "viz-vizchange-annual-temp": {
-    "slideTemperatures": {
-      "station": "abisko",
-      "plot": "slideTemperatures"
-    }
-  },
   "viz-annual-prec": {
-    "annualPrecipitation": {
+    "slidePrecipitation": {
       "station": "abisko",
-      "plot": "annualPrecipitation"
+      "plot": "slidePrecipitation"
     }
   },
   "viz-grow-weeks": {
@@ -536,6 +530,12 @@
       "plot": "precipitation_dec"
     }
   },
+  "viz-annual-temp": {
+    "slideTemperatures": {
+      "station": "abisko",
+      "plot": "slideTemperatures"
+    }
+  },
   "viz-spring-temp": {
     "slideTemperaturesSpring": {
       "station": "abisko",
@@ -633,7 +633,6 @@
     }
   },
   "vizchange": [
-    "viz-vizchange-annual-temp",
     "viz-annual-prec",
     "viz-grow-weeks",
     "viz-grow-days",
@@ -653,6 +652,7 @@
     "viz-oct-prec",
     "viz-nov-prec",
     "viz-dec-prec",
+    "viz-annual-temp",
     "viz-spring-temp",
     "viz-summer-temp",
     "viz-autumn-temp",
