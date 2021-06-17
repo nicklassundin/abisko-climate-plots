@@ -37,10 +37,11 @@ exports.meta = {
 				res({
 					files: files,
 					aggr: function(){
+						var lang = this.files.config.fixlang
 						var aggr = {
 							stationDef: this.files.stationDef
 						};
-						$.extend(true, aggr, this.files.config, this.files.set, this.files[nav_lang])
+						$.extend(true, aggr, this.files.config, this.files.set, this.files[lang ? lang : nav_lang])
 						aggr.subset = {};
 						$.extend(true, aggr.subset, this.files.subset, this.files.ref.subset);
 
