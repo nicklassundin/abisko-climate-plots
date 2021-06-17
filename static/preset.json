@@ -418,218 +418,268 @@
   ],
   "viz-annual-prec": {
     "slidePrecipitation": {
+      "context": false,
       "station": "abisko",
       "plot": "slidePrecipitation"
     }
   },
   "viz-grow-weeks": {
     "growingSeasonWeeks": {
+      "context": false,
       "station": "abisko",
       "plot": "slideGrowingSeasonWeeks"
     }
   },
   "viz-grow-days": {
     "growingSeasonDays": {
+      "context": false,
       "station": "abisko",
       "plot": "slideGrowingSeasonDays"
     }
   },
   "viz-spring-prec": {
     "slideSpringPrecipitation": {
+      "context": false,
       "station": "abisko",
       "plot": "slideSpringPrecipitation"
     }
   },
   "viz-summer-prec": {
     "slideSummerPrecipitation": {
+      "context": false,
       "station": "abisko",
       "plot": "slideSummerPrecipitation"
     }
   },
   "viz-autumn-prec": {
     "slideAutumnPrecipitation": {
+      "context": false,
       "station": "abisko",
       "plot": "slideAutumnPrecipitation"
     }
   },
   "viz-winter-prec": {
     "slideWinterPrecipitation": {
+      "context": false,
       "station": "abisko",
       "plot": "slideWinterPrecipitation"
     }
   },
   "viz-jan-prec": {
     "precipitation_jan": {
+      "context": false,
       "station": "abisko",
       "plot": "precipitation_jan"
     }
   },
   "viz-feb-prec": {
     "precipitation_feb": {
+      "context": false,
       "station": "abisko",
       "plot": "precipitation_feb"
     }
   },
   "viz-mar-prec": {
     "precipitation_mar": {
+      "context": false,
       "station": "abisko",
       "plot": "precipitation_mar"
     }
   },
   "viz-apr-prec": {
     "precipitation_apr": {
+      "context": false,
       "station": "abisko",
       "plot": "precipitation_apr"
     }
   },
   "viz-may-prec": {
     "precipitation_may": {
+      "context": false,
       "station": "abisko",
       "plot": "precipitation_may"
     }
   },
   "viz-jun-prec": {
     "precipitation_jun": {
+      "context": false,
       "station": "abisko",
       "plot": "precipitation_jun"
     }
   },
   "viz-jul-prec": {
     "precipitation_jul": {
+      "context": false,
       "station": "abisko",
       "plot": "precipitation_jul"
     }
   },
   "viz-aug-prec": {
     "precipitation_aug": {
+      "context": false,
       "station": "abisko",
       "plot": "precipitation_aug"
     }
   },
   "viz-sep-prec": {
     "precipitation_sep": {
+      "context": false,
       "station": "abisko",
       "plot": "precipitation_sep"
     }
   },
   "viz-oct-prec": {
     "precipitation_oct": {
+      "context": false,
       "station": "abisko",
       "plot": "precipitation_oct"
     }
   },
   "viz-nov-prec": {
     "precipitation_nov": {
+      "context": false,
       "station": "abisko",
       "plot": "precipitation_nov"
     }
   },
   "viz-dec-prec": {
     "precipitation_dec": {
+      "context": false,
       "station": "abisko",
       "plot": "precipitation_dec"
     }
   },
   "viz-annual-temp": {
     "slideTemperatures": {
+      "context": false,
       "station": "abisko",
       "plot": "slideTemperatures"
     }
   },
   "viz-spring-temp": {
     "slideTemperaturesSpring": {
+      "context": false,
       "station": "abisko",
       "plot": "slideTemperaturesSpring"
     }
   },
   "viz-summer-temp": {
     "slideTemperaturesSummer": {
+      "context": false,
       "station": "abisko",
       "plot": "slideTemperaturesSummer"
     }
   },
   "viz-autumn-temp": {
     "slideTemperaturesAutumn": {
+      "context": false,
       "station": "abisko",
       "plot": "slideTemperaturesAutumn"
     }
   },
   "viz-winter-temp": {
     "slideTemperaturesWinter": {
+      "context": false,
       "station": "abisko",
       "plot": "slideTemperaturesWinter"
     }
   },
   "viz-jan-temp": {
     "jan_temperatures": {
+      "context": false,
       "station": "abisko",
       "plot": "jan_temperatures"
     }
   },
   "viz-feb-temp": {
     "feb_temperatures": {
+      "context": false,
       "station": "abisko",
       "plot": "feb_temperatures"
     }
   },
   "viz-mar-temp": {
     "mar_temperatures": {
+      "context": false,
       "station": "abisko",
       "plot": "mar_temperatures"
     }
   },
   "viz-apr-temp": {
     "apr_temperatures": {
+      "context": false,
       "station": "abisko",
       "plot": "apr_temperatures"
     }
   },
   "viz-may-temp": {
     "may_temperatures": {
+      "context": false,
       "station": "abisko",
       "plot": "may_temperatures"
     }
   },
   "viz-jun-temp": {
     "jun_temperatures": {
+      "context": false,
       "station": "abisko",
       "plot": "jun_temperatures"
     }
   },
   "viz-jul-temp": {
     "jul_temperatures": {
+      "context": false,
       "station": "abisko",
       "plot": "jul_temperatures"
     }
   },
   "viz-aug-temp": {
     "aug_temperatures": {
+      "context": false,
       "station": "abisko",
       "plot": "aug_temperatures"
     }
   },
   "viz-sep-temp": {
     "sep_temperatures": {
+      "context": false,
       "station": "abisko",
       "plot": "sep_temperatures"
     }
   },
   "viz-oct-temp": {
     "oct_temperatures": {
+      "context": false,
       "station": "abisko",
       "plot": "oct_temperatures"
     }
   },
   "viz-nov-temp": {
     "nov_temperatures": {
+      "context": false,
       "station": "abisko",
       "plot": "nov_temperatures"
     }
   },
   "viz-dec-temp": {
     "dec_temperatures": {
+      "context": false,
       "station": "abisko",
       "plot": "dec_temperatures"
+    }
+  },
+  "viz-perma": {
+    "permaHistogram": {
+      "context": false,
+      "station": "CALM",
+      "plot": "permaHistogramCALM"
+    }
+  },
+  "viz-lakeice": {
+    "slideLakeIceTime": {
+      "context": false,
+      "station": "abisko",
+      "plot": "slideLakeIceTime"
     }
   },
   "vizchange": [
@@ -668,6 +718,8 @@
     "viz-sep-temp",
     "viz-oct-temp",
     "viz-nov-temp",
-    "viz-dec-temp"
+    "viz-dec-temp",
+    "viz-perma",
+    "viz-lakeice"
   ]
 }
