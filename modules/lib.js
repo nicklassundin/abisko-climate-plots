@@ -8,8 +8,6 @@ global.startYear = constant.startYear;
 global.baselineLower = constant.baselineLower;
 global.baselineUpper = constant.baselineUpper;
 
-// global.stationType = "abisko" 
-// TODO example IDs test
 // global.station = 159880;
 // global.station = 188790;
 // global.stationName = "";
@@ -22,10 +20,8 @@ global.variables = {
 	metas: {},
 }
 
-// var charts = require('./config/charts/config.js');
 var charts = require('./config/dataset/struct.js').struct
 var sets = require('../static/preset.json');
-// var sets = require('../config/preset.js').preset;
 exports.stats = require('./stats/config.js')
 
 var meta = require('./config/metaMngr.js').meta
@@ -35,19 +31,15 @@ lib = {
 	renderChart: function(div, type, url=window.location.origin){
 		if(hostUrl){
 			if(url){
-				// console.log("Hosting from: ")
 				hostUrl = url;
 			}else{
-				// console.log("Running Local setup: ")
 				hostUrl = window.location.origin
 			}
 		}
 		meta.getMeta(type).then(cfg =>{
 			$(function(){
+				cfg.files.config.contex = type.context === undefined ? true : type.context
 				var chrt = charts.build(cfg, div)
-				// div.appendChild(chrt.html(div_id));
-				// chrt.func(false, id);
-				// return div;
 			})
 		})
 	},
@@ -55,17 +47,11 @@ lib = {
 		set=(new URL(window.location.href).searchParams.get("set")), 
 		id=(new URL(window.location.href).searchParams.get("station")), 
 		url=window.location.origin){
-		// console.log("Input url")
-		// console.log(url)
 		if(url){
-			// console.log("Hosting from: ")
 			hostUrl = url;
 		}else{
-			// console.log("Running Local setup: ")
 			hostUrl = window.location.origin
 		} 
-		// console.log(hostUrl)
-
 		variables.debug = (new URL(window.location.href).searchParams.get("debug") == "true" ? true : false)
 		if(variables.debug) {
 			var debug = document.createElement("div");
