@@ -241,7 +241,9 @@
     "slideGrowingSeasonDays",
     "slideGrowingSeasonWeeks",
     "jan_temperatures",
-    "precipitation_jan"
+    "precipitation_jan",
+    "temperatures_jan_slide",
+    "precipitation_jan_slide"
   ],
   "sqrt-IceThick": {
     "iceThicknessYear": {
@@ -435,6 +437,20 @@
       "context": false,
       "station": "abisko",
       "plot": "slideGrowingSeasonDays"
+    }
+  },
+  "viz-grow-first": {
+    "growingSeasonFrostFirst": {
+      "context": false,
+      "station": "abisko",
+      "plot": "growingSeasonFrostFirst"
+    }
+  },
+  "viz-grow-last": {
+    "growingSeasonFrostLast": {
+      "context": false,
+      "station": "abisko",
+      "plot": "growingSeasonFrostLast"
     }
   },
   "viz-spring-prec": {
@@ -682,10 +698,26 @@
       "plot": "slideLakeIceTime"
     }
   },
+  "viz-lake-freeze": {
+    "abiskoLakeIceFreezeup": {
+      "content": false,
+      "station": "abisko",
+      "plot": "abiskoLakeIceFreezeup"
+    }
+  },
+  "viz-lake-break": {
+    "abiskoLakeIceBreakeup": {
+      "content": false,
+      "station": "abisko",
+      "plot": "abiskoLakeIceBreakup"
+    }
+  },
   "vizchange": [
     "viz-annual-prec",
     "viz-grow-weeks",
     "viz-grow-days",
+    "viz-grow-first",
+    "viz-grow-last",
     "viz-spring-prec",
     "viz-summer-prec",
     "viz-autumn-prec",
@@ -720,6 +752,8 @@
     "viz-nov-temp",
     "viz-dec-temp",
     "viz-perma",
-    "viz-lakeice"
+    "viz-lakeice",
+    "viz-lake-freeze",
+    "viz-lake-break"
   ]
 }

@@ -20,6 +20,20 @@
 			"plot": "slideGrowingSeasonDays" 
 		}
 	},
+	"viz-grow-first": {
+		"growingSeasonFrostFirst": {
+			"context": false,
+			"station": "abisko",
+			"plot": "growingSeasonFrostFirst"
+		}
+	},
+	"viz-grow-last": {
+		"growingSeasonFrostLast": {
+			"context": false,
+			"station": "abisko",
+			"plot": "growingSeasonFrostLast"
+		}
+	},
 	"viz-spring-prec": {
 		"slideSpringPrecipitation": {
 			"context": false,
@@ -263,6 +277,20 @@
 			"context": false,
 			"station": "abisko",
 			"plot": "slideLakeIceTime"
+		}
+	},
+	"viz-lake-freeze": {
+		"abiskoLakeIceFreezeup": {
+			"content": false,
+			"station": "abisko",
+			"plot": "abiskoLakeIceFreezeup"
+		}
+	},
+	"viz-lake-break": {
+		"abiskoLakeIceBreakeup": {
+			"content": false,
+			"station": "abisko",
+			"plot": "abiskoLakeIceBreakup"
 		}
 	}
 }
