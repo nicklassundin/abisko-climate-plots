@@ -54,5 +54,7 @@
 	"slideGrowingSeasonDays": ["slideGrowingSeasonDays"],
 	"slideGrowingSeasonWeeks": ["slideGrowingSeasonWeeks"],
 	"jan_temperatures": ["jan_temperatures"],
-	"precipitation_jan": ["precipitation_jan"]
+	"precipitation_jan": ["precipitation_jan"],
+	"temperatures_jan_slide": ["temperatures_jan_slide"],
+	"precipitation_jan_slide": ["precipitation_jan_slide"]
 }
