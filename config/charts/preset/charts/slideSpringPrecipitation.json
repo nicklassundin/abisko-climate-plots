@@ -10,13 +10,13 @@
 			"smhi": {
 				"data": "SMHI-Hydrology",
 				"config": "precipitation",
-				"lang": "springTemperature",
+				"lang": "springPrecipitation",
 				"set": "slide"
 			},
 			"abisko": {
 				"data": "ANS",
 				"config": "precipitation",
-				"lang": "springTemperature",
+				"lang": "springPrecipitation",
 				"set": "slide"
 			}
 		}
