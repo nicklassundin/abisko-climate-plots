@@ -2,8 +2,8 @@
 	"valueSuffix": "cm",
 	"groups": {
 		"0": {
-			"title": "[stationName] Snow Depth",
-			"subTitle": "Annual average", 
+			"title": "Annual average Snow Depth",
+			"subTitle": "[stationName]", 
 			"caption": "Average annual snow depth in centimeters.", 
 			"yAxis": {
 				"left": "Average Snow depth [cm]", 
