@@ -2,8 +2,8 @@
 	"valueSuffix": "Dagar",
 	"groups": {
 		"0": {
-			"title": "[stationName] Vårens eller sommarens sista frost", 
-			"subTitle": "",
+			"title": "Vårens eller sommarens sista frost", 
+			"subTitle": "[stationName]",
 			"legend": "Väder",
 			"caption": "Datumet för den senaste vår- eller sommarfrosten, vilket markerar den ungefärliga början av växtsäsongen för frostkänsliga grödor och växter. Detta beräknas utifrån temperaturdata.", 
 			"xAxis": {
@@ -16,8 +16,8 @@
 			}
 		},
 		"1": {
-			"title": "[stationName] Vårens sista frost - Skillnad från baslinjen", 
-			"subTitle": "",
+			"title": "Vårens sista frost - Skillnad från baslinjen", 
+			"subTitle": "[stationName]",
 			"legend": "Klimat",
 			"caption": "Skillnaden mellan datumet för den senaste vår- eller sommarfrosten och genomsnittet för basperioden, vanligtvis 1961 till 1990. Detta beräknas utifrån temperaturdata.", 
 			"xAxis": {
