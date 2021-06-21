@@ -72,6 +72,7 @@ lib = {
 			})
 		}
 		ids.forEach(type => {
+			if(type.startYear) startYear = type.startYear
 			var container = document.createElement("div");
 			type.id = type.station+'_'+type.plot;
 			$.extend(true, type, stationTypeMap[type.station]);
