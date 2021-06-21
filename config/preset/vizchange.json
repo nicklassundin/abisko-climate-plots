@@ -7,14 +7,14 @@
 		}
 	},
 	"viz-grow-weeks": {
-		"growingSeasonWeeks": {
+		"slideGrowingSeasonWeeks": {
 			"context": false,
 			"station": "abisko",
 			"plot": "slideGrowingSeasonWeeks" 
 		}
 	},
 	"viz-grow-days": {
-		"growingSeasonDays": {
+		"slideGrowingSeasonDays": {
 			"context": false,
 			"station": "abisko",
 			"plot": "slideGrowingSeasonDays" 
