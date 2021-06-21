@@ -2,8 +2,8 @@
 	"valueSuffix": "days",
 	"groups": {
 		"0": {
-			"title": "[stationName] First Frost of the Autumn" ,
-			"subTitle": "Maximum number of consecutive weeks above zero Celcius",
+			"title": "[stationName] First Frost of the Autumn",
+			"subTitle": "[stationName]",
 			"legend": "Weather",
 			"caption": "The date of the first fall frost, which marks the approximate end of the growing season for frost-sensitive crops and plants. This is calculated from temperature data.", 
 			"xAxis": {
