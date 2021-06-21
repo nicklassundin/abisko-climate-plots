@@ -41,18 +41,19 @@ var parseByDate = function (values, type='mean', src='', custom) {
 			insert: function(entries){
 				var result = Object.assign({}, frame);
 				// TODO build to general function to be use for all functions
+				var set = function(entry, key, date){
 				var insert = (...k) => {
-					return function(e, data = result){
+					return function(data = result, e = entry){
 						var kn = k[0]
 						if(!data[kn]){
 							if(k.length > 1){
-								data[kn] = insert(...(k.slice(1)))(e, {})
+								data[kn] = insert(...(k.slice(1)))({})
 							}else{
 								data[kn] = struct.create([],kn,type);
 							}
 						}else{
 							if(k.length > 1){
-								data[kn] = insert(...(k.slice(1)))(e, data[kn]);
+								data[kn] = insert(...(k.slice(1)))(data[kn]);
 							}else{
 								data[kn].values.push(e)
 							}
@@ -60,7 +61,6 @@ var parseByDate = function (values, type='mean', src='', custom) {
 						return data;
 					}
 				}
-				var set = function(entry, key, date){
 					var year = date.getFullYear();
 					entry.year = year;
 					if(!years[year+'']) years[year] = year+'';
@@ -77,11 +77,11 @@ var parseByDate = function (values, type='mean', src='', custom) {
 					var monthName = help.monthByIndex(month)
 					// Seasons	
 					var season = help.getSeasonByIndex(month);
-					insert(season, key, year)(entry);
-					insert('yrly', key, year)(entry)
+					insert(season, key, year)();
+					insert('yrly', key, year)()
 					// Decades
 					var decade = year - year % 10;
-					insert('decades', key, decade)(entry)
+					insert('decades', key, decade)()
 
 					// split year over 6 month
 					var splitYear = year;
@@ -89,18 +89,19 @@ var parseByDate = function (values, type='mean', src='', custom) {
 						splitYear = year - 1;	
 					}	
 					// split for Winter
-					insert('yrlySplit', key, splitYear)(entry);
+					insert('yrlySplit', key, splitYear)();
 
 					// decade month split
-					insert('yrlyFull', decade, key, monthName)(entry)
+					insert('yrlyFull', decade, key, monthName)()
 
 					// Monthly
-					insert('monthly', monthName, key, year)(entry)
+					insert('monthly', monthName, key, year)()
 					// Weeks
-					var wE = {};
-					Object.assign(wE, entry)
-					wE.x = week;
-					insert('weeks', key, year)(wE);
+					// var wE = {};
+					// Object.assign(wE, entry)
+					// wE.x = week;
+					// insert('weeks', key, year)(wE);
+					insert('weeks', key, year, week)();
 					// custom period
 					if(custom){
 						if(!result.customPeriod) result.customPeriod = {};

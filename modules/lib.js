@@ -39,6 +39,7 @@ lib = {
 		meta.getMeta(type).then(cfg =>{
 			$(function(){
 				cfg.files.config.contex = type.context === undefined ? true : type.context
+				// console.log(cfg)
 				var chrt = charts.build(cfg, div)
 			})
 		})
