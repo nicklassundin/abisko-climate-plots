@@ -201,6 +201,9 @@ var struct = {
 			// console.log('parse')
 			this.cached[id][tag[0]] = this.parseRawData(tag)
 		}
+		// console.log(this.cached[id][tag[0]])
+		// console.log(tag)
+		// console.log(this.cached[id])
 		var data = new Promise((res, rej) => {
 			if(tag){
 				res(tagApply(this.cached[id], [...tag]))
@@ -208,6 +211,7 @@ var struct = {
 				res(this.cached[id])
 			}
 		})
+		// console.log(data)
 		try{
 			if(data.then){
 				data.then(d => {
