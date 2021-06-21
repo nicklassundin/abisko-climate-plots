@@ -292,5 +292,26 @@
 			"station": "abisko",
 			"plot": "abiskoLakeIceBreakup"
 		}
+	},
+	"viz-snowdepth-period": {
+		"abioskoSnowDepthPeriodMeans": {
+			"contet": false,
+			"station": "abisko",
+			"plot": "abiskoSnowDepthPeriodMeans"
+		}
+	},
+	"viz-snowdepth-decade": {
+		"abioskoSnowDepthPeriodMeans2": {
+			"contet": false,
+			"station": "abisko",
+			"plot": "abiskoSnowDepthPeriodMeans2"
+		}
+	},
+	"viz-carbon": {
+		"weeklyCO2": {
+			"contet": false,
+			"station": "global",
+			"plot": "weeklyCO2"
+		}
 	}
 }

@@ -712,6 +712,27 @@
       "plot": "abiskoLakeIceBreakup"
     }
   },
+  "viz-snowdepth-period": {
+    "abioskoSnowDepthPeriodMeans": {
+      "contet": false,
+      "station": "abisko",
+      "plot": "abiskoSnowDepthPeriodMeans"
+    }
+  },
+  "viz-snowdepth-decade": {
+    "abioskoSnowDepthPeriodMeans2": {
+      "contet": false,
+      "station": "abisko",
+      "plot": "abiskoSnowDepthPeriodMeans2"
+    }
+  },
+  "viz-carbon": {
+    "weeklyCO2": {
+      "contet": false,
+      "station": "global",
+      "plot": "weeklyCO2"
+    }
+  },
   "vizchange": [
     "viz-annual-prec",
     "viz-grow-weeks",
@@ -754,6 +775,9 @@
     "viz-perma",
     "viz-lakeice",
     "viz-lake-freeze",
-    "viz-lake-break"
+    "viz-lake-break",
+    "viz-snowdepth-period",
+    "viz-snowdepth-decade",
+    "viz-carbon"
   ]
 }
