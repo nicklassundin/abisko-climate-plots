@@ -287,10 +287,10 @@
 		}
 	},
 	"viz-lake-break": {
-		"abiskoLakeIceBreakeup": {
+		"slideLakeIceBreakeup": {
 			"content": false,
 			"station": "abisko",
-			"plot": "abiskoLakeIceBreakup"
+			"plot": "slideLakeIceBreakup"
 		}
 	},
 	"viz-lake-thick": {
