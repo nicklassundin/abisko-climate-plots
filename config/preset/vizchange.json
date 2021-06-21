@@ -314,6 +314,13 @@
 			"plot": "abiskoSnowDepthPeriodMeans2"
 		}
 	},
+	"viz-snowdepth-annual": {
+		"annualAvgSnowDepth": {
+			"contet": false,
+			"station": "abisko",
+			"plot": "annualAvgSnowDepth"
+		}
+	},
 	"viz-carbon": {
 		"weeklyCO2": {
 			"contet": false,
