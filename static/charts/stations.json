@@ -153,6 +153,8 @@
     "slideAutumnPrecipitation",
     "slideGrowingSeasonDays",
     "slideGrowingSeasonWeeks",
+    "slideLakeIceBreakup",
+    "slideLakeIceFreezeup",
     "slideLakeIceTime",
     "slideMonthlyPrecipitation",
     "slideMonthlyTemperatures",
