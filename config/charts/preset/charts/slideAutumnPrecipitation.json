@@ -9,14 +9,14 @@
 		"meta": {
 			"smhi": {
 				"data": "SMHI-Hydrology",
-				"config": "temperature",
-				"lang": "autumnTemperature",
+				"config": "precipitation",
+				"lang": "autumnPrecipitation",
 				"set": "slide"
 			},
 			"abisko": {
 				"data": "ANS",
-				"config": "temperature",
-				"lang": "autumnTemperature",
+				"config": "precipitation",
+				"lang": "autumnPrecipitation",
 				"set": "slide"
 			}
 		}
