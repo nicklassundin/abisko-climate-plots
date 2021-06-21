@@ -712,6 +712,13 @@
       "plot": "abiskoLakeIceBreakup"
     }
   },
+  "viz-lake-thick": {
+    "iceThicknessYear": {
+      "content": false,
+      "station": "abisko",
+      "plot": "iceThicknessYear"
+    }
+  },
   "viz-snowdepth-period": {
     "abioskoSnowDepthPeriodMeans": {
       "contet": false,
@@ -776,6 +783,7 @@
     "viz-lakeice",
     "viz-lake-freeze",
     "viz-lake-break",
+    "viz-lake-thick",
     "viz-snowdepth-period",
     "viz-snowdepth-decade",
     "viz-carbon"
