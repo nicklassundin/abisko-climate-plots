@@ -1,0 +1,31 @@
+{
+	"id": "jul_temperatures",
+	"type": "[stationType]",
+	"subset": {
+		"type": "months",
+		"set": "jul"
+	},
+	"tag": {
+		"render": ["temperatures","monthly"],
+		"data": ["temperatures","monthly", "jul"]
+	},
+	"config": {
+		"meta": {
+			"smhi": {
+				"data": "SMHI-Weather",
+				"config": "temperature",
+				"lang": "monthlyTemperature",
+				"set": "slide",
+				"subset": "monthly"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "temperature",
+				"lang": "monthlyTemperature",
+				"set": "slide",
+				"subset": "monthly"
+			}
+		}
+	},
+	"months": true
+}

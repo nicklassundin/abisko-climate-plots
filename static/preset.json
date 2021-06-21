@@ -342,7 +342,7 @@
     "weeklyCO2": {
       "station": "glob",
       "plot": "weeklyCO2",
-      "startYear": 1975
+      "startYear": 1958
     }
   },
   "sqrt-temp-climate-weather-v2": [
@@ -427,14 +427,14 @@
     }
   },
   "viz-grow-weeks": {
-    "growingSeasonWeeks": {
+    "slideGrowingSeasonWeeks": {
       "context": false,
       "station": "abisko",
       "plot": "slideGrowingSeasonWeeks"
     }
   },
   "viz-grow-days": {
-    "growingSeasonDays": {
+    "slideGrowingSeasonDays": {
       "context": false,
       "station": "abisko",
       "plot": "slideGrowingSeasonDays"
@@ -734,12 +734,19 @@
       "plot": "abiskoSnowDepthPeriodMeans2"
     }
   },
+  "viz-snowdepth-annual": {
+    "annualAvgSnowDepth": {
+      "contet": false,
+      "station": "abisko",
+      "plot": "annualAvgSnowDepth"
+    }
+  },
   "viz-carbon": {
     "weeklyCO2": {
       "contet": false,
       "station": "glob",
       "plot": "weeklyCO2",
-      "startYear": 1975
+      "startYear": 1958
     }
   },
   "vizchange": [
@@ -788,6 +795,7 @@
     "viz-lake-thick",
     "viz-snowdepth-period",
     "viz-snowdepth-decade",
+    "viz-snowdepth-annual",
     "viz-carbon"
   ]
 }

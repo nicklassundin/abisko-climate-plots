@@ -74,7 +74,7 @@
 			"weeklyCO2": {
 				"station": "glob",
 				"plot": "weeklyCO2",
-				"startYear": 1975
+				"startYear": 1958
 			}
 		}, 
 	"sqrt-temp-climate-weather-v2": ["slideTemperature"],
