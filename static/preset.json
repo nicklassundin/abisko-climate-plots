@@ -702,10 +702,10 @@
     }
   },
   "viz-lake-freeze": {
-    "abiskoLakeIceFreezeup": {
+    "slideLakeIceFreezeup": {
       "content": false,
       "station": "abisko",
-      "plot": "abiskoLakeIceFreezeup"
+      "plot": "slideLakeIceFreezeup"
     }
   },
   "viz-lake-break": {
