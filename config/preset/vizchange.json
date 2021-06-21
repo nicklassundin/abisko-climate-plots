@@ -293,6 +293,13 @@
 			"plot": "abiskoLakeIceBreakup"
 		}
 	},
+	"viz-lake-thick": {
+		"iceThicknessYear": {
+			"content": false,
+			"station": "abisko",
+			"plot": "iceThicknessYear" 
+		}
+	},
 	"viz-snowdepth-period": {
 		"abioskoSnowDepthPeriodMeans": {
 			"contet": false,
