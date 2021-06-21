@@ -29,6 +29,7 @@ var meta = require('./config/metaMngr.js').meta
 const stationTypeMap = require('../static/charts/stationTypeMap.json');
 lib = {
 	renderChart: function(div, type, url=window.location.origin){
+		if(type.startYear) startYear = null;
 		if(hostUrl){
 			if(url){
 				hostUrl = url;
@@ -39,7 +40,6 @@ lib = {
 		meta.getMeta(type).then(cfg =>{
 			$(function(){
 				cfg.files.config.contex = type.context === undefined ? true : type.context
-				// console.log(cfg)
 				var chrt = charts.build(cfg, div)
 			})
 		})
@@ -72,7 +72,6 @@ lib = {
 			})
 		}
 		ids.forEach(type => {
-			if(type.startYear) startYear = type.startYear
 			var container = document.createElement("div");
 			type.id = type.station+'_'+type.plot;
 			$.extend(true, type, stationTypeMap[type.station]);
