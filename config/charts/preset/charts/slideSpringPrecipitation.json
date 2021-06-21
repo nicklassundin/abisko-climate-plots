@@ -9,13 +9,13 @@
 		"meta": {
 			"smhi": {
 				"data": "SMHI-Hydrology",
-				"config": "temperature",
+				"config": "precipitation",
 				"lang": "springTemperature",
 				"set": "slide"
 			},
 			"abisko": {
 				"data": "ANS",
-				"config": "temperature",
+				"config": "precipitation",
 				"lang": "springTemperature",
 				"set": "slide"
 			}

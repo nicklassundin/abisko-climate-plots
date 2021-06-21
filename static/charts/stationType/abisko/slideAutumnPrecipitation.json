@@ -16,14 +16,14 @@
       "meta": {
         "smhi": {
           "data": "SMHI-Hydrology",
-          "config": "temperature",
-          "lang": "autumnTemperature",
+          "config": "precipitation",
+          "lang": "autumnPrecipitation",
           "set": "slide"
         },
         "abisko": {
           "data": "ANS",
-          "config": "temperature",
-          "lang": "autumnTemperature",
+          "config": "precipitation",
+          "lang": "autumnPrecipitation",
           "set": "slide"
         }
       }
@@ -32,61 +32,50 @@
   },
   "config": {
     "type": "column",
-    "polar": false,
     "groups": {
       "0": {
         "baseline": false
       },
       "1": {
-        "baseline": true,
-        "yAxis": {
-          "min": -3,
-          "max": 4
-        }
+        "baseline": true
       },
       "2": {
-        "baseline": false,
-        "yAxis": {
-          "min": 15
-        }
+        "baseline": false
       }
     },
     "decimals": 2,
     "series": {
-      "max": {
-        "preset": "max",
-        "group": "0",
-        "visible": false,
-        "colour": "#ff0000",
-        "type": "line"
-      },
-      "min": {
-        "preset": "min",
-        "group": "0",
-        "visible": false,
-        "colour": "#0000ff",
-        "type": "line"
-      },
-      "avg": {
-        "preset": "avg",
-        "group": "0",
-        "visible": true,
-        "colour": "#888888",
-        "type": "line"
-      },
       "diff": {
         "preset": "diff",
-        "group": "1",
+        "group": 1,
         "visible": true,
         "colour": "[example]",
         "type": "column"
       },
+      "snow": {
+        "preset": "snow",
+        "group": 0,
+        "visible": true,
+        "colour": "#CDD8F0",
+        "hoverColour": "#eeeeff",
+        "borderColour": "#5F7CB9",
+        "type": "column"
+      },
+      "rain": {
+        "preset": "rain",
+        "group": 0,
+        "visible": true,
+        "colour": "#1000FB",
+        "hoverColor": "#3333ff",
+        "borderColour": "#5F7CB9",
+        "type": "column"
+      },
       "extreme": {
         "preset": "extreme",
-        "group": "2",
+        "group": 2,
         "visible": true,
-        "colour": "#ff0000",
-        "type": "line"
+        "colour": "#1000FF",
+        "type": "column"
       }
     },
     "parse": {
@@ -117,49 +106,46 @@
     }
   },
   "en": {
-    "valueSuffix": "°C",
+    "valueSuffix": "mm",
     "groups": {
       "0": {
-        "title": "Autumn Average Temperature",
+        "title": "Autumn Average Precipitation",
         "subTitle": "[stationName]",
-        "caption": "Average annual autumn (September to November) temperature. The lowest (min) and highest (max) temperature of the month.",
-        "legend": "Weather",
+        "caption": "Average annual autumn (Septembe to November) precipitation. The lowest (min) and highest (max) precipitation of the month. Note the measurement of snow from precipitation is estimated from precipitation taking place when the temperature was simultaneously recorded as below 0 C. These values should be considered estimates and not a precise value.",
+        "yAxis": {
+          "left": "Total Precipitation [mm]",
+          "right": "[X-AXIS]"
+        },
         "xAxis": {
           "bott": "Year",
           "top": "[Y-AXIS]"
         },
-        "yAxis": {
-          "left": "Average temperature [°C]",
-          "right": "[X-AXIS]"
-        }
+        "legend": "Weather"
       },
       "1": {
-        "title": " Autumn Average Temperature Difference From Baseline",
+        "title": "Autumn Average Precipitation Difference From Baseline",
         "subTitle": "[stationName]",
-        "caption": "Difference between the autumn (September-November)seasonal averages and the average for the baseline period, typically 1961 to 1990.",
-        "legend": "Climate",
+        "caption": "Difference between the autumn (September-November) seasonal averages and the average for the baseline period, [baseline].",
+        "yAxis": {
+          "left": "Average Precipitation [mm]",
+          "right": "[X-AXIS]"
+        },
         "xAxis": {
           "bott": "Year",
           "top": "[Y-AXIS]"
         },
-        "yAxis": {
-          "left": "Temperature difference [°C]",
-          "right": "[X-AXIS]"
-        }
+        "legend": "Climate"
       }
     },
     "series": {
-      "max": {
-        "name": "Max"
-      },
-      "min": {
-        "name": "Min"
-      },
-      "avg": {
-        "name": "Yearly Average"
-      },
       "diff": {
         "name": "Difference"
+      },
+      "snow": {
+        "name": "Precipitation from snow"
+      },
+      "rain": {
+        "name": "Precipitation from rain"
       }
     },
     "dataSource": {
@@ -280,49 +266,46 @@
     }
   },
   "sv": {
-    "valueSuffix": "°C",
+    "valueSuffix": "mm",
     "groups": {
       "0": {
-        "title": "Höstens genomsnittliga temperatur",
+        "title": "Höstens genomsnittliga nederbörd",
         "subTitle": "[stationName]",
-        "caption": "Genomsnittlig årlig höst (september till november) temperatur. Månadens lägsta (min) och högsta (max) temperatur.",
-        "legend": "Väder",
+        "caption": "Genomsnittlig årlig nederbörd i höst (september till november). Månadens lägsta (min) och högsta (max) nederbörd. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 grader C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
+        "yAxis": {
+          "left": "Summa av all nederbörd [mm]",
+          "right": "[X-AXIS]"
+        },
         "xAxis": {
           "bott": "År",
           "top": "[Y-AXIS]"
         },
-        "yAxis": {
-          "left": "Genomsnittlig temperatur [°C]",
-          "right": "[X-AXIS]"
-        }
+        "legend": "Väder"
       },
       "1": {
-        "title": "Höstens genomsnittliga temperaturskillnad från baslinjen",
+        "title": "Höstens genomsnittliga skillnad i nederbörd från baslinjen",
         "subTitle": "[stationName]",
-        "caption": "Skillnad mellan höstens (september-november) säsongsgenomsnitt och genomsnittet för basperioden, vanligtvis 1961 till 1990.",
-        "legend": "Klimat",
+        "caption": "Skillnad mellan höstens (september-november) säsongsgenomsnitt och genomsnittet för baslinjeperioden, [baseline].",
+        "yAxis": {
+          "left": "Genomsnittlig nederbörd [mm]",
+          "right": "[X-AXIS]"
+        },
         "xAxis": {
           "bott": "År",
           "top": "[Y-AXIS]"
         },
-        "yAxis": {
-          "left": "Temperaturskillnad [°C]",
-          "right": "[X-AXIS]"
-        }
+        "legend": "Klimat"
       }
     },
     "series": {
-      "max": {
-        "name": "Max"
-      },
-      "min": {
-        "name": "Min"
-      },
-      "avg": {
-        "name": "Årligt genomsnitt"
-      },
       "diff": {
         "name": "Skillnad"
+      },
+      "snow": {
+        "name": "Nederbörd från snö"
+      },
+      "rain": {
+        "name": "Nederbörd från regn"
       }
     },
     "dataSource": {

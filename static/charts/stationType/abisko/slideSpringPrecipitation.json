@@ -16,13 +16,13 @@
       "meta": {
         "smhi": {
           "data": "SMHI-Hydrology",
-          "config": "temperature",
+          "config": "precipitation",
           "lang": "springTemperature",
           "set": "slide"
         },
         "abisko": {
           "data": "ANS",
-          "config": "temperature",
+          "config": "precipitation",
           "lang": "springTemperature",
           "set": "slide"
         }
@@ -32,61 +32,50 @@
   },
   "config": {
     "type": "column",
-    "polar": false,
     "groups": {
       "0": {
         "baseline": false
       },
       "1": {
-        "baseline": true,
-        "yAxis": {
-          "min": -3,
-          "max": 4
-        }
+        "baseline": true
       },
       "2": {
-        "baseline": false,
-        "yAxis": {
-          "min": 15
-        }
+        "baseline": false
       }
     },
     "decimals": 2,
     "series": {
-      "max": {
-        "preset": "max",
-        "group": "0",
-        "visible": false,
-        "colour": "#ff0000",
-        "type": "line"
-      },
-      "min": {
-        "preset": "min",
-        "group": "0",
-        "visible": false,
-        "colour": "#0000ff",
-        "type": "line"
-      },
-      "avg": {
-        "preset": "avg",
-        "group": "0",
-        "visible": true,
-        "colour": "#888888",
-        "type": "line"
-      },
       "diff": {
         "preset": "diff",
-        "group": "1",
+        "group": 1,
         "visible": true,
         "colour": "[example]",
         "type": "column"
       },
+      "snow": {
+        "preset": "snow",
+        "group": 0,
+        "visible": true,
+        "colour": "#CDD8F0",
+        "hoverColour": "#eeeeff",
+        "borderColour": "#5F7CB9",
+        "type": "column"
+      },
+      "rain": {
+        "preset": "rain",
+        "group": 0,
+        "visible": true,
+        "colour": "#1000FB",
+        "hoverColor": "#3333ff",
+        "borderColour": "#5F7CB9",
+        "type": "column"
+      },
       "extreme": {
         "preset": "extreme",
-        "group": "2",
+        "group": 2,
         "visible": true,
-        "colour": "#ff0000",
-        "type": "line"
+        "colour": "#1000FF",
+        "type": "column"
       }
     },
     "parse": {
