@@ -94,7 +94,7 @@
     "groups": {
       "0": {
         "title": "[stationName] First Frost of the Autumn",
-        "subTitle": "Maximum number of consecutive weeks above zero Celcius",
+        "subTitle": "[stationName]",
         "legend": "Weather",
         "caption": "The date of the first fall frost, which marks the approximate end of the growing season for frost-sensitive crops and plants. This is calculated from temperature data.",
         "xAxis": {
@@ -250,8 +250,8 @@
     "valueSuffix": "Dagar",
     "groups": {
       "0": {
-        "title": "[stationName] Höstens första frost",
-        "subTitle": "Maximalt antal veckor i rad över noll grader Celsius",
+        "title": "Höstens första frost",
+        "subTitle": "[stationName]",
         "legend": "Väder",
         "caption": "Datumet för den första höstfrosten, vilket markerar det ungefärliga slutet på växtsäsongen för frostkänsliga grödor och växter. Detta beräknas utifrån temperaturdata.",
         "xAxis": {
@@ -264,8 +264,8 @@
         }
       },
       "1": {
-        "title": "[stationName] Höstens första frost - Skillnad från baslinjen",
-        "subTitle": "",
+        "title": "Höstens första frost - Skillnad från baslinjen",
+        "subTitle": "[stationName]",
         "legend": "Klimat",
         "caption": "Skillnaden mellan datumet för årets första höstfrost och genomsnittet för baslinjeperioden, vanligtvis 1961 till 1990. Detta beräknas utifrån temperaturdata.",
         "xAxis": {
