@@ -231,6 +231,7 @@
     "slideWinterPrecipitation",
     "slideSpringPrecipitation",
     "abiskoLakeIceBreakup",
+    "slideLakeIceBreakup",
     "abiskoLakeIceFreezeup",
     "annualAvgSnowDepth",
     "avgTemperaturesByYear",

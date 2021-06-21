@@ -44,6 +44,7 @@
 	"slideWinterPrecipitation" : ["slideWinterPrecipitation"],
 	"slideSpringPrecipitation" : ["slideSpringPrecipitation"],
 	"abiskoLakeIceBreakup" : ["abiskoLakeIceBreakup"],
+	"slideLakeIceBreakup" : ["slideLakeIceBreakup"],
 	"abiskoLakeIceFreezeup" : ["abiskoLakeIceFreezeup"],
 	"annualAvgSnowDepth" : ["annualAvgSnowDepth"],
 	"avgTemperaturesByYear": ["avgTemperaturesByYear"],
