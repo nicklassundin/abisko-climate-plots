@@ -1,0 +1,19 @@
+{
+	"id": "slideLakeIceFreezeup",
+	"type": "tornetrask",
+	"tag": {
+		"render": "freezeDOY",
+		"data": ["DOY","freeze"]
+	},
+	"config": {
+		"meta": {
+			"abisko": {
+				"config": "iceFreeze",
+				"lang": "iceFreeze",
+				"data": "ANS",
+				"set": "slide"
+			}
+		}
+	},
+	"months": false
+}
