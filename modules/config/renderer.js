@@ -46,6 +46,7 @@ var chart = {
 			var res = this.clone();
 			return new Promise((resolve, reject) => {
 				var meta = metaRef.aggr();
+				console.log(meta)
 				res.chart = Highcharts.chart(id, {
 					lang: meta.menu, 
 					credits: {
@@ -407,7 +408,8 @@ var chart = {
 			})
 		}
 		try{
-			console.log(meta.menu.dataCredit)
+			// console.log(meta.menu.dataCredit)
+			// console.log(meta)
 			this.chart.update({
 				title: {
 					text: title,
