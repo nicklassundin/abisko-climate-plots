@@ -10,7 +10,7 @@
 			"glob": {
 				"config": "co2",
 				"lang": "co2_weekly",
-				"data": "[data]",
+				"data": "Scipps-CO2",
 				"set": "weather"
 			}
 		}
