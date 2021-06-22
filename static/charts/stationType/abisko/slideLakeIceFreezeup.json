@@ -60,7 +60,6 @@
         "preset": "diff",
         "group": 1,
         "visible": true,
-        "color": "[EXAMPLE]",
         "type": "column"
       }
     },

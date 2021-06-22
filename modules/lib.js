@@ -39,6 +39,7 @@ lib = {
 		}
 		meta.getMeta(type).then(cfg =>{
 			$(function(){
+				cfg.files.config.noAxisLim = type.override ? !type.override.axislim : false;
 				cfg.files.config.contex = type.context === undefined ? true : type.context
 				var chrt = charts.build(cfg, div)
 			})

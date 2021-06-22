@@ -4420,7 +4420,6 @@
               "preset": "diff",
               "group": 1,
               "visible": true,
-              "color": "[EXAMPLE]",
               "type": "column"
             }
           },
@@ -6071,7 +6070,7 @@
               "preset": "avg",
               "group": 0,
               "visible": true,
-              "type": "line",
+              "type": "column",
               "colour": "#1000FB"
             },
             "diff": {
@@ -6108,8 +6107,8 @@
           "valueSuffix": "cm",
           "groups": {
             "0": {
-              "title": "[stationName] Snow Depth",
-              "subTitle": "Annual average",
+              "title": "Annual average Snow Depth",
+              "subTitle": "[stationName]",
               "caption": "Average annual snow depth in centimeters.",
               "yAxis": {
                 "left": "Average Snow depth [cm]",
@@ -6289,8 +6288,8 @@
           "valueSuffix": "cm",
           "groups": {
             "0": {
-              "title": "[stationName] Snödjup",
-              "subTitle": "Årlig genomsnitt",
+              "title": "Årlig genomsnitt Snödjup",
+              "subTitle": "[stationName]",
               "caption": "Genomsnittligt årligt snödjup i centimeter.",
               "yAxis": {
                 "left": "Genomsnittligt snödjup [cm]",
@@ -30298,7 +30297,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -30753,7 +30752,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -31209,7 +31208,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -31664,7 +31663,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -32120,7 +32119,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -32575,7 +32574,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -33031,7 +33030,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -33486,7 +33485,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -33942,7 +33941,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -34397,7 +34396,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -34853,7 +34852,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -35308,7 +35307,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -35764,7 +35763,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -36219,7 +36218,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -36675,7 +36674,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -37130,7 +37129,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -37586,7 +37585,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -38041,7 +38040,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -38497,7 +38496,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -38952,7 +38951,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -39408,7 +39407,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -39863,7 +39862,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -40319,7 +40318,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -40774,7 +40773,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -41230,7 +41229,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -41685,7 +41684,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -42141,7 +42140,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -42596,7 +42595,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -43052,7 +43051,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -43507,7 +43506,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -43963,7 +43962,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -44418,7 +44417,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -44874,7 +44873,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -45329,7 +45328,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -45785,7 +45784,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -46240,7 +46239,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -46696,7 +46695,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -47151,7 +47150,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -47607,7 +47606,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -48062,7 +48061,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -48518,7 +48517,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -48973,7 +48972,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -49429,7 +49428,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -49884,7 +49883,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -50340,7 +50339,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -50795,7 +50794,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -51251,7 +51250,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -51706,7 +51705,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -55793,7 +55792,6 @@
               "preset": "diff",
               "group": 1,
               "visible": true,
-              "color": "[EXAMPLE]",
               "type": "column"
             }
           },
@@ -56817,7 +56815,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {
@@ -57249,7 +57247,7 @@
           "valueSuffix": "mm",
           "groups": {
             "0": {
-              "title": "Genomsnittlig nederbörd",
+              "title": "Genomsnittlig [month] nederbörd",
               "subTitle": "[stationName]",
               "caption": "Genomsnittlig nederbörd per månad för [month]. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
               "yAxis": {

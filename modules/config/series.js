@@ -41,7 +41,14 @@ exports.series = {
 		lineWidth: 0,
 		regression: true,
 		step: 'center',
-		marker: { radius: 2 },
+		// marker: { radius: 2 },
+		marker: { 
+			enabled: true,
+			fillColor: meta.series.avg.colour,
+			lineColor: meta.series.avg.borderColour,
+			lineWidth: meta.series.avg.borderColour ? 1 : 0,
+			radius: 2 
+		},
 		states: { hover: { lineWidthPlus: 0 } },
 		color: meta.series.avg.colour,
 		data: (data.avg != undefined) ? data.avg.values : data.values,
@@ -211,7 +218,7 @@ exports.series = {
 			radius: 2 
 		},
 		states: { hover: { lineWidthPlus: 0 } },
-		data: data.freeze.values,
+		data: (data.avg != undefined) ? data.avg.values : data.values,
 		visible: true,
 		tooltip: { valueDecimals: meta.decimals },
 	}),
