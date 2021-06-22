@@ -73,7 +73,7 @@ var struct = {
 				// div.appendChild(createDiv(id+'_'+month));
 			// })
 		// }else{
-			return createDiv(id, false)
+			return createDiv(config, false)
 		// }	
 		// return div
 	},

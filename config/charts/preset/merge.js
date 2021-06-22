@@ -41,14 +41,15 @@ exports.preset = new Promise((resolve, reject) => {
 							files.subset = require('../'+define.subset+'.json').subset;
 						}
 						files.set = require('../'+define.set+'.json');
-							
-							
 						['en', 'sv'].forEach(lang => {
 							files[lang] = require('../lang/'+lang+'/'+define.lang+'.json');
 
+							var dref = files.ref.config.meta[station].data
+
 							files[lang].dataSource = {
-								meta: require('../lang/'+lang+'/dataSource.json')
+								meta: require('../lang/'+lang+'/dataSource.json')[dref]
 							}
+							
 							files[lang].units = require('../lang/'+lang+'/units') 
 							files[lang].time = require('../lang/'+lang+'/time.json');
 							files[lang].menu = language[lang];

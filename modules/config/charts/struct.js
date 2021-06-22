@@ -11,7 +11,8 @@ global.selectText = function(e){
 	}
 };
 
-var createDiv = function(id, no=null){
+var createDiv = function(config, no=null){
+	var id = config.files.stationDef.id;
 	var el = document.createElement('div');
 	if(variables.debug) {
 		el = document.createElement('form')

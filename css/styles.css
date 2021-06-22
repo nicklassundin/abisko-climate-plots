@@ -155,7 +155,7 @@
   border-top: none;
   border-bottom: 2px solid #ccc;
   background-color: #f1f1f1;
-  width: 90%;
+  width: 100%;
 }
 .tab button {
   flex-basis: 100%;
@@ -210,3 +210,16 @@
     background: #DFDFDF;
     display: none;
 }
+
+
+/* Caption and Description */
+.captionCont{
+	width: 100%;
+}
+.caption{
+	padding: 0px 30px;
+	width: 50%;
+	text-align: right;
+	float: left;
+}
+

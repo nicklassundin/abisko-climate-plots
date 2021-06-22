@@ -4,7 +4,7 @@
 		"0": {
 			"title": "Årlig genomsnittlig nederbörd" ,
 			"subTitle": "[stationName]",
-			"caption": "Genomsnittlig årlig nederbörd.",
+			"caption": "Genomsnittlig årlig nederbörd. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0° C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
 			"yAxis": {
 				"left": "Summerad nederbörd [mm]",
 				"right": "[X-AXIS]"
