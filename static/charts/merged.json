@@ -4624,13 +4624,13 @@
             "0": {
               "baseline": false,
               "xAxis": {
-                "min": 1930
+                "min": 1955
               }
             },
             "1": {
               "baseline": true,
               "xAxis": {
-                "min": 1930
+                "min": 1955
               }
             }
           },
