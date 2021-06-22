@@ -2,8 +2,8 @@
 	"valueSuffix": "cm",
 	"groups": {
 		"0": {
-			"title": "[stationName] Snödjup",
-			"subTitle": "Årlig genomsnitt", 
+			"title": "Årlig genomsnitt Snödjup",
+			"subTitle": "[stationName]", 
 			"caption": "Genomsnittligt årligt snödjup i centimeter.", 
 			"yAxis": {
 				"left": "Genomsnittligt snödjup [cm]", 
