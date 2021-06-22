@@ -4,7 +4,7 @@
 		"0": {
 			"title": "Årlig genomsnittlig nederbörd" ,
 			"subTitle": "[stationName]",
-			"caption": "Genomsnittlig årlig nederbörd. Månadens lägsta (min) och högsta (max) nederbörd.",
+			"caption": "Genomsnittlig årlig nederbörd.",
 			"yAxis": {
 				"left": "Summerad nederbörd [mm]",
 				"right": "[X-AXIS]"
