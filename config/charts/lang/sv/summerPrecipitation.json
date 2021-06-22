@@ -4,7 +4,7 @@
 		"0": {
 			"title": "Sommarens genomsnittliga nederbörd",
 			"subTitle": "[stationName]",
-			"caption": "Genomsnittlig årlig nederbörd under sommaren (juni till augusti). Månadens lägsta (min) och högsta (max) nederbörd. Observera att mätning av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
+			"caption": "Genomsnittlig årlig nederbörd under sommaren (juni till augusti). Observera att mätning av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0 C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
 			"yAxis": {
 				"left": "Summa av all nederbörd [mm]",
 				"right": "[X-AXIS]"
