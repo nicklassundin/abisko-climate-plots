@@ -213,13 +213,10 @@
 
 
 /* Caption and Description */
-.captionCont{
-	width: 100%;
-}
 .caption{
 	padding: 0px 30px;
-	width: 50%;
-	text-align: right;
+	width: 75%;
+	text-align: left;
 	float: left;
 }
 

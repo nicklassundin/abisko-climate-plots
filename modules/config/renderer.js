@@ -46,15 +46,16 @@ var chart = {
 			var res = this.clone();
 			return new Promise((resolve, reject) => {
 				var meta = metaRef.aggr();
-				console.log(meta)
 				res.chart = Highcharts.chart(id, {
 					lang: meta.menu, 
 					credits: {
 						enabled: true,
 						href: null,
-						text: meta.menu.dataCredit+': <br/>'+meta.dataSource.meta.desc+'<br/>'+meta.dataSource.meta.downloadDate+'<br/>'+meta.dataSource.meta.citation,
+						text: meta.menu.dataCredit+': <br/>'+meta.dataSource.meta.desc+'<br/>'+meta.dataSource.meta.downloadDate+'<br/>'
+						// +meta.dataSource.meta.citation
+						,
 						position: {
-							y: -50,
+							y: -35,
 						}
 					},
 				});
@@ -423,11 +424,11 @@ var chart = {
 				},
 				caption: {
 					text:
-					'<div class="captionCont"><div class="caption">'
-					+group.caption+
-					'</div></div>',
+					'<div class="caption">'
+					+group.caption
+					+'</div>',
 					useHTML: true,
-					align: 'center',
+					align: 'left',
 				},
 				xAxis: {
 					type: group.xAxis.type,
