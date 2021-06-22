@@ -183,6 +183,9 @@
 	},
 	"viz-jan-temp": {
 		"temperatures_jan_slide": {
+			"override": {
+				"axislim": false
+			},
 			"context": false,
 			"station": "abisko",
 			"plot": "temperatures_jan_slide"
@@ -190,6 +193,9 @@
 	},
 	"viz-feb-temp": {
 		"temperatures_feb_slide": {
+			"override": {
+				"axislim": false
+			},
 			"context": false,
 			"station": "abisko",
 			"plot": "temperatures_feb_slide"
@@ -197,6 +203,9 @@
 	},
 	"viz-mar-temp": {
 		"temperatures_mar_slide": {
+			"override": {
+				"axislim": false
+			},
 			"context": false,
 			"station": "abisko",
 			"plot": "temperatures_mar_slide"
@@ -204,6 +213,9 @@
 	},
 	"viz-apr-temp": {
 		"temperatures_apr_slide": {
+			"override": {
+				"axislim": false
+			},
 			"context": false,
 			"station": "abisko",
 			"plot": "temperatures_apr_slide"
@@ -211,6 +223,9 @@
 	},
 	"viz-may-temp": {
 		"temperatures_may_slide": {
+			"override": {
+				"axislim": false
+			},
 			"context": false,
 			"station": "abisko",
 			"plot": "temperatures_may_slide"
@@ -218,6 +233,9 @@
 	},
 	"viz-jun-temp": {
 		"temperatures_jun_slide": {
+			"override": {
+				"axislim": false
+			},
 			"context": false,
 			"station": "abisko",
 			"plot": "temperatures_jun_slide"
@@ -225,6 +243,9 @@
 	},
 	"viz-jul-temp": {
 		"temperatures_jul_slide": {
+			"override": {
+				"axislim": false
+			},
 			"context": false,
 			"station": "abisko",
 			"plot": "temperatures_jul_slide"
@@ -232,6 +253,9 @@
 	},
 	"viz-aug-temp": {
 		"temperatures_aug_slide": {
+			"override": {
+				"axislim": false
+			},
 			"context": false,
 			"station": "abisko",
 			"plot": "temperatures_aug_slide"
@@ -239,6 +263,9 @@
 	},
 	"viz-sep-temp": {
 		"temperatures_sep_slide": {
+			"override": {
+				"axislim": false
+			},
 			"context": false,
 			"station": "abisko",
 			"plot": "temperatures_sep_slide"
@@ -246,6 +273,9 @@
 	},
 	"viz-oct-temp": {
 		"temperatures_oct_slide": {
+			"override": {
+				"axislim": false
+			},
 			"context": false,
 			"station": "abisko",
 			"plot": "temperatures_oct_slide"
@@ -253,6 +283,9 @@
 	},
 	"viz-nov-temp": {
 		"temperatures_nov_slide": {
+			"override": {
+				"axislim": false
+			},
 			"context": false,
 			"station": "abisko",
 			"plot": "temperatures_nov_slide"
@@ -260,6 +293,9 @@
 	},
 	"viz-dec-temp": {
 		"temperatures_dec_slide": {
+			"override": {
+				"axislim": false
+			},
 			"context": false,
 			"station": "abisko",
 			"plot": "temperatures_dec_slide" 
