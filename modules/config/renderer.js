@@ -53,7 +53,7 @@ var chart = {
 						href: null,
 						text: meta.menu.dataCredit+': <br/>'+meta.dataSource.meta.desc+'<br/>'+meta.dataSource.meta.downloadDate+'<br/>'+meta.dataSource.meta.citation,
 						position: {
-							y: -60,
+							y: -50,
 						}
 					},
 				});
