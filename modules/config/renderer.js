@@ -49,7 +49,12 @@ var chart = {
 				res.chart = Highcharts.chart(id, {
 					lang: meta.menu, 
 					credits: {
-						enabled: false
+						enabled: true,
+						href: null,
+						text: meta.menu.dataCredit+': <br/>'+meta.dataSource.meta.desc+'<br/>'+meta.dataSource.meta.downloadDate+'<br/>'+meta.dataSource.meta.citation,
+						position: {
+							y: -60,
+						}
 					},
 				});
 				res.chart.showLoading();
@@ -73,13 +78,13 @@ var chart = {
 		var meta = this.meta
 		this.chart.update({
 			navigation: {
-        			buttonOptions: {
-            				enabled: meta.contex
-        			}
-    			},
-			credits: {
-				enabled: false
+				buttonOptions: {
+					enabled: meta.contex
+				}
 			},
+			// credits: {
+				// enabled: false
+			// },
 			tooltip: {
 				shared: true,
 				valueSuffix: ' '+meta.valueSuffix,
@@ -144,7 +149,7 @@ var chart = {
 							textKey: 'dataCredit',
 							onclick: function(){
 								try{
-									window.open(meta.meta.src, '_blank');
+									window.open(meta.dataSource.meta.src);
 								}catch(error){
 									console.log(meta);
 									throw error
@@ -402,6 +407,7 @@ var chart = {
 			})
 		}
 		try{
+			console.log(meta.menu.dataCredit)
 			this.chart.update({
 				title: {
 					text: title,
@@ -414,8 +420,12 @@ var chart = {
 					text: (group.subTitle != undefined) ? group.subTitle : "",
 				},
 				caption: {
-					text: group.caption,
+					text:
+					'<div class="captionCont"><div class="caption">'
+					+group.caption+
+					'</div></div>',
 					useHTML: true,
+					align: 'center',
 				},
 				xAxis: {
 					type: group.xAxis.type,
