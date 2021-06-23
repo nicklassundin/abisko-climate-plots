@@ -15,19 +15,19 @@
         "nhem": {
           "config": "temperature",
           "lang": "nhem_Temperature",
-          "data": "NASA-GISS_TEMP",
+          "data": "NASA-GISS-TEMP",
           "set": "climate"
         },
         "glob": {
           "config": "temperature",
           "lang": "glob_Temperature",
-          "data": "NASA-GISS_TEMP",
+          "data": "NASA-GISS-TEMP",
           "set": "climate"
         },
         "64n-90n": {
           "config": "temperature",
           "lang": "64n-90n_Temperature",
-          "data": "NASA-GISS_TEMP",
+          "data": "NASA-GISS-TEMP",
           "set": "climate"
         }
       }
@@ -167,7 +167,15 @@
         "name": "[example]"
       }
     },
-    "dataSource": {},
+    "dataSource": {
+      "meta": {
+        "src": "https://data.giss.nasa.gov/gistemp/",
+        "downloadDate": "7 January 2020",
+        "citation": "GISTEMP Team, 2020: GISS Surface Temperature Analysis (GISTEMP), version 4. NASA Goddard Institute for Space Studies.",
+        "desc": "GISS Surface Temperature Analysis (GISTEMP v4)",
+        "descLong": "NASA Goddard Institute for Space Studies, Earth Sciences Division, GISS Surface Temperature Analysis (GISTEMP v4)"
+      }
+    },
     "units": {
       "day": {
         "plural": "days",
@@ -274,7 +282,15 @@
         "name": "[example]"
       }
     },
-    "dataSource": {},
+    "dataSource": {
+      "meta": {
+        "src": "https://data.giss.nasa.gov/gistemp/",
+        "downloadDate": "7 Januari 2020",
+        "citation": "GISTEMP Team, 2020: GISS Surface Temperature Analysis (GISTEMP), version 4. NASA Goddard Institute for Space Studies.",
+        "desc": "GISS Surface Temperature Analysis (GISTEMP v4)",
+        "descLong": "NASA Goddard Institute for Space Studies, Earth Sciences Division, GISS Surface Temperature Analysis (GISTEMP v4)"
+      }
+    },
     "units": {
       "day": {
         "plural": "dagar",

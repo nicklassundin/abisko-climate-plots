@@ -146,6 +146,27 @@
 			"plot": "precipitation_dec_slide" 
 		}
 	},
+	"viz-annual-temp-glob": {
+		"temperature_glob": {
+			"contexxt": false,
+			"station": "glob",
+			"plot": "temperature_zonal"
+		}
+	},
+	"viz-annual-temp-nhem": {
+		"temperature_glob": {
+			"contexxt": false,
+			"station": "nhem",
+			"plot": "temperature_zonal"
+		}
+	},
+	"viz-annual-temp-64n-90n": {
+		"temperature_glob": {
+			"contexxt": false,
+			"station": "64n-90n",
+			"plot": "temperature_zonal"
+		}
+	},
 	"viz-annual-temp": {
 		"slideTemperatures": {
 			"context": false,

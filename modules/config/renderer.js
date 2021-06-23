@@ -49,7 +49,7 @@ var chart = {
 				res.chart = Highcharts.chart(id, {
 					lang: meta.menu, 
 					credits: {
-						enabled: true,
+						enabled: false,
 						href: null,
 						text: meta.menu.dataCredit+': <br/>'+meta.dataSource.meta.desc+'<br/>'+meta.dataSource.meta.downloadDate+'<br/>'
 						// +meta.dataSource.meta.citation
@@ -84,9 +84,9 @@ var chart = {
 					enabled: meta.contex
 				}
 			},
-			// credits: {
-				// enabled: false
-			// },
+			credits: {
+				enabled: false
+			},
 			tooltip: {
 				shared: true,
 				valueSuffix: ' '+meta.valueSuffix,
