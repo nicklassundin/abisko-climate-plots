@@ -78,10 +78,13 @@ var chart = {
 		var id = this.id
 		var title = this.title(0);
 		var meta = this.meta
+		var cM = (m) => {
+			return meta.context || !(meta.context === undefined) ? m : null;
+		}
 		this.chart.update({
 			navigation: {
 				buttonOptions: {
-					enabled: meta.contex
+					// enabled: meta.contex
 				}
 			},
 			credits: {
@@ -104,26 +107,31 @@ var chart = {
 				sourceHeight: 350*1.2,
 				scale: 8,
 				filename: 'id',
-				// allowHTML: true,
+				allowHTML: true,
 				buttons: {
 					contextButton: {
-						menuItems: [{
+						menuItems: [
+							cM({
 							textKey: 'downloadPDF',
 							onclick: function(){
 								this.exportChart({
 									type: 'application/pdf'
 								});
 							},
-						},{
+							// enabled: meta.contex,
+						}),
+							cM({
 							textKey: 'downloadJPEG',
 							onclick: function(){
 								this.exportChart({
 									type: 'image/jpeg'
 								});
-							}
-						},'downloadSVG','viewFullscreen','printChart',{
+							},
+							enabled: meta.contex,
+						}), cM('downloadSVG'), cM('viewFullscreen'), cM('printChart'),cM({
 							separator: true,
-						},{
+							enabled: meta.contex,
+						}),cM({
 							textKey: 'langOption',
 							onclick: function(){
 								if(nav_lang=='en') nav_lang='sv';
@@ -134,7 +142,8 @@ var chart = {
 								var id = this.renderTo.id.split('_')[0];
 								renderInterface.updatePlot(this);
 							},
-						},{
+							enabled: meta.contex,
+						}),{
 							textKey: 'showDataTable',
 							onclick: function(){
 								if(this.options.exporting.showTable) {
@@ -147,7 +156,7 @@ var chart = {
 								});
 								// TODO toggle between 'Show data' and 'Hide data'
 							},
-						},{
+						},cM({
 							textKey: 'dataCredit',
 							onclick: function(){
 								try{
@@ -157,7 +166,8 @@ var chart = {
 									throw error
 								}
 							},
-						}],
+							enabled: meta.contex,
+						})],
 					},
 				},
 			},
