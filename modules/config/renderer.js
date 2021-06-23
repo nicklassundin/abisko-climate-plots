@@ -108,6 +108,7 @@ var chart = {
 				scale: 8,
 				filename: 'id',
 				allowHTML: true,
+				tableCaption: '',
 				buttons: {
 					contextButton: {
 						menuItems: [
