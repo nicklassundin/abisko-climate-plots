@@ -569,24 +569,24 @@
     }
   },
   "viz-annual-temp-glob": {
-    "temperature_glob": {
-      "contexxt": false,
+    "temperature_zonal_slide": {
+      "context": false,
       "station": "glob",
-      "plot": "temperature_zonal"
+      "plot": "temperature_zonal_slide"
     }
   },
   "viz-annual-temp-nhem": {
-    "temperature_glob": {
-      "contexxt": false,
+    "temperature_zonal_slide": {
+      "context": false,
       "station": "nhem",
-      "plot": "temperature_zonal"
+      "plot": "temperature_zonal_slide"
     }
   },
   "viz-annual-temp-64n-90n": {
-    "temperature_glob": {
-      "contexxt": false,
+    "temperature_zonal_slide": {
+      "context": false,
       "station": "64n-90n",
-      "plot": "temperature_zonal"
+      "plot": "temperature_zonal_slide"
     }
   },
   "viz-annual-temp": {

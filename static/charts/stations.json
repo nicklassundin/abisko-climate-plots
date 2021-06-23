@@ -191,15 +191,18 @@
   ],
   "64n-90n": [
     "temperature_64n90n",
-    "temperature_zonal"
+    "temperature_zonal",
+    "temperature_zonal_slide"
   ],
   "glob": [
     "temperature_glob",
     "temperature_zonal",
+    "temperature_zonal_slide",
     "weeklyCO2"
   ],
   "nhem": [
     "temperature_nhem",
-    "temperature_zonal"
+    "temperature_zonal",
+    "temperature_zonal_slide"
   ]
 }
