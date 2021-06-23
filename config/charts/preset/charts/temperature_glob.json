@@ -10,7 +10,7 @@
 			"glob": {
 				"config": "temperature",
 				"lang": "glob_Temperature",
-				"data": "NASA-GISS_TEMP",
+				"data": "NASA-GISS-TEMP",
 				"set": "climate"
 			}
 		}
