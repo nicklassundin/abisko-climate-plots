@@ -109,6 +109,7 @@ var chart = {
 				filename: 'id',
 				allowHTML: true,
 				tableCaption: '',
+				showTable: false,
 				buttons: {
 					contextButton: {
 						menuItems: [
@@ -410,7 +411,7 @@ var chart = {
 			return res.length < 0 ? null : res;
 		}
 		this.chart.update({
-			xAxis: baseline(group) 
+			xAxis: baseline(group),
 		})
 		if(group.tooltip){
 			this.chart.update({
