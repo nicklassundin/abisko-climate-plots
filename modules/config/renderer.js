@@ -130,7 +130,7 @@ var chart = {
 								});
 							},
 							enabled: meta.contex,
-						}), cM('downloadSVG'), cM('viewFullscreen'), cM('printChart'),cM({
+						}), cM('downloadSVG'), 'viewFullscreen', cM('printChart'),cM({
 							separator: true,
 							enabled: meta.contex,
 						}),cM({
