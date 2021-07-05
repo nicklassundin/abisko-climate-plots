@@ -1,4 +1,5 @@
 // Series definitions/configuration
+
 exports.series = {
 	getPreset: (series, data) => {
 		//TODO
