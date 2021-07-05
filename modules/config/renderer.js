@@ -567,33 +567,35 @@ var render = {
 			throw error
 		}
 		// Update radius TODO
-	
+
 		this.charts[id].then((Obj) => {
 
-		var divID = Obj.id;
-		window.onresize = function (event) {
-			var currWidth = $('#'+divID)[0].offsetWidth;
-			// Catch 1st width
-			if (render.charts[id].lastWidth === undefined) {
-				render.charts[id].lastWidth = currWidth;
-			}
-			// Is it wider or not and by how much?
-			var ratio = currWidth / render.charts[id].lastWidth;
+			var divID = Obj.id;
+			window.onresize = function (event) {
+				var currWidth = $('#'+divID)[0].offsetWidth;
+				// Catch 1st width
+				if (render.charts[id].lastWidth === undefined) {
+					render.charts[id].lastWidth = currWidth;
+				}
+				// Is it wider or not and by how much?
+				var ratio = currWidth / render.charts[id].lastWidth;
+				var chart = $('#'+divID).highcharts();
 
-			var chart = $('#'+divID).highcharts();
-			var currRadius = chart.series[0].options.marker.radius;
-			var newRadius;
-			if(ratio == 1) newRadius = currRadius;
-			else newRadius = currRadius*ratio;
-			chart.series.forEach(function (v, i, a) {
-				a[i].update({
-					marker: {
-						radius: newRadius
+				chart.series.forEach(function (v, i, a) {
+					if(chart.series[i].options.marker){
+						var currRadius = chart.series[i].options.marker.radius;
+						var newRadius;
+						if(ratio == 1) newRadius = currRadius;
+						else newRadius = currRadius*ratio;
+						a[i].update({
+							marker: {
+								radius: newRadius
+							}
+						});
 					}
 				});
-			});
-			render.charts[id].lastWidth = currWidth;
-		};
+				render.charts[id].lastWidth = currWidth;
+			};
 		})
 		//////
 	},
