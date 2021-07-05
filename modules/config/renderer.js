@@ -114,62 +114,62 @@ var chart = {
 					contextButton: {
 						menuItems: [
 							cM({
-							textKey: 'downloadPDF',
-							onclick: function(){
-								this.exportChart({
-									type: 'application/pdf'
-								});
-							},
-							// enabled: meta.contex,
-						}),
+								textKey: 'downloadPDF',
+								onclick: function(){
+									this.exportChart({
+										type: 'application/pdf'
+									});
+								},
+								// enabled: meta.contex,
+							}),
 							cM({
-							textKey: 'downloadJPEG',
-							onclick: function(){
-								this.exportChart({
-									type: 'image/jpeg'
-								});
-							},
-							enabled: meta.contex,
-						}), cM('downloadSVG'), 'viewFullscreen', cM('printChart'),cM({
-							separator: true,
-							enabled: meta.contex,
-						}),cM({
-							textKey: 'langOption',
-							onclick: function(){
-								if(nav_lang=='en') nav_lang='sv';
-								else nav_lang='en';
-								Highcharts.setOptions({
-									lang: meta.menu, 
-								})	
-								var id = this.renderTo.id.split('_')[0];
-								renderInterface.updatePlot(this);
-							},
-							enabled: meta.contex,
-						}),{
-							textKey: 'showDataTable',
-							onclick: function(){
-								if(this.options.exporting.showTable) {
-									this.dataTableDiv.innerHTML = '';
-								};
-								this.update({
-									exporting: {
-										showTable: !this.options.exporting.showTable, 
-									},
-								});
-								// TODO toggle between 'Show data' and 'Hide data'
-							},
-						},cM({
-							textKey: 'dataCredit',
-							onclick: function(){
-								try{
-									window.open(meta.dataSource.meta.src);
-								}catch(error){
-									console.log(meta);
-									throw error
-								}
-							},
-							enabled: meta.contex,
-						})],
+								textKey: 'downloadJPEG',
+								onclick: function(){
+									this.exportChart({
+										type: 'image/jpeg'
+									});
+								},
+								enabled: meta.contex,
+							}), cM('downloadSVG'), 'viewFullscreen', cM('printChart'),cM({
+								separator: true,
+								enabled: meta.contex,
+							}),cM({
+								textKey: 'langOption',
+								onclick: function(){
+									if(nav_lang=='en') nav_lang='sv';
+									else nav_lang='en';
+									Highcharts.setOptions({
+										lang: meta.menu, 
+									})	
+									var id = this.renderTo.id.split('_')[0];
+									renderInterface.updatePlot(this);
+								},
+								enabled: meta.contex,
+							}),{
+								textKey: 'showDataTable',
+								onclick: function(){
+									if(this.options.exporting.showTable) {
+										this.dataTableDiv.innerHTML = '';
+									};
+									this.update({
+										exporting: {
+											showTable: !this.options.exporting.showTable, 
+										},
+									});
+									// TODO toggle between 'Show data' and 'Hide data'
+								},
+							},cM({
+								textKey: 'dataCredit',
+								onclick: function(){
+									try{
+										window.open(meta.dataSource.meta.src);
+									}catch(error){
+										console.log(meta);
+										throw error
+									}
+								},
+								enabled: meta.contex,
+							})],
 					},
 				},
 			},
@@ -280,6 +280,10 @@ var chart = {
 			}
 		})
 		series.forEach((serie) => {
+			var width = $('#'+id)[0].offsetWidth;
+			if(serie.marker){
+				serie.marker.radius = serie.marker.radius*width/800;
+			} 
 			this.chart.addSeries(serie)
 		})
 		if(Object.keys(meta.groups).map(key => meta.groups[key].enabled).filter(each => each).length > 1){
@@ -562,6 +566,36 @@ var render = {
 			console.log(id);
 			throw error
 		}
+		// Update radius TODO
+	
+		this.charts[id].then((Obj) => {
+
+		var divID = Obj.id;
+		window.onresize = function (event) {
+			var currWidth = $('#'+divID)[0].offsetWidth;
+			// Catch 1st width
+			if (render.charts[id].lastWidth === undefined) {
+				render.charts[id].lastWidth = currWidth;
+			}
+			// Is it wider or not and by how much?
+			var ratio = currWidth / render.charts[id].lastWidth;
+
+			var chart = $('#'+divID).highcharts();
+			var currRadius = chart.series[0].options.marker.radius;
+			var newRadius;
+			if(ratio == 1) newRadius = currRadius;
+			else newRadius = currRadius*ratio;
+			chart.series.forEach(function (v, i, a) {
+				a[i].update({
+					marker: {
+						radius: newRadius
+					}
+				});
+			});
+			render.charts[id].lastWidth = currWidth;
+		};
+		})
+		//////
 	},
 	initiate: function(id, data){
 		try{
