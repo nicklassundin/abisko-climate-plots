@@ -114,6 +114,9 @@
       },
       "1": {
         "enabled": false
+      },
+      "2": {
+        "enabled": false
       }
     }
   },

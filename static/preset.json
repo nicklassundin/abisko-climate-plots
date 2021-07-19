@@ -31,7 +31,7 @@
     "annualTemperatures"
   ],
   "tempAvgSlide": [
-    "slideTemperature"
+    "slideTemperatures"
   ],
   "tempSeason": [
     "TemperaturesSummer",
@@ -101,7 +101,7 @@
     "monthlyPrecipitationPolar"
   ],
   "tempClimateWeather": [
-    "slideTemperature"
+    "slideTemperatures"
   ],
   "growingSeasonAll": [
     "growingSeasonWeeks",
@@ -119,13 +119,13 @@
     "slideMonthlyPrecipitation"
   ],
   "slideTemp": [
-    "slideTemperature"
+    "slideTemperatures"
   ],
   "slidePrec": [
     "slidePrecipitation"
   ],
   "slideTempMin": [
-    "slideTemperature",
+    "slideTemperatures",
     "slideTemperaturesSpring",
     "slideTemperaturesSummer",
     "slideTemperaturesAutumn",
@@ -212,11 +212,15 @@
     "iceThicknessDate",
     "weeklyCO2",
     "permaHistogramCALM",
-    "slideTemperature",
+    "slideTemperatures",
     "dailyExtremeTemperature",
+    "extremeTempDaily",
     "weeklyExtremeTemperature",
+    "extremeTempWeekly",
     "dailyExtremePrecipitation",
+    "extremePrecDaily",
     "weeklyExtremePrecipitation",
+    "extremePrecWeekly",
     "growingSeasonFrostFirst",
     "growingSeasonFrostLast",
     "slideMonthlyTemperatures",
@@ -348,7 +352,7 @@
     }
   },
   "sqrt-temp-climate-weather-v2": [
-    "slideTemperature"
+    "slideTemperatures"
   ],
   "sqrt-temp-extreme-v2": [
     "dailyExtremeTemperature",
@@ -367,7 +371,7 @@
     "growingSeasonFrostLast"
   ],
   "sqrt-temp-v2": [
-    "slideTemperature",
+    "slideTemperatures",
     "slideTemperaturesSpring",
     "slideTemperaturesSummer",
     "slideTemperaturesAutumn",

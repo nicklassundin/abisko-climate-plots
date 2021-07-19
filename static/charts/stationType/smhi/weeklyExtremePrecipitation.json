@@ -9,7 +9,8 @@
       ],
       "data": [
         "precipitation",
-        "weeks"
+        "weeks",
+        "total"
       ]
     },
     "config": {

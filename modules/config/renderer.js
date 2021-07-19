@@ -187,13 +187,14 @@ var chart = {
 		})
 		this.chart.showLoading();
 		// this.chart.redraw();
-		var groups = Object.keys(meta.groups).map(key => ({
+		var groups = Object.keys(meta.groups).filter(k => {meta.groups[k].enabled}).map(key => ({
 			key: key,
 			enabled: meta.groups[key].enabled
 		}));
 		if(Object.keys(meta.groups).map(key => meta.groups[key].enabled).filter(each => each).length > 1){
 			var gTitle = this.groupTitle();
-			this.switchToGroup(groups[0].key, true, change = false)
+			// this.switchToGroup(groups[0].key, true, change = false)
+			this.switchToGroup(undefined ,true, change = false)
 			$('#'+id).append(gTitle);
 		}
 		return this
@@ -205,15 +206,15 @@ var chart = {
 			var title = '<label>'+
 				group.title+
 				'</label><br>';
-			if(group.select != undefined && group.select.enabled){
-				title = title + '<label style="font-size: 10px">'+
-					group.select.text+
-					' </label>'+
-					'<input type="date" value='+
-					variables.dateStr()+
-					' onclick=selectText(this) '+
-					'onchange=renderInterface.updatePlot('+this.id+','+baselineLower+','+baselineUpper+',this.value)></input>'
-			}	
+			// if(group.select != undefined && group.select.enabled){
+				// title = title + '<label style="font-size: 10px">'+
+					// group.select.text+
+					// ' </label>'+
+					// '<input type="date" value='+
+					// variables.dateStr()+
+					// ' onclick=selectText(this) '+
+					// 'onchange=renderInterface.updatePlot('+this.id+','+baselineLower+','+baselineUpper+',this.value)></input>'
+			// }	
 			return title
 		}catch(error){
 			console.log(gID)
@@ -222,11 +223,19 @@ var chart = {
 			throw error
 		}
 	},
-	groupTitle: function(active = 0){
+	groupTitle: function(active){
 		var id = this.id
 		var meta = this.meta;
+		if(!active){
 
-		var group = Object.keys(meta.groups).filter((key) => meta.groups[key].enabled).map(function(each, index){
+			active = parseInt(Object.keys(meta.groups).filter(k => meta.groups[k].enabled ).shift())
+			if(active > 0){
+				active = 2;
+			} 
+		}
+
+		var group = Object.keys(meta.groups).filter((key) => meta.groups[key].enabled).map(function(each){
+			var index = parseInt(each)
 			if(index == active){
 				return "<button class='tablinks_"+id+" active' id="+index+">"+meta.groups[each].legend+"</button>"
 			}else{
@@ -321,7 +330,8 @@ var chart = {
 				}
 			})	
 		}
-		this.switchToGroup(groups[0].key)
+		// this.switchToGroup(groups[0].key)
+		this.switchToGroup()
 		this.chart.redraw();
 		this.chart.hideLoading();
 	},
@@ -335,6 +345,10 @@ var chart = {
 	switchToGroup: function(gID, changeVisibility = true, change = true){
 		var meta = this.meta;
 		var id = this.id;
+		if(!gID){
+			gID = parseInt(Object.keys(meta.groups).filter(k => meta.groups[k].enabled).shift());
+			if(gID > 0) gID = 2;
+		}
 		var title = this.title(gID);
 		var group = meta.groups[gID];
 		var series_count = 0;

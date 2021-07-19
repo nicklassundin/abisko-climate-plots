@@ -9,7 +9,8 @@
       ],
       "data": [
         "temperatures",
-        "weeks"
+        "weeks",
+        "max"
       ]
     },
     "config": {

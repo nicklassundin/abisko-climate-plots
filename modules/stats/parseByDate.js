@@ -8,6 +8,7 @@ var parseByDate = function (values, type='mean', src='', custom) {
 		var frame = {
 			weeks: {},
 			yrly: {},
+			yrlyTest: {},
 			yrlyFull: {},
 			yrlySplit: {},
 			decades: {},
@@ -25,6 +26,7 @@ var parseByDate = function (values, type='mean', src='', custom) {
 		const data = {
 			weeks: {},
 			yrly: {},
+			yrlyTest: {},
 			yrlyFull: {},
 			yrlySplit: {},
 			decades: {},
@@ -42,25 +44,26 @@ var parseByDate = function (values, type='mean', src='', custom) {
 				var result = Object.assign({}, frame);
 				// TODO build to general function to be use for all functions
 				var set = function(entry, key, date){
-				var insert = (...k) => {
-					return function(data = result, e = entry){
-						var kn = k[0]
-						if(!data[kn]){
-							if(k.length > 1){
-								data[kn] = insert(...(k.slice(1)))({})
+					var insert = (...k) => {
+						return function(data = result, e = entry){
+							var kn = k[0]
+							if(!data[kn]){
+								if(k.length > 1){
+									data[kn] = insert(...(k.slice(1)))({})
+								}else{
+									data[kn] = struct.create([],kn,type);
+								}
 							}else{
-								data[kn] = struct.create([],kn,type);
+								if(k.length > 1){
+									data[kn] = insert(...(k.slice(1)))(data[kn]);
+								}else{
+									data[kn].values.push(e)
+								}
 							}
-						}else{
-							if(k.length > 1){
-								data[kn] = insert(...(k.slice(1)))(data[kn]);
-							}else{
-								data[kn].values.push(e)
-							}
+							return data;
 						}
-						return data;
 					}
-				}
+
 					var year = date.getFullYear();
 					entry.year = year;
 					if(!years[year+'']) years[year] = year+'';
@@ -79,6 +82,10 @@ var parseByDate = function (values, type='mean', src='', custom) {
 					var season = help.getSeasonByIndex(month);
 					insert(season, key, year)();
 					insert('yrly', key, year)()
+
+					// TODO test
+					// insert('yrlyTest', key, year, month)()
+					// insert('yrlyWeek', key, year, week)()
 					// Decades
 					var decade = year - year % 10;
 					insert('decades', key, decade)()
@@ -198,6 +205,9 @@ var parseByDate = function (values, type='mean', src='', custom) {
 											})
 											res(this.values[key])
 											break;
+										case 'yrlyTest':
+											res(this.values[key])
+											break;
 										case 'yrlySplit':
 											keys.forEach(tkey => {
 												this.values[key][tkey] = construct(values[key][tkey])
@@ -285,6 +295,9 @@ var parseByDate = function (values, type='mean', src='', custom) {
 						get winter() {
 							return this.request('winter')
 						},
+						get yrlyTest() {
+							return this.request('yrlyTest')
+						}
 					}
 				}
 				var answer = build(entries);

@@ -9412,6 +9412,9 @@
             },
             "1": {
               "enabled": false
+            },
+            "2": {
+              "enabled": false
             }
           }
         },
@@ -9759,6 +9762,9 @@
             },
             "1": {
               "enabled": false
+            },
+            "2": {
+              "enabled": false
             }
           }
         },
@@ -10002,7 +10008,8 @@
             ],
             "data": [
               "precipitation",
-              "yrly"
+              "yrly",
+              "total"
             ]
           },
           "config": {
@@ -10376,7 +10383,8 @@
             ],
             "data": [
               "precipitation",
-              "yrly"
+              "yrly",
+              "total"
             ]
           },
           "config": {
@@ -10753,7 +10761,8 @@
             ],
             "data": [
               "temperatures",
-              "yrly"
+              "yrly",
+              "max"
             ]
           },
           "config": {
@@ -11148,7 +11157,8 @@
             ],
             "data": [
               "temperatures",
-              "yrly"
+              "yrly",
+              "max"
             ]
           },
           "config": {
@@ -13745,6 +13755,3070 @@
             },
             "diff": {
               "name": "Skillnad"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 Januari 2020",
+              "citation": "",
+              "desc": "Abisko Naturvetenskapliga Station",
+              "descLong": "Polarforskningssekretariatet, Abisko Naturvetenskapliga Station, forskningsdata"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "dagar",
+              "singular": "dag",
+              "interval": "daglig"
+            },
+            "week": {
+              "plural": "veckor",
+              "singular": "vecka",
+              "interval": "veckovis"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "Januari",
+              "feb": "Februari",
+              "mar": "Mars",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Augusti",
+              "sep": "September",
+              "oct": "Oktober",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "March",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Okt",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Interval för baslinje",
+              "lower": "Undregräns",
+              "upper": "Övregräns"
+            },
+            "dataCredit": "Data källa",
+            "contribute": "Bidra - Github [dummy]",
+            "showDataTable": "Vissa/göm data",
+            "langOption": "English",
+            "downloadJPEG": "Laddaner som JPEG",
+            "downloadPDF": "Laddaner som  PDF",
+            "downloadSVG": "Laddaner som SVG"
+          }
+        }
+      }
+    }
+  },
+  {
+    "smhi": {
+      "extremePrecDaily": {
+        "ref": {
+          "id": "dailyExtremePrecipitation",
+          "type": "smhi",
+          "tag": {
+            "render": [
+              "precipitation",
+              "dailyExtreme"
+            ],
+            "data": [
+              "precipitation",
+              "yrly",
+              "total"
+            ]
+          },
+          "config": {
+            "meta": {
+              "smhi": {
+                "data": "SMHI-Hydrology",
+                "config": "precipitation",
+                "lang": "annualPrecipitation",
+                "set": "slideExtremeDay"
+              },
+              "abisko": {
+                "data": "ANS",
+                "config": "precipitation",
+                "lang": "annualPrecipitation",
+                "set": "slideExtremeDay"
+              }
+            }
+          },
+          "months": false
+        },
+        "config": {
+          "type": "column",
+          "groups": {
+            "0": {
+              "baseline": false
+            },
+            "1": {
+              "baseline": true
+            },
+            "2": {
+              "baseline": false
+            }
+          },
+          "decimals": 2,
+          "series": {
+            "diff": {
+              "preset": "diff",
+              "group": 1,
+              "visible": true,
+              "colour": "[example]",
+              "type": "column"
+            },
+            "snow": {
+              "preset": "snow",
+              "group": 0,
+              "visible": true,
+              "colour": "#CDD8F0",
+              "hoverColour": "#eeeeff",
+              "borderColour": "#5F7CB9",
+              "type": "column"
+            },
+            "rain": {
+              "preset": "rain",
+              "group": 0,
+              "visible": true,
+              "colour": "#1000FB",
+              "hoverColor": "#3333ff",
+              "borderColour": "#5F7CB9",
+              "type": "column"
+            },
+            "extreme": {
+              "preset": "extreme",
+              "group": 2,
+              "visible": true,
+              "colour": "#1000FF",
+              "type": "column"
+            }
+          },
+          "parse": {
+            "file": [
+              "temperature.csv",
+              "precipitation.csv"
+            ],
+            "preset": {
+              "header": true,
+              "download": true,
+              "skipEmptyLines": true,
+              "beforeFirstChunk": "smhi",
+              "fastMode": true
+            },
+            "parser": "smhiTemp",
+            "local": true
+          }
+        },
+        "set": {
+          "unitType": "day",
+          "groups": {
+            "0": {
+              "enabled": false,
+              "tooltip": {
+                "type": "valueDate"
+              }
+            },
+            "1": {
+              "enabled": true,
+              "tooltip": {
+                "type": "valueDate"
+              }
+            },
+            "2": {
+              "enabled": true,
+              "prime": true,
+              "tooltip": {
+                "type": "valueDate"
+              }
+            }
+          }
+        },
+        "en": {
+          "valueSuffix": "mm",
+          "groups": {
+            "0": {
+              "title": "Annual Average Precipitation",
+              "subTitle": "[stationName]",
+              "caption": "Average annual precipitation. Note the measurement of snow from precipitation is estimated from precipitation taking place when the temperature was simultaneously recorded as below 0° C. These values should be considered estimates and not a precise value.",
+              "yAxis": {
+                "left": "Total Precipitation [mm]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "1": {
+              "title": "Annual Average Precipitation Difference From Baseline",
+              "subTitle": "[stationName]",
+              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
+              "yAxis": {
+                "left": "Precipitation [mm]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Climate"
+            },
+            "2": {
+              "title": "Wettest [unit] of the year",
+              "subTitle": "[stationName]",
+              "yAxis": {
+                "left": "Total precipitation [mm]",
+                "right": "[X-Axis]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "caption": "The wettest [unit] of the year (total precipitation in mm).",
+              "legend": "Weather"
+            }
+          },
+          "series": {
+            "diff": {
+              "name": "Difference"
+            },
+            "snow": {
+              "name": "Precipitation from snow"
+            },
+            "rain": {
+              "name": "Precipitation from rain"
+            },
+            "extreme": {
+              "name": "wettest [interval] of the year (total precipitation in mm)"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 January 2020",
+              "citation": "",
+              "desc": "Abisko Scientific Research Station",
+              "descLong": "Swedish Polar Research Secretariet, Abisko Scientific Research Station, Research Data"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "days",
+              "singular": "day",
+              "interval": "daily"
+            },
+            "week": {
+              "plural": "weeks",
+              "singular": "week",
+              "interval": "weekly"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "January",
+              "feb": "February",
+              "mar": "March",
+              "apr": "April",
+              "may": "May",
+              "jun": "June",
+              "jul": "July",
+              "aug": "August",
+              "sep": "September",
+              "oct": "October",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "Mar",
+              "apr": "Apr",
+              "may": "May",
+              "jun": "Jun",
+              "jul": "Jul",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Oct",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Range for baseline",
+              "lower": "Lower limit",
+              "upper": "Upper limit"
+            },
+            "dataCredit": "Data source",
+            "contribute": "Contribute - Github [dummy]",
+            "showDataTable": "Show/hide data",
+            "langOption": "Svenska",
+            "downloadJPEG": "Download as JPEG",
+            "downloadPDF": "Download as PDF",
+            "downloadSVG": "Download as SVG"
+          }
+        },
+        "sv": {
+          "valueSuffix": "mm",
+          "groups": {
+            "0": {
+              "title": "Årlig genomsnittlig nederbörd",
+              "subTitle": "[stationName]",
+              "caption": "Genomsnittlig årlig nederbörd. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0° C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
+              "yAxis": {
+                "left": "Summerad nederbörd [mm]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Väder"
+            },
+            "1": {
+              "title": "Årlig genomsnittlig nederbördsskillnad från baslinjen",
+              "subTitle": "[stationName] Skillnad mellan årligt genomsnitt och genomsnitt för [baseline]",
+              "yAxis": {
+                "left": "Nederbörd [mm]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "caption": "Skillnad mellan den årliga genomsnittliga nederbörden och den genomsnittliga nederbörden för baslinjeperioden, vanligtvis 1961 till 1990.",
+              "legend": "Klimat"
+            },
+            "2": {
+              "title": "Årets blötaste [unit]",
+              "subTitle": "[stationName]",
+              "yAxis": {
+                "left": "Summerad nederbörd [mm]",
+                "right": "[X-Axis]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "caption": "Årets blötaste [unit] (Summerad nederbörd i mm).",
+              "legend": "Väder"
+            }
+          },
+          "series": {
+            "diff": {
+              "name": "Skillnad"
+            },
+            "snow": {
+              "name": "Nederbörd från snö"
+            },
+            "rain": {
+              "name": "Nederbörd från regn"
+            },
+            "extreme": {
+              "name": "Årets blötaste [interval] (Summerad nederbörd i mm)"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 Januari 2020",
+              "citation": "",
+              "desc": "Abisko Naturvetenskapliga Station",
+              "descLong": "Polarforskningssekretariatet, Abisko Naturvetenskapliga Station, forskningsdata"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "dagar",
+              "singular": "dag",
+              "interval": "daglig"
+            },
+            "week": {
+              "plural": "veckor",
+              "singular": "vecka",
+              "interval": "veckovis"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "Januari",
+              "feb": "Februari",
+              "mar": "Mars",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Augusti",
+              "sep": "September",
+              "oct": "Oktober",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "March",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Okt",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Interval för baslinje",
+              "lower": "Undregräns",
+              "upper": "Övregräns"
+            },
+            "dataCredit": "Data källa",
+            "contribute": "Bidra - Github [dummy]",
+            "showDataTable": "Vissa/göm data",
+            "langOption": "English",
+            "downloadJPEG": "Laddaner som JPEG",
+            "downloadPDF": "Laddaner som  PDF",
+            "downloadSVG": "Laddaner som SVG"
+          }
+        }
+      }
+    },
+    "abisko": {
+      "extremePrecDaily": {
+        "ref": {
+          "id": "dailyExtremePrecipitation",
+          "type": "abisko",
+          "tag": {
+            "render": [
+              "precipitation",
+              "dailyExtreme"
+            ],
+            "data": [
+              "precipitation",
+              "yrly",
+              "total"
+            ]
+          },
+          "config": {
+            "meta": {
+              "smhi": {
+                "data": "SMHI-Hydrology",
+                "config": "precipitation",
+                "lang": "annualPrecipitation",
+                "set": "slideExtremeDay"
+              },
+              "abisko": {
+                "data": "ANS",
+                "config": "precipitation",
+                "lang": "annualPrecipitation",
+                "set": "slideExtremeDay"
+              }
+            }
+          },
+          "months": false
+        },
+        "config": {
+          "type": "column",
+          "groups": {
+            "0": {
+              "baseline": false
+            },
+            "1": {
+              "baseline": true
+            },
+            "2": {
+              "baseline": false
+            }
+          },
+          "decimals": 2,
+          "series": {
+            "diff": {
+              "preset": "diff",
+              "group": 1,
+              "visible": true,
+              "colour": "[example]",
+              "type": "column"
+            },
+            "snow": {
+              "preset": "snow",
+              "group": 0,
+              "visible": true,
+              "colour": "#CDD8F0",
+              "hoverColour": "#eeeeff",
+              "borderColour": "#5F7CB9",
+              "type": "column"
+            },
+            "rain": {
+              "preset": "rain",
+              "group": 0,
+              "visible": true,
+              "colour": "#1000FB",
+              "hoverColor": "#3333ff",
+              "borderColour": "#5F7CB9",
+              "type": "column"
+            },
+            "extreme": {
+              "preset": "extreme",
+              "group": 2,
+              "visible": true,
+              "colour": "#1000FF",
+              "type": "column"
+            }
+          },
+          "parse": {
+            "file": [
+              "ANS_Temp_Prec.csv",
+              "AWS.csv",
+              "ANS_Prec.csv"
+            ],
+            "preset": {
+              "header": true,
+              "download": true,
+              "skipEmptyLines": true,
+              "beforeFirstChunk": "abisko",
+              "dynamicTyping": false
+            },
+            "parser": "AbiskoCsv",
+            "local": true
+          }
+        },
+        "set": {
+          "unitType": "day",
+          "groups": {
+            "0": {
+              "enabled": false,
+              "tooltip": {
+                "type": "valueDate"
+              }
+            },
+            "1": {
+              "enabled": true,
+              "tooltip": {
+                "type": "valueDate"
+              }
+            },
+            "2": {
+              "enabled": true,
+              "prime": true,
+              "tooltip": {
+                "type": "valueDate"
+              }
+            }
+          }
+        },
+        "en": {
+          "valueSuffix": "mm",
+          "groups": {
+            "0": {
+              "title": "Annual Average Precipitation",
+              "subTitle": "[stationName]",
+              "caption": "Average annual precipitation. Note the measurement of snow from precipitation is estimated from precipitation taking place when the temperature was simultaneously recorded as below 0° C. These values should be considered estimates and not a precise value.",
+              "yAxis": {
+                "left": "Total Precipitation [mm]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "1": {
+              "title": "Annual Average Precipitation Difference From Baseline",
+              "subTitle": "[stationName]",
+              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
+              "yAxis": {
+                "left": "Precipitation [mm]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Climate"
+            },
+            "2": {
+              "title": "Wettest [unit] of the year",
+              "subTitle": "[stationName]",
+              "yAxis": {
+                "left": "Total precipitation [mm]",
+                "right": "[X-Axis]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "caption": "The wettest [unit] of the year (total precipitation in mm).",
+              "legend": "Weather"
+            }
+          },
+          "series": {
+            "diff": {
+              "name": "Difference"
+            },
+            "snow": {
+              "name": "Precipitation from snow"
+            },
+            "rain": {
+              "name": "Precipitation from rain"
+            },
+            "extreme": {
+              "name": "wettest [interval] of the year (total precipitation in mm)"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 January 2020",
+              "citation": "",
+              "desc": "Abisko Scientific Research Station",
+              "descLong": "Swedish Polar Research Secretariet, Abisko Scientific Research Station, Research Data"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "days",
+              "singular": "day",
+              "interval": "daily"
+            },
+            "week": {
+              "plural": "weeks",
+              "singular": "week",
+              "interval": "weekly"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "January",
+              "feb": "February",
+              "mar": "March",
+              "apr": "April",
+              "may": "May",
+              "jun": "June",
+              "jul": "July",
+              "aug": "August",
+              "sep": "September",
+              "oct": "October",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "Mar",
+              "apr": "Apr",
+              "may": "May",
+              "jun": "Jun",
+              "jul": "Jul",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Oct",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Range for baseline",
+              "lower": "Lower limit",
+              "upper": "Upper limit"
+            },
+            "dataCredit": "Data source",
+            "contribute": "Contribute - Github [dummy]",
+            "showDataTable": "Show/hide data",
+            "langOption": "Svenska",
+            "downloadJPEG": "Download as JPEG",
+            "downloadPDF": "Download as PDF",
+            "downloadSVG": "Download as SVG"
+          }
+        },
+        "sv": {
+          "valueSuffix": "mm",
+          "groups": {
+            "0": {
+              "title": "Årlig genomsnittlig nederbörd",
+              "subTitle": "[stationName]",
+              "caption": "Genomsnittlig årlig nederbörd. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0° C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
+              "yAxis": {
+                "left": "Summerad nederbörd [mm]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Väder"
+            },
+            "1": {
+              "title": "Årlig genomsnittlig nederbördsskillnad från baslinjen",
+              "subTitle": "[stationName] Skillnad mellan årligt genomsnitt och genomsnitt för [baseline]",
+              "yAxis": {
+                "left": "Nederbörd [mm]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "caption": "Skillnad mellan den årliga genomsnittliga nederbörden och den genomsnittliga nederbörden för baslinjeperioden, vanligtvis 1961 till 1990.",
+              "legend": "Klimat"
+            },
+            "2": {
+              "title": "Årets blötaste [unit]",
+              "subTitle": "[stationName]",
+              "yAxis": {
+                "left": "Summerad nederbörd [mm]",
+                "right": "[X-Axis]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "caption": "Årets blötaste [unit] (Summerad nederbörd i mm).",
+              "legend": "Väder"
+            }
+          },
+          "series": {
+            "diff": {
+              "name": "Skillnad"
+            },
+            "snow": {
+              "name": "Nederbörd från snö"
+            },
+            "rain": {
+              "name": "Nederbörd från regn"
+            },
+            "extreme": {
+              "name": "Årets blötaste [interval] (Summerad nederbörd i mm)"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 Januari 2020",
+              "citation": "",
+              "desc": "Abisko Naturvetenskapliga Station",
+              "descLong": "Polarforskningssekretariatet, Abisko Naturvetenskapliga Station, forskningsdata"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "dagar",
+              "singular": "dag",
+              "interval": "daglig"
+            },
+            "week": {
+              "plural": "veckor",
+              "singular": "vecka",
+              "interval": "veckovis"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "Januari",
+              "feb": "Februari",
+              "mar": "Mars",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Augusti",
+              "sep": "September",
+              "oct": "Oktober",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "March",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Okt",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Interval för baslinje",
+              "lower": "Undregräns",
+              "upper": "Övregräns"
+            },
+            "dataCredit": "Data källa",
+            "contribute": "Bidra - Github [dummy]",
+            "showDataTable": "Vissa/göm data",
+            "langOption": "English",
+            "downloadJPEG": "Laddaner som JPEG",
+            "downloadPDF": "Laddaner som  PDF",
+            "downloadSVG": "Laddaner som SVG"
+          }
+        }
+      }
+    }
+  },
+  {
+    "smhi": {
+      "extremePrecWeekly": {
+        "ref": {
+          "id": "weeklyExtremePrecipitation",
+          "type": "smhi",
+          "tag": {
+            "render": [
+              "precipitation",
+              "weeklyExtreme"
+            ],
+            "data": [
+              "precipitation",
+              "weeks",
+              "total"
+            ]
+          },
+          "config": {
+            "meta": {
+              "smhi": {
+                "data": "SMHI-Hydrology",
+                "config": "precipitation",
+                "lang": "annualPrecipitation",
+                "set": "slideExtremeWeek"
+              },
+              "abisko": {
+                "data": "ANS",
+                "config": "precipitation",
+                "lang": "annualPrecipitation",
+                "set": "slideExtremeWeek"
+              }
+            }
+          },
+          "months": false
+        },
+        "config": {
+          "type": "column",
+          "groups": {
+            "0": {
+              "baseline": false
+            },
+            "1": {
+              "baseline": true
+            },
+            "2": {
+              "baseline": false
+            }
+          },
+          "decimals": 2,
+          "series": {
+            "diff": {
+              "preset": "diff",
+              "group": 1,
+              "visible": true,
+              "colour": "[example]",
+              "type": "column"
+            },
+            "snow": {
+              "preset": "snow",
+              "group": 0,
+              "visible": true,
+              "colour": "#CDD8F0",
+              "hoverColour": "#eeeeff",
+              "borderColour": "#5F7CB9",
+              "type": "column"
+            },
+            "rain": {
+              "preset": "rain",
+              "group": 0,
+              "visible": true,
+              "colour": "#1000FB",
+              "hoverColor": "#3333ff",
+              "borderColour": "#5F7CB9",
+              "type": "column"
+            },
+            "extreme": {
+              "preset": "extreme",
+              "group": 2,
+              "visible": true,
+              "colour": "#1000FF",
+              "type": "column"
+            }
+          },
+          "parse": {
+            "file": [
+              "temperature.csv",
+              "precipitation.csv"
+            ],
+            "preset": {
+              "header": true,
+              "download": true,
+              "skipEmptyLines": true,
+              "beforeFirstChunk": "smhi",
+              "fastMode": true
+            },
+            "parser": "smhiTemp",
+            "local": true
+          }
+        },
+        "set": {
+          "unitType": "week",
+          "groups": {
+            "0": {
+              "enabled": false
+            },
+            "1": {
+              "enabled": true
+            },
+            "2": {
+              "enabled": true
+            }
+          }
+        },
+        "en": {
+          "valueSuffix": "mm",
+          "groups": {
+            "0": {
+              "title": "Annual Average Precipitation",
+              "subTitle": "[stationName]",
+              "caption": "Average annual precipitation. Note the measurement of snow from precipitation is estimated from precipitation taking place when the temperature was simultaneously recorded as below 0° C. These values should be considered estimates and not a precise value.",
+              "yAxis": {
+                "left": "Total Precipitation [mm]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "1": {
+              "title": "Annual Average Precipitation Difference From Baseline",
+              "subTitle": "[stationName]",
+              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
+              "yAxis": {
+                "left": "Precipitation [mm]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Climate"
+            },
+            "2": {
+              "title": "Wettest [unit] of the year",
+              "subTitle": "[stationName]",
+              "yAxis": {
+                "left": "Total precipitation [mm]",
+                "right": "[X-Axis]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "caption": "The wettest [unit] of the year (total precipitation in mm).",
+              "legend": "Weather"
+            }
+          },
+          "series": {
+            "diff": {
+              "name": "Difference"
+            },
+            "snow": {
+              "name": "Precipitation from snow"
+            },
+            "rain": {
+              "name": "Precipitation from rain"
+            },
+            "extreme": {
+              "name": "wettest [interval] of the year (total precipitation in mm)"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 January 2020",
+              "citation": "",
+              "desc": "Abisko Scientific Research Station",
+              "descLong": "Swedish Polar Research Secretariet, Abisko Scientific Research Station, Research Data"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "days",
+              "singular": "day",
+              "interval": "daily"
+            },
+            "week": {
+              "plural": "weeks",
+              "singular": "week",
+              "interval": "weekly"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "January",
+              "feb": "February",
+              "mar": "March",
+              "apr": "April",
+              "may": "May",
+              "jun": "June",
+              "jul": "July",
+              "aug": "August",
+              "sep": "September",
+              "oct": "October",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "Mar",
+              "apr": "Apr",
+              "may": "May",
+              "jun": "Jun",
+              "jul": "Jul",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Oct",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Range for baseline",
+              "lower": "Lower limit",
+              "upper": "Upper limit"
+            },
+            "dataCredit": "Data source",
+            "contribute": "Contribute - Github [dummy]",
+            "showDataTable": "Show/hide data",
+            "langOption": "Svenska",
+            "downloadJPEG": "Download as JPEG",
+            "downloadPDF": "Download as PDF",
+            "downloadSVG": "Download as SVG"
+          }
+        },
+        "sv": {
+          "valueSuffix": "mm",
+          "groups": {
+            "0": {
+              "title": "Årlig genomsnittlig nederbörd",
+              "subTitle": "[stationName]",
+              "caption": "Genomsnittlig årlig nederbörd. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0° C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
+              "yAxis": {
+                "left": "Summerad nederbörd [mm]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Väder"
+            },
+            "1": {
+              "title": "Årlig genomsnittlig nederbördsskillnad från baslinjen",
+              "subTitle": "[stationName] Skillnad mellan årligt genomsnitt och genomsnitt för [baseline]",
+              "yAxis": {
+                "left": "Nederbörd [mm]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "caption": "Skillnad mellan den årliga genomsnittliga nederbörden och den genomsnittliga nederbörden för baslinjeperioden, vanligtvis 1961 till 1990.",
+              "legend": "Klimat"
+            },
+            "2": {
+              "title": "Årets blötaste [unit]",
+              "subTitle": "[stationName]",
+              "yAxis": {
+                "left": "Summerad nederbörd [mm]",
+                "right": "[X-Axis]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "caption": "Årets blötaste [unit] (Summerad nederbörd i mm).",
+              "legend": "Väder"
+            }
+          },
+          "series": {
+            "diff": {
+              "name": "Skillnad"
+            },
+            "snow": {
+              "name": "Nederbörd från snö"
+            },
+            "rain": {
+              "name": "Nederbörd från regn"
+            },
+            "extreme": {
+              "name": "Årets blötaste [interval] (Summerad nederbörd i mm)"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 Januari 2020",
+              "citation": "",
+              "desc": "Abisko Naturvetenskapliga Station",
+              "descLong": "Polarforskningssekretariatet, Abisko Naturvetenskapliga Station, forskningsdata"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "dagar",
+              "singular": "dag",
+              "interval": "daglig"
+            },
+            "week": {
+              "plural": "veckor",
+              "singular": "vecka",
+              "interval": "veckovis"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "Januari",
+              "feb": "Februari",
+              "mar": "Mars",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Augusti",
+              "sep": "September",
+              "oct": "Oktober",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "March",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Okt",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Interval för baslinje",
+              "lower": "Undregräns",
+              "upper": "Övregräns"
+            },
+            "dataCredit": "Data källa",
+            "contribute": "Bidra - Github [dummy]",
+            "showDataTable": "Vissa/göm data",
+            "langOption": "English",
+            "downloadJPEG": "Laddaner som JPEG",
+            "downloadPDF": "Laddaner som  PDF",
+            "downloadSVG": "Laddaner som SVG"
+          }
+        }
+      }
+    },
+    "abisko": {
+      "extremePrecWeekly": {
+        "ref": {
+          "id": "weeklyExtremePrecipitation",
+          "type": "abisko",
+          "tag": {
+            "render": [
+              "precipitation",
+              "weeklyExtreme"
+            ],
+            "data": [
+              "precipitation",
+              "weeks",
+              "total"
+            ]
+          },
+          "config": {
+            "meta": {
+              "smhi": {
+                "data": "SMHI-Hydrology",
+                "config": "precipitation",
+                "lang": "annualPrecipitation",
+                "set": "slideExtremeWeek"
+              },
+              "abisko": {
+                "data": "ANS",
+                "config": "precipitation",
+                "lang": "annualPrecipitation",
+                "set": "slideExtremeWeek"
+              }
+            }
+          },
+          "months": false
+        },
+        "config": {
+          "type": "column",
+          "groups": {
+            "0": {
+              "baseline": false
+            },
+            "1": {
+              "baseline": true
+            },
+            "2": {
+              "baseline": false
+            }
+          },
+          "decimals": 2,
+          "series": {
+            "diff": {
+              "preset": "diff",
+              "group": 1,
+              "visible": true,
+              "colour": "[example]",
+              "type": "column"
+            },
+            "snow": {
+              "preset": "snow",
+              "group": 0,
+              "visible": true,
+              "colour": "#CDD8F0",
+              "hoverColour": "#eeeeff",
+              "borderColour": "#5F7CB9",
+              "type": "column"
+            },
+            "rain": {
+              "preset": "rain",
+              "group": 0,
+              "visible": true,
+              "colour": "#1000FB",
+              "hoverColor": "#3333ff",
+              "borderColour": "#5F7CB9",
+              "type": "column"
+            },
+            "extreme": {
+              "preset": "extreme",
+              "group": 2,
+              "visible": true,
+              "colour": "#1000FF",
+              "type": "column"
+            }
+          },
+          "parse": {
+            "file": [
+              "ANS_Temp_Prec.csv",
+              "AWS.csv",
+              "ANS_Prec.csv"
+            ],
+            "preset": {
+              "header": true,
+              "download": true,
+              "skipEmptyLines": true,
+              "beforeFirstChunk": "abisko",
+              "dynamicTyping": false
+            },
+            "parser": "AbiskoCsv",
+            "local": true
+          }
+        },
+        "set": {
+          "unitType": "week",
+          "groups": {
+            "0": {
+              "enabled": false
+            },
+            "1": {
+              "enabled": true
+            },
+            "2": {
+              "enabled": true
+            }
+          }
+        },
+        "en": {
+          "valueSuffix": "mm",
+          "groups": {
+            "0": {
+              "title": "Annual Average Precipitation",
+              "subTitle": "[stationName]",
+              "caption": "Average annual precipitation. Note the measurement of snow from precipitation is estimated from precipitation taking place when the temperature was simultaneously recorded as below 0° C. These values should be considered estimates and not a precise value.",
+              "yAxis": {
+                "left": "Total Precipitation [mm]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "1": {
+              "title": "Annual Average Precipitation Difference From Baseline",
+              "subTitle": "[stationName]",
+              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
+              "yAxis": {
+                "left": "Precipitation [mm]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Climate"
+            },
+            "2": {
+              "title": "Wettest [unit] of the year",
+              "subTitle": "[stationName]",
+              "yAxis": {
+                "left": "Total precipitation [mm]",
+                "right": "[X-Axis]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "caption": "The wettest [unit] of the year (total precipitation in mm).",
+              "legend": "Weather"
+            }
+          },
+          "series": {
+            "diff": {
+              "name": "Difference"
+            },
+            "snow": {
+              "name": "Precipitation from snow"
+            },
+            "rain": {
+              "name": "Precipitation from rain"
+            },
+            "extreme": {
+              "name": "wettest [interval] of the year (total precipitation in mm)"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 January 2020",
+              "citation": "",
+              "desc": "Abisko Scientific Research Station",
+              "descLong": "Swedish Polar Research Secretariet, Abisko Scientific Research Station, Research Data"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "days",
+              "singular": "day",
+              "interval": "daily"
+            },
+            "week": {
+              "plural": "weeks",
+              "singular": "week",
+              "interval": "weekly"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "January",
+              "feb": "February",
+              "mar": "March",
+              "apr": "April",
+              "may": "May",
+              "jun": "June",
+              "jul": "July",
+              "aug": "August",
+              "sep": "September",
+              "oct": "October",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "Mar",
+              "apr": "Apr",
+              "may": "May",
+              "jun": "Jun",
+              "jul": "Jul",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Oct",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Range for baseline",
+              "lower": "Lower limit",
+              "upper": "Upper limit"
+            },
+            "dataCredit": "Data source",
+            "contribute": "Contribute - Github [dummy]",
+            "showDataTable": "Show/hide data",
+            "langOption": "Svenska",
+            "downloadJPEG": "Download as JPEG",
+            "downloadPDF": "Download as PDF",
+            "downloadSVG": "Download as SVG"
+          }
+        },
+        "sv": {
+          "valueSuffix": "mm",
+          "groups": {
+            "0": {
+              "title": "Årlig genomsnittlig nederbörd",
+              "subTitle": "[stationName]",
+              "caption": "Genomsnittlig årlig nederbörd. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0° C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
+              "yAxis": {
+                "left": "Summerad nederbörd [mm]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Väder"
+            },
+            "1": {
+              "title": "Årlig genomsnittlig nederbördsskillnad från baslinjen",
+              "subTitle": "[stationName] Skillnad mellan årligt genomsnitt och genomsnitt för [baseline]",
+              "yAxis": {
+                "left": "Nederbörd [mm]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "caption": "Skillnad mellan den årliga genomsnittliga nederbörden och den genomsnittliga nederbörden för baslinjeperioden, vanligtvis 1961 till 1990.",
+              "legend": "Klimat"
+            },
+            "2": {
+              "title": "Årets blötaste [unit]",
+              "subTitle": "[stationName]",
+              "yAxis": {
+                "left": "Summerad nederbörd [mm]",
+                "right": "[X-Axis]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "caption": "Årets blötaste [unit] (Summerad nederbörd i mm).",
+              "legend": "Väder"
+            }
+          },
+          "series": {
+            "diff": {
+              "name": "Skillnad"
+            },
+            "snow": {
+              "name": "Nederbörd från snö"
+            },
+            "rain": {
+              "name": "Nederbörd från regn"
+            },
+            "extreme": {
+              "name": "Årets blötaste [interval] (Summerad nederbörd i mm)"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 Januari 2020",
+              "citation": "",
+              "desc": "Abisko Naturvetenskapliga Station",
+              "descLong": "Polarforskningssekretariatet, Abisko Naturvetenskapliga Station, forskningsdata"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "dagar",
+              "singular": "dag",
+              "interval": "daglig"
+            },
+            "week": {
+              "plural": "veckor",
+              "singular": "vecka",
+              "interval": "veckovis"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "Januari",
+              "feb": "Februari",
+              "mar": "Mars",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Augusti",
+              "sep": "September",
+              "oct": "Oktober",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "March",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Okt",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Interval för baslinje",
+              "lower": "Undregräns",
+              "upper": "Övregräns"
+            },
+            "dataCredit": "Data källa",
+            "contribute": "Bidra - Github [dummy]",
+            "showDataTable": "Vissa/göm data",
+            "langOption": "English",
+            "downloadJPEG": "Laddaner som JPEG",
+            "downloadPDF": "Laddaner som  PDF",
+            "downloadSVG": "Laddaner som SVG"
+          }
+        }
+      }
+    }
+  },
+  {
+    "smhi": {
+      "extremeTempDaily": {
+        "ref": {
+          "id": "dailyExtremeTemperature",
+          "type": "smhi",
+          "tag": {
+            "render": [
+              "temperatures",
+              "dailyExtreme"
+            ],
+            "data": [
+              "temperatures",
+              "yrly",
+              "max"
+            ]
+          },
+          "config": {
+            "meta": {
+              "smhi": {
+                "data": "SMHI-Weather",
+                "config": "temperature",
+                "lang": "annualTemperature",
+                "set": "slideExtremeDay"
+              },
+              "abisko": {
+                "data": "ANS",
+                "config": "temperature",
+                "lang": "annualTemperature",
+                "set": "slideExtremeDay"
+              }
+            }
+          },
+          "months": false
+        },
+        "config": {
+          "type": "column",
+          "polar": false,
+          "groups": {
+            "0": {
+              "baseline": false
+            },
+            "1": {
+              "baseline": true,
+              "yAxis": {
+                "min": -3,
+                "max": 4
+              }
+            },
+            "2": {
+              "baseline": false,
+              "yAxis": {
+                "min": 15
+              }
+            }
+          },
+          "decimals": 2,
+          "series": {
+            "max": {
+              "preset": "max",
+              "group": "0",
+              "visible": false,
+              "colour": "#ff0000",
+              "type": "line"
+            },
+            "min": {
+              "preset": "min",
+              "group": "0",
+              "visible": false,
+              "colour": "#0000ff",
+              "type": "line"
+            },
+            "avg": {
+              "preset": "avg",
+              "group": "0",
+              "visible": true,
+              "colour": "#888888",
+              "type": "line"
+            },
+            "diff": {
+              "preset": "diff",
+              "group": "1",
+              "visible": true,
+              "colour": "[example]",
+              "type": "column"
+            },
+            "extreme": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            }
+          },
+          "parse": {
+            "file": [
+              "temperature.csv",
+              "precipitation.csv"
+            ],
+            "preset": {
+              "header": true,
+              "download": true,
+              "skipEmptyLines": true,
+              "beforeFirstChunk": "smhi",
+              "fastMode": true
+            },
+            "parser": "smhiTemp",
+            "local": true
+          }
+        },
+        "set": {
+          "unitType": "day",
+          "groups": {
+            "0": {
+              "enabled": false,
+              "tooltip": {
+                "type": "valueDate"
+              }
+            },
+            "1": {
+              "enabled": true,
+              "tooltip": {
+                "type": "valueDate"
+              }
+            },
+            "2": {
+              "enabled": true,
+              "prime": true,
+              "tooltip": {
+                "type": "valueDate"
+              }
+            }
+          }
+        },
+        "en": {
+          "valueSuffix": "°C",
+          "groups": {
+            "0": {
+              "title": "Annual Average Temperature",
+              "subTitle": "[stationName]",
+              "caption": "Average annual temperature. The lowest (min) and highest (max) temperature of the year.",
+              "yAxis": {
+                "left": "Average temperature [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "1": {
+              "title": "Temperature Difference From Baseline",
+              "subTitle": "[stationName]",
+              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
+              "yAxis": {
+                "left": "Temperature [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Climate"
+            },
+            "2": {
+              "title": "Warmest [unit] of the year",
+              "subTitle": "[stationName]",
+              "caption": "Average temperature of warmest [unit] of the year.",
+              "yAxis": {
+                "left": "Average temperature of warmest [unit] of the year [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            }
+          },
+          "series": {
+            "max": {
+              "name": "Max"
+            },
+            "min": {
+              "name": "Min"
+            },
+            "avg": {
+              "name": "Yearly Average"
+            },
+            "diff": {
+              "name": "Difference"
+            },
+            "extreme": {
+              "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 January 2020",
+              "citation": "",
+              "desc": "Abisko Scientific Research Station",
+              "descLong": "Swedish Polar Research Secretariet, Abisko Scientific Research Station, Research Data"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "days",
+              "singular": "day",
+              "interval": "daily"
+            },
+            "week": {
+              "plural": "weeks",
+              "singular": "week",
+              "interval": "weekly"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "January",
+              "feb": "February",
+              "mar": "March",
+              "apr": "April",
+              "may": "May",
+              "jun": "June",
+              "jul": "July",
+              "aug": "August",
+              "sep": "September",
+              "oct": "October",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "Mar",
+              "apr": "Apr",
+              "may": "May",
+              "jun": "Jun",
+              "jul": "Jul",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Oct",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Range for baseline",
+              "lower": "Lower limit",
+              "upper": "Upper limit"
+            },
+            "dataCredit": "Data source",
+            "contribute": "Contribute - Github [dummy]",
+            "showDataTable": "Show/hide data",
+            "langOption": "Svenska",
+            "downloadJPEG": "Download as JPEG",
+            "downloadPDF": "Download as PDF",
+            "downloadSVG": "Download as SVG"
+          }
+        },
+        "sv": {
+          "valueSuffix": "°C",
+          "groups": {
+            "0": {
+              "title": "Årlig genomsnittstemperatur",
+              "subTitle": "[stationName]",
+              "caption": "Årlig genomsnittstemperatur. Årets lägsta (min) och högsta (max) temperatur.",
+              "yAxis": {
+                "left": "Genomsnittstemperatur [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Väder"
+            },
+            "1": {
+              "title": "Temperaturskillnaden från baslinjen",
+              "subTitle": "[stationName]",
+              "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
+              "yAxis": {
+                "left": "Temperatur [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Klimat"
+            },
+            "2": {
+              "title": "Årets varmaste [unit]",
+              "subTitle": "[stationName]",
+              "caption": "Medeltemperaturen på årets varmaste [unit].",
+              "yAxis": {
+                "left": "Medeltemperaturen på årets varmaste [unit] [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Väder"
+            }
+          },
+          "series": {
+            "max": {
+              "name": "Max"
+            },
+            "min": {
+              "name": "Min"
+            },
+            "avg": {
+              "name": "Årlig genomsnitt"
+            },
+            "diff": {
+              "name": "Skillnad"
+            },
+            "extreme": {
+              "name": "Genomsnittlig varmaste högsta temperatur [interval]",
+              "week": "veckovis",
+              "day": "dagligen"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 Januari 2020",
+              "citation": "",
+              "desc": "Abisko Naturvetenskapliga Station",
+              "descLong": "Polarforskningssekretariatet, Abisko Naturvetenskapliga Station, forskningsdata"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "dagar",
+              "singular": "dag",
+              "interval": "daglig"
+            },
+            "week": {
+              "plural": "veckor",
+              "singular": "vecka",
+              "interval": "veckovis"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "Januari",
+              "feb": "Februari",
+              "mar": "Mars",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Augusti",
+              "sep": "September",
+              "oct": "Oktober",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "March",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Okt",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Interval för baslinje",
+              "lower": "Undregräns",
+              "upper": "Övregräns"
+            },
+            "dataCredit": "Data källa",
+            "contribute": "Bidra - Github [dummy]",
+            "showDataTable": "Vissa/göm data",
+            "langOption": "English",
+            "downloadJPEG": "Laddaner som JPEG",
+            "downloadPDF": "Laddaner som  PDF",
+            "downloadSVG": "Laddaner som SVG"
+          }
+        }
+      }
+    },
+    "abisko": {
+      "extremeTempDaily": {
+        "ref": {
+          "id": "dailyExtremeTemperature",
+          "type": "abisko",
+          "tag": {
+            "render": [
+              "temperatures",
+              "dailyExtreme"
+            ],
+            "data": [
+              "temperatures",
+              "yrly",
+              "max"
+            ]
+          },
+          "config": {
+            "meta": {
+              "smhi": {
+                "data": "SMHI-Weather",
+                "config": "temperature",
+                "lang": "annualTemperature",
+                "set": "slideExtremeDay"
+              },
+              "abisko": {
+                "data": "ANS",
+                "config": "temperature",
+                "lang": "annualTemperature",
+                "set": "slideExtremeDay"
+              }
+            }
+          },
+          "months": false
+        },
+        "config": {
+          "type": "column",
+          "polar": false,
+          "groups": {
+            "0": {
+              "baseline": false
+            },
+            "1": {
+              "baseline": true,
+              "yAxis": {
+                "min": -3,
+                "max": 4
+              }
+            },
+            "2": {
+              "baseline": false,
+              "yAxis": {
+                "min": 15
+              }
+            }
+          },
+          "decimals": 2,
+          "series": {
+            "max": {
+              "preset": "max",
+              "group": "0",
+              "visible": false,
+              "colour": "#ff0000",
+              "type": "line"
+            },
+            "min": {
+              "preset": "min",
+              "group": "0",
+              "visible": false,
+              "colour": "#0000ff",
+              "type": "line"
+            },
+            "avg": {
+              "preset": "avg",
+              "group": "0",
+              "visible": true,
+              "colour": "#888888",
+              "type": "line"
+            },
+            "diff": {
+              "preset": "diff",
+              "group": "1",
+              "visible": true,
+              "colour": "[example]",
+              "type": "column"
+            },
+            "extreme": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            }
+          },
+          "parse": {
+            "file": [
+              "ANS_Temp_Prec.csv",
+              "AWS.csv",
+              "ANS_Prec.csv"
+            ],
+            "preset": {
+              "header": true,
+              "download": true,
+              "skipEmptyLines": true,
+              "beforeFirstChunk": "abisko",
+              "dynamicTyping": false
+            },
+            "parser": "AbiskoCsv",
+            "local": true
+          }
+        },
+        "set": {
+          "unitType": "day",
+          "groups": {
+            "0": {
+              "enabled": false,
+              "tooltip": {
+                "type": "valueDate"
+              }
+            },
+            "1": {
+              "enabled": true,
+              "tooltip": {
+                "type": "valueDate"
+              }
+            },
+            "2": {
+              "enabled": true,
+              "prime": true,
+              "tooltip": {
+                "type": "valueDate"
+              }
+            }
+          }
+        },
+        "en": {
+          "valueSuffix": "°C",
+          "groups": {
+            "0": {
+              "title": "Annual Average Temperature",
+              "subTitle": "[stationName]",
+              "caption": "Average annual temperature. The lowest (min) and highest (max) temperature of the year.",
+              "yAxis": {
+                "left": "Average temperature [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "1": {
+              "title": "Temperature Difference From Baseline",
+              "subTitle": "[stationName]",
+              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
+              "yAxis": {
+                "left": "Temperature [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Climate"
+            },
+            "2": {
+              "title": "Warmest [unit] of the year",
+              "subTitle": "[stationName]",
+              "caption": "Average temperature of warmest [unit] of the year.",
+              "yAxis": {
+                "left": "Average temperature of warmest [unit] of the year [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            }
+          },
+          "series": {
+            "max": {
+              "name": "Max"
+            },
+            "min": {
+              "name": "Min"
+            },
+            "avg": {
+              "name": "Yearly Average"
+            },
+            "diff": {
+              "name": "Difference"
+            },
+            "extreme": {
+              "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 January 2020",
+              "citation": "",
+              "desc": "Abisko Scientific Research Station",
+              "descLong": "Swedish Polar Research Secretariet, Abisko Scientific Research Station, Research Data"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "days",
+              "singular": "day",
+              "interval": "daily"
+            },
+            "week": {
+              "plural": "weeks",
+              "singular": "week",
+              "interval": "weekly"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "January",
+              "feb": "February",
+              "mar": "March",
+              "apr": "April",
+              "may": "May",
+              "jun": "June",
+              "jul": "July",
+              "aug": "August",
+              "sep": "September",
+              "oct": "October",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "Mar",
+              "apr": "Apr",
+              "may": "May",
+              "jun": "Jun",
+              "jul": "Jul",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Oct",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Range for baseline",
+              "lower": "Lower limit",
+              "upper": "Upper limit"
+            },
+            "dataCredit": "Data source",
+            "contribute": "Contribute - Github [dummy]",
+            "showDataTable": "Show/hide data",
+            "langOption": "Svenska",
+            "downloadJPEG": "Download as JPEG",
+            "downloadPDF": "Download as PDF",
+            "downloadSVG": "Download as SVG"
+          }
+        },
+        "sv": {
+          "valueSuffix": "°C",
+          "groups": {
+            "0": {
+              "title": "Årlig genomsnittstemperatur",
+              "subTitle": "[stationName]",
+              "caption": "Årlig genomsnittstemperatur. Årets lägsta (min) och högsta (max) temperatur.",
+              "yAxis": {
+                "left": "Genomsnittstemperatur [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Väder"
+            },
+            "1": {
+              "title": "Temperaturskillnaden från baslinjen",
+              "subTitle": "[stationName]",
+              "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
+              "yAxis": {
+                "left": "Temperatur [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Klimat"
+            },
+            "2": {
+              "title": "Årets varmaste [unit]",
+              "subTitle": "[stationName]",
+              "caption": "Medeltemperaturen på årets varmaste [unit].",
+              "yAxis": {
+                "left": "Medeltemperaturen på årets varmaste [unit] [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Väder"
+            }
+          },
+          "series": {
+            "max": {
+              "name": "Max"
+            },
+            "min": {
+              "name": "Min"
+            },
+            "avg": {
+              "name": "Årlig genomsnitt"
+            },
+            "diff": {
+              "name": "Skillnad"
+            },
+            "extreme": {
+              "name": "Genomsnittlig varmaste högsta temperatur [interval]",
+              "week": "veckovis",
+              "day": "dagligen"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 Januari 2020",
+              "citation": "",
+              "desc": "Abisko Naturvetenskapliga Station",
+              "descLong": "Polarforskningssekretariatet, Abisko Naturvetenskapliga Station, forskningsdata"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "dagar",
+              "singular": "dag",
+              "interval": "daglig"
+            },
+            "week": {
+              "plural": "veckor",
+              "singular": "vecka",
+              "interval": "veckovis"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "Januari",
+              "feb": "Februari",
+              "mar": "Mars",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Augusti",
+              "sep": "September",
+              "oct": "Oktober",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "March",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Okt",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Interval för baslinje",
+              "lower": "Undregräns",
+              "upper": "Övregräns"
+            },
+            "dataCredit": "Data källa",
+            "contribute": "Bidra - Github [dummy]",
+            "showDataTable": "Vissa/göm data",
+            "langOption": "English",
+            "downloadJPEG": "Laddaner som JPEG",
+            "downloadPDF": "Laddaner som  PDF",
+            "downloadSVG": "Laddaner som SVG"
+          }
+        }
+      }
+    }
+  },
+  {
+    "smhi": {
+      "extremeTempWeekly": {
+        "ref": {
+          "id": "weeklyExtremeTemperature",
+          "type": "smhi",
+          "tag": {
+            "render": [
+              "temperatures",
+              "weeklyExtreme"
+            ],
+            "data": [
+              "temperatures",
+              "weeks",
+              "max"
+            ]
+          },
+          "config": {
+            "meta": {
+              "smhi": {
+                "data": "SMHI-Weather",
+                "config": "temperature",
+                "lang": "annualTemperature",
+                "set": "slideExtremeWeek"
+              },
+              "abisko": {
+                "data": "ANS",
+                "config": "temperature",
+                "lang": "annualTemperature",
+                "set": "slideExtremeWeek"
+              }
+            }
+          },
+          "months": false
+        },
+        "config": {
+          "type": "column",
+          "polar": false,
+          "groups": {
+            "0": {
+              "baseline": false
+            },
+            "1": {
+              "baseline": true,
+              "yAxis": {
+                "min": -3,
+                "max": 4
+              }
+            },
+            "2": {
+              "baseline": false,
+              "yAxis": {
+                "min": 15
+              }
+            }
+          },
+          "decimals": 2,
+          "series": {
+            "max": {
+              "preset": "max",
+              "group": "0",
+              "visible": false,
+              "colour": "#ff0000",
+              "type": "line"
+            },
+            "min": {
+              "preset": "min",
+              "group": "0",
+              "visible": false,
+              "colour": "#0000ff",
+              "type": "line"
+            },
+            "avg": {
+              "preset": "avg",
+              "group": "0",
+              "visible": true,
+              "colour": "#888888",
+              "type": "line"
+            },
+            "diff": {
+              "preset": "diff",
+              "group": "1",
+              "visible": true,
+              "colour": "[example]",
+              "type": "column"
+            },
+            "extreme": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            }
+          },
+          "parse": {
+            "file": [
+              "temperature.csv",
+              "precipitation.csv"
+            ],
+            "preset": {
+              "header": true,
+              "download": true,
+              "skipEmptyLines": true,
+              "beforeFirstChunk": "smhi",
+              "fastMode": true
+            },
+            "parser": "smhiTemp",
+            "local": true
+          }
+        },
+        "set": {
+          "unitType": "week",
+          "groups": {
+            "0": {
+              "enabled": false
+            },
+            "1": {
+              "enabled": true
+            },
+            "2": {
+              "enabled": true
+            }
+          }
+        },
+        "en": {
+          "valueSuffix": "°C",
+          "groups": {
+            "0": {
+              "title": "Annual Average Temperature",
+              "subTitle": "[stationName]",
+              "caption": "Average annual temperature. The lowest (min) and highest (max) temperature of the year.",
+              "yAxis": {
+                "left": "Average temperature [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "1": {
+              "title": "Temperature Difference From Baseline",
+              "subTitle": "[stationName]",
+              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
+              "yAxis": {
+                "left": "Temperature [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Climate"
+            },
+            "2": {
+              "title": "Warmest [unit] of the year",
+              "subTitle": "[stationName]",
+              "caption": "Average temperature of warmest [unit] of the year.",
+              "yAxis": {
+                "left": "Average temperature of warmest [unit] of the year [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            }
+          },
+          "series": {
+            "max": {
+              "name": "Max"
+            },
+            "min": {
+              "name": "Min"
+            },
+            "avg": {
+              "name": "Yearly Average"
+            },
+            "diff": {
+              "name": "Difference"
+            },
+            "extreme": {
+              "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 January 2020",
+              "citation": "",
+              "desc": "Abisko Scientific Research Station",
+              "descLong": "Swedish Polar Research Secretariet, Abisko Scientific Research Station, Research Data"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "days",
+              "singular": "day",
+              "interval": "daily"
+            },
+            "week": {
+              "plural": "weeks",
+              "singular": "week",
+              "interval": "weekly"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "January",
+              "feb": "February",
+              "mar": "March",
+              "apr": "April",
+              "may": "May",
+              "jun": "June",
+              "jul": "July",
+              "aug": "August",
+              "sep": "September",
+              "oct": "October",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "Mar",
+              "apr": "Apr",
+              "may": "May",
+              "jun": "Jun",
+              "jul": "Jul",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Oct",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Range for baseline",
+              "lower": "Lower limit",
+              "upper": "Upper limit"
+            },
+            "dataCredit": "Data source",
+            "contribute": "Contribute - Github [dummy]",
+            "showDataTable": "Show/hide data",
+            "langOption": "Svenska",
+            "downloadJPEG": "Download as JPEG",
+            "downloadPDF": "Download as PDF",
+            "downloadSVG": "Download as SVG"
+          }
+        },
+        "sv": {
+          "valueSuffix": "°C",
+          "groups": {
+            "0": {
+              "title": "Årlig genomsnittstemperatur",
+              "subTitle": "[stationName]",
+              "caption": "Årlig genomsnittstemperatur. Årets lägsta (min) och högsta (max) temperatur.",
+              "yAxis": {
+                "left": "Genomsnittstemperatur [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Väder"
+            },
+            "1": {
+              "title": "Temperaturskillnaden från baslinjen",
+              "subTitle": "[stationName]",
+              "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
+              "yAxis": {
+                "left": "Temperatur [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Klimat"
+            },
+            "2": {
+              "title": "Årets varmaste [unit]",
+              "subTitle": "[stationName]",
+              "caption": "Medeltemperaturen på årets varmaste [unit].",
+              "yAxis": {
+                "left": "Medeltemperaturen på årets varmaste [unit] [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Väder"
+            }
+          },
+          "series": {
+            "max": {
+              "name": "Max"
+            },
+            "min": {
+              "name": "Min"
+            },
+            "avg": {
+              "name": "Årlig genomsnitt"
+            },
+            "diff": {
+              "name": "Skillnad"
+            },
+            "extreme": {
+              "name": "Genomsnittlig varmaste högsta temperatur [interval]",
+              "week": "veckovis",
+              "day": "dagligen"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 Januari 2020",
+              "citation": "",
+              "desc": "Abisko Naturvetenskapliga Station",
+              "descLong": "Polarforskningssekretariatet, Abisko Naturvetenskapliga Station, forskningsdata"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "dagar",
+              "singular": "dag",
+              "interval": "daglig"
+            },
+            "week": {
+              "plural": "veckor",
+              "singular": "vecka",
+              "interval": "veckovis"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "Januari",
+              "feb": "Februari",
+              "mar": "Mars",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Augusti",
+              "sep": "September",
+              "oct": "Oktober",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "March",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Okt",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Interval för baslinje",
+              "lower": "Undregräns",
+              "upper": "Övregräns"
+            },
+            "dataCredit": "Data källa",
+            "contribute": "Bidra - Github [dummy]",
+            "showDataTable": "Vissa/göm data",
+            "langOption": "English",
+            "downloadJPEG": "Laddaner som JPEG",
+            "downloadPDF": "Laddaner som  PDF",
+            "downloadSVG": "Laddaner som SVG"
+          }
+        }
+      }
+    },
+    "abisko": {
+      "extremeTempWeekly": {
+        "ref": {
+          "id": "weeklyExtremeTemperature",
+          "type": "abisko",
+          "tag": {
+            "render": [
+              "temperatures",
+              "weeklyExtreme"
+            ],
+            "data": [
+              "temperatures",
+              "weeks",
+              "max"
+            ]
+          },
+          "config": {
+            "meta": {
+              "smhi": {
+                "data": "SMHI-Weather",
+                "config": "temperature",
+                "lang": "annualTemperature",
+                "set": "slideExtremeWeek"
+              },
+              "abisko": {
+                "data": "ANS",
+                "config": "temperature",
+                "lang": "annualTemperature",
+                "set": "slideExtremeWeek"
+              }
+            }
+          },
+          "months": false
+        },
+        "config": {
+          "type": "column",
+          "polar": false,
+          "groups": {
+            "0": {
+              "baseline": false
+            },
+            "1": {
+              "baseline": true,
+              "yAxis": {
+                "min": -3,
+                "max": 4
+              }
+            },
+            "2": {
+              "baseline": false,
+              "yAxis": {
+                "min": 15
+              }
+            }
+          },
+          "decimals": 2,
+          "series": {
+            "max": {
+              "preset": "max",
+              "group": "0",
+              "visible": false,
+              "colour": "#ff0000",
+              "type": "line"
+            },
+            "min": {
+              "preset": "min",
+              "group": "0",
+              "visible": false,
+              "colour": "#0000ff",
+              "type": "line"
+            },
+            "avg": {
+              "preset": "avg",
+              "group": "0",
+              "visible": true,
+              "colour": "#888888",
+              "type": "line"
+            },
+            "diff": {
+              "preset": "diff",
+              "group": "1",
+              "visible": true,
+              "colour": "[example]",
+              "type": "column"
+            },
+            "extreme": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            }
+          },
+          "parse": {
+            "file": [
+              "ANS_Temp_Prec.csv",
+              "AWS.csv",
+              "ANS_Prec.csv"
+            ],
+            "preset": {
+              "header": true,
+              "download": true,
+              "skipEmptyLines": true,
+              "beforeFirstChunk": "abisko",
+              "dynamicTyping": false
+            },
+            "parser": "AbiskoCsv",
+            "local": true
+          }
+        },
+        "set": {
+          "unitType": "week",
+          "groups": {
+            "0": {
+              "enabled": false
+            },
+            "1": {
+              "enabled": true
+            },
+            "2": {
+              "enabled": true
+            }
+          }
+        },
+        "en": {
+          "valueSuffix": "°C",
+          "groups": {
+            "0": {
+              "title": "Annual Average Temperature",
+              "subTitle": "[stationName]",
+              "caption": "Average annual temperature. The lowest (min) and highest (max) temperature of the year.",
+              "yAxis": {
+                "left": "Average temperature [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "1": {
+              "title": "Temperature Difference From Baseline",
+              "subTitle": "[stationName]",
+              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
+              "yAxis": {
+                "left": "Temperature [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Climate"
+            },
+            "2": {
+              "title": "Warmest [unit] of the year",
+              "subTitle": "[stationName]",
+              "caption": "Average temperature of warmest [unit] of the year.",
+              "yAxis": {
+                "left": "Average temperature of warmest [unit] of the year [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            }
+          },
+          "series": {
+            "max": {
+              "name": "Max"
+            },
+            "min": {
+              "name": "Min"
+            },
+            "avg": {
+              "name": "Yearly Average"
+            },
+            "diff": {
+              "name": "Difference"
+            },
+            "extreme": {
+              "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 January 2020",
+              "citation": "",
+              "desc": "Abisko Scientific Research Station",
+              "descLong": "Swedish Polar Research Secretariet, Abisko Scientific Research Station, Research Data"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "days",
+              "singular": "day",
+              "interval": "daily"
+            },
+            "week": {
+              "plural": "weeks",
+              "singular": "week",
+              "interval": "weekly"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "January",
+              "feb": "February",
+              "mar": "March",
+              "apr": "April",
+              "may": "May",
+              "jun": "June",
+              "jul": "July",
+              "aug": "August",
+              "sep": "September",
+              "oct": "October",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "Mar",
+              "apr": "Apr",
+              "may": "May",
+              "jun": "Jun",
+              "jul": "Jul",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Oct",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Range for baseline",
+              "lower": "Lower limit",
+              "upper": "Upper limit"
+            },
+            "dataCredit": "Data source",
+            "contribute": "Contribute - Github [dummy]",
+            "showDataTable": "Show/hide data",
+            "langOption": "Svenska",
+            "downloadJPEG": "Download as JPEG",
+            "downloadPDF": "Download as PDF",
+            "downloadSVG": "Download as SVG"
+          }
+        },
+        "sv": {
+          "valueSuffix": "°C",
+          "groups": {
+            "0": {
+              "title": "Årlig genomsnittstemperatur",
+              "subTitle": "[stationName]",
+              "caption": "Årlig genomsnittstemperatur. Årets lägsta (min) och högsta (max) temperatur.",
+              "yAxis": {
+                "left": "Genomsnittstemperatur [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Väder"
+            },
+            "1": {
+              "title": "Temperaturskillnaden från baslinjen",
+              "subTitle": "[stationName]",
+              "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
+              "yAxis": {
+                "left": "Temperatur [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Klimat"
+            },
+            "2": {
+              "title": "Årets varmaste [unit]",
+              "subTitle": "[stationName]",
+              "caption": "Medeltemperaturen på årets varmaste [unit].",
+              "yAxis": {
+                "left": "Medeltemperaturen på årets varmaste [unit] [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Väder"
+            }
+          },
+          "series": {
+            "max": {
+              "name": "Max"
+            },
+            "min": {
+              "name": "Min"
+            },
+            "avg": {
+              "name": "Årlig genomsnitt"
+            },
+            "diff": {
+              "name": "Skillnad"
+            },
+            "extreme": {
+              "name": "Genomsnittlig varmaste högsta temperatur [interval]",
+              "week": "veckovis",
+              "day": "dagligen"
             }
           },
           "dataSource": {
@@ -65665,7 +68739,8 @@
             ],
             "data": [
               "precipitation",
-              "weeks"
+              "weeks",
+              "total"
             ]
           },
           "config": {
@@ -66030,7 +69105,8 @@
             ],
             "data": [
               "precipitation",
-              "weeks"
+              "weeks",
+              "total"
             ]
           },
           "config": {
@@ -66398,7 +69474,8 @@
             ],
             "data": [
               "temperatures",
-              "weeks"
+              "weeks",
+              "max"
             ]
           },
           "config": {
@@ -66784,7 +69861,8 @@
             ],
             "data": [
               "temperatures",
-              "weeks"
+              "weeks",
+              "max"
             ]
           },
           "config": {

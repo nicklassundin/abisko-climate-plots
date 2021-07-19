@@ -9,7 +9,8 @@
       ],
       "data": [
         "temperatures",
-        "yrly"
+        "yrly",
+        "max"
       ]
     },
     "config": {

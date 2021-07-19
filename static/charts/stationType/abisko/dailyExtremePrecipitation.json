@@ -9,7 +9,8 @@
       ],
       "data": [
         "precipitation",
-        "yrly"
+        "yrly",
+        "total"
       ]
     },
     "config": {

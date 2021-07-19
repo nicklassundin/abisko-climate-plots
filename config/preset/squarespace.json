@@ -77,7 +77,7 @@
 				"startYear": 1958
 			}
 		}, 
-	"sqrt-temp-climate-weather-v2": ["slideTemperature"],
+	"sqrt-temp-climate-weather-v2": ["slideTemperatures"],
 	"sqrt-temp-extreme-v2": ["dailyExtremeTemperature",
 		"weeklyExtremeTemperature"],
 	"sqrt-prec-extreme-v2": ["dailyExtremePrecipitation",
@@ -90,7 +90,7 @@
 		"growingSeasonFrostFirst",
 		"growingSeasonFrostLast"
 	],
-	"sqrt-temp-v2": ["slideTemperature",
+	"sqrt-temp-v2": ["slideTemperatures",
 		"slideTemperaturesSpring",
 		"slideTemperaturesSummer",
 		"slideTemperaturesAutumn",

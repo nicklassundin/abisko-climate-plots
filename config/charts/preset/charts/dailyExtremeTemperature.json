@@ -3,7 +3,7 @@
 	"type": "[stationType]",
 	"tag": {
 		"render": ["temperatures","dailyExtreme"],
-		"data": ["temperatures","yrly"]
+		"data": ["temperatures","yrly", "max"]
 	},
 	"config": {
 		"meta": {

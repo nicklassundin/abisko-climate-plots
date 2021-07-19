@@ -3,7 +3,7 @@
 	"type": "[stationType]",
 	"tag": {
 		"render": ["temperatures","weeklyExtreme"],
-		"data": ["temperatures","weeks"]
+		"data": ["temperatures","weeks", "max"]
 	},
 	"config": {
 		"meta": {

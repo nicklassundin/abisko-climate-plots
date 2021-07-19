@@ -2,6 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const $ = require('jquery')
 
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
 module.exports = [{
 	entry: {
 		bundle: './modules/lib.js'
@@ -12,6 +14,15 @@ module.exports = [{
 	},
 	optimization: {
     		minimize: true,
+		minimizer: [
+			new UglifyJsPlugin({
+				uglifyOptions: {
+					output: {
+						comments: false,
+					}
+				}
+			})
+		],
   	},
 	module: {
 		rules: [
@@ -29,13 +40,14 @@ module.exports = [{
 			}
 		]
 	},
-	// plugins: [
+	
+	plugins: [
 		// new webpack.ProvidePlugin({
 			// $: "jquery",
 			// jQuery: "jquery",
 			// "window.jQuery": "jquery"
 		// })
-	// ],
+	],
 	node: {
 		console: true,
 		child_process: "empty",
