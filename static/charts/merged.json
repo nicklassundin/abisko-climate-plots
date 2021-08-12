@@ -56,6 +56,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -83,13 +90,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -400,6 +400,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -427,13 +434,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -747,6 +747,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -774,13 +781,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -1091,6 +1091,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -1118,13 +1125,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -1438,6 +1438,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -1465,13 +1472,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -1782,6 +1782,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -1809,13 +1816,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -2129,6 +2129,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -2156,13 +2163,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -2473,6 +2473,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -2500,13 +2507,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -5066,7 +5066,7 @@
             "1": {
               "title": "Annual Average Precipitation Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Precipitation [mm]",
                 "right": "[X-AXIS]"
@@ -5428,7 +5428,7 @@
             "1": {
               "title": "Annual Average Precipitation Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Precipitation [mm]",
                 "right": "[X-AXIS]"
@@ -5791,7 +5791,7 @@
             "1": {
               "title": "Annual Average Precipitation Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Precipitation [mm]",
                 "right": "[X-AXIS]"
@@ -6153,7 +6153,7 @@
             "1": {
               "title": "Annual Average Precipitation Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Precipitation [mm]",
                 "right": "[X-AXIS]"
@@ -6445,6 +6445,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -6472,13 +6479,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -6527,7 +6527,7 @@
             "1": {
               "title": "Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Temperature [°C]",
                 "right": "[X-AXIS]"
@@ -6827,6 +6827,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -6854,13 +6861,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -6910,7 +6910,7 @@
             "1": {
               "title": "Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Temperature [°C]",
                 "right": "[X-AXIS]"
@@ -7219,6 +7219,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -7246,13 +7253,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -7319,7 +7319,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -7588,6 +7588,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -7615,13 +7622,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -7689,7 +7689,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -7960,6 +7960,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -7987,13 +7994,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -8060,7 +8060,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -8329,6 +8329,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -8356,13 +8363,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -8430,7 +8430,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -9352,6 +9352,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -9379,13 +9386,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -9701,6 +9701,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -9728,13 +9735,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -10137,7 +10137,7 @@
             "1": {
               "title": "Annual Average Precipitation Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Precipitation [mm]",
                 "right": "[X-AXIS]"
@@ -10513,7 +10513,7 @@
             "1": {
               "title": "Annual Average Precipitation Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Precipitation [mm]",
                 "right": "[X-AXIS]"
@@ -10806,6 +10806,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -10833,13 +10840,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -10901,7 +10901,7 @@
             "1": {
               "title": "Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Temperature [°C]",
                 "right": "[X-AXIS]"
@@ -11202,6 +11202,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -11229,13 +11236,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -11298,7 +11298,7 @@
             "1": {
               "title": "Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Temperature [°C]",
                 "right": "[X-AXIS]"
@@ -11607,6 +11607,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -11634,13 +11641,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -11707,7 +11707,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -11976,6 +11976,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -12003,13 +12010,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -12077,7 +12077,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -13969,7 +13969,7 @@
             "1": {
               "title": "Annual Average Precipitation Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Precipitation [mm]",
                 "right": "[X-AXIS]"
@@ -14346,7 +14346,7 @@
             "1": {
               "title": "Annual Average Precipitation Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Precipitation [mm]",
                 "right": "[X-AXIS]"
@@ -14714,7 +14714,7 @@
             "1": {
               "title": "Annual Average Precipitation Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Precipitation [mm]",
                 "right": "[X-AXIS]"
@@ -15081,7 +15081,7 @@
             "1": {
               "title": "Annual Average Precipitation Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Precipitation [mm]",
                 "right": "[X-AXIS]"
@@ -15374,6 +15374,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -15401,13 +15408,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -15470,7 +15470,7 @@
             "1": {
               "title": "Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Temperature [°C]",
                 "right": "[X-AXIS]"
@@ -15771,6 +15771,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -15798,13 +15805,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -15868,7 +15868,7 @@
             "1": {
               "title": "Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Temperature [°C]",
                 "right": "[X-AXIS]"
@@ -16171,6 +16171,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -16198,13 +16205,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -16257,7 +16257,7 @@
             "1": {
               "title": "Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Temperature [°C]",
                 "right": "[X-AXIS]"
@@ -16558,6 +16558,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -16585,13 +16592,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -16645,7 +16645,7 @@
             "1": {
               "title": "Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Temperature [°C]",
                 "right": "[X-AXIS]"
@@ -16954,6 +16954,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -16981,13 +16988,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -17054,7 +17054,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -17323,6 +17323,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -17350,13 +17357,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -17424,7 +17424,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -20794,6 +20794,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -20821,13 +20828,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -20894,7 +20894,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -21163,6 +21163,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -21190,13 +21197,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -21264,7 +21264,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -21535,6 +21535,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -21562,13 +21569,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -21635,7 +21635,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -21904,6 +21904,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -21931,13 +21938,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -22005,7 +22005,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -22276,6 +22276,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -22303,13 +22310,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -22376,7 +22376,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -22645,6 +22645,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -22672,13 +22679,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -22746,7 +22746,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -23017,6 +23017,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -23044,13 +23051,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -23117,7 +23117,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -23386,6 +23386,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -23413,13 +23420,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -23487,7 +23487,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -23758,6 +23758,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -23785,13 +23792,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -23858,7 +23858,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -24127,6 +24127,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -24154,13 +24161,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -24228,7 +24228,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -24499,6 +24499,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -24526,13 +24533,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -24599,7 +24599,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -24868,6 +24868,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -24895,13 +24902,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -24969,7 +24969,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -25240,6 +25240,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -25267,13 +25274,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -25340,7 +25340,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -25609,6 +25609,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -25636,13 +25643,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -25710,7 +25710,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -43272,6 +43272,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -43299,13 +43306,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -43372,7 +43372,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -43641,6 +43641,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -43668,13 +43675,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -43742,7 +43742,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -47483,6 +47483,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -47510,13 +47517,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -47565,7 +47565,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -47829,6 +47829,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -47856,13 +47863,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -47912,7 +47912,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -48247,7 +48247,7 @@
             "1": {
               "title": "Annual Average Precipitation Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Precipitation [mm]",
                 "right": "[X-AXIS]"
@@ -48609,7 +48609,7 @@
             "1": {
               "title": "Annual Average Precipitation Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Precipitation [mm]",
                 "right": "[X-AXIS]"
@@ -50215,6 +50215,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -50242,13 +50249,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -50297,7 +50297,7 @@
             "1": {
               "title": "Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Temperature [°C]",
                 "right": "[X-AXIS]"
@@ -50597,6 +50597,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -50624,13 +50631,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -50680,7 +50680,7 @@
             "1": {
               "title": "Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Temperature [°C]",
                 "right": "[X-AXIS]"
@@ -50982,6 +50982,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -51009,13 +51016,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -51326,6 +51326,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -51353,13 +51360,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -51673,6 +51673,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -51700,13 +51707,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -52017,6 +52017,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -52044,13 +52051,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -52364,6 +52364,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -52391,13 +52398,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -52708,6 +52708,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -52735,13 +52742,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -53055,6 +53055,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -53082,13 +53089,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -53399,6 +53399,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -53426,13 +53433,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -55717,6 +55717,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -55744,13 +55751,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -55799,7 +55799,7 @@
             "1": {
               "title": "Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Temperature [°C]",
                 "right": "[X-AXIS]"
@@ -56099,6 +56099,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -56126,13 +56133,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -56182,7 +56182,7 @@
             "1": {
               "title": "Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Temperature [°C]",
                 "right": "[X-AXIS]"
@@ -56476,6 +56476,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -56503,13 +56510,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -56819,6 +56819,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -56846,13 +56853,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -57162,6 +57162,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -57189,13 +57196,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -57517,6 +57517,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -57544,13 +57551,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -57870,6 +57870,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -57897,13 +57904,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -58223,6 +58223,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -58250,13 +58257,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -58578,6 +58578,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -58605,13 +58612,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -58931,6 +58931,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -58958,13 +58965,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -59284,6 +59284,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -59311,13 +59318,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -59642,6 +59642,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -59669,13 +59676,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -59742,7 +59742,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -60011,6 +60011,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -60038,13 +60045,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -60112,7 +60112,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -60383,6 +60383,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -60410,13 +60417,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -60483,7 +60483,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -60752,6 +60752,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -60779,13 +60786,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -60853,7 +60853,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -61124,6 +61124,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -61151,13 +61158,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -61224,7 +61224,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -61493,6 +61493,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -61520,13 +61527,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -61594,7 +61594,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -61865,6 +61865,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -61892,13 +61899,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -61965,7 +61965,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -62234,6 +62234,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -62261,13 +62268,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -62335,7 +62335,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -62606,6 +62606,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -62633,13 +62640,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -62706,7 +62706,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -62975,6 +62975,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -63002,13 +63009,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -63076,7 +63076,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -63347,6 +63347,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -63374,13 +63381,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -63447,7 +63447,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -63716,6 +63716,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -63743,13 +63750,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -63817,7 +63817,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -64088,6 +64088,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -64115,13 +64122,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -64188,7 +64188,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -64457,6 +64457,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -64484,13 +64491,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -64558,7 +64558,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -64829,6 +64829,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -64856,13 +64863,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -64929,7 +64929,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -65198,6 +65198,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -65225,13 +65232,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -65299,7 +65299,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -65570,6 +65570,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -65597,13 +65604,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -65670,7 +65670,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -65939,6 +65939,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -65966,13 +65973,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -66040,7 +66040,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -66311,6 +66311,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -66338,13 +66345,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -66411,7 +66411,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -66680,6 +66680,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -66707,13 +66714,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -66781,7 +66781,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -67052,6 +67052,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -67079,13 +67086,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -67152,7 +67152,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -67421,6 +67421,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -67448,13 +67455,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -67522,7 +67522,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -67793,6 +67793,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -67820,13 +67827,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -67893,7 +67893,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -68162,6 +68162,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -68189,13 +68196,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -68263,7 +68263,7 @@
             "1": {
               "title": "Average Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "legend": "Climate",
               "xAxis": {
                 "bott": "Year",
@@ -68859,7 +68859,7 @@
             "1": {
               "title": "Annual Average Precipitation Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Precipitation [mm]",
                 "right": "[X-AXIS]"
@@ -69226,7 +69226,7 @@
             "1": {
               "title": "Annual Average Precipitation Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Precipitation [mm]",
                 "right": "[X-AXIS]"
@@ -69519,6 +69519,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -69546,13 +69553,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -69605,7 +69605,7 @@
             "1": {
               "title": "Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Temperature [°C]",
                 "right": "[X-AXIS]"
@@ -69906,6 +69906,13 @@
           },
           "decimals": 2,
           "series": {
+            "0": {
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
             "max": {
               "preset": "max",
               "group": "0",
@@ -69933,13 +69940,6 @@
               "visible": true,
               "colour": "[example]",
               "type": "column"
-            },
-            "extreme": {
-              "preset": "extreme",
-              "group": "2",
-              "visible": true,
-              "colour": "#ff0000",
-              "type": "line"
             }
           },
           "parse": {
@@ -69993,7 +69993,7 @@
             "1": {
               "title": "Temperature Difference From Baseline",
               "subTitle": "[stationName]",
-              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
+              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
               "yAxis": {
                 "left": "Temperature [°C]",
                 "right": "[X-AXIS]"

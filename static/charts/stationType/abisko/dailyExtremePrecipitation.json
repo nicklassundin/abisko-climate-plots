@@ -139,7 +139,7 @@
       "1": {
         "title": "Annual Average Precipitation Difference From Baseline",
         "subTitle": "[stationName]",
-        "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically 1961 to 1990.",
+        "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
         "yAxis": {
           "left": "Precipitation [mm]",
           "right": "[X-AXIS]"

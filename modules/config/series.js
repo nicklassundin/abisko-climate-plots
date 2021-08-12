@@ -26,17 +26,17 @@ exports.series = {
 		tooltip: { valueDecimals: meta.decimals },
 		type: meta.series.min.type,
 	}),
-	extreme: (meta, data) => ({
+	extreme: (meta, data, k, s) => ({
 		name: meta.series.extreme.name,
 		lineWidth: 0,
 		marker: { radius: 2 },
 		states: { hover: { lineWidthPlus: 0 } },
-		color: meta.series.extreme.colour,
+		color: meta.series[s].colour,
 		// data: (data.max != undefined) ? (data.max.max != undefined ? data.max.max(false).values : undefined) : data.total.max(false).values, 
 		data: data.max(false).values,
 		visible: false,
 		tooltip: { valueDecimals: meta.decimals },
-		type: meta.series.extreme.type,
+		type: meta.series[s].type,
 	}),
 	avg: (meta, data) => ({
 		name: meta.series.avg.name,

@@ -203,9 +203,7 @@ var chart = {
 		try{
 			var meta = this.meta;
 			var group = meta.groups[gID];
-			var title = '<label>'+
-				group.title+
-				'</label><br>';
+			var title = '<label class=title>'+group.title+'</label>';
 			// if(group.select != undefined && group.select.enabled){
 				// title = title + '<label style="font-size: 10px">'+
 					// group.select.text+
@@ -256,7 +254,9 @@ var chart = {
 		// console.log(this.data)
 		// console.log(this.meta)
 
-		var groups = Object.keys(meta.groups).map(key => ({
+		var groups = Object.keys(meta.groups).filter(s => {
+			return meta.groups[s].enabled == undefined ? false : meta.groups[s].enabled;
+		}).map(key => ({
 			key: key,
 			enabled: meta.groups[key].enabled
 		}));
@@ -273,16 +273,21 @@ var chart = {
 		// });
 		var series = [];
 		// TODO clean up
-		Object.keys(meta.series).filter(s => meta.series[s].visible != undefined ).forEach(key => {
+		Object.keys(meta.series).filter(k => {
+			var g = meta.series[k].group
+			return meta.series[k].visible != undefined && meta.groups[g].enabled
+		}).forEach(key => {
+			var s = meta.series[key].preset
 			try{
 				if(meta.selector){
-					series.push(seriesBuild[meta.series[key].preset](meta, data.values[98], key));
+					series.push(seriesBuild[s](meta, data.values[98], s, key));
 				}else{
-					series.push(seriesBuild[meta.series[key].preset](meta, data, key));
+					series.push(seriesBuild[s](meta, data, s, key));
 				}
 			}catch(error){
 				console.log(data)
 				console.log(key)
+				console.log(s)
 				console.log(meta)
 				console.log(meta.series)
 				throw error
@@ -345,16 +350,22 @@ var chart = {
 	switchToGroup: function(gID, changeVisibility = true, change = true){
 		var meta = this.meta;
 		var id = this.id;
+		// TODO save
+		if(this.gID) gID = this.gID;
 		if(!gID){
 			gID = parseInt(Object.keys(meta.groups).filter(k => meta.groups[k].enabled).shift());
 			if(gID > 0) gID = 2;
 		}
+		this.gID = gID;
 		var title = this.title(gID);
 		var group = meta.groups[gID];
 		var series_count = 0;
 
 		if(change) {
-			Object.keys(meta.series).filter(s => meta.series[s].visible != undefined).forEach((key, index) => {
+			Object.keys(meta.series).filter(s => {
+				var g = meta.series[s].group
+				return meta.series[s].visible != undefined && meta.groups[g].enabled
+			}).forEach((key, index) => {
 				if(meta.series[key].group == gID){
 					$('#' + id).highcharts().series[index].update({
 						visible: meta.series[key].visible,
@@ -646,6 +657,7 @@ var render = {
 					id = id.split('_')[0]
 					div = document.getElementById(id);
 				}
+				console.log(chart)
 				chart.chart.destroy();
 			})
 		}catch(error){

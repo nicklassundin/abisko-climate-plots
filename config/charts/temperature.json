@@ -49,7 +49,7 @@
 			"colour": "[example]",
 			"type": "column" 
 		},
-		"extreme": {
+		"0": {
 			"preset": "extreme",
 			"group": "2", 
 			"visible": true,
