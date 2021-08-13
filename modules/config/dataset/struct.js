@@ -26,7 +26,6 @@ global.filePath = {
 // wander down the data structure with tag input example: [high, medium, low]
 var tagApply = function(data, tags){
 	// console.log(tags)
-	// console.log(data)
 	if(Array.isArray(tags) && tags.length == 1){
 		tags = tags[0];
 	}
@@ -173,8 +172,15 @@ var struct = {
 					// dataType: 'script'
 					// });
 					var data = parser(rawData);	
-					// console.log(rawData)
 					// console.log(data)
+					// data.then(d => {
+						// console.log(d['yrlyTest'])
+						// d['yrlyTest'].then(dn => {
+						// 	console.log(dn)
+						// 	console.log(dn['avg']['2001']['0'].valuesAll)
+						// 	// console.log(dn['avg']['2001']['0'])
+						// })
+					// })
 					return data
 				})
 					.catch(error =>{
@@ -211,7 +217,6 @@ var struct = {
 				res(this.cached[id])
 			}
 		})
-		// console.log(data)
 		try{
 			if(data.then){
 				data.then(d => {

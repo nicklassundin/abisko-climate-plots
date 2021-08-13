@@ -54,6 +54,13 @@
     },
     "decimals": 2,
     "series": {
+      "0": {
+        "preset": "extreme",
+        "group": "2",
+        "visible": true,
+        "colour": "#ff0000",
+        "type": "line"
+      },
       "max": {
         "preset": "max",
         "group": "0",
@@ -81,13 +88,6 @@
         "visible": true,
         "colour": "[example]",
         "type": "column"
-      },
-      "extreme": {
-        "preset": "extreme",
-        "group": "2",
-        "visible": true,
-        "colour": "#ff0000",
-        "type": "line"
       }
     },
     "parse": {
@@ -114,6 +114,9 @@
         "enabled": true
       },
       "1": {
+        "enabled": false
+      },
+      "2": {
         "enabled": false
       }
     }

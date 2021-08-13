@@ -1,4 +1,15 @@
 var before = require('./charts/help.js').preset
+
+// const { markdownToTxt } = require('markdown-to-txt');
+
+var Remarkable = require('remarkable').Remarkable;
+var md = new Remarkable({
+    html: false, // Enable HTML tags in source
+    xhtmlOut: true, // Use '/' to close single tags (<br />)
+    breaks: true, // Convert '\n' in paragraphs into <br>
+});
+
+
 // var station = require('../../static/charts/stationIDs.json');
 exports.meta = {
 	// metaTable: function(id, json, i=0){
@@ -37,17 +48,6 @@ exports.meta = {
 				res({
 					files: files,
 					aggr: function(){
-						var lang = this.files.config.fixlang
-						var aggr = {
-							stationDef: this.files.stationDef
-						};
-						$.extend(true, aggr, this.files.config, this.files.set, this.files[lang ? lang : nav_lang])
-						aggr.subset = {};
-						$.extend(true, aggr.subset, this.files.subset, this.files.ref.subset);
-
-						return aggr;
-					},
-					text: function(){
 						var iter = function(obj, meta=obj){
 							var res = {};
 							Object.keys(obj).forEach(key => {
@@ -61,7 +61,20 @@ exports.meta = {
 							})
 							return res;
 						}
-						return iter(this.aggr())
+						var lang = this.files.config.fixlang
+						var aggr = {
+							stationDef: this.files.stationDef
+						};
+						$.extend(true, aggr, this.files[lang ? lang : nav_lang], this.files.set);
+						aggr = iter(aggr)
+						$.extend(true, aggr, this.files.config, this.files.set,)
+						aggr.subset = {};
+						$.extend(true, aggr.subset, this.files.subset, this.files.ref.subset);
+
+						return aggr;
+					},
+					text: function(){
+						return this.aggr()
 					} 
 				})
 				})
@@ -81,9 +94,14 @@ exports.meta = {
 				var set = (meta.subset ? meta.subset.enabled : false) ? meta.subset.set : undefined;
 				if(meta.time.months[set]) set = meta.time.months[set]
 				res = (meta.subset ? meta.subset.enabled : false) ? res.replace("[month]", set) : res.replace("[month]", meta.month)
+				res = res.replace("[baselineLower]", baselineLower)
+				res = res.replace("[baselineUpper]", baselineUpper)
 				res = res.replace("[baseline]", baselineLower +" - "+ baselineUpper)
 				res = res.replace("[CO2]", 'CO'+("2".sub()))
 				res = res.replace("[SOME TEXT]", "")
+				// res = markdownToTxt(res);
+				var tmp = md.render(res);
+				if(!tmp.includes(res)) res = tmp
 				if(meta.unitType && meta.units){
 					var res = res.replace("[unit]", meta.units[meta.unitType].singular).replace("[units]", meta.units[meta.unitType].plural).replace("[interval]", meta.units[meta.unitType].interval);
 				}

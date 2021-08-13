@@ -2,7 +2,7 @@
 	"valueSuffix": "°C",
 	"groups": {
 		"0": {
-			"title": "Annual Average Temperature" ,
+			"title": "Annual Average Temperature",
 			"subTitle": "[stationName]",
 			"caption": "Average annual temperature. The lowest (min) and highest (max) temperature of the year.",
 			"yAxis": {
@@ -18,7 +18,7 @@
 		"1": {
 			"title": "Temperature Difference From Baseline",
 			"subTitle": "[stationName]",
-			"caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990.",
+			"caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
 			"yAxis": {
 				"left": "Temperature [°C]",
 				"right": "[X-AXIS]"

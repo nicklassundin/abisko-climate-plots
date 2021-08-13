@@ -10,7 +10,35 @@ var struct = {
 		fields: [],
 		src: '',
 	},
-	values: 	[],
+	// values:	[],
+	VALUES: [],
+	set values(val) {
+		this.VALUES = val;	
+	},
+	get values() {
+		if(Array.isArray(this.VALUES)){
+			return this.VALUES
+		}else if(typeof this.VALUES === 'object'){
+			return Object.values(this.VALUES)
+		}else{
+			return undefined
+		}
+	},
+	// TODO
+	get valuesAll() {
+		if(this.values[0] != undefined){
+			if(this.values[0].values != undefined){
+				return this.values.map(each => {
+					return each.values
+				}).reduce((a, c) => a.concat(c))	
+			}else{
+				return this.values;
+			}
+		}else{
+			return this.values;
+		}
+	},
+	//
 	x: 		undefined,
 	y: 		undefined,
 	count:		undefined,
