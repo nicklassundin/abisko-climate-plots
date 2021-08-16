@@ -207,7 +207,8 @@ var chart = {
 		try{
 			var meta = this.meta;
 			var group = meta.groups[gID];
-			var title = '<label class=title>'+group.title+'</label>';
+			// var title = '<label class=title>'+group.title+'</label>';
+			var title = group.title;
 			// if(group.select != undefined && group.select.enabled){
 				// title = title + '<label style="font-size: 10px">'+
 					// group.select.text+
@@ -464,14 +465,11 @@ var chart = {
 					enabled: series_count > 1 
 				},
 				subtitle: {
-					text: '<label class="subtitle">' + ((group.subTitle != undefined) ? group.subTitle : "")+'</label>',
+					text: ((group.subTitle != undefined) ? group.subTitle : ""),
 					useHTML: true,
 				},
 				caption: {
-					text:
-					'<div class="caption">'
-					+group.caption
-					+'</div>',
+					text: group.caption,
 					useHTML: true,
 					align: 'left',
 				},
