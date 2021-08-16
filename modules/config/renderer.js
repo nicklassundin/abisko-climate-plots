@@ -24,7 +24,12 @@ var chart = {
 	metaFiles: undefined,
 	meta: undefined,
 	data: undefined,
-	create: function(meta){
+	create: function(meta, old){
+		// TODO save what can be done
+		if(old) this.gID = old.gID		
+		//
+
+
 		this.metaRef = meta;
 		var metaRef = this.metaRef;
 		var id = metaRef.files.stationDef.id;
@@ -192,9 +197,8 @@ var chart = {
 			enabled: meta.groups[key].enabled
 		}));
 		if(Object.keys(meta.groups).map(key => meta.groups[key].enabled).filter(each => each).length > 1){
-			var gTitle = this.groupTitle();
-			// this.switchToGroup(groups[0].key, true, change = false)
-			this.switchToGroup(undefined ,true, change = false)
+			var gTitle = this.groupTitle(this.gID);
+			this.switchToGroup(this.gID ,true, change = false)
 			$('#'+id).append(gTitle);
 		}
 		return this
@@ -285,10 +289,10 @@ var chart = {
 					series.push(seriesBuild[s](meta, data, s, key));
 				}
 			}catch(error){
-				console.log(data)
-				console.log(key)
-				console.log(s)
 				console.log(meta)
+				console.log(data)
+				console.log(s)
+				console.log(key)
 				console.log(meta.series)
 				throw error
 			}
@@ -335,8 +339,7 @@ var chart = {
 				}
 			})	
 		}
-		// this.switchToGroup(groups[0].key)
-		this.switchToGroup()
+		this.switchToGroup(this.gID)
 		this.chart.redraw();
 		this.chart.hideLoading();
 	},
@@ -351,7 +354,7 @@ var chart = {
 		var meta = this.meta;
 		var id = this.id;
 		// TODO save
-		if(this.gID) gID = this.gID;
+		if(!gID) gID = this.gID;
 		if(!gID){
 			gID = parseInt(Object.keys(meta.groups).filter(k => meta.groups[k].enabled).shift());
 			if(gID > 0) gID = 2;
@@ -583,10 +586,11 @@ var chart = {
 // TODO merge into main function above
 var render = {
 	charts: {},
-	setup: function(meta){
+	setup: function(meta, old){
 		var id = meta.files.stationDef.id
 		try{
-			this.charts[id] = chart.create(meta) 
+			this.charts[id] = chart.create(meta, old) 
+			// console.log(this.charts[id])
 		}catch(error){
 			console.log(id);
 			throw error
@@ -594,7 +598,6 @@ var render = {
 		// Update radius TODO
 
 		this.charts[id].then((Obj) => {
-
 			var divID = Obj.id;
 			window.onresize = function (event) {
 				var currWidth = $('#'+divID)[0].offsetWidth;
@@ -657,7 +660,6 @@ var render = {
 					id = id.split('_')[0]
 					div = document.getElementById(id);
 				}
-				console.log(chart)
 				chart.chart.destroy();
 			})
 		}catch(error){
@@ -666,7 +668,7 @@ var render = {
 		}
 		var cont = this;
 		this.charts[id].then(function(result){
-			cont.setup(result.metaRef)
+			cont.setup(result.metaRef, result)
 			cont.initiate(id, result.data)
 		})
 	}

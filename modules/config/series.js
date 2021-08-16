@@ -270,7 +270,7 @@ exports.series = {
 		visible: true,
 		tooltip: { valueDecimals: meta.decimals },
 	}),
-	perma: (meta, data, k) => ({
+	perma: (meta, data, type, k) => ({
 		name: (meta.series[k].name == undefined) ? k : meta.series[k].name,
 		type: meta.series[k].type,
 		color: meta.series[k].colour,
@@ -279,7 +279,7 @@ exports.series = {
 		visible: k == "Torneträsk",
 		tooltip: { valueDecimals: meta.decimals },
 	}),
-	period: (meta, p, k) => ({
+	period: (meta, p, type, k) => ({
 		name: meta.series[k].name, 
 		type: meta.series[k].type,
 		lineWidth: 1,

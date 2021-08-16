@@ -66,11 +66,10 @@ exports.meta = {
 							stationDef: this.files.stationDef
 						};
 						$.extend(true, aggr, this.files[lang ? lang : nav_lang], this.files.set);
-						aggr = iter(aggr)
-						$.extend(true, aggr, this.files.config, this.files.set,)
+						$.extend(true, aggr, this.files.config, this.files.set)
 						aggr.subset = {};
-						$.extend(true, aggr.subset, this.files.subset, this.files.ref.subset);
-
+						$.extend(true, aggr.subset, this.files.ref.subset, this.files.subset);
+						aggr = iter(aggr)
 						return aggr;
 					},
 					text: function(){
