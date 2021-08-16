@@ -464,7 +464,8 @@ var chart = {
 					enabled: series_count > 1 
 				},
 				subtitle: {
-					text: (group.subTitle != undefined) ? group.subTitle : "",
+					text: '<label class="subtitle">' + ((group.subTitle != undefined) ? group.subTitle : "")+'</label>',
+					useHTML: true,
 				},
 				caption: {
 					text:
