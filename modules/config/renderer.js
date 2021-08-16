@@ -63,6 +63,9 @@ var chart = {
 							y: -35,
 						}
 					},
+					chart: {
+						// styledMode: true,
+					}
 				});
 				res.chart.showLoading();
 				res.id = id;
@@ -206,8 +209,8 @@ var chart = {
 	title: function(gID){
 		try{
 			var meta = this.meta;
-			var group = meta.groups[gID];
-			// var title = '<label class=title>'+group.title+'</label>';
+			// var group = meta.groups[gID];
+			var title = '<label class=title>'+group.title+'</label>';
 			var title = group.title;
 			// if(group.select != undefined && group.select.enabled){
 				// title = title + '<label style="font-size: 10px">'+
@@ -465,11 +468,11 @@ var chart = {
 					enabled: series_count > 1 
 				},
 				subtitle: {
-					text: ((group.subTitle != undefined) ? group.subTitle : ""),
+					text: '<label class="subtitle>"'((group.subTitle != undefined) ? group.subTitle : "")+'</label>',
 					useHTML: true,
 				},
 				caption: {
-					text: group.caption,
+					text: '<label class="caption">'+group.caption+'</label>',
 					useHTML: true,
 					align: 'left',
 				},
