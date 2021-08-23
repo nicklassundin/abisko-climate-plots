@@ -385,5 +385,12 @@
 			"plot": "weeklyCO2",
 			"startYear": 1958
 		}
+	},
+	"viz-extreme-temp-30": {
+		"extremeTempDailyLim": {
+			"contet": false,
+			"station": "abisko",
+			"plot": "extremeTempDailyLim"
+		}
 	}
 }

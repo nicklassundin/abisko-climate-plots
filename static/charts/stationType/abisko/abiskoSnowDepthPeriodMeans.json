@@ -30,24 +30,28 @@
     "period": true,
     "series": {
       "1931": {
+        "className": "series-period",
         "preset": "period",
         "group": 0,
         "visible": true,
         "type": "line"
       },
       "1961": {
+        "className": "series-period",
         "preset": "period",
         "group": 0,
         "visible": true,
         "type": "line"
       },
       "1991": {
+        "className": "series-period",
         "preset": "period",
         "group": 0,
         "visible": true,
         "type": "line"
       },
       "allTime": {
+        "className": "series-period",
         "preset": "period",
         "group": 0,
         "visible": true,

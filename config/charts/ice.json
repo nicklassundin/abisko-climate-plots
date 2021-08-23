@@ -17,6 +17,7 @@
 	"decimals": 0,
 	"series": {
 		"freeze": {
+			"className": "series-freeze",
 			"preset": "freeze",
 			"group": 0,
 			"visible": true,
@@ -25,6 +26,7 @@
 			"type": "line"
 		},
 		"breakup": {
+			"className": "series-breakup",
 			"preset": "breakup",
 			"group": 0,
 			"visible": true,
