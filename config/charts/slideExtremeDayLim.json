@@ -1,0 +1,22 @@
+{
+	"unitType": "day",
+	"groups": {
+		"0": {
+			"enabled": false
+		},
+		"1": {
+			"enabled": true,
+			"tooltip": {
+			}
+		},
+		"2": {
+			"enabled": false
+		},
+		"3": {
+			"enabled": true,
+			"prime": true,
+			"tooltip": {
+			}
+		}
+	}
+}

@@ -1,0 +1,50 @@
+{
+	"valueSuffix": "°C",
+	"groups": {
+		"0": {
+			"title": "", 
+			"subTitle": "", 
+			"caption": "", 
+			"yAxis": {
+				"left": "Genomsnittlig temperatur [°C]",
+				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "År", 
+				"top": "[Y-AXIS]"
+			},
+			"legend": "Väder"
+		},
+		"1": {
+			"title": "", 
+			"subTitle": "",
+			"caption": "", 
+			"yAxis": {
+				"left": "Temperatur [°C]",
+				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "År", 
+				"top": "[Y-AXIS]"
+			},
+			"legend": "Klimat"
+		}
+	},
+	"series": {
+		"max": {
+			"name": "Max"
+		},
+		"min": {
+			"name": "Min"
+		},
+		"avg": {
+			"name": "Årligt genomsnitt"
+		},  
+		"diff": {
+			"name": "Skillnad"
+		},
+		"linjer": {
+			"name": "[example]"
+		}
+	}
+}
