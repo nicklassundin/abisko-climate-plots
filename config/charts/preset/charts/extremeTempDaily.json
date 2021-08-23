@@ -1,0 +1,25 @@
+{
+	"id": "dailyExtremeTemperature",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["temperatures","dailyExtreme"],
+		"data": ["temperatures","dailyExtremeHigh"]
+	},
+	"config": {
+		"meta": {
+			"smhi": {
+				"data": "SMHI-Weather",
+				"config": "temperature",
+				"lang": "annualTemperature",
+				"set": "slideExtremeDay"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "temperature",
+				"lang": "annualTemperature",
+				"set": "slideExtremeDay"
+			}
+		}
+	},
+	"months": false
+}

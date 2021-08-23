@@ -1,0 +1,25 @@
+{
+	"id": "weeklyExtremeTemperature",
+	"type": "[stationType]",
+	"tag": {
+		"render": ["temperatures","weeklyExtreme"],
+		"data": ["temperatures","weeksExtremeHigh"]
+	},
+	"config": {
+		"meta": {
+			"smhi": {
+				"data": "SMHI-Weather",
+				"config": "temperature",
+				"lang": "annualTemperature",
+				"set": "slideExtremeWeek"
+			},
+			"abisko": {
+				"data": "ANS",
+				"config": "temperature",
+				"lang": "annualTemperature",
+				"set": "slideExtremeWeek"
+			}
+		}
+	},
+	"months": false
+}
