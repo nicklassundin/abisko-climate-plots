@@ -54,6 +54,7 @@
     "decimals": 0,
     "series": {
       "iceThick": {
+        "className": "series-iceThick",
         "preset": "iceThick",
         "group": 0,
         "visible": true,
@@ -61,6 +62,7 @@
         "type": "column"
       },
       "diff": {
+        "className": "series-diff",
         "preset": "diff",
         "group": 1,
         "visible": true,

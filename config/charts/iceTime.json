@@ -30,6 +30,7 @@
 	"decimals": 0,
 	"series": {
 		"avg": {
+			"className": "series-iceTime",
 			"preset": "avg",
 			"group": "0",
 			"visible": true,
@@ -37,6 +38,7 @@
 			"type": "line"
 		},
 		"diff": {
+			"className": "series-diff",
 			"preset": "diff",
 			"group": "1",
 			"visible": true,

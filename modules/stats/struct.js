@@ -98,6 +98,10 @@ var struct = {
 	max: function(abs = false){
 		return this.filterForm(Math.max, 'max', abs);
 	},
+	numberReq: function(){
+		console.log(this)
+		return this
+	},
 	last: function(f = (e) => { return e.y <= 0 }, type=this.type){
 		var res = this.filter((entry) => {
 			var values = entry.values.filter(f);
@@ -131,6 +135,13 @@ var struct = {
 		})
 		res.shift();
 		return struct.create(res).build();
+	},
+	occurrence: function(f=(e)=>{ return e > 30 }){
+		var res = struct.create(this.values.map(each => ({
+			x: each.x,
+			y: each.values.filter(value => f(value.y)).map(node => node.x).filter((v, i, a) => a.indexOf(v) === i).length,	
+		})).filter(a => a.y != 0)).build()
+		return res
 	},
 	sequence: function(f=(e)=>{ return e > 0 }){
 		var values = this.values.map(each => {

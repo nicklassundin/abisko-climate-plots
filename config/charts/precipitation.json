@@ -9,11 +9,15 @@
 		},
 		"2": {
 			"baseline": false
+		},
+		"3": {
+			"baseline": false
 		}
 	},
 	"decimals": 2,
 	"series": {
 		"diff": {
+			"className": "series-diff",
 			"preset": "diff",
 			"group": 1,
 			"visible": true,
@@ -21,6 +25,7 @@
 			"type": "column" 
 		},
 		"snow": {
+			"className": "series-snow",
 			"preset": "snow",
 			"group": 0,
 			"visible": true,
@@ -30,6 +35,7 @@
 			"type": "column"
 		},
 		"rain": {
+			"className": "series-rain",
 			"preset": "rain",
 			"group": 0,
 			"visible": true,
@@ -38,9 +44,18 @@
 			"borderColour": "#5F7CB9",
 			"type": "column"
 		},
-		"extreme": {
+		"0": {
+			"className": "series-prec-extreme",
 			"preset": "extreme",
 			"group": 2,
+			"visible": true,
+			"colour": "#1000FF",
+			"type": "column" 
+		},
+		"1": {
+			"className": "series-prec-extreme-lim",
+			"preset": "extreme",
+			"group": 3,
 			"visible": true,
 			"colour": "#1000FF",
 			"type": "column" 

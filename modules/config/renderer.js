@@ -63,6 +63,9 @@ var chart = {
 							y: -35,
 						}
 					},
+					chart: {
+						// styledMode: true,
+					}
 				});
 				res.chart.showLoading();
 				res.id = id;
@@ -192,10 +195,6 @@ var chart = {
 		})
 		this.chart.showLoading();
 		// this.chart.redraw();
-		var groups = Object.keys(meta.groups).filter(k => {meta.groups[k].enabled}).map(key => ({
-			key: key,
-			enabled: meta.groups[key].enabled
-		}));
 		if(Object.keys(meta.groups).map(key => meta.groups[key].enabled).filter(each => each).length > 1){
 			var gTitle = this.groupTitle(this.gID);
 			this.switchToGroup(this.gID ,true, change = false)
@@ -209,15 +208,6 @@ var chart = {
 			var group = meta.groups[gID];
 			// var title = '<label class=title>'+group.title+'</label>';
 			var title = group.title;
-			// if(group.select != undefined && group.select.enabled){
-				// title = title + '<label style="font-size: 10px">'+
-					// group.select.text+
-					// ' </label>'+
-					// '<input type="date" value='+
-					// variables.dateStr()+
-					// ' onclick=selectText(this) '+
-					// 'onchange=renderInterface.updatePlot('+this.id+','+baselineLower+','+baselineUpper+',this.value)></input>'
-			// }	
 			return title
 		}catch(error){
 			console.log(gID)
@@ -229,11 +219,13 @@ var chart = {
 	groupTitle: function(active){
 		var id = this.id
 		var meta = this.meta;
+
 		if(!active){
 
 			active = parseInt(Object.keys(meta.groups).filter(k => meta.groups[k].enabled ).shift())
 			if(active > 0){
-				active = 2;
+				active = parseInt(Object.keys(meta.groups).filter(k => meta.groups[k].prime).shift())
+				if(!active) active = 2;
 			} 
 		}
 
@@ -344,18 +336,14 @@ var chart = {
 		this.chart.redraw();
 		this.chart.hideLoading();
 	},
-	switch: function(){
-		if(index){
-			this.weather();
-		}else{
-			this.climate();
-		}
-	},
 	switchToGroup: function(gID, changeVisibility = true, change = true){
 		var meta = this.meta;
 		var id = this.id;
 		// TODO save
 		if(!gID) gID = this.gID;
+		if(!gID){
+			gID = parseInt(Object.keys(meta.groups).filter(k => meta.groups[k].prime).shift());
+		}
 		if(!gID){
 			gID = parseInt(Object.keys(meta.groups).filter(k => meta.groups[k].enabled).shift());
 			if(gID > 0) gID = 2;
@@ -465,10 +453,11 @@ var chart = {
 					enabled: series_count > 1 
 				},
 				subtitle: {
-					text: ((group.subTitle != undefined) ? group.subTitle : ""),
+					text: '<label class="subtitle>"'+((group.subTitle != undefined) ? group.subTitle : "")+'</label>',
 					useHTML: true,
 				},
 				caption: {
+					// text: '<label class="caption">'+group.caption+'</label>',
 					text: group.caption,
 					useHTML: true,
 					align: 'left',

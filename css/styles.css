@@ -1,17 +1,4 @@
 
-/* chart styles */
-.highcharts-title {
-}
-.highcharts-subtitle {
-}
-.highcharts-caption {
-}
-/* end chart styles */
-
-
-.highcharts-container {
-	position: relative;
-}
 .overlay {
 	position: absolute;
 	display: none;

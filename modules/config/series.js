@@ -6,6 +6,7 @@ exports.series = {
 	},
 	max: (meta, data) => ({
 		name: meta.series.max.name,
+		className: meta.series.max.className,
 		lineWidth: 0,
 		marker: { radius: 2 },
 		states: { hover: { lineWidthPlus: 0 } },
@@ -17,6 +18,7 @@ exports.series = {
 	}),
 	min: (meta, data) => ({
 		name: meta.series.min.name,
+		className: meta.series.min.className,
 		lineWidth: 0,
 		marker: { radius: 2 },
 		states: { hover: { lineWidthPlus: 0 } },
@@ -28,18 +30,21 @@ exports.series = {
 	}),
 	extreme: (meta, data, k, s) => ({
 		name: meta.series.extreme.name,
+		className: meta.series[s].className,
 		lineWidth: 0,
 		marker: { radius: 2 },
 		states: { hover: { lineWidthPlus: 0 } },
 		color: meta.series[s].colour,
 		// data: (data.max != undefined) ? (data.max.max != undefined ? data.max.max(false).values : undefined) : data.total.max(false).values, 
-		data: data.max(false).values,
+		// data: data.max(false).values,
+		data: data.values,
 		visible: false,
 		tooltip: { valueDecimals: meta.decimals },
 		type: meta.series[s].type,
 	}),
 	avg: (meta, data) => ({
 		name: meta.series.avg.name,
+		className: meta.series.avg.className,
 		lineWidth: 0,
 		regression: true,
 		step: 'center',
@@ -66,6 +71,7 @@ exports.series = {
 	}),
 	diff: (meta, data) => ({
 		regression: false,
+		className: meta.series.diff.className,
 		regressionSettings: {
 			type: 'linear',
 			color: '#aa0000',
@@ -87,6 +93,7 @@ exports.series = {
 	}),
 	first: (meta, data) => ({
 		name: meta.series.first.name,
+		className: meta.series.first.className,
 		lineWidth: 0,
 		marker: { radius: 2 },
 		states: { hover: { lineWidthPlus: 0 } },
@@ -105,6 +112,7 @@ exports.series = {
 			name: 'DUMMY',
 		},
 		name: meta.series.diff.name,
+		className: meta.series.diff.className,
 		type: meta.series.diff.type,
 		data: data.difference(),
 		color: 'red',
@@ -114,6 +122,7 @@ exports.series = {
 	}),
 	last: (meta, data) => ({
 		name: meta.series.last.name,
+		className: meta.series.last.className,
 		lineWidth: 0,
 		marker: { radius: 2 },
 		states: { hover: { lineWidthPlus: 0 } },
@@ -132,6 +141,7 @@ exports.series = {
 			name: 'DUMMY',
 		},
 		name: meta.series.diff.name,
+		className: meta.series.diff.className,
 		type: meta.series.diff.type,
 		data: data.difference(),
 		color: 'red',
@@ -140,7 +150,9 @@ exports.series = {
 		tooltip: { valueDecimals: meta.decimals },
 	}),
 	linjer: (meta, data) => ({
+		className: 'series-linjer',
 		name: meta.series.linjer.name,
+		className: meta.series.linjer.className,
 		type: meta.series.linjer.typ,
 		visible: false,
 		tooltip: { valueDecimals: meta.decimals },
@@ -148,6 +160,7 @@ exports.series = {
 	}),
 	snow: (meta, data) => ({
 		name: meta.series.snow.name,
+		className: meta.series.snow.className,
 		type: meta.series.snow.type,
 		stack: meta.groups[meta.series.snow.group].title,
 		stacking: 'normal',
@@ -167,6 +180,7 @@ exports.series = {
 	}),
 	rain: (meta, data) => ({
 		name: meta.series.rain.name,
+		className: meta.series.rain.className,
 		type: meta.series.rain.type,
 		stack: meta.groups[meta.series.rain.group].title,
 		stacking: 'normal',
@@ -193,6 +207,7 @@ exports.series = {
 			name: '[placeholder]',
 		},
 		name: meta.series.iceTime.name,
+		className: meta.series.iceTime.className,
 		color: meta.series.iceTime.colour,
 		lineWidth: 0,
 		marker: { radius: 2 },
@@ -210,6 +225,7 @@ exports.series = {
 			name: '[placeholder]',
 		},
 		name: meta.series.freeze.name,
+		className: meta.series.freeze.className,
 		color: meta.series.freeze.colour,
 		lineWidth: 0,
 		marker: { 
@@ -227,6 +243,7 @@ exports.series = {
 	breakup: (meta, data) => ({
 		regression: false,
 		type: meta.series.breakup.type,
+		className: meta.series.breakup.className,
 		regressionSettings: {
 			type: 'linear',
 			color: '#0000ee',
@@ -248,6 +265,7 @@ exports.series = {
 	}),
 	iceThick: (meta, data) => ({
 		name: meta.series.iceThick.name,
+		className: meta.series.iceThick.className,
 		color: meta.series.iceThick.colour,
 		lineWidth: 0,
 		marker: {
@@ -260,6 +278,7 @@ exports.series = {
 	}),
 	iceThickDiff: (meta, data) => ({
 		name: meta.series.iceThickDiff.name,
+		className: meta.series.iceTickDiff.className,
 		color: meta.series.iceThickDiff.colour,
 		lineWidth: 0,
 		marker: {
@@ -272,6 +291,7 @@ exports.series = {
 	}),
 	perma: (meta, data, type, k) => ({
 		name: (meta.series[k].name == undefined) ? k : meta.series[k].name,
+		className: meta.series[k].className,
 		type: meta.series[k].type,
 		color: meta.series[k].colour,
 		opacity: 0.9,
@@ -281,6 +301,7 @@ exports.series = {
 	}),
 	period: (meta, p, type, k) => ({
 		name: meta.series[k].name, 
+		className: meta.series[k].className,
 		type: meta.series[k].type,
 		lineWidth: 1,
 		data: p[k].means.rotate(6).slice(2),
@@ -289,6 +310,7 @@ exports.series = {
 	}),
 	co2: (meta, data) => ({
 		name: meta.series.co2.name,
+		className: meta.series.co2.className,
 		color: meta.series.co2.colour,
 		type: meta.series.co2.type,
 		lineWidth: 2,

@@ -217,6 +217,7 @@ var struct = {
 				res(this.cached[id])
 			}
 		})
+		// console.log(data)
 		try{
 			if(data.then){
 				data.then(d => {

@@ -42,6 +42,20 @@
 				"top": "[Y-AXIS]"
 			},
 			"legend": "Weather"
+		},
+		"3": {
+			"title": "[Number of Extreme Weather event]", 
+			"subTitle": "[stationName]",
+			"caption": "", 
+			"yAxis": {
+				"left": "" ,
+				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "Year", 
+				"top": "[Y-AXIS]"
+			},
+			"legend": "Weather"
 		}
 	},
 	"series": {

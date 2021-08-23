@@ -215,8 +215,10 @@
     "slideTemperatures",
     "dailyExtremeTemperature",
     "extremeTempDaily",
+    "extremeTempDailyLim",
     "weeklyExtremeTemperature",
     "extremeTempWeekly",
+    "extremeTempWeeklyLim",
     "dailyExtremePrecipitation",
     "extremePrecDaily",
     "weeklyExtremePrecipitation",
@@ -812,6 +814,13 @@
       "startYear": 1958
     }
   },
+  "viz-extreme-temp-30": {
+    "extremeTempDailyLim": {
+      "contet": false,
+      "station": "abisko",
+      "plot": "extremeTempDailyLim"
+    }
+  },
   "vizchange": [
     "viz-annual-prec",
     "viz-grow-weeks",
@@ -862,6 +871,7 @@
     "viz-snowdepth-period",
     "viz-snowdepth-decade",
     "viz-snowdepth-annual",
-    "viz-carbon"
+    "viz-carbon",
+    "viz-extreme-temp-30"
   ]
 }
