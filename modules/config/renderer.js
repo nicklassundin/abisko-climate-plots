@@ -469,7 +469,7 @@ var chart = {
 					gridLineWidth: group.xAxis.gridLineWidth,
 					categories: (meta.period) ? group.xAxis.categories : undefined,
 					corsshair: true,
-					min: meta.noAxisLim ? null : (meta.period) ? null : (group.xAxis.min) ? group.xAxis.min : startYear,
+					min: meta.noAxisLim = ? null : (meta.period) ? null : (group.xAxis.min) ? group.xAxis.min : startYear,
 					tickInterval: group.xAxis.ticketInterval
 				},
 				yAxis: {
