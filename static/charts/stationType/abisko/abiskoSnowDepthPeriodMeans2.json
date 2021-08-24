@@ -95,7 +95,8 @@
   "set": {
     "groups": {
       "0": {
-        "enabled": true
+        "enabled": true,
+        "prime": true
       },
       "1": {
         "enabled": false

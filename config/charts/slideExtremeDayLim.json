@@ -16,6 +16,7 @@
 			"enabled": true,
 			"prime": true,
 			"tooltip": {
+				"type": "value"
 			}
 		}
 	}

@@ -74,7 +74,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -128,7 +129,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -435,7 +437,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -490,7 +493,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -799,7 +803,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -853,7 +858,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -1160,7 +1166,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -1215,7 +1222,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -1524,7 +1532,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -1578,7 +1587,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -1885,7 +1895,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -1940,7 +1951,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -2249,7 +2261,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -2303,7 +2316,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -2610,7 +2624,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -2665,7 +2680,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -2974,7 +2990,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -3254,7 +3271,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -3561,7 +3579,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -3867,7 +3886,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -4167,7 +4187,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -4496,7 +4517,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -4823,7 +4845,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -5159,7 +5182,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -5209,7 +5233,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -5535,7 +5560,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -5586,7 +5612,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -5914,7 +5941,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -5967,7 +5995,8 @@
               "enabled": false
             },
             "1": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             }
           }
         },
@@ -6290,7 +6319,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -6344,7 +6374,8 @@
               "enabled": false
             },
             "1": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             }
           }
         },
@@ -6678,7 +6709,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -6732,7 +6764,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -7091,7 +7124,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -7146,7 +7180,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -7514,7 +7549,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -7586,7 +7622,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -7900,7 +7937,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -7973,7 +8011,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -8289,7 +8328,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -8361,7 +8401,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -8675,7 +8716,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -8748,7 +8790,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -9048,7 +9091,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -9098,7 +9142,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -9390,7 +9435,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -9441,7 +9487,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -9745,7 +9792,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -9800,7 +9848,8 @@
           "selector": true,
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -10111,7 +10160,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -10167,7 +10217,8 @@
           "selector": true,
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -10470,7 +10521,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -10858,7 +10910,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -11258,7 +11311,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -11683,7 +11737,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -12118,7 +12173,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -12190,7 +12246,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -12504,7 +12561,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -12577,7 +12635,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -14144,7 +14203,8 @@
               "enabled": false
             },
             "1": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             }
           }
         },
@@ -14376,7 +14436,7 @@
             ],
             "data": [
               "precipitation",
-              "yrlyExtremeHigh"
+              "dailyExtremeHigh"
             ]
           },
           "config": {
@@ -14429,7 +14489,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -14766,7 +14827,7 @@
             ],
             "data": [
               "precipitation",
-              "yrlyExtremeHigh"
+              "dailyExtremeHigh"
             ]
           },
           "config": {
@@ -14819,7 +14880,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -15212,7 +15274,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -15593,7 +15656,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -15986,7 +16050,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -16413,7 +16478,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -16843,7 +16909,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -16910,7 +16977,9 @@
             "3": {
               "enabled": true,
               "prime": true,
-              "tooltip": {}
+              "tooltip": {
+                "type": "value"
+              }
             }
           }
         },
@@ -17266,7 +17335,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -17334,7 +17404,9 @@
             "3": {
               "enabled": true,
               "prime": true,
-              "tooltip": {}
+              "tooltip": {
+                "type": "value"
+              }
             }
           }
         },
@@ -17692,7 +17764,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -18110,7 +18183,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -18531,7 +18605,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -18952,7 +19027,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -19383,7 +19459,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -19455,7 +19532,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -19769,7 +19847,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -19842,7 +19921,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -20787,7 +20867,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -21096,7 +21177,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -21406,7 +21488,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -21715,7 +21798,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -22650,7 +22734,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -22973,7 +23058,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -23277,7 +23363,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -23349,7 +23436,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -23663,7 +23751,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -23736,7 +23825,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -24052,7 +24142,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -24124,7 +24215,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -24438,7 +24530,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -24511,7 +24604,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -24827,7 +24921,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -24899,7 +24994,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -25213,7 +25309,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -25286,7 +25383,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -25602,7 +25700,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -25674,7 +25773,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -25988,7 +26088,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -26061,7 +26162,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -26377,7 +26479,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -26449,7 +26552,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -26763,7 +26867,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -26836,7 +26941,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -27152,7 +27258,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -27224,7 +27331,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -27538,7 +27646,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -27611,7 +27720,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -27927,7 +28037,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -27999,7 +28110,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -28313,7 +28425,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -28386,7 +28499,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -28749,7 +28863,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -29016,7 +29131,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -29084,7 +29200,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -29383,7 +29500,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -29452,7 +29570,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -29753,7 +29872,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -29821,7 +29941,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -30120,7 +30241,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -30189,7 +30311,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -30490,7 +30613,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -30558,7 +30682,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -30857,7 +30982,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -30926,7 +31052,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -31227,7 +31354,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -31295,7 +31423,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -31594,7 +31723,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -31663,7 +31793,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -31964,7 +32095,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -32032,7 +32164,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -32331,7 +32464,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -32400,7 +32534,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -32701,7 +32836,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -32769,7 +32905,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -33068,7 +33205,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -33137,7 +33275,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -33438,7 +33577,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -33506,7 +33646,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -33805,7 +33946,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -33874,7 +34016,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -34175,7 +34318,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -34243,7 +34387,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -34542,7 +34687,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -34611,7 +34757,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -34912,7 +35059,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -34980,7 +35128,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -35279,7 +35428,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -35348,7 +35498,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -35649,7 +35800,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -35717,7 +35869,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -36016,7 +36169,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -36085,7 +36239,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -36386,7 +36541,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -36454,7 +36610,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -36753,7 +36910,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -36822,7 +36980,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -37123,7 +37282,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -37191,7 +37351,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -37490,7 +37651,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -37559,7 +37721,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -37860,7 +38023,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -37928,7 +38092,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -38227,7 +38392,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -38296,7 +38462,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -38597,7 +38764,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -38665,7 +38833,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -38964,7 +39133,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -39033,7 +39203,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -39334,7 +39505,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -39402,7 +39574,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -39701,7 +39874,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -39770,7 +39944,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -40071,7 +40246,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -40139,7 +40315,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -40438,7 +40615,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -40507,7 +40685,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -40808,7 +40987,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -40876,7 +41056,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -41175,7 +41356,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -41244,7 +41426,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -41545,7 +41728,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -41613,7 +41797,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -41912,7 +42097,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -41981,7 +42167,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -42282,7 +42469,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -42350,7 +42538,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -42649,7 +42838,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -42718,7 +42908,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -43019,7 +43210,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -43087,7 +43279,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -43386,7 +43579,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -43455,7 +43649,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -43756,7 +43951,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -43824,7 +44020,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -44123,7 +44320,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -44192,7 +44390,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -44493,7 +44692,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -44561,7 +44761,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -44860,7 +45061,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -44929,7 +45131,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -45230,7 +45433,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -45298,7 +45502,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -45597,7 +45802,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -45666,7 +45872,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -45967,7 +46174,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -46035,7 +46243,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -46334,7 +46543,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -46403,7 +46613,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -46713,7 +46924,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -46785,7 +46997,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -47099,7 +47312,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -47172,7 +47386,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -47472,7 +47687,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -47522,7 +47738,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -47814,7 +48031,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -47865,7 +48083,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -48184,7 +48403,8 @@
           "unitType": "day",
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -48496,7 +48716,8 @@
           "unitType": "day",
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -48809,7 +49030,8 @@
           "unitType": "week",
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -49121,7 +49343,8 @@
           "unitType": "week",
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -49429,7 +49652,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -49736,7 +49960,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -50042,7 +50267,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -50332,7 +50558,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -50382,7 +50609,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -50676,7 +50904,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -50727,7 +50956,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -51032,7 +51262,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -51086,7 +51317,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -51395,7 +51627,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -51450,7 +51683,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -51750,7 +51984,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -51800,7 +52035,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -52126,7 +52362,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -52177,7 +52414,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -52505,7 +52743,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -52555,7 +52794,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -52847,7 +53087,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -52898,7 +53139,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -53192,7 +53434,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -53242,7 +53485,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -53534,7 +53778,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -53585,7 +53830,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -53888,7 +54134,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -53942,7 +54189,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -54301,7 +54549,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -54356,7 +54605,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -54717,7 +54967,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -54771,7 +55022,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -55078,7 +55330,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -55133,7 +55386,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -55442,7 +55696,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -55496,7 +55751,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -55803,7 +56059,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -55858,7 +56115,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -56167,7 +56425,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -56221,7 +56480,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -56528,7 +56788,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -56583,7 +56844,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -56892,7 +57154,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -56946,7 +57209,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -57253,7 +57517,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -57308,7 +57573,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -57608,7 +57874,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -57658,7 +57925,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -57950,7 +58218,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -58001,7 +58270,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -58295,7 +58565,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -58345,7 +58616,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -58637,7 +58909,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -58688,7 +58961,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -58982,7 +59256,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -59032,7 +59307,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -59324,7 +59600,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -59375,7 +59652,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -59678,7 +59956,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -59735,7 +60014,8 @@
               "enabled": false
             },
             "1": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             }
           }
         },
@@ -60091,7 +60371,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -60149,7 +60430,8 @@
               "enabled": false
             },
             "1": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             }
           }
         },
@@ -60499,7 +60781,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -60555,7 +60838,8 @@
               "enabled": false
             },
             "1": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             }
           }
         },
@@ -60859,7 +61143,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -60915,7 +61200,8 @@
               "enabled": false
             },
             "1": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             }
           }
         },
@@ -61219,7 +61505,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -61275,7 +61562,8 @@
               "enabled": false
             },
             "1": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             }
           }
         },
@@ -61591,7 +61879,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -61647,7 +61936,8 @@
               "enabled": false
             },
             "1": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             }
           }
         },
@@ -61961,7 +62251,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -62017,7 +62308,8 @@
               "enabled": false
             },
             "1": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             }
           }
         },
@@ -62331,7 +62623,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -62387,7 +62680,8 @@
               "enabled": false
             },
             "1": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             }
           }
         },
@@ -62703,7 +62997,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -62756,7 +63051,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -63073,7 +63369,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -63126,7 +63423,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -63443,7 +63741,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -63496,7 +63795,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -63818,7 +64118,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -63890,7 +64191,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -64204,7 +64506,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -64277,7 +64580,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -64593,7 +64897,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -64665,7 +64970,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -64979,7 +65285,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -65052,7 +65359,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -65368,7 +65676,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -65440,7 +65749,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -65754,7 +66064,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -65827,7 +66138,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -66143,7 +66455,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -66215,7 +66528,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -66529,7 +66843,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -66602,7 +66917,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -66918,7 +67234,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -66990,7 +67307,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -67304,7 +67622,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -67377,7 +67696,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -67693,7 +68013,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -67765,7 +68086,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -68079,7 +68401,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -68152,7 +68475,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -68468,7 +68792,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -68540,7 +68865,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -68854,7 +69180,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -68927,7 +69254,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -69243,7 +69571,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -69315,7 +69644,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -69629,7 +69959,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -69702,7 +70033,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -70018,7 +70350,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -70090,7 +70423,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -70404,7 +70738,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -70477,7 +70812,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -70793,7 +71129,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -70865,7 +71202,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -71179,7 +71517,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -71252,7 +71591,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -71568,7 +71908,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -71640,7 +71981,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -71954,7 +72296,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -72027,7 +72370,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -72343,7 +72687,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -72415,7 +72760,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -72729,7 +73075,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -72802,7 +73149,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": true
@@ -73105,7 +73453,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -73360,7 +73709,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -73742,7 +74092,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -74136,7 +74487,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -74555,7 +74907,8 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
-              "type": "line"
+              "type": "line",
+              "decimals": 0
             },
             "max": {
               "className": "series-temp-max",
@@ -74967,7 +75320,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -75017,7 +75371,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false
@@ -75309,7 +75664,8 @@
               "group": 3,
               "visible": true,
               "colour": "#1000FF",
-              "type": "column"
+              "type": "column",
+              "decimals": 2
             },
             "diff": {
               "className": "series-diff",
@@ -75360,7 +75716,8 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             },
             "1": {
               "enabled": false

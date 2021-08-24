@@ -4,7 +4,8 @@
 			"enabled": false
 		},
 		"1": {
-			"enabled": true
+			"enabled": true,
+			"prime": true
 		}
 	}
 }

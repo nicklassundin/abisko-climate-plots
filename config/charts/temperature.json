@@ -72,7 +72,8 @@
 			"group": "3", 
 			"visible": true,
 			"colour": "#ff0000", 
-			"type": "line"
+			"type": "line",
+			"decimals": 0
 		}
 	}
 }

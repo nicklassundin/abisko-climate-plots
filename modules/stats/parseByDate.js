@@ -172,7 +172,6 @@ var parseByDate = function (values, type='mean', src='', custom) {
 								if(this.parsed[key]){
 									res(this.values[key])
 								}else{
-
 									this.parsed[key] = true;
 									switch(key){
 										case 'monthly':
@@ -210,22 +209,26 @@ var parseByDate = function (values, type='mean', src='', custom) {
 											break;
 										case 'dailyExtremeHigh':
 											this['yrly'].then(y => {
-												res((y.max ? y.max : y.total).max(false));
+												this.values[key] = (y.max ? y.max : y.total).max(false);
+												res(this.values[key])
 											})
 											break;
 										case 'dailyExtremeHighLim':
 											this['yrly'].then(y => {
-												res((y.max ? y.max : y.total).occurrence((e) => 30 < e));
+												this.values[key] = (y.max ? y.max : y.total).occurrence((e) => 30 < e);
+												res(this.values[key])
 											})
 											break;
 										case 'weeksExtremeHighLim':
 											this['weeks'].then(y => {
-												res((y.max ? y.max : y.total).occurrence((e) => 30 < e));
+												this.values[key] = (y.max ? y.max : y.total).occurrence((e) => 30 < e);
+												res(this.values[key])
 											})
 											break;
 										case 'weeksExtremeHigh':
 											this['weeks'].then(y => {
-												res((y.max ? y.max : y.total).max(false));
+												this.values[key] = (y.max ? y.max : y.total).max(false);
+												res(this.values[key])
 											})
 											break;
 										case 'yrlySplit':

@@ -782,7 +782,8 @@
     "iceThicknessYear": {
       "content": false,
       "station": "abisko",
-      "plot": "iceThicknessYear"
+      "plot": "iceThicknessYear",
+      "startYear": 1950
     }
   },
   "viz-snowdepth-period": {

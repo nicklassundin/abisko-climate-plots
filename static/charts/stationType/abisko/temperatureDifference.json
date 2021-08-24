@@ -71,7 +71,8 @@
         "group": "3",
         "visible": true,
         "colour": "#ff0000",
-        "type": "line"
+        "type": "line",
+        "decimals": 0
       },
       "max": {
         "className": "series-temp-max",
@@ -129,7 +130,8 @@
         "enabled": false
       },
       "1": {
-        "enabled": true
+        "enabled": true,
+        "prime": true
       }
     }
   },

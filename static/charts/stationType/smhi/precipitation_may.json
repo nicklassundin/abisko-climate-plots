@@ -69,7 +69,8 @@
         "group": 3,
         "visible": true,
         "colour": "#1000FF",
-        "type": "column"
+        "type": "column",
+        "decimals": 2
       },
       "diff": {
         "className": "series-diff",
@@ -137,7 +138,8 @@
   "set": {
     "groups": {
       "0": {
-        "enabled": true
+        "enabled": true,
+        "prime": true
       },
       "1": {
         "enabled": false

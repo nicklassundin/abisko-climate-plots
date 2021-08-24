@@ -172,7 +172,6 @@ var struct = {
 					// dataType: 'script'
 					// });
 					var data = parser(rawData);	
-					// console.log(data)
 					// data.then(d => {
 						// console.log(d['yrlyTest'])
 						// d['yrlyTest'].then(dn => {
@@ -208,6 +207,7 @@ var struct = {
 			this.cached[id][tag[0]] = this.parseRawData(tag)
 		}
 		// console.log(this.cached[id][tag[0]])
+		// console.log(this.cached)
 		// console.log(tag)
 		// console.log(this.cached[id])
 		var data = new Promise((res, rej) => {
@@ -217,7 +217,6 @@ var struct = {
 				res(this.cached[id])
 			}
 		})
-		// console.log(data)
 		try{
 			if(data.then){
 				data.then(d => {
