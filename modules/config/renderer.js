@@ -101,7 +101,7 @@ var chart = {
 			tooltip: {
 				shared: true,
 				valueSuffix: ' '+meta.valueSuffix,
-				valueDecimals: meta.decimals,
+				// valueDecimals: meta.decimals,
 			},
 			exporting: {
 				chartOptions: {
@@ -206,7 +206,6 @@ var chart = {
 		try{
 			var meta = this.meta;
 			var group = meta.groups[gID];
-			// var title = '<label class=title>'+group.title+'</label>';
 			var title = group.title;
 			return title
 		}catch(error){
@@ -282,10 +281,10 @@ var chart = {
 					series.push(seriesBuild[s](meta, data, s, key));
 				}
 			}catch(error){
-				console.log(meta)
+				// console.log(meta)
 				console.log(data)
-				console.log(s)
-				console.log(key)
+				// console.log(s)
+				// console.log(key)
 				console.log(meta.series)
 				throw error
 			}
@@ -346,7 +345,6 @@ var chart = {
 		}
 		if(!gID){
 			gID = parseInt(Object.keys(meta.groups).filter(k => meta.groups[k].enabled).shift());
-			if(gID > 0) gID = 2;
 		}
 		this.gID = gID;
 		var title = this.title(gID);
@@ -437,7 +435,7 @@ var chart = {
 		if(group.tooltip){
 			this.chart.update({
 				tooltip: {
-					formatter: (group.tooltip != undefined) ? formatters(meta)[group.tooltip.type] : undefined
+					formatter: formatters(meta)[group.tooltip.type ? group.tooltip.type : 'default']
 				},
 			})
 		}

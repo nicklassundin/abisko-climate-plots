@@ -39,7 +39,11 @@ exports.series = {
 		// data: data.max(false).values,
 		data: data.values,
 		visible: false,
-		tooltip: { valueDecimals: meta.decimals },
+		tooltip: { 
+			valueDecimals: (() => {
+				return (meta.series[s].decimals != undefined ? meta.series[s].decimals : meta.decimals) 
+			})()
+		},
 		type: meta.series[s].type,
 	}),
 	avg: (meta, data) => ({
