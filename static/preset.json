@@ -576,6 +576,9 @@
   },
   "viz-annual-temp-glob": {
     "temperature_zonal_slide": {
+      "override": {
+        "axislim": false
+      },
       "context": false,
       "station": "glob",
       "plot": "temperature_zonal_slide"
@@ -583,6 +586,9 @@
   },
   "viz-annual-temp-nhem": {
     "temperature_zonal_slide": {
+      "override": {
+        "axislim": false
+      },
       "context": false,
       "station": "nhem",
       "plot": "temperature_zonal_slide"
@@ -590,6 +596,9 @@
   },
   "viz-annual-temp-64n-90n": {
     "temperature_zonal_slide": {
+      "override": {
+        "axislim": false
+      },
       "context": false,
       "station": "64n-90n",
       "plot": "temperature_zonal_slide"
