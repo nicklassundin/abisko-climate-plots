@@ -39,8 +39,16 @@ lib = {
 		}
 		meta.getMeta(type).then(cfg =>{
 			$(function(){
-				cfg.files.config.noAxisLim = type.override ? !type.override.axislim : false;
 				cfg.files.config.contex = type.context === undefined ? true : type.context
+				if(type.override ? !type.override.axislim : false){
+					Object.keys(cfg.files.config.groups).forEach(key => {
+						if(!cfg.files.config.groups[key].yAxis){
+							cfg.files.config.groups[key].yAxis = {};
+						}
+						cfg.files.config.groups[key].yAxis.min = undefined;
+						cfg.files.config.groups[key].yAxis.max = undefined;
+					})
+				}
 				var chrt = charts.build(cfg, div)
 			})
 		})
