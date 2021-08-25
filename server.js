@@ -1,4 +1,4 @@
-// Pre-setup Server
+// Pre-setup
 var $ = require("jquery");
 if(process.argv.includes('d')){
 	var app = require('./dev-app.js').app
