@@ -469,7 +469,7 @@ var chart = {
 					gridLineWidth: group.xAxis.gridLineWidth,
 					categories: (meta.period) ? group.xAxis.categories : undefined,
 					corsshair: true,
-					min: meta.noAxisLim ? null : (meta.period) ? null : (group.xAxis.min) ? group.xAxis.min : startYear,
+					min: (meta.period) ? null : (group.xAxis.min) ? group.xAxis.min : startYear,
 					tickInterval: group.xAxis.ticketInterval
 				},
 				yAxis: {
@@ -482,8 +482,8 @@ var chart = {
 						color: 'rgb(204, 214, 235)',
 						width: 2,
 					}],
-					max: meta.noAxisLim ? null : (group.yAxis.max != undefined) ? group.yAxis.max : null,
-					min: meta.noAxisLim ? null : (group.yAxis.min != undefined) ? group.yAxis.min : null,
+					max: (group.yAxis.max != undefined) ? group.yAxis.max : null,
+					min: (group.yAxis.min != undefined) ? group.yAxis.min : null,
 					tickInterval: (group.yAxis.ticketInterval) ? group.yAxis.ticketInterval : 1,
 					lineWidth: 1,
 					reversed: group.yAxis.reversed,
