@@ -54,6 +54,10 @@
       "3": {
         "baseline": false,
         "yAxis": {}
+      },
+      "4": {
+        "baseline": false,
+        "yAxis": {}
       }
     },
     "decimals": 2,
@@ -72,6 +76,15 @@
         "group": "3",
         "visible": true,
         "colour": "#ff0000",
+        "type": "line",
+        "decimals": 0
+      },
+      "2": {
+        "className": "series-temp-low-extreme",
+        "preset": "extreme",
+        "group": "4",
+        "visible": true,
+        "colour": "#0000ff",
         "type": "line",
         "decimals": 0
       },

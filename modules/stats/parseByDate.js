@@ -213,9 +213,19 @@ var parseByDate = function (values, type='mean', src='', custom) {
 												res(this.values[key])
 											})
 											break;
-										case 'dailyExtremeHighLim':
+										case 'dailyExtremeMaxLim':
 											this['yrly'].then(y => {
-												this.values[key] = (y.max ? y.max : y.total).occurrence((e) => 30 < e);
+
+												// this.values[key] = (y.max ? y.max : y.total).occurrence((e) => 30 < e);
+												this.values[key] = (y.max ? y.max : y.total),
+												res(this.values[key])
+											})
+											break;
+										case 'dailyExtremeMinLim':
+											this['yrly'].then(y => {
+
+												// this.values[key] = (y.max ? y.max : y.total).occurrence((e) => 30 < e);
+												this.values[key] = (y.min ? y.min : y.total),
 												res(this.values[key])
 											})
 											break;
@@ -303,8 +313,11 @@ var parseByDate = function (values, type='mean', src='', custom) {
 						get dailyExtremeHigh() {
 							return this.request('dailyExtremeHigh')
 						},
-						get dailyExtremeHighLim() {
-							return this.request('dailyExtremeHighLim')
+						get dailyExtremeMaxLim() {
+							return this.request('dailyExtremeMaxLim')
+						},
+						get dailyExtremeMinLim() {
+							return this.request('dailyExtremeMinLim')
 						},
 						get yrlySplit() {
 							return this.request('yrlySplit')

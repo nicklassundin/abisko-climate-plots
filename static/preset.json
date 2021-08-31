@@ -216,6 +216,7 @@
     "dailyExtremeTemperature",
     "extremeTempDaily",
     "extremeTempDailyLim",
+    "extremeTempDailyLowLim",
     "weeklyExtremeTemperature",
     "extremeTempWeekly",
     "extremeTempWeeklyLim",
@@ -775,21 +776,21 @@
   },
   "viz-lake-freeze": {
     "slideLakeIceFreezeup": {
-      "content": false,
+      "context": false,
       "station": "abisko",
       "plot": "slideLakeIceFreezeup"
     }
   },
   "viz-lake-break": {
     "slideLakeIceBreakeup": {
-      "content": false,
+      "context": false,
       "station": "abisko",
       "plot": "slideLakeIceBreakup"
     }
   },
   "viz-lake-thick": {
     "iceThicknessYear": {
-      "content": false,
+      "context": false,
       "station": "abisko",
       "plot": "iceThicknessYear",
       "startYear": 1950
@@ -797,38 +798,95 @@
   },
   "viz-snowdepth-period": {
     "abioskoSnowDepthPeriodMeans": {
-      "contet": false,
+      "context": false,
       "station": "abisko",
       "plot": "abiskoSnowDepthPeriodMeans"
     }
   },
   "viz-snowdepth-decade": {
     "abioskoSnowDepthPeriodMeans2": {
-      "contet": false,
+      "context": false,
       "station": "abisko",
       "plot": "abiskoSnowDepthPeriodMeans2"
     }
   },
   "viz-snowdepth-annual": {
     "annualAvgSnowDepth": {
-      "contet": false,
+      "context": false,
       "station": "abisko",
       "plot": "annualAvgSnowDepth"
     }
   },
   "viz-carbon": {
     "weeklyCO2": {
-      "contet": false,
+      "context": false,
       "station": "glob",
       "plot": "weeklyCO2",
       "startYear": 1958
     }
   },
-  "viz-extreme-temp-30": {
+  "viz-extreme-temp-high-30": {
     "extremeTempDailyLim": {
-      "contet": false,
+      "context": false,
       "station": "abisko",
-      "plot": "extremeTempDailyLim"
+      "plot": "extremeTempDailyLim",
+      "config": {
+        "files": {
+          "set": {
+            "extreme": {
+              "lim": 30
+            }
+          }
+        }
+      }
+    }
+  },
+  "viz-extreme-temp-high-33": {
+    "extremeTempDailyLim": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremeTempDailyLim",
+      "config": {
+        "files": {
+          "set": {
+            "extreme": {
+              "lim": 33
+            }
+          }
+        }
+      }
+    }
+  },
+  "viz-extreme-temp-low-25": {
+    "extremeTempDailyLim": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremeTempDailyLowLim",
+      "config": {
+        "files": {
+          "set": {
+            "extreme": {
+              "lim": -25
+            }
+          }
+        }
+      }
+    }
+  },
+  "viz-extreme-temp-low-20": {
+    "extremeTempDailyLim": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremeTempDailyLowLim",
+      "config": {
+        "files": {
+          "set": {
+            "extreme": {
+              "lim": -20
+            }
+          }
+        }
+      }
     }
   },
   "vizchange": [
@@ -882,6 +940,9 @@
     "viz-snowdepth-decade",
     "viz-snowdepth-annual",
     "viz-carbon",
-    "viz-extreme-temp-30"
+    "viz-extreme-temp-high-30",
+    "viz-extreme-temp-high-33",
+    "viz-extreme-temp-low-25",
+    "viz-extreme-temp-low-20"
   ]
 }

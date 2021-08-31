@@ -1,22 +1,30 @@
 {
   "ref": {
-    "id": "temperature_nhem",
-    "type": "zonal",
+    "id": "dailyExtremeTemperature",
+    "type": "abisko",
     "tag": {
       "render": [
-        "nhem"
+        "temperatures",
+        "dailyExtreme"
       ],
       "data": [
-        "nhem"
+        "temperatures",
+        "dailyExtremeHighLim"
       ]
     },
     "config": {
       "meta": {
-        "nhem": {
+        "smhi": {
+          "data": "SMHI-Weather",
           "config": "temperature",
-          "lang": "nhem_Temperature",
-          "data": "NASA-GISS-TEMP",
-          "set": "climate"
+          "lang": "annualTemperature",
+          "set": "slideExtremeDayLim"
+        },
+        "abisko": {
+          "data": "ANS",
+          "config": "temperature",
+          "lang": "annualTemperature",
+          "set": "slideExtremeDayLim"
         }
       }
     },
@@ -45,10 +53,6 @@
       "3": {
         "baseline": false,
         "yAxis": {}
-      },
-      "4": {
-        "baseline": false,
-        "yAxis": {}
       }
     },
     "decimals": 2,
@@ -67,15 +71,6 @@
         "group": "3",
         "visible": true,
         "colour": "#ff0000",
-        "type": "line",
-        "decimals": 0
-      },
-      "2": {
-        "className": "series-temp-low-extreme",
-        "preset": "extreme",
-        "group": "4",
-        "visible": true,
-        "colour": "#0000ff",
         "type": "line",
         "decimals": 0
       },
@@ -114,27 +109,44 @@
     },
     "parse": {
       "file": [
-        "ZonAnn.Ts.csv"
+        "ANS_Temp_Prec.csv",
+        "AWS.csv",
+        "ANS_Prec.csv"
       ],
       "preset": {
         "header": true,
-        "delimiter": ",",
         "download": true,
         "skipEmptyLines": true,
-        "dynamicTyping": true
+        "beforeFirstChunk": "abisko",
+        "dynamicTyping": false
       },
-      "parser": "GISSTEMPzonalMeans",
-      "local": false
+      "parser": "AbiskoCsv",
+      "local": true
     }
   },
   "set": {
+    "unitType": "day",
+    "extreme": {
+      "type": "low",
+      "lim": 30
+    },
     "groups": {
       "0": {
         "enabled": false
       },
       "1": {
         "enabled": true,
-        "prime": true
+        "tooltip": {}
+      },
+      "2": {
+        "enabled": false
+      },
+      "3": {
+        "enabled": true,
+        "prime": true,
+        "tooltip": {
+          "type": "value"
+        }
       }
     }
   },
@@ -142,11 +154,11 @@
     "valueSuffix": "°C",
     "groups": {
       "0": {
-        "title": "Average Temperature",
-        "subTitle": "Northern Hemisphere",
+        "title": "Annual Average Temperature",
+        "subTitle": "[stationName]",
         "caption": "Average annual temperature. The lowest (min) and highest (max) temperature of the year.",
         "yAxis": {
-          "left": "Average Temperature [°C]",
+          "left": "Average temperature [°C]",
           "right": "[X-AXIS]"
         },
         "xAxis": {
@@ -157,8 +169,8 @@
       },
       "1": {
         "title": "Temperature Difference From Baseline",
-        "subTitle": "Northern Hemisphere",
-        "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baseline], for the Northern Hemisphere.",
+        "subTitle": "[stationName]",
+        "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
         "yAxis": {
           "left": "Temperature [°C]",
           "right": "[X-AXIS]"
@@ -168,6 +180,34 @@
           "top": "[Y-AXIS]"
         },
         "legend": "Climate"
+      },
+      "2": {
+        "title": "Warmest [unit] of the year",
+        "subTitle": "[stationName]",
+        "caption": "Average temperature of warmest [unit] of the year.",
+        "yAxis": {
+          "left": "Average temperature of warmest [unit] of the year [°C]",
+          "right": "[X-AXIS]"
+        },
+        "xAxis": {
+          "bott": "Year",
+          "top": "[Y-AXIS]"
+        },
+        "legend": "Weather"
+      },
+      "3": {
+        "title": "Extreme Weather event, Days Above [lim] [°C]",
+        "subTitle": "[stationName]",
+        "caption": "",
+        "yAxis": {
+          "left": "",
+          "right": "[X-AXIS]"
+        },
+        "xAxis": {
+          "bott": "Year",
+          "top": "[Y-AXIS]"
+        },
+        "legend": "Weather"
       }
     },
     "series": {
@@ -183,17 +223,19 @@
       "diff": {
         "name": "Difference"
       },
-      "linjer": {
-        "name": "[example]"
+      "extreme": {
+        "name": "Average warmest maximum [interval] temperature",
+        "week": "weekly",
+        "day": "daily"
       }
     },
     "dataSource": {
       "meta": {
-        "src": "https://data.giss.nasa.gov/gistemp/",
+        "src": "https://polar.se/en/research-in-abisko/research-data/",
         "downloadDate": "7 January 2020",
-        "citation": "GISTEMP Team, 2020: GISS Surface Temperature Analysis (GISTEMP), version 4. NASA Goddard Institute for Space Studies.",
-        "desc": "GISS Surface Temperature Analysis (GISTEMP v4)",
-        "descLong": "NASA Goddard Institute for Space Studies, Earth Sciences Division, GISS Surface Temperature Analysis (GISTEMP v4)"
+        "citation": "",
+        "desc": "Abisko Scientific Research Station",
+        "descLong": "Swedish Polar Research Secretariet, Abisko Scientific Research Station, Research Data"
       }
     },
     "units": {
@@ -257,11 +299,11 @@
     "valueSuffix": "°C",
     "groups": {
       "0": {
-        "title": "Genomsnittlig temperatur",
-        "subTitle": "Norra halvklotet",
-        "caption": "Genomsnittlig årstemperatur. Årets lägsta (min) och högsta (max) temperatur.",
+        "title": "Årlig genomsnittstemperatur",
+        "subTitle": "[stationName]",
+        "caption": "Årlig genomsnittstemperatur. Årets lägsta (min) och högsta (max) temperatur.",
         "yAxis": {
-          "left": "Genomsnittlig temperatur [°C]",
+          "left": "Genomsnittstemperatur [°C]",
           "right": "[X-AXIS]"
         },
         "xAxis": {
@@ -272,8 +314,8 @@
       },
       "1": {
         "title": "Temperaturskillnaden från baslinjen",
-        "subTitle": "Norra halvklotet",
-        "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis [baseline], för norra halvklotet.",
+        "subTitle": "[stationName]",
+        "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
         "yAxis": {
           "left": "Temperatur [°C]",
           "right": "[X-AXIS]"
@@ -283,6 +325,20 @@
           "top": "[Y-AXIS]"
         },
         "legend": "Klimat"
+      },
+      "2": {
+        "title": "Årets varmaste [unit]",
+        "subTitle": "[stationName]",
+        "caption": "Medeltemperaturen på årets varmaste [unit].",
+        "yAxis": {
+          "left": "Medeltemperaturen på årets varmaste [unit] [°C]",
+          "right": "[X-AXIS]"
+        },
+        "xAxis": {
+          "bott": "År",
+          "top": "[Y-AXIS]"
+        },
+        "legend": "Väder"
       }
     },
     "series": {
@@ -293,22 +349,24 @@
         "name": "Min"
       },
       "avg": {
-        "name": "Årligt genomsnitt"
+        "name": "Årlig genomsnitt"
       },
       "diff": {
         "name": "Skillnad"
       },
-      "linjer": {
-        "name": "[example]"
+      "extreme": {
+        "name": "Genomsnittlig varmaste högsta temperatur [interval]",
+        "week": "veckovis",
+        "day": "dagligen"
       }
     },
     "dataSource": {
       "meta": {
-        "src": "https://data.giss.nasa.gov/gistemp/",
+        "src": "https://polar.se/en/research-in-abisko/research-data/",
         "downloadDate": "7 Januari 2020",
-        "citation": "GISTEMP Team, 2020: GISS Surface Temperature Analysis (GISTEMP), version 4. NASA Goddard Institute for Space Studies.",
-        "desc": "GISS Surface Temperature Analysis (GISTEMP v4)",
-        "descLong": "NASA Goddard Institute for Space Studies, Earth Sciences Division, GISS Surface Temperature Analysis (GISTEMP v4)"
+        "citation": "",
+        "desc": "Abisko Naturvetenskapliga Station",
+        "descLong": "Polarforskningssekretariatet, Abisko Naturvetenskapliga Station, forskningsdata"
       }
     },
     "units": {

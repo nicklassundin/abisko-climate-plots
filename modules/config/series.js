@@ -28,24 +28,39 @@ exports.series = {
 		tooltip: { valueDecimals: meta.decimals },
 		type: meta.series.min.type,
 	}),
-	extreme: (meta, data, k, s) => ({
-		name: meta.series.extreme.name,
-		className: meta.series[s].className,
-		lineWidth: 0,
-		marker: { radius: 2 },
-		states: { hover: { lineWidthPlus: 0 } },
-		color: meta.series[s].colour,
-		// data: (data.max != undefined) ? (data.max.max != undefined ? data.max.max(false).values : undefined) : data.total.max(false).values, 
-		// data: data.max(false).values,
-		data: data.values,
-		visible: false,
-		tooltip: { 
-			valueDecimals: (() => {
-				return (meta.series[s].decimals != undefined ? meta.series[s].decimals : meta.decimals) 
-			})()
-		},
-		type: meta.series[s].type,
-	}),
+	extreme: (meta, data, k, s) => {
+		var tag = "extreme";
+		if(meta.extreme) tag = tag+meta.extreme.type
+
+		return {
+			name: meta.series[tag].name,
+			className: meta.series[s].className,
+			lineWidth: 0,
+			marker: { radius: 2 },
+			states: { hover: { lineWidthPlus: 0 } },
+			color: meta.series[s].colour,
+			// data: (data.max != undefined) ? (data.max.max != undefined ? data.max.max(false).values : undefined) : data.total.max(false).values, 
+			// data: data.max(false).values,
+			data: (() => {
+				if(meta.extreme){
+					if(meta.extreme.type == "high"){
+						return data.occurrence((e => meta.extreme.lim < e)).values
+					}else{
+						return data.occurrence((e => meta.extreme.lim > e)).values
+					}
+				}else{
+					return data.values
+				}
+			})(),
+			visible: false,
+			tooltip: { 
+				valueDecimals: (() => {
+					return (meta.series[s].decimals != undefined ? meta.series[s].decimals : meta.decimals) 
+				})()
+			},
+			type: meta.series[s].type,
+		}
+	},
 	avg: (meta, data) => ({
 		name: meta.series.avg.name,
 		className: meta.series.avg.className,

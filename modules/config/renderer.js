@@ -64,6 +64,7 @@ var chart = {
 						}
 					},
 					chart: {
+						// width: window.innerWidth  
 						// styledMode: true,
 					}
 				});
