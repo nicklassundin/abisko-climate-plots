@@ -44,7 +44,21 @@
 			"legend": "Weather"
 		},
 		"3": {
-			"title": "[Number of Extreme Weather event]", 
+			"title": "Extreme Weather event, Days Above [lim] [°C]", 
+			"subTitle": "[stationName]",
+			"caption": "", 
+			"yAxis": {
+				"left": "" ,
+				"right": "[X-AXIS]"
+			},
+			"xAxis": {
+				"bott": "Year", 
+				"top": "[Y-AXIS]"
+			},
+			"legend": "Weather"
+		},
+		"4": {
+			"title": "Extreme Weather event, Days Below [lim] [°C]", 
 			"subTitle": "[stationName]",
 			"caption": "", 
 			"yAxis": {
@@ -73,6 +87,16 @@
 		},
 		"extreme": {
 			"name": "Average warmest maximum [interval] temperature",
+			"week": "weekly",
+			"day": "daily"
+		},
+		"extremehigh": {
+			"name": "[PLACEHOLDER] Number of days above [interval] temperature",
+			"week": "weekly",
+			"day": "daily"
+		},
+		"extremelow": {
+			"name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
 			"week": "weekly",
 			"day": "daily"
 		}

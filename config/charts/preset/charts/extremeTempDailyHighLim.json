@@ -3,7 +3,7 @@
 	"type": "[stationType]",
 	"tag": {
 		"render": ["temperatures","dailyExtreme"],
-		"data": ["temperatures","dailyExtremeMaxLim"]
+		"data": ["temperatures","dailyExtremeHighLim"]
 	},
 	"config": {
 		"meta": {

@@ -53,6 +53,10 @@
       "3": {
         "baseline": false,
         "yAxis": {}
+      },
+      "4": {
+        "baseline": false,
+        "yAxis": {}
       }
     },
     "decimals": 2,
@@ -71,6 +75,15 @@
         "group": "3",
         "visible": true,
         "colour": "#ff0000",
+        "type": "line",
+        "decimals": 0
+      },
+      "2": {
+        "className": "series-temp-low-extreme",
+        "preset": "extreme",
+        "group": "4",
+        "visible": true,
+        "colour": "#0000ff",
         "type": "line",
         "decimals": 0
       },
@@ -191,7 +204,21 @@
         "legend": "Weather"
       },
       "3": {
-        "title": "[Number of Extreme Weather event]",
+        "title": "Extreme Weather event, Days Above [lim] [°C]",
+        "subTitle": "[stationName]",
+        "caption": "",
+        "yAxis": {
+          "left": "",
+          "right": "[X-AXIS]"
+        },
+        "xAxis": {
+          "bott": "Year",
+          "top": "[Y-AXIS]"
+        },
+        "legend": "Weather"
+      },
+      "4": {
+        "title": "Extreme Weather event, Days Below [lim] [°C]",
         "subTitle": "[stationName]",
         "caption": "",
         "yAxis": {
@@ -220,6 +247,16 @@
       },
       "extreme": {
         "name": "Average warmest maximum [interval] temperature",
+        "week": "weekly",
+        "day": "daily"
+      },
+      "extremehigh": {
+        "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+        "week": "weekly",
+        "day": "daily"
+      },
+      "extremelow": {
+        "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
         "week": "weekly",
         "day": "daily"
       }

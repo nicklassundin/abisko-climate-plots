@@ -1,5 +1,9 @@
 {
 	"unitType": "day",
+	"extreme": {
+		"type": "high",
+		"lim": 30
+	},
 	"groups": {
 		"0": {
 			"enabled": false

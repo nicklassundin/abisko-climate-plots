@@ -56,6 +56,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -74,6 +78,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -419,6 +432,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -437,6 +454,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -785,6 +811,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -803,6 +833,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -1148,6 +1187,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -1166,6 +1209,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -1514,6 +1566,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -1532,6 +1588,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -1877,6 +1942,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -1895,6 +1964,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -2243,6 +2321,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -2261,6 +2343,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -2606,6 +2697,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -2624,6 +2719,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -6691,6 +6795,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -6709,6 +6817,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -6818,7 +6935,21 @@
               "legend": "Weather"
             },
             "3": {
-              "title": "[Number of Extreme Weather event]",
+              "title": "Extreme Weather event, Days Above [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "4": {
+              "title": "Extreme Weather event, Days Below [lim] [°C]",
               "subTitle": "[stationName]",
               "caption": "",
               "yAxis": {
@@ -6847,6 +6978,16 @@
             },
             "extreme": {
               "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremehigh": {
+              "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremelow": {
+              "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
               "week": "weekly",
               "day": "daily"
             }
@@ -7106,6 +7247,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -7124,6 +7269,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -7234,7 +7388,21 @@
               "legend": "Weather"
             },
             "3": {
-              "title": "[Number of Extreme Weather event]",
+              "title": "Extreme Weather event, Days Above [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "4": {
+              "title": "Extreme Weather event, Days Below [lim] [°C]",
               "subTitle": "[stationName]",
               "caption": "",
               "yAxis": {
@@ -7263,6 +7431,16 @@
             },
             "extreme": {
               "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremehigh": {
+              "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremelow": {
+              "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
               "week": "weekly",
               "day": "daily"
             }
@@ -7531,6 +7709,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -7549,6 +7731,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -7919,6 +8110,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -7937,6 +8132,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -8310,6 +8514,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -8328,6 +8536,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -8698,6 +8915,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -8716,6 +8937,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -9774,6 +10004,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -9792,6 +10026,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -10142,6 +10385,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -10160,6 +10407,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -11293,6 +11549,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -11311,6 +11571,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -11431,7 +11700,21 @@
               "legend": "Weather"
             },
             "3": {
-              "title": "[Number of Extreme Weather event]",
+              "title": "Extreme Weather event, Days Above [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "4": {
+              "title": "Extreme Weather event, Days Below [lim] [°C]",
               "subTitle": "[stationName]",
               "caption": "",
               "yAxis": {
@@ -11460,6 +11743,16 @@
             },
             "extreme": {
               "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremehigh": {
+              "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremelow": {
+              "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
               "week": "weekly",
               "day": "daily"
             }
@@ -11719,6 +12012,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -11737,6 +12034,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -11858,7 +12164,21 @@
               "legend": "Weather"
             },
             "3": {
-              "title": "[Number of Extreme Weather event]",
+              "title": "Extreme Weather event, Days Above [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "4": {
+              "title": "Extreme Weather event, Days Below [lim] [°C]",
               "subTitle": "[stationName]",
               "caption": "",
               "yAxis": {
@@ -11887,6 +12207,16 @@
             },
             "extreme": {
               "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremehigh": {
+              "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremelow": {
+              "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
               "week": "weekly",
               "day": "daily"
             }
@@ -12155,6 +12485,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -12173,6 +12507,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -12543,6 +12886,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -12561,6 +12908,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -16032,6 +16388,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -16050,6 +16410,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -16172,7 +16541,21 @@
               "legend": "Weather"
             },
             "3": {
-              "title": "[Number of Extreme Weather event]",
+              "title": "Extreme Weather event, Days Above [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "4": {
+              "title": "Extreme Weather event, Days Below [lim] [°C]",
               "subTitle": "[stationName]",
               "caption": "",
               "yAxis": {
@@ -16201,6 +16584,16 @@
             },
             "extreme": {
               "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremehigh": {
+              "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremelow": {
+              "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
               "week": "weekly",
               "day": "daily"
             }
@@ -16460,6 +16853,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -16478,6 +16875,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -16601,7 +17007,21 @@
               "legend": "Weather"
             },
             "3": {
-              "title": "[Number of Extreme Weather event]",
+              "title": "Extreme Weather event, Days Above [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "4": {
+              "title": "Extreme Weather event, Days Below [lim] [°C]",
               "subTitle": "[stationName]",
               "caption": "",
               "yAxis": {
@@ -16630,6 +17050,953 @@
             },
             "extreme": {
               "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremehigh": {
+              "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremelow": {
+              "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 January 2020",
+              "citation": "",
+              "desc": "Abisko Scientific Research Station",
+              "descLong": "Swedish Polar Research Secretariet, Abisko Scientific Research Station, Research Data"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "days",
+              "singular": "day",
+              "interval": "daily"
+            },
+            "week": {
+              "plural": "weeks",
+              "singular": "week",
+              "interval": "weekly"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "January",
+              "feb": "February",
+              "mar": "March",
+              "apr": "April",
+              "may": "May",
+              "jun": "June",
+              "jul": "July",
+              "aug": "August",
+              "sep": "September",
+              "oct": "October",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "Mar",
+              "apr": "Apr",
+              "may": "May",
+              "jun": "Jun",
+              "jul": "Jul",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Oct",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Range for baseline",
+              "lower": "Lower limit",
+              "upper": "Upper limit"
+            },
+            "dataCredit": "Data source",
+            "contribute": "Contribute - Github [dummy]",
+            "showDataTable": "Show/hide data",
+            "langOption": "Svenska",
+            "downloadJPEG": "Download as JPEG",
+            "downloadPDF": "Download as PDF",
+            "downloadSVG": "Download as SVG"
+          }
+        },
+        "sv": {
+          "valueSuffix": "°C",
+          "groups": {
+            "0": {
+              "title": "Årlig genomsnittstemperatur",
+              "subTitle": "[stationName]",
+              "caption": "Årlig genomsnittstemperatur. Årets lägsta (min) och högsta (max) temperatur.",
+              "yAxis": {
+                "left": "Genomsnittstemperatur [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Väder"
+            },
+            "1": {
+              "title": "Temperaturskillnaden från baslinjen",
+              "subTitle": "[stationName]",
+              "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
+              "yAxis": {
+                "left": "Temperatur [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Klimat"
+            },
+            "2": {
+              "title": "Årets varmaste [unit]",
+              "subTitle": "[stationName]",
+              "caption": "Medeltemperaturen på årets varmaste [unit].",
+              "yAxis": {
+                "left": "Medeltemperaturen på årets varmaste [unit] [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Väder"
+            }
+          },
+          "series": {
+            "max": {
+              "name": "Max"
+            },
+            "min": {
+              "name": "Min"
+            },
+            "avg": {
+              "name": "Årlig genomsnitt"
+            },
+            "diff": {
+              "name": "Skillnad"
+            },
+            "extreme": {
+              "name": "Genomsnittlig varmaste högsta temperatur [interval]",
+              "week": "veckovis",
+              "day": "dagligen"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 Januari 2020",
+              "citation": "",
+              "desc": "Abisko Naturvetenskapliga Station",
+              "descLong": "Polarforskningssekretariatet, Abisko Naturvetenskapliga Station, forskningsdata"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "dagar",
+              "singular": "dag",
+              "interval": "daglig"
+            },
+            "week": {
+              "plural": "veckor",
+              "singular": "vecka",
+              "interval": "veckovis"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "Januari",
+              "feb": "Februari",
+              "mar": "Mars",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Augusti",
+              "sep": "September",
+              "oct": "Oktober",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "March",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Okt",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Interval för baslinje",
+              "lower": "Undregräns",
+              "upper": "Övregräns"
+            },
+            "dataCredit": "Data källa",
+            "contribute": "Bidra - Github [dummy]",
+            "showDataTable": "Vissa/göm data",
+            "langOption": "English",
+            "downloadJPEG": "Laddaner som JPEG",
+            "downloadPDF": "Laddaner som  PDF",
+            "downloadSVG": "Laddaner som SVG"
+          }
+        }
+      }
+    }
+  },
+  {
+    "smhi": {
+      "extremeTempDailyHighLim": {
+        "ref": {
+          "id": "dailyExtremeTemperature",
+          "type": "smhi",
+          "tag": {
+            "render": [
+              "temperatures",
+              "dailyExtreme"
+            ],
+            "data": [
+              "temperatures",
+              "dailyExtremeHighLim"
+            ]
+          },
+          "config": {
+            "meta": {
+              "smhi": {
+                "data": "SMHI-Weather",
+                "config": "temperature",
+                "lang": "annualTemperature",
+                "set": "slideExtremeDayLim"
+              },
+              "abisko": {
+                "data": "ANS",
+                "config": "temperature",
+                "lang": "annualTemperature",
+                "set": "slideExtremeDayLim"
+              }
+            }
+          },
+          "months": false
+        },
+        "config": {
+          "type": "column",
+          "polar": false,
+          "groups": {
+            "0": {
+              "baseline": false
+            },
+            "1": {
+              "baseline": true,
+              "yAxis": {
+                "min": -3,
+                "max": 4
+              }
+            },
+            "2": {
+              "baseline": false,
+              "yAxis": {
+                "min": 15
+              }
+            },
+            "3": {
+              "baseline": false,
+              "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
+            }
+          },
+          "decimals": 2,
+          "series": {
+            "0": {
+              "className": "series-temp-extreme",
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
+            "1": {
+              "className": "series-temp-extreme",
+              "preset": "extreme",
+              "group": "3",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
+              "type": "line",
+              "decimals": 0
+            },
+            "max": {
+              "className": "series-temp-max",
+              "preset": "max",
+              "group": "0",
+              "visible": false,
+              "colour": "#ff0000",
+              "type": "line"
+            },
+            "min": {
+              "className": "series-temp-min",
+              "preset": "min",
+              "group": "0",
+              "visible": false,
+              "colour": "#0000ff",
+              "type": "line"
+            },
+            "avg": {
+              "className": "series-temp-avg",
+              "preset": "avg",
+              "group": "0",
+              "visible": true,
+              "colour": "#888888",
+              "type": "line"
+            },
+            "diff": {
+              "className": "series-diff",
+              "preset": "diff",
+              "group": "1",
+              "visible": true,
+              "colour": "[example]",
+              "type": "column"
+            }
+          },
+          "parse": {
+            "file": [
+              "temperature.csv",
+              "precipitation.csv"
+            ],
+            "preset": {
+              "header": true,
+              "download": true,
+              "skipEmptyLines": true,
+              "beforeFirstChunk": "smhi",
+              "fastMode": true
+            },
+            "parser": "smhiTemp",
+            "local": true
+          }
+        },
+        "set": {
+          "unitType": "day",
+          "extreme": {
+            "type": "high",
+            "lim": 30
+          },
+          "groups": {
+            "0": {
+              "enabled": false
+            },
+            "1": {
+              "enabled": true,
+              "tooltip": {}
+            },
+            "2": {
+              "enabled": false
+            },
+            "3": {
+              "enabled": true,
+              "prime": true,
+              "tooltip": {
+                "type": "value"
+              }
+            }
+          }
+        },
+        "en": {
+          "valueSuffix": "°C",
+          "groups": {
+            "0": {
+              "title": "Annual Average Temperature",
+              "subTitle": "[stationName]",
+              "caption": "Average annual temperature. The lowest (min) and highest (max) temperature of the year.",
+              "yAxis": {
+                "left": "Average temperature [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "1": {
+              "title": "Temperature Difference From Baseline",
+              "subTitle": "[stationName]",
+              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+              "yAxis": {
+                "left": "Temperature [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Climate"
+            },
+            "2": {
+              "title": "Warmest [unit] of the year",
+              "subTitle": "[stationName]",
+              "caption": "Average temperature of warmest [unit] of the year.",
+              "yAxis": {
+                "left": "Average temperature of warmest [unit] of the year [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "3": {
+              "title": "Extreme Weather event, Days Above [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "4": {
+              "title": "Extreme Weather event, Days Below [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            }
+          },
+          "series": {
+            "max": {
+              "name": "Max"
+            },
+            "min": {
+              "name": "Min"
+            },
+            "avg": {
+              "name": "Yearly Average"
+            },
+            "diff": {
+              "name": "Difference"
+            },
+            "extreme": {
+              "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremehigh": {
+              "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremelow": {
+              "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 January 2020",
+              "citation": "",
+              "desc": "Abisko Scientific Research Station",
+              "descLong": "Swedish Polar Research Secretariet, Abisko Scientific Research Station, Research Data"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "days",
+              "singular": "day",
+              "interval": "daily"
+            },
+            "week": {
+              "plural": "weeks",
+              "singular": "week",
+              "interval": "weekly"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "January",
+              "feb": "February",
+              "mar": "March",
+              "apr": "April",
+              "may": "May",
+              "jun": "June",
+              "jul": "July",
+              "aug": "August",
+              "sep": "September",
+              "oct": "October",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "Mar",
+              "apr": "Apr",
+              "may": "May",
+              "jun": "Jun",
+              "jul": "Jul",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Oct",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Range for baseline",
+              "lower": "Lower limit",
+              "upper": "Upper limit"
+            },
+            "dataCredit": "Data source",
+            "contribute": "Contribute - Github [dummy]",
+            "showDataTable": "Show/hide data",
+            "langOption": "Svenska",
+            "downloadJPEG": "Download as JPEG",
+            "downloadPDF": "Download as PDF",
+            "downloadSVG": "Download as SVG"
+          }
+        },
+        "sv": {
+          "valueSuffix": "°C",
+          "groups": {
+            "0": {
+              "title": "Årlig genomsnittstemperatur",
+              "subTitle": "[stationName]",
+              "caption": "Årlig genomsnittstemperatur. Årets lägsta (min) och högsta (max) temperatur.",
+              "yAxis": {
+                "left": "Genomsnittstemperatur [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Väder"
+            },
+            "1": {
+              "title": "Temperaturskillnaden från baslinjen",
+              "subTitle": "[stationName]",
+              "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
+              "yAxis": {
+                "left": "Temperatur [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Klimat"
+            },
+            "2": {
+              "title": "Årets varmaste [unit]",
+              "subTitle": "[stationName]",
+              "caption": "Medeltemperaturen på årets varmaste [unit].",
+              "yAxis": {
+                "left": "Medeltemperaturen på årets varmaste [unit] [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Väder"
+            }
+          },
+          "series": {
+            "max": {
+              "name": "Max"
+            },
+            "min": {
+              "name": "Min"
+            },
+            "avg": {
+              "name": "Årlig genomsnitt"
+            },
+            "diff": {
+              "name": "Skillnad"
+            },
+            "extreme": {
+              "name": "Genomsnittlig varmaste högsta temperatur [interval]",
+              "week": "veckovis",
+              "day": "dagligen"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 Januari 2020",
+              "citation": "",
+              "desc": "Abisko Naturvetenskapliga Station",
+              "descLong": "Polarforskningssekretariatet, Abisko Naturvetenskapliga Station, forskningsdata"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "dagar",
+              "singular": "dag",
+              "interval": "daglig"
+            },
+            "week": {
+              "plural": "veckor",
+              "singular": "vecka",
+              "interval": "veckovis"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "Januari",
+              "feb": "Februari",
+              "mar": "Mars",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Augusti",
+              "sep": "September",
+              "oct": "Oktober",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "March",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Okt",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Interval för baslinje",
+              "lower": "Undregräns",
+              "upper": "Övregräns"
+            },
+            "dataCredit": "Data källa",
+            "contribute": "Bidra - Github [dummy]",
+            "showDataTable": "Vissa/göm data",
+            "langOption": "English",
+            "downloadJPEG": "Laddaner som JPEG",
+            "downloadPDF": "Laddaner som  PDF",
+            "downloadSVG": "Laddaner som SVG"
+          }
+        }
+      }
+    },
+    "abisko": {
+      "extremeTempDailyHighLim": {
+        "ref": {
+          "id": "dailyExtremeTemperature",
+          "type": "abisko",
+          "tag": {
+            "render": [
+              "temperatures",
+              "dailyExtreme"
+            ],
+            "data": [
+              "temperatures",
+              "dailyExtremeHighLim"
+            ]
+          },
+          "config": {
+            "meta": {
+              "smhi": {
+                "data": "SMHI-Weather",
+                "config": "temperature",
+                "lang": "annualTemperature",
+                "set": "slideExtremeDayLim"
+              },
+              "abisko": {
+                "data": "ANS",
+                "config": "temperature",
+                "lang": "annualTemperature",
+                "set": "slideExtremeDayLim"
+              }
+            }
+          },
+          "months": false
+        },
+        "config": {
+          "type": "column",
+          "polar": false,
+          "groups": {
+            "0": {
+              "baseline": false
+            },
+            "1": {
+              "baseline": true,
+              "yAxis": {
+                "min": -3,
+                "max": 4
+              }
+            },
+            "2": {
+              "baseline": false,
+              "yAxis": {
+                "min": 15
+              }
+            },
+            "3": {
+              "baseline": false,
+              "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
+            }
+          },
+          "decimals": 2,
+          "series": {
+            "0": {
+              "className": "series-temp-extreme",
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
+            "1": {
+              "className": "series-temp-extreme",
+              "preset": "extreme",
+              "group": "3",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
+              "type": "line",
+              "decimals": 0
+            },
+            "max": {
+              "className": "series-temp-max",
+              "preset": "max",
+              "group": "0",
+              "visible": false,
+              "colour": "#ff0000",
+              "type": "line"
+            },
+            "min": {
+              "className": "series-temp-min",
+              "preset": "min",
+              "group": "0",
+              "visible": false,
+              "colour": "#0000ff",
+              "type": "line"
+            },
+            "avg": {
+              "className": "series-temp-avg",
+              "preset": "avg",
+              "group": "0",
+              "visible": true,
+              "colour": "#888888",
+              "type": "line"
+            },
+            "diff": {
+              "className": "series-diff",
+              "preset": "diff",
+              "group": "1",
+              "visible": true,
+              "colour": "[example]",
+              "type": "column"
+            }
+          },
+          "parse": {
+            "file": [
+              "ANS_Temp_Prec.csv",
+              "AWS.csv",
+              "ANS_Prec.csv"
+            ],
+            "preset": {
+              "header": true,
+              "download": true,
+              "skipEmptyLines": true,
+              "beforeFirstChunk": "abisko",
+              "dynamicTyping": false
+            },
+            "parser": "AbiskoCsv",
+            "local": true
+          }
+        },
+        "set": {
+          "unitType": "day",
+          "extreme": {
+            "type": "high",
+            "lim": 30
+          },
+          "groups": {
+            "0": {
+              "enabled": false
+            },
+            "1": {
+              "enabled": true,
+              "tooltip": {}
+            },
+            "2": {
+              "enabled": false
+            },
+            "3": {
+              "enabled": true,
+              "prime": true,
+              "tooltip": {
+                "type": "value"
+              }
+            }
+          }
+        },
+        "en": {
+          "valueSuffix": "°C",
+          "groups": {
+            "0": {
+              "title": "Annual Average Temperature",
+              "subTitle": "[stationName]",
+              "caption": "Average annual temperature. The lowest (min) and highest (max) temperature of the year.",
+              "yAxis": {
+                "left": "Average temperature [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "1": {
+              "title": "Temperature Difference From Baseline",
+              "subTitle": "[stationName]",
+              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+              "yAxis": {
+                "left": "Temperature [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Climate"
+            },
+            "2": {
+              "title": "Warmest [unit] of the year",
+              "subTitle": "[stationName]",
+              "caption": "Average temperature of warmest [unit] of the year.",
+              "yAxis": {
+                "left": "Average temperature of warmest [unit] of the year [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "3": {
+              "title": "Extreme Weather event, Days Above [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "4": {
+              "title": "Extreme Weather event, Days Below [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            }
+          },
+          "series": {
+            "max": {
+              "name": "Max"
+            },
+            "min": {
+              "name": "Min"
+            },
+            "avg": {
+              "name": "Yearly Average"
+            },
+            "diff": {
+              "name": "Difference"
+            },
+            "extreme": {
+              "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremehigh": {
+              "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremelow": {
+              "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
               "week": "weekly",
               "day": "daily"
             }
@@ -16847,7 +18214,7 @@
             ],
             "data": [
               "temperatures",
-              "dailyExtremeHighLim"
+              "dailyExtremeMaxLim"
             ]
           },
           "config": {
@@ -16891,6 +18258,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -16909,6 +18280,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -16963,6 +18343,10 @@
         },
         "set": {
           "unitType": "day",
+          "extreme": {
+            "type": "high",
+            "lim": 30
+          },
           "groups": {
             "0": {
               "enabled": false
@@ -17029,7 +18413,21 @@
               "legend": "Weather"
             },
             "3": {
-              "title": "[Number of Extreme Weather event]",
+              "title": "Extreme Weather event, Days Above [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "4": {
+              "title": "Extreme Weather event, Days Below [lim] [°C]",
               "subTitle": "[stationName]",
               "caption": "",
               "yAxis": {
@@ -17058,6 +18456,16 @@
             },
             "extreme": {
               "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremehigh": {
+              "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremelow": {
+              "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
               "week": "weekly",
               "day": "daily"
             }
@@ -17273,7 +18681,7 @@
             ],
             "data": [
               "temperatures",
-              "dailyExtremeHighLim"
+              "dailyExtremeMaxLim"
             ]
           },
           "config": {
@@ -17317,6 +18725,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -17335,6 +18747,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -17390,6 +18811,10 @@
         },
         "set": {
           "unitType": "day",
+          "extreme": {
+            "type": "high",
+            "lim": 30
+          },
           "groups": {
             "0": {
               "enabled": false
@@ -17456,7 +18881,21 @@
               "legend": "Weather"
             },
             "3": {
-              "title": "[Number of Extreme Weather event]",
+              "title": "Extreme Weather event, Days Above [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "4": {
+              "title": "Extreme Weather event, Days Below [lim] [°C]",
               "subTitle": "[stationName]",
               "caption": "",
               "yAxis": {
@@ -17485,6 +18924,965 @@
             },
             "extreme": {
               "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremehigh": {
+              "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremelow": {
+              "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 January 2020",
+              "citation": "",
+              "desc": "Abisko Scientific Research Station",
+              "descLong": "Swedish Polar Research Secretariet, Abisko Scientific Research Station, Research Data"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "days",
+              "singular": "day",
+              "interval": "daily"
+            },
+            "week": {
+              "plural": "weeks",
+              "singular": "week",
+              "interval": "weekly"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "January",
+              "feb": "February",
+              "mar": "March",
+              "apr": "April",
+              "may": "May",
+              "jun": "June",
+              "jul": "July",
+              "aug": "August",
+              "sep": "September",
+              "oct": "October",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "Mar",
+              "apr": "Apr",
+              "may": "May",
+              "jun": "Jun",
+              "jul": "Jul",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Oct",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Range for baseline",
+              "lower": "Lower limit",
+              "upper": "Upper limit"
+            },
+            "dataCredit": "Data source",
+            "contribute": "Contribute - Github [dummy]",
+            "showDataTable": "Show/hide data",
+            "langOption": "Svenska",
+            "downloadJPEG": "Download as JPEG",
+            "downloadPDF": "Download as PDF",
+            "downloadSVG": "Download as SVG"
+          }
+        },
+        "sv": {
+          "valueSuffix": "°C",
+          "groups": {
+            "0": {
+              "title": "Årlig genomsnittstemperatur",
+              "subTitle": "[stationName]",
+              "caption": "Årlig genomsnittstemperatur. Årets lägsta (min) och högsta (max) temperatur.",
+              "yAxis": {
+                "left": "Genomsnittstemperatur [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Väder"
+            },
+            "1": {
+              "title": "Temperaturskillnaden från baslinjen",
+              "subTitle": "[stationName]",
+              "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
+              "yAxis": {
+                "left": "Temperatur [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Klimat"
+            },
+            "2": {
+              "title": "Årets varmaste [unit]",
+              "subTitle": "[stationName]",
+              "caption": "Medeltemperaturen på årets varmaste [unit].",
+              "yAxis": {
+                "left": "Medeltemperaturen på årets varmaste [unit] [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Väder"
+            }
+          },
+          "series": {
+            "max": {
+              "name": "Max"
+            },
+            "min": {
+              "name": "Min"
+            },
+            "avg": {
+              "name": "Årlig genomsnitt"
+            },
+            "diff": {
+              "name": "Skillnad"
+            },
+            "extreme": {
+              "name": "Genomsnittlig varmaste högsta temperatur [interval]",
+              "week": "veckovis",
+              "day": "dagligen"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 Januari 2020",
+              "citation": "",
+              "desc": "Abisko Naturvetenskapliga Station",
+              "descLong": "Polarforskningssekretariatet, Abisko Naturvetenskapliga Station, forskningsdata"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "dagar",
+              "singular": "dag",
+              "interval": "daglig"
+            },
+            "week": {
+              "plural": "veckor",
+              "singular": "vecka",
+              "interval": "veckovis"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "Januari",
+              "feb": "Februari",
+              "mar": "Mars",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Augusti",
+              "sep": "September",
+              "oct": "Oktober",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "March",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Okt",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Interval för baslinje",
+              "lower": "Undregräns",
+              "upper": "Övregräns"
+            },
+            "dataCredit": "Data källa",
+            "contribute": "Bidra - Github [dummy]",
+            "showDataTable": "Vissa/göm data",
+            "langOption": "English",
+            "downloadJPEG": "Laddaner som JPEG",
+            "downloadPDF": "Laddaner som  PDF",
+            "downloadSVG": "Laddaner som SVG"
+          }
+        }
+      }
+    }
+  },
+  {
+    "smhi": {
+      "extremeTempDailyLowLim": {
+        "ref": {
+          "id": "dailyExtremeTemperature",
+          "type": "smhi",
+          "tag": {
+            "render": [
+              "temperatures",
+              "dailyExtreme"
+            ],
+            "data": [
+              "temperatures",
+              "dailyExtremeMinLim"
+            ]
+          },
+          "config": {
+            "meta": {
+              "smhi": {
+                "data": "SMHI-Weather",
+                "config": "temperature",
+                "lang": "annualTemperature",
+                "set": "slideExtremeDayLowLim"
+              },
+              "abisko": {
+                "data": "ANS",
+                "config": "temperature",
+                "lang": "annualTemperature",
+                "set": "slideExtremeDayLowLim"
+              }
+            }
+          },
+          "months": false
+        },
+        "config": {
+          "type": "column",
+          "polar": false,
+          "groups": {
+            "0": {
+              "baseline": false
+            },
+            "1": {
+              "baseline": true,
+              "yAxis": {
+                "min": -3,
+                "max": 4
+              }
+            },
+            "2": {
+              "baseline": false,
+              "yAxis": {
+                "min": 15
+              }
+            },
+            "3": {
+              "baseline": false,
+              "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
+            }
+          },
+          "decimals": 2,
+          "series": {
+            "0": {
+              "className": "series-temp-extreme",
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
+            "1": {
+              "className": "series-temp-extreme",
+              "preset": "extreme",
+              "group": "3",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
+              "type": "line",
+              "decimals": 0
+            },
+            "max": {
+              "className": "series-temp-max",
+              "preset": "max",
+              "group": "0",
+              "visible": false,
+              "colour": "#ff0000",
+              "type": "line"
+            },
+            "min": {
+              "className": "series-temp-min",
+              "preset": "min",
+              "group": "0",
+              "visible": false,
+              "colour": "#0000ff",
+              "type": "line"
+            },
+            "avg": {
+              "className": "series-temp-avg",
+              "preset": "avg",
+              "group": "0",
+              "visible": true,
+              "colour": "#888888",
+              "type": "line"
+            },
+            "diff": {
+              "className": "series-diff",
+              "preset": "diff",
+              "group": "1",
+              "visible": true,
+              "colour": "[example]",
+              "type": "column"
+            }
+          },
+          "parse": {
+            "file": [
+              "temperature.csv",
+              "precipitation.csv"
+            ],
+            "preset": {
+              "header": true,
+              "download": true,
+              "skipEmptyLines": true,
+              "beforeFirstChunk": "smhi",
+              "fastMode": true
+            },
+            "parser": "smhiTemp",
+            "local": true
+          }
+        },
+        "set": {
+          "unitType": "day",
+          "extreme": {
+            "type": "low",
+            "lim": -25
+          },
+          "groups": {
+            "0": {
+              "enabled": false
+            },
+            "1": {
+              "enabled": true,
+              "tooltip": {}
+            },
+            "2": {
+              "enabled": false
+            },
+            "3": {
+              "enabled": false,
+              "tooltip": {
+                "type": "value"
+              }
+            },
+            "4": {
+              "enabled": true,
+              "prime": true,
+              "tooltip": {
+                "type": "values"
+              }
+            }
+          }
+        },
+        "en": {
+          "valueSuffix": "°C",
+          "groups": {
+            "0": {
+              "title": "Annual Average Temperature",
+              "subTitle": "[stationName]",
+              "caption": "Average annual temperature. The lowest (min) and highest (max) temperature of the year.",
+              "yAxis": {
+                "left": "Average temperature [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "1": {
+              "title": "Temperature Difference From Baseline",
+              "subTitle": "[stationName]",
+              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+              "yAxis": {
+                "left": "Temperature [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Climate"
+            },
+            "2": {
+              "title": "Warmest [unit] of the year",
+              "subTitle": "[stationName]",
+              "caption": "Average temperature of warmest [unit] of the year.",
+              "yAxis": {
+                "left": "Average temperature of warmest [unit] of the year [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "3": {
+              "title": "Extreme Weather event, Days Above [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "4": {
+              "title": "Extreme Weather event, Days Below [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            }
+          },
+          "series": {
+            "max": {
+              "name": "Max"
+            },
+            "min": {
+              "name": "Min"
+            },
+            "avg": {
+              "name": "Yearly Average"
+            },
+            "diff": {
+              "name": "Difference"
+            },
+            "extreme": {
+              "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremehigh": {
+              "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremelow": {
+              "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 January 2020",
+              "citation": "",
+              "desc": "Abisko Scientific Research Station",
+              "descLong": "Swedish Polar Research Secretariet, Abisko Scientific Research Station, Research Data"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "days",
+              "singular": "day",
+              "interval": "daily"
+            },
+            "week": {
+              "plural": "weeks",
+              "singular": "week",
+              "interval": "weekly"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "January",
+              "feb": "February",
+              "mar": "March",
+              "apr": "April",
+              "may": "May",
+              "jun": "June",
+              "jul": "July",
+              "aug": "August",
+              "sep": "September",
+              "oct": "October",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "Mar",
+              "apr": "Apr",
+              "may": "May",
+              "jun": "Jun",
+              "jul": "Jul",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Oct",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Range for baseline",
+              "lower": "Lower limit",
+              "upper": "Upper limit"
+            },
+            "dataCredit": "Data source",
+            "contribute": "Contribute - Github [dummy]",
+            "showDataTable": "Show/hide data",
+            "langOption": "Svenska",
+            "downloadJPEG": "Download as JPEG",
+            "downloadPDF": "Download as PDF",
+            "downloadSVG": "Download as SVG"
+          }
+        },
+        "sv": {
+          "valueSuffix": "°C",
+          "groups": {
+            "0": {
+              "title": "Årlig genomsnittstemperatur",
+              "subTitle": "[stationName]",
+              "caption": "Årlig genomsnittstemperatur. Årets lägsta (min) och högsta (max) temperatur.",
+              "yAxis": {
+                "left": "Genomsnittstemperatur [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Väder"
+            },
+            "1": {
+              "title": "Temperaturskillnaden från baslinjen",
+              "subTitle": "[stationName]",
+              "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
+              "yAxis": {
+                "left": "Temperatur [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Klimat"
+            },
+            "2": {
+              "title": "Årets varmaste [unit]",
+              "subTitle": "[stationName]",
+              "caption": "Medeltemperaturen på årets varmaste [unit].",
+              "yAxis": {
+                "left": "Medeltemperaturen på årets varmaste [unit] [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "År",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Väder"
+            }
+          },
+          "series": {
+            "max": {
+              "name": "Max"
+            },
+            "min": {
+              "name": "Min"
+            },
+            "avg": {
+              "name": "Årlig genomsnitt"
+            },
+            "diff": {
+              "name": "Skillnad"
+            },
+            "extreme": {
+              "name": "Genomsnittlig varmaste högsta temperatur [interval]",
+              "week": "veckovis",
+              "day": "dagligen"
+            }
+          },
+          "dataSource": {
+            "meta": {
+              "src": "https://polar.se/en/research-in-abisko/research-data/",
+              "downloadDate": "7 Januari 2020",
+              "citation": "",
+              "desc": "Abisko Naturvetenskapliga Station",
+              "descLong": "Polarforskningssekretariatet, Abisko Naturvetenskapliga Station, forskningsdata"
+            }
+          },
+          "units": {
+            "day": {
+              "plural": "dagar",
+              "singular": "dag",
+              "interval": "daglig"
+            },
+            "week": {
+              "plural": "veckor",
+              "singular": "vecka",
+              "interval": "veckovis"
+            }
+          },
+          "time": {
+            "months": {
+              "jan": "Januari",
+              "feb": "Februari",
+              "mar": "Mars",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Augusti",
+              "sep": "September",
+              "oct": "Oktober",
+              "nov": "November",
+              "dec": "December"
+            },
+            "monthShort": {
+              "jan": "Jan",
+              "feb": "Feb",
+              "mar": "March",
+              "apr": "April",
+              "may": "Maj",
+              "jun": "Juni",
+              "jul": "Juli",
+              "aug": "Aug",
+              "sep": "Sep",
+              "oct": "Okt",
+              "nov": "Nov",
+              "dec": "Dec"
+            }
+          },
+          "menu": {
+            "baselineform": {
+              "title": "Interval för baslinje",
+              "lower": "Undregräns",
+              "upper": "Övregräns"
+            },
+            "dataCredit": "Data källa",
+            "contribute": "Bidra - Github [dummy]",
+            "showDataTable": "Vissa/göm data",
+            "langOption": "English",
+            "downloadJPEG": "Laddaner som JPEG",
+            "downloadPDF": "Laddaner som  PDF",
+            "downloadSVG": "Laddaner som SVG"
+          }
+        }
+      }
+    },
+    "abisko": {
+      "extremeTempDailyLowLim": {
+        "ref": {
+          "id": "dailyExtremeTemperature",
+          "type": "abisko",
+          "tag": {
+            "render": [
+              "temperatures",
+              "dailyExtreme"
+            ],
+            "data": [
+              "temperatures",
+              "dailyExtremeMinLim"
+            ]
+          },
+          "config": {
+            "meta": {
+              "smhi": {
+                "data": "SMHI-Weather",
+                "config": "temperature",
+                "lang": "annualTemperature",
+                "set": "slideExtremeDayLowLim"
+              },
+              "abisko": {
+                "data": "ANS",
+                "config": "temperature",
+                "lang": "annualTemperature",
+                "set": "slideExtremeDayLowLim"
+              }
+            }
+          },
+          "months": false
+        },
+        "config": {
+          "type": "column",
+          "polar": false,
+          "groups": {
+            "0": {
+              "baseline": false
+            },
+            "1": {
+              "baseline": true,
+              "yAxis": {
+                "min": -3,
+                "max": 4
+              }
+            },
+            "2": {
+              "baseline": false,
+              "yAxis": {
+                "min": 15
+              }
+            },
+            "3": {
+              "baseline": false,
+              "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
+            }
+          },
+          "decimals": 2,
+          "series": {
+            "0": {
+              "className": "series-temp-extreme",
+              "preset": "extreme",
+              "group": "2",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line"
+            },
+            "1": {
+              "className": "series-temp-extreme",
+              "preset": "extreme",
+              "group": "3",
+              "visible": true,
+              "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
+              "type": "line",
+              "decimals": 0
+            },
+            "max": {
+              "className": "series-temp-max",
+              "preset": "max",
+              "group": "0",
+              "visible": false,
+              "colour": "#ff0000",
+              "type": "line"
+            },
+            "min": {
+              "className": "series-temp-min",
+              "preset": "min",
+              "group": "0",
+              "visible": false,
+              "colour": "#0000ff",
+              "type": "line"
+            },
+            "avg": {
+              "className": "series-temp-avg",
+              "preset": "avg",
+              "group": "0",
+              "visible": true,
+              "colour": "#888888",
+              "type": "line"
+            },
+            "diff": {
+              "className": "series-diff",
+              "preset": "diff",
+              "group": "1",
+              "visible": true,
+              "colour": "[example]",
+              "type": "column"
+            }
+          },
+          "parse": {
+            "file": [
+              "ANS_Temp_Prec.csv",
+              "AWS.csv",
+              "ANS_Prec.csv"
+            ],
+            "preset": {
+              "header": true,
+              "download": true,
+              "skipEmptyLines": true,
+              "beforeFirstChunk": "abisko",
+              "dynamicTyping": false
+            },
+            "parser": "AbiskoCsv",
+            "local": true
+          }
+        },
+        "set": {
+          "unitType": "day",
+          "extreme": {
+            "type": "low",
+            "lim": -25
+          },
+          "groups": {
+            "0": {
+              "enabled": false
+            },
+            "1": {
+              "enabled": true,
+              "tooltip": {}
+            },
+            "2": {
+              "enabled": false
+            },
+            "3": {
+              "enabled": false,
+              "tooltip": {
+                "type": "value"
+              }
+            },
+            "4": {
+              "enabled": true,
+              "prime": true,
+              "tooltip": {
+                "type": "values"
+              }
+            }
+          }
+        },
+        "en": {
+          "valueSuffix": "°C",
+          "groups": {
+            "0": {
+              "title": "Annual Average Temperature",
+              "subTitle": "[stationName]",
+              "caption": "Average annual temperature. The lowest (min) and highest (max) temperature of the year.",
+              "yAxis": {
+                "left": "Average temperature [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "1": {
+              "title": "Temperature Difference From Baseline",
+              "subTitle": "[stationName]",
+              "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+              "yAxis": {
+                "left": "Temperature [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Climate"
+            },
+            "2": {
+              "title": "Warmest [unit] of the year",
+              "subTitle": "[stationName]",
+              "caption": "Average temperature of warmest [unit] of the year.",
+              "yAxis": {
+                "left": "Average temperature of warmest [unit] of the year [°C]",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "3": {
+              "title": "Extreme Weather event, Days Above [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "4": {
+              "title": "Extreme Weather event, Days Below [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            }
+          },
+          "series": {
+            "max": {
+              "name": "Max"
+            },
+            "min": {
+              "name": "Min"
+            },
+            "avg": {
+              "name": "Yearly Average"
+            },
+            "diff": {
+              "name": "Difference"
+            },
+            "extreme": {
+              "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremehigh": {
+              "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremelow": {
+              "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
               "week": "weekly",
               "day": "daily"
             }
@@ -17746,6 +20144,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -17764,6 +20166,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -17877,7 +20288,21 @@
               "legend": "Weather"
             },
             "3": {
-              "title": "[Number of Extreme Weather event]",
+              "title": "Extreme Weather event, Days Above [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "4": {
+              "title": "Extreme Weather event, Days Below [lim] [°C]",
               "subTitle": "[stationName]",
               "caption": "",
               "yAxis": {
@@ -17906,6 +20331,16 @@
             },
             "extreme": {
               "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremehigh": {
+              "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremelow": {
+              "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
               "week": "weekly",
               "day": "daily"
             }
@@ -18165,6 +20600,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -18183,6 +20622,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -18297,7 +20745,21 @@
               "legend": "Weather"
             },
             "3": {
-              "title": "[Number of Extreme Weather event]",
+              "title": "Extreme Weather event, Days Above [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "4": {
+              "title": "Extreme Weather event, Days Below [lim] [°C]",
               "subTitle": "[stationName]",
               "caption": "",
               "yAxis": {
@@ -18326,6 +20788,16 @@
             },
             "extreme": {
               "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremehigh": {
+              "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremelow": {
+              "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
               "week": "weekly",
               "day": "daily"
             }
@@ -18587,6 +21059,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -18605,6 +21081,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -18721,7 +21206,21 @@
               "legend": "Weather"
             },
             "3": {
-              "title": "[Number of Extreme Weather event]",
+              "title": "Extreme Weather event, Days Above [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "4": {
+              "title": "Extreme Weather event, Days Below [lim] [°C]",
               "subTitle": "[stationName]",
               "caption": "",
               "yAxis": {
@@ -18750,6 +21249,16 @@
             },
             "extreme": {
               "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremehigh": {
+              "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremelow": {
+              "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
               "week": "weekly",
               "day": "daily"
             }
@@ -19009,6 +21518,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -19027,6 +21540,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -19144,7 +21666,21 @@
               "legend": "Weather"
             },
             "3": {
-              "title": "[Number of Extreme Weather event]",
+              "title": "Extreme Weather event, Days Above [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "4": {
+              "title": "Extreme Weather event, Days Below [lim] [°C]",
               "subTitle": "[stationName]",
               "caption": "",
               "yAxis": {
@@ -19173,6 +21709,16 @@
             },
             "extreme": {
               "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremehigh": {
+              "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremelow": {
+              "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
               "week": "weekly",
               "day": "daily"
             }
@@ -19441,6 +21987,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -19459,6 +22009,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -19829,6 +22388,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -19847,6 +22410,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -23345,6 +25917,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -23363,6 +25939,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -23733,6 +26318,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -23751,6 +26340,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -24124,6 +26722,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -24142,6 +26744,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -24512,6 +27123,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -24530,6 +27145,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -24903,6 +27527,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -24921,6 +27549,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -25291,6 +27928,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -25309,6 +27950,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -25682,6 +28332,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -25700,6 +28354,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -26070,6 +28733,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -26088,6 +28755,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -26461,6 +29137,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -26479,6 +29159,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -26849,6 +29538,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -26867,6 +29560,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -27240,6 +29942,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -27258,6 +29964,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -27628,6 +30343,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -27646,6 +30365,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -28019,6 +30747,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -28037,6 +30769,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -28407,6 +31148,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -28425,6 +31170,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -46906,6 +49660,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -46924,6 +49682,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -47294,6 +50061,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -47312,6 +50083,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -51244,6 +54024,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -51262,6 +54046,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -51609,6 +54402,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -51627,6 +54424,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -54116,6 +56922,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -54134,6 +56944,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -54243,7 +57062,21 @@
               "legend": "Weather"
             },
             "3": {
-              "title": "[Number of Extreme Weather event]",
+              "title": "Extreme Weather event, Days Above [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "4": {
+              "title": "Extreme Weather event, Days Below [lim] [°C]",
               "subTitle": "[stationName]",
               "caption": "",
               "yAxis": {
@@ -54272,6 +57105,16 @@
             },
             "extreme": {
               "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremehigh": {
+              "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremelow": {
+              "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
               "week": "weekly",
               "day": "daily"
             }
@@ -54531,6 +57374,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -54549,6 +57396,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -54659,7 +57515,21 @@
               "legend": "Weather"
             },
             "3": {
-              "title": "[Number of Extreme Weather event]",
+              "title": "Extreme Weather event, Days Above [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "4": {
+              "title": "Extreme Weather event, Days Below [lim] [°C]",
               "subTitle": "[stationName]",
               "caption": "",
               "yAxis": {
@@ -54688,6 +57558,16 @@
             },
             "extreme": {
               "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremehigh": {
+              "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremelow": {
+              "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
               "week": "weekly",
               "day": "daily"
             }
@@ -54949,6 +57829,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -54967,6 +57851,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -55312,6 +58205,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -55330,6 +58227,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -55678,6 +58584,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -55696,6 +58606,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -56041,6 +58960,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -56059,6 +58982,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -56407,6 +59339,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -56425,6 +59361,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -56770,6 +59715,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -56788,6 +59737,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -57136,6 +60094,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -57154,6 +60116,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -57499,6 +60470,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -57517,6 +60492,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -59938,6 +62922,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -59956,6 +62944,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -60065,7 +63062,21 @@
               "legend": "Weather"
             },
             "3": {
-              "title": "[Number of Extreme Weather event]",
+              "title": "Extreme Weather event, Days Above [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "4": {
+              "title": "Extreme Weather event, Days Below [lim] [°C]",
               "subTitle": "[stationName]",
               "caption": "",
               "yAxis": {
@@ -60094,6 +63105,16 @@
             },
             "extreme": {
               "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremehigh": {
+              "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremelow": {
+              "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
               "week": "weekly",
               "day": "daily"
             }
@@ -60353,6 +63374,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -60371,6 +63396,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -60481,7 +63515,21 @@
               "legend": "Weather"
             },
             "3": {
-              "title": "[Number of Extreme Weather event]",
+              "title": "Extreme Weather event, Days Above [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "4": {
+              "title": "Extreme Weather event, Days Below [lim] [°C]",
               "subTitle": "[stationName]",
               "caption": "",
               "yAxis": {
@@ -60510,6 +63558,16 @@
             },
             "extreme": {
               "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremehigh": {
+              "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremelow": {
+              "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
               "week": "weekly",
               "day": "daily"
             }
@@ -60763,6 +63821,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -60781,6 +63843,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -61125,6 +64196,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -61143,6 +64218,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -61487,6 +64571,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -61505,6 +64593,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -61861,6 +64958,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -61879,6 +64980,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -62233,6 +65343,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -62251,6 +65365,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -62605,6 +65728,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -62623,6 +65750,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -62979,6 +66115,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -62997,6 +66137,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -63351,6 +66500,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -63369,6 +66522,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -63723,6 +66885,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -63741,6 +66907,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -64100,6 +67275,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -64118,6 +67297,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -64488,6 +67676,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -64506,6 +67698,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -64879,6 +68080,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -64897,6 +68102,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -65267,6 +68481,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -65285,6 +68503,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -65658,6 +68885,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -65676,6 +68907,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -66046,6 +69286,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -66064,6 +69308,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -66437,6 +69690,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -66455,6 +69712,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -66825,6 +70091,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -66843,6 +70113,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -67216,6 +70495,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -67234,6 +70517,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -67604,6 +70896,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -67622,6 +70918,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -67995,6 +71300,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -68013,6 +71322,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -68383,6 +71701,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -68401,6 +71723,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -68774,6 +72105,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -68792,6 +72127,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -69162,6 +72506,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -69180,6 +72528,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -69553,6 +72910,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -69571,6 +72932,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -69941,6 +73311,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -69959,6 +73333,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -70332,6 +73715,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -70350,6 +73737,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -70720,6 +74116,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -70738,6 +74138,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -71111,6 +74520,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -71129,6 +74542,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -71499,6 +74921,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -71517,6 +74943,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -71890,6 +75325,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -71908,6 +75347,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -72278,6 +75726,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -72296,6 +75748,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -72669,6 +76130,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -72687,6 +76152,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -73057,6 +76531,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -73075,6 +76553,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -74469,6 +77956,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -74487,6 +77978,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -74600,7 +78100,21 @@
               "legend": "Weather"
             },
             "3": {
-              "title": "[Number of Extreme Weather event]",
+              "title": "Extreme Weather event, Days Above [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "4": {
+              "title": "Extreme Weather event, Days Below [lim] [°C]",
               "subTitle": "[stationName]",
               "caption": "",
               "yAxis": {
@@ -74629,6 +78143,16 @@
             },
             "extreme": {
               "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremehigh": {
+              "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremelow": {
+              "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
               "week": "weekly",
               "day": "daily"
             }
@@ -74889,6 +78413,10 @@
             "3": {
               "baseline": false,
               "yAxis": {}
+            },
+            "4": {
+              "baseline": false,
+              "yAxis": {}
             }
           },
           "decimals": 2,
@@ -74907,6 +78435,15 @@
               "group": "3",
               "visible": true,
               "colour": "#ff0000",
+              "type": "line",
+              "decimals": 0
+            },
+            "2": {
+              "className": "series-temp-low-extreme",
+              "preset": "extreme",
+              "group": "4",
+              "visible": true,
+              "colour": "#0000ff",
               "type": "line",
               "decimals": 0
             },
@@ -75021,7 +78558,21 @@
               "legend": "Weather"
             },
             "3": {
-              "title": "[Number of Extreme Weather event]",
+              "title": "Extreme Weather event, Days Above [lim] [°C]",
+              "subTitle": "[stationName]",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": "[X-AXIS]"
+              },
+              "xAxis": {
+                "bott": "Year",
+                "top": "[Y-AXIS]"
+              },
+              "legend": "Weather"
+            },
+            "4": {
+              "title": "Extreme Weather event, Days Below [lim] [°C]",
               "subTitle": "[stationName]",
               "caption": "",
               "yAxis": {
@@ -75050,6 +78601,16 @@
             },
             "extreme": {
               "name": "Average warmest maximum [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremehigh": {
+              "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+              "week": "weekly",
+              "day": "daily"
+            },
+            "extremelow": {
+              "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
               "week": "weekly",
               "day": "daily"
             }

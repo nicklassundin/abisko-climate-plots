@@ -29,6 +29,7 @@
 	"dailyExtremeTemperature" : ["dailyExtremeTemperature"],
 	"extremeTempDaily" : ["extremeTempDaily"],
 	"extremeTempDailyLim" : ["extremeTempDailyLim"],
+	"extremeTempDailyLowLim" : ["extremeTempDailyLowLim"],
 	"weeklyExtremeTemperature" : ["weeklyExtremeTemperature"],
 	"extremeTempWeekly" : ["extremeTempWeekly"],
 	"extremeTempWeeklyLim" : ["extremeTempWeeklyLim"],

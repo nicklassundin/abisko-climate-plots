@@ -45,6 +45,7 @@ exports.meta = {
 			return new Promise((res,rej) => {
 				metaRef.then(files => {
 					files.stationDef = type;
+					if(type.config) $.extend(true, files, type.config.files)
 				res({
 					files: files,
 					aggr: function(){
@@ -98,6 +99,7 @@ exports.meta = {
 				res = res.replace("[baseline]", baselineLower +" - "+ baselineUpper)
 				res = res.replace("[CO2]", 'CO'+("2".sub()))
 				res = res.replace("[SOME TEXT]", "")
+				if(meta.extreme) res = res.replace("[lim]", (meta.extreme.lim > 0 ? "+" : "")+meta.extreme.lim)
 				// res = markdownToTxt(res);
 				var tmp = md.render(res);
 				if(!tmp.includes(res)) res = tmp
