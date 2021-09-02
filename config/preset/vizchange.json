@@ -417,6 +417,9 @@
 			"context": false,
 			"station": "abisko",
 			"plot": "extremeTempDailyLim",
+			"override": {
+				"axislim": false
+			},
 			"config": {
 				"files": {
 					"set": {
@@ -433,6 +436,9 @@
 			"context": false,
 			"station": "abisko",
 			"plot": "extremeTempDailyLowLim",
+			"override": {
+				"axislim": false
+			},
 			"config": {
 				"files": {
 					"set": {
@@ -449,6 +455,9 @@
 			"context": false,
 			"station": "abisko",
 			"plot": "extremeTempDailyLowLim",
+			"override": {
+				"axislim": false
+			},
 			"config": {
 				"files": {
 					"set": {

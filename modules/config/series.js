@@ -1,115 +1,120 @@
 // Series definitions/configuration
 
 exports.series = {
-	getPreset: (series, data) => {
-		//TODO
-	},
-	max: (meta, data) => ({
-		name: meta.series.max.name,
-		className: meta.series.max.className,
-		lineWidth: 0,
-		marker: { radius: 2 },
-		states: { hover: { lineWidthPlus: 0 } },
-		color: meta.series.max.colour,
-		data: (data.max != undefined) ? ((data.max.max != undefined) ? data.max.max(meta, data).values : data.max(meta, data).values) : undefined ,
-		visible: false,
-		tooltip: { valueDecimals: meta.decimals },
-		type: meta.series.max.type,
-	}),
-	min: (meta, data) => ({
-		name: meta.series.min.name,
-		className: meta.series.min.className,
-		lineWidth: 0,
-		marker: { radius: 2 },
-		states: { hover: { lineWidthPlus: 0 } },
-		color: meta.series.min.colour,
-		data: (data.min != undefined) ? ((data.min.min != undefined) ? data.min.min(meta, data).values : data.min(meta, data).values) : undefined ,
-		visible: false,
-		tooltip: { valueDecimals: meta.decimals },
-		type: meta.series.min.type,
-	}),
-	extreme: (meta, data, k, s) => {
-		var tag = "extreme";
-		if(meta.extreme) tag = tag+meta.extreme.type
-
-		return {
-			name: meta.series[tag].name,
-			className: meta.series[s].className,
+	getPreset: (config, serie, meta) => {
+		// console.log("getPreset")
+		// console.log(config)
+		// console.log(serie)
+		// console.log(meta)
+		var preset = {
 			lineWidth: 0,
 			marker: { radius: 2 },
 			states: { hover: { lineWidthPlus: 0 } },
-			color: meta.series[s].colour,
-			// data: (data.max != undefined) ? (data.max.max != undefined ? data.max.max(false).values : undefined) : data.total.max(false).values, 
-			// data: data.max(false).values,
-			data: (() => {
-				if(meta.extreme){
-					if(meta.extreme.type == "high"){
-						return data.occurrence((e => meta.extreme.lim < e)).values
-					}else{
-						return data.occurrence((e => meta.extreme.lim > e)).values
-					}
-				}else{
-					return data.values
-				}
-			})(),
 			visible: false,
 			tooltip: { 
 				valueDecimals: (() => {
-					return (meta.series[s].decimals != undefined ? meta.series[s].decimals : meta.decimals) 
+					return (serie.decimals != undefined ? series.decimals : meta.decimals) 
 				})()
 			},
-			type: meta.series[s].type,
+		}
+		$.extend(true, preset, serie, config)
+		preset.name = config.name;
+		preset.className = config.className;
+		if(!preset.color) preset.color = config.colour;
+		preset.type = config.type;
+		// console.log(preset)
+		// console.log("preset end")
+		return preset;
+	},
+	get max() {
+		return (meta, data, k, s) => {
+			return this.getPreset(meta.series.max, {
+				data: (data.max != undefined) ? ((data.max.max != undefined) ? data.max.max(meta, data).values : data.max(meta, data).values) : undefined ,
+				// type: meta.series.max.type,
+			}, meta)
 		}
 	},
-	avg: (meta, data) => ({
-		name: meta.series.avg.name,
-		className: meta.series.avg.className,
-		lineWidth: 0,
-		regression: true,
-		step: 'center',
-		// marker: { radius: 2 },
-		marker: { 
-			enabled: true,
-			fillColor: meta.series.avg.colour,
-			lineColor: meta.series.avg.borderColour,
-			lineWidth: meta.series.avg.borderColour ? 1 : 0,
-			radius: 2 
-		},
-		states: { hover: { lineWidthPlus: 0 } },
-		color: meta.series.avg.colour,
-		data: (data.avg != undefined) ? data.avg.values : data.values,
-		regressionSettings: {
-			// type: 'linear',
-			// color: meta.series.linjer.colour,
-			// name: (meta.series.linjer.name,
-		},
-		visible: true,
-		tooltip: { valueDecimals: meta.decimals },
-		type: meta.series.avg.type,
-		// type: 'xrange'
-	}),
-	diff: (meta, data) => ({
-		regression: false,
-		className: meta.series.diff.className,
-		regressionSettings: {
-			type: 'linear',
-			color: '#aa0000',
-			name: 'DUMMY',
-		},
-		name: meta.series.diff.name,
-		type: meta.series.diff.type,
-		data: (data.difference != undefined ?
-			data.difference() : 
-			(data.avg != undefined ?
-				data.avg.difference() : 
-				(data.total != undefined ? 
-					data.total.difference() : 
-					data(variables.date).difference()))),
-		color: 'red',
-		negativeColor: 'blue',
-		visible: true,
-		tooltip: { valueDecimals: meta.decimals },
-	}),
+	get min() {
+		return (meta, data, k, s) => {
+			return this.getPreset(meta.series.min, {
+				data: (data.min != undefined) ? ((data.min.min != undefined) ? data.min.min(meta, data).values : data.min(meta, data).values) : undefined ,
+			}, meta)
+		}
+	},
+	get extreme() {
+		return (meta, data, k, s) => {
+			var tag = "extreme";
+			if(meta.extreme) tag = tag+meta.extreme.type
+			var config = {};
+			$.extend(true, config, meta.series[tag], meta.series[s])
+			return this.getPreset(config, {
+				data: (() => {
+					if(meta.extreme){
+						if(meta.extreme.type == "high"){
+							return data.occurrence((e => meta.extreme.lim < e)).values
+						}else{
+							return data.occurrence((e => meta.extreme.lim > e)).values
+						}
+					}else{
+						return data.values
+					}
+				})(),
+			}, meta);
+
+		} 
+	},
+	get avg() {
+		return (meta, data, k, s) => {
+			return this.getPreset(meta.series.avg, {
+				step: 'center',
+				marker: { 
+					enabled: true,
+					fillColor: meta.series.avg.colour,
+					lineColor: meta.series.avg.borderColour,
+					lineWidth: meta.series.avg.borderColour ? 1 : 0,
+					radius: 2 
+				},
+				data: (data.avg != undefined) ? data.avg.values : data.values,
+			}, meta)
+		}
+	},
+	get diff() {
+		return (meta, data, k, s) => {
+			return this.getPreset(meta.series.diff, {
+				// regression: false,
+				// className: meta.series.diff.className,
+				// regressionSettings: {
+				// type: 'linear',
+				// color: '#aa0000',
+				// name: 'DUMMY',
+				// },
+				// name: meta.series.diff.name,
+				// type: meta.series.diff.type,
+				data: (() => {
+					if(meta.extreme){
+						if(meta.extreme.type == "high"){
+							return data.occurrence((e => meta.extreme.lim < e)).difference();
+						}else{
+							return data.occurrence((e => meta.extreme.lim > e)).difference();
+						}
+					}else{
+						return (data.difference != undefined ?
+							data.difference() : 
+							(data.avg != undefined ?
+								data.avg.difference() : 
+								(data.total != undefined ? 
+									data.total.difference() : 
+									data(variables.date).difference())))
+					}
+				})(),
+				color: 'red',
+				negativeColor: 'blue',
+				visible: true,
+				// tooltip: { valueDecimals: meta.decimals },
+			}, meta);
+		}
+
+	},
 	first: (meta, data) => ({
 		name: meta.series.first.name,
 		className: meta.series.first.className,
@@ -308,22 +313,22 @@ exports.series = {
 		visible: true,
 		tooltip: { valueDecimals: meta.decimals },
 	}),
-	perma: (meta, data, type, k) => ({
-		name: (meta.series[k].name == undefined) ? k : meta.series[k].name,
-		className: meta.series[k].className,
-		type: meta.series[k].type,
-		color: meta.series[k].colour,
+	perma: (meta, data, k, s) => ({
+		name: (meta.series[s].name == undefined) ? k : meta.series[k].name,
+		className: meta.series[s].className,
+		type: meta.series[s].type,
+		color: meta.series[s].colour,
 		opacity: 0.9,
-		data: data[k].values,
+		data: data[s].values,
 		visible: k == "Torneträsk",
 		tooltip: { valueDecimals: meta.decimals },
 	}),
-	period: (meta, p, type, k) => ({
-		name: meta.series[k].name, 
-		className: meta.series[k].className,
-		type: meta.series[k].type,
+	period: (meta, data, k, s) => ({
+		name: meta.series[s].name, 
+		className: meta.series[s].className,
+		type: meta.series[s].type,
 		lineWidth: 1,
-		data: p[k].means.rotate(6).slice(2),
+		data: data[s].means.rotate(6).slice(2),
 		visible: true,
 		tooltip: { valueDecimals: meta.decimals },
 	}),

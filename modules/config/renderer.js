@@ -270,11 +270,14 @@ var chart = {
 		// });
 		var series = [];
 		// TODO clean up
+		// console.log(meta.series)
 		Object.keys(meta.series).filter(k => {
 			var g = meta.series[k].group
 			return meta.series[k].visible != undefined && meta.groups[g].enabled
 		}).forEach(key => {
+			// console.log(key)
 			var s = meta.series[key].preset
+			// console.log(seriesBuild[s](meta, data, s, key));
 			try{
 				if(meta.selector){
 					series.push(seriesBuild[s](meta, data.values[98], s, key));
@@ -285,7 +288,8 @@ var chart = {
 				// console.log(meta)
 				console.log(data)
 				// console.log(s)
-				// console.log(key)
+				console.log(key)
+				console.log(series)
 				console.log(meta.series)
 				throw error
 			}
@@ -357,6 +361,10 @@ var chart = {
 				var g = meta.series[s].group
 				return meta.series[s].visible != undefined && meta.groups[g].enabled
 			}).forEach((key, index) => {
+				// console.log({key, index})
+				// console.log(meta.series[key])
+				try{
+
 				if(meta.series[key].group == gID){
 					$('#' + id).highcharts().series[index].update({
 						visible: meta.series[key].visible,
@@ -368,6 +376,13 @@ var chart = {
 						visible: false,
 						showInLegend: false,
 					}, false)
+				}
+				}catch(error){
+					console.log(key)
+					console.log(meta.series[key])
+					console.log(index)
+					console.log($('#'+id).highcharts().series)
+					throw error;
 				}
 			})
 		}
