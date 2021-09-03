@@ -137,10 +137,11 @@ var struct = {
 		return struct.create(res).build();
 	},
 	occurrence: function(f=(e)=>{ return e > 30 }){
+		var color = (f(-100) ? 'blue' : 'red')
 		var res = struct.create(this.values.map(each => ({
 			x: each.x,
 			y: each.values.filter(value => f(value.y)).map(node => node.x).filter((v, i, a) => a.indexOf(v) === i).length,	
-		})).filter(a => a.y != 0)).build()
+		})).filter(a => a.y != 0)).build(undefined, undefined, undefined, color)
 		return res
 	},
 	sequence: function(f=(e)=>{ return e > 0 }){
@@ -281,7 +282,7 @@ var struct = {
 		}
 	},
 	xInterval: {},
-	build: function(type=this.type, lower=baselineLower, upper=baselineUpper){
+	build: function(type=this.type, lower=baselineLower, upper=baselineUpper, color){
 		this.xInterval.x = new Date(Math.min.apply(null, 
 			this.values.map(each => 
 				each.xInterval ? Math.min.apply(null, each.xInterval) : new Date(each.x)))).getTime();
@@ -300,7 +301,32 @@ var struct = {
 		this.values = this.values.filter(entry => !isNaN(parseFloat(entry.y)) && isFinite(entry.y));
 		var count = this.values.length;
 		this.count = count;
+		// Colorize
+		var max = Math.max(...this.values.map(each => each.y)); 
+		values = this.values.map(each => {
+			switch(color){
+				case "red":
+					each.color = 'rgb(255,' + (255 - Math.floor(each.y * 255 / max)) + ', 0)';
+					break;
+				case "blue":
+					each.color = 'rgb('+ 
+						(255-Math.floor(each.y * 255 / max)) + ','+ 
+						(255-Math.floor(each.y * 255 / max)) + ',' + 
+						(255) +')';
+					// each.color = 'rgb(' + (255 - Math.floor(each.y * 255 / max)) + ',0,255)';
+					// each.color = 'rgb(255,0,' + (255 - Math.floor(each.y * 127 / max)) + ')';
+					break;
+				case "green":
+					each.color = 'rgb(' + (255 - Math.floor(each.y * 255 / max)) + ',255, 0)';
+					break;
+				default:
+					var col = (255 - Math.floor(each.y * 255 / max));
+					each.color = 'rgb('+col+','+col+','+col+')';
+					return each
 
+
+			}
+		})
 		var y;
 		if(this.y == undefined){
 			switch(type){

@@ -77,8 +77,12 @@
         "group": "3",
         "visible": true,
         "colour": "#ff0000",
-        "type": "line",
-        "decimals": 0
+        "type": "bar",
+        "decimals": 0,
+        "keys": [
+          "y",
+          "color"
+        ]
       },
       "2": {
         "className": "series-temp-low-extreme",
@@ -87,7 +91,11 @@
         "visible": true,
         "colour": "#0000ff",
         "type": "bar",
-        "decimals": 0
+        "decimals": 0,
+        "keys": [
+          "y",
+          "color"
+        ]
       },
       "max": {
         "className": "series-temp-max",
