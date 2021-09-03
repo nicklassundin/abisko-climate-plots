@@ -91,7 +91,7 @@
         "group": "4",
         "visible": true,
         "colour": "#0000ff",
-        "type": "line",
+        "type": "bar",
         "decimals": 0
       },
       "max": {
