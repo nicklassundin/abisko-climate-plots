@@ -396,22 +396,6 @@
 			"startYear": 1958
 		}
 	},
-	"viz-extreme-temp-high-30": {
-		"extremeTempDailyLim": {
-			"context": false,
-			"station": "abisko",
-			"plot": "extremeTempDailyLim",
-			"config": {
-				"files": {
-					"set": {
-						"extreme": {
-							"lim": 30
-						}
-					}
-				}	
-			}
-		}
-	},
 	"viz-extreme-temp-high-33": {
 		"extremeTempDailyLim": {
 			"context": false,
@@ -431,7 +415,55 @@
 			}
 		}
 	},
-	"viz-extreme-temp-low-25": {
+	"viz-extreme-temp-high-30": {
+		"extremeTempDailyLim": {
+			"context": false,
+			"station": "abisko",
+			"plot": "extremeTempDailyLim",
+			"config": {
+				"files": {
+					"set": {
+						"extreme": {
+							"lim": 30
+						}
+					}
+				}	
+			}
+		}
+	},
+	"viz-extreme-temp-high-25": {
+		"extremeTempDailyLim": {
+			"context": false,
+			"station": "abisko",
+			"plot": "extremeTempDailyLim",
+			"config": {
+				"files": {
+					"set": {
+						"extreme": {
+							"lim": 25
+						}
+					}
+				}	
+			}
+		}
+	},
+	"viz-extreme-temp-high-20": {
+		"extremeTempDailyLim": {
+			"context": false,
+			"station": "abisko",
+			"plot": "extremeTempDailyLim",
+			"config": {
+				"files": {
+					"set": {
+						"extreme": {
+							"lim": 20
+						}
+					}
+				}	
+			}
+		}
+	},
+	"viz-extreme-temp-low-15": {
 		"extremeTempDailyLim": {
 			"context": false,
 			"station": "abisko",
@@ -443,7 +475,7 @@
 				"files": {
 					"set": {
 						"extreme": {
-							"lim": -25
+							"lim": -15
 						}
 					}
 				}	
@@ -463,6 +495,25 @@
 					"set": {
 						"extreme": {
 							"lim": -20
+						}
+					}
+				}	
+			}
+		}
+	},
+	"viz-extreme-temp-low-25": {
+		"extremeTempDailyLim": {
+			"context": false,
+			"station": "abisko",
+			"plot": "extremeTempDailyLowLim",
+			"override": {
+				"axislim": false
+			},
+			"config": {
+				"files": {
+					"set": {
+						"extreme": {
+							"lim": -25
 						}
 					}
 				}	

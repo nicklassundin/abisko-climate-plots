@@ -21,6 +21,7 @@ exports.series = {
 		preset.name = config.name;
 		preset.className = config.className;
 		if(!preset.color) preset.color = config.colour;
+		if(config.borderColor) preset.borderColor = config.borderColor;
 		preset.type = config.type;
 		// console.log(preset)
 		// console.log("preset end")
@@ -43,6 +44,11 @@ exports.series = {
 	},
 	get extreme() {
 		return (meta, data, k, s) => {
+  Highcharts.each(data, function(point, i) {
+    data[i] = [point, 'rgb(255,' + Math.floor(point * 255 / max) + ', 0)'];
+  });
+
+
 			var tag = "extreme";
 			if(meta.extreme) tag = tag+meta.extreme.type
 			var config = {};
