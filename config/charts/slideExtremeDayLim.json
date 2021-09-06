@@ -2,7 +2,13 @@
 	"unitType": "day",
 	"extreme": {
 		"type": "high",
-		"lim": 30
+		"lim": 33,
+		"sublim": {
+			"1": 20,
+			"2": 25,
+			"3": 30,
+			"4": 33
+		}
 	},
 	"groups": {
 		"0": {

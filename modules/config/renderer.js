@@ -199,6 +199,20 @@ var chart = {
 		if(Object.keys(meta.groups).map(key => meta.groups[key].enabled).filter(each => each).length > 1){
 			var gTitle = this.groupTitle(this.gID);
 			this.switchToGroup(this.gID ,true, change = false)
+			if(meta.extreme){
+				var ext_menu = Object.keys(meta.extreme.sublim).map(key => {
+					var val = meta.extreme.sublim[key];
+					if(meta.extreme.lim == val){
+						return "<button class='ext_menu_"+id+" active' value="+val+">"+val+" C </button>"
+					}else{
+
+						return "<button class='ext_menu_"+id+"' value="+val+">"+val+" C</button>"
+					}
+				})
+				$('#'+id).append("<div>"+
+					ext_menu.join("")+
+					"</div>")
+			}
 			$('#'+id).append(gTitle);
 		}
 		return this
@@ -282,7 +296,8 @@ var chart = {
 				if(meta.selector){
 					series.push(seriesBuild[s](meta, data.values[98], s, key));
 				}else{
-					series.push(seriesBuild[s](meta, data, s, key));
+					var sr = seriesBuild[s](meta, data, s, key);
+					series.push(sr)
 				}
 			}catch(error){
 				// console.log(meta)
@@ -306,6 +321,22 @@ var chart = {
 			$(".tablinks_"+id).click(function(e) {
 				$(".tablinks_"+id).toggleClass('active')
 				chart.switchToGroup(e.target.id);
+				return false
+			})
+		}
+		if(meta.extreme){
+
+			$(".ext_menu_"+id).click(function(e) {
+				$(".ext_menu_"+id).toggleClass('active')
+				// console.log(renderInterface.charts[id])
+				renderInterface.charts[id] = renderInterface.charts[id].then(ch => {
+					return new Promise((res,rej) => {
+						// console.log(ch)
+						ch.metaRef.files.set.extreme.lim = parseInt(e.target.value)
+						res(ch)
+					})
+				})
+				renderInterface.updatePlot(id)
 				return false
 			})
 		}
@@ -365,18 +396,18 @@ var chart = {
 				// console.log(meta.series[key])
 				try{
 
-				if(meta.series[key].group == gID){
-					$('#' + id).highcharts().series[index].update({
-						visible: meta.series[key].visible,
-						showInLegend: true,
-					}, false)
-					series_count += 1;
-				}else{
-					$('#' + id).highcharts().series[index].update({
-						visible: false,
-						showInLegend: false,
-					}, false)
-				}
+					if(meta.series[key].group == gID){
+						$('#' + id).highcharts().series[index].update({
+							visible: meta.series[key].visible,
+							showInLegend: true,
+						}, false)
+						series_count += 1;
+					}else{
+						$('#' + id).highcharts().series[index].update({
+							visible: false,
+							showInLegend: false,
+						}, false)
+					}
 				}catch(error){
 					console.log(key)
 					console.log(meta.series[key])
