@@ -149,7 +149,7 @@
     "unitType": "day",
     "extreme": {
       "type": "low",
-      "lim": -25,
+      "lim": -10,
       "sublim": {
         "1": -10,
         "2": -15,
