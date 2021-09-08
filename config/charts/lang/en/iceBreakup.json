@@ -2,8 +2,8 @@
 	"valueSuffix": "",
 	"groups": {
 		"0": {
-			"title": "Torneträsk Break-up of lake ice" ,
-			"subTitle": "",
+			"title": "Break-up of lake ice" ,
+			"subTitle": "Torneträsk",
 			"caption": "Day of year for the start of the lake ice breaking-up.", 
 			"yAxis": {
 				"left": "Ice break-up [day of year]",
@@ -16,8 +16,8 @@
 			"legend": "Weather"
 		},
 		"1": {
-			"title": "Troneträsk Break-Up Date of Lake Ice Difference from Baseline",
-			"subTitle": "",
+			"title": "Break-Up Date of Lake Ice Difference from Baseline",
+			"subTitle": "Troneträsk",
 			"caption": "Break-up difference from baseline period, typically 1961 to 1990.", 
 			"yAxis": {
 				"left": "Ice break-up [day of year]",

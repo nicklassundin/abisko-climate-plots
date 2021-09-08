@@ -320,8 +320,8 @@ var struct = {
 					each.color = 'rgb(' + (255 - Math.floor(each.y * 255 / max)) + ',255, 0)';
 					break;
 				default:
-					var col = (255 - Math.floor(each.y * 255 / max));
-					each.color = 'rgb('+col+','+col+','+col+')';
+					// var col = (255 - Math.floor(each.y * 255 / max));
+					// each.color = 'rgb('+col+','+col+','+col+')';
 					return each
 
 

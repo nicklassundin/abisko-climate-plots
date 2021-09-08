@@ -17592,7 +17592,7 @@
           "unitType": "day",
           "extreme": {
             "type": "high",
-            "lim": 33,
+            "lim": 20,
             "sublim": {
               "1": 20,
               "2": 25,
@@ -18074,7 +18074,7 @@
           "unitType": "day",
           "extreme": {
             "type": "high",
-            "lim": 33,
+            "lim": 20,
             "sublim": {
               "1": 20,
               "2": 25,
@@ -18557,7 +18557,7 @@
           "unitType": "day",
           "extreme": {
             "type": "high",
-            "lim": 33,
+            "lim": 20,
             "sublim": {
               "1": 20,
               "2": 25,
@@ -19039,7 +19039,7 @@
           "unitType": "day",
           "extreme": {
             "type": "high",
-            "lim": 33,
+            "lim": 20,
             "sublim": {
               "1": 20,
               "2": 25,
@@ -19522,7 +19522,7 @@
           "unitType": "day",
           "extreme": {
             "type": "low",
-            "lim": -25,
+            "lim": -10,
             "sublim": {
               "1": -10,
               "2": -15,
@@ -20011,7 +20011,7 @@
           "unitType": "day",
           "extreme": {
             "type": "low",
-            "lim": -25,
+            "lim": -10,
             "sublim": {
               "1": -10,
               "2": -15,
