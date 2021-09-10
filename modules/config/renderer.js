@@ -489,6 +489,7 @@ var chart = {
 		try{
 			// console.log(meta.menu.dataCredit)
 			// console.log(meta)
+			console.log(((group.subTitle != undefined) ? group.subTitle : ""))
 			this.chart.update({
 				title: {
 					text: title,
@@ -498,7 +499,7 @@ var chart = {
 					enabled: series_count > 1 
 				},
 				subtitle: {
-					text: '<label class="subtitle>"'+((group.subTitle != undefined) ? group.subTitle : "")+'</label>',
+					text: '<label class="subtitle">'+((group.subTitle != undefined) ? group.subTitle : "")+'</label>',
 					useHTML: true,
 				},
 				caption: {
