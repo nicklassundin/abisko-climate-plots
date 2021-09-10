@@ -111,6 +111,7 @@ var csv_smhi_json = function(id, type){
 
 var restApiStations = function(parmFile=smhiParam.temp){
 	return new Promise((resolve, reject) => {
+		console.log(parmFile.url)
 		request({
 			url: parmFile.url,
 			json: true,
