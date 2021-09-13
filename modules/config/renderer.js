@@ -489,7 +489,6 @@ var chart = {
 		try{
 			// console.log(meta.menu.dataCredit)
 			// console.log(meta)
-			console.log(((group.subTitle != undefined) ? group.subTitle : ""))
 			this.chart.update({
 				title: {
 					text: title,

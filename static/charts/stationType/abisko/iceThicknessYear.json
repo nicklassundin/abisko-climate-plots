@@ -97,8 +97,8 @@
     "valueSuffix": "",
     "groups": {
       "0": {
-        "title": "[stationName] Maximum Lake Ice Thickness",
-        "subTitle": "",
+        "title": "Maximum Lake Ice Thickness",
+        "subTitle": "Torneträsk",
         "caption": "The maximum ice thickness for a given winter.",
         "yAxis": {
           "left": "Ice thickness [cm]",
@@ -111,8 +111,8 @@
         "legend": "Weather"
       },
       "1": {
-        "title": "[stationName] Maximum Lake Ice Thickness Difference",
-        "subTitle": "",
+        "title": "Maximum Lake Ice Thickness Difference",
+        "subTitle": "Torneträsk",
         "caption": "The maximum ice thickness for a given winter.",
         "yAxis": {
           "left": "Ice thickness [cm]",
@@ -203,8 +203,8 @@
     "valueSuffix": "",
     "groups": {
       "0": {
-        "title": "[stationName] Maximal tjocklek av sjöis",
-        "subTitle": "",
+        "title": "Maximal tjocklek av sjöis",
+        "subTitle": "Torneträsk",
         "caption": "Den maximala istjockleken för en viss vinter.",
         "yAxis": {
           "left": "Isens tjocklek [cm]",
@@ -217,8 +217,8 @@
         "legend": "Väder"
       },
       "1": {
-        "title": "[stationName] Skillnad i maximal tjocklek av sjöis",
-        "subTitle": "",
+        "title": "Skillnad i maximal tjocklek av sjöis",
+        "subTitle": "Torneträsk",
         "caption": "Den maximala istjockleken för en viss vinter.",
         "yAxis": {
           "left": "Isens tjocklek [cm]",
