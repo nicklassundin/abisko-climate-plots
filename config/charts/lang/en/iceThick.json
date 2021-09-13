@@ -2,8 +2,8 @@
 	"valueSuffix": "",
 	"groups": {
 		"0": {
-			"title": "[stationName] Maximum Lake Ice Thickness",
-			"subTitle": "",
+			"title": "Maximum Lake Ice Thickness",
+			"subTitle": "Torneträsk",
 			"caption": "The maximum ice thickness for a given winter.",
 			"yAxis": {
 				"left": "Ice thickness [cm]", 
@@ -16,8 +16,8 @@
 			"legend": "Weather"
 		},
 		"1": {
-			"title": "[stationName] Maximum Lake Ice Thickness Difference",
-			"subTitle": "",
+			"title": "Maximum Lake Ice Thickness Difference",
+			"subTitle": "Torneträsk",
 			"caption": "The maximum ice thickness for a given winter.",
 			"yAxis": {
 				"left": "Ice thickness [cm]", 
