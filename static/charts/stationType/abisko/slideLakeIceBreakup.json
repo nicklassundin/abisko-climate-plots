@@ -200,8 +200,8 @@
     "valueSuffix": "",
     "groups": {
       "0": {
-        "title": "Torneträsk - Islossning av sjöis",
-        "subTitle": "",
+        "title": "Islossning av sjöis",
+        "subTitle": "Torneträsk",
         "caption": "Dag på året där isen lossnar.",
         "yAxis": {
           "left": "Islossning [day of year]",
@@ -214,8 +214,8 @@
         "legend": "Weather"
       },
       "1": {
-        "title": "Torneträsk - Skillnad från baslinjen i datumet för islossning på sjön",
-        "subTitle": "",
+        "title": "Skillnad från baslinjen i datumet för islossning på sjön",
+        "subTitle": "Torneträsk",
         "caption": "Skillnad i islossning från baslinjen, vanligtvis 1961 till 1990.",
         "yAxis": {
           "left": "Islossning [day of year]",
