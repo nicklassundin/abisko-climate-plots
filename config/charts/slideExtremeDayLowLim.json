@@ -1,0 +1,33 @@
+{
+	"unitType": "day",
+	"extreme": {
+		"type": "low",
+		"lim": -10,
+		"sublim": {
+			"1": -10,
+			"2": -15,
+			"3": -20,
+			"4": -30
+		}
+	},
+	"groups": {
+		"0": {
+			"enabled": false
+		},
+		"1": {
+			"enabled": true,
+			"tooltip": {
+			}
+		},
+		"2": {
+			"enabled": false
+		},
+		"3": {
+			"enabled": true,
+			"prime": true,
+			"tooltip": {
+				"type": "value"
+			}
+		}
+	}
+}
