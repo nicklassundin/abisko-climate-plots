@@ -318,7 +318,11 @@ exports.series = {
 		tooltip: { valueDecimals: meta.decimals },
 	}),
 	perma: (meta, data, k, s) => ({
-		name: (meta.series[s].name == undefined) ? k : meta.series[k].name,
+		name: (() => {
+			console.log(k)	
+			console.log(s)
+			return (meta.series[s].name == undefined) ? s : meta.series[k].name
+		})(),
 		className: meta.series[s].className,
 		type: meta.series[s].type,
 		color: meta.series[s].colour,
