@@ -19527,8 +19527,7 @@
               "1": -10,
               "2": -15,
               "3": -20,
-              "4": -25,
-              "5": -30
+              "4": -30
             }
           },
           "groups": {
@@ -19543,16 +19542,10 @@
               "enabled": false
             },
             "3": {
-              "enabled": false,
-              "tooltip": {
-                "type": "value"
-              }
-            },
-            "4": {
               "enabled": true,
               "prime": true,
               "tooltip": {
-                "type": "values"
+                "type": "value"
               }
             }
           }
@@ -20016,8 +20009,7 @@
               "1": -10,
               "2": -15,
               "3": -20,
-              "4": -25,
-              "5": -30
+              "4": -30
             }
           },
           "groups": {
@@ -20032,16 +20024,10 @@
               "enabled": false
             },
             "3": {
-              "enabled": false,
-              "tooltip": {
-                "type": "value"
-              }
-            },
-            "4": {
               "enabled": true,
               "prime": true,
               "tooltip": {
-                "type": "values"
+                "type": "value"
               }
             }
           }

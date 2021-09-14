@@ -1,11 +1,14 @@
 global.Highcharts = require('highcharts');
 require('jquery-contextmenu');
-require('highcharts-more')(Highcharts);
+// require('highcharts/modules/highcharts-more')(Highcharts);
+require('highcharts/highcharts-more')
+// require('highcharts/modules/annotations.js')(Highcharts);
 require('highcharts/modules/series-label')(Highcharts);
 require('highcharts/modules/exporting')(Highcharts);
 require('highcharts/modules/export-data.js')(Highcharts);
 require('highcharts/modules/histogram-bellcurve')(Highcharts);
 require('highcharts/modules/xrange')(Highcharts);
+
 // const highchart_help = require('./highcharts/config.js');
 const seriesBuild = require('./series.js').series;
 var base = require('./highcharts_config/base.js')
