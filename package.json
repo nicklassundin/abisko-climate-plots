@@ -76,8 +76,8 @@
 		"test-respons:w": "artillery quick --count 10 -n 20 https://localhost/charts",
 		"test-unit": "mocha './modules/**/*.spec.js' --delay",
 		"test-dev": "mocha  './modules/**/*.spec.js' '*.spec.dev.js' 'modules/**/*.spec.dev.js' --delay",
-		"start": "node server.js",
-		"start-dev": "npx nodemon server.js d",
+		"start": "git submodule update && node server.js",
+		"start-dev": "git submodule update && npx nodemon server.js d",
 		"start-full": "npm test && npx nodemon server.js",
 		"static": "cp client/bundle.js static/bundle.js"
 	},
