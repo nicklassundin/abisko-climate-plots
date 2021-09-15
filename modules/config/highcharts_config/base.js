@@ -1,5 +1,5 @@
 
-var constant = require('../../../config/const.json');
+var constant = require('../../../static/const.json');
 global.baselineLower = constant.baselineLower;
 global.baselineUpper = constant.baselineUpper;
 global.startYear = constant.startYear;
