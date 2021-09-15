@@ -72,7 +72,7 @@
 		"xxxxx": "^1.0.3"
 	},
 	"scripts": {
-		"test": "npm run test-unit",
+		"test": "git submodule update && npm run test-unit",
 		"test-respons:w": "artillery quick --count 10 -n 20 https://localhost/charts",
 		"test-unit": "mocha './modules/**/*.spec.js' --delay",
 		"test-dev": "mocha  './modules/**/*.spec.js' '*.spec.dev.js' 'modules/**/*.spec.dev.js' --delay",
