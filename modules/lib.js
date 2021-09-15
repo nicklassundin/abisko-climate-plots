@@ -3,7 +3,7 @@ console.log("Visual Change Library Restart")
 var $ = require('jquery')
 global.queryString = require('query-string');
 global.nav_lang = 'en';
-var constant = require('../config/const.json');
+var constant = require('../static/const.json');
 global.startYear = constant.startYear;
 global.baselineLower = constant.baselineLower;
 global.baselineUpper = constant.baselineUpper;
