@@ -6,7 +6,7 @@ var parseByDate = parser.parseByDate;
 // var R = require('r-script');
 // var python=require('python').shell;
 // TODO temporary hotfix
-var constant = require('./../../config/const.json');
+var constant = require('./../../static/const.json');
 global.startYear = constant.startYear;
 global.baselineLower = constant.baselineLower;
 global.baselineUpper = constant.baselineUpper;
