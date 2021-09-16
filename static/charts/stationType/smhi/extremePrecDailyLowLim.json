@@ -1,30 +1,30 @@
 {
   "ref": {
-    "id": "Precipitation",
-    "type": "abisko",
+    "id": "dailyExtremePrecipitation",
+    "type": "smhi",
     "tag": {
       "render": [
         "precipitation",
-        "yrlySlide"
+        "dailyExtreme"
       ],
       "data": [
         "precipitation",
-        "yrly"
+        "dailyExtremeMinLim"
       ]
     },
     "config": {
       "meta": {
         "smhi": {
-          "data": "SMHI-Hydrology",
+          "data": "SMHI-Weather",
           "config": "precipitation",
-          "lang": "annualPrecipitation",
-          "set": "slide"
+          "lang": "annualprecipitation",
+          "set": "slideExtremeDayLowLim"
         },
         "abisko": {
           "data": "ANS",
           "config": "precipitation",
           "lang": "annualPrecipitation",
-          "set": "slide"
+          "set": "slideExtremeDayLowLim"
         }
       }
     },
@@ -117,29 +117,49 @@
     },
     "parse": {
       "file": [
-        "ANS_Temp_Prec.csv",
-        "AWS.csv",
-        "ANS_Prec.csv"
+        "temperature.csv",
+        "precipitation.csv"
       ],
       "preset": {
         "header": true,
         "download": true,
         "skipEmptyLines": true,
-        "beforeFirstChunk": "abisko",
-        "dynamicTyping": false
+        "beforeFirstChunk": "smhi",
+        "fastMode": true
       },
-      "parser": "AbiskoCsv",
+      "parser": "smhiTemp",
       "local": true
     }
   },
   "set": {
+    "unitType": "day",
+    "extreme": {
+      "type": "low",
+      "lim": -10,
+      "sublim": {
+        "1": -10,
+        "2": -15,
+        "3": -20,
+        "4": -30
+      }
+    },
     "groups": {
       "0": {
-        "enabled": true,
-        "prime": true
+        "enabled": false
       },
       "1": {
-        "enabled": true
+        "enabled": true,
+        "tooltip": {}
+      },
+      "2": {
+        "enabled": false
+      },
+      "3": {
+        "enabled": true,
+        "prime": true,
+        "tooltip": {
+          "type": "value"
+        }
       }
     }
   },
@@ -233,11 +253,11 @@
     },
     "dataSource": {
       "meta": {
-        "src": "https://polar.se/en/research-in-abisko/research-data/",
-        "downloadDate": "7 January 2020",
+        "src": "https://www.smhi.se/data/utforskaren-oppna-data/?p=1&q=&r=Lufttemperatur",
+        "downloadDate": "",
         "citation": "",
-        "desc": "Abisko Scientific Research Station",
-        "descLong": "Swedish Polar Research Secretariet, Abisko Scientific Research Station, Research Data"
+        "desc": "",
+        "descLong": ""
       }
     },
     "units": {
@@ -359,11 +379,11 @@
     },
     "dataSource": {
       "meta": {
-        "src": "https://polar.se/en/research-in-abisko/research-data/",
-        "downloadDate": "7 Januari 2020",
+        "src": "",
+        "downloadDate": "",
         "citation": "",
-        "desc": "Abisko Naturvetenskapliga Station",
-        "descLong": "Polarforskningssekretariatet, Abisko Naturvetenskapliga Station, forskningsdata"
+        "desc": "",
+        "descLong": ""
       }
     },
     "units": {

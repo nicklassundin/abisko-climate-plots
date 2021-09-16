@@ -9,7 +9,7 @@
       ],
       "data": [
         "temperatures",
-        "dailyExtremeHighLim"
+        "dailyExtremeMaxLim"
       ]
     },
     "config": {
@@ -18,13 +18,13 @@
           "data": "SMHI-Weather",
           "config": "temperature",
           "lang": "annualTemperature",
-          "set": "slideExtremeDayLim"
+          "set": "slideExtremeDayHighLim"
         },
         "abisko": {
           "data": "ANS",
           "config": "temperature",
           "lang": "annualTemperature",
-          "set": "slideExtremeDayLim"
+          "set": "slideExtremeDayHighLim"
         }
       }
     },

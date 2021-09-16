@@ -1,30 +1,30 @@
 {
   "ref": {
-    "id": "Precipitation",
+    "id": "dailyExtremePrecipitation",
     "type": "abisko",
     "tag": {
       "render": [
         "precipitation",
-        "yrlySlide"
+        "dailyExtreme"
       ],
       "data": [
         "precipitation",
-        "yrly"
+        "dailyExtremeMaxLim"
       ]
     },
     "config": {
       "meta": {
         "smhi": {
-          "data": "SMHI-Hydrology",
+          "data": "SMHI-Weather",
           "config": "precipitation",
           "lang": "annualPrecipitation",
-          "set": "slide"
+          "set": "slideExtremeDayHighLim"
         },
         "abisko": {
           "data": "ANS",
           "config": "precipitation",
           "lang": "annualPrecipitation",
-          "set": "slide"
+          "set": "slideExtremeDayHighLim"
         }
       }
     },
@@ -133,13 +133,34 @@
     }
   },
   "set": {
+    "unitType": "day",
+    "extreme": {
+      "type": "high",
+      "lim": 20,
+      "sublim": {
+        "1": 20,
+        "2": 25,
+        "3": 30,
+        "4": 33
+      }
+    },
     "groups": {
       "0": {
-        "enabled": true,
-        "prime": true
+        "enabled": false
       },
       "1": {
-        "enabled": true
+        "enabled": true,
+        "tooltip": {}
+      },
+      "2": {
+        "enabled": false
+      },
+      "3": {
+        "enabled": true,
+        "prime": true,
+        "tooltip": {
+          "type": "value"
+        }
       }
     }
   },

@@ -206,10 +206,10 @@ var chart = {
 				var ext_menu = Object.keys(meta.extreme.sublim).map(key => {
 					var val = meta.extreme.sublim[key];
 					if(meta.extreme.lim == val){
-						return "<button class='ext_menu_"+id+" active' value="+val+">"+val+" C </button>"
+						return "<button class='ext_menu_"+id+" active' value="+val+">"+val+" "+meta.valueSuffix+" </button>"
 					}else{
 
-						return "<button class='ext_menu_"+id+"' value="+val+">"+val+" C</button>"
+						return "<button class='ext_menu_"+id+"' value="+val+">"+val+" "+meta.valueSuffix+"</button>"
 					}
 				})
 				$('#'+id).append("<div>"+

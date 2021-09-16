@@ -45,6 +45,10 @@
       },
       "3": {
         "baseline": false
+      },
+      "4": {
+        "baseline": false,
+        "yAxis": {}
       }
     },
     "decimals": 2,
@@ -58,13 +62,30 @@
         "type": "column"
       },
       "1": {
-        "className": "series-prec-extreme-lim",
+        "className": "series-temp-extreme",
         "preset": "extreme",
-        "group": 3,
+        "group": "3",
         "visible": true,
-        "colour": "#1000FF",
-        "type": "column",
-        "decimals": 2
+        "colour": "#ff0000",
+        "type": "bar",
+        "decimals": 0,
+        "keys": [
+          "y",
+          "color"
+        ]
+      },
+      "2": {
+        "className": "series-temp-low-extreme",
+        "preset": "extreme",
+        "group": "4",
+        "visible": true,
+        "colour": "#0000ff",
+        "type": "bar",
+        "decimals": 0,
+        "keys": [
+          "y",
+          "color"
+        ]
       },
       "diff": {
         "className": "series-diff",
@@ -170,6 +191,34 @@
           "top": "[Y-AXIS]"
         },
         "caption": "The wettest [unit] of the year (total precipitation in mm).",
+        "legend": "Weather"
+      },
+      "3": {
+        "title": "Extreme Weather event, Days Above [lim] [mm]",
+        "subTitle": "[stationName]",
+        "caption": "",
+        "yAxis": {
+          "left": "",
+          "right": "[X-AXIS]"
+        },
+        "xAxis": {
+          "bott": "Year",
+          "top": "[Y-AXIS]"
+        },
+        "legend": "Weather"
+      },
+      "4": {
+        "title": "Extreme Weather event, Days Below [lim] [mm]",
+        "subTitle": "[stationName]",
+        "caption": "",
+        "yAxis": {
+          "left": "",
+          "right": "[X-AXIS]"
+        },
+        "xAxis": {
+          "bott": "Year",
+          "top": "[Y-AXIS]"
+        },
         "legend": "Weather"
       }
     },
