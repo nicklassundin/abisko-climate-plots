@@ -229,12 +229,6 @@ var parseByDate = function (values, type='mean', src='', custom) {
 												res(this.values[key])
 											})
 											break;
-										case 'weeksExtremeHighLim':
-											this['weeks'].then(y => {
-												this.values[key] = (y.max ? y.max : y.total).occurrence((e) => 30 < e);
-												res(this.values[key])
-											})
-											break;
 										case 'weeksExtremeHigh':
 											this['weeks'].then(y => {
 												this.values[key] = (y.max ? y.max : y.total).max(false);

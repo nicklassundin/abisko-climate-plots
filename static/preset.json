@@ -215,13 +215,15 @@
     "slideTemperatures",
     "dailyExtremeTemperature",
     "extremeTempDaily",
-    "extremeTempDailyLim",
+    "extremeTempDailyHighLim",
     "extremeTempDailyLowLim",
     "weeklyExtremeTemperature",
     "extremeTempWeekly",
     "extremeTempWeeklyLim",
     "dailyExtremePrecipitation",
     "extremePrecDaily",
+    "extremePrecDailyHighLim",
+    "extremePrecDailyLowLim",
     "weeklyExtremePrecipitation",
     "extremePrecWeekly",
     "growingSeasonFrostFirst",
@@ -826,10 +828,10 @@
     }
   },
   "viz-extreme-temp-high-20": {
-    "extremeTempDailyLim": {
+    "extremeTempDailyHighLim": {
       "context": false,
       "station": "abisko",
-      "plot": "extremeTempDailyLim",
+      "plot": "extremeTempDailyHighLim",
       "override": {
         "axislim": false
       },
@@ -845,7 +847,7 @@
     }
   },
   "viz-extreme-temp-low-10": {
-    "extremeTempDailyLim": {
+    "extremeTempDailyLowLim": {
       "context": false,
       "station": "abisko",
       "plot": "extremeTempDailyLowLim",

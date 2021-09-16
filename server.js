@@ -1,7 +1,9 @@
 // Pre-setup
 var $ = require("jquery");
+var generate = require('climate-plots-config')
+console.log(generate)
 if(process.argv.includes('d')){
-	require('./config/gen.js').genStaticFiles(__dirname).then(() => {
+	generate.genStaticFiles(__dirname).then(() => {
 		var app = require('./dev-app.js').app
 		var web = require('./modules/server/web.js')
 		web.webserver["http"](app);

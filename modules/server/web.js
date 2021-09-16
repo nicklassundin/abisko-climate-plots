@@ -2,9 +2,9 @@
 const fs = require('fs');
 var config = undefined;
 try{
-	config = require('../../config/server.json')
+	config = require('./config/server.json')
 }catch(ERROR){
-	config = require('../../config/default.server.json')
+	config = require('./config/default.server.json')
 }
 
 exports.webserver = {
