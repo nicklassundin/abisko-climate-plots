@@ -8,7 +8,7 @@
 		"body-parser": "^1.19.0",
 		"chai-http": "^4.3.0",
 		"child_process": "^1.0.2",
-		"climate-plots-config": "^0.0.7",
+		"climate-plots-config": "*",
 		"commonjs-highcharts": "^4.0.3",
 		"compression": "^1.7.4",
 		"connect": "^3.7.0",
@@ -57,6 +57,7 @@
 		"topojson-client": "^3.1.0",
 		"uniq": "^1.0.1",
 		"unique-commit-id": "^1.0.0",
+		"utils": "^0.3.1",
 		"webpack": "^4.43.0"
 	},
 	"devDependencies": {
@@ -73,12 +74,13 @@
 		"xxxxx": "^1.0.3"
 	},
 	"scripts": {
+		"update": "npm update climate-plots-config",
 		"test": "git submodule update && npm run test-unit",
-		"test-respons:w": "artillery quick --count 10 -n 20 https://localhost/charts",
+		"test-respons": "artillery quick --count 10 -n 20 https://localhost/charts",
 		"test-unit": "mocha './modules/**/*.spec.js' --delay",
 		"test-dev": "mocha  './modules/**/*.spec.js' '*.spec.dev.js' 'modules/**/*.spec.dev.js' --delay",
-		"start": "git submodule update && node server.js",
-		"start-dev": "npx nodemon server.js d",
+		"start": "npm run update && git submodule update && node server.js",
+		"start-dev": "npm run update && npx nodemon server.js d",
 		"start-full": "npm test && npx nodemon server.js",
 		"static": "cp client/bundle.js static/bundle.js"
 	},

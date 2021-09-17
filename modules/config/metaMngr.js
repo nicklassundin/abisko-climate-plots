@@ -1,5 +1,4 @@
 var before = require('./charts/help.js').preset
-
 // const { markdownToTxt } = require('markdown-to-txt');
 
 var Remarkable = require('remarkable').Remarkable;

@@ -1,5 +1,6 @@
 const help = require('../../helpers.js');
 const time = require('climate-plots-config').time
+console.log(global)
 var dateFormat = (date) => {
 	return date.getFullYear() + ' ' + time[nav_lang].months[help.months()[date.getMonth()]] + ' ' + date.getDate();
 }
@@ -23,7 +24,7 @@ var formats = {
 		return date.getDate();	
 	},
 	MM: (date, shrt=false) => {
-		return (shrt ? time[nav_lang].monthShort : time[nav_lang].months)[help.months()[date.getMonth()]]
+		return (shrt ? time[nav_lang].monthShort : time[nav_lang].months)[help.months()[date.getMonth()]] 
 	},
 }
 exports.formats = formats;
