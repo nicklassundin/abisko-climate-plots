@@ -68,6 +68,7 @@ exports.custom = custom;
 hbs.registerPartials(__dirname+'/views/partials');
 var stati = require('./static/charts/stations.json');
 const stations = require('./static/charts/stations.json');
+var version = require('./package.json').version
 custom.then(chrts => {
 	var sets = stati;
 	var stations = Object.keys(stati).map(st => {
@@ -83,7 +84,7 @@ custom.then(chrts => {
 			sets,
 			chrts,
 			stations,
-			latestCommit: require('./package.json').version
+			version
 		})
 	})
 })
