@@ -1,11 +1,6 @@
 const ucid = require('unique-commit-id');
-var latestCommit = "[Commit-id]";
-try{
-	latestCommit = ucid.latest();
-}catch(error){
-	latestCommit = error;
-	console.log(error);
-}
+var version = require('./package.json').version + '';
+
 var fs = require('fs');
 var express = require('express');
 
@@ -97,7 +92,7 @@ hbs.registerPartials(__dirname + '/views/partials', function (err) {
 			// })
 		// });
 		var sets = stati;
-		app.render('browse-release.hbs', {sets, chrts, stations, latestCommit}, (err, str) => {
+		app.render('browse-release.hbs', {sets, chrts, stations, version}, (err, str) => {
 			if(err) throw err
 			fs.writeFile('index.html', str, err => {
 				if (err) {
@@ -111,7 +106,7 @@ hbs.registerPartials(__dirname + '/views/partials', function (err) {
 				sets,
 				chrts,
 				stations,
-				latestCommit,
+				version,
 			})
 		})
 		app.get('/browse', (req, res) => {
@@ -119,7 +114,7 @@ hbs.registerPartials(__dirname + '/views/partials', function (err) {
 				sets,
 				chrts,
 				stations,
-				latestCommit
+				version
 			})
 		})
 	})
