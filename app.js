@@ -83,7 +83,7 @@ custom.then(chrts => {
 			sets,
 			chrts,
 			stations,
-			latestCommit: "release"
+			latestCommit: require('./package.json').version
 		})
 	})
 })
