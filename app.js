@@ -38,7 +38,8 @@ app.use(session({
 }));
 
 const url = require('url');
-const custom = require('./config/preset.js').preset;
+var plotConfig = require('climate-plots-config')
+const custom = plotConfig.custom;
 exports.custom = custom;
 
 // var charts = (req) => {
