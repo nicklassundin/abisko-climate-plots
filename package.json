@@ -1,6 +1,6 @@
 {
   "name": "abisko-climate-plots",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Original work from https://github.com/antoneri/abisko-climate-plots",
   "main": "abisko-climate-plots-lib.js",
   "dependencies": {
