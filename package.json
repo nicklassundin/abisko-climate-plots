@@ -1,6 +1,6 @@
 {
 	"name": "abisko-climate-plots",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"description": "Original work from https://github.com/antoneri/abisko-climate-plots",
 	"main": "abisko-climate-plots-lib.js",
 	"dependencies": {
@@ -8,7 +8,7 @@
 		"body-parser": "^1.19.0",
 		"chai-http": "^4.3.0",
 		"child_process": "^1.0.2",
-		"climate-plots-config": "0.0.17",
+		"climate-plots-config": "*",
 		"commonjs-highcharts": "^4.0.3",
 		"compression": "^1.7.4",
 		"connect": "^3.7.0",
