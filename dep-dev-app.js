@@ -1,4 +1,3 @@
-const ucid = require('unique-commit-id');
 var version = require('./package.json').version + '';
 
 var fs = require('fs');
@@ -6,25 +5,8 @@ var express = require('express');
 
 // Pre-setup
 var $ = require("jquery");
-
-
 // Setup
 const app = express();
-// const compression = require('compression')
-// app.use(compression)
-var hbs = require('hbs');
-// Open file access
-app.use('/css', express.static(__dirname + '/css'));
-app.use('/dep', express.static(__dirname + '/dep'));
-app.use('/modules', express.static(__dirname + '/modules'));
-app.use('/config', express.static(__dirname + '/config'));
-app.use('/data', express.static(__dirname + '/data'));
-app.use('/data/abisko', express.static(__dirname + '/data/abisko'));
-app.use('/client', express.static(__dirname + '/client'));
-app.use('/tmp', express.static(__dirname + '/tmp'));
-app.use('/maps', express.static(__dirname + '/maps'));
-app.use('/static', express.static(__dirname + '/static'));
-
 // SMHI DB connection
 const TYPE = 'corrected-archive';
 require('./modules/server/smhi').init(app, TYPE);
@@ -39,86 +21,6 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true
 }));
-
-const url = require('url');
-var plotConfig = require('climate-plots-config')
-const custom = plotConfig.custom;
-exports.custom = custom;
-
-var charts = (req) => {
-	return new Promise((res, rej) => {
-		custom.then(IDs => {
-			const queryObject = url.parse(req.url,true).query;
-			var id;
-			var ids;
-			if(!queryObject.id) {
-				ids = IDs.all;
-			}else if(!custom[queryObject.id]){
-				ids = queryObject.id.split(",");
-			}else{
-				ids = IDs[queryObject.id];
-			}
-			res(ids.map(id => {
-				return {
-					id: id,
-					station: queryObject.station
-				}
-			}))
-		})
-	})
-}
-
-var stati = require('./static/charts/stations.json')
-// hbs.registerHelper('isdefined', (value, station) => {
-// 	return stati[station].includes(value);
-// })
-// var stationIDs = require('./static/charts/stationIds.json');
-
-hbs.registerPartials(__dirname + '/views/partials', function (err) {
-	custom.then(chrts => {
-		var stations = Object.keys(stati).map(st => {
-			if(st === "smhi"){
-				return "53430";
-			}else{
-				return st
-			}
-		})
-		// var stations = []
-		// Object.keys(stati).forEach(each => {
-			// console.log(each)
-			// console.log(stationIDs.sets[each])
-			// stationIDs.sets[each].forEach(id => {
-				// stations.push(id)
-			// })
-		// });
-		var sets = stati;
-		app.render('browse-release.hbs', {sets, chrts, stations, version}, (err, str) => {
-			if(err) throw err
-			fs.writeFile('index.html', str, err => {
-				if (err) {
-					console.error(err)
-					return
-				}
-			})
-		})	
-		app.get('/github', (req, res) => {
-			res.render('browse-release.hbs', {
-				sets,
-				chrts,
-				stations,
-				version,
-			})
-		})
-		app.get('/browse', (req, res) => {
-			res.render('browse.hbs', {
-				sets,
-				chrts,
-				stations,
-				version
-			})
-		})
-	})
-});
 
 /////
 var R = require('r-script');
