@@ -1,34 +1,56 @@
-var chai = require('chai');
-var chaiHttp = require('chai-http');
-var server = require('./app.js').app
-var should = chai.should();
+const chai = require("chai");
+const chaiHttp = require("chai-http"),
+    server = require("./app.js").app,
+    should = chai.should();
 
 chai.use(chaiHttp);
 
-describe('server test', function() {
-	before(function(){
-	})
-	it('should list ALL / GET', function(done) {
-		chai.request(server)
-			.get('/')
-			.end(function(err, res){
-				res.should.have.status(200);
-				done();
-			});
-	});
-	it('should list ALL /chart GET', function(done) {
-		chai.request(server)
-			.get('/chart')
-			.end(function(err, res){
-				res.should.have.status(200);
-				done();
-			});
-	});
-	// it('chart time to load', function * (){
-	// chai.request(server)
-	// .get('/chart')
-	// .end(function(err, res){
-	// TODO
-	// });
-	// })
-})
+describe(
+    "server test",
+    () => {
+
+        before(() => {
+        });
+        it(
+            "should list ALL / GET",
+            (done) => {
+
+                chai.request(server).
+                    get("/").
+                    end((err, res) => {
+
+                        res.should.have.status(200);
+                        done();
+
+                    });
+
+            }
+        );
+        it(
+            "should list ALL /chart GET",
+            (done) => {
+
+                chai.request(server).
+                    get("/chart").
+                    end((err, res) => {
+
+                        res.should.have.status(200);
+                        done();
+
+                    });
+
+            }
+        );
+
+        /*
+         * It('chart time to load', function * (){
+         * Chai.request(server)
+         * .get('/chart')
+         * .end(function(err, res){
+         * TODO
+         * });
+         * })
+         */
+
+    }
+);

@@ -1,44 +1,85 @@
-exports.setup = function(app){
-	var version = require('./package.json').version + '';
+exports.setup = function (app) {
 
-	var fs = require('fs');
+    const version = `${require("./package.json").version}`;
 
-	// Pre-setup
-	var $ = require("jquery");
+    const fs = require("fs");
 
-	var hbs = require('hbs');
-	var plotConfig = require('climate-plots-config')
-	const custom = plotConfig.custom;
-	exports.custom = custom;
-	var stati = require('./static/charts/stations.json')
-	hbs.registerPartials(__dirname + '/views/partials', function (err) {
-		custom.then(chrts => {
-			var stations = Object.keys(stati).map(st => {
-				if(st === "smhi"){
-					return "53430";
-				}else{
-					return st
-				}
-			})
-			var sets = stati;
-			app.render('browse-release.hbs', {sets, chrts, stations, version}, (err, str) => {
-				if(err) throw err
-				fs.writeFile('index.html', str, err => {
-					if (err) {
-						console.error(err)
-						return
-					}
-				})
-			})	
-			app.get('/github', (req, res) => {
-				res.render('browse-release.hbs', {
-					sets,
-					chrts,
-					stations,
-					version,
-				})
-			})
-		})
-	});
+    // Pre-setup
+    const $ = require("jquery");
 
-}
+    const hbs = require("hbs");
+    const plotConfig = require("climate-plots-config"),
+        {custom} = plotConfig;
+    exports.custom = custom;
+    const stati = require("./static/charts/stations.json");
+    hbs.registerPartials(
+        `${__dirname}/views/partials`,
+        (err) => {
+
+            custom.then((chrts) => {
+
+                const stations = Object.keys(stati).map((st) => {
+
+                        if (st === "smhi") {
+
+                            return "53430";
+
+                        }
+
+                        return st;
+
+                    }),
+                    sets = stati;
+                app.render(
+                    "browse-release.hbs",
+                    {sets,
+                        chrts,
+                        stations,
+                        version},
+                    (err, str) => {
+
+                        if (err) {
+
+                            throw err;
+
+                        }
+                        fs.writeFile(
+                            "index.html",
+                            str,
+                            (err) => {
+
+                                if (err) {
+
+                                    console.error(err);
+
+
+                                }
+
+                            }
+                        );
+
+                    }
+                );
+                app.get(
+                    "/github",
+                    (req, res) => {
+
+                        res.render(
+                            "browse-release.hbs",
+                            {
+                                sets,
+                                chrts,
+                                stations,
+                                version
+                            }
+                        );
+
+                    }
+                );
+
+            });
+
+        }
+    );
+
+};

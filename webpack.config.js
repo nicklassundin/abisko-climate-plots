@@ -1,120 +1,136 @@
-const path = require('path');
-const webpack = require('webpack');
-const $ = require('jquery')
+// Const $ = require("jquery");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const webpack = require("webpack");
+const dir = __dirname;
+module.exports = [
+    {
+        "entry": {
+            "bundle": "./modules/lib.js"
+        },
+        "module": {
+            "rules": [
+                {
+                    "loader": "raw-loader",
+                    "test": /\.txt$/u
+                },
+                {
+                    "loader": "csv-loader",
+                    "test": /\.csv$/u
 
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+                    /*
+                     * Options: {
+                     * Header: true,
+                     * Download: true,
+                     * SkipEmptyLines: true
+                     * }
+                     */
+                }
+            ]
+        },
+        "node": {
+            "child_process": "empty",
+            "console": true,
+            "fs": "empty",
+            "net": "empty",
+            "tls": "empty"
+        },
+        "optimization": {
+            "minimize": true,
+            "minimizer": [
+                new UglifyJsPlugin({
+                    "uglifyOptions": {
+                        "output": {
+                            "comments": false
+                        }
+                    }
+                })
+            ]
+        },
+        "output": {
+            "filename": "./bundle.js",
+            "path": `${dir}/client`
+        },
+        "plugins": [
 
-module.exports = [{
-	entry: {
-		bundle: './modules/lib.js'
-	},
-	output: {
-		filename: './bundle.js',
-		path: __dirname + '/client'
-	},
-	optimization: {
-    		minimize: true,
-		minimizer: [
-			new UglifyJsPlugin({
-				uglifyOptions: {
-					output: {
-						comments: false,
-					}
-				}
-			})
-		],
-  	},
-	module: {
-		rules: [
-			{
-				test: /\.txt$/, 
-				loader: 'raw-loader'
-			},{
-				test: /\.csv$/,
-				loader: 'csv-loader',
-				// options: {
-				// header: true,
-				// download: true,
-				// skipEmptyLines: true
-				// }
-			}
-		]
-	},
-	
-	plugins: [
-		// new webpack.ProvidePlugin({
-			// $: "jquery",
-			// jQuery: "jquery",
-			// "window.jQuery": "jquery"
-		// })
-	],
-	node: {
-		console: true,
-		child_process: "empty",
-		fs: 'empty',
-		net: 'empty',
-		tls: 'empty'
-	}
-},{
-	entry: {
-		bundle: './modules/map.js'
-	},
-	output: {
-		filename: './map.js',
-		path: __dirname + "/temp"
-	},
-	module: {
-		rules: [
-			{
-				test: /\.txt$/, 
-				loader: 'raw-loader'
-			},{
-				test: /\.csv$/,
-				loader: 'csv-loader',
-				// options: {
-				// header: true,
-				// download: true,
-				// skipEmptyLines: true
-				// }
-			}
-		]
-	},
-	node: {
-		console: true,
-		fs: 'empty',
-		net: 'empty',
-		tls: 'empty'
-	}
-},{
-	entry: {
-		bundle: './modules/d3-map.js'
-	},
-	output: {
-		filename: './d3-map.js',
-		path: __dirname + '/client'
-	},
-	module: {
-		rules: [
-			{
-				test: /\.txt$/, 
-				loader: 'raw-loader'
-			},{
-				test: /\.csv$/,
-				loader: 'csv-loader',
-				// options: {
-				// header: true,
-				// download: true,
-				// skipEmptyLines: true
-				// }
-			}
-		]
-	},
-	node: {
-		console: true,
-		fs: 'empty',
-		net: 'empty',
-		tls: 'empty'
-	}
+            /*
+             * New webpack.ProvidePlugin({
+             * $: "jquery",
+             * JQuery: "jquery",
+             * "window.jQuery": "jquery"
+             * })
+             */
+        ]
+    },
+    {
+        "entry": {
+            "bundle": "./modules/map.js"
+        },
+        "module": {
+            "rules": [
+                {
+                    "loader": "raw-loader",
+                    "test": /\.txt$/u
+                },
+                {
+                    "loader": "csv-loader",
+                    "test": /\.csv$/u
 
-}];
+                    /*
+                     * Options: {
+                     * Header: true,
+                     * Download: true,
+                     * SkipEmptyLines: true
+                     * }
+                     */
+                }
+            ]
+        },
+        "node": {
+            "console": true,
+            "fs": "empty",
+            "net": "empty",
+            "tls": "empty"
+        },
+        "output": {
+            "filename": "./map.js",
+            "path": `${__dirname}/temp`
+        }
+    },
+    {
+        "entry": {
+            "bundle": "./modules/d3-map.js"
+        },
+        "module": {
+            "rules": [
+                {
+                    "loader": "raw-loader",
+                    "test": /\.txt$/u
+                },
+                {
+                    "loader": "csv-loader",
+                    "test": /\.csv$/u
+
+                    /*
+                     * Options: {
+                     * Header: true,
+                     * Download: true,
+                     * SkipEmptyLines: true
+                     * }
+                     */
+                }
+            ]
+        },
+        "node": {
+            "console": true,
+            "fs": "empty",
+            "net": "empty",
+            "tls": "empty"
+        },
+        "output": {
+            "filename": "./d3-map.js",
+            "path": `${__dirname}/client`
+        }
+
+    }
+];
 
