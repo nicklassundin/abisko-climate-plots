@@ -1,23 +1,47 @@
-const fs = require('fs')
-const request = require('request')
+const fs = require("fs");
+const request = require("request");
 
-const expect = require('chai').expect
+const {expect} = require("chai");
 
-const stats = require('./struct.js')
+const stats = require("./struct.js");
 
-describe('javascript statistic module', function () {
-		
-	it('CLEAN - struct.create()', function * () {
-		var result = stats.struct.create();
-		expect(result).to.eql(stats.struct);
-	})
-	it('NONE-CLEAN - struct.create()', function * () {
-		var result = stats.struct.create([{x: 0, y: 0},{x: 1, y: 1}]);
-		expect(result.values).to.eql(stats.struct.values);
-	})
-	it('struct.clone()', function * () {
-		var result = stats.struct.create();
-		var clone = result.clone();
-		expect(result).to.eql(clone);
-	})
-})
+describe(
+    "javascript statistic module",
+    () => {
+
+        it(
+            "CLEAN - struct.create()",
+            function *() {
+
+                const result = stats.struct.create();
+                expect(result).to.eql(stats.struct);
+
+            }
+        );
+        it(
+            "NONE-CLEAN - struct.create()",
+            function *() {
+
+                const result = stats.struct.create([
+                    {"x": 0,
+                        "y": 0},
+                    {"x": 1,
+                        "y": 1}
+                ]);
+                expect(result.values).to.eql(stats.struct.values);
+
+            }
+        );
+        it(
+            "struct.clone()",
+            function *() {
+
+                const result = stats.struct.create(),
+		 clone = result.clone();
+                expect(result).to.eql(clone);
+
+            }
+        );
+
+    }
+);
