@@ -4,7 +4,8 @@ global.baselineLower = constant.baselineLower;
 global.baselineUpper = constant.baselineUpper;
 global.startYear = constant.startYear;
 // Var date = require('../formatters/date');
-const helper = require("../../helpers");
+// const helper = require("../../helpers");
+const helper = require('climate-plots-helper')
 
 
 exports.plotLines = {

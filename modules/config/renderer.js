@@ -17,7 +17,7 @@ const tooltips = require("./formatters/tooltips.js"),
     {dateFormats} = tooltips;
 const axisFormats = require("./formatters/axis.js"),
     yAxisFormats = axisFormats.yAxis;
-const help = require("../helpers.js"),
+const help = require('climate-plots-helper'),
 
     chart = {
         "id": undefined,

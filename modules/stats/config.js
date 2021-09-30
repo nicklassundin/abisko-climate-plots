@@ -1,5 +1,5 @@
 
-const help = require("./../helpers.js");
+const help = require('climate-plots-helper');
 const parser = require("./struct.js"),
     {struct} = parser,
     {parseByDate} = parser;
