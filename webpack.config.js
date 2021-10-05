@@ -93,7 +93,7 @@ module.exports = [
         },
         "output": {
             "filename": "./map.js",
-            "path": `${__dirname}/temp`
+            "path": `${__dirname}/static/map.bundle.js`
         }
     },
     {

@@ -15,10 +15,10 @@ app.use(
     "/css",
     express.static(`${__dirname}/css`)
 );
-app.use(
-    "/dep",
-    express.static(`${__dirname}/dep`)
-);
+// app.use(
+    // "/dep",
+    // express.static(`${__dirname}/dep`)
+// );
 app.use(
     "/modules",
     express.static(`${__dirname}/modules`)
@@ -38,10 +38,6 @@ app.use(
 app.use(
     "/client",
     express.static(`${__dirname}/client`)
-);
-app.use(
-    "/tmp",
-    express.static(`${__dirname}/tmp`)
 );
 app.use(
     "/maps",
