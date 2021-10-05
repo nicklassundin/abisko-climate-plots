@@ -1,16 +1,26 @@
 <script type="text/javascript">
 	var url = "https://nicklassundin.github.io/abisko-climate-plots";
 $("select").change(function() {
-		document.getElementById("mark").innerHTML = "";
-		var q = queryString.parse(location.search);
-		q.set = document.getElementById("set").value;
-		q.station = document.getElementById("station").value;
-		window.history.replaceState(null, null,'?'+queryString.stringify(q));
-		lib.renderSets(document.getElementById("mark"),q.set,q.station,url);
-	});
+	document.getElementById("mark").innerHTML = "";
 	var q = queryString.parse(location.search);
-	q.set = q.set ? q.set : document.getElementById("set").value;
-	q.station = q.station ? q.station : document.getElementById("station").value;
+	q.set = document.getElementById("set").value;
+	q.station = document.getElementById("station").value;
+	window.history.replaceState(null, null,'?'+queryString.stringify(q));
+	{{!-- lib.renderSets(document.getElementById("mark"),q.set,q.station,url); --}}
+	var el = document.getElementById("mark");
+	el.setAttribute("set", `${q.set}`)
+	el.setAttribute("station", `${q.station}`)
+	el.setAttribute("url", `${url}`)
+	lib.chart(document.getElementById("mark"))
+});
+var q = queryString.parse(location.search);
+q.set = q.set ? q.set : document.getElementById("set").value;
+q.station = q.station ? q.station : document.getElementById("station").value;
 window.history.replaceState(null, null,'?'+queryString.stringify(q));
-	lib.renderSets(document.getElementById("mark"),q.set,q.station,url);
+{{!-- lib.renderSets(document.getElementById("mark"),q.set,q.station,url); --}}
+var el = document.getElementById("mark").
+	el.setAttribute("set", `${q.set}`)
+el.setAttribute("station", `${q.station}`)
+el.setAttribute("url", `${url}`)
+lib.chart(el)
 </script>

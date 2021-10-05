@@ -87,9 +87,9 @@
     "test-respons": "artillery quick --count 10 -n 20 https://localhost/charts",
     "test-unit": "mocha './modules/**/*.spec.js' --delay",
     "test-dev": "mocha  './modules/**/*.spec.js' '*.spec.dev.js' 'modules/**/*.spec.dev.js' --delay",
-    "start": "npm run update && git submodule update && node server.js",
-    "start-dev": "npm run update && npx nodemon server.js d",
-    "start-full": "npm test && npx nodemon server.js",
+    "start": "npm run update && git submodule update && node static/initiate.js && node server.js",
+    "start-dev": "npm run update && node static/initiate.js && npx nodemon server.js d",
+    "start-full": "npm run update && git submodule update && npm test && node static/initiate.js && npx nodemon server.js",
     "static": "cp client/bundle.js static/bundle.js",
     "lint": "eslint *.js ./modules/",
     "lint-fix": "eslint --fix *.js ./modules/"
