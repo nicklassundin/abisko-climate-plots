@@ -1,4 +1,4 @@
-const help = require("../../helpers.js"),
+const help = require('climate-plots-helper'),
     {time} = require("climate-plots-config");
 const dateFormat = (date) => `${date.getFullYear()} ${time[nav_lang].months[help.months()[date.getMonth()]]} ${date.getDate()}`;
 

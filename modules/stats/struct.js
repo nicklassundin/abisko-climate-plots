@@ -1,4 +1,5 @@
-const help = require("./../helpers.js");
+// const help = require("./../helpers.js");
+const help = require('climate-plots-helper')
 const regression = require("regression");
 
 /*

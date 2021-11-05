@@ -1,4 +1,4 @@
-const help = require("./../helpers.js");
+const help = require('climate-plots-helper');
 const regression = require("regression");
 const {struct} = require("./struct.js"),
     parseByDate = function (values, type = "mean", src = "", custom) {

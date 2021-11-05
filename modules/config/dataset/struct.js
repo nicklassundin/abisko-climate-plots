@@ -2,7 +2,8 @@ const $ = require("jquery");
 
 const Papa = require("papaparse"),
     parse = require("../../stats/config.js").parsers;
-const help = require("../../helpers.js");
+// const help = require("../../helpers.js");
+const help = require('climate-plots-helper');
 
 const {createDiv} = require("../charts/struct.js"),
 
