@@ -5628,6 +5628,34 @@
               },
               "caption": "Årets blötaste [unit] (Summerad nederbörd i mm).",
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -6056,6 +6084,34 @@
               },
               "caption": "Årets blötaste [unit] (Summerad nederbörd i mm).",
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -6485,6 +6541,34 @@
               },
               "caption": "Årets blötaste [unit] (Summerad nederbörd i mm).",
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -6913,6 +6997,34 @@
               },
               "caption": "Årets blötaste [unit] (Summerad nederbörd i mm).",
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -7370,6 +7482,34 @@
                 "top": "[Y-AXIS]"
               },
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -7389,6 +7529,16 @@
               "name": "Genomsnittlig varmaste högsta temperatur [interval]",
               "week": "veckovis",
               "day": "dagligen"
+            },
+            "extremehigh": {
+              "name": "",
+              "week": "",
+              "day": ""
+            },
+            "extremelow": {
+              "name": "",
+              "week": "",
+              "day": ""
             }
           },
           "dataSource": {
@@ -7831,6 +7981,34 @@
                 "top": "[Y-AXIS]"
               },
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -7850,6 +8028,16 @@
               "name": "Genomsnittlig varmaste högsta temperatur [interval]",
               "week": "veckovis",
               "day": "dagligen"
+            },
+            "extremehigh": {
+              "name": "",
+              "week": "",
+              "day": ""
+            },
+            "extremelow": {
+              "name": "",
+              "week": "",
+              "day": ""
             }
           },
           "dataSource": {
@@ -11432,6 +11620,34 @@
               },
               "caption": "Årets blötaste [unit] (Summerad nederbörd i mm).",
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -11871,6 +12087,34 @@
               },
               "caption": "Årets blötaste [unit] (Summerad nederbörd i mm).",
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -12339,6 +12583,34 @@
                 "top": "[Y-AXIS]"
               },
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -12358,6 +12630,16 @@
               "name": "Genomsnittlig varmaste högsta temperatur [interval]",
               "week": "veckovis",
               "day": "dagligen"
+            },
+            "extremehigh": {
+              "name": "",
+              "week": "",
+              "day": ""
+            },
+            "extremelow": {
+              "name": "",
+              "week": "",
+              "day": ""
             }
           },
           "dataSource": {
@@ -12811,6 +13093,34 @@
                 "top": "[Y-AXIS]"
               },
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -12830,6 +13140,16 @@
               "name": "Genomsnittlig varmaste högsta temperatur [interval]",
               "week": "veckovis",
               "day": "dagligen"
+            },
+            "extremehigh": {
+              "name": "",
+              "week": "",
+              "day": ""
+            },
+            "extremelow": {
+              "name": "",
+              "week": "",
+              "day": ""
             }
           },
           "dataSource": {
@@ -15632,6 +15952,34 @@
               },
               "caption": "Årets blötaste [unit] (Summerad nederbörd i mm).",
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -16073,6 +16421,34 @@
               },
               "caption": "Årets blötaste [unit] (Summerad nederbörd i mm).",
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -16506,6 +16882,34 @@
               },
               "caption": "Årets blötaste [unit] (Summerad nederbörd i mm).",
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -16938,6 +17342,34 @@
               },
               "caption": "Årets blötaste [unit] (Summerad nederbörd i mm).",
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -17408,6 +17840,34 @@
                 "top": "[Y-AXIS]"
               },
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -17427,6 +17887,16 @@
               "name": "Genomsnittlig varmaste högsta temperatur [interval]",
               "week": "veckovis",
               "day": "dagligen"
+            },
+            "extremehigh": {
+              "name": "",
+              "week": "",
+              "day": ""
+            },
+            "extremelow": {
+              "name": "",
+              "week": "",
+              "day": ""
             }
           },
           "dataSource": {
@@ -17882,6 +18352,34 @@
                 "top": "[Y-AXIS]"
               },
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -17901,6 +18399,16 @@
               "name": "Genomsnittlig varmaste högsta temperatur [interval]",
               "week": "veckovis",
               "day": "dagligen"
+            },
+            "extremehigh": {
+              "name": "",
+              "week": "",
+              "day": ""
+            },
+            "extremelow": {
+              "name": "",
+              "week": "",
+              "day": ""
             }
           },
           "dataSource": {
@@ -18365,6 +18873,34 @@
                 "top": "[Y-AXIS]"
               },
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -18384,6 +18920,16 @@
               "name": "Genomsnittlig varmaste högsta temperatur [interval]",
               "week": "veckovis",
               "day": "dagligen"
+            },
+            "extremehigh": {
+              "name": "",
+              "week": "",
+              "day": ""
+            },
+            "extremelow": {
+              "name": "",
+              "week": "",
+              "day": ""
             }
           },
           "dataSource": {
@@ -18847,6 +19393,34 @@
                 "top": "[Y-AXIS]"
               },
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -18866,6 +19440,16 @@
               "name": "Genomsnittlig varmaste högsta temperatur [interval]",
               "week": "veckovis",
               "day": "dagligen"
+            },
+            "extremehigh": {
+              "name": "",
+              "week": "",
+              "day": ""
+            },
+            "extremelow": {
+              "name": "",
+              "week": "",
+              "day": ""
             }
           },
           "dataSource": {
@@ -19330,6 +19914,34 @@
                 "top": "[Y-AXIS]"
               },
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -19349,6 +19961,16 @@
               "name": "Genomsnittlig varmaste högsta temperatur [interval]",
               "week": "veckovis",
               "day": "dagligen"
+            },
+            "extremehigh": {
+              "name": "",
+              "week": "",
+              "day": ""
+            },
+            "extremelow": {
+              "name": "",
+              "week": "",
+              "day": ""
             }
           },
           "dataSource": {
@@ -19812,6 +20434,34 @@
                 "top": "[Y-AXIS]"
               },
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -19831,6 +20481,16 @@
               "name": "Genomsnittlig varmaste högsta temperatur [interval]",
               "week": "veckovis",
               "day": "dagligen"
+            },
+            "extremehigh": {
+              "name": "",
+              "week": "",
+              "day": ""
+            },
+            "extremelow": {
+              "name": "",
+              "week": "",
+              "day": ""
             }
           },
           "dataSource": {
@@ -20278,6 +20938,34 @@
                 "top": "[Y-AXIS]"
               },
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -20297,6 +20985,16 @@
               "name": "Genomsnittlig varmaste högsta temperatur [interval]",
               "week": "veckovis",
               "day": "dagligen"
+            },
+            "extremehigh": {
+              "name": "",
+              "week": "",
+              "day": ""
+            },
+            "extremelow": {
+              "name": "",
+              "week": "",
+              "day": ""
             }
           },
           "dataSource": {
@@ -20743,6 +21441,34 @@
                 "top": "[Y-AXIS]"
               },
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -20762,6 +21488,16 @@
               "name": "Genomsnittlig varmaste högsta temperatur [interval]",
               "week": "veckovis",
               "day": "dagligen"
+            },
+            "extremehigh": {
+              "name": "",
+              "week": "",
+              "day": ""
+            },
+            "extremelow": {
+              "name": "",
+              "week": "",
+              "day": ""
             }
           },
           "dataSource": {
@@ -55230,6 +55966,34 @@
               },
               "caption": "Årets blötaste [unit] (Summerad nederbörd i mm).",
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -55658,6 +56422,34 @@
               },
               "caption": "Årets blötaste [unit] (Summerad nederbörd i mm).",
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -57581,6 +58373,34 @@
                 "top": "[Y-AXIS]"
               },
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -57600,6 +58420,16 @@
               "name": "Genomsnittlig varmaste högsta temperatur [interval]",
               "week": "veckovis",
               "day": "dagligen"
+            },
+            "extremehigh": {
+              "name": "",
+              "week": "",
+              "day": ""
+            },
+            "extremelow": {
+              "name": "",
+              "week": "",
+              "day": ""
             }
           },
           "dataSource": {
@@ -58042,6 +58872,34 @@
                 "top": "[Y-AXIS]"
               },
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -58061,6 +58919,16 @@
               "name": "Genomsnittlig varmaste högsta temperatur [interval]",
               "week": "veckovis",
               "day": "dagligen"
+            },
+            "extremehigh": {
+              "name": "",
+              "week": "",
+              "day": ""
+            },
+            "extremelow": {
+              "name": "",
+              "week": "",
+              "day": ""
             }
           },
           "dataSource": {
@@ -63787,6 +64655,34 @@
                 "top": "[Y-AXIS]"
               },
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -63806,6 +64702,16 @@
               "name": "Genomsnittlig varmaste högsta temperatur [interval]",
               "week": "veckovis",
               "day": "dagligen"
+            },
+            "extremehigh": {
+              "name": "",
+              "week": "",
+              "day": ""
+            },
+            "extremelow": {
+              "name": "",
+              "week": "",
+              "day": ""
             }
           },
           "dataSource": {
@@ -64248,6 +65154,34 @@
                 "top": "[Y-AXIS]"
               },
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -64267,6 +65201,16 @@
               "name": "Genomsnittlig varmaste högsta temperatur [interval]",
               "week": "veckovis",
               "day": "dagligen"
+            },
+            "extremehigh": {
+              "name": "",
+              "week": "",
+              "day": ""
+            },
+            "extremelow": {
+              "name": "",
+              "week": "",
+              "day": ""
             }
           },
           "dataSource": {
@@ -66688,19 +67632,19 @@
                 "config": "temperature",
                 "lang": "nhem_Temperature",
                 "data": "NASA-GISS-TEMP",
-                "set": "slide"
+                "set": "climate"
               },
               "glob": {
                 "config": "temperature",
                 "lang": "glob_Temperature",
                 "data": "NASA-GISS-TEMP",
-                "set": "slide"
+                "set": "climate"
               },
               "64n-90n": {
                 "config": "temperature",
                 "lang": "64n-90n_Temperature",
                 "data": "NASA-GISS-TEMP",
-                "set": "slide"
+                "set": "climate"
               }
             }
           },
@@ -66822,11 +67766,11 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true,
-              "prime": true
+              "enabled": false
             },
             "1": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             }
           }
         },
@@ -67081,19 +68025,19 @@
                 "config": "temperature",
                 "lang": "nhem_Temperature",
                 "data": "NASA-GISS-TEMP",
-                "set": "slide"
+                "set": "climate"
               },
               "glob": {
                 "config": "temperature",
                 "lang": "glob_Temperature",
                 "data": "NASA-GISS-TEMP",
-                "set": "slide"
+                "set": "climate"
               },
               "64n-90n": {
                 "config": "temperature",
                 "lang": "64n-90n_Temperature",
                 "data": "NASA-GISS-TEMP",
-                "set": "slide"
+                "set": "climate"
               }
             }
           },
@@ -67215,11 +68159,11 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true,
-              "prime": true
+              "enabled": false
             },
             "1": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             }
           }
         },
@@ -67474,19 +68418,19 @@
                 "config": "temperature",
                 "lang": "nhem_Temperature",
                 "data": "NASA-GISS-TEMP",
-                "set": "slide"
+                "set": "climate"
               },
               "glob": {
                 "config": "temperature",
                 "lang": "glob_Temperature",
                 "data": "NASA-GISS-TEMP",
-                "set": "slide"
+                "set": "climate"
               },
               "64n-90n": {
                 "config": "temperature",
                 "lang": "64n-90n_Temperature",
                 "data": "NASA-GISS-TEMP",
-                "set": "slide"
+                "set": "climate"
               }
             }
           },
@@ -67608,11 +68552,11 @@
         "set": {
           "groups": {
             "0": {
-              "enabled": true,
-              "prime": true
+              "enabled": false
             },
             "1": {
-              "enabled": true
+              "enabled": true,
+              "prime": true
             }
           }
         },
@@ -78308,6 +79252,34 @@
               },
               "caption": "Årets blötaste [unit] (Summerad nederbörd i mm).",
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -78741,6 +79713,34 @@
               },
               "caption": "Årets blötaste [unit] (Summerad nederbörd i mm).",
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -79203,6 +80203,34 @@
                 "top": "[Y-AXIS]"
               },
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -79222,6 +80250,16 @@
               "name": "Genomsnittlig varmaste högsta temperatur [interval]",
               "week": "veckovis",
               "day": "dagligen"
+            },
+            "extremehigh": {
+              "name": "",
+              "week": "",
+              "day": ""
+            },
+            "extremelow": {
+              "name": "",
+              "week": "",
+              "day": ""
             }
           },
           "dataSource": {
@@ -79669,6 +80707,34 @@
                 "top": "[Y-AXIS]"
               },
               "legend": "Väder"
+            },
+            "3": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
+            },
+            "4": {
+              "title": "",
+              "subTitle": "",
+              "caption": "",
+              "yAxis": {
+                "left": "",
+                "right": ""
+              },
+              "xAxis": {
+                "bott": "",
+                "top": ""
+              },
+              "legend": ""
             }
           },
           "series": {
@@ -79688,6 +80754,16 @@
               "name": "Genomsnittlig varmaste högsta temperatur [interval]",
               "week": "veckovis",
               "day": "dagligen"
+            },
+            "extremehigh": {
+              "name": "",
+              "week": "",
+              "day": ""
+            },
+            "extremelow": {
+              "name": "",
+              "week": "",
+              "day": ""
             }
           },
           "dataSource": {
