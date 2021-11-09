@@ -372,6 +372,34 @@
           "top": "[Y-AXIS]"
         },
         "legend": "Väder"
+      },
+      "3": {
+        "title": "",
+        "subTitle": "",
+        "caption": "",
+        "yAxis": {
+          "left": "",
+          "right": ""
+        },
+        "xAxis": {
+          "bott": "",
+          "top": ""
+        },
+        "legend": ""
+      },
+      "4": {
+        "title": "",
+        "subTitle": "",
+        "caption": "",
+        "yAxis": {
+          "left": "",
+          "right": ""
+        },
+        "xAxis": {
+          "bott": "",
+          "top": ""
+        },
+        "legend": ""
       }
     },
     "series": {
@@ -391,6 +419,16 @@
         "name": "Genomsnittlig varmaste högsta temperatur [interval]",
         "week": "veckovis",
         "day": "dagligen"
+      },
+      "extremehigh": {
+        "name": "",
+        "week": "",
+        "day": ""
+      },
+      "extremelow": {
+        "name": "",
+        "week": "",
+        "day": ""
       }
     },
     "dataSource": {

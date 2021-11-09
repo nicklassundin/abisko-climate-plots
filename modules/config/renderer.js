@@ -84,10 +84,8 @@ const help = require('climate-plots-helper'),
                             },
                             "chart": {
 
-                                /*
-                                 * Width: window.innerWidth
-                                 * StyledMode: true,
-                                 */
+                                 Width: window.innerWidth,
+                                 StyledMode: true,
                             }
                         }
                     );

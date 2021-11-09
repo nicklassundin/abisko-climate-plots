@@ -341,6 +341,34 @@
         },
         "caption": "Årets blötaste [unit] (Summerad nederbörd i mm).",
         "legend": "Väder"
+      },
+      "3": {
+        "title": "",
+        "subTitle": "",
+        "caption": "",
+        "yAxis": {
+          "left": "",
+          "right": ""
+        },
+        "xAxis": {
+          "bott": "",
+          "top": ""
+        },
+        "legend": ""
+      },
+      "4": {
+        "title": "",
+        "subTitle": "",
+        "caption": "",
+        "yAxis": {
+          "left": "",
+          "right": ""
+        },
+        "xAxis": {
+          "bott": "",
+          "top": ""
+        },
+        "legend": ""
       }
     },
     "series": {
