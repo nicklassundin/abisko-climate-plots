@@ -6,7 +6,9 @@ module.exports = (() => {
 
 	}
 	const web = require("./modules/server/web.js");
-	web.webserver.http(app);
+	const http = web.webserver.http(app);
+	const glimworks = require('climate-plots-glimworks-reader');
+	glimworks.init(app, http)
 	app.get(
 		"/",
 		(req, res) => {

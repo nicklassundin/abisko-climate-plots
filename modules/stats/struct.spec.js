@@ -1,8 +1,6 @@
 const fs = require("fs");
 const request = require("request");
-
 const {expect} = require("chai");
-
 const stats = require("./struct.js");
 
 describe(
