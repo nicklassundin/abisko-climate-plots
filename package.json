@@ -4,7 +4,7 @@
   "description": "Original work from https://github.com/antoneri/abisko-climate-plots",
   "main": "abisko-climate-plots-lib.js",
   "devdependencies": {
-	"climate-plots-config": "*" 
+    "climate-plots-config": "*"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.4",
@@ -49,7 +49,6 @@
     "papaparse": "^5.2.0",
     "pem": "^1.14.4",
     "pug": "^3.0.2",
-    "python": "^0.0.4",
     "query-string": "^7.0.0",
     "r-script": "^0.0.4",
     "regression": "^2.0.1",
