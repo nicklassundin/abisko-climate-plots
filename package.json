@@ -44,7 +44,6 @@
     "papaparse": "^5.2.0",
     "pem": "^1.14.4",
     "pug": "^3.0.2",
-    "python": "^0.0.4",
     "query-string": "^7.0.0",
     "r-script": "^0.0.4",
     "regression": "^2.0.1",
