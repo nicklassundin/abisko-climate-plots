@@ -12,7 +12,7 @@
     "chai-http": "^4.3.0",
     "child_process": "^1.0.2",
     "climate-plots-config": "0.x.x",
-    "climate-plots-glimworks-reader": "^1.0.7",
+    "climate-plots-glimworks-reader": "^1.0.14",
     "climate-plots-helper": "^1.0.3",
     "commonjs-highcharts": "^4.0.3",
     "compression": "^1.7.4",
