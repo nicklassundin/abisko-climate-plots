@@ -865,6 +865,26 @@
       }
     }
   },
+  "viz-extreme-temp-daily": {
+    "extremeTempDaily": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremeTempDaily",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
+  "viz-extreme-prec-daily": {
+    "extremePrecDaily": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremePrecDaily",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
   "vizchange": [
     "viz-annual-prec",
     "viz-grow-weeks",
@@ -917,6 +937,8 @@
     "viz-snowdepth-annual",
     "viz-carbon",
     "viz-extreme-temp-high-20",
-    "viz-extreme-temp-low-10"
+    "viz-extreme-temp-low-10",
+    "viz-extreme-temp-daily",
+    "viz-extreme-prec-daily"
   ]
 }
