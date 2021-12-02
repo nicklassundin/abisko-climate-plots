@@ -57,6 +57,10 @@
       "4": {
         "baseline": false,
         "yAxis": {}
+      },
+      "5": {
+        "baseline": false,
+        "yAxis": {}
       }
     },
     "decimals": 2,
@@ -123,6 +127,14 @@
         "className": "series-diff",
         "preset": "diff",
         "group": "1",
+        "visible": true,
+        "colour": "[example]",
+        "type": "column"
+      },
+      "extreme-diff": {
+        "className": "series-diff",
+        "preset": "diff",
+        "group": "5",
         "visible": true,
         "colour": "[example]",
         "type": "column"

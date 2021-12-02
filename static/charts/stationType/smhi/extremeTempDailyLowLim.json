@@ -57,6 +57,10 @@
       "4": {
         "baseline": false,
         "yAxis": {}
+      },
+      "5": {
+        "baseline": false,
+        "yAxis": {}
       }
     },
     "decimals": 2,
@@ -123,6 +127,14 @@
         "className": "series-diff",
         "preset": "diff",
         "group": "1",
+        "visible": true,
+        "colour": "[example]",
+        "type": "column"
+      },
+      "extreme-diff": {
+        "className": "series-diff",
+        "preset": "diff",
+        "group": "5",
         "visible": true,
         "colour": "[example]",
         "type": "column"
@@ -248,6 +260,20 @@
           "top": "[Y-AXIS]"
         },
         "legend": "Weather"
+      },
+      "5": {
+        "title": "Temperature Difference From Baseline",
+        "subTitle": "[stationName]",
+        "caption": "Difference between the yearly extreme average daily temperature  and the average extreme daily temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+        "yAxis": {
+          "left": "Temperature [°C]",
+          "right": "[X-AXIS]"
+        },
+        "xAxis": {
+          "bott": "Year",
+          "top": "[Y-AXIS]"
+        },
+        "legend": "Climate"
       }
     },
     "series": {
@@ -405,6 +431,20 @@
         "legend": ""
       },
       "4": {
+        "title": "",
+        "subTitle": "",
+        "caption": "",
+        "yAxis": {
+          "left": "",
+          "right": ""
+        },
+        "xAxis": {
+          "bott": "",
+          "top": ""
+        },
+        "legend": ""
+      },
+      "5": {
         "title": "",
         "subTitle": "",
         "caption": "",

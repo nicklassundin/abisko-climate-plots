@@ -142,7 +142,7 @@
         }
       },
       "1": {
-        "enabled": true,
+        "enabled": false,
         "tooltip": {
           "type": "valueDate"
         }
@@ -150,6 +150,12 @@
       "2": {
         "enabled": true,
         "prime": true,
+        "tooltip": {
+          "type": "valueDate"
+        }
+      },
+      "5": {
+        "enabled": true,
         "tooltip": {
           "type": "valueDate"
         }
