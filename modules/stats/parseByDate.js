@@ -362,6 +362,56 @@ const {struct} = require("./struct.js"),
 
                                                     });
                                                     break;
+                                                case "dailyExtremeLow":
+                                                    this.yrly.then((y) => {
+
+                                                        this.values[key] = (y.min
+                                                            ? y.min
+                                                            : y.total).min(false);
+                                                        res(this.values[key]);
+
+                                                    });
+                                                    break;
+                                                case "weeklyExtremeHigh":
+                                                    this.weeks.then((y) => {
+
+                                                        this.values[key] = (y.max
+                                                            ? y.max
+                                                            : y.total).max(false);
+                                                        res(this.values[key]);
+
+                                                    });
+                                                    break;
+                                                case "weeklyExtremeLow":
+                                                    this.weeks.then((y) => {
+
+                                                        this.values[key] = (y.min
+                                                            ? y.min
+                                                            : y.total).min(false);
+                                                        res(this.values[key]);
+
+                                                    });
+                                                    break;
+                                                case "monthlyExtremeHigh":
+                                                    this.monthly.then((y) => {
+
+                                                        this.values[key] = (y.max
+                                                            ? y.max
+                                                            : y.total).max(false);
+                                                        res(this.values[key]);
+
+                                                    });
+                                                    break;
+                                                case "monthlyExtremeLow":
+                                                    this.monthly.then((y) => {
+
+                                                        this.values[key] = (y.min
+                                                            ? y.min
+                                                            : y.total).min(false);
+                                                        res(this.values[key]);
+
+                                                    });
+                                                    break;
                                                 case "dailyExtremeMaxLim":
                                                     this.yrly.then((y) => {
 
@@ -482,6 +532,11 @@ const {struct} = require("./struct.js"),
                                         return this.request("weeksExtremeHigh");
 
                                     },
+                                    get "weeksExtremeLow" () {
+
+                                        return this.request("weeksExtremeLow");
+
+                                    },
                                     get "weeksExtremeHighLim" () {
 
                                         return this.request("weeksExtremeHighLim");
@@ -502,6 +557,11 @@ const {struct} = require("./struct.js"),
                                         return this.request("dailyExtremeHigh");
 
                                     },
+                                    get "dailyExtremeLow" () {
+
+                                        return this.request("dailyExtremeLow");
+
+                                    },
                                     get "dailyExtremeMaxLim" () {
 
                                         return this.request("dailyExtremeMaxLim");
@@ -510,6 +570,16 @@ const {struct} = require("./struct.js"),
                                     get "dailyExtremeMinLim" () {
 
                                         return this.request("dailyExtremeMinLim");
+
+                                    },
+                                    get "monthlyExtremeHigh" () {
+
+                                        return this.request("monthlyExtremeHigh");
+
+                                    },
+                                    get "monthlyExtremeLow" () {
+
+                                        return this.request("monthlyExtremeLow");
 
                                     },
                                     get "yrlySplit" () {

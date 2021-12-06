@@ -865,21 +865,121 @@
       }
     }
   },
-  "viz-extreme-temp-daily": {
+  "viz-extreme-temp-high-daily": {
     "extremeTempDaily": {
       "context": false,
       "station": "abisko",
-      "plot": "extremeTempDaily",
+      "plot": "extremeTempDailyHigh",
       "override": {
         "axislim": false
       }
     }
   },
-  "viz-extreme-prec-daily": {
+  "viz-extreme-temp-low-daily": {
+    "extremeTempDaily": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremeTempDailyLow",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
+  "viz-extreme-temp-high-weekly": {
+    "extremeTempWeekly": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremeTempWeeklyHigh",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
+  "viz-extreme-temp-low-weekly": {
+    "extremeTempDaily": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremeTempweeklyLow",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
+  "viz-extreme-temp-high-monthly": {
+    "extremeTempMonthly": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremeTempMonthlyHigh",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
+  "viz-extreme-temp-low-monthly": {
+    "extremeTempMonth": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremeTempMonthlyLow",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
+  "viz-extreme-prec-high-daily": {
     "extremePrecDaily": {
       "context": false,
       "station": "abisko",
-      "plot": "extremePrecDaily",
+      "plot": "extremePrecDailyHigh",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
+  "viz-extreme-prec-low-daily": {
+    "extremePrecDaily": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremePrecDailyLow",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
+  "viz-extreme-prec-high-weekly": {
+    "extremePrecWeekly": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremePrecWeeklyHigh",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
+  "viz-extreme-prec-low-weekly": {
+    "extremePrecWeekly": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremePrecWeeklyLow",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
+  "viz-extreme-prec-high-monthly": {
+    "extremePrecMonthly": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremePrecMonthlyHigh",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
+  "viz-extreme-prec-low-monthly": {
+    "extremePrecMonthly": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremePrecMonthlyLow",
       "override": {
         "axislim": false
       }
@@ -938,7 +1038,17 @@
     "viz-carbon",
     "viz-extreme-temp-high-20",
     "viz-extreme-temp-low-10",
-    "viz-extreme-temp-daily",
-    "viz-extreme-prec-daily"
+    "viz-extreme-temp-high-daily",
+    "viz-extreme-temp-low-daily",
+    "viz-extreme-temp-high-weekly",
+    "viz-extreme-temp-low-weekly",
+    "viz-extreme-temp-high-monthly",
+    "viz-extreme-temp-low-monthly",
+    "viz-extreme-prec-high-daily",
+    "viz-extreme-prec-low-daily",
+    "viz-extreme-prec-high-weekly",
+    "viz-extreme-prec-low-weekly",
+    "viz-extreme-prec-high-monthly",
+    "viz-extreme-prec-low-monthly"
   ]
 }
