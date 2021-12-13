@@ -9,13 +9,14 @@ var getData = function(station, tags, ...ser){
 	var type = tags.shift();
 	tags = tags.join('/')
 	ser = ser.join('/')
-	var url = `station/${station}/type/${type}/period/${tags}/${ser}`;
+	if(type === 'temperatures') type = 'temperature' // TODO hotfix
+	var url = `station/${station}/${type}/${tags}/${ser}`;
 	return new Promise((res, rej) => {
 		$.getJSON(url, function(result) {
-			result = result.data;
-			if(result.values && typeof result.values != 'function') result = result.values 
 			console.log('url', url)
 			console.log('data',result)
+			result = result.data;
+			if(result.values && typeof result.values != 'function') result = result.values 
 			res(result)	
 		})
 			.done(function(result) {
@@ -106,7 +107,7 @@ exports.series = {
 		return (meta, data, k, s) => this.getPreset(
 			meta.series.max,
 			{
-				"data": getData(meta.stationDef.station,meta.tag.data, 'max', 'max'),
+				"data": getData(meta.stationDef.station,meta.tag.data, 'max', true, 'values'),
 				// "data": data.max != undefined
 				// ? data.max.max != undefined
 				// ? data.max.max(
@@ -128,7 +129,7 @@ exports.series = {
 		return (meta, data, k, s) => this.getPreset(
 			meta.series.min,
 			{
-				"data": getData(meta.stationDef.station,meta.tag.data, 'min', 'min'),
+				"data": getData(meta.stationDef.station,meta.tag.data, 'min', true, 'values'),
 				// "data": data.min != undefined
 				//     ? data.min.min != undefined
 				//         ? data.min.min(
@@ -213,7 +214,7 @@ exports.series = {
 					: 0,
 					"radius": 2
 				},
-				"data": getData(meta.stationDef.station,meta.tag.data, 'avg'),
+				"data": getData(meta.stationDef.station,meta.tag.data),
 				// "data": data.avg != undefined
 				// ? data.avg.values
 				// : data.values
