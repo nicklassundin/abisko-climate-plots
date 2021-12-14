@@ -409,7 +409,10 @@ const help = require('climate-plots-helper'),
 
                     // Console.log(key)
                     const s = meta.series[key].preset;
-                    // Console.log(seriesBuild[s](meta, data, s, key));
+			// console.log("seriesbuild", seriesBuild[s])
+			// console.log("s", s)
+			// console.log("seriesBuild", seriesBuild)
+			// ffsdfsd
                     try {
 
                         if (meta.selector) {
@@ -422,7 +425,6 @@ const help = require('climate-plots-helper'),
                             ));
 
                         } else {
-
                             const sr = seriesBuild[s](
                                 meta,
                                 data,
@@ -432,17 +434,14 @@ const help = require('climate-plots-helper'),
                             series.push(sr);
 
                         }
-
                     } catch (error) {
-
                         // Console.log(meta)
-                        console.log(data);
+                        // console.log("data",data);
                         // Console.log(s)
-                        console.log(key);
-                        console.log(series);
-                        console.log(meta.series);
+                        // console.log("key",key);
+                        // console.log("series",series);
+                        // console.log("meta",meta.series);
                         throw error;
-
                     }
 
                 });

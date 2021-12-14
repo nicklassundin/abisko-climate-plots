@@ -1,30 +1,30 @@
 {
   "ref": {
-    "id": "weeklyExtremeTemperature",
+    "id": "dailyExtremeTemperature",
     "type": "abisko",
     "tag": {
       "render": [
         "temperatures",
-        "weeklyExtreme"
+        "dailyExtreme"
       ],
       "data": [
         "temperatures",
-        "weeksExtremeHigh"
+        "dailyExtremeLow"
       ]
     },
     "config": {
       "meta": {
         "smhi": {
           "data": "SMHI-Weather",
-          "config": "temperature",
-          "lang": "annualTemperature",
-          "set": "slideExtremeWeek"
+          "config": "extremeTemperature",
+          "lang": "extremeTemperature",
+          "set": "slideExtremeDayLow"
         },
         "abisko": {
           "data": "ANS",
-          "config": "temperature",
-          "lang": "annualTemperature",
-          "set": "slideExtremeWeek"
+          "config": "extremeTemperature",
+          "lang": "extremeTemperature",
+          "set": "slideExtremeDayLow"
         }
       }
     },
@@ -38,92 +38,28 @@
         "baseline": false
       },
       "1": {
-        "baseline": true,
-        "yAxis": {
-          "min": -3,
-          "max": 4
-        }
+        "baseline": true
       },
       "2": {
-        "baseline": false,
-        "yAxis": {
-          "min": 15
-        }
-      },
-      "3": {
-        "baseline": false,
-        "yAxis": {}
-      },
-      "4": {
-        "baseline": false,
-        "yAxis": {}
-      },
-      "5": {
-        "baseline": false,
-        "yAxis": {}
+        "baseline": false
       }
     },
     "decimals": 2,
     "series": {
-      "0": {
-        "className": "series-temp-extreme",
+      "extreme-high": {
+        "className": "series-temp-high-extreme",
         "preset": "extreme",
-        "group": "2",
+        "group": "0",
         "visible": true,
         "colour": "#ff0000",
-        "type": "line"
-      },
-      "1": {
-        "className": "series-temp-extreme",
-        "preset": "extreme",
-        "group": "3",
-        "visible": true,
-        "colour": "#ff0000",
-        "type": "bar",
+        "type": "line",
         "decimals": 0,
         "keys": [
           "y",
           "color"
         ]
       },
-      "2": {
-        "className": "series-temp-low-extreme",
-        "preset": "extreme",
-        "group": "4",
-        "visible": true,
-        "colour": "#0000ff",
-        "type": "bar",
-        "decimals": 0,
-        "keys": [
-          "y",
-          "color"
-        ]
-      },
-      "max": {
-        "className": "series-temp-max",
-        "preset": "max",
-        "group": "0",
-        "visible": false,
-        "colour": "#ff0000",
-        "type": "line"
-      },
-      "min": {
-        "className": "series-temp-min",
-        "preset": "min",
-        "group": "0",
-        "visible": false,
-        "colour": "#0000ff",
-        "type": "line"
-      },
-      "avg": {
-        "className": "series-temp-avg",
-        "preset": "avg",
-        "group": "0",
-        "visible": true,
-        "colour": "#888888",
-        "type": "line"
-      },
-      "diff": {
+      "extreme-diff": {
         "className": "series-diff",
         "preset": "diff",
         "group": "1",
@@ -131,13 +67,18 @@
         "colour": "[example]",
         "type": "column"
       },
-      "extreme-diff": {
-        "className": "series-diff",
-        "preset": "diff",
-        "group": "5",
+      "extreme-low": {
+        "className": "series-temp-low-extreme",
+        "preset": "extreme",
+        "group": "2",
         "visible": true,
-        "colour": "[example]",
-        "type": "column"
+        "colour": "#0000ff",
+        "type": "line",
+        "decimals": 0,
+        "keys": [
+          "y",
+          "color"
+        ]
       }
     },
     "parse": {
@@ -158,52 +99,27 @@
     }
   },
   "set": {
-    "unitType": "week",
+    "unitType": "day",
     "groups": {
-      "0": {
-        "enabled": false
-      },
       "1": {
-        "enabled": true
+        "enabled": true,
+        "tooltip": {
+          "type": "valueDate"
+        }
       },
       "2": {
+        "enabled": true,
         "prime": true,
-        "enabled": true
+        "tooltip": {
+          "type": "valueDate"
+        }
       }
     }
   },
   "en": {
-    "valueSuffix": "°C",
+    "valueSuffix": "",
     "groups": {
       "0": {
-        "title": "Annual Average Temperature",
-        "subTitle": "[stationName]",
-        "caption": "Average annual temperature. The lowest (min) and highest (max) temperature of the year.",
-        "yAxis": {
-          "left": "Average temperature [°C]",
-          "right": "[X-AXIS]"
-        },
-        "xAxis": {
-          "bott": "Year",
-          "top": "[Y-AXIS]"
-        },
-        "legend": "Weather"
-      },
-      "1": {
-        "title": "Temperature Difference From Baseline",
-        "subTitle": "[stationName]",
-        "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
-        "yAxis": {
-          "left": "Temperature [°C]",
-          "right": "[X-AXIS]"
-        },
-        "xAxis": {
-          "bott": "Year",
-          "top": "[Y-AXIS]"
-        },
-        "legend": "Climate"
-      },
-      "2": {
         "title": "Warmest [unit] of the year",
         "subTitle": "[stationName]",
         "caption": "Average temperature of warmest [unit] of the year.",
@@ -217,35 +133,7 @@
         },
         "legend": "Weather"
       },
-      "3": {
-        "title": "Extreme Weather event, Days Above [lim] [°C]",
-        "subTitle": "[stationName]",
-        "caption": "",
-        "yAxis": {
-          "left": "",
-          "right": "[X-AXIS]"
-        },
-        "xAxis": {
-          "bott": "Year",
-          "top": "[Y-AXIS]"
-        },
-        "legend": "Weather"
-      },
-      "4": {
-        "title": "Extreme Weather event, Days Below [lim] [°C]",
-        "subTitle": "[stationName]",
-        "caption": "",
-        "yAxis": {
-          "left": "",
-          "right": "[X-AXIS]"
-        },
-        "xAxis": {
-          "bott": "Year",
-          "top": "[Y-AXIS]"
-        },
-        "legend": "Weather"
-      },
-      "5": {
+      "1": {
         "title": "Temperature Difference From Baseline",
         "subTitle": "[stationName]",
         "caption": "Difference between the yearly extreme average daily temperature  and the average extreme daily temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
@@ -258,35 +146,37 @@
           "top": "[Y-AXIS]"
         },
         "legend": "Climate"
+      },
+      "2": {
+        "title": "Coldest [unit] of the year",
+        "subTitle": "[stationName]",
+        "caption": "Average temperature of coldest [unit] of the year.",
+        "yAxis": {
+          "left": "Average temperature of coldest [unit] of the year [°C]",
+          "right": "[X-AXIS]"
+        },
+        "xAxis": {
+          "bott": "Year",
+          "top": "[Y-AXIS]"
+        },
+        "legend": "Weather"
       }
     },
     "series": {
-      "max": {
-        "name": "Max"
-      },
-      "min": {
-        "name": "Min"
-      },
-      "avg": {
-        "name": "Yearly Average"
-      },
-      "diff": {
-        "name": "Difference"
-      },
-      "extreme": {
+      "extreme-high": {
         "name": "Average warmest maximum [interval] temperature",
         "week": "weekly",
         "day": "daily"
       },
-      "extremehigh": {
-        "name": "[PLACEHOLDER] Number of days above [interval] temperature",
+      "extreme-low": {
+        "name": "Average coldest minimum [interval] temperature",
         "week": "weekly",
         "day": "daily"
       },
-      "extremelow": {
-        "name": "[PlACEHOLDER] Average coldest minim [interval] temperature",
-        "week": "weekly",
-        "day": "daily"
+      "diff": {
+        "name": "difference",
+        "week": "",
+        "day": ""
       }
     },
     "dataSource": {
@@ -308,6 +198,11 @@
         "plural": "weeks",
         "singular": "week",
         "interval": "weekly"
+      },
+      "month": {
+        "plural": "months",
+        "singular": "month",
+        "interval": "monthly"
       }
     },
     "time": {
@@ -356,79 +251,37 @@
     }
   },
   "sv": {
-    "valueSuffix": "°C",
+    "valueSuffix": "",
     "groups": {
       "0": {
-        "title": "Årlig genomsnittstemperatur",
-        "subTitle": "[stationName]",
-        "caption": "Årlig genomsnittstemperatur. Årets lägsta (min) och högsta (max) temperatur.",
+        "title": "",
+        "subTitle": "",
+        "caption": "",
         "yAxis": {
-          "left": "Genomsnittstemperatur [°C]",
-          "right": "[X-AXIS]"
+          "left": "",
+          "right": ""
         },
         "xAxis": {
-          "bott": "År",
-          "top": "[Y-AXIS]"
+          "bott": "",
+          "top": ""
         },
-        "legend": "Väder"
+        "legend": ""
       },
       "1": {
-        "title": "Temperaturskillnaden från baslinjen",
-        "subTitle": "[stationName]",
-        "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
+        "title": "",
+        "subTitle": "",
+        "caption": "",
         "yAxis": {
-          "left": "Temperatur [°C]",
-          "right": "[X-AXIS]"
+          "left": "",
+          "right": ""
         },
         "xAxis": {
-          "bott": "År",
-          "top": "[Y-AXIS]"
+          "bott": "",
+          "top": ""
         },
-        "legend": "Klimat"
+        "legend": ""
       },
       "2": {
-        "title": "Årets varmaste [unit]",
-        "subTitle": "[stationName]",
-        "caption": "Medeltemperaturen på årets varmaste [unit].",
-        "yAxis": {
-          "left": "Medeltemperaturen på årets varmaste [unit] [°C]",
-          "right": "[X-AXIS]"
-        },
-        "xAxis": {
-          "bott": "År",
-          "top": "[Y-AXIS]"
-        },
-        "legend": "Väder"
-      },
-      "3": {
-        "title": "",
-        "subTitle": "",
-        "caption": "",
-        "yAxis": {
-          "left": "",
-          "right": ""
-        },
-        "xAxis": {
-          "bott": "",
-          "top": ""
-        },
-        "legend": ""
-      },
-      "4": {
-        "title": "",
-        "subTitle": "",
-        "caption": "",
-        "yAxis": {
-          "left": "",
-          "right": ""
-        },
-        "xAxis": {
-          "bott": "",
-          "top": ""
-        },
-        "legend": ""
-      },
-      "5": {
         "title": "",
         "subTitle": "",
         "caption": "",
@@ -444,29 +297,17 @@
       }
     },
     "series": {
-      "max": {
-        "name": "Max"
-      },
-      "min": {
-        "name": "Min"
-      },
-      "avg": {
-        "name": "Årlig genomsnitt"
-      },
-      "diff": {
-        "name": "Skillnad"
-      },
-      "extreme": {
-        "name": "Genomsnittlig varmaste högsta temperatur [interval]",
-        "week": "veckovis",
-        "day": "dagligen"
-      },
-      "extremehigh": {
+      "extreme-high": {
         "name": "",
         "week": "",
         "day": ""
       },
-      "extremelow": {
+      "extreme-low": {
+        "name": "",
+        "week": "",
+        "day": ""
+      },
+      "diff": {
         "name": "",
         "week": "",
         "day": ""
@@ -491,6 +332,11 @@
         "plural": "veckor",
         "singular": "vecka",
         "interval": "veckovis"
+      },
+      "month": {
+        "plural": "",
+        "singular": "",
+        "interval": ""
       }
     },
     "time": {

@@ -9,22 +9,22 @@
       ],
       "data": [
         "precipitation",
-        "dailyExtremeMinLim"
+        "dailyExtremeHigh"
       ]
     },
     "config": {
       "meta": {
         "smhi": {
-          "data": "SMHI-Weather",
-          "config": "precipitation",
-          "lang": "annualprecipitation",
-          "set": "slideExtremeDayLowLim"
+          "data": "SMHI-Hydrology",
+          "config": "extremePrecipitation",
+          "lang": "extremePrecipitation",
+          "set": "slideExtremeDay"
         },
         "abisko": {
           "data": "ANS",
-          "config": "precipitation",
-          "lang": "annualPrecipitation",
-          "set": "slideExtremeDayLowLim"
+          "config": "extremePrecipitation",
+          "lang": "extremePrecipitation",
+          "set": "slideExtremeDay"
         }
       }
     },
@@ -41,29 +41,22 @@
       },
       "2": {
         "baseline": false
-      },
-      "3": {
-        "baseline": false
-      },
-      "4": {
-        "baseline": false,
-        "yAxis": {}
       }
     },
     "decimals": 2,
     "series": {
-      "0": {
-        "className": "series-prec-extreme",
+      "extreme-high": {
+        "className": "series-prec-high-extreme",
         "preset": "extreme",
-        "group": 2,
+        "group": 0,
         "visible": true,
         "colour": "#1000FF",
         "type": "column"
       },
-      "1": {
-        "className": "series-temp-extreme",
-        "preset": "extreme",
-        "group": "3",
+      "extreme-diff": {
+        "className": "series-diff",
+        "preset": "diff",
+        "group": "1",
         "visible": true,
         "colour": "#ff0000",
         "type": "bar",
@@ -73,10 +66,10 @@
           "color"
         ]
       },
-      "2": {
+      "extreme-low": {
         "className": "series-temp-low-extreme",
         "preset": "extreme",
-        "group": "4",
+        "group": "2",
         "visible": true,
         "colour": "#0000ff",
         "type": "bar",
@@ -85,34 +78,6 @@
           "y",
           "color"
         ]
-      },
-      "diff": {
-        "className": "series-diff",
-        "preset": "diff",
-        "group": 1,
-        "visible": true,
-        "colour": "[example]",
-        "type": "column"
-      },
-      "snow": {
-        "className": "series-snow",
-        "preset": "snow",
-        "group": 0,
-        "visible": true,
-        "colour": "#CDD8F0",
-        "hoverColour": "#eeeeff",
-        "borderColour": "#5F7CB9",
-        "type": "column"
-      },
-      "rain": {
-        "className": "series-rain",
-        "preset": "rain",
-        "group": 0,
-        "visible": true,
-        "colour": "#1000FB",
-        "hoverColor": "#3333ff",
-        "borderColour": "#5F7CB9",
-        "type": "column"
       }
     },
     "parse": {
@@ -134,69 +99,27 @@
   },
   "set": {
     "unitType": "day",
-    "extreme": {
-      "type": "low",
-      "lim": -10,
-      "sublim": {
-        "1": -10,
-        "2": -15,
-        "3": -20,
-        "4": -30
-      }
-    },
     "groups": {
       "0": {
-        "enabled": false
-      },
-      "1": {
-        "enabled": true,
-        "tooltip": {}
-      },
-      "2": {
-        "enabled": false
-      },
-      "3": {
         "enabled": true,
         "prime": true,
         "tooltip": {
-          "type": "value"
+          "type": "valueDate"
+        }
+      },
+      "1": {
+        "enabled": true,
+        "tooltip": {
+          "type": "valueDate"
         }
       }
     }
   },
   "en": {
-    "valueSuffix": "mm",
+    "valueSuffix": "",
     "groups": {
       "0": {
-        "title": "Annual Average Precipitation",
-        "subTitle": "[stationName]",
-        "caption": "Average annual precipitation. Note the measurement of snow from precipitation is estimated from precipitation taking place when the temperature was simultaneously recorded as below 0° C. These values should be considered estimates and not a precise value.",
-        "yAxis": {
-          "left": "Total Precipitation [mm]",
-          "right": "[X-AXIS]"
-        },
-        "xAxis": {
-          "bott": "Year",
-          "top": "[Y-AXIS]"
-        },
-        "legend": "Weather"
-      },
-      "1": {
-        "title": "Annual Average Precipitation Difference From Baseline",
-        "subTitle": "[stationName]",
-        "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
-        "yAxis": {
-          "left": "Precipitation [mm]",
-          "right": "[X-AXIS]"
-        },
-        "xAxis": {
-          "bott": "Year",
-          "top": "[Y-AXIS]"
-        },
-        "legend": "Climate"
-      },
-      "2": {
-        "title": "Wettest [unit] of the year",
+        "title": "Dryest [unit] of the year",
         "subTitle": "[stationName]",
         "yAxis": {
           "left": "Total precipitation [mm]",
@@ -206,50 +129,53 @@
           "bott": "Year",
           "top": "[Y-AXIS]"
         },
-        "caption": "The wettest [unit] of the year (total precipitation in mm).",
+        "caption": "The dryest [unit] of the year (total precipitation in mm).",
         "legend": "Weather"
       },
-      "3": {
-        "title": "Extreme Weather event, Days Above [lim] [mm]",
-        "subTitle": "[stationName]",
+      "1": {
+        "title": "[PLACEHOLDER]",
+        "subTitle": "",
         "caption": "",
         "yAxis": {
           "left": "",
-          "right": "[X-AXIS]"
+          "right": ""
         },
         "xAxis": {
-          "bott": "Year",
-          "top": "[Y-AXIS]"
+          "bott": "",
+          "top": ""
         },
-        "legend": "Weather"
+        "legend": ""
       },
-      "4": {
-        "title": "Extreme Weather event, Days Below [lim] [mm]",
-        "subTitle": "[stationName]",
+      "2": {
+        "title": "",
+        "subTitle": "",
         "caption": "",
         "yAxis": {
           "left": "",
-          "right": "[X-AXIS]"
+          "right": ""
         },
         "xAxis": {
-          "bott": "Year",
-          "top": "[Y-AXIS]"
+          "bott": "",
+          "top": ""
         },
-        "legend": "Weather"
+        "legend": ""
       }
     },
     "series": {
+      "extreme-high": {
+        "name": "",
+        "week": "",
+        "day": ""
+      },
+      "extreme-low": {
+        "name": "",
+        "week": "",
+        "day": ""
+      },
       "diff": {
-        "name": "Difference"
-      },
-      "snow": {
-        "name": "Precipitation from snow"
-      },
-      "rain": {
-        "name": "Precipitation from rain"
-      },
-      "extreme": {
-        "name": "wettest [interval] of the year (total precipitation in mm)"
+        "name": "",
+        "week": "",
+        "day": ""
       }
     },
     "dataSource": {
@@ -271,6 +197,11 @@
         "plural": "weeks",
         "singular": "week",
         "interval": "weekly"
+      },
+      "month": {
+        "plural": "months",
+        "singular": "month",
+        "interval": "monthly"
       }
     },
     "time": {
@@ -319,63 +250,66 @@
     }
   },
   "sv": {
-    "valueSuffix": "mm",
+    "valueSuffix": "",
     "groups": {
       "0": {
-        "title": "Årlig genomsnittlig nederbörd",
-        "subTitle": "[stationName]",
-        "caption": "Genomsnittlig årlig nederbörd. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0° C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
+        "title": "",
+        "subTitle": "",
+        "caption": "",
         "yAxis": {
-          "left": "Summerad nederbörd [mm]",
-          "right": "[X-AXIS]"
+          "left": "",
+          "right": ""
         },
         "xAxis": {
-          "bott": "År",
-          "top": "[Y-AXIS]"
+          "bott": "",
+          "top": ""
         },
-        "legend": "Väder"
+        "legend": ""
       },
       "1": {
-        "title": "Årlig genomsnittlig nederbördsskillnad från baslinjen",
-        "subTitle": "[stationName] Skillnad mellan årligt genomsnitt och genomsnitt för [baseline]",
+        "title": "",
+        "subTitle": "",
+        "caption": "",
         "yAxis": {
-          "left": "Nederbörd [mm]",
-          "right": "[X-AXIS]"
+          "left": "",
+          "right": ""
         },
         "xAxis": {
-          "bott": "År",
-          "top": "[Y-AXIS]"
+          "bott": "",
+          "top": ""
         },
-        "caption": "Skillnad mellan den årliga genomsnittliga nederbörden och den genomsnittliga nederbörden för baslinjeperioden, vanligtvis 1961 till 1990.",
-        "legend": "Klimat"
+        "legend": ""
       },
       "2": {
-        "title": "Årets blötaste [unit]",
-        "subTitle": "[stationName]",
+        "title": "",
+        "subTitle": "",
+        "caption": "",
         "yAxis": {
-          "left": "Summerad nederbörd [mm]",
-          "right": "[X-Axis]"
+          "left": "",
+          "right": ""
         },
         "xAxis": {
-          "bott": "År",
-          "top": "[Y-AXIS]"
+          "bott": "",
+          "top": ""
         },
-        "caption": "Årets blötaste [unit] (Summerad nederbörd i mm).",
-        "legend": "Väder"
+        "legend": ""
       }
     },
     "series": {
+      "extreme-high": {
+        "name": "",
+        "week": "",
+        "day": ""
+      },
+      "extreme-low": {
+        "name": "",
+        "week": "",
+        "day": ""
+      },
       "diff": {
-        "name": "Skillnad"
-      },
-      "snow": {
-        "name": "Nederbörd från snö"
-      },
-      "rain": {
-        "name": "Nederbörd från regn"
-      },
-      "extreme": {
-        "name": "Årets blötaste [interval] (Summerad nederbörd i mm)"
+        "name": "",
+        "week": "",
+        "day": ""
       }
     },
     "dataSource": {
@@ -397,6 +331,11 @@
         "plural": "veckor",
         "singular": "vecka",
         "interval": "veckovis"
+      },
+      "month": {
+        "plural": "",
+        "singular": "",
+        "interval": ""
       }
     },
     "time": {

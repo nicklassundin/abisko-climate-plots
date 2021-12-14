@@ -221,8 +221,7 @@ exports.meta = {
                     res = tmp;
 
                 }
-                if (meta.unitType && meta.units) {
-
+                if (meta.unitType && meta.units && meta.units[meta.unitType] != undefined) {
                     var res = res.replace(
                         "[unit]",
                         meta.units[meta.unitType].singular
@@ -239,8 +238,6 @@ exports.meta = {
 
             } catch (error) {
 
-                console.log(this.id);
-                console.log(meta);
                 throw error;
 
             }

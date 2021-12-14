@@ -2,8 +2,7 @@
 
 exports.series = {
     "getPreset": (config, serie, meta) => {
-
-        /*
+	/*
          * Console.log("getPreset")
          * Console.log(config)
          * Console.log(serie)
@@ -141,6 +140,12 @@ exports.series = {
         };
 
     },
+get "extreme-low" () {
+		return this.extreme;
+    },
+	get "extreme-high" () {
+		return this.extreme
+	},
     get "avg" () {
 
         return (meta, data, k, s) => this.getPreset(
