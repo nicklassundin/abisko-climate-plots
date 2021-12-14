@@ -205,7 +205,7 @@
         "legend": "Climate"
       },
       "2": {
-        "title": "Warmest [unit] of the year",
+        "title": "[REMOVE?] Warmest [unit] of the year",
         "subTitle": "[stationName]",
         "caption": "Average temperature of warmest [unit] of the year.",
         "yAxis": {
@@ -247,7 +247,7 @@
         "legend": "Weather"
       },
       "5": {
-        "title": "Temperature Difference From Baseline",
+        "title": "[REMOVE] Temperature Difference From Baseline",
         "subTitle": "[stationName]",
         "caption": "Difference between the yearly extreme average daily temperature  and the average extreme daily temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
         "yAxis": {
@@ -275,7 +275,7 @@
         "name": "Difference"
       },
       "extreme": {
-        "name": "Average warmest maximum [interval] temperature",
+        "name": "[REMOVE?] Average warmest maximum [interval] temperature",
         "week": "weekly",
         "day": "daily"
       },
@@ -309,6 +309,11 @@
         "plural": "weeks",
         "singular": "week",
         "interval": "weekly"
+      },
+      "month": {
+        "plural": "months",
+        "singular": "month",
+        "interval": "monthly"
       }
     },
     "time": {
@@ -492,6 +497,11 @@
         "plural": "veckor",
         "singular": "vecka",
         "interval": "veckovis"
+      },
+      "month": {
+        "plural": "",
+        "singular": "",
+        "interval": ""
       }
     },
     "time": {

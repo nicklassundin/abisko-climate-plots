@@ -1,30 +1,30 @@
 {
   "ref": {
-    "id": "weeklyExtremePrecipitation",
-    "type": "abisko",
+    "id": "dailyExtremeTemperature",
+    "type": "smhi",
     "tag": {
       "render": [
-        "precipitation",
-        "weeklyExtreme"
+        "temperatures",
+        "dailyExtreme"
       ],
       "data": [
-        "precipitation",
-        "weeksExtremeHigh"
+        "temperatures",
+        "dailyExtremeLow"
       ]
     },
     "config": {
       "meta": {
         "smhi": {
-          "data": "SMHI-Hydrology",
-          "config": "precipitation",
-          "lang": "annualPrecipitation",
-          "set": "slideExtremeWeek"
+          "data": "SMHI-Weather",
+          "config": "extremeTemperature",
+          "lang": "extremeTemperature",
+          "set": "slideExtremeDayLow"
         },
         "abisko": {
           "data": "ANS",
-          "config": "precipitation",
-          "lang": "annualPrecipitation",
-          "set": "slideExtremeWeek"
+          "config": "extremeTemperature",
+          "lang": "extremeTemperature",
+          "set": "slideExtremeDayLow"
         }
       }
     },
@@ -32,6 +32,7 @@
   },
   "config": {
     "type": "column",
+    "polar": false,
     "groups": {
       "0": {
         "baseline": false
@@ -41,121 +42,88 @@
       },
       "2": {
         "baseline": false
-      },
-      "3": {
-        "baseline": false
-      },
-      "4": {
-        "baseline": false,
-        "yAxis": {}
       }
     },
     "decimals": 2,
     "series": {
-      "0": {
-        "className": "series-prec-extreme",
+      "extreme-high": {
+        "className": "series-temp-high-extreme",
         "preset": "extreme",
-        "group": 2,
-        "visible": true,
-        "colour": "#1000FF",
-        "type": "column"
-      },
-      "1": {
-        "className": "series-temp-extreme",
-        "preset": "extreme",
-        "group": "3",
+        "group": "0",
         "visible": true,
         "colour": "#ff0000",
-        "type": "bar",
+        "type": "line",
         "decimals": 0,
         "keys": [
           "y",
           "color"
         ]
       },
-      "2": {
-        "className": "series-temp-low-extreme",
-        "preset": "extreme",
-        "group": "4",
-        "visible": true,
-        "colour": "#0000ff",
-        "type": "bar",
-        "decimals": 0,
-        "keys": [
-          "y",
-          "color"
-        ]
-      },
-      "diff": {
+      "extreme-diff": {
         "className": "series-diff",
         "preset": "diff",
-        "group": 1,
+        "group": "1",
         "visible": true,
         "colour": "[example]",
         "type": "column"
       },
-      "snow": {
-        "className": "series-snow",
-        "preset": "snow",
-        "group": 0,
+      "extreme-low": {
+        "className": "series-temp-low-extreme",
+        "preset": "extreme",
+        "group": "2",
         "visible": true,
-        "colour": "#CDD8F0",
-        "hoverColour": "#eeeeff",
-        "borderColour": "#5F7CB9",
-        "type": "column"
-      },
-      "rain": {
-        "className": "series-rain",
-        "preset": "rain",
-        "group": 0,
-        "visible": true,
-        "colour": "#1000FB",
-        "hoverColor": "#3333ff",
-        "borderColour": "#5F7CB9",
-        "type": "column"
+        "colour": "#0000ff",
+        "type": "line",
+        "decimals": 0,
+        "keys": [
+          "y",
+          "color"
+        ]
       }
     },
     "parse": {
       "file": [
-        "ANS_Temp_Prec.csv",
-        "AWS.csv",
-        "ANS_Prec.csv"
+        "temperature.csv",
+        "precipitation.csv"
       ],
       "preset": {
         "header": true,
         "download": true,
         "skipEmptyLines": true,
-        "beforeFirstChunk": "abisko",
-        "dynamicTyping": false
+        "beforeFirstChunk": "smhi",
+        "fastMode": true
       },
-      "parser": "AbiskoCsv",
+      "parser": "smhiTemp",
       "local": true
     }
   },
   "set": {
-    "unitType": "week",
+    "unitType": "day",
     "groups": {
-      "0": {
-        "enabled": false
-      },
       "1": {
-        "enabled": true
+        "enabled": true,
+        "tooltip": {
+          "type": "valueDate"
+        }
       },
       "2": {
+        "enabled": true,
         "prime": true,
-        "enabled": true
+        "tooltip": {
+          "type": "valueDate"
+        }
       }
     }
   },
   "en": {
-    "valueSuffix": "mm",
+    "valueSuffix": "",
     "groups": {
       "0": {
-        "title": "Annual Average Precipitation",
+        "title": "Warmest [unit] of the year",
         "subTitle": "[stationName]",
-        "caption": "Average annual precipitation. Note the measurement of snow from precipitation is estimated from precipitation taking place when the temperature was simultaneously recorded as below 0° C. These values should be considered estimates and not a precise value.",
+        "caption": "Average temperature of warmest [unit] of the year.",
         "yAxis": {
-          "left": "Total Precipitation [mm]",
+          "left": "Average temperature of warmest [unit] of the year [°C]",
           "right": "[X-AXIS]"
         },
         "xAxis": {
@@ -165,11 +133,11 @@
         "legend": "Weather"
       },
       "1": {
-        "title": "Annual Average Precipitation Difference From Baseline",
+        "title": "Temperature Difference From Baseline",
         "subTitle": "[stationName]",
-        "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
+        "caption": "Difference between the yearly extreme average daily temperature  and the average extreme daily temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
         "yAxis": {
-          "left": "Precipitation [mm]",
+          "left": "Temperature [°C]",
           "right": "[X-AXIS]"
         },
         "xAxis": {
@@ -179,39 +147,11 @@
         "legend": "Climate"
       },
       "2": {
-        "title": "Wettest [unit] of the year",
+        "title": "Coldest [unit] of the year",
         "subTitle": "[stationName]",
+        "caption": "Average temperature of coldest [unit] of the year.",
         "yAxis": {
-          "left": "Total precipitation [mm]",
-          "right": "[X-Axis]"
-        },
-        "xAxis": {
-          "bott": "Year",
-          "top": "[Y-AXIS]"
-        },
-        "caption": "The wettest [unit] of the year (total precipitation in mm).",
-        "legend": "Weather"
-      },
-      "3": {
-        "title": "Extreme Weather event, Days Above [lim] [mm]",
-        "subTitle": "[stationName]",
-        "caption": "",
-        "yAxis": {
-          "left": "",
-          "right": "[X-AXIS]"
-        },
-        "xAxis": {
-          "bott": "Year",
-          "top": "[Y-AXIS]"
-        },
-        "legend": "Weather"
-      },
-      "4": {
-        "title": "Extreme Weather event, Days Below [lim] [mm]",
-        "subTitle": "[stationName]",
-        "caption": "",
-        "yAxis": {
-          "left": "",
+          "left": "Average temperature of coldest [unit] of the year [°C]",
           "right": "[X-AXIS]"
         },
         "xAxis": {
@@ -222,17 +162,20 @@
       }
     },
     "series": {
+      "extreme-high": {
+        "name": "Average warmest maximum [interval] temperature",
+        "week": "weekly",
+        "day": "daily"
+      },
+      "extreme-low": {
+        "name": "Average coldest minimum [interval] temperature",
+        "week": "weekly",
+        "day": "daily"
+      },
       "diff": {
-        "name": "Difference"
-      },
-      "snow": {
-        "name": "Precipitation from snow"
-      },
-      "rain": {
-        "name": "Precipitation from rain"
-      },
-      "extreme": {
-        "name": "wettest [interval] of the year (total precipitation in mm)"
+        "name": "difference",
+        "week": "",
+        "day": ""
       }
     },
     "dataSource": {
@@ -254,6 +197,11 @@
         "plural": "weeks",
         "singular": "week",
         "interval": "weekly"
+      },
+      "month": {
+        "plural": "months",
+        "singular": "month",
+        "interval": "monthly"
       }
     },
     "time": {
@@ -302,51 +250,9 @@
     }
   },
   "sv": {
-    "valueSuffix": "mm",
+    "valueSuffix": "",
     "groups": {
       "0": {
-        "title": "Årlig genomsnittlig nederbörd",
-        "subTitle": "[stationName]",
-        "caption": "Genomsnittlig årlig nederbörd. Observera att mätningen av snö från nederbörd uppskattas från nederbörd som äger rum när temperaturen registrerades samtidigt som under 0° C. Dessa värden bör betraktas som uppskattningar och inte som ett exakt värde.",
-        "yAxis": {
-          "left": "Summerad nederbörd [mm]",
-          "right": "[X-AXIS]"
-        },
-        "xAxis": {
-          "bott": "År",
-          "top": "[Y-AXIS]"
-        },
-        "legend": "Väder"
-      },
-      "1": {
-        "title": "Årlig genomsnittlig nederbördsskillnad från baslinjen",
-        "subTitle": "[stationName] Skillnad mellan årligt genomsnitt och genomsnitt för [baseline]",
-        "yAxis": {
-          "left": "Nederbörd [mm]",
-          "right": "[X-AXIS]"
-        },
-        "xAxis": {
-          "bott": "År",
-          "top": "[Y-AXIS]"
-        },
-        "caption": "Skillnad mellan den årliga genomsnittliga nederbörden och den genomsnittliga nederbörden för baslinjeperioden, vanligtvis 1961 till 1990.",
-        "legend": "Klimat"
-      },
-      "2": {
-        "title": "Årets blötaste [unit]",
-        "subTitle": "[stationName]",
-        "yAxis": {
-          "left": "Summerad nederbörd [mm]",
-          "right": "[X-Axis]"
-        },
-        "xAxis": {
-          "bott": "År",
-          "top": "[Y-AXIS]"
-        },
-        "caption": "Årets blötaste [unit] (Summerad nederbörd i mm).",
-        "legend": "Väder"
-      },
-      "3": {
         "title": "",
         "subTitle": "",
         "caption": "",
@@ -360,7 +266,21 @@
         },
         "legend": ""
       },
-      "4": {
+      "1": {
+        "title": "",
+        "subTitle": "",
+        "caption": "",
+        "yAxis": {
+          "left": "",
+          "right": ""
+        },
+        "xAxis": {
+          "bott": "",
+          "top": ""
+        },
+        "legend": ""
+      },
+      "2": {
         "title": "",
         "subTitle": "",
         "caption": "",
@@ -376,17 +296,20 @@
       }
     },
     "series": {
+      "extreme-high": {
+        "name": "",
+        "week": "",
+        "day": ""
+      },
+      "extreme-low": {
+        "name": "",
+        "week": "",
+        "day": ""
+      },
       "diff": {
-        "name": "Skillnad"
-      },
-      "snow": {
-        "name": "Nederbörd från snö"
-      },
-      "rain": {
-        "name": "Nederbörd från regn"
-      },
-      "extreme": {
-        "name": "Årets blötaste [interval] (Summerad nederbörd i mm)"
+        "name": "",
+        "week": "",
+        "day": ""
       }
     },
     "dataSource": {
@@ -408,6 +331,11 @@
         "plural": "veckor",
         "singular": "vecka",
         "interval": "veckovis"
+      },
+      "month": {
+        "plural": "",
+        "singular": "",
+        "interval": ""
       }
     },
     "time": {

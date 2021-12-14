@@ -899,7 +899,7 @@
     "extremeTempDaily": {
       "context": false,
       "station": "abisko",
-      "plot": "extremeTempweeklyLow",
+      "plot": "extremeTempWeeklyLow",
       "override": {
         "axislim": false
       }

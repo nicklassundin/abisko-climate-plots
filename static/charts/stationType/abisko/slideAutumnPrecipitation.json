@@ -205,6 +205,11 @@
         "plural": "weeks",
         "singular": "week",
         "interval": "weekly"
+      },
+      "month": {
+        "plural": "months",
+        "singular": "month",
+        "interval": "monthly"
       }
     },
     "time": {
@@ -314,6 +319,11 @@
         "plural": "veckor",
         "singular": "vecka",
         "interval": "veckovis"
+      },
+      "month": {
+        "plural": "",
+        "singular": "",
+        "interval": ""
       }
     },
     "time": {

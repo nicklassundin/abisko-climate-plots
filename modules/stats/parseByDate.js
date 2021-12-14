@@ -13,6 +13,7 @@ const {struct} = require("./struct.js"),
                     "yrlyFull": {},
                     "yrlySplit": {},
                     "decades": {},
+		    "months": {},
                     "monthly": {},
                     "spring": {},
                     "summer": {},
@@ -31,6 +32,7 @@ const {struct} = require("./struct.js"),
                     "yrlyFull": {},
                     "yrlySplit": {},
                     "decades": {},
+		    "months": {},
                     "monthly": {},
                     "spring": {},
                     "summer": {},
@@ -154,6 +156,12 @@ const {struct} = require("./struct.js"),
                                     monthName,
                                     key,
                                     year
+                                )();
+                                insert(
+                                    "months",
+                                    key,
+                                    year,
+                                    month
                                 )();
 
                                 /*
@@ -298,8 +306,16 @@ const {struct} = require("./struct.js"),
                                                 this.parsed[key] = true;
                                                 switch (key) {
 
+                                                case "months":
+                                                    keys.forEach((tkey) => {
+
+                                                        this.values[key][tkey] = construct(this.values[key][tkey]);
+
+                                                    });
+                                                    res(this.values[key]);
+                                                    break;
                                                 case "monthly":
-                                                    Object.keys(this.values[key]).forEach((month) => {
+                                                    Object.keys(this.values[key]).forEach((month, index) => {
 
                                                         keys.forEach((tkey) => {
 
@@ -314,11 +330,6 @@ const {struct} = require("./struct.js"),
                                                     res(this.values[key]);
                                                     break;
                                                 case "weeks":
-
-                                                    /*
-                                                     * TODO
-                                                     * Console.log(values[key])
-                                                     */
                                                     keys.forEach((tkey) => {
 
                                                         this.values[key][tkey] = construct(this.values[key][tkey]);
@@ -372,44 +383,38 @@ const {struct} = require("./struct.js"),
 
                                                     });
                                                     break;
-                                                case "weeklyExtremeHigh":
+                                                case "weeksExtremeHigh":
                                                     this.weeks.then((y) => {
-
-                                                        this.values[key] = (y.max
-                                                            ? y.max
+                                                        this.values[key] = (y.avg
+                                                            ? y.avg
                                                             : y.total).max(false);
                                                         res(this.values[key]);
 
                                                     });
                                                     break;
-                                                case "weeklyExtremeLow":
+                                                case "weeksExtremeLow":
                                                     this.weeks.then((y) => {
-
-                                                        this.values[key] = (y.min
-                                                            ? y.min
+                                                        this.values[key] = (y.avg
+                                                            ? y.avg
                                                             : y.total).min(false);
-                                                        res(this.values[key]);
 
+                                                        res(this.values[key]);
                                                     });
                                                     break;
                                                 case "monthlyExtremeHigh":
-                                                    this.monthly.then((y) => {
-
-                                                        this.values[key] = (y.max
-                                                            ? y.max
+                                                    this.months.then((y) => {
+                                                        this.values[key] = (y.avg
+                                                            ? y.avg
                                                             : y.total).max(false);
                                                         res(this.values[key]);
-
                                                     });
                                                     break;
                                                 case "monthlyExtremeLow":
-                                                    this.monthly.then((y) => {
-
-                                                        this.values[key] = (y.min
-                                                            ? y.min
+                                                    this.months.then((y) => {
+                                                        this.values[key] = (y.avg
+                                                            ? y.avg
                                                             : y.total).min(false);
                                                         res(this.values[key]);
-
                                                     });
                                                     break;
                                                 case "dailyExtremeMaxLim":
@@ -430,16 +435,6 @@ const {struct} = require("./struct.js"),
                                                         this.values[key] = y.min
                                                             ? y.min
                                                             : y.total,
-                                                        res(this.values[key]);
-
-                                                    });
-                                                    break;
-                                                case "weeksExtremeHigh":
-                                                    this.weeks.then((y) => {
-
-                                                        this.values[key] = (y.max
-                                                            ? y.max
-                                                            : y.total).max(false);
                                                         res(this.values[key]);
 
                                                     });
@@ -517,15 +512,16 @@ const {struct} = require("./struct.js"),
                                         return this.request("");
 
                                     },
+                                    get "months" () {
+                                        return this.request("months");
+                                    },
                                     get "monthly" () {
 
                                         return this.request("monthly");
 
                                     },
                                     get "weeks" () {
-
                                         return this.request("weeks");
-
                                     },
                                     get "weeksExtremeHigh" () {
 
