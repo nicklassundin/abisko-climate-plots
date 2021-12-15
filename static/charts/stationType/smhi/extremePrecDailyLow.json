@@ -118,6 +118,34 @@
     "valueSuffix": "",
     "groups": {
       "0": {
+        "title": "[REMOVE] Wettest [unit] of the year",
+        "subTitle": "[stationName]",
+        "yAxis": {
+          "left": "Total precipitation [mm]",
+          "right": "[X-Axis]"
+        },
+        "xAxis": {
+          "bott": "Year",
+          "top": "[Y-AXIS]"
+        },
+        "caption": "The wettest [unit] of the year (total precipitation in mm).",
+        "legend": "Weather"
+      },
+      "1": {
+        "title": "Precipitation Difference From Baseline",
+        "subTitle": "[stationName]",
+        "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
+        "yAxis": {
+          "left": "Temperature [°C]",
+          "right": "[X-AXIS]"
+        },
+        "xAxis": {
+          "bott": "Year",
+          "top": "[Y-AXIS]"
+        },
+        "legend": "Climate"
+      },
+      "2": {
         "title": "Dryest [unit] of the year",
         "subTitle": "[stationName]",
         "yAxis": {
@@ -130,34 +158,6 @@
         },
         "caption": "The dryest [unit] of the year (total precipitation in mm).",
         "legend": "Weather"
-      },
-      "1": {
-        "title": "[PLACEHOLDER]",
-        "subTitle": "",
-        "caption": "",
-        "yAxis": {
-          "left": "",
-          "right": ""
-        },
-        "xAxis": {
-          "bott": "",
-          "top": ""
-        },
-        "legend": ""
-      },
-      "2": {
-        "title": "",
-        "subTitle": "",
-        "caption": "",
-        "yAxis": {
-          "left": "",
-          "right": ""
-        },
-        "xAxis": {
-          "bott": "",
-          "top": ""
-        },
-        "legend": ""
       }
     },
     "series": {
