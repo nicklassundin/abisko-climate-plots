@@ -18008,13 +18008,13 @@
               "enabled": true,
               "prime": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueMonth"
               }
             },
             "1": {
               "enabled": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueMonth"
               }
             }
           }
@@ -18396,13 +18396,13 @@
               "enabled": true,
               "prime": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueMonth"
               }
             },
             "1": {
               "enabled": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueMonth"
               }
             }
           }
@@ -18784,14 +18784,14 @@
             "1": {
               "enabled": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueMonth"
               }
             },
             "2": {
               "enabled": true,
               "prime": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueMonth"
               }
             }
           }
@@ -19172,14 +19172,14 @@
             "1": {
               "enabled": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueMonth"
               }
             },
             "2": {
               "enabled": true,
               "prime": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueMonth"
               }
             }
           }
@@ -19562,13 +19562,13 @@
               "enabled": true,
               "prime": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueWeek"
               }
             },
             "1": {
               "enabled": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueWeek"
               }
             }
           }
@@ -19950,13 +19950,13 @@
               "enabled": true,
               "prime": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueWeek"
               }
             },
             "1": {
               "enabled": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueWeek"
               }
             }
           }
@@ -20338,14 +20338,14 @@
             "1": {
               "enabled": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueWeek"
               }
             },
             "2": {
               "enabled": true,
               "prime": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueWeek"
               }
             }
           }
@@ -20726,14 +20726,14 @@
             "1": {
               "enabled": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueWeek"
               }
             },
             "2": {
               "enabled": true,
               "prime": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueWeek"
               }
             }
           }
@@ -24957,13 +24957,13 @@
               "enabled": true,
               "prime": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueMonth"
               }
             },
             "1": {
               "enabled": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueMonth"
               }
             }
           }
@@ -25346,13 +25346,13 @@
               "enabled": true,
               "prime": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueMonth"
               }
             },
             "1": {
               "enabled": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueMonth"
               }
             }
           }
@@ -25735,14 +25735,14 @@
             "1": {
               "enabled": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueMonth"
               }
             },
             "2": {
               "enabled": true,
               "prime": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueMonth"
               }
             }
           }
@@ -26124,14 +26124,14 @@
             "1": {
               "enabled": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueMonth"
               }
             },
             "2": {
               "enabled": true,
               "prime": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueMonth"
               }
             }
           }
@@ -26515,13 +26515,13 @@
               "enabled": true,
               "prime": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueWeek"
               }
             },
             "1": {
               "enabled": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueWeek"
               }
             }
           }
@@ -26904,13 +26904,13 @@
               "enabled": true,
               "prime": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueWeek"
               }
             },
             "1": {
               "enabled": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueWeek"
               }
             }
           }
@@ -27293,14 +27293,14 @@
             "1": {
               "enabled": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueWeek"
               }
             },
             "2": {
               "enabled": true,
               "prime": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueWeek"
               }
             }
           }
@@ -27682,14 +27682,14 @@
             "1": {
               "enabled": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueWeek"
               }
             },
             "2": {
               "enabled": true,
               "prime": true,
               "tooltip": {
-                "type": "valueDate"
+                "type": "valueWeek"
               }
             }
           }

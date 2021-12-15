@@ -104,14 +104,14 @@
       "1": {
         "enabled": true,
         "tooltip": {
-          "type": "valueDate"
+          "type": "valueWeek"
         }
       },
       "2": {
         "enabled": true,
         "prime": true,
         "tooltip": {
-          "type": "valueDate"
+          "type": "valueWeek"
         }
       }
     }

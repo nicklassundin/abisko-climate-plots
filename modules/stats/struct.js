@@ -104,7 +104,8 @@ var struct = {
                         const y = f(...entry.values.map((each) => each.y));
 		        let e = entry.values.filter((each) => each.y == y)
 			let date = e.map((each) => {	
-					return new Date(each.x)
+					return each.x
+					// return new Date(each.x)
 				    }
 				);
                         return {
