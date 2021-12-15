@@ -135,7 +135,7 @@
       "1": {
         "title": "Temperature Difference From Baseline",
         "subTitle": "[stationName]",
-        "caption": "Difference between the yearly extreme average daily temperature  and the average extreme daily temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+        "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
         "yAxis": {
           "left": "Temperature [°C]",
           "right": "[X-AXIS]"
