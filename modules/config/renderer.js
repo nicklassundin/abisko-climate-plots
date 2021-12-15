@@ -431,7 +431,7 @@ const help = require('climate-plots-helper'),
 							if (ser.marker) {
 								ser.marker.radius = ser.marker.radius * width / 800;
 							}
-							
+
 							$(`#${id}`).highcharts().series[index].update(ser)
 						})	
 					} catch (error) {
@@ -555,7 +555,6 @@ const help = require('climate-plots-helper'),
 			let title = this.title(gID),
 				group = meta.groups[gID],
 				series_count = 0;
-
 			if (change) {
 
 				Object.keys(meta.series).filter((s) => {

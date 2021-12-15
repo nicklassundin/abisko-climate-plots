@@ -3,10 +3,8 @@
 const dateFormats = require("./date").formats;
 
 exports.formatters = function (meta) {
-
     return {
         "winterDOY" () {
-
             try {
 
                 let tooltip = `<span style="font-size: 10px">${this.x - 1}/${this.x}</span><br/>`;
@@ -56,7 +54,7 @@ exports.formatters = function (meta) {
 
         },
         "winterValueDate" () {
-
+		
             try {
 
                 let tooltip = `<span style="font-size: 10px">Winter ${this.x}-${this.x + 1}</span><br/>`;
@@ -111,12 +109,9 @@ exports.formatters = function (meta) {
 
         },
         "valueDate" () {
-
             try {
-
                 let tooltip = `<span style="font-size: 10px">${this.x}</span><br/>`;
                 this.points.forEach((point) => {
-
                     const dec = point.series.options.tooltip.valueDecimals;
                     tooltip += `<span style="color:${
                         point.color
@@ -125,23 +120,68 @@ exports.formatters = function (meta) {
                     }: <b>${
                         point.y.toFixed(dec)
                     }</b><br/>`;
-                    point.point.subX.forEach((date) => {
+			(Array.isArray(point.point.subX) ? point.point.subX.forEach((date) => {
 
-                        tooltip += `${dateFormats.MMDD(date)}</b><br/>`;
+			console.log(date)
+                        tooltip += `${dateFormats.MMDD(new Date(date))}</b><br/>`;
 
-                    });
+                    }) : null)
                     tooltip += "<br/>";
-
                 });
                 return tooltip;
-
             } catch (error) {
-
                 console.log(error);
                 return undefined;
-
             }
+        },
+        "valueWeek" () {
+            try {
+                let tooltip = `<span style="font-size: 10px">${this.x}</span><br/>`;
+                this.points.forEach((point) => {
+                    const dec = point.series.options.tooltip.valueDecimals;
+                    tooltip += `<span style="color:${
+                        point.color
+                    }">\u25CF</span> ${
+                        point.series.name
+                    }: <b>${
+                        point.y.toFixed(dec)
+                    }</b><br/>`;
+			(Array.isArray(point.point.subX) ? point.point.subX.forEach((date) => {
 
+                        tooltip += `v ${date}</b><br/>`;
+
+                    }) : null)
+                    tooltip += "<br/>";
+                });
+                return tooltip;
+            } catch (error) {
+                console.log(error);
+                return undefined;
+            }
+        },
+        "valueMonth" () {
+            try {
+                let tooltip = `<span style="font-size: 10px">${this.x}</span><br/>`;
+                this.points.forEach((point) => {
+                    const dec = point.series.options.tooltip.valueDecimals;
+                    tooltip += `<span style="color:${
+                        point.color
+                    }">\u25CF</span> ${
+                        point.series.name
+                    }: <b>${
+                        point.y.toFixed(dec)
+                    }</b><br/>`;
+			(Array.isArray(point.point.subX) ? point.point.subX.forEach((date) => {
+                        tooltip += `${dateFormats.MM(new Date(0, date, 1))}</b><br/>`;
+
+                    }) : null)
+                    tooltip += "<br/>";
+                });
+                return tooltip;
+            } catch (error) {
+                console.log(error);
+                return undefined;
+            }
         },
         "value" () {
 

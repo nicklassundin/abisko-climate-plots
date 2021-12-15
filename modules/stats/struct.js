@@ -74,7 +74,7 @@ var struct = {
                 ));
 
             });
-            return value;
+            return f(value);
 
         }
         return f(this);
@@ -83,45 +83,40 @@ var struct = {
 
     },
     "split" (f) {
-
         if (this.values[0].split) {
-
             return struct.create(
                 this.values.map((each) => each.split(f)),
                 this.x,
                 src
             );
-
         }
         return struct.create(
             f(this.values),
             this.x,
             src
         );
-
     },
     "filterForm" (f, type, abs) {
-
         try {
-
             if (this.values[0].values) { // .values replace .filter ? TODO check
-
                 return struct.create(this.values.map((each) => each.filter(
                     (entry) => {
-
-                        const y = f(...entry.values.map((each) => each.y)),
-					 date = entry.values.filter((each) => each.y == y).map((each) => new Date(each.x));
+                        const y = f(...entry.values.map((each) => each.y));
+		        let e = entry.values.filter((each) => each.y == y)
+			let date = e.map((each) => {	
+					return each.x
+					// return new Date(each.x)
+				    }
+				);
                         return {
                             "subX": date,
                             y,
                             "x": entry.x
                         };
-
                     },
                     type,
                     abs
                 ))).build();
-
             }
             return struct.create(this.filter(
                 (entry) => {

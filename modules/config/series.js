@@ -147,25 +147,19 @@ exports.series = {
 
 	},
 	get "extreme" () {
-
 		return (meta, data, k, s) => {
-
 			Highcharts.each(
 				data,
 				(point, i) => {
-
 					data[i] = [
 						point,
 						`rgb(255,${Math.floor(point * 255 / max)}, 0)`
 					];
-
 				}
 			);
 			let tag = "extreme";
 			if (meta.extreme) {
-
 				tag += meta.extreme.type;
-
 			}
 			const config = {};
 			$.extend(
@@ -182,22 +176,22 @@ exports.series = {
 						if (meta.extreme) {
 
 							if (meta.extreme.type == "high") {
-
 								return data.occurrence((e) => meta.extreme.lim < e).values;
-
 							}
 							return data.occurrence((e) => meta.extreme.lim > e).values;
-
 						}
 						return data.values;
-
 					})()
 				},
 				meta
 			);
-
 		};
-
+	},
+	get "extreme-low" () {
+		return this.extreme;
+    	},
+	get "extreme-high" () {
+		return this.extreme
 	},
 	get "avg" () {
 

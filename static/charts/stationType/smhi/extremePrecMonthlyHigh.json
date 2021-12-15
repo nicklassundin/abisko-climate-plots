@@ -1,0 +1,385 @@
+{
+  "ref": {
+    "id": "weeklyExtremePrecipitation",
+    "type": "smhi",
+    "tag": {
+      "render": [
+        "precipitation",
+        "monthlyExtreme"
+      ],
+      "data": [
+        "precipitation",
+        "monthlyExtremeHigh"
+      ]
+    },
+    "config": {
+      "meta": {
+        "smhi": {
+          "data": "SMHI-Hydrology",
+          "config": "extremePrecipitation",
+          "lang": "extremePrecipitation",
+          "set": "slideExtremeMonth"
+        },
+        "abisko": {
+          "data": "ANS",
+          "config": "extremePrecipitation",
+          "lang": "extremePrecipitation",
+          "set": "slideExtremeMonth"
+        }
+      }
+    },
+    "months": false
+  },
+  "config": {
+    "type": "column",
+    "groups": {
+      "0": {
+        "baseline": false
+      },
+      "1": {
+        "baseline": true
+      },
+      "2": {
+        "baseline": false
+      }
+    },
+    "decimals": 2,
+    "series": {
+      "extreme-high": {
+        "className": "series-prec-high-extreme",
+        "preset": "extreme",
+        "group": 0,
+        "visible": true,
+        "colour": "#1000FF",
+        "type": "column"
+      },
+      "extreme-diff": {
+        "className": "series-diff",
+        "preset": "diff",
+        "group": "1",
+        "visible": true,
+        "colour": "#ff0000",
+        "type": "bar",
+        "decimals": 0,
+        "keys": [
+          "y",
+          "color"
+        ]
+      },
+      "extreme-low": {
+        "className": "series-temp-low-extreme",
+        "preset": "extreme",
+        "group": "2",
+        "visible": true,
+        "colour": "#0000ff",
+        "type": "bar",
+        "decimals": 0,
+        "keys": [
+          "y",
+          "color"
+        ]
+      }
+    },
+    "parse": {
+      "file": [
+        "temperature.csv",
+        "precipitation.csv"
+      ],
+      "preset": {
+        "header": true,
+        "download": true,
+        "skipEmptyLines": true,
+        "beforeFirstChunk": "smhi",
+        "fastMode": true
+      },
+      "parser": "smhiTemp",
+      "local": true
+    }
+  },
+  "set": {
+    "unitType": "month",
+    "groups": {
+      "0": {
+        "enabled": true,
+        "prime": true,
+        "tooltip": {
+          "type": "valueMonth"
+        }
+      },
+      "1": {
+        "enabled": true,
+        "tooltip": {
+          "type": "valueMonth"
+        }
+      }
+    }
+  },
+  "en": {
+    "valueSuffix": "",
+    "groups": {
+      "0": {
+        "title": "[REMOVE] Wettest [unit] of the year",
+        "subTitle": "[stationName]",
+        "yAxis": {
+          "left": "Total precipitation [mm]",
+          "right": "[X-Axis]"
+        },
+        "xAxis": {
+          "bott": "Year",
+          "top": "[Y-AXIS]"
+        },
+        "caption": "The wettest [unit] of the year (total precipitation in mm).",
+        "legend": "Weather"
+      },
+      "1": {
+        "title": "Precipitation Difference From Baseline",
+        "subTitle": "[stationName]",
+        "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
+        "yAxis": {
+          "left": "Temperature [°C]",
+          "right": "[X-AXIS]"
+        },
+        "xAxis": {
+          "bott": "Year",
+          "top": "[Y-AXIS]"
+        },
+        "legend": "Climate"
+      },
+      "2": {
+        "title": "Dryest [unit] of the year",
+        "subTitle": "[stationName]",
+        "yAxis": {
+          "left": "Total precipitation [mm]",
+          "right": "[X-Axis]"
+        },
+        "xAxis": {
+          "bott": "Year",
+          "top": "[Y-AXIS]"
+        },
+        "caption": "The dryest [unit] of the year (total precipitation in mm).",
+        "legend": "Weather"
+      }
+    },
+    "series": {
+      "extreme-high": {
+        "name": "",
+        "week": "",
+        "day": ""
+      },
+      "extreme-low": {
+        "name": "",
+        "week": "",
+        "day": ""
+      },
+      "diff": {
+        "name": "",
+        "week": "",
+        "day": ""
+      }
+    },
+    "dataSource": {
+      "meta": {
+        "src": "https://polar.se/en/research-in-abisko/research-data/",
+        "downloadDate": "7 January 2020",
+        "citation": "",
+        "desc": "Abisko Scientific Research Station",
+        "descLong": "Swedish Polar Research Secretariet, Abisko Scientific Research Station, Research Data"
+      }
+    },
+    "units": {
+      "day": {
+        "plural": "days",
+        "singular": "day",
+        "interval": "daily"
+      },
+      "week": {
+        "plural": "weeks",
+        "singular": "week",
+        "interval": "weekly"
+      },
+      "month": {
+        "plural": "months",
+        "singular": "month",
+        "interval": "monthly"
+      }
+    },
+    "time": {
+      "months": {
+        "jan": "January",
+        "feb": "February",
+        "mar": "March",
+        "apr": "April",
+        "may": "May",
+        "jun": "June",
+        "jul": "July",
+        "aug": "August",
+        "sep": "September",
+        "oct": "October",
+        "nov": "November",
+        "dec": "December"
+      },
+      "monthShort": {
+        "jan": "Jan",
+        "feb": "Feb",
+        "mar": "Mar",
+        "apr": "Apr",
+        "may": "May",
+        "jun": "Jun",
+        "jul": "Jul",
+        "aug": "Aug",
+        "sep": "Sep",
+        "oct": "Oct",
+        "nov": "Nov",
+        "dec": "Dec"
+      }
+    },
+    "menu": {
+      "baselineform": {
+        "title": "Range for baseline",
+        "lower": "Lower limit",
+        "upper": "Upper limit"
+      },
+      "dataCredit": "Data source",
+      "contribute": "Contribute - Github [dummy]",
+      "showDataTable": "Show/hide data",
+      "langOption": "Svenska",
+      "downloadJPEG": "Download as JPEG",
+      "downloadPDF": "Download as PDF",
+      "downloadSVG": "Download as SVG"
+    }
+  },
+  "sv": {
+    "valueSuffix": "",
+    "groups": {
+      "0": {
+        "title": "",
+        "subTitle": "",
+        "caption": "",
+        "yAxis": {
+          "left": "",
+          "right": ""
+        },
+        "xAxis": {
+          "bott": "",
+          "top": ""
+        },
+        "legend": ""
+      },
+      "1": {
+        "title": "",
+        "subTitle": "",
+        "caption": "",
+        "yAxis": {
+          "left": "",
+          "right": ""
+        },
+        "xAxis": {
+          "bott": "",
+          "top": ""
+        },
+        "legend": ""
+      },
+      "2": {
+        "title": "",
+        "subTitle": "",
+        "caption": "",
+        "yAxis": {
+          "left": "",
+          "right": ""
+        },
+        "xAxis": {
+          "bott": "",
+          "top": ""
+        },
+        "legend": ""
+      }
+    },
+    "series": {
+      "extreme-high": {
+        "name": "",
+        "week": "",
+        "day": ""
+      },
+      "extreme-low": {
+        "name": "",
+        "week": "",
+        "day": ""
+      },
+      "diff": {
+        "name": "",
+        "week": "",
+        "day": ""
+      }
+    },
+    "dataSource": {
+      "meta": {
+        "src": "https://polar.se/en/research-in-abisko/research-data/",
+        "downloadDate": "7 Januari 2020",
+        "citation": "",
+        "desc": "Abisko Naturvetenskapliga Station",
+        "descLong": "Polarforskningssekretariatet, Abisko Naturvetenskapliga Station, forskningsdata"
+      }
+    },
+    "units": {
+      "day": {
+        "plural": "dagar",
+        "singular": "dag",
+        "interval": "daglig"
+      },
+      "week": {
+        "plural": "veckor",
+        "singular": "vecka",
+        "interval": "veckovis"
+      },
+      "month": {
+        "plural": "",
+        "singular": "",
+        "interval": ""
+      }
+    },
+    "time": {
+      "months": {
+        "jan": "Januari",
+        "feb": "Februari",
+        "mar": "Mars",
+        "apr": "April",
+        "may": "Maj",
+        "jun": "Juni",
+        "jul": "Juli",
+        "aug": "Augusti",
+        "sep": "September",
+        "oct": "Oktober",
+        "nov": "November",
+        "dec": "December"
+      },
+      "monthShort": {
+        "jan": "Jan",
+        "feb": "Feb",
+        "mar": "March",
+        "apr": "April",
+        "may": "Maj",
+        "jun": "Juni",
+        "jul": "Juli",
+        "aug": "Aug",
+        "sep": "Sep",
+        "oct": "Okt",
+        "nov": "Nov",
+        "dec": "Dec"
+      }
+    },
+    "menu": {
+      "baselineform": {
+        "title": "Interval för baslinje",
+        "lower": "Undregräns",
+        "upper": "Övregräns"
+      },
+      "dataCredit": "Data källa",
+      "contribute": "Bidra - Github [dummy]",
+      "showDataTable": "Vissa/göm data",
+      "langOption": "English",
+      "downloadJPEG": "Laddaner som JPEG",
+      "downloadPDF": "Laddaner som  PDF",
+      "downloadSVG": "Laddaner som SVG"
+    }
+  }
+}

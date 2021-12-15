@@ -160,7 +160,7 @@ exports.meta = {
             try {
 
                 // TODO order of month replace for subsets
-                var res = res.replace(
+                var res = res.replaceAll(
                         "[stationName]",
                         meta.stationDef.stationName
                     ),
@@ -178,37 +178,37 @@ exports.meta = {
                 res = (meta.subset
                     ? meta.subset.enabled
                     : false)
-                    ? res.replace(
+                    ? res.replaceAll(
                         "[month]",
                         set
                     )
-                    : res.replace(
+                    : res.replaceAll(
                         "[month]",
                         meta.month
                     );
-                res = res.replace(
+                res = res.replaceAll(
                     "[baselineLower]",
                     baselineLower
                 );
-                res = res.replace(
+                res = res.replaceAll(
                     "[baselineUpper]",
                     baselineUpper
                 );
-                res = res.replace(
+                res = res.replaceAll(
                     "[baseline]",
                     `${baselineLower} - ${baselineUpper}`
                 );
-                res = res.replace(
+                res = res.replaceAll(
                     "[CO2]",
                     `CO${"2".sub()}`
                 );
-                res = res.replace(
+                res = res.replaceAll(
                     "[SOME TEXT]",
                     ""
                 );
                 if (meta.extreme) {
 
-                    res = res.replace(
+                    res = res.replaceAll(
                         "[lim]",
                         (meta.extreme.lim > 0
                             ? "+"
@@ -223,16 +223,15 @@ exports.meta = {
                     res = tmp;
 
                 }
-                if (meta.unitType && meta.units) {
-
-                    var res = res.replace(
+                if (meta.unitType && meta.units && meta.units[meta.unitType] != undefined) {
+                    var res = res.replaceAll(
                         "[unit]",
                         meta.units[meta.unitType].singular
-                    ).replace(
+                    ).replaceAll(
                         "[units]",
                         meta.units[meta.unitType].plural
                     ).
-                        replace(
+                        replaceAll(
                             "[interval]",
                             meta.units[meta.unitType].interval
                         );
@@ -241,8 +240,6 @@ exports.meta = {
 
             } catch (error) {
 
-                console.log(this.id);
-                console.log(meta);
                 throw error;
 
             }
