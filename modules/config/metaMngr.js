@@ -127,6 +127,8 @@ exports.meta = {
                                 this.files.ref.subset,
                                 this.files.subset
                             );
+
+				aggr.tag = this.files.ref.tag;
                             aggr = iter(aggr);
                             return aggr;
 

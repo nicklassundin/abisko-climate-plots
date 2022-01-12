@@ -16,8 +16,8 @@ exports.webserver = {
 
         const http = require("http");
         try {
-
-            return http.createServer(app).listen(config.port);
+	    http.createServer(app).listen(config.port);
+            return http
 
         } catch (err) {
 
