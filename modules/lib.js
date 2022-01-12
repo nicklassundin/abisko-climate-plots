@@ -32,7 +32,7 @@ global.variables = {
 
 const charts = require("./config/dataset/struct.js").struct;
 const sets = require("../static/preset.json");
-exports.stats = require("./stats/config.js");
+// exports.stats = require("./stats/config.js");
 
 const {meta} = require("./config/metaMngr.js");
 

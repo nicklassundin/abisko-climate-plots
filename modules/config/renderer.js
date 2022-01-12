@@ -435,13 +435,10 @@ const help = require('climate-plots-helper'),
 							$(`#${id}`).highcharts().series[index].update(ser)
 						})	
 					} catch (error) {
-
-						// Console.log(meta)
-						console.log(data);
-						// Console.log(s)
-						console.log(key);
-						console.log(series);
-						console.log(meta.series);
+						// console.log("meta",meta)
+						// console.log("data",data);
+						// console.log("key",key);
+						// console.log("series",series);
 						throw error;
 
 					}
@@ -519,7 +516,7 @@ const help = require('climate-plots-helper'),
 
 			}
 			var complete = () => {
-				console.log("switchGroup")
+				// console.log("switchGroup")
 				this.switchToGroup(this.gID);
 				this.chart.redraw();
 				this.chart.hideLoading();
@@ -527,7 +524,6 @@ const help = require('climate-plots-helper'),
 			Promise.all(series).then(() => {
 				complete()
 			})
-
 		},
 		"switchToGroup" (gID, changeVisibility = true, change = true) {
 

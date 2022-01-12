@@ -1,7 +1,6 @@
 const $ = require("jquery");
 
-const Papa = require("papaparse"),
-	parse = require("../../stats/config.js").parsers;
+const Papa = require("papaparse");
 // const help = require("../../helpers.js");
 const help = require('climate-plots-helper');
 
@@ -131,157 +130,16 @@ const container = {},
 		"filePath": undefined,
 		"preset": undefined,
 		"cached": {},
-		// "rawData": [],
 		"parser": undefined,
 		"render": renderer,
-		// "reader": Papa.parse, // TODO be a module that are self contained
 		"metaRef": {},
 		"contFunc" (reset = false, id, config) {
-
 			id = config.files.stationDef.id;
 			if (!this.metaRef[id]) {
 				this.metaRef[id] = config;
 			}
-			// if (typeof this.rawData !== "undefined" && this.rawData.length > 0) {
-			// return this;
-			// }
-			// if (Object.keys(this.rawData).length > 0) {
-			// return false;
-			// }
-			// if (reset) {
-			// this.cached = {};
-			// }
-			// const ref = this;
-			// if (!this.rawData.then) {
-
-			//     const path = ref.filePath(ref.file);
-			//     this.rawData = new Promise((resolve, reject) => {
-
-			//         function data (file) {
-
-			//             return new Promise((resolve, reject) => {
-
-			//                 /*
-			// * Console.log(file)
-			// * Console.log(ref.preset)
-			// */
-			// ref.preset.complete = function (result) {
-
-			//    // Console.log(result)
-			//    resolve(result);
-
-			// };
-			// ref.reader(
-			//    file,
-			//    ref.preset
-			// );
-
-			// }).catch((error) => {
-
-			// console.log("FAILED TO LOAD DATA");
-			// console.log(error);
-
-			// });
-
-			// }
-			// ref.file.forEach((file, index) => {
-
-			//     /*
-			//      * TODO Demo
-			//      * If(demo[station] && demo[station][file]){
-			//      */
-
-			//     /*
-			//      * Console.log(demo[station][file])
-			//      * Ref.rawData.push(
-			//      * Data(demo[station][file]))
-			// * }else{
-			// */
-			// try {
-
-			//    ref.rawData.push(data(path[index]));
-
-			// } catch (error) {
-
-			//    console.log(file);
-			//    console.log(ref.rawData);
-			//    throw error;
-
-			// }
-			// // }
-
-			// });
-			// resolve(ref.rawData);
-
-			// });
-
-			// }
 			return this;
-
 		},
-		// "parseRawData" (tags) {
-		//     let tag = tags[0],
-		//         temp = this.parser,
-		// {parser} = this;
-
-		//     /*
-		//      * Console.log("Parser")
-		//      * Console.log(this.parser.pre)
-		//      */
-		//     if (!(typeof parser === "function")) {
-
-		//         parser = parser[tag];
-
-		//     }
-		//     // const rawDataPromise = this.rawData;
-		//     return new Promise((resolve, reject) => {
-
-		//         rawDataPromise.then((rawData) => {
-
-		//             resolve(Promise.all(rawData).then((rawData) => {
-
-		//                 /*
-		//                  * $.ajax({
-		//                  * Type: "POST",
-		//                  * Url: hostUrl+'/receive',
-		//                  * Data: {
-		//                  * Data: JSON.stringify(rawData)
-		//                  * },
-		//                  * Success: success,
-		//                  * DataType: 'script'
-		//                  * });
-		//                  */
-		//                 const data = parser(rawData);
-
-		//                 /*
-		//                  * Data.then(d => {
-		//                  * Console.log(d['yrlyTest'])
-		//                  * D['yrlyTest'].then(dn => {
-		//                  * 	Console.log(dn)
-		//                  * 	Console.log(dn['avg']['2001']['0'].valuesAll)
-		//                  * 	// console.log(dn['avg']['2001']['0'])
-		// * })
-		// * })
-		// */
-		// return data;
-
-		// }).
-		// catch((error) => {
-
-		//    console.log("FAILED DATA PARSE");
-		//    console.log(tags);
-		//    console.log(tag);
-		//    console.log(parser);
-		//    console.log(temp);
-		//    throw error;
-
-		// }));
-
-		//                 });
-
-		//             });
-
-		//         },
 		"init" (id) {
 			let tag = this.metaRef[id].files.ref.tag.data,
 				// Var render = this.render;
@@ -324,7 +182,6 @@ const container = {},
 			let cfg = config.files.config.parse,
 				{file} = cfg,
 				{preset} = cfg,
-				parser = parse[cfg.parser],
 				{local} = cfg,
 				// Console.log(file)
 				res = this.clone();
@@ -335,8 +192,7 @@ const container = {},
 			// station
 			// ));
 			res.preset = preset;
-			res.parser = parser;
-			res.reader = Papa.parse;
+			// res.reader = Papa.parse;
 			return res;
 
 		}

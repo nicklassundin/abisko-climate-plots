@@ -3,21 +3,35 @@
 
 
 var getData = function(station, tags, ...ser){
+	// console.log('station',station)
 	// console.log('tags',tags)
 	// console.log('ser',ser)
 	tags = Object.values(tags)
 	var type = tags.shift();
+	if(type === 'temperatures') type = 'temperature' // TODO hotfix
+	if(type === 'growingSeason'){
+		type = 'temperature' // TODO hotfix
+		tags[0] = tags[0].replace('days', 'growDays');
+		tags[0] = tags[0].replace('weeks', 'growWeeks');
+	}
+	if(station === 'calm'){
+		console.log('station',station)
+		return Promise.resolve(null)
+	}
 	tags = tags.join('/')
 	ser = ser.join('/')
-	if(type === 'temperatures') type = 'temperature' // TODO hotfix
-	var url = `station/${station}/${type}/${tags}/${ser}`;
+
+	var url = tags.length == 0 ? `station/${station}/${type}/${ser}` : `station/${station}/${type}/${tags}/${ser}`;
+	// console.log("URL",url)
+	// console.log("tags",tags)
+	// console.log("ser",ser)
+	// return Promise.resolve(undefined)
 	return new Promise((res, rej) => {
 		$.getJSON(url, function(result) {
-			console.log('url', url)
-			console.log('data',result)
 			result = result.data;
 			if(result.values && typeof result.values != 'function') result = result.values 
-			res(result)	
+			if(result.ERROR) res(undefined);
+			res(Object.values(result))
 		})
 			.done(function(result) {
 				// res(result.data)
@@ -31,13 +45,9 @@ var getData = function(station, tags, ...ser){
 
 exports.series = {
 	"getPreset": (config, serie, meta) => {
-		// console.log('meta:', meta)
-		/*
-		 * Console.log("getPreset")
-		 * Console.log(config)
-		 * Console.log(serie)
-		 * Console.log(meta)
-		 */
+		// console.log("config",config)
+		// console.log("serie",serie)
+		// console.log("meta",meta)
 		const preset = {
 			"lineWidth": 0,
 			"marker": {"radius": 2},
@@ -56,14 +66,10 @@ exports.series = {
 		preset.name = config.name;
 		preset.className = config.className;
 		if (!preset.color) {
-
 			preset.color = config.colour;
-
 		}
 		if (config.borderColor) {
-
 			preset.borderColor = config.borderColor;
-
 		}
 		preset.type = config.type;
 
@@ -89,6 +95,7 @@ exports.series = {
 				if(typeof incomp.data.then === 'function'){
 					incomp.data.then(reso => {
 						incomp.data = reso;
+						// console.log(incomp)
 						res(incomp)		
 					})
 				}else{
@@ -107,7 +114,7 @@ exports.series = {
 		return (meta, data, k, s) => this.getPreset(
 			meta.series.max,
 			{
-				"data": getData(meta.stationDef.station,meta.tag.data, 'max', true, 'values'),
+				"data": getData(meta.stationDef.station,meta.tag.data, 'max', 'shortValues'),
 				// "data": data.max != undefined
 				// ? data.max.max != undefined
 				// ? data.max.max(
@@ -129,7 +136,7 @@ exports.series = {
 		return (meta, data, k, s) => this.getPreset(
 			meta.series.min,
 			{
-				"data": getData(meta.stationDef.station,meta.tag.data, 'min', true, 'values'),
+				"data": getData(meta.stationDef.station,meta.tag.data, 'min', 'shortValues'),
 				// "data": data.min != undefined
 				//     ? data.min.min != undefined
 				//         ? data.min.min(
@@ -189,7 +196,7 @@ exports.series = {
 	},
 	get "extreme-low" () {
 		return this.extreme;
-    	},
+	},
 	get "extreme-high" () {
 		return this.extreme
 	},
@@ -208,7 +215,7 @@ exports.series = {
 					: 0,
 					"radius": 2
 				},
-				"data": getData(meta.stationDef.station,meta.tag.data),
+				"data": getData(meta.stationDef.station,meta.tag.data, 'shortValues'),
 				// "data": data.avg != undefined
 				// ? data.avg.values
 				// : data.values
@@ -218,7 +225,6 @@ exports.series = {
 
 	},
 	get "diff" () {
-
 		return (meta, data, k, s) => this.getPreset(
 			meta.series.diff,
 			{
@@ -235,7 +241,7 @@ exports.series = {
 				 * Type: meta.series.diff.type,
 				 */
 				"data": (() => {
-					return getData(meta.stationDef.station,meta.tag.data,'avg','difference')
+					return getData(meta.stationDef.station,meta.tag.data,'difference', 'shortValues')
 					if (meta.extreme) {
 
 						if (meta.extreme.type == "high") {
@@ -264,64 +270,34 @@ exports.series = {
 		);
 
 	},
-	"first": (meta, data) => ({
-		"name": meta.series.first.name,
-		"className": meta.series.first.className,
-		"lineWidth": 0,
-		"marker": {"radius": 2},
-		"states": {"hover": {"lineWidthPlus": 0}},
-		"color": meta.series.first.colour,
-		"data": data.values,
-		"visible": false,
-		"tooltip": {"valueDecimals": meta.decimals},
-		"type": meta.series.first.type
-	}),
-	"firstDiff": (meta, data) => ({
-		// TODO outdated
-		"regression": false,
-		"regressionSettings": {
-			"type": "linear",
-			"color": "#aa0000",
-			"name": "DUMMY"
-		},
-		"name": meta.series.diff.name,
-		"className": meta.series.diff.className,
-		"type": meta.series.diff.type,
-		"data": data.difference(),
-		"color": "red",
-		"negativeColor": "blue",
-		"visible": true,
-		"tooltip": {"valueDecimals": meta.decimals}
-	}),
-	"last": (meta, data) => ({
-		"name": meta.series.last.name,
-		"className": meta.series.last.className,
-		"lineWidth": 0,
-		"marker": {"radius": 2},
-		"states": {"hover": {"lineWidthPlus": 0}},
-		"color": meta.series.last.colour,
-		"data": data.values,
-		"visible": false,
-		"tooltip": {"valueDecimals": meta.decimals},
-		"type": meta.series.last.type
-	}),
-	"lastDiff": (meta, data) => ({
-		// TODO outdated
-		"regression": false,
-		"regressionSettings": {
-			"type": "linear",
-			"color": "#aa0000",
-			"name": "DUMMY"
-		},
-		"name": meta.series.diff.name,
-		"className": meta.series.diff.className,
-		"type": meta.series.diff.type,
-		"data": data.difference(),
-		"color": "red",
-		"negativeColor": "blue",
-		"visible": true,
-		"tooltip": {"valueDecimals": meta.decimals}
-	}),
+	get "first" () {
+		return (meta, data, k, s) => this.getPreset(
+			meta.series.first,
+			{
+				"lineWidth": 0,
+				"marker": {"radius": 2},
+				"states": {"hover": {"lineWidthPlus": 0}},
+				"data": getData(meta.stationDef.station,meta.tag.data, 'first', 'shortValues'),
+			},
+			meta);
+	},
+	get "firstDiff" (){
+		return this.diff;
+	},
+	get "last" () {
+		return (meta, data, k, s) => this.getPreset(
+			meta.series.last,
+			{
+				"lineWidth": 0,
+				"marker": {"radius": 2},
+				"states": {"hover": {"lineWidthPlus": 0}},
+				"data": getData(meta.stationDef.station,meta.tag.data, 'last', 'shortValues'),
+			},
+			meta);
+	},
+	get "lastDiff" (){
+		return this.diff;
+	},
 	"linjer": (meta, data) => ({
 		"className": "series-linjer",
 		"name": meta.series.linjer.name,
@@ -331,50 +307,65 @@ exports.series = {
 		"tooltip": {"valueDecimals": meta.decimals},
 		"showInLegend": false
 	}),
-	"snow": (meta, data) => ({
-		"name": meta.series.snow.name,
-		"className": meta.series.snow.className,
-		"type": meta.series.snow.type,
-		"stack": meta.groups[meta.series.snow.group].title,
-		"stacking": "normal",
-		"color": meta.series.snow.colour,
-		"data": data.snow != undefined
-		? data.snow.values
-		: undefined,
-		"visible": true,
-		"tooltip": {"valueDecimals": meta.decimals},
-		"borderColor": meta.series.snow.borderColour,
-		"states": {
-			"hover": {
-				"color": meta.series.snow.hoverColour,
-				"animation": {
-					"duration": 0
-				}
-			}
-		}
-	}),
-	"rain": (meta, data) => ({
-		"name": meta.series.rain.name,
-		"className": meta.series.rain.className,
-		"type": meta.series.rain.type,
-		"stack": meta.groups[meta.series.rain.group].title,
-		"stacking": "normal",
-		"data": data.rain != undefined
-		? data.rain.values
-		: undefined,
-		"color": meta.series.rain.colour,
-		"borderColor": meta.series.rain.borderColour,
-		"states": {
-			"hover": {
-				"color": meta.series.rain.hoverColour,
-				"animation": {
-					"duration": 0
-				}
-			}
-		},
-		"visible": true,
-		"tooltip": {"valueDecimals": meta.decimals}
-	}),
+	get "snow"(){
+		return (meta, data, k, s) => this.getPreset(
+			meta.series.snow,
+			{
+				"data": getData(meta.stationDef.station,meta.tag.data, 'changeY', 'snow', 'shortValues'),
+				// "name": meta.series.snow.name,
+				// "className": meta.series.snow.className,
+				// "type": meta.series.snow.type,
+				// "stack": meta.groups[meta.series.snow.group].title,
+				"stacking": "normal",
+				// "color": meta.series.snow.colour,
+				// "data": data.snow != undefined
+				// ? data.snow.values
+				// : undefined,
+				// "visible": true,
+				// "tooltip": {"valueDecimals": meta.decimals},
+				// "borderColor": meta.series.snow.borderColour,
+				// "states": {
+				// "hover": {
+				// "color": meta.series.snow.hoverColour,
+				// "animation": {
+				// "duration": 0
+				// }
+				// }
+				// }
+			},
+			meta
+		);
+	},
+	get "rain"(){
+		return (meta, data, k, s) => this.getPreset(
+			meta.series.rain,
+			{
+				"data": getData(meta.stationDef.station, meta.tag.data, 'shortValues'),
+				"stacking": "normal"
+			},
+			meta
+		)
+		// "name": meta.series.rain.name,
+		// "className": meta.series.rain.className,
+		// "type": meta.series.rain.type,
+		// "stack": meta.groups[meta.series.rain.group].title,
+		// "stacking": "normal",
+		// "data": data.rain != undefined
+		// ? data.rain.values
+		// : undefined,
+		// "color": meta.series.rain.colour,
+		// "borderColor": meta.series.rain.borderColour,
+		// "states": {
+		// "hover": {
+		// 	"color": meta.series.rain.hoverColour,
+		// 	"animation": {
+		// 		"duration": 0
+		// 	}
+		// }
+		// },
+		// "visible": true,
+		// "tooltip": {"valueDecimals": meta.decimals}
+	},
 	"iceTime": (meta, data) => ({
 		"regression": false,
 		"type": meta.series.iceTime.type,
@@ -478,18 +469,29 @@ exports.series = {
 		"visible": true,
 		"tooltip": {"valueDecimals": meta.decimals}
 	}),
-	"perma": (meta, data, k, s) => ({
-		"name": meta.series[s].name == undefined
-		? s
-		: meta.series[k].name,
-		"className": meta.series[s].className,
-		"type": meta.series[s].type,
-		"color": meta.series[s].colour,
-		"opacity": 0.9,
-		"data": data[s].values,
-		"visible": k == "Torneträsk",
-		"tooltip": {"valueDecimals": meta.decimals}
-	}),
+	get "perma"(){
+		return (meta, data, k, s) => this.getPreset(
+			meta.series[s],
+			{
+				"color": meta.series[s].colour,
+				"className": meta.series[s].className,
+				"data": getData(s.toLowerCase()
+					.replace('ä','a').replace('å','a').replace('ö','o'), 
+					meta.tag.data,
+					'yrly',
+					'shortValues'),
+				"visible": k == "Torneträsk",
+				"opacity": 0.9,
+				"name": meta.series[s].name == undefined
+					? s : meta.series[k].name,
+			},
+			meta)
+		// {
+		// "type": meta.series[s].type,
+		// "data": data[s].values,
+		// "tooltip": {"valueDecimals": meta.decimals}
+		// }),
+	}, 
 	"period": (meta, data, k, s) => ({
 		"name": meta.series[s].name,
 		"className": meta.series[s].className,
