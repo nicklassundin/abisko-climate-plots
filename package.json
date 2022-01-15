@@ -56,7 +56,7 @@
     "require.async": "^0.1.1",
     "requirejs-plugins": "^1.0.2",
     "run-async": "^2.4.1",
-    "shelljs": "^0.8.4",
+    "shelljs": "^0.8.5",
     "tedious": "^6.7.0",
     "textarea-markdown": "^1.2.7",
     "topo": "^3.0.3",
