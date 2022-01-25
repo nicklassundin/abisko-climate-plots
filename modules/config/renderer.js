@@ -521,7 +521,8 @@ const help = require('climate-plots-helper'),
 				this.chart.redraw();
 				this.chart.hideLoading();
 			}
-			Promise.all(series).then(() => {
+			Promise.all(series).then((ser) => {
+				console.log(ser)
 				complete()
 			})
 		},

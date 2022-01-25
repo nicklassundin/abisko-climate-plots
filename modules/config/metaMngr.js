@@ -1,4 +1,4 @@
-const before = require("./charts/help.js").preset;
+// const before = require("./charts/help.js").preset;
 // Const { markdownToTxt } = require('markdown-to-txt');
 
 const {Remarkable} = require("remarkable"),
@@ -30,18 +30,15 @@ exports.meta = {
      * },
      */
     "getMeta" (type) {
-
         const st = type.stationType.config,
 		 id = type.plot,
 		 metaRef = new Promise((res, rej) => {
 
                 $.getJSON(
-                    `${hostUrl}/static/charts/stationType/${st}/${id}.json`,
+                    `${hostUrl}/static/charts/stationType/${id}.json`,
                     (result) => {
-
-                        result.config.parse = before(result.config.parse);
+			    // console.log(result)
                         res(result);
-
                     }
                 );
 

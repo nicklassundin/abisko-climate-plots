@@ -1,5 +1,6 @@
-const help = require('climate-plots-helper'),
-    {time} = require("climate-plots-config");
+const help = require('climate-plots-helper');
+const time = require('../../../static/lang/time.json');
+
 const dateFormat = (date) => `${date.getFullYear()} ${time[nav_lang].months[help.months()[date.getMonth()]]} ${date.getDate()}`;
 
 var formats = {

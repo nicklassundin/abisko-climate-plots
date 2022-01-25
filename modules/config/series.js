@@ -20,12 +20,9 @@ var getData = function(station, tags, ...ser){
 	}
 	tags = tags.join('/')
 	ser = ser.join('/')
-
-	var url = tags.length == 0 ? `station/${station}/${type}/${ser}` : `station/${station}/${type}/${tags}/${ser}`;
-	// console.log("URL",url)
-	// console.log("tags",tags)
+	var url = tags.length <= 0 ? `station/${station}/${type}/${ser}` : `station/${station}/${type}/${tags}/${ser}`;
+	console.log("URL",url)
 	// console.log("ser",ser)
-	// return Promise.resolve(undefined)
 	return new Promise((res, rej) => {
 		$.getJSON(url, function(result) {
 			result = result.data;
@@ -483,7 +480,7 @@ exports.series = {
 				"visible": k == "Torneträsk",
 				"opacity": 0.9,
 				"name": meta.series[s].name == undefined
-					? s : meta.series[k].name,
+				? s : meta.series[k].name,
 			},
 			meta)
 		// {
@@ -492,38 +489,45 @@ exports.series = {
 		// "tooltip": {"valueDecimals": meta.decimals}
 		// }),
 	}, 
-	"period": (meta, data, k, s) => ({
-		"name": meta.series[s].name,
-		"className": meta.series[s].className,
-		"type": meta.series[s].type,
-		"lineWidth": 1,
-		"data": data[s].means.rotate(6).slice(2),
-		"visible": true,
-		"tooltip": {"valueDecimals": meta.decimals}
-	}),
-	"co2": (meta, data) => ({
-		"name": meta.series.co2.name,
-		"className": meta.series.co2.className,
-		"color": meta.series.co2.colour,
-		"type": meta.series.co2.type,
-		"lineWidth": 2,
-		"states": {"hover": {"lineWidthPlus": 0}},
-		"data": data.values,
-		"turboThreshold": 4000,
-		"fillOpacity": 0.2,
-		"label": {
-			"enabled": false
-		},
-		"marker": {
-			"states": {
-				"select": {
-					"fillColor": "red",
-					"lineWidth": 1,
-					"radius": 5
-				}
+	get "period" (){
+		return (meta, data, k, s) => this.getPreset(
+			meta.series[s],
+			{
+				"name": meta.series[s].name,
+				"className": meta.series[s].className,
+				"type": meta.series[s].type,
+				"lineWidth": 1,
+				"data": getData(meta.stationDef.station,meta.tag.data, s, 'shortValues'),
+				"visible": true,
+				"tooltip": {"valueDecimals": meta.decimals}
+			},
+			meta)
+	}, 
+	get "co2" (){
+		return (meta, data) => this.getPreset(
+			meta.series[s],
+			{
+				"lineWidth": 2,
+				"states": {"hover": {"lineWidthPlus": 0}},
+				"data": data.values,
+				"turboThreshold": 4000,
+				"fillOpacity": 0.2,
+				"label": {
+					"enabled": false
+				},
+				"data": getData(meta.stationDef.station,meta.tag.data, 'shortValues'),
+				"marker": {
+					"states": {
+						"select": {
+							"fillColor": "red",
+							"lineWidth": 1,
+							"radius": 5
+						}
+					}
+				},
+				"zIndex": 6,
+				"tooltip": {"valueDecimals": meta.decimals}
 			}
-		},
-		"zIndex": 6,
-		"tooltip": {"valueDecimals": meta.decimals}
-	})
+			,meta)
+	}
 };
