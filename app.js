@@ -43,6 +43,8 @@ app.use(
     "/maps",
     express.static(`${__dirname}/maps`)
 );
+const path = require('path');
+require("climate-plots-config").genStaticFiles(path.join(__dirname, '/'))
 app.use(
     "/static",
     express.static(`${__dirname}/static`)

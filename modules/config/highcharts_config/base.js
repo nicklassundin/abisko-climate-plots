@@ -42,7 +42,6 @@ exports.plotLines = {
 
     },
     "DoY" () {
-
         return [
             1,
             2,

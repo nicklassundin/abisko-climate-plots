@@ -73,6 +73,7 @@ exports.meta = {
                             var iter = function (obj, meta = obj) {
 
                                     const res = {};
+				    try{
                                     Object.keys(obj).forEach((key) => {
 
                                         if (typeof obj[key] === "object") {
@@ -96,6 +97,11 @@ exports.meta = {
                                         }
 
                                     });
+				    }catch(error){
+					    console.log("obj",obj);
+					    console.log("meta")
+					    throw error
+				    }
                                     return res;
 
                                 },

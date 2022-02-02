@@ -2324,8 +2324,8 @@
         "tag": {
           "render": "breakupDOY",
           "data": [
-            "DOY",
-            "breakup"
+            "breakup",
+            "yrly"
           ]
         },
         "config": {
@@ -2740,8 +2740,8 @@
         "tag": {
           "render": "freezeDOY",
           "data": [
-            "DOY",
-            "freeze"
+            "freezeup",
+            "yrly"
           ]
         },
         "config": {
@@ -3153,8 +3153,12 @@
         "id": "abiskoLakeIceTime",
         "type": "tornetrask",
         "tag": {
-          "render": "iceTime",
-          "data": "iceTime"
+          "render": [
+            "iceTime"
+          ],
+          "data": [
+            "iceTime"
+          ]
         },
         "config": {
           "meta": {
@@ -3659,6 +3663,7 @@
             },
             "xAxis": {
               "categories": [
+                "Aug",
                 "Sep",
                 "Oct",
                 "Nov",
@@ -3668,7 +3673,8 @@
                 "Mar",
                 "Apr",
                 "May",
-                "Jun"
+                "Jun",
+                "Jul"
               ],
               "bott": "Month",
               "top": "[Y-AXIS]"
@@ -3825,16 +3831,18 @@
             },
             "xAxis": {
               "categories": [
+                "Aug",
                 "Sep",
-                "Oct",
+                "Okt",
                 "Nov",
                 "Dec",
                 "Jan",
                 "Feb",
                 "Mar",
                 "Apr",
-                "May",
-                "Jun"
+                "Maj",
+                "Jun",
+                "Jul"
               ],
               "bott": "Månad",
               "top": "[Y-AXIS]"
@@ -4099,6 +4107,7 @@
             },
             "xAxis": {
               "categories": [
+                "Aug",
                 "Sep",
                 "Oct",
                 "Nov",
@@ -4108,7 +4117,8 @@
                 "Mar",
                 "Apr",
                 "May",
-                "Jun"
+                "Jun",
+                "Jul"
               ],
               "bott": "Month",
               "top": "[Y-AXIS]"
@@ -4274,16 +4284,18 @@
             },
             "xAxis": {
               "categories": [
+                "Aug",
                 "Sep",
-                "Oct",
+                "Okt",
                 "Nov",
                 "Dec",
                 "Jan",
                 "Feb",
                 "Mar",
                 "Apr",
-                "May",
-                "Jun"
+                "Maj",
+                "Jun",
+                "Jul"
               ],
               "bott": "Månad",
               "top": "[Y-AXIS]"
@@ -4449,8 +4461,7 @@
             "yrly"
           ],
           "data": [
-            "snowDepth",
-            "singleStake",
+            "snowDepth_single",
             "yrly"
           ]
         },
@@ -25084,8 +25095,8 @@
         },
         "decimals": 2,
         "series": {
-          "avg": {
-            "preset": "avg",
+          "calm": {
+            "preset": "perma",
             "group": 0,
             "visible": true,
             "colour": "#bb9999",
@@ -25194,7 +25205,7 @@
         },
         "valueSuffix": "m",
         "series": {
-          "avg": {
+          "calm": {
             "name": "Average of all stations"
           }
         },
@@ -25342,7 +25353,7 @@
         },
         "valueSuffix": "m",
         "series": {
-          "avg": {
+          "calm": {
             "name": "Genomsnitt av alla stationer"
           }
         },
@@ -38715,8 +38726,8 @@
         "tag": {
           "render": "breakupDOY",
           "data": [
-            "DOY",
-            "breakup"
+            "breakup",
+            "yrlySplit"
           ]
         },
         "config": {
@@ -39131,8 +39142,8 @@
         "tag": {
           "render": "freezeDOY",
           "data": [
-            "DOY",
-            "freeze"
+            "freezeup",
+            "yrlySplit"
           ]
         },
         "config": {
@@ -54059,6 +54070,9 @@
             "className": "series-co2",
             "preset": "co2",
             "group": 0,
+            "marker": {
+              "radius": 0.5
+            },
             "visible": true,
             "colour": "#5555bb",
             "type": "area"

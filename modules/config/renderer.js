@@ -693,10 +693,9 @@ const help = require('climate-plots-helper'),
 			}
 			try {
 
-				/*
-				 * Console.log(meta.menu.dataCredit)
-				 * Console.log(meta)
-				 */
+				 // console.log(meta)
+				// console.log(group.xAxis.categories)
+
 				this.chart.update({
 					"title": {
 						"text": title,
@@ -725,9 +724,10 @@ const help = require('climate-plots-helper'),
 						},
 						"gridLineWidth": group.xAxis.gridLineWidth,
 						"categories": meta.period
-						? group.xAxis.categories
+						? Object.values(group.xAxis.categories)
 						: undefined,
 						"corsshair": true,
+						"max": meta.period ? 9 : null,
 						"min": meta.period
 						? null
 						: group.xAxis.min
@@ -780,6 +780,7 @@ const help = require('climate-plots-helper'),
 							"marker": {
 								"enabledThreshold": 0,
 								"radius": 1,
+								// "lineColor": null,
 								"state": {
 									"select": {
 										"lineColor": "6666bb",
@@ -910,7 +911,6 @@ var render = {
 					chart = $(`#${divID}`).highcharts();
 
 				chart.series.forEach((v, i, a) => {
-
 					if (chart.series[i].options.marker) {
 
 						let currRadius = chart.series[i].options.marker.radius,
