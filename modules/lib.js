@@ -42,11 +42,12 @@ lib = {
 		this.renderSets(element, element.set, element.station, element.url)		
 	},
 	"renderChart" (div, type, url = window.location.origin) {
-		if (type.startYear) {
+		// if (type.startYear) {
+			// console.log(type.startYear)
 
-			startYear = null;
+// 			startYear = null;
 
-		}
+		// }
 		if (hostUrl) {
 
 			if (url) {

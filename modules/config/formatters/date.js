@@ -1,13 +1,14 @@
-const help = require('climate-plots-helper'),
-    {time} = require("climate-plots-config");
+const help = require('climate-plots-helper');
+const time = require('../../../static/lang/time.json');
+
 const dateFormat = (date) => `${date.getFullYear()} ${time[nav_lang].months[help.months()[date.getMonth()]]} ${date.getDate()}`;
 
 var formats = {
-    "YYYYMMDD": (date) => {
+    "YYYYMMDD": (date, shrt = false) => {
 
         try {
 
-            return `${date.getFullYear()} ${formats.MM(date)} ${formats.DD(date)}`;
+            return `${date.getFullYear()} ${formats.MM(date, shrt)} ${formats.DD(date)}`;
 
         } catch (error) {
 
@@ -17,8 +18,8 @@ var formats = {
 
     },
     "MMDD": (date, shrt = false) => {
-
-        try {
+        // console.log(date)
+	try {
 
             return `${formats.MM(
                 date,
@@ -29,7 +30,7 @@ var formats = {
             )}`;
 
         } catch (error) {
-
+		console.log(error)
             return "";
 
         }

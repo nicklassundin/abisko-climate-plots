@@ -3,9 +3,9 @@
 
 
 var getData = function(station, tags, ...ser){
-	// console.log('station',station)
-	// console.log('tags',tags)
-	// console.log('ser',ser)
+	console.log('station',station)
+	console.log('tags',tags)
+	console.log('ser',ser)
 	tags = Object.values(tags)
 	var type = tags.shift();
 	if(type === 'temperatures') type = 'temperature' // TODO hotfix
@@ -14,18 +14,17 @@ var getData = function(station, tags, ...ser){
 		tags[0] = tags[0].replace('days', 'growDays');
 		tags[0] = tags[0].replace('weeks', 'growWeeks');
 	}
-	if(station === 'calm'){
-		console.log('station',station)
-		return Promise.resolve(null)
+	if(station === 'CALM'){
+		sdfsdfsd
+		station = station.toLowerCase()
+		// 	console.log('station',station)
+		// return Promise.resolve(null)
 	}
 	tags = tags.join('/')
 	ser = ser.join('/')
-
-	var url = tags.length == 0 ? `station/${station}/${type}/${ser}` : `station/${station}/${type}/${tags}/${ser}`;
-	// console.log("URL",url)
-	// console.log("tags",tags)
+	var url = tags.length <= 0 ? `station/${station}/${type}/${ser}` : `station/${station}/${type}/${tags}/${ser}`;
+	console.log("URL",url)
 	// console.log("ser",ser)
-	// return Promise.resolve(undefined)
 	return new Promise((res, rej) => {
 		$.getJSON(url, function(result) {
 			result = result.data;
@@ -49,6 +48,7 @@ exports.series = {
 		// console.log("serie",serie)
 		// console.log("meta",meta)
 		const preset = {
+			"label": false,
 			"lineWidth": 0,
 			"marker": {"radius": 2},
 			"states": {"hover": {"lineWidthPlus": 0}},
@@ -63,7 +63,7 @@ exports.series = {
 			serie,
 			config
 		);
-		preset.name = config.name;
+		if(config.name != undefined) preset.name = config.name;
 		preset.className = config.className;
 		if (!preset.color) {
 			preset.color = config.colour;
@@ -73,21 +73,6 @@ exports.series = {
 		}
 		preset.type = config.type;
 
-		/*
-		 * Console.log(preset)
-		 * Console.log("preset end")
-		 */
-		// return new Promise((res, rej) => {
-		// 	if(typeof preset.data.then === 'function'){
-
-		// 		preset.data.then(reso => {
-		// 			preset.data = reso;
-		// 			res(preset)		
-		// 		})
-		// 	}else{
-		// 		res(preset)
-		// 	}
-		// })
 		var complete = () => {	
 			var incomp = {};
 			$.extend(true, incomp, preset)
@@ -384,55 +369,58 @@ exports.series = {
 		"visible": true,
 		"tooltip": {"valueDecimals": meta.decimals}
 	}),
-	"freeze": (meta, data) => ({
-		"regression": false,
-		"type": meta.series.freeze.type,
-		"regressionSettings": {
-			"type": "linear",
-			"color": "#0000ee",
-			"name": "[placeholder]"
-		},
-		"name": meta.series.freeze.name,
-		"className": meta.series.freeze.className,
-		"color": meta.series.freeze.colour,
-		"lineWidth": 0,
-		"marker": {
-			"enabled": true,
-			"fillColor": meta.series.freeze.colour,
-			"lineColor": meta.series.freeze.borderColour,
-			"lineWidth": 1,
-			"radius": 2
-		},
-		"states": {"hover": {"lineWidthPlus": 0}},
-		"data": data.avg != undefined
-		? data.avg.values
-		: data.values,
-		"visible": true,
-		"tooltip": {"valueDecimals": meta.decimals}
-	}),
-	"breakup": (meta, data) => ({
-		"regression": false,
-		"type": meta.series.breakup.type,
-		"className": meta.series.breakup.className,
-		"regressionSettings": {
-			"type": "linear",
-			"color": "#0000ee",
-			"name": "[placeholder]"
-		},
-		"name": meta.series.breakup.name,
-		"color": meta.series.breakup.colour,
-		"lineWidth": 0,
-		"marker": {
-			"enabled": true,
-			"fillColor": meta.series.breakup.colour,
-			"lineColor": meta.series.breakup.borderColour,
-			"lineWidth": 1,
-			"radius": 2
-		},
-		"states": {"hover": {"lineWidthPlus": 0}},
-		"data": data.breakup.values,
-		"visible": true
-	}),
+	"freeze" (){
+		return (meta, data, k, s) => this.getPreset(
+			meta.series.freeze,
+			{
+				"data": getData(meta.stationDef.station, meta.tag.data, 'shortValues'),
+				"regression": false,
+				"regressionSettings": {
+					"type": "linear",
+					"color": "#0000ee",
+					"name": "[placeholder]"
+				},
+				"lineWidth": 0,
+				"marker": {
+					"enabled": true,
+					"fillColor": meta.series.freeze.colour,
+					"lineColor": meta.series.freeze.borderColour,
+					"lineWidth": 1,
+					"radius": 2
+				},
+				"states": {"hover": {"lineWidthPlus": 0}},
+				"visible": true,
+				"tooltip": {"valueDecimals": meta.decimals}
+			},
+			meta
+		)
+	},
+	"breakup"(){
+		return (meta, data, k, s) => this.getPreset(
+			meta.series.breakup,
+			{
+				"data": getData(meta.stationDef.station, meta.tag.data, 'shortValues'),
+				"stacking": "normal",
+				"regression": false,
+				"regressionSettings": {
+					"type": "linear",
+					"color": "#0000ee",
+					"name": "[placeholder]"
+				},
+				"lineWidth": 0,
+				"marker": {
+					"enabled": true,
+					"fillColor": meta.series.breakup.colour,
+					"lineColor": meta.series.breakup.borderColour,
+					"lineWidth": 1,
+					"radius": 2
+				},
+				"states": {"hover": {"lineWidthPlus": 0}},
+				"visible": true
+			},
+			meta
+		)
+	},
 	"iceThick": (meta, data) => ({
 		"name": meta.series.iceThick.name,
 		"className": meta.series.iceThick.className,
@@ -473,6 +461,7 @@ exports.series = {
 		return (meta, data, k, s) => this.getPreset(
 			meta.series[s],
 			{
+				"name": s,
 				"color": meta.series[s].colour,
 				"className": meta.series[s].className,
 				"data": getData(s.toLowerCase()
@@ -482,8 +471,6 @@ exports.series = {
 					'shortValues'),
 				"visible": k == "Torneträsk",
 				"opacity": 0.9,
-				"name": meta.series[s].name == undefined
-					? s : meta.series[k].name,
 			},
 			meta)
 		// {
@@ -492,38 +479,58 @@ exports.series = {
 		// "tooltip": {"valueDecimals": meta.decimals}
 		// }),
 	}, 
-	"period": (meta, data, k, s) => ({
-		"name": meta.series[s].name,
-		"className": meta.series[s].className,
-		"type": meta.series[s].type,
-		"lineWidth": 1,
-		"data": data[s].means.rotate(6).slice(2),
-		"visible": true,
-		"tooltip": {"valueDecimals": meta.decimals}
-	}),
-	"co2": (meta, data) => ({
-		"name": meta.series.co2.name,
-		"className": meta.series.co2.className,
-		"color": meta.series.co2.colour,
-		"type": meta.series.co2.type,
-		"lineWidth": 2,
-		"states": {"hover": {"lineWidthPlus": 0}},
-		"data": data.values,
-		"turboThreshold": 4000,
-		"fillOpacity": 0.2,
-		"label": {
-			"enabled": false
-		},
-		"marker": {
-			"states": {
-				"select": {
-					"fillColor": "red",
+	get "period" (){
+		return (meta, data, k, s) => this.getPreset(
+			meta.series[s],
+			{
+				"name": meta.series[s].name,
+				"className": meta.series[s].className,
+				"type": meta.series[s].type,
+				"lineWidth": 1,
+				"data": getData(meta.stationDef.station,meta.tag.data, s, 'yValues'),
+				"visible": true,
+				// "tooltip": {"valueDecimals": meta.decimals}
+			},
+			meta)
+	}, 
+	get "co2" (){
+		return (meta, data, k, s) => this.getPreset(
+			meta.series[s],
+			{
+				"name": meta.series.co2.name,
+				"className": meta.series.co2.className,
+				"color": meta.series.co2.colour,
+				"type": meta.series.co2.type,
+				"lineWidth": 0,
+				"states": {"hover": {"lineWidthPlus": 0}},
+				"turboThreshold": 4000,
+				"fillOpacity": 0.2,
+				"label": {
+					"enabled": false
+
+				},
+				"marker": {
+					"radius": 5,
+					"lineColor": meta.series.co2.colour, 
 					"lineWidth": 1,
-					"radius": 5
-				}
+					"states": {
+						"select": {
+							"fillColor": "red",
+							"lineWidth": 1,
+							"radius": 5
+
+						}
+
+					}
+
+				},
+				"zIndex": 6,
+				"tooltip": {"valueDecimals": meta.decimals},
+				"data": getData(meta.stationDef.station,meta.tag.data, 'shortValues').then(res => res.map(each => {
+					each.x = new Date(each.x)
+					return each
+				})),
 			}
-		},
-		"zIndex": 6,
-		"tooltip": {"valueDecimals": meta.decimals}
-	})
+			,meta)
+	}
 };

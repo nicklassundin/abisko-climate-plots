@@ -7,15 +7,15 @@ exports.formatters = function (meta) {
         "winterDOY" () {
             try {
 
-                let tooltip = `<span style="font-size: 10px">${this.x - 1}/${this.x}</span><br/>`;
+                let tooltip = `<span style="font-size: 10px">${this.x}/${this.x+1}</span><br/>`;
                 this.points.forEach((point) => {
-
+			// console.log(point.point)
                     const dec = point.series.options.tooltip.valueDecimals;
                     tooltip += `<span style="color:${point.color}">\u25CF</span> ${point.series.name
                     }${meta.unitType
                         ? ` [${meta.units[meta.unitType].plural}]`
                         : ""
-                    }: <b>${point.point.options.name || point.y.toFixed(dec)}</b><br/>`;
+                    }: <b>${(point.point.date != undefined ? dateFormats.YYYYMMDD(new Date(point.point.date), true) : point.y.toFixed(dec))}</b><br/>`;
 
                 });
                 return tooltip;
@@ -31,7 +31,7 @@ exports.formatters = function (meta) {
         "winterValue" () {
 
             try {
-
+		// TODO change from this.x-1/this.x to this.x/this.x+1
                 let tooltip = `<span style="font-size: 10px">${this.x - 1}/${this.x}</span><br/>`;
                 this.points.forEach((point) => {
 
@@ -56,7 +56,6 @@ exports.formatters = function (meta) {
         "winterValueDate" () {
 		
             try {
-
                 let tooltip = `<span style="font-size: 10px">Winter ${this.x}-${this.x + 1}</span><br/>`;
                 this.points.forEach((point) => {
 
