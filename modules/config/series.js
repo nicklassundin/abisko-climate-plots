@@ -38,6 +38,17 @@ var getData = function(station, tags, ...ser){
 				// console.log( "error",error);
 				throw error
 			})
+
+
+		// Highcharts.each(
+		// 	data,
+		// 	(point, i) => {
+		// 		data[i] = [
+		// 			point,
+		// 			`rgb(255,${Math.floor(point * 255 / max)}, 0)`
+		// 		];
+		// 	}
+		// );
 	}) 
 }
 
@@ -140,15 +151,6 @@ exports.series = {
 	},
 	get "extreme" () {
 		return (meta, data, k, s) => {
-			Highcharts.each(
-				data,
-				(point, i) => {
-					data[i] = [
-						point,
-						`rgb(255,${Math.floor(point * 255 / max)}, 0)`
-					];
-				}
-			);
 			let tag = "extreme";
 			if (meta.extreme) {
 				tag += meta.extreme.type;
@@ -160,17 +162,13 @@ exports.series = {
 				meta.series[tag],
 				meta.series[s]
 			);
+			console.log(meta.extreme)
 			return this.getPreset(
 				config,
 				{
 					"data": (() => {
-
 						if (meta.extreme) {
-
-							if (meta.extreme.type == "high") {
-								return data.occurrence((e) => meta.extreme.lim < e).values;
-							}
-							return data.occurrence((e) => meta.extreme.lim > e).values;
+							return getData(meta.stationDef.station,meta.tag.data, 'occurence', meta.extreme.type, meta.extreme.lim ,'shortValues')
 						}
 						return data.values;
 					})()
@@ -226,24 +224,21 @@ exports.series = {
 				 * Type: meta.series.diff.type,
 				 */
 				"data": (() => {
-					return getData(meta.stationDef.station,meta.tag.data,'difference', 'shortValues')
 					if (meta.extreme) {
 
-						if (meta.extreme.type == "high") {
-
-							return data.occurrence((e) => meta.extreme.lim < e).difference();
-
-						}
+						return getData(meta.stationDef.station,meta.tag.data, 'occurence', meta.extreme.type, meta.extreme.lim , 'difference', 'shortValues')
 						return data.occurrence((e) => meta.extreme.lim > e).difference();
 
 					}
-					return data.difference != undefined
-						? data.difference()
-						: data.avg != undefined
-						? data.avg.difference()
-						: data.total != undefined
-						? data.total.difference()
-						: data(variables.date).difference();
+					return getData(meta.stationDef.station,meta.tag.data,'difference', 'shortValues')
+
+					// return data.difference != undefined
+					// 	? data.difference()
+					// 	: data.avg != undefined
+					// 	? data.avg.difference()
+					// 	: data.total != undefined
+					// 	? data.total.difference()
+					// 	: data(variables.date).difference();
 
 				})(),
 				"color": "red",
