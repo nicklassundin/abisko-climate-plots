@@ -2,9 +2,13 @@
 .series-diff {
 }
 /* Precipitation */
-.series-prec-snow {
+.series-snow {
+	fill: #CDD8F0;
+	stroke-width: 0;
 }
-.series-prec-rain {
+.series-rain {
+	fill: #1000FB;
+	stroke-width: 0;
 }
 .series-prec-extreme {
 }
@@ -15,6 +19,7 @@
 }
 /* Perma */
 .series-perma {
+	fill: #bb9999;
 }
 /* Temperature */
 .series-temp-max {
@@ -32,6 +37,14 @@
 }
 .series-temp-extreme {
 	fill: #ff0000;
+	stroke-width: 0;
+}
+.series-temp-high-extreme {
+	fill: #ff0000;
+	stroke-width: 0;
+}
+.series-temp-low-extreme {
+	fill: #0000ff;
 	stroke-width: 0;
 }
 /* GrowingSeason */
