@@ -269,7 +269,7 @@ exports.series = {
 				"lineWidth": 0,
 				"marker": {"radius": 2},
 				"states": {"hover": {"lineWidthPlus": 0}},
-				"data": getData(meta.stationDef.station,meta.tag.data, 'first', 'shortValues'),
+				"data": getData(meta.stationDef.station,meta.tag.data, 'shortValues')
 			},
 			meta);
 	},
@@ -283,7 +283,7 @@ exports.series = {
 				"lineWidth": 0,
 				"marker": {"radius": 2},
 				"states": {"hover": {"lineWidthPlus": 0}},
-				"data": getData(meta.stationDef.station,meta.tag.data, 'last', 'shortValues'),
+				"data": getData(meta.stationDef.station,meta.tag.data, 'shortValues'),
 			},
 			meta);
 	},
@@ -446,7 +446,8 @@ exports.series = {
 					"radius": 2,
 					"symbol": "circle"
 				},
-				"data": getData(meta.stationDef.station, meta.tag.data,variables.date, 'shortValues'),
+				// "data": getData(meta.stationDef.station, meta.tag.data, variables.date, 'shortValues'),
+				"data": getData(meta.stationDef.station, meta.tag.data, 'shortValues'),
 				// "data": data.total != undefined
 				// ? data.total.max(
 				// 	meta,
@@ -470,7 +471,7 @@ exports.series = {
 					"radius": 2,
 					"symbol": "circle"
 				},
-				"data": getData(meta.stationDef.station, meta.tag.data,variables.date, 'difference', `{"lower":${baselineLower},"upper":${baselineUpper}}`),
+				"data": getData(meta.stationDef.station, meta.tag.data, 'difference', `{"lower":${baselineLower},"upper":${baselineUpper}}`),
 				"visible": true,
 				"tooltip": {"valueDecimals": meta.decimals}
 			},

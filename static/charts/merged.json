@@ -3157,7 +3157,8 @@
             "iceTime"
           ],
           "data": [
-            "iceTime"
+            "icetime",
+            "yrly"
           ]
         },
         "config": {
@@ -4461,7 +4462,7 @@
             "yrly"
           ],
           "data": [
-            "snowDepth_single",
+            "snowdepth_single",
             "yrly"
           ]
         },
@@ -4495,6 +4496,7 @@
         "period": false,
         "series": {
           "avg": {
+            "className": "series-snowAvg",
             "preset": "avg",
             "group": 0,
             "visible": true,
@@ -4502,6 +4504,7 @@
             "colour": "#1000FB"
           },
           "diff": {
+            "className": "series-diff",
             "preset": "diff",
             "group": 1,
             "visible": true,
@@ -11232,7 +11235,7 @@
         "type": "tornetrask",
         "tag": {
           "render": "difference",
-          "data": "iceTime"
+          "data": "icetime"
         },
         "config": {
           "meta": {
@@ -17624,7 +17627,7 @@
           "data": [
             "temperatures",
             "weeks",
-            "min"
+            "max"
           ]
         },
         "config": {
@@ -19467,7 +19470,8 @@
           ],
           "data": [
             "temperature",
-            "yrlySplit"
+            "yrlySplit",
+            "first"
           ]
         },
         "config": {
@@ -19865,7 +19869,8 @@
           ],
           "data": [
             "temperature",
-            "yrlySplit"
+            "yrlySplit",
+            "last"
           ]
         },
         "config": {
@@ -20657,7 +20662,11 @@
         "type": "iceThick",
         "tag": {
           "render": "date",
-          "data": "date"
+          "data": [
+            "complete_ice_cover",
+            "yrly",
+            "closest"
+          ]
         },
         "config": {
           "meta": {
@@ -21093,6 +21102,7 @@
             "max"
           ],
           "data": [
+            "complete_ice_cover",
             "yrly"
           ]
         },
@@ -39580,7 +39590,8 @@
         "tag": {
           "render": "slideIceTime",
           "data": [
-            "iceTime"
+            "icetime",
+            "yrly"
           ]
         },
         "config": {
