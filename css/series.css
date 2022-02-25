@@ -6,6 +6,10 @@
 	fill: #CDD8F0;
 	stroke-width: 0;
 }
+.series-snowAvg {
+	fill: #DEE9F1;
+	stroke-width: 10;
+}
 .series-rain {
 	fill: #1000FB;
 	stroke-width: 0;

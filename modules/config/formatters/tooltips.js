@@ -93,7 +93,7 @@ exports.formatters = function (meta) {
                     }">\u25CF</span> ${
                         point.series.name
                     }: <b>${
-                        dateFormats.YYYYMMDD(point.point.fullDate)
+                        dateFormats.YYYYMMDD(new Date(point.point.fullDate))
                     }</b><br/>`;
 
                 });
