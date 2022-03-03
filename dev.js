@@ -30,6 +30,7 @@ exports.setup = function (app) {
 
                     }),
                     sets = stati;
+	    	console.log("version", version)
                 app.render(
                     "browse-release.hbs",
                     {sets,

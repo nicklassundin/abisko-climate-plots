@@ -101,7 +101,7 @@ exports.custom = custom;
 hbs.registerPartials(`${__dirname}/views/partials`);
 const stati = require("./static/charts/stations.json");
 const stations = require("./static/charts/stations.json");
-const {version} = require("./package.json");
+const version = `${require("./package.json").version}`;
 custom.then((chrts) => {
 
     const sets = stati,
@@ -121,6 +121,7 @@ custom.then((chrts) => {
         "/browse",
         (req, res) => {
 
+	    console.log("version", version)
             res.render(
                 "browse.hbs",
                 {
