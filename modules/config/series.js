@@ -27,7 +27,7 @@ var getData = function(station, tags, ...ser){
 	tags = tags.join('/')
 	ser = ser.join('/')
 	var url = tags.length <= 0 ? `station/${station}/${type}/${ser}` : `station/${station}/${type}/${tags}/${ser}`;
-	console.log("URL",url)
+	// console.log("URL",url)
 	// console.log("ser",ser)
 	return new Promise((res, rej) => {
 		$.getJSON(url, function(result) {
@@ -50,10 +50,10 @@ var getData = function(station, tags, ...ser){
 				}
 				return each
 			}))
-		})
-			.done(function(result) {
-			}).fail(function(error) {
+		}).fail(function(error) {
+				// rej(error)
 				// console.log( "error",error);
+				// console.log('url',url)
 				throw error
 			})
 
@@ -108,7 +108,7 @@ exports.series = {
 				}
 			})
 		}
-		console.log('preset',preset)
+		// console.log('preset',preset)
 		return {
 			incomplete: preset, 
 			complete: complete()

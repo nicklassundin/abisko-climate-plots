@@ -10,6 +10,7 @@ module.exports = (() => {
 	const glimworks = require('climate-plots-glimworks-reader');
 	// glimworks.init(app, http, 'live')
 	glimworks.init(app, http, 'production')
+	// glimworks.init(app, http, 'xsProduction')
 	// glimworks.init(app, http, 'xsLive')
 	// glimworks.init(app, http, 'debug')
 	app.get(

@@ -51,6 +51,7 @@
     "pug": "^3.0.2",
     "query-string": "^7.0.0",
     "r-script": "^0.0.4",
+    "readline": "^1.3.0",
     "regression": "^2.0.1",
     "remarkable": "^2.0.1",
     "require.async": "^0.1.1",
@@ -64,6 +65,7 @@
     "uniq": "^1.0.1",
     "unique-commit-id": "^1.0.0",
     "utils": "^0.3.1",
+    "vizchange-stats": "^1.1.4",
     "webpack": "^4.43.0"
   },
   "devDependencies": {
@@ -94,11 +96,13 @@
     "start-no-update": "node server.js",
     "start": "npm run update && git submodule update && node server.js",
     "start-dev": "npm run update && npx nodemon -x \"clear;node server.js d\"",
-    "start-inspect": "npm run update && npx nodemon -x \"clear;node --inspect server.js d\"",
+    "start-dev-no-update": "npx nodemon -x \"clear;node server.js d\"",
+    "start-inspect": "npx nodemon -x \"clear;node --inspect server.js d\"",
     "start-full": "npm run update && git submodule update && npm test && npx nodemon server.js",
     "static": "cp client/bundle.js static/bundle.js",
     "lint": "eslint *.js ./modules/",
-    "lint-fix": "eslint --fix *.js ./modules/"
+    "lint-fix": "eslint --fix *.js ./modules/",
+    "webpack": "webpack --mode=development"
   },
   "repository": {
     "type": "git",
