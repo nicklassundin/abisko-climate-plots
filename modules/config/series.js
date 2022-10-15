@@ -28,10 +28,7 @@ let getData = function (station, tags, ...ser) {
 					ser.splice(0, 1)
 					break;
 				default:
-					console.log(ser[0], Number(ser[0]))
 					specs.dates.start = Number(ser[0]);
-
-					console.log(specs)
 					ser.splice(0, 1)
 					specs.dates.end = specs.dates.start + t
 			}
