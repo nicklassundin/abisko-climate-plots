@@ -12,6 +12,7 @@ exports.setup = function (app) {
         {custom} = plotConfig;
     exports.custom = custom;
     const stati = require("./static/charts/stations.json");
+
     hbs.registerPartials(
         `${__dirname}/views/partials`,
         (err) => {
