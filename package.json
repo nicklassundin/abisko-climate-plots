@@ -27,7 +27,6 @@
     "express-session": "^1.17.1",
     "fast-csv": "^4.3.6",
     "formidable": "^1.2.2",
-    "geo": "0.0.3",
     "handlebars": "^4.7.6",
     "hbs": "^4.1.1",
     "highcharts": "^8.2.2",
