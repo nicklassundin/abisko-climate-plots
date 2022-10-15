@@ -1,16 +1,36 @@
 
 // Pre-setup
-const $ = require("jquery");
-
-
-const fs = require("fs");
-const request = require("request");
+require("jquery");
+require("fs");
+require("request");
 const express = require("express"),
 
     // Setup
     app = express();
+/**
+var cors = require('cors')
+app.use('*', cors({
+    origin: 'http://localhost:80',
+    optionsSuccessStatus: 200, // For legacy browser support
+    methods: "GET, PUT"
+}))
+*/
 const hbs = require("hbs");
-// Open file access
+/* Open file access
+const cors = require('cors');
+const server-config = require('vizchange-stats').configs;
+console.log(server-config.live.url);
+app.use(cors({}))
+
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+    next();
+});
+
+*/
+
+
 app.use(
     "/css",
     express.static(`${__dirname}/css`)
@@ -44,7 +64,7 @@ app.use(
     express.static(`${__dirname}/maps`)
 );
 const path = require('path');
-require("climate-plots-config").genStaticFiles(path.join(__dirname, '/'))
+require("climate-plots-config").genStaticFiles(path.join(__dirname, '/')).then()
 app.use(
     "/static",
     express.static(`${__dirname}/static`)
@@ -68,7 +88,7 @@ app.use(session({
     "saveUninitialized": true
 }));
 
-const url = require("url");
+//const url = require("url");
 const plotConfig = require("climate-plots-config"),
     {custom} = plotConfig;
 exports.custom = custom;
@@ -99,14 +119,12 @@ exports.custom = custom;
  */
 
 hbs.registerPartials(`${__dirname}/views/partials`);
-const stati = require("./static/charts/stations.json");
-const stations = require("./static/charts/stations.json");
+const station_static = require("./static/charts/stations.json");
 const version = require("./package.json").version;
-// console.log("version", version)
-custom.then((chrts) => {
 
-    const sets = stati,
-	 stations = Object.keys(stati).map((st) => {
+custom.then((chart_list) => {
+    const sets = station_static
+    let stations = Object.keys(station_static).map((st) => {
 
             if (st === "smhi") {
 
@@ -116,18 +134,18 @@ custom.then((chrts) => {
 
             return st;
 
-        }),
-        temp = Object.keys(stations);
+        });
     app.get(
         "/browse",
         (req, res) => {
 	    console.log("/browse")
+        console.log('remote Address:',req.ip)
 	    console.log("version", version)
             res.render(
                 "browse.hbs",
                 {
                     sets,
-                    chrts,
+                    chrts: chart_list,
                     stations,
                     version
                 }

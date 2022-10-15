@@ -7,9 +7,9 @@ const help = require('climate-plots-helper');
 const {createDiv} = require("../charts/struct.js"),
 
 	// renderer = require("../renderer.js").render;
-	renderer = require("../render_class.js").render;
+	renderer = require("../render.js").render;
 
-const stats = require('vizchange-stats')
+//const stats = require('vizchange-stats')
 
 
 // Wander down the data structure with tag input example: [high, medium, low]

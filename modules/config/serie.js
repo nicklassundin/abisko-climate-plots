@@ -2,94 +2,88 @@
 
 const stats = require('vizchange-stats')
 
-let getData = function (station, tags, ...ser) {
-	tags = Object.values(tags)
-	let specs = JSON.parse(JSON.stringify(stats.configs.production))
-
-	let type = tags.shift();
-
-	// TODO hotfix
-	switch(type) {
-		case 'freezeup':
-		case 'breakup':
-			tags[0] = 'yrly'
-	}
-	let t = 10
-	switch (tags[0]) {
-		case 'monthly':
-			tags.shift()
-			break;
-		case '30period':
-			tags[0] = 'splitDecades'
-			t = 30;
-		case 'splitDecades':
-			switch (ser[0]) {
-				case 'allTime':
-					ser.splice(0, 1)
-					break;
-				default:
-					console.log(ser[0], Number(ser[0]))
-					specs.dates.start = Number(ser[0]);
-
-					console.log(specs)
-					ser.splice(0, 1)
-					specs.dates.end = specs.dates.start + t
-			}
-		default:
-	}
-
-	if (type === 'temperatures') type = 'temperature' // TODO hotfix
-	if (type === 'growingSeason') {
-		type = 'temperature' // TODO hotfix
-		switch (tags[0]) {
-			case 'weeks':
-				tags = ['weekly', 'growingSeason']
+class Serie {
+	constructor(meta, type, key, id, callback){
+		this.meta = meta
+		this.type = type
+		this.key = key
+		this.id = id
+		this.callback = callback
+		console.log('type:', type)
+		switch(type){
+			case "max":
+				this.station = meta.stationDef.station
+				this.ser = ['max', 'shortValues'];
+				this.tags = this.meta.tag.data
 				break;
-			case 'days':
-				tags = ['yrlyFull', 'growingSeason']
+			case "min":
+				this.station = meta.stationDef.station
+				this.ser = ['min', 'shortValues'];
+				this.tags = this.meta.tag.data
+				break;
+			case "perma":
+				this.station = id;
+				break;
+			case "first":
+				this.station = meta.stationDef.station;
+				this.ser = ['yrlySplit', 'min', 'first', 'shortValues']
 				break;
 			default:
+				this.station = meta.stationDef.station
+				this.tags = this.meta.tag.data
 		}
 	}
-	if (station === 'CALM') {
-		station = station.toLowerCase()
-		// 	console.log('station',station)
-		// return Promise.resolve(null)
+	get 'serie' () {
+		return this[this.type](this.meta, this.type, this.key, this.id)
 	}
-	//
-	//
-	//
-	/**
-	tags = tags.join('/')
-	ser = ser.join('/')
-	let url = tags.length <= 0 ? `station/${station}/${type}/${ser}` : `station/${station}/${type}/${tags}/${ser}`;
-	let config = stats.configs.live;
-	config.station = station;
-	config.type = type;
-    */
-	let params = [type].concat(tags, ser)
-	//console.log("stats.configs", stats.configs)
-	specs.station = station;
-	specs.type = type;
-	specs.baseline.start = global.baselineLower
-	specs.baseline.end = global.baselineUpper
-	//console.log("specs: ", specs)
-	let index = params.indexOf('occurrence');
-	if(index > -1){
-		params.splice(index, 1)
+	'data' (st, tgs, ...sr) {
+		let station = this.station;
+		let tags = this.tags
+		let ser = this.ser
+		// console.log('station',station)
+		// console.log('tags',tags)
+		// console.log('ser',ser)
+		tags = Object.values(tags)
+		let type = tags.shift();
+		if (type === 'temperatures') type = 'temperature' // TODO hotfix
+		if (type === 'growingSeason') {
+			type = 'temperature' // TODO hotfix
+			tags[0] = tags[0].replace('days', 'growDays');
+			tags[0] = tags[0].replace('weeks', 'growWeeks');
+		}
+		if (station === 'CALM') {
+			station = station.toLowerCase()
+			// 	console.log('station',station)
+			// return Promise.resolve(null)
+		}
+		//
+		//
+		//
+		/**
+		 tags = tags.join('/')
+		 ser = ser.join('/')
+		 let url = tags.length <= 0 ? `station/${station}/${type}/${ser}` : `station/${station}/${type}/${tags}/${ser}`;
+		 let config = stats.configs.live;
+		 config.station = station;
+		 config.type = type;
+		 */
+		let params = [type].concat(tags, ser)
+		let specs = stats.configs.production;
+		specs.station = station;
+		specs.type = type;
+		specs.baseline.start = global.baselineLower
+		specs.baseline.end = global.baselineUpper
+		return stats.getByParams(specs, params).then(result => {
+			//console.log(params)
+			//console.log(result)
+			return result
+		})
 	}
-	console.log('params', params)
-	return stats.getByParams(specs, params).then(result => {
-		return result
-	})
-};
-
-
-exports.series = {
-	"getPreset": (config, serie, meta) => {
-		// console.log("config",config)
-		// console.log("serie",serie)
-		// console.log("meta",meta)
+	'preset' (config, serie, meta) {
+		/*let config = this.config;
+		let serie = this.config;
+		let meta = this.meta;
+		 */
 		const preset = {
 			"label": false,
 			"lineWidth": 0,
@@ -100,12 +94,7 @@ exports.series = {
 				"valueDecimals": (() => (serie.decimals !== undefined ? series.decimals : meta.decimals))()
 			}
 		};
-		$.extend(
-			true,
-			preset,
-			serie,
-			config
-		);
+		$.extend(true, preset, serie, config);
 		if(config.name !== undefined) preset.name = config.name;
 		preset.className = config.className;
 		if (!preset.color) {
@@ -119,65 +108,44 @@ exports.series = {
 			let incomp = {};
 			$.extend(true, incomp, preset)
 			return incomp.data.then((promises) => {
-				/*
-				incomp.data = []
-				incomp.promises = promises
-				return incomp */
-				return Promise.allSettled(promises).then(data => {
-					incomp.data = data.map(each => each.value).filter(each => each !== undefined);
-					//console.log(incomp)
-					return incomp;
+				incomp.data = [];
+				promises.forEach((each) => {
+					each.then(data => {
+						incomp.data.push(data)
+						this.callback(data)
+					})
 				})
+				//return Promise.allSettled(promises).then(data => {
+				//	incomp.data = data.map(each => each.value).filter(each => each !== undefined);
+				//	return incomp;
+				//})
 			})
 		};
 		return {
-			incomplete: preset, 
+			incomplete: preset,
 			complete: complete()
 		}
-	},
+	}
 	get "max" () {
 		return (meta) => this.getPreset(
 			meta.series.max,
 			{
-				"data": getData(meta.stationDef.station,meta.tag.data, 'max', 'shortValues'),
-				// "data": data.max != undefined
-				// ? data.max.max != undefined
-				// ? data.max.max(
-				// 	meta,
-				// 	data
-				// ).values
-				// : data.max(
-				// meta,
-				// data
-				// ).values
-				// : undefined
-				// Type: meta.series.max.type,
+				"data": this.data(meta.stationDef.station,meta.tag.data, 'max', 'shortValues'),
 			},
 			meta
 		);
 
-	},
+	}
 	get "min" () {
 		return (meta) => this.getPreset(
 			meta.series.min,
 			{
-				"data": getData(meta.stationDef.station,meta.tag.data, 'min', 'shortValues'),
-				// "data": data.min != undefined
-				//     ? data.min.min != undefined
-				//         ? data.min.min(
-				//             meta,
-				//             data
-				//         ).values
-				//         : data.min(
-				//             meta,
-				//             data
-				//         ).values
-				//     : undefined
+				"data": this.data(meta.stationDef.station,meta.tag.data, 'min', 'shortValues'),
 			},
 			meta
 		);
 
-	},
+	}
 	get "extreme" () {
 		return (meta, depricated, k, s) => {
 			let tag = "extreme";
@@ -194,9 +162,9 @@ exports.series = {
 			let data = (() => {
 				if (meta.extreme) {
 
-					return getData(meta.stationDef.station,meta.tag.data, 'occurrence', meta.extreme.type, meta.extreme.lim ,'shortValues')
+					return this.data(meta.stationDef.station,meta.tag.data, 'occurrence', meta.extreme.type, meta.extreme.lim ,'shortValues')
 				}
-				return getData(meta.stationDef.station,meta.tag.data,'shortValues');
+				return this.data(meta.stationDef.station,meta.tag.data,'shortValues');
 			})()
 
 			return this.getPreset(
@@ -207,13 +175,13 @@ exports.series = {
 				meta
 			);
 		};
-	},
+	}
 	get "extreme-low" () {
 		return this.extreme;
-	},
+	}
 	get "extreme-high" () {
 		return this.extreme
-	},
+	}
 	get "avg" () {
 
 		return (meta) => this.getPreset(
@@ -225,11 +193,11 @@ exports.series = {
 					"fillColor": meta.series.avg.colour,
 					"lineColor": meta.series.avg.borderColour,
 					"lineWidth": meta.series.avg.borderColour
-					? 1
-					: 0,
+						? 1
+						: 0,
 					"radius": 2
 				},
-				"data": getData(meta.stationDef.station, meta.tag.data, 'shortValues'),
+				"data": this.data(meta.stationDef.station, meta.tag.data, 'shortValues'),
 				// "data": data.avg != undefined
 				// ? data.avg.values
 				// : data.values
@@ -237,7 +205,7 @@ exports.series = {
 			meta
 		);
 
-	},
+	}
 	get "diff" () {
 		return (meta) => this.getPreset(
 			meta.series.diff,
@@ -257,11 +225,11 @@ exports.series = {
 				"data": (() => {
 					if (meta.extreme) {
 
-						return getData(meta.stationDef.station,meta.tag.data, 'occurrence', meta.extreme.type, meta.extreme.lim , 'difference')
+						return this.data(meta.stationDef.station,meta.tag.data, 'occurrence', meta.extreme.type, meta.extreme.lim , 'difference')
 						// return data.occurrence((e) => meta.extreme.lim > e).difference();
 
 					}
-					return getData(meta.stationDef.station,meta.tag.data,'difference')
+					return this.data(meta.stationDef.station,meta.tag.data,'difference')
 
 					// return data.difference != undefined
 					// 	? data.difference()
@@ -279,8 +247,7 @@ exports.series = {
 			},
 			meta
 		);
-
-	},
+	}
 	get "first" () {
 		return (meta) => this.getPreset(
 			meta.series.first,
@@ -288,13 +255,13 @@ exports.series = {
 				"lineWidth": 0,
 				"marker": {"radius": 2},
 				"states": {"hover": {"lineWidthPlus": 0}},
-				"data": getData(meta.stationDef.station,meta.tag.data, 'shortValues')
+				"data": this.data(meta.stationDef.station,meta.tag.data, 'shortValues')
 			},
 			meta);
-	},
+	}
 	get "firstDiff" (){
 		return this.diff;
-	},
+	}
 	get "last" () {
 		return (meta) => this.getPreset(
 			meta.series.last,
@@ -302,13 +269,14 @@ exports.series = {
 				"lineWidth": 0,
 				"marker": {"radius": 2},
 				"states": {"hover": {"lineWidthPlus": 0}},
-				"data": getData(meta.stationDef.station,meta.tag.data, 'shortValues'),
+				"data": this.data(meta.stationDef.station,meta.tag.data, 'shortValues'),
 			},
 			meta);
-	},
+	}
 	get "lastDiff" (){
 		return this.diff;
-	},
+	}
+	/*
 	"linjer": (meta) => ({
 		"name": meta.series.linjer.name,
 		"className": meta.series.linjer.className,
@@ -316,12 +284,13 @@ exports.series = {
 		"visible": false,
 		"tooltip": {"valueDecimals": meta.decimals},
 		"showInLegend": false
-	}),
+	})
+	*/
 	get "snow"(){
 		return (meta) => this.getPreset(
 			meta.series.snow,
 			{
-				"data": getData(meta.stationDef.station,meta.tag.data, 'snow', 'shortValues'),
+				"data": this.data(meta.stationDef.station,meta.tag.data, 'snow', 'shortValues'),
 				// "name": meta.series.snow.name,
 				// "className": meta.series.snow.className,
 				// "type": meta.series.snow.type,
@@ -345,12 +314,12 @@ exports.series = {
 			},
 			meta
 		);
-	},
+	}
 	get "rain"(){
 		return (meta) => this.getPreset(
 			meta.series.rain,
 			{
-				"data": getData(meta.stationDef.station, meta.tag.data, 'rain', 'shortValues'),
+				"data": this.data(meta.stationDef.station, meta.tag.data, 'rain', 'shortValues'),
 				"stacking": "normal"
 			},
 			meta
@@ -375,9 +344,8 @@ exports.series = {
 		// },
 		// "visible": true,
 		// "tooltip": {"valueDecimals": meta.decimals}
-	},
+	}
 	"iceTime" () {
-
 		return (meta) => this.getPreset(
 			meta.series.iceTime,
 			{
@@ -394,17 +362,17 @@ exports.series = {
 				"lineWidth": 0,
 				"marker": {"radius": 2},
 				"states": {"hover": {"lineWidthPlus": 0}},
-				"data": getData(meta.stationDef.station, meta.tag.data),
+				"data": this.data(meta.stationDef.station, meta.tag.data),
 				"visible": true,
 				"tooltip": {"valueDecimals": meta.decimals}
 			},
 			meta)
-	},
+	}
 	"freeze" (){
 		return (meta) => this.getPreset(
 			meta.series.freeze,
 			{
-				"data": getData(meta.stationDef.station, meta.tag.data, 'shortValues'),
+				"data": this.data(meta.stationDef.station, meta.tag.data, 'shortValues'),
 				"regression": false,
 				"regressionSettings": {
 					"type": "linear",
@@ -425,12 +393,12 @@ exports.series = {
 			},
 			meta
 		)
-	},
+	}
 	"breakup"(){
 		return (meta) => this.getPreset(
 			meta.series.breakup,
 			{
-				"data": getData(meta.stationDef.station, meta.tag.data, 'shortValues'),
+				"data": this.data(meta.stationDef.station, meta.tag.data, 'shortValues'),
 				"stacking": "normal",
 				"regression": false,
 				"regressionSettings": {
@@ -451,7 +419,7 @@ exports.series = {
 			},
 			meta
 		)
-	},
+	}
 	get "iceThick" () {
 		return (meta) => this.getPreset(
 			meta.series.iceThick,
@@ -464,8 +432,8 @@ exports.series = {
 					"radius": 2,
 					"symbol": "circle"
 				},
-				// "data": getData(meta.stationDef.station, meta.tag.data, variables.date, 'shortValues'),
-				"data": getData(meta.stationDef.station, meta.tag.data, 'shortValues'),
+				// "data": this.data(meta.stationDef.station, meta.tag.data, variables.date, 'shortValues'),
+				"data": this.data(meta.stationDef.station, meta.tag.data, 'shortValues'),
 				// "data": data.total != undefined
 				// ? data.total.max(
 				// 	meta,
@@ -476,7 +444,7 @@ exports.series = {
 				"tooltip": {"valueDecimals": meta.decimals}
 			},
 			meta)
-	},
+	}
 	get "iceThickDiff" () {
 		return (meta) => this.getPreset(
 			meta.series.iceThick,
@@ -489,12 +457,12 @@ exports.series = {
 					"radius": 2,
 					"symbol": "circle"
 				},
-				"data": getData(meta.stationDef.station, meta.tag.data, 'difference'),
+				"data": this.data(meta.stationDef.station, meta.tag.data, 'difference'),
 				"visible": true,
 				"tooltip": {"valueDecimals": meta.decimals}
 			},
 			meta)
-	},
+	}
 	get "perma"(){
 		return (meta, data, k, s) => this.getPreset(
 			meta.series[s],
@@ -502,8 +470,8 @@ exports.series = {
 				"name": s,
 				"color": meta.series[s].colour,
 				"className": meta.series[s].className,
-				"data": getData(s.toLowerCase()
-					.replace('ä','a').replace('å','a').replace('ö','o'), 
+				"data": this.data(s.toLowerCase()
+						.replace('ä','a').replace('å','a').replace('ö','o'),
 					meta.tag.data,
 					'yrly',
 					'shortValues'),
@@ -516,7 +484,7 @@ exports.series = {
 		// "data": data[s].values,
 		// "tooltip": {"valueDecimals": meta.decimals}
 		// }),
-	}, 
+	}
 	get "period" (){
 		return (meta, data, k, s) => this.getPreset(
 			meta.series[s],
@@ -525,12 +493,12 @@ exports.series = {
 				"className": meta.series[s].className,
 				"type": meta.series[s].type,
 				"lineWidth": 1,
-				"data": getData(meta.stationDef.station,meta.tag.data, s, 'yValues'),
+				"data": this.data(meta.stationDef.station,meta.tag.data, s, 'yValues'),
 				"visible": true,
 				// "tooltip": {"valueDecimals": meta.decimals}
 			},
 			meta)
-	}, 
+	}
 	get "co2" (){
 		return (meta, data, k, s) => this.getPreset(
 			meta.series[s],
@@ -549,7 +517,7 @@ exports.series = {
 				},
 				"marker": {
 					"radius": 5,
-					"lineColor": meta.series.co2.colour, 
+					"lineColor": meta.series.co2.colour,
 					"lineWidth": 1,
 					"states": {
 						"select": {
@@ -564,11 +532,12 @@ exports.series = {
 				},
 				"zIndex": 6,
 				"tooltip": {"valueDecimals": meta.decimals},
-				"data": getData(meta.stationDef.station, meta.tag.data, 'shortValues').then(res => res.map(each => {
+				"data": this.data(meta.stationDef.station,meta.tag.data, 'shortValues').then(res => res.map(each => {
 					each.x = new Date(each.x)
 					return each
 				})),
 			}
 			,meta)
 	}
-};
+}
+module.exports.Serie = Serie
