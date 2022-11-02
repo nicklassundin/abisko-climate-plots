@@ -32,7 +32,11 @@ class Serie {
 						break;
 					default:
 						this.specs.dates.start = Number(this.key)
-						switch (this.type) {
+						console.log(this.meta)
+						switch (this.meta.tag.render) {
+							case 'periodMeans':
+								this.specs.dates.end = this.specs.dates.start + 29;
+								break;
 							default:
 								this.specs.dates.end = this.specs.dates.start + 9;
 						}
