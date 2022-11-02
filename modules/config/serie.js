@@ -9,7 +9,7 @@ class Serie {
 		this.key = key
 		this.id = id
 		this.callback = callback
-		console.log('type:', type)
+		this.specs = JSON.parse(JSON.stringify(stats.configs.production));
 		switch(type){
 			case "max":
 				this.station = meta.stationDef.station
@@ -22,7 +22,22 @@ class Serie {
 				this.tags = this.meta.tag.data
 				break;
 			case "perma":
-				this.station = id;
+				this.tags = ['perma', 'yrly'];
+				this.station = Object.keys(meta.series)[this.callback].toLowerCase();
+				break;
+			case "period":
+				this.station = meta.stationDef.station;
+				switch (key) {
+					case 'allTime':
+						break;
+					default:
+						this.specs.dates.start = Number(this.key)
+						switch (this.type) {
+							default:
+								this.specs.dates.end = this.specs.dates.start + 9;
+						}
+				}
+				this.tags = ['snowdepth_single', 'splitDecades']
 				break;
 			case "first":
 				this.station = meta.stationDef.station;
@@ -32,6 +47,7 @@ class Serie {
 				this.station = meta.stationDef.station
 				this.tags = this.meta.tag.data
 		}
+		this.updateTime = (new Date()).getTime();
 	}
 	get 'serie' () {
 		return this[this.type](this.meta, this.type, this.key, this.id)
@@ -39,7 +55,7 @@ class Serie {
 	'data' (st, tgs, ...sr) {
 		let station = this.station;
 		let tags = this.tags
-		let ser = this.ser
+		//let ser = this.ser
 		// console.log('station',station)
 		// console.log('tags',tags)
 		// console.log('ser',ser)
@@ -50,11 +66,6 @@ class Serie {
 			type = 'temperature' // TODO hotfix
 			tags[0] = tags[0].replace('days', 'growDays');
 			tags[0] = tags[0].replace('weeks', 'growWeeks');
-		}
-		if (station === 'CALM') {
-			station = station.toLowerCase()
-			// 	console.log('station',station)
-			// return Promise.resolve(null)
 		}
 		//
 		//
@@ -67,23 +78,34 @@ class Serie {
 		 config.station = station;
 		 config.type = type;
 		 */
-		let params = [type].concat(tags, ser)
-		let specs = stats.configs.production;
+		// TODO change if needed shortValeus
+		let specs = JSON.parse(JSON.stringify(this.specs));
 		specs.station = station;
 		specs.type = type;
 		specs.baseline.start = global.baselineLower
 		specs.baseline.end = global.baselineUpper
+
+		let params = [type].concat(tags, ['shortValues'])
+		console.log('serie.params', params)
+		//console.log('serie.specs', specs.dates)
+		//console.log('serie.tags', tags)
 		return stats.getByParams(specs, params).then(result => {
-			//console.log(params)
-			//console.log(result)
 			return result
+		}).then(result => {
+			return result.map(each => {
+				return each
+			})
 		})
 	}
 	'preset' (config, serie, meta) {
 		/*let config = this.config;
 		let serie = this.config;
 		let meta = this.meta;
-		 */
+*/
+		//console.log(serie)
+		//console.log(config)
+		//console.log(meta)
+
 		const preset = {
 			"label": false,
 			"lineWidth": 0,
@@ -104,15 +126,31 @@ class Serie {
 			preset.borderColor = config.borderColor;
 		}
 		preset.type = config.type;
+
 		let complete = () => {
-			let incomp = {};
+			const incomp = {};
 			$.extend(true, incomp, preset)
-			return incomp.data.then((promises) => {
-				incomp.data = [];
-				promises.forEach((each) => {
-					each.then(data => {
-						incomp.data.push(data)
-						this.callback(data)
+			incomp.visible = (meta.groups[config.group].prime === undefined ? false : meta.groups[config.group].prime) && config.visible;
+			if(meta.period) incomp.visible = meta.period
+			incomp.promises.then((promises) => {
+				Promise.allSettled(promises).then(() => {
+					$(`#${this.id}`).highcharts().hideLoading();
+				})
+				promises.forEach((each, index) => {
+					each.then(point => {
+						if(point === undefined || isNaN(point.y)){
+						}else{
+							switch (meta.period) {
+								case true:
+									point = point.y
+
+									//$(`#${this.id}`).highcharts().series[this.callback].addPoint(point)
+									$(`#${this.id}`).highcharts().series[this.callback].data[11-index].update(point)
+									break;
+								default:
+									$(`#${this.id}`).highcharts().series[this.callback].addPoint(point)
+							}
+						}
 					})
 				})
 				//return Promise.allSettled(promises).then(data => {
@@ -120,6 +158,7 @@ class Serie {
 				//	return incomp;
 				//})
 			})
+			return incomp
 		};
 		return {
 			incomplete: preset,
@@ -127,20 +166,20 @@ class Serie {
 		}
 	}
 	get "max" () {
-		return (meta) => this.getPreset(
+		return (meta) => this.preset(
 			meta.series.max,
 			{
-				"data": this.data(meta.stationDef.station,meta.tag.data, 'max', 'shortValues'),
+				"promises": this.data(meta.stationDef.station,meta.tag.data, 'max', 'shortValues'),
 			},
 			meta
 		);
 
 	}
 	get "min" () {
-		return (meta) => this.getPreset(
+		return (meta) => this.preset(
 			meta.series.min,
 			{
-				"data": this.data(meta.stationDef.station,meta.tag.data, 'min', 'shortValues'),
+				"promises": this.data(meta.stationDef.station,meta.tag.data, 'min', 'shortValues'),
 			},
 			meta
 		);
@@ -161,16 +200,15 @@ class Serie {
 			);
 			let data = (() => {
 				if (meta.extreme) {
-
 					return this.data(meta.stationDef.station,meta.tag.data, 'occurrence', meta.extreme.type, meta.extreme.lim ,'shortValues')
 				}
 				return this.data(meta.stationDef.station,meta.tag.data,'shortValues');
 			})()
 
-			return this.getPreset(
+			return this.preset(
 				config,
 				{
-					"data": data
+					"promises": data
 				},
 				meta
 			);
@@ -184,7 +222,7 @@ class Serie {
 	}
 	get "avg" () {
 
-		return (meta) => this.getPreset(
+		return (meta) => this.preset(
 			meta.series.avg,
 			{
 				"step": "center",
@@ -197,8 +235,7 @@ class Serie {
 						: 0,
 					"radius": 2
 				},
-				"data": this.data(meta.stationDef.station, meta.tag.data, 'shortValues'),
-				// "data": data.avg != undefined
+				// "promises": data.avg != undefined
 				// ? data.avg.values
 				// : data.values
 			},
@@ -207,7 +244,7 @@ class Serie {
 
 	}
 	get "diff" () {
-		return (meta) => this.getPreset(
+		return (meta) => this.preset(
 			meta.series.diff,
 			{
 
@@ -222,7 +259,7 @@ class Serie {
 				 * Name: meta.series.diff.name,
 				 * Type: meta.series.diff.type,
 				 */
-				"data": (() => {
+				"promises": (() => {
 					if (meta.extreme) {
 
 						return this.data(meta.stationDef.station,meta.tag.data, 'occurrence', meta.extreme.type, meta.extreme.lim , 'difference')
@@ -249,13 +286,13 @@ class Serie {
 		);
 	}
 	get "first" () {
-		return (meta) => this.getPreset(
+		return (meta) => this.preset(
 			meta.series.first,
 			{
 				"lineWidth": 0,
 				"marker": {"radius": 2},
 				"states": {"hover": {"lineWidthPlus": 0}},
-				"data": this.data(meta.stationDef.station,meta.tag.data, 'shortValues')
+				"promises": this.data(meta.stationDef.station,meta.tag.data, 'shortValues')
 			},
 			meta);
 	}
@@ -263,13 +300,13 @@ class Serie {
 		return this.diff;
 	}
 	get "last" () {
-		return (meta) => this.getPreset(
+		return (meta) => this.preset(
 			meta.series.last,
 			{
 				"lineWidth": 0,
 				"marker": {"radius": 2},
 				"states": {"hover": {"lineWidthPlus": 0}},
-				"data": this.data(meta.stationDef.station,meta.tag.data, 'shortValues'),
+				"promises": this.data(meta.stationDef.station,meta.tag.data, 'shortValues'),
 			},
 			meta);
 	}
@@ -287,17 +324,17 @@ class Serie {
 	})
 	*/
 	get "snow"(){
-		return (meta) => this.getPreset(
+		return (meta) => this.preset(
 			meta.series.snow,
 			{
-				"data": this.data(meta.stationDef.station,meta.tag.data, 'snow', 'shortValues'),
+				"promises": this.data(meta.stationDef.station,meta.tag.data, 'snow', 'shortValues'),
 				// "name": meta.series.snow.name,
 				// "className": meta.series.snow.className,
 				// "type": meta.series.snow.type,
 				// "stack": meta.groups[meta.series.snow.group].title,
 				"stacking": "normal",
 				// "color": meta.series.snow.colour,
-				// "data": data.snow != undefined
+				// "promises": data.snow != undefined
 				// ? data.snow.values
 				// : undefined,
 				// "visible": true,
@@ -316,10 +353,10 @@ class Serie {
 		);
 	}
 	get "rain"(){
-		return (meta) => this.getPreset(
+		return (meta) => this.preset(
 			meta.series.rain,
 			{
-				"data": this.data(meta.stationDef.station, meta.tag.data, 'rain', 'shortValues'),
+				"promises": this.data(meta.stationDef.station, meta.tag.data, 'rain', 'shortValues'),
 				"stacking": "normal"
 			},
 			meta
@@ -329,7 +366,7 @@ class Serie {
 		// "type": meta.series.rain.type,
 		// "stack": meta.groups[meta.series.rain.group].title,
 		// "stacking": "normal",
-		// "data": data.rain != undefined
+		// "promises": data.rain != undefined
 		// ? data.rain.values
 		// : undefined,
 		// "color": meta.series.rain.colour,
@@ -346,7 +383,7 @@ class Serie {
 		// "tooltip": {"valueDecimals": meta.decimals}
 	}
 	"iceTime" () {
-		return (meta) => this.getPreset(
+		return (meta) => this.preset(
 			meta.series.iceTime,
 			{
 				"regression": false,
@@ -362,17 +399,17 @@ class Serie {
 				"lineWidth": 0,
 				"marker": {"radius": 2},
 				"states": {"hover": {"lineWidthPlus": 0}},
-				"data": this.data(meta.stationDef.station, meta.tag.data),
+				"promises": this.data(meta.stationDef.station, meta.tag.data),
 				"visible": true,
 				"tooltip": {"valueDecimals": meta.decimals}
 			},
 			meta)
 	}
 	"freeze" (){
-		return (meta) => this.getPreset(
+		return (meta) => this.preset(
 			meta.series.freeze,
 			{
-				"data": this.data(meta.stationDef.station, meta.tag.data, 'shortValues'),
+				"promises": this.data(meta.stationDef.station, meta.tag.data, 'shortValues'),
 				"regression": false,
 				"regressionSettings": {
 					"type": "linear",
@@ -395,10 +432,10 @@ class Serie {
 		)
 	}
 	"breakup"(){
-		return (meta) => this.getPreset(
+		return (meta) => this.preset(
 			meta.series.breakup,
 			{
-				"data": this.data(meta.stationDef.station, meta.tag.data, 'shortValues'),
+				"promises": this.data(meta.stationDef.station, meta.tag.data, 'shortValues'),
 				"stacking": "normal",
 				"regression": false,
 				"regressionSettings": {
@@ -421,7 +458,7 @@ class Serie {
 		)
 	}
 	get "iceThick" () {
-		return (meta) => this.getPreset(
+		return (meta) => this.preset(
 			meta.series.iceThick,
 			{
 				// "name": meta.series.iceThick.name,
@@ -432,9 +469,9 @@ class Serie {
 					"radius": 2,
 					"symbol": "circle"
 				},
-				// "data": this.data(meta.stationDef.station, meta.tag.data, variables.date, 'shortValues'),
-				"data": this.data(meta.stationDef.station, meta.tag.data, 'shortValues'),
-				// "data": data.total != undefined
+				// "promises": this.data(meta.stationDef.station, meta.tag.data, variables.date, 'shortValues'),
+				"promises": this.data(meta.stationDef.station, meta.tag.data, 'shortValues'),
+				// "promises": data.total != undefined
 				// ? data.total.max(
 				// 	meta,
 				// 	data
@@ -446,7 +483,7 @@ class Serie {
 			meta)
 	}
 	get "iceThickDiff" () {
-		return (meta) => this.getPreset(
+		return (meta) => this.preset(
 			meta.series.iceThick,
 			{
 				// "name": meta.series.iceThickDiff.name,
@@ -457,50 +494,58 @@ class Serie {
 					"radius": 2,
 					"symbol": "circle"
 				},
-				"data": this.data(meta.stationDef.station, meta.tag.data, 'difference'),
+				"promises": this.data(meta.stationDef.station, meta.tag.data, 'difference'),
 				"visible": true,
 				"tooltip": {"valueDecimals": meta.decimals}
 			},
 			meta)
 	}
 	get "perma"(){
-		return (meta, data, k, s) => this.getPreset(
-			meta.series[s],
-			{
-				"name": s,
-				"color": meta.series[s].colour,
-				"className": meta.series[s].className,
-				"data": this.data(s.toLowerCase()
-						.replace('ä','a').replace('å','a').replace('ö','o'),
-					meta.tag.data,
-					'yrly',
-					'shortValues'),
-				"visible": k === "Torneträsk",
-				"opacity": 0.9,
-			},
-			meta)
+		return (meta) => {
+			return this.preset(
+				meta.series[Object.keys(meta.series)[this.callback]],
+				{
+					"name": Object.keys(meta.series)[this.callback],
+					"color": meta.series[Object.keys(meta.series)[this.callback]].colour,
+					"className": meta.series[Object.keys(meta.series)[this.callback]].className,
+					"promises": this.data(Object.keys(meta.series)[this.callback].toLowerCase()
+							.replace('ä','a').replace('å','a').replace('ö','o'),
+						meta.tag.data,
+						'yrly',
+						'shortValues'),
+					"visible": Object.keys(meta.series)[this.callback] === "Torneträsk",
+					"opacity": 0.9,
+				},
+				meta)
+		}
 		// {
 		// "type": meta.series[s].type,
-		// "data": data[s].values,
+		// "promises": data[s].values,
 		// "tooltip": {"valueDecimals": meta.decimals}
 		// }),
 	}
 	get "period" (){
-		return (meta, data, k, s) => this.getPreset(
-			meta.series[s],
+		return (meta) => this.preset(
+			meta.series[Object.keys(meta.series)[this.callback]],
 			{
-				"name": meta.series[s].name,
-				"className": meta.series[s].className,
-				"type": meta.series[s].type,
+				"name": meta.series[Object.keys(meta.series)[this.callback]].name,
+				"className": meta.series[Object.keys(meta.series)[this.callback]].className,
+				"type": meta.series[Object.keys(meta.series)[this.callback]].type,
 				"lineWidth": 1,
-				"data": this.data(meta.stationDef.station,meta.tag.data, s, 'yValues'),
 				"visible": true,
+				"data": [0,0,0,0,0,0,0,0,0,0,0,0],
+				"promises": this.data(this.station, this.tags),
+				"dataSorting": {
+					"enabled": true,
+					"matchByName": true,
+					"sortKey": 'y'
+				}
 				// "tooltip": {"valueDecimals": meta.decimals}
 			},
 			meta)
 	}
 	get "co2" (){
-		return (meta, data, k, s) => this.getPreset(
+		return (meta, data, k, s) => this.preset(
 			meta.series[s],
 			{
 				"name": meta.series.co2.name,
@@ -532,7 +577,7 @@ class Serie {
 				},
 				"zIndex": 6,
 				"tooltip": {"valueDecimals": meta.decimals},
-				"data": this.data(meta.stationDef.station,meta.tag.data, 'shortValues').then(res => res.map(each => {
+				"promises": this.data(meta.stationDef.station,meta.tag.data, 'shortValues').then(res => res.map(each => {
 					each.x = new Date(each.x)
 					return each
 				})),

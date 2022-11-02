@@ -5,6 +5,7 @@ global.queryString = require("query-string");
 global.nav_lang = "en";
 const constant = require("../static/const.json");
 global.startYear = constant.startYear;
+global.endYear = constant.endYear;
 global.baselineLower = constant.baselineLower;
 global.baselineUpper = constant.baselineUpper;
 
@@ -49,51 +50,34 @@ lib = {
 
 		// }
 		if (hostUrl) {
-
 			if (url) {
-
 				hostUrl = url;
-
 			} else {
-
 				hostUrl = window.location.origin;
-
 			}
-
 		}
 		meta.getMeta(type).then((cfg) => {
-
 			$(() => {
-
 				cfg.files.config.contex = type.context === undefined
 					? true
 					: type.context;
 				if (type.override
 					? !type.override.axislim
 					: false) {
-
 					Object.keys(cfg.files.config.groups).forEach((key) => {
-
 						if (!cfg.files.config.groups[key].yAxis) {
-
 							cfg.files.config.groups[key].yAxis = {};
-
 						}
 						cfg.files.config.groups[key].yAxis.min = undefined;
 						cfg.files.config.groups[key].yAxis.max = undefined;
-
 					});
-
 				}
 				const chrt = charts.build(
 					cfg,
 					div
 				);
-
 			});
-
 		});
-
 	},
 	"renderSets" (
 		div,
@@ -101,19 +85,13 @@ lib = {
 		id = new URL(window.location.href).searchParams.get("station"),
 		url = window.location.origin
 	) {
-
 		if (url) {
-
 			hostUrl = url;
-
 		} else {
-
 			hostUrl = window.location.origin;
-
 		}
 		variables.debug = new URL(window.location.href).searchParams.get("debug") == "true";
 		if (variables.debug) {
-
 			const debug = document.createElement("div");
 			debug.setAttribute(
 				"class",
@@ -127,19 +105,14 @@ lib = {
 			? sets[set]
 			: [set];
 		if (!Array.isArray(ids)) {
-
 			ids = Object.values(ids);
-
 		} else {
-
 			ids = ids.map((each) => ({
 				"station": id,
 				"plot": each
 			}));
-
 		}
 		ids.forEach((type) => {
-
 			const container = document.createElement("div");
 			type.id = `${type.station}_${type.plot}`;
 			$.extend(
@@ -152,7 +125,6 @@ lib = {
 				`mark_${type.id}`
 			);
 			if (variables.debug) {
-
 				const debug = document.createElement("div");
 				debug.setAttribute(
 					"class",

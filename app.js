@@ -120,7 +120,7 @@ exports.custom = custom;
 
 hbs.registerPartials(`${__dirname}/views/partials`);
 const station_static = require("./static/charts/stations.json");
-const version = require("./package.json").version;
+let version = require("./package.json").version;
 
 custom.then((chart_list) => {
     const sets = station_static
@@ -141,6 +141,8 @@ custom.then((chart_list) => {
 	    console.log("/browse")
         console.log('remote Address:',req.ip)
 	    console.log("version", version)
+
+            version = `${version}`
             res.render(
                 "browse.hbs",
                 {
