@@ -5,11 +5,8 @@ const dateFormat = (date) => `${date.getFullYear()} ${time[nav_lang].months[help
 
 var formats = {
     "YYYYMMDD": (date, shrt = false) => {
-
         try {
-
             return `${date.getFullYear()} ${formats.MM(date, shrt)} ${formats.DD(date)}`;
-
         } catch (error) {
 
             return "";

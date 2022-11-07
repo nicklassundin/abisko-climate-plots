@@ -116,15 +116,8 @@ exports.series = {
 			let incomp = {};
 			$.extend(true, incomp, preset)
 			return incomp.data.then((promises) => {
-				/*
-				incomp.data = []
-				incomp.promises = promises
-				return incomp */
-				return Promise.allSettled(promises).then(data => {
-					incomp.data = data.map(each => each.value).filter(each => each !== undefined);
-					//console.log(incomp)
-					return incomp;
-				})
+				incomp.promises = promises;
+				return incomp
 			})
 		};
 		return {

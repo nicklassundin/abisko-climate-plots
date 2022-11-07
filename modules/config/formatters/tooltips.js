@@ -6,10 +6,8 @@ exports.formatters = function (meta) {
     return {
         "winterDOY" () {
             try {
-
                 let tooltip = `<span style="font-size: 10px">${this.x}/${this.x+1}</span><br/>`;
                 this.points.forEach((point) => {
-			// console.log(point.point)
                     const dec = point.series.options.tooltip.valueDecimals;
                     tooltip += `<span style="color:${point.color}">\u25CF</span> ${point.series.name
                     }${meta.unitType
@@ -87,13 +85,13 @@ exports.formatters = function (meta) {
 
                 let tooltip = `<span style="font-size: 10px">Winter ${this.x}-${this.x + 1}</span><br/>`;
                 this.points.forEach((point) => {
-
                     tooltip += `<span style="color:${
                         point.color
                     }">\u25CF</span> ${
                         point.series.name
                     }: <b>${
-                        dateFormats.YYYYMMDD(new Date(point.point.fullDate))
+                        // TODO fix fullDate tag
+                        dateFormats.YYYYMMDD(new Date(point.point.date))
                     }</b><br/>`;
 
                 });

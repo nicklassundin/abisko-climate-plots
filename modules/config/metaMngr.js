@@ -189,16 +189,18 @@ exports.meta = {
                         "[month]",
                         meta.month
                     );
+                id = meta.stationDef.id;
                 res = res.replaceAll(
                     "[baselineLower]",
-                    baselineLower
+                    `<html value=${baselineLower}>${baselineLower}</html>`
                 );
                 res = res.replaceAll(
                     "[baselineUpper]",
-                    baselineUpper
+                    `<input id=${id}uppLabel type=text class=input value=${baselineUpper} maxlength=4 onclick=selectText(this) onchange=renderInterface.updateSeries(${id},${baselineLower},this.value)></input>`,
                 );
                 res = res.replaceAll(
                     "[baseline]",
+
                     `${baselineLower} - ${baselineUpper}`
                 );
                 res = res.replaceAll(
@@ -210,21 +212,17 @@ exports.meta = {
                     ""
                 );
                 if (meta.extreme) {
-
                     res = res.replaceAll(
                         "[lim]",
                         (meta.extreme.lim > 0
                             ? "+"
                             : "") + meta.extreme.lim
                     );
-
                 }
                 // Res = markdownToTxt(res);
                 const tmp = md.render(res);
                 if (!tmp.includes(res)) {
-
                     res = tmp;
-
                 }
                 if (meta.unitType && meta.units && meta.units[meta.unitType] != undefined) {
                     var res = res.replaceAll(
@@ -238,22 +236,13 @@ exports.meta = {
                             "[interval]",
                             meta.units[meta.unitType].interval
                         );
-
                 }
-
             } catch (error) {
-
                 throw error;
-
             }
-
         } else {
-
             res = "";
-
         }
         return res;
-        // Return res
-
     }
 };
