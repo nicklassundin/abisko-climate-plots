@@ -13522,8 +13522,8 @@
           ],
           "data": [
             "precipitation",
-            "weeks",
-            "max"
+            "weekly",
+            "maxAvg"
           ]
         },
         "config": {
@@ -13989,8 +13989,8 @@
           ],
           "data": [
             "precipitation",
-            "weeks",
-            "min"
+            "weekly",
+            "minAvg"
           ]
         },
         "config": {
@@ -17158,8 +17158,8 @@
           ],
           "data": [
             "temperatures",
-            "months",
-            "min"
+            "weekly",
+            "minAvg"
           ]
         },
         "config": {
@@ -17626,8 +17626,8 @@
           ],
           "data": [
             "temperatures",
-            "weeks",
-            "max"
+            "weekly",
+            "maxAvg"
           ]
         },
         "config": {
@@ -19070,8 +19070,8 @@
             "days"
           ],
           "data": [
-            "growingSeason",
-            "days"
+            "yrlyFull",
+            "growingSeason"
           ]
         },
         "config": {
@@ -19471,6 +19471,7 @@
           "data": [
             "temperature",
             "yrlySplit",
+            "min",
             "first"
           ]
         },
@@ -19870,6 +19871,7 @@
           "data": [
             "temperature",
             "yrlySplit",
+            "min",
             "last"
           ]
         },
@@ -20267,8 +20269,8 @@
             "weeks"
           ],
           "data": [
-            "growingSeason",
-            "weeks"
+            "weekly",
+            "growingSeason"
           ]
         },
         "config": {
@@ -37961,8 +37963,9 @@
             "days"
           ],
           "data": [
-            "growingSeason",
-            "days"
+            "temperature",
+            "yrlyFull",
+            "growingSeason"
           ]
         },
         "config": {
@@ -38362,8 +38365,9 @@
             "weeks"
           ],
           "data": [
-            "growingSeason",
-            "weeks"
+            "temperature",
+            "weekly",
+            "growingSeason"
           ]
         },
         "config": {

@@ -2,6 +2,10 @@
 
 const stats = require('vizchange-stats')
 
+const configs = JSON.parse(JSON.stringify(stats.configs.production));
+configs.dates.start = global.startYear;
+configs.dates.end = global.endYear;
+
 class Serie {
 	constructor(meta, type, key, id, callback){
 		this.meta = meta
@@ -9,20 +13,22 @@ class Serie {
 		this.key = key
 		this.id = id
 		this.callback = callback
-		this.specs = JSON.parse(JSON.stringify(stats.configs.production));
+		this.specs = configs
 		switch(type){
+			case "avg":
+				this.station = meta.stationDef.station
+				this.tags = Object.values(meta.tag.data).concat(['shortValues'])
+				break
 			case "max":
 				this.station = meta.stationDef.station
-				this.ser = ['max', 'shortValues'];
-				this.tags = this.meta.tag.data
+				this.tags = Object.values(meta.tag.data).concat(['max', 'shortValues'])
 				break;
 			case "min":
 				this.station = meta.stationDef.station
-				this.ser = ['min', 'shortValues'];
-				this.tags = this.meta.tag.data
+				this.tags = Object.values(meta.tag.data).concat(['min', 'shortValues'])
 				break;
 			case "perma":
-				this.tags = ['perma', 'yrly'];
+				this.tags = ['perma', 'yrly', 'shortValues'];
 				this.station = Object.keys(meta.series)[this.callback].toLowerCase();
 				break;
 			case "period":
@@ -32,7 +38,6 @@ class Serie {
 						break;
 					default:
 						this.specs.dates.start = Number(this.key)
-						console.log(this.meta)
 						switch (this.meta.tag.render) {
 							case 'periodMeans':
 								this.specs.dates.end = this.specs.dates.start + 29;
@@ -41,15 +46,34 @@ class Serie {
 								this.specs.dates.end = this.specs.dates.start + 9;
 						}
 				}
-				this.tags = ['snowdepth_single', 'splitDecades']
+				this.tags = ['snowdepth_single', 'splitDecades', 'shortValues']
 				break;
-			case "first":
+			case "co2":
 				this.station = meta.stationDef.station;
-				this.ser = ['yrlySplit', 'min', 'first', 'shortValues']
+				this.tags = ['co2_weekly', 'all', 'shortValues']
+				break;
+				/*
+			case "first":
+			case "last":
+				this.station = meta.stationDef.station;
+				this.tags = Object.values(meta.tag.data).concat(['shortValues']);
+				break;
+				 */
+			case "extreme":
+				this.station = meta.stationDef.station
+				if (meta.extreme) {
+					this.tags = Object.values(meta.tag.data).concat([meta.extreme.type, meta.extreme.lim, 'shortValues']);
+				}else{
+					this.tags = Object.values(meta.tag.data).concat(['shortValues'])
+				}
+				break;
+			case "diff":
+				this.station = meta.stationDef.station;
+				this.tags = Object.values(meta.tag.data).concat(['difference'])
 				break;
 			default:
 				this.station = meta.stationDef.station
-				this.tags = this.meta.tag.data
+				this.tags = Object.values(this.meta.tag.data).concat(['shortValues'])
 		}
 		this.updateTime = (new Date()).getTime();
 	}
@@ -59,6 +83,7 @@ class Serie {
 	'data' (st, tgs, ...sr) {
 		let station = this.station;
 		let tags = this.tags
+		let specs = JSON.parse(JSON.stringify(this.specs));
 		//let ser = this.ser
 		// console.log('station',station)
 		// console.log('tags',tags)
@@ -67,6 +92,7 @@ class Serie {
 		let type = tags.shift();
 		if (type === 'temperatures') type = 'temperature' // TODO hotfix
 		if (type === 'growingSeason') {
+			// outdated TODO
 			type = 'temperature' // TODO hotfix
 			tags[0] = tags[0].replace('days', 'growDays');
 			tags[0] = tags[0].replace('weeks', 'growWeeks');
@@ -83,14 +109,13 @@ class Serie {
 		 config.type = type;
 		 */
 		// TODO change if needed shortValeus
-		let specs = JSON.parse(JSON.stringify(this.specs));
 		specs.station = station;
 		specs.type = type;
 		specs.baseline.start = global.baselineLower
 		specs.baseline.end = global.baselineUpper
 
-		let params = [type].concat(tags, ['shortValues'])
-		console.log('serie.params', params)
+		let params = [type].concat(tags)
+		//console.log('serie.params', params)
 		//console.log('serie.specs', specs.dates)
 		//console.log('serie.tags', tags)
 		return stats.getByParams(specs, params).then(result => {
@@ -102,14 +127,10 @@ class Serie {
 		})
 	}
 	'preset' (config, serie, meta) {
-		/*let config = this.config;
-		let serie = this.config;
-		let meta = this.meta;
-*/
+		//console.log('--------------------')
 		//console.log(serie)
 		//console.log(config)
-		//console.log(meta)
-
+		//console.log('meta', meta)
 		const preset = {
 			"label": false,
 			"lineWidth": 0,
@@ -121,6 +142,12 @@ class Serie {
 			}
 		};
 		$.extend(true, preset, serie, config);
+		/*
+		console.log('meta', meta)
+		console.log('preset', preset)
+		console.log('config', config)
+		 */
+
 		if(config.name !== undefined) preset.name = config.name;
 		preset.className = config.className;
 		if (!preset.color) {
@@ -134,29 +161,37 @@ class Serie {
 		let complete = () => {
 			const incomp = {};
 			$.extend(true, incomp, preset)
-			incomp.visible = (meta.groups[config.group].prime === undefined ? false : meta.groups[config.group].prime) && config.visible;
+			if(config.group !== undefined) incomp.visible = (meta.groups[config.group].prime === undefined ? false : meta.groups[config.group].prime) && config.visible;
 			if(meta.period) incomp.visible = meta.period
 			incomp.promises.then((promises) => {
 				Promise.allSettled(promises).then(() => {
 					$(`#${this.id}`).highcharts().hideLoading();
 				})
-				promises.forEach((each, index) => {
-					each.then(point => {
-						if(point === undefined || isNaN(point.y)){
-						}else{
-							switch (meta.period) {
-								case true:
-									point = point.y
-
-									//$(`#${this.id}`).highcharts().series[this.callback].addPoint(point)
-									$(`#${this.id}`).highcharts().series[this.callback].data[11-index].update(point)
-									break;
-								default:
-									$(`#${this.id}`).highcharts().series[this.callback].addPoint(point)
-							}
-						}
+				if(meta.tag.data[1] === 'all'){
+					Promise.allSettled(promises).then(all => {
+						all = all.map(each => each.value)
+						incomp.data = all
+						$(`#${this.id}`).highcharts().series[this.callback].update(incomp)
 					})
-				})
+				}else{
+					promises.forEach((each, index) => {
+						each.then(point => {
+							if(point === undefined || isNaN(point.y)){
+							}else{
+								switch (meta.period) {
+									case true:
+										point = point.y
+										$(`#${this.id}`).highcharts().series[this.callback].data[11-index].update(point)
+										break;
+									default:
+										$(`#${this.id}`).highcharts().series[this.callback].addPoint(point)
+								}
+							}
+						})
+					})
+				}
+
+
 				//return Promise.allSettled(promises).then(data => {
 				//	incomp.data = data.map(each => each.value).filter(each => each !== undefined);
 				//	return incomp;
@@ -190,7 +225,22 @@ class Serie {
 
 	}
 	get "extreme" () {
-		return (meta, depricated, k, s) => {
+		return (meta) => {
+			let tag = "extreme";
+			if (meta.extreme) {
+				tag += meta.extreme.type;
+			}else{
+				tag += '-high'
+			}
+			//console.log(tag, Object.keys(meta.series), meta.series[tag])
+			return this.preset(
+				meta.series[tag],
+				{
+					"promises": this.data(meta.stationDef.station,meta.tag.data)
+				},
+				meta
+			);
+			/*
 			let tag = "extreme";
 			if (meta.extreme) {
 				tag += meta.extreme.type;
@@ -212,10 +262,13 @@ class Serie {
 			return this.preset(
 				config,
 				{
-					"promises": data
+					"promises": data,
+					"colorKey": 'y',
 				},
 				meta
 			);
+
+			 */
 		};
 	}
 	get "extreme-low" () {
@@ -239,6 +292,8 @@ class Serie {
 						: 0,
 					"radius": 2
 				},
+				"promises": this.data(meta.stationDef.station,meta.tag.data, 'shortValues'),
+
 				// "promises": data.avg != undefined
 				// ? data.avg.values
 				// : data.values
@@ -293,6 +348,7 @@ class Serie {
 		return (meta) => this.preset(
 			meta.series.first,
 			{
+				"keys": ["x", "date"],
 				"lineWidth": 0,
 				"marker": {"radius": 2},
 				"states": {"hover": {"lineWidthPlus": 0}},
@@ -549,8 +605,8 @@ class Serie {
 			meta)
 	}
 	get "co2" (){
-		return (meta, data, k, s) => this.preset(
-			meta.series[s],
+		return (meta) => this.preset(
+			meta.series.co2,
 			{
 				"name": meta.series.co2.name,
 				"className": meta.series.co2.className,
@@ -562,7 +618,6 @@ class Serie {
 				"fillOpacity": 0.2,
 				"label": {
 					"enabled": false
-
 				},
 				"marker": {
 					"radius": 5,
