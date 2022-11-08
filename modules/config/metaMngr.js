@@ -192,11 +192,11 @@ exports.meta = {
                 id = meta.stationDef.id;
                 res = res.replaceAll(
                     "[baselineLower]",
-                    `<html value=${baselineLower}>${baselineLower}</html>`
+                    `<input id=${id}uppLabel type=text class=input value=${baselineLower} maxlength=4 onclick=selectText(this) onchange=renderInterface.updatePlot(${id},this.value,${baselineUpper})></input>`,
                 );
                 res = res.replaceAll(
                     "[baselineUpper]",
-                    `<input id=${id}uppLabel type=text class=input value=${baselineUpper} maxlength=4 onclick=selectText(this) onchange=renderInterface.updateSeries(${id},${baselineLower},this.value)></input>`,
+                    `<input id=${id}uppLabel type=text class=input value=${baselineUpper} maxlength=4 onclick=selectText(this) onchange=renderInterface.updatePlot(${id},${baselineLower},this.value)></input>`,
                 );
                 res = res.replaceAll(
                     "[baseline]",
