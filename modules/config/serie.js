@@ -161,6 +161,7 @@ class Serie {
 		let complete = () => {
 			const incomp = {};
 			$.extend(true, incomp, preset)
+			console.log('meta', meta)
 			if(config.group !== undefined) incomp.visible = (meta.groups[config.group].prime === undefined ? false : meta.groups[config.group].prime) && config.visible;
 			if(meta.period) incomp.visible = meta.period
 			incomp.promises.then((promises) => {
