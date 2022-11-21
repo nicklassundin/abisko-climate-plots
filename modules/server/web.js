@@ -1,5 +1,7 @@
 
 const fs = require("fs");
+const http = require("http");
+const https = require("https");
 let config;
 try {
 
@@ -15,9 +17,8 @@ exports.webserver = {
     "http" (app) {
         const http = require("http");
         try {
-	    http.createServer(app).listen(config.port);
+	        http.createServer(app).listen(config.port);
             return http
-
         } catch (err) {
 
             console.log(err);
@@ -25,6 +26,17 @@ exports.webserver = {
 
         }
 
+    },
+    "https" (app) {
+        const https = require("https");
+        try {
+            https.createServer(app).listen(config.https.port);
+            return https
+        } catch (err) {
+            console.log(err);
+            return err;
+
+        }
     }
 };
 
