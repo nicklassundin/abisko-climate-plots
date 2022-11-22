@@ -2,7 +2,9 @@
 
 const stats = require('vizchange-stats')
 
+
 const configs = JSON.parse(JSON.stringify(stats.configs.production));
+configs.url = `${window.origin}/data/production/url`;
 configs.dates.start = global.startYear;
 configs.dates.end = global.endYear;
 

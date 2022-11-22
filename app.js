@@ -16,6 +16,10 @@ app.use('*', cors({
 }))
 */
 const hbs = require("hbs");
+
+const config = require('./static/server.config.json')
+
+
 /* Open file access
 const cors = require('cors');
 const server-config = require('vizchange-stats').configs;
@@ -47,14 +51,7 @@ app.use(
     "/config",
     express.static(`${__dirname}/config`)
 );
-app.use(
-    "/data",
-    express.static(`${__dirname}/data`)
-);
-app.use(
-    "/data/abisko",
-    express.static(`${__dirname}/data/abisko`)
-);
+
 app.use(
     "/client",
     express.static(`${__dirname}/client`)
@@ -118,8 +115,24 @@ exports.custom = custom;
  * }
  */
 
+const Axios = require('axios')
+const { setupCache } = require('axios-cache-interceptor');
+
+const axios = setupCache(Axios);
+
+app.use('/data/:server/:params', function(req, res) {
+    let url = `https://${config[req.params.server]}${req['_parsedUrl'].search}`
+    axios.get(url, {
+        ttl: 1000*60*60*24*14,
+    }).then(async (result) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify(result.data));
+    })
+});
+
 hbs.registerPartials(`${__dirname}/views/partials`);
 const station_static = require("./static/charts/stations.json");
+const http = require("http");
 let version = require("./package.json").version;
 
 custom.then((chart_list) => {
