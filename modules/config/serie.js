@@ -123,6 +123,11 @@ class Serie {
 		return stats.getByParams(specs, params).then(result => {
 			return result
 		}).then(result => {
+			result[result.length-10].then(each => {
+				if(each.baseline){
+					global.baselineValue = Math.round(each.baseline * 100) / 100;
+				}
+			})
 			return result.map(each => {
 				return each
 			})
