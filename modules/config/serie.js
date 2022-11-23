@@ -108,8 +108,12 @@ class Serie {
 					case 'snow':
 					case 'rain':
 						// TODO hotfix tags to series insted in config
-						sr.unshift(tags[0])
-						tags = sr;
+						if(tags[0] === 'monthly') {
+							tags.shift()
+						}
+						tags.pop()
+						tags = tags.concat(sr)
+
 						break;
 					default:
 				}
