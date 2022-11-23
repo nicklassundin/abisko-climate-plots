@@ -87,17 +87,33 @@ class Serie {
 		let tags = this.tags
 		let specs = JSON.parse(JSON.stringify(this.specs));
 		//let ser = this.ser
-		// console.log('station',station)
-		// console.log('tags',tags)
-		// console.log('ser',ser)
+		//console.log('station',station)
+		//console.log('tags',tags)
+		//console.log('sr',sr)
 		tags = Object.values(tags)
 		let type = tags.shift();
-		if (type === 'temperatures') type = 'temperature' // TODO hotfix
-		if (type === 'growingSeason') {
-			// outdated TODO
-			type = 'temperature' // TODO hotfix
-			tags[0] = tags[0].replace('days', 'growDays');
-			tags[0] = tags[0].replace('weeks', 'growWeeks');
+
+		switch (type) {
+			case 'temperatures':
+				type = 'temperature' // TODO hotfix
+				break;
+			case 'growingSeason':
+				// outdated TODO
+				type = 'temperature' // TODO hotfix
+				tags[0] = tags[0].replace('days', 'growDays');
+				tags[0] = tags[0].replace('weeks', 'growWeeks');
+				break;
+			case 'precipitation':
+				switch (sr[0]) {
+					case 'snow':
+					case 'rain':
+						// TODO hotfix tags to series insted in config
+						sr.unshift(tags[0])
+						tags = sr;
+						break;
+					default:
+				}
+			default:
 		}
 		//
 		//
@@ -117,6 +133,7 @@ class Serie {
 		specs.baseline.end = global.baselineUpper
 
 		let params = [type].concat(tags)
+		//console.log('serie.tags', tags)
 		//console.log('serie.params', params)
 		//console.log('serie.specs', specs.dates)
 		//console.log('serie.tags', tags)

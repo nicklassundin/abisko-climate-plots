@@ -11690,12 +11690,12 @@
             "colour": "#1000FF",
             "type": "column"
           },
-          "extreme-diff": {
-            "className": "series-diff",
-            "preset": "diff",
-            "group": "1",
+          "extreme-low": {
+            "className": "series-temp-low-extreme",
+            "preset": "extreme",
+            "group": "2",
             "visible": true,
-            "colour": "#ff0000",
+            "colour": "#0000ff",
             "type": "bar",
             "decimals": 0,
             "keys": [
@@ -11703,12 +11703,12 @@
               "color"
             ]
           },
-          "extreme-low": {
-            "className": "series-temp-low-extreme",
-            "preset": "extreme",
-            "group": "2",
+          "extreme-diff": {
+            "className": "series-diff",
+            "preset": "diff",
+            "group": "1",
             "visible": true,
-            "colour": "#0000ff",
+            "colour": "#ff0000",
             "type": "bar",
             "decimals": 0,
             "keys": [
@@ -12157,12 +12157,12 @@
             "colour": "#1000FF",
             "type": "column"
           },
-          "extreme-diff": {
-            "className": "series-diff",
-            "preset": "diff",
-            "group": "1",
+          "extreme-low": {
+            "className": "series-temp-low-extreme",
+            "preset": "extreme",
+            "group": "2",
             "visible": true,
-            "colour": "#ff0000",
+            "colour": "#0000ff",
             "type": "bar",
             "decimals": 0,
             "keys": [
@@ -12170,12 +12170,12 @@
               "color"
             ]
           },
-          "extreme-low": {
-            "className": "series-temp-low-extreme",
-            "preset": "extreme",
-            "group": "2",
+          "extreme-diff": {
+            "className": "series-diff",
+            "preset": "diff",
+            "group": "1",
             "visible": true,
-            "colour": "#0000ff",
+            "colour": "#ff0000",
             "type": "bar",
             "decimals": 0,
             "keys": [
@@ -12624,12 +12624,12 @@
             "colour": "#1000FF",
             "type": "column"
           },
-          "extreme-diff": {
-            "className": "series-diff",
-            "preset": "diff",
-            "group": "1",
+          "extreme-low": {
+            "className": "series-temp-low-extreme",
+            "preset": "extreme",
+            "group": "2",
             "visible": true,
-            "colour": "#ff0000",
+            "colour": "#0000ff",
             "type": "bar",
             "decimals": 0,
             "keys": [
@@ -12637,12 +12637,12 @@
               "color"
             ]
           },
-          "extreme-low": {
-            "className": "series-temp-low-extreme",
-            "preset": "extreme",
-            "group": "2",
+          "extreme-diff": {
+            "className": "series-diff",
+            "preset": "diff",
+            "group": "1",
             "visible": true,
-            "colour": "#0000ff",
+            "colour": "#ff0000",
             "type": "bar",
             "decimals": 0,
             "keys": [
@@ -13091,12 +13091,12 @@
             "colour": "#1000FF",
             "type": "column"
           },
-          "extreme-diff": {
-            "className": "series-diff",
-            "preset": "diff",
-            "group": "1",
+          "extreme-low": {
+            "className": "series-temp-low-extreme",
+            "preset": "extreme",
+            "group": "2",
             "visible": true,
-            "colour": "#ff0000",
+            "colour": "#0000ff",
             "type": "bar",
             "decimals": 0,
             "keys": [
@@ -13104,12 +13104,12 @@
               "color"
             ]
           },
-          "extreme-low": {
-            "className": "series-temp-low-extreme",
-            "preset": "extreme",
-            "group": "2",
+          "extreme-diff": {
+            "className": "series-diff",
+            "preset": "diff",
+            "group": "1",
             "visible": true,
-            "colour": "#0000ff",
+            "colour": "#ff0000",
             "type": "bar",
             "decimals": 0,
             "keys": [
@@ -13558,12 +13558,12 @@
             "colour": "#1000FF",
             "type": "column"
           },
-          "extreme-diff": {
-            "className": "series-diff",
-            "preset": "diff",
-            "group": "1",
+          "extreme-low": {
+            "className": "series-temp-low-extreme",
+            "preset": "extreme",
+            "group": "2",
             "visible": true,
-            "colour": "#ff0000",
+            "colour": "#0000ff",
             "type": "bar",
             "decimals": 0,
             "keys": [
@@ -13571,12 +13571,12 @@
               "color"
             ]
           },
-          "extreme-low": {
-            "className": "series-temp-low-extreme",
-            "preset": "extreme",
-            "group": "2",
+          "extreme-diff": {
+            "className": "series-diff",
+            "preset": "diff",
+            "group": "1",
             "visible": true,
-            "colour": "#0000ff",
+            "colour": "#ff0000",
             "type": "bar",
             "decimals": 0,
             "keys": [
@@ -14025,12 +14025,12 @@
             "colour": "#1000FF",
             "type": "column"
           },
-          "extreme-diff": {
-            "className": "series-diff",
-            "preset": "diff",
-            "group": "1",
+          "extreme-low": {
+            "className": "series-temp-low-extreme",
+            "preset": "extreme",
+            "group": "2",
             "visible": true,
-            "colour": "#ff0000",
+            "colour": "#0000ff",
             "type": "bar",
             "decimals": 0,
             "keys": [
@@ -14038,12 +14038,12 @@
               "color"
             ]
           },
-          "extreme-low": {
-            "className": "series-temp-low-extreme",
-            "preset": "extreme",
-            "group": "2",
+          "extreme-diff": {
+            "className": "series-diff",
+            "preset": "diff",
+            "group": "1",
             "visible": true,
-            "colour": "#0000ff",
+            "colour": "#ff0000",
             "type": "bar",
             "decimals": 0,
             "keys": [
@@ -14498,14 +14498,6 @@
               "color"
             ]
           },
-          "extreme-diff": {
-            "className": "series-diff",
-            "preset": "diff",
-            "group": "1",
-            "visible": true,
-            "colour": "[example]",
-            "type": "column"
-          },
           "extreme-low": {
             "className": "series-temp-low-extreme",
             "preset": "extreme",
@@ -14518,6 +14510,14 @@
               "y",
               "color"
             ]
+          },
+          "extreme-diff": {
+            "className": "series-diff",
+            "preset": "diff",
+            "group": "1",
+            "visible": true,
+            "colour": "[example]",
+            "type": "column"
           }
         },
         "parse": {}
@@ -15615,14 +15615,6 @@
               "color"
             ]
           },
-          "extreme-diff": {
-            "className": "series-diff",
-            "preset": "diff",
-            "group": "1",
-            "visible": true,
-            "colour": "[example]",
-            "type": "column"
-          },
           "extreme-low": {
             "className": "series-temp-low-extreme",
             "preset": "extreme",
@@ -15635,6 +15627,14 @@
               "y",
               "color"
             ]
+          },
+          "extreme-diff": {
+            "className": "series-diff",
+            "preset": "diff",
+            "group": "1",
+            "visible": true,
+            "colour": "[example]",
+            "type": "column"
           }
         },
         "parse": {}
@@ -16732,14 +16732,6 @@
               "color"
             ]
           },
-          "extreme-diff": {
-            "className": "series-diff",
-            "preset": "diff",
-            "group": "1",
-            "visible": true,
-            "colour": "[example]",
-            "type": "column"
-          },
           "extreme-low": {
             "className": "series-temp-low-extreme",
             "preset": "extreme",
@@ -16752,6 +16744,14 @@
               "y",
               "color"
             ]
+          },
+          "extreme-diff": {
+            "className": "series-diff",
+            "preset": "diff",
+            "group": "1",
+            "visible": true,
+            "colour": "[example]",
+            "type": "column"
           }
         },
         "parse": {}
@@ -17200,14 +17200,6 @@
               "color"
             ]
           },
-          "extreme-diff": {
-            "className": "series-diff",
-            "preset": "diff",
-            "group": "1",
-            "visible": true,
-            "colour": "[example]",
-            "type": "column"
-          },
           "extreme-low": {
             "className": "series-temp-low-extreme",
             "preset": "extreme",
@@ -17220,6 +17212,14 @@
               "y",
               "color"
             ]
+          },
+          "extreme-diff": {
+            "className": "series-diff",
+            "preset": "diff",
+            "group": "1",
+            "visible": true,
+            "colour": "[example]",
+            "type": "column"
           }
         },
         "parse": {}
@@ -17668,14 +17668,6 @@
               "color"
             ]
           },
-          "extreme-diff": {
-            "className": "series-diff",
-            "preset": "diff",
-            "group": "1",
-            "visible": true,
-            "colour": "[example]",
-            "type": "column"
-          },
           "extreme-low": {
             "className": "series-temp-low-extreme",
             "preset": "extreme",
@@ -17688,6 +17680,14 @@
               "y",
               "color"
             ]
+          },
+          "extreme-diff": {
+            "className": "series-diff",
+            "preset": "diff",
+            "group": "1",
+            "visible": true,
+            "colour": "[example]",
+            "type": "column"
           }
         },
         "parse": {}
@@ -18136,14 +18136,6 @@
               "color"
             ]
           },
-          "extreme-diff": {
-            "className": "series-diff",
-            "preset": "diff",
-            "group": "1",
-            "visible": true,
-            "colour": "[example]",
-            "type": "column"
-          },
           "extreme-low": {
             "className": "series-temp-low-extreme",
             "preset": "extreme",
@@ -18156,6 +18148,14 @@
               "y",
               "color"
             ]
+          },
+          "extreme-diff": {
+            "className": "series-diff",
+            "preset": "diff",
+            "group": "1",
+            "visible": true,
+            "colour": "[example]",
+            "type": "column"
           }
         },
         "parse": {}
