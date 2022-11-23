@@ -200,11 +200,8 @@ exports.meta = {
                 );
                 // TODO introduce in text
                 res = res.replaceAll(
-                    //"([baselineValue])",
-
                     "[baselineValue]",
-                  ''
-                  //  `<u class=baselineValue></u>`,
+                   `<i class=baselineValue></i>`,
                 );
                 res = res.replaceAll(
                     "[baseline]",

@@ -124,6 +124,7 @@ app.use('/data/:server/:params', function(req, res) {
     let url = `https://${config[req.params.server]}${req['_parsedUrl'].search}`
     axios.get(url, {
         ttl: 1000*60*60*24*14,
+        staleIfError: true
     }).then(async (result) => {
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify(result.data));

@@ -115,6 +115,7 @@
     "ignore": [
       "client/*.js",
       "docs/*",
+      "css/*",
       "temp/*",
       "static/*",
       "cms/*",
