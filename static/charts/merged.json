@@ -166,7 +166,7 @@
           "1": {
             "title": " Autumn Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the autumn (September-November)seasonal averages and the average for the baseline period, typically 1961 to 1990.",
+            "caption": "Difference between the autumn (September-November)seasonal averages and the average for the baseline period ([baselineValue]), typically 1961 to 1990.",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -334,7 +334,7 @@
           "1": {
             "title": "Höstens genomsnittliga temperaturskillnad från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan höstens (september-november) säsongsgenomsnitt och genomsnittet för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan höstens (september-november) säsongsgenomsnitt och genomsnittet för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -651,7 +651,7 @@
           "1": {
             "title": "Spring Average Temperature Difference from Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the spring (March-May) seasonal averages and the average for the baseline period, typically 1961 to 1990.",
+            "caption": "Difference between the spring (March-May) seasonal averages and the average for the baseline period ([baselineValue]), typically 1961 to 1990.",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -819,7 +819,7 @@
           "1": {
             "title": "Skillnad från baslinjen för vårens genomsnittliga temperatur",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan vårens (mars-maj) säsongsgenomsnitt och genomsnittet för baslinjeperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan vårens (mars-maj) säsongsgenomsnitt och genomsnittet för baslinjeperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -1136,7 +1136,7 @@
           "1": {
             "title": "Summer Average Temperature Difference from Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the summer (June-August) seasonal averages and the average for the baseline period, typically 1961 to 1990.",
+            "caption": "Difference between the summer (June-August) seasonal averages and the average for the baseline period ([baselineValue]), typically 1961 to 1990.",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -1304,7 +1304,7 @@
           "1": {
             "title": "Skillnad från baslinjen för sommarens genomsnittliga temperatur",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan sommarens (juni till augusti) säsongsgenomsnitt och genomsnittet för baslinjeperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan sommarens (juni till augusti) säsongsgenomsnitt och genomsnittet för baslinjeperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -1621,7 +1621,7 @@
           "1": {
             "title": "Winter Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the winter (December-February) seasonal averages and the average for the baseline period, typically 1961 to 1990.",
+            "caption": "Difference between the winter (December-February) seasonal averages and the average for the baseline period ([baselineValue]), typically 1961 to 1990.",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -1789,7 +1789,7 @@
           "1": {
             "title": "Skillnad från baslinjen för vinterns genomsnittliga temperatur",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan vinterns (december till februari) säsongsgenomsnitt och genomsnittet för baslinjeperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan vinterns (december till februari) säsongsgenomsnitt och genomsnittet för baslinjeperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -2426,7 +2426,7 @@
           "1": {
             "title": "Break-Up Date of Lake Ice Difference from Baseline",
             "subTitle": "Troneträsk",
-            "caption": "Break-up difference from baseline period, typically 1961 to 1990.",
+            "caption": "Break-up difference from baseline period ([baselineValue]), typically 1961 to 1990.",
             "yAxis": {
               "left": "Ice break-up [day of year]",
               "right": "[X-AXIS]"
@@ -2588,7 +2588,7 @@
           "1": {
             "title": "Skillnad från baslinjen i datumet för islossning på sjön",
             "subTitle": "Torneträsk",
-            "caption": "Skillnad i islossning från baslinjen, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad i islossning från baslinjen ([baselineValue]), vanligtvis 1961 till 1990.",
             "yAxis": {
               "left": "Islossning [day of year]",
               "right": "[X-AXIS]"
@@ -2841,7 +2841,7 @@
           "1": {
             "title": "Freeze-Up Date of Lake Ice Difference from Baseline",
             "subTitle": "Troneträsk",
-            "caption": "Freeze-up difference from baseline period, typically 1961 to 1990.",
+            "caption": "Freeze-up difference from baseline period ([baselineValue]), typically 1961 to 1990.",
             "yAxis": {
               "left": "Ice freeze-up [day of year]",
               "right": "[X-AXIS]"
@@ -3003,7 +3003,7 @@
           "1": {
             "title": "Skillnad från baslinjen i datum för isläggningen av sjöis",
             "subTitle": "Torneträsk",
-            "caption": "Skillnad från baslinjeperioden, vanligtvis 1961 to 1990, i datum för isläggningen.",
+            "caption": "Skillnad från baslinjeperioden ([baselineValue]), vanligtvis 1961 to 1990, i datum för isläggningen.",
             "yAxis": {
               "left": "Isläggning [day of year]",
               "right": "[X-AXIS]"
@@ -3260,7 +3260,7 @@
           "1": {
             "title": "Lake Ice Time Difference (from Baseline)",
             "subTitle": "Torneträsk",
-            "caption": "Number of days the lake is covered completely by ice  difference from baseline period.",
+            "caption": "Number of days the lake is covered completely by ice  difference from baseline period ([baselineValue]).",
             "yAxis": {
               "left": "Difference Ice time [units]",
               "right": "[X-AXIS]"
@@ -4567,7 +4567,7 @@
           "1": {
             "title": "[stationName] Annual Average Snow Depth Difference from Baseline",
             "subTitle": "",
-            "caption": "Difference between annual snow depth in centimeters and the average for the baseline period, typically 1961 to 1990.",
+            "caption": "Difference between annual snow depth in centimeters and the average for the baseline period ([baselineValue]), typically 1961 to 1990.",
             "yAxis": {
               "left": "Average Snow depth [cm]",
               "right": "[X-AXIS]"
@@ -4753,7 +4753,7 @@
           "1": {
             "title": "[stationName] Årlig genomsnittlig snödjupskillnad från baslinjen",
             "subTitle": "",
-            "caption": "Skillnad mellan årligt snödjup i centimeter och genomsnittet för baslinjeperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan årligt snödjup i centimeter och genomsnittet för baslinjeperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "yAxis": {
               "left": "Genomsnittligt snödjup [cm]",
               "right": "[X-AXIS]"
@@ -5051,7 +5051,7 @@
           "1": {
             "title": "Annual Average Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly average precipitation and the average precipitation ([baselineValue]) for the baseline period, typically [baselineLower] to [baselineUpper].",
             "yAxis": {
               "left": "Precipitation [mm]",
               "right": "[X-AXIS]"
@@ -5269,7 +5269,7 @@
               "bott": "År",
               "top": "[Y-AXIS]"
             },
-            "caption": "Skillnad mellan den årliga genomsnittliga nederbörden och den genomsnittliga nederbörden för baslinjeperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan den årliga genomsnittliga nederbörden och den genomsnittliga nederbörden för baslinjeperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat"
           },
           "2": {
@@ -5595,7 +5595,7 @@
           "1": {
             "title": "Annual Average Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly average precipitation and the average precipitation ([baselineValue]) for the baseline period, typically [baselineLower] to [baselineUpper].",
             "yAxis": {
               "left": "Precipitation [mm]",
               "right": "[X-AXIS]"
@@ -5813,7 +5813,7 @@
               "bott": "År",
               "top": "[Y-AXIS]"
             },
-            "caption": "Skillnad mellan den årliga genomsnittliga nederbörden och den genomsnittliga nederbörden för baslinjeperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan den årliga genomsnittliga nederbörden och den genomsnittliga nederbörden för baslinjeperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat"
           },
           "2": {
@@ -6164,7 +6164,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly average temperature and the average temperature ([baselineValue]) for the baseline period, typically [baselineLower] to [baselineUpper].",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -6403,7 +6403,7 @@
           "1": {
             "title": "Temperaturskillnaden från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "yAxis": {
               "left": "Temperatur [°C]",
               "right": "[X-AXIS]"
@@ -6815,7 +6815,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -6983,7 +6983,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -7324,7 +7324,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -7492,7 +7492,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -7784,7 +7784,7 @@
           "1": {
             "title": "Autumn Average Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the autumn (September-November) seasonal averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the autumn (September-November) seasonal averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average Precipitation [mm]",
               "right": "[X-AXIS]"
@@ -7949,7 +7949,7 @@
           "1": {
             "title": "Höstens genomsnittliga skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan höstens (september-november) säsongsgenomsnitt och genomsnittet för baslinjeperioden, [baseline].",
+            "caption": "Skillnad mellan höstens (september-november) säsongsgenomsnitt ([baselineValue]) och genomsnittet för baslinjeperioden, [baseline].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -8268,7 +8268,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly average temperature and the average temperature ([baselineValue]) for the baseline period, typically [baselineLower] to [baselineUpper].",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -8507,7 +8507,7 @@
           "1": {
             "title": "Temperaturskillnaden från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "yAxis": {
               "left": "Temperatur [°C]",
               "right": "[X-AXIS]"
@@ -8881,7 +8881,7 @@
           "1": {
             "title": "Annual Average Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly average precipitation and the average precipitation ([baselineValue]) for the baseline period, typically [baselineLower] to [baselineUpper].",
             "yAxis": {
               "left": "Precipitation [mm]",
               "right": "[X-AXIS]"
@@ -9099,7 +9099,7 @@
               "bott": "År",
               "top": "[Y-AXIS]"
             },
-            "caption": "Skillnad mellan den årliga genomsnittliga nederbörden och den genomsnittliga nederbörden för baslinjeperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan den årliga genomsnittliga nederbörden och den genomsnittliga nederbörden för baslinjeperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat"
           },
           "2": {
@@ -9461,7 +9461,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly average temperature and the average temperature ([baselineValue]) for the baseline period, typically [baselineLower] to [baselineUpper].",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -9700,7 +9700,7 @@
           "1": {
             "title": "Temperaturskillnaden från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "yAxis": {
               "left": "Temperatur [°C]",
               "right": "[X-AXIS]"
@@ -10112,7 +10112,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -10280,7 +10280,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -10524,7 +10524,7 @@
             "title": "Growing Season Difference ([units]) From Baseline",
             "subTitle": "[stationName]",
             "legend": "Climate",
-            "caption": "Difference between the maximum number of [units] above zero for the year (the frost-free season) and the average for the baseline period, [baseline]. This is calculated from temperature data.",
+            "caption": "Difference between the maximum number of [units] above zero for the year (the frost-free season) and the average for the baseline period ([baselineValue]), [baseline]. This is calculated from temperature data.",
             "xAxis": {
               "bott": "Year",
               "top": "[Y-AXIS]"
@@ -10686,7 +10686,7 @@
             "title": "Skillnad i växtsäsongens längd [units] från baslinjen",
             "subTitle": "[stationName]",
             "legend": "Klimat",
-            "caption": "Skillnad mellan det maximala antalet [units] över noll för året (den frostfria säsongen) och genomsnittet för baslinjeperioden, [baseline]. Detta beräknas utifrån temperaturdata.",
+            "caption": "Skillnad mellan det maximala antalet [units] över noll för året (den frostfria säsongen) och genomsnittet för baslinjeperioden ([baselineValue]), [baseline]. Detta beräknas utifrån temperaturdata.",
             "xAxis": {
               "bott": "År",
               "top": "[Y-AXIS]"
@@ -10923,7 +10923,7 @@
             "title": "Growing Season Difference ([units]) From Baseline",
             "subTitle": "[stationName]",
             "legend": "Climate",
-            "caption": "Difference between the maximum number of [units] above zero for the year (the frost-free season) and the average for the baseline period, [baseline]. This is calculated from temperature data.",
+            "caption": "Difference between the maximum number of [units] above zero for the year (the frost-free season) and the average for the baseline period ([baselineValue]), [baseline]. This is calculated from temperature data.",
             "xAxis": {
               "bott": "Year",
               "top": "[Y-AXIS]"
@@ -11085,7 +11085,7 @@
             "title": "Skillnad i växtsäsongens längd [units] från baslinjen",
             "subTitle": "[stationName]",
             "legend": "Klimat",
-            "caption": "Skillnad mellan det maximala antalet [units] över noll för året (den frostfria säsongen) och genomsnittet för baslinjeperioden, [baseline]. Detta beräknas utifrån temperaturdata.",
+            "caption": "Skillnad mellan det maximala antalet [units] över noll för året (den frostfria säsongen) och genomsnittet för baslinjeperioden ([baselineValue]), [baseline]. Detta beräknas utifrån temperaturdata.",
             "xAxis": {
               "bott": "År",
               "top": "[Y-AXIS]"
@@ -11336,7 +11336,7 @@
           "1": {
             "title": "Lake Ice Time Difference (from Baseline)",
             "subTitle": "Torneträsk",
-            "caption": "Number of days the lake is covered completely by ice  difference from baseline period.",
+            "caption": "Number of days the lake is covered completely by ice  difference from baseline period ([baselineValue]).",
             "yAxis": {
               "left": "Difference Ice time [units]",
               "right": "[X-AXIS]"
@@ -11741,7 +11741,7 @@
         "valueSuffix": "",
         "groups": {
           "0": {
-            "title": "[REMOVE] Wettest [unit] of the year",
+            "title": "Wettest [unit] of the year",
             "subTitle": "[stationName]",
             "yAxis": {
               "left": "Total precipitation [mm]",
@@ -11757,9 +11757,9 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "yAxis": {
-              "left": "Temperature [°C]",
+              "left": "Precipitation [mm]",
               "right": "[X-AXIS]"
             },
             "xAxis": {
@@ -11926,46 +11926,46 @@
         "valueSuffix": "",
         "groups": {
           "0": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Blöttaste [unit] på året",
+            "subTitle": "[stationName]",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Total Nederbörd [mm]",
+              "right": "[X-Axis]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "caption": "Blöttaste [unit] dagen på året (total nederbörd i mm).",
+            "legend": "Väder"
           },
           "1": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Nederbörd Differans Från Baselinjen",
+            "subTitle": "[stationName]",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] nederbörden ([baselineValue]) och den genomsnittliga extrema [interval] nederbörden för baslinjeperioden, vanligtvis 1961 till 1990.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Nederbörd [mm]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Klimat"
           },
           "2": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Torraste [unit] på året",
+            "subTitle": "[stationName]",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Total nederbörd [mm]",
+              "right": "[X-Axis]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "caption": "Torraste [unit] på året (total nederbörd i mm).",
+            "legend": "Väder"
           }
         },
         "series": {
@@ -12208,7 +12208,7 @@
         "valueSuffix": "",
         "groups": {
           "0": {
-            "title": "[REMOVE] Wettest [unit] of the year",
+            "title": "Wettest [unit] of the year",
             "subTitle": "[stationName]",
             "yAxis": {
               "left": "Total precipitation [mm]",
@@ -12224,9 +12224,9 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "yAxis": {
-              "left": "Temperature [°C]",
+              "left": "Precipitation [mm]",
               "right": "[X-AXIS]"
             },
             "xAxis": {
@@ -12393,46 +12393,46 @@
         "valueSuffix": "",
         "groups": {
           "0": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Blöttaste [unit] på året",
+            "subTitle": "[stationName]",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Total Nederbörd [mm]",
+              "right": "[X-Axis]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "caption": "Blöttaste [unit] dagen på året (total nederbörd i mm).",
+            "legend": "Väder"
           },
           "1": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Nederbörd Differans Från Baselinjen",
+            "subTitle": "[stationName]",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] nederbörden ([baselineValue]) och den genomsnittliga extrema [interval] nederbörden för baslinjeperioden, vanligtvis 1961 till 1990.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Nederbörd [mm]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Klimat"
           },
           "2": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Torraste [unit] på året",
+            "subTitle": "[stationName]",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Total nederbörd [mm]",
+              "right": "[X-Axis]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "caption": "Torraste [unit] på året (total nederbörd i mm).",
+            "legend": "Väder"
           }
         },
         "series": {
@@ -12675,7 +12675,7 @@
         "valueSuffix": "",
         "groups": {
           "0": {
-            "title": "[REMOVE] Wettest [unit] of the year",
+            "title": "Wettest [unit] of the year",
             "subTitle": "[stationName]",
             "yAxis": {
               "left": "Total precipitation [mm]",
@@ -12691,9 +12691,9 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "yAxis": {
-              "left": "Temperature [°C]",
+              "left": "Precipitation [mm]",
               "right": "[X-AXIS]"
             },
             "xAxis": {
@@ -12860,46 +12860,46 @@
         "valueSuffix": "",
         "groups": {
           "0": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Blöttaste [unit] på året",
+            "subTitle": "[stationName]",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Total Nederbörd [mm]",
+              "right": "[X-Axis]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "caption": "Blöttaste [unit] dagen på året (total nederbörd i mm).",
+            "legend": "Väder"
           },
           "1": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Nederbörd Differans Från Baselinjen",
+            "subTitle": "[stationName]",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] nederbörden ([baselineValue]) och den genomsnittliga extrema [interval] nederbörden för baslinjeperioden, vanligtvis 1961 till 1990.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Nederbörd [mm]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Klimat"
           },
           "2": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Torraste [unit] på året",
+            "subTitle": "[stationName]",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Total nederbörd [mm]",
+              "right": "[X-Axis]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "caption": "Torraste [unit] på året (total nederbörd i mm).",
+            "legend": "Väder"
           }
         },
         "series": {
@@ -13142,7 +13142,7 @@
         "valueSuffix": "",
         "groups": {
           "0": {
-            "title": "[REMOVE] Wettest [unit] of the year",
+            "title": "Wettest [unit] of the year",
             "subTitle": "[stationName]",
             "yAxis": {
               "left": "Total precipitation [mm]",
@@ -13158,9 +13158,9 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "yAxis": {
-              "left": "Temperature [°C]",
+              "left": "Precipitation [mm]",
               "right": "[X-AXIS]"
             },
             "xAxis": {
@@ -13327,46 +13327,46 @@
         "valueSuffix": "",
         "groups": {
           "0": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Blöttaste [unit] på året",
+            "subTitle": "[stationName]",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Total Nederbörd [mm]",
+              "right": "[X-Axis]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "caption": "Blöttaste [unit] dagen på året (total nederbörd i mm).",
+            "legend": "Väder"
           },
           "1": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Nederbörd Differans Från Baselinjen",
+            "subTitle": "[stationName]",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] nederbörden ([baselineValue]) och den genomsnittliga extrema [interval] nederbörden för baslinjeperioden, vanligtvis 1961 till 1990.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Nederbörd [mm]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Klimat"
           },
           "2": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Torraste [unit] på året",
+            "subTitle": "[stationName]",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Total nederbörd [mm]",
+              "right": "[X-Axis]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "caption": "Torraste [unit] på året (total nederbörd i mm).",
+            "legend": "Väder"
           }
         },
         "series": {
@@ -13609,7 +13609,7 @@
         "valueSuffix": "",
         "groups": {
           "0": {
-            "title": "[REMOVE] Wettest [unit] of the year",
+            "title": "Wettest [unit] of the year",
             "subTitle": "[stationName]",
             "yAxis": {
               "left": "Total precipitation [mm]",
@@ -13625,9 +13625,9 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "yAxis": {
-              "left": "Temperature [°C]",
+              "left": "Precipitation [mm]",
               "right": "[X-AXIS]"
             },
             "xAxis": {
@@ -13794,46 +13794,46 @@
         "valueSuffix": "",
         "groups": {
           "0": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Blöttaste [unit] på året",
+            "subTitle": "[stationName]",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Total Nederbörd [mm]",
+              "right": "[X-Axis]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "caption": "Blöttaste [unit] dagen på året (total nederbörd i mm).",
+            "legend": "Väder"
           },
           "1": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Nederbörd Differans Från Baselinjen",
+            "subTitle": "[stationName]",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] nederbörden ([baselineValue]) och den genomsnittliga extrema [interval] nederbörden för baslinjeperioden, vanligtvis 1961 till 1990.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Nederbörd [mm]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Klimat"
           },
           "2": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Torraste [unit] på året",
+            "subTitle": "[stationName]",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Total nederbörd [mm]",
+              "right": "[X-Axis]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "caption": "Torraste [unit] på året (total nederbörd i mm).",
+            "legend": "Väder"
           }
         },
         "series": {
@@ -14076,7 +14076,7 @@
         "valueSuffix": "",
         "groups": {
           "0": {
-            "title": "[REMOVE] Wettest [unit] of the year",
+            "title": "Wettest [unit] of the year",
             "subTitle": "[stationName]",
             "yAxis": {
               "left": "Total precipitation [mm]",
@@ -14092,9 +14092,9 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "yAxis": {
-              "left": "Temperature [°C]",
+              "left": "Precipitation [mm]",
               "right": "[X-AXIS]"
             },
             "xAxis": {
@@ -14261,46 +14261,46 @@
         "valueSuffix": "",
         "groups": {
           "0": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Blöttaste [unit] på året",
+            "subTitle": "[stationName]",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Total Nederbörd [mm]",
+              "right": "[X-Axis]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "caption": "Blöttaste [unit] dagen på året (total nederbörd i mm).",
+            "legend": "Väder"
           },
           "1": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Nederbörd Differans Från Baselinjen",
+            "subTitle": "[stationName]",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] nederbörden ([baselineValue]) och den genomsnittliga extrema [interval] nederbörden för baslinjeperioden, vanligtvis 1961 till 1990.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Nederbörd [mm]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Klimat"
           },
           "2": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Torraste [unit] på året",
+            "subTitle": "[stationName]",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Total nederbörd [mm]",
+              "right": "[X-Axis]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "caption": "Torraste [unit] på året (total nederbörd i mm).",
+            "legend": "Väder"
           }
         },
         "series": {
@@ -14560,7 +14560,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -14729,46 +14729,46 @@
         "valueSuffix": "",
         "groups": {
           "0": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Varmaste [unit] på året",
+            "subTitle": "[stationName]",
+            "caption": "Genomsnittliga temperaturen av den varmaste [unit] på året.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Genomsnittliga temperaturen på den varmaste [unit] på året [°C]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Väder"
           },
           "1": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Temperatur Skillnad från Baselinjen",
+            "subTitle": "[stationName]",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] temperaturen ([baselineValue]) och den genomsnittliga extrema [interval] temperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Temperatur [°C]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Klimat"
           },
           "2": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Kallaste [unit] på året",
+            "subTitle": "[stationName]",
+            "caption": "Genomsnittliga temperaturen av den kallaste [unit] på året.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Genomsnittliga temperaturen av den kallaste [unit] på året. [°C]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Väder"
           }
         },
         "series": {
@@ -15101,7 +15101,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly average temperature and the average temperature ([baselineValue]) for the baseline period, typically [baselineLower] to [baselineUpper].",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -15340,7 +15340,7 @@
           "1": {
             "title": "Temperaturskillnaden från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "yAxis": {
               "left": "Temperatur [°C]",
               "right": "[X-AXIS]"
@@ -15677,7 +15677,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -15846,46 +15846,46 @@
         "valueSuffix": "",
         "groups": {
           "0": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Varmaste [unit] på året",
+            "subTitle": "[stationName]",
+            "caption": "Genomsnittliga temperaturen av den varmaste [unit] på året.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Genomsnittliga temperaturen på den varmaste [unit] på året [°C]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Väder"
           },
           "1": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Temperatur Skillnad från Baselinjen",
+            "subTitle": "[stationName]",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] temperaturen ([baselineValue]) och den genomsnittliga extrema [interval] temperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Temperatur [°C]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Klimat"
           },
           "2": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Kallaste [unit] på året",
+            "subTitle": "[stationName]",
+            "caption": "Genomsnittliga temperaturen av den kallaste [unit] på året.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Genomsnittliga temperaturen av den kallaste [unit] på året. [°C]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Väder"
           }
         },
         "series": {
@@ -16218,7 +16218,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly average temperature and the average temperature ([baselineValue]) for the baseline period, typically [baselineLower] to [baselineUpper].",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -16457,7 +16457,7 @@
           "1": {
             "title": "Temperaturskillnaden från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "yAxis": {
               "left": "Temperatur [°C]",
               "right": "[X-AXIS]"
@@ -16794,7 +16794,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -16963,46 +16963,46 @@
         "valueSuffix": "",
         "groups": {
           "0": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Varmaste [unit] på året",
+            "subTitle": "[stationName]",
+            "caption": "Genomsnittliga temperaturen av den varmaste [unit] på året.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Genomsnittliga temperaturen på den varmaste [unit] på året [°C]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Väder"
           },
           "1": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Temperatur Skillnad från Baselinjen",
+            "subTitle": "[stationName]",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] temperaturen ([baselineValue]) och den genomsnittliga extrema [interval] temperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Temperatur [°C]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Klimat"
           },
           "2": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Kallaste [unit] på året",
+            "subTitle": "[stationName]",
+            "caption": "Genomsnittliga temperaturen av den kallaste [unit] på året.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Genomsnittliga temperaturen av den kallaste [unit] på året. [°C]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Väder"
           }
         },
         "series": {
@@ -17262,7 +17262,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -17431,46 +17431,46 @@
         "valueSuffix": "",
         "groups": {
           "0": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Varmaste [unit] på året",
+            "subTitle": "[stationName]",
+            "caption": "Genomsnittliga temperaturen av den varmaste [unit] på året.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Genomsnittliga temperaturen på den varmaste [unit] på året [°C]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Väder"
           },
           "1": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Temperatur Skillnad från Baselinjen",
+            "subTitle": "[stationName]",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] temperaturen ([baselineValue]) och den genomsnittliga extrema [interval] temperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Temperatur [°C]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Klimat"
           },
           "2": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Kallaste [unit] på året",
+            "subTitle": "[stationName]",
+            "caption": "Genomsnittliga temperaturen av den kallaste [unit] på året.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Genomsnittliga temperaturen av den kallaste [unit] på året. [°C]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Väder"
           }
         },
         "series": {
@@ -17730,7 +17730,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -17899,46 +17899,46 @@
         "valueSuffix": "",
         "groups": {
           "0": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Varmaste [unit] på året",
+            "subTitle": "[stationName]",
+            "caption": "Genomsnittliga temperaturen av den varmaste [unit] på året.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Genomsnittliga temperaturen på den varmaste [unit] på året [°C]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Väder"
           },
           "1": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Temperatur Skillnad från Baselinjen",
+            "subTitle": "[stationName]",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] temperaturen ([baselineValue]) och den genomsnittliga extrema [interval] temperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Temperatur [°C]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Klimat"
           },
           "2": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Kallaste [unit] på året",
+            "subTitle": "[stationName]",
+            "caption": "Genomsnittliga temperaturen av den kallaste [unit] på året.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Genomsnittliga temperaturen av den kallaste [unit] på året. [°C]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Väder"
           }
         },
         "series": {
@@ -18198,7 +18198,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -18367,46 +18367,46 @@
         "valueSuffix": "",
         "groups": {
           "0": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Varmaste [unit] på året",
+            "subTitle": "[stationName]",
+            "caption": "Genomsnittliga temperaturen av den varmaste [unit] på året.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Genomsnittliga temperaturen på den varmaste [unit] på året [°C]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Väder"
           },
           "1": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Temperatur Skillnad från Baselinjen",
+            "subTitle": "[stationName]",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] temperaturen ([baselineValue]) och den genomsnittliga extrema [interval] temperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Temperatur [°C]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Klimat"
           },
           "2": {
-            "title": "",
-            "subTitle": "",
-            "caption": "",
+            "title": "Kallaste [unit] på året",
+            "subTitle": "[stationName]",
+            "caption": "Genomsnittliga temperaturen av den kallaste [unit] på året.",
             "yAxis": {
-              "left": "",
-              "right": ""
+              "left": "Genomsnittliga temperaturen av den kallaste [unit] på året. [°C]",
+              "right": "[X-AXIS]"
             },
             "xAxis": {
-              "bott": "",
-              "top": ""
+              "bott": "År",
+              "top": "[Y-AXIS]"
             },
-            "legend": ""
+            "legend": "Väder"
           }
         },
         "series": {
@@ -18741,7 +18741,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -18909,7 +18909,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -19153,7 +19153,7 @@
             "title": "Growing Season Difference ([units]) From Baseline",
             "subTitle": "[stationName]",
             "legend": "Climate",
-            "caption": "Difference between the maximum number of [units] above zero for the year (the frost-free season) and the average for the baseline period, [baseline]. This is calculated from temperature data.",
+            "caption": "Difference between the maximum number of [units] above zero for the year (the frost-free season) and the average for the baseline period ([baselineValue]), [baseline]. This is calculated from temperature data.",
             "xAxis": {
               "bott": "Year",
               "top": "[Y-AXIS]"
@@ -19315,7 +19315,7 @@
             "title": "Skillnad i växtsäsongens längd [units] från baslinjen",
             "subTitle": "[stationName]",
             "legend": "Klimat",
-            "caption": "Skillnad mellan det maximala antalet [units] över noll för året (den frostfria säsongen) och genomsnittet för baslinjeperioden, [baseline]. Detta beräknas utifrån temperaturdata.",
+            "caption": "Skillnad mellan det maximala antalet [units] över noll för året (den frostfria säsongen) och genomsnittet för baslinjeperioden ([baselineValue]), [baseline]. Detta beräknas utifrån temperaturdata.",
             "xAxis": {
               "bott": "År",
               "top": "[Y-AXIS]"
@@ -19553,7 +19553,7 @@
             "title": "[stationName] First Autumn Frost - Difference from Baseline",
             "subTitle": "",
             "legend": "Climate",
-            "caption": "The difference between the date of the first autumn frost for the year and the average for the baseline period, typically 1961 to 1990. This is calculated from temperature data.",
+            "caption": "The difference between the date of the first autumn frost for the year and the average for the baseline period ([baselineValue]), typically 1961 to 1990. This is calculated from temperature data.",
             "xAxis": {
               "bott": "Year",
               "top": "[Y-AXIS]"
@@ -19715,7 +19715,7 @@
             "title": "Höstens första frost - Skillnad från baslinjen",
             "subTitle": "[stationName]",
             "legend": "Klimat",
-            "caption": "Skillnaden mellan datumet för årets första höstfrost och genomsnittet för baslinjeperioden, vanligtvis 1961 till 1990. Detta beräknas utifrån temperaturdata.",
+            "caption": "Skillnaden mellan datumet för årets första höstfrost och genomsnittet för baslinjeperioden ([baselineValue]), vanligtvis 1961 till 1990. Detta beräknas utifrån temperaturdata.",
             "xAxis": {
               "bott": "År",
               "top": "[Y-AXIS]"
@@ -19953,7 +19953,7 @@
             "title": "Last Spring Frost - Difference from Baseline",
             "subTitle": "[stationName]",
             "legend": "Climate",
-            "caption": "The difference between the date of the last spring or summer frost and the average for the baseline period, typically 1961 to 1990. This is calculated from temperature data.",
+            "caption": "The difference between the date of the last spring or summer frost and the average for the baseline period ([baselineValue]), typically 1961 to 1990. This is calculated from temperature data.",
             "xAxis": {
               "bott": "Year",
               "top": "[Y-AXIS]"
@@ -20115,7 +20115,7 @@
             "title": "Vårens sista frost - Skillnad från baslinjen",
             "subTitle": "[stationName]",
             "legend": "Klimat",
-            "caption": "Skillnaden mellan datumet för den senaste vår- eller sommarfrosten och genomsnittet för basperioden, vanligtvis 1961 till 1990. Detta beräknas utifrån temperaturdata.",
+            "caption": "Skillnaden mellan datumet för den senaste vår- eller sommarfrosten och genomsnittet för basperioden ([baselineValue]), vanligtvis 1961 till 1990. Detta beräknas utifrån temperaturdata.",
             "xAxis": {
               "bott": "År",
               "top": "[Y-AXIS]"
@@ -20352,7 +20352,7 @@
             "title": "Growing Season Difference ([units]) From Baseline",
             "subTitle": "[stationName]",
             "legend": "Climate",
-            "caption": "Difference between the maximum number of [units] above zero for the year (the frost-free season) and the average for the baseline period, [baseline]. This is calculated from temperature data.",
+            "caption": "Difference between the maximum number of [units] above zero for the year (the frost-free season) and the average for the baseline period ([baselineValue]), [baseline]. This is calculated from temperature data.",
             "xAxis": {
               "bott": "Year",
               "top": "[Y-AXIS]"
@@ -20514,7 +20514,7 @@
             "title": "Skillnad i växtsäsongens längd [units] från baslinjen",
             "subTitle": "[stationName]",
             "legend": "Klimat",
-            "caption": "Skillnad mellan det maximala antalet [units] över noll för året (den frostfria säsongen) och genomsnittet för baslinjeperioden, [baseline]. Detta beräknas utifrån temperaturdata.",
+            "caption": "Skillnad mellan det maximala antalet [units] över noll för året (den frostfria säsongen) och genomsnittet för baslinjeperioden ([baselineValue]), [baseline]. Detta beräknas utifrån temperaturdata.",
             "xAxis": {
               "bott": "År",
               "top": "[Y-AXIS]"
@@ -21704,7 +21704,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -21872,7 +21872,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -22213,7 +22213,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -22381,7 +22381,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -22722,7 +22722,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -22890,7 +22890,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -23231,7 +23231,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -23399,7 +23399,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -23740,7 +23740,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -23908,7 +23908,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -24249,7 +24249,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -24417,7 +24417,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -24758,7 +24758,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -24926,7 +24926,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -25682,7 +25682,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -25847,7 +25847,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -26160,7 +26160,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -26325,7 +26325,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -26638,7 +26638,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -26803,7 +26803,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -27116,7 +27116,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -27281,7 +27281,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -27594,7 +27594,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -27759,7 +27759,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -28072,7 +28072,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -28237,7 +28237,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -28550,7 +28550,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -28715,7 +28715,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -29028,7 +29028,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -29193,7 +29193,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -29506,7 +29506,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -29671,7 +29671,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -29984,7 +29984,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -30149,7 +30149,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -30462,7 +30462,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -30627,7 +30627,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -30940,7 +30940,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -31105,7 +31105,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -31418,7 +31418,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -31583,7 +31583,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -31896,7 +31896,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -32061,7 +32061,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -32374,7 +32374,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -32539,7 +32539,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -32852,7 +32852,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -33017,7 +33017,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -33330,7 +33330,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -33495,7 +33495,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -33808,7 +33808,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -33973,7 +33973,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -34286,7 +34286,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -34451,7 +34451,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -34764,7 +34764,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -34929,7 +34929,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -35242,7 +35242,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -35407,7 +35407,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -35720,7 +35720,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -35885,7 +35885,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -36198,7 +36198,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -36363,7 +36363,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -36676,7 +36676,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -36841,7 +36841,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -37179,7 +37179,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -37347,7 +37347,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -37639,7 +37639,7 @@
           "1": {
             "title": "Autumn Average Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the autumn (September-November) seasonal averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the autumn (September-November) seasonal averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average Precipitation [mm]",
               "right": "[X-AXIS]"
@@ -37804,7 +37804,7 @@
           "1": {
             "title": "Höstens genomsnittliga skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan höstens (september-november) säsongsgenomsnitt och genomsnittet för baslinjeperioden, [baseline].",
+            "caption": "Skillnad mellan höstens (september-november) säsongsgenomsnitt ([baselineValue]) och genomsnittet för baslinjeperioden, [baseline].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -38048,7 +38048,7 @@
             "title": "Growing Season Difference ([units]) From Baseline",
             "subTitle": "[stationName]",
             "legend": "Climate",
-            "caption": "Difference between the maximum number of [units] above zero for the year (the frost-free season) and the average for the baseline period, [baseline]. This is calculated from temperature data.",
+            "caption": "Difference between the maximum number of [units] above zero for the year (the frost-free season) and the average for the baseline period ([baselineValue]), [baseline]. This is calculated from temperature data.",
             "xAxis": {
               "bott": "Year",
               "top": "[Y-AXIS]"
@@ -38210,7 +38210,7 @@
             "title": "Skillnad i växtsäsongens längd [units] från baslinjen",
             "subTitle": "[stationName]",
             "legend": "Klimat",
-            "caption": "Skillnad mellan det maximala antalet [units] över noll för året (den frostfria säsongen) och genomsnittet för baslinjeperioden, [baseline]. Detta beräknas utifrån temperaturdata.",
+            "caption": "Skillnad mellan det maximala antalet [units] över noll för året (den frostfria säsongen) och genomsnittet för baslinjeperioden ([baselineValue]), [baseline]. Detta beräknas utifrån temperaturdata.",
             "xAxis": {
               "bott": "År",
               "top": "[Y-AXIS]"
@@ -38450,7 +38450,7 @@
             "title": "Growing Season Difference ([units]) From Baseline",
             "subTitle": "[stationName]",
             "legend": "Climate",
-            "caption": "Difference between the maximum number of [units] above zero for the year (the frost-free season) and the average for the baseline period, [baseline]. This is calculated from temperature data.",
+            "caption": "Difference between the maximum number of [units] above zero for the year (the frost-free season) and the average for the baseline period ([baselineValue]), [baseline]. This is calculated from temperature data.",
             "xAxis": {
               "bott": "Year",
               "top": "[Y-AXIS]"
@@ -38612,7 +38612,7 @@
             "title": "Skillnad i växtsäsongens längd [units] från baslinjen",
             "subTitle": "[stationName]",
             "legend": "Klimat",
-            "caption": "Skillnad mellan det maximala antalet [units] över noll för året (den frostfria säsongen) och genomsnittet för baslinjeperioden, [baseline]. Detta beräknas utifrån temperaturdata.",
+            "caption": "Skillnad mellan det maximala antalet [units] över noll för året (den frostfria säsongen) och genomsnittet för baslinjeperioden ([baselineValue]), [baseline]. Detta beräknas utifrån temperaturdata.",
             "xAxis": {
               "bott": "År",
               "top": "[Y-AXIS]"
@@ -38865,7 +38865,7 @@
           "1": {
             "title": "Break-Up Date of Lake Ice Difference from Baseline",
             "subTitle": "Troneträsk",
-            "caption": "Break-up difference from baseline period, typically 1961 to 1990.",
+            "caption": "Break-up difference from baseline period ([baselineValue]), typically 1961 to 1990.",
             "yAxis": {
               "left": "Ice break-up [day of year]",
               "right": "[X-AXIS]"
@@ -39027,7 +39027,7 @@
           "1": {
             "title": "Skillnad från baslinjen i datumet för islossning på sjön",
             "subTitle": "Torneträsk",
-            "caption": "Skillnad i islossning från baslinjen, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad i islossning från baslinjen ([baselineValue]), vanligtvis 1961 till 1990.",
             "yAxis": {
               "left": "Islossning [day of year]",
               "right": "[X-AXIS]"
@@ -39280,7 +39280,7 @@
           "1": {
             "title": "Freeze-Up Date of Lake Ice Difference from Baseline",
             "subTitle": "Troneträsk",
-            "caption": "Freeze-up difference from baseline period, typically 1961 to 1990.",
+            "caption": "Freeze-up difference from baseline period ([baselineValue]), typically 1961 to 1990.",
             "yAxis": {
               "left": "Ice freeze-up [day of year]",
               "right": "[X-AXIS]"
@@ -39442,7 +39442,7 @@
           "1": {
             "title": "Skillnad från baslinjen i datum för isläggningen av sjöis",
             "subTitle": "Torneträsk",
-            "caption": "Skillnad från baslinjeperioden, vanligtvis 1961 to 1990, i datum för isläggningen.",
+            "caption": "Skillnad från baslinjeperioden ([baselineValue]), vanligtvis 1961 to 1990, i datum för isläggningen.",
             "yAxis": {
               "left": "Isläggning [day of year]",
               "right": "[X-AXIS]"
@@ -39697,7 +39697,7 @@
           "1": {
             "title": "Lake Ice Time Difference (from Baseline)",
             "subTitle": "Torneträsk",
-            "caption": "Number of days the lake is covered completely by ice  difference from baseline period.",
+            "caption": "Number of days the lake is covered completely by ice  difference from baseline period ([baselineValue]).",
             "yAxis": {
               "left": "Difference Ice time [units]",
               "right": "[X-AXIS]"
@@ -40146,7 +40146,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the [month] precipitation averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the [month] precipitation averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -40311,7 +40311,7 @@
           "1": {
             "title": "Skillnad i nederbörd från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Genomsnittlig nederbörd per månad för [month].",
+            "caption": "Genomsnittlig nederbörd ([baselineValue]) per månad för [month].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -40626,7 +40626,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -40794,7 +40794,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -41086,7 +41086,7 @@
           "1": {
             "title": "Annual Average Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly average precipitation and the average precipitation ([baselineValue]) for the baseline period, typically [baselineLower] to [baselineUpper].",
             "yAxis": {
               "left": "Precipitation [mm]",
               "right": "[X-AXIS]"
@@ -41304,7 +41304,7 @@
               "bott": "År",
               "top": "[Y-AXIS]"
             },
-            "caption": "Skillnad mellan den årliga genomsnittliga nederbörden och den genomsnittliga nederbörden för baslinjeperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan den årliga genomsnittliga nederbörden och den genomsnittliga nederbörden för baslinjeperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat"
           },
           "2": {
@@ -41630,7 +41630,7 @@
           "1": {
             "title": "Spring Average Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the spring (March-May) seasonal averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the spring (March-May) seasonal averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average Precipitation [mm]",
               "right": "[X-AXIS]"
@@ -41795,7 +41795,7 @@
           "1": {
             "title": "Skillnad från baslinjen för vårens genomsnittliga nederbörd",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan vårens (mars-maj) säsongsgenomsnitt och genomsnittet för baslinjeperioden, [baseline].",
+            "caption": "Skillnad mellan vårens (mars-maj) säsongsgenomsnitt och genomsnittet för baslinjeperioden ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -42084,7 +42084,7 @@
           "1": {
             "title": "Summer Average Precipitation Difference from Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the summer (June to August) seasonal averages and the average for the baseline period, typically 1961 to 1990.",
+            "caption": "Difference between the summer (June to August) seasonal averages and the average for the baseline period ([baselineValue]), typically 1961 to 1990.",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -42249,7 +42249,7 @@
           "1": {
             "title": "Skillnad från baslinjen för sommarens genomsnittliga nederbörd",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan sommarens (juni till augusti) säsongsgenomsnitt och genomsnittet för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan sommarens (juni till augusti) säsongsgenomsnitt och genomsnittet för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "yAxis": {
               "left": "Genomsnittlig nederbörd[mm]",
               "right": "[X-AXIS]"
@@ -42563,7 +42563,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly average temperature and the average temperature ([baselineValue]) for the baseline period, typically [baselineLower] to [baselineUpper].",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -42802,7 +42802,7 @@
           "1": {
             "title": "Temperaturskillnaden från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "yAxis": {
               "left": "Temperatur [°C]",
               "right": "[X-AXIS]"
@@ -43190,7 +43190,7 @@
           "1": {
             "title": " Autumn Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the autumn (September-November)seasonal averages and the average for the baseline period, typically 1961 to 1990.",
+            "caption": "Difference between the autumn (September-November)seasonal averages and the average for the baseline period ([baselineValue]), typically 1961 to 1990.",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -43358,7 +43358,7 @@
           "1": {
             "title": "Höstens genomsnittliga temperaturskillnad från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan höstens (september-november) säsongsgenomsnitt och genomsnittet för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan höstens (september-november) säsongsgenomsnitt och genomsnittet för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -43675,7 +43675,7 @@
           "1": {
             "title": "Spring Average Temperature Difference from Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the spring (March-May) seasonal averages and the average for the baseline period, typically 1961 to 1990.",
+            "caption": "Difference between the spring (March-May) seasonal averages and the average for the baseline period ([baselineValue]), typically 1961 to 1990.",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -43843,7 +43843,7 @@
           "1": {
             "title": "Skillnad från baslinjen för vårens genomsnittliga temperatur",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan vårens (mars-maj) säsongsgenomsnitt och genomsnittet för baslinjeperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan vårens (mars-maj) säsongsgenomsnitt och genomsnittet för baslinjeperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -44160,7 +44160,7 @@
           "1": {
             "title": "Summer Average Temperature Difference from Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the summer (June-August) seasonal averages and the average for the baseline period, typically 1961 to 1990.",
+            "caption": "Difference between the summer (June-August) seasonal averages and the average for the baseline period ([baselineValue]), typically 1961 to 1990.",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -44328,7 +44328,7 @@
           "1": {
             "title": "Skillnad från baslinjen för sommarens genomsnittliga temperatur",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan sommarens (juni till augusti) säsongsgenomsnitt och genomsnittet för baslinjeperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan sommarens (juni till augusti) säsongsgenomsnitt och genomsnittet för baslinjeperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -44645,7 +44645,7 @@
           "1": {
             "title": "Winter Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the winter (December-February) seasonal averages and the average for the baseline period, typically 1961 to 1990.",
+            "caption": "Difference between the winter (December-February) seasonal averages and the average for the baseline period ([baselineValue]), typically 1961 to 1990.",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -44813,7 +44813,7 @@
           "1": {
             "title": "Skillnad från baslinjen för vinterns genomsnittliga temperatur",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan vinterns (december till februari) säsongsgenomsnitt och genomsnittet för baslinjeperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan vinterns (december till februari) säsongsgenomsnitt och genomsnittet för baslinjeperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -45105,7 +45105,7 @@
           "1": {
             "title": "Winter Average Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the winter (December-February) seasonal averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the winter (December-February) seasonal averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average Precipitation [mm]",
               "right": "[X-AXIS]"
@@ -45270,7 +45270,7 @@
           "1": {
             "title": "Skillnad från baslinjen för vinterns genomsnittliga nederbörd",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan vinterns (december till februari) säsongsgenomsnitt och genomsnittet för basperioden [baseline].",
+            "caption": "Skillnad mellan vinterns (december till februari) säsongsgenomsnitt och genomsnittet ([baselineValue]) för basperioden [baseline].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -45559,7 +45559,7 @@
           "1": {
             "title": "Spring Average Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the spring (March-May) seasonal averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the spring (March-May) seasonal averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average Precipitation [mm]",
               "right": "[X-AXIS]"
@@ -45724,7 +45724,7 @@
           "1": {
             "title": "Skillnad från baslinjen för vårens genomsnittliga nederbörd",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan vårens (mars-maj) säsongsgenomsnitt och genomsnittet för baslinjeperioden, [baseline].",
+            "caption": "Skillnad mellan vårens (mars-maj) säsongsgenomsnitt och genomsnittet för baslinjeperioden ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -46013,7 +46013,7 @@
           "1": {
             "title": "Summer Average Precipitation Difference from Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the summer (June to August) seasonal averages and the average for the baseline period, typically 1961 to 1990.",
+            "caption": "Difference between the summer (June to August) seasonal averages and the average for the baseline period ([baselineValue]), typically 1961 to 1990.",
             "yAxis": {
               "left": "Average precipitation [mm]",
               "right": "[X-AXIS]"
@@ -46178,7 +46178,7 @@
           "1": {
             "title": "Skillnad från baslinjen för sommarens genomsnittliga nederbörd",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan sommarens (juni till augusti) säsongsgenomsnitt och genomsnittet för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan sommarens (juni till augusti) säsongsgenomsnitt och genomsnittet för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "yAxis": {
               "left": "Genomsnittlig nederbörd[mm]",
               "right": "[X-AXIS]"
@@ -46492,7 +46492,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly average temperature and the average temperature ([baselineValue]) for the baseline period, typically [baselineLower] to [baselineUpper].",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -46731,7 +46731,7 @@
           "1": {
             "title": "Temperaturskillnaden från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "yAxis": {
               "left": "Temperatur [°C]",
               "right": "[X-AXIS]"
@@ -47129,7 +47129,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "Arctic",
-            "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990, for the Arctic Region (64N-90N).",
+            "caption": "Difference between the yearly average temperature and the average temperature ([baselineValue]) for the baseline period, typically 1961 to 1990, for the Arctic Region (64N-90N).",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -47300,7 +47300,7 @@
           "1": {
             "title": "Temperaturskillnad från baslinjen",
             "subTitle": "Arktis",
-            "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för basperioden, vanligtvis 1961 till 1990, för den arktiska regionen (64N-90N).",
+            "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990, för den arktiska regionen (64N-90N).",
             "yAxis": {
               "left": "Temperatur [°C]",
               "right": "[X-AXIS]"
@@ -47630,7 +47630,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "Global",
-            "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically 1961 to 1990, for the globe.",
+            "caption": "Difference between the yearly average temperature and the average temperature for the baseline period ([baselineValue]), typically 1961 to 1990, for the globe.",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -47801,7 +47801,7 @@
           "1": {
             "title": "Temperaturskillnad från baslinjen",
             "subTitle": "Global",
-            "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990, för hela världen.",
+            "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden ([baselineValue]), vanligtvis 1961 till 1990, för hela världen.",
             "yAxis": {
               "left": "Temperatur [°C]",
               "right": "[X-AXIS]"
@@ -48131,7 +48131,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "Northern Hemisphere",
-            "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baseline], for the Northern Hemisphere.",
+            "caption": "Difference between the yearly average temperature and the average temperature for the baseline period ([baselineValue]), typically [baseline], for the Northern Hemisphere.",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -48302,7 +48302,7 @@
           "1": {
             "title": "Temperaturskillnaden från baslinjen",
             "subTitle": "Norra halvklotet",
-            "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis [baseline], för norra halvklotet.",
+            "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden ([baselineValue]), vanligtvis [baseline], för norra halvklotet.",
             "yAxis": {
               "left": "Temperatur [°C]",
               "right": "[X-AXIS]"
@@ -48646,7 +48646,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -48814,7 +48814,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -49155,7 +49155,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -49323,7 +49323,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -49664,7 +49664,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -49832,7 +49832,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -50173,7 +50173,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -50341,7 +50341,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -50682,7 +50682,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -50850,7 +50850,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -51191,7 +51191,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -51359,7 +51359,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -51700,7 +51700,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -51868,7 +51868,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -52209,7 +52209,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -52377,7 +52377,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -52718,7 +52718,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -52886,7 +52886,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -53227,7 +53227,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -53395,7 +53395,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -53736,7 +53736,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -53904,7 +53904,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -54245,7 +54245,7 @@
           "1": {
             "title": "Average Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the average temperature for [month] and the average temperature for the baseline period ([baselineValue]), typically [baselineLower] to [baselineUpper].",
             "legend": "Climate",
             "xAxis": {
               "bott": "Year",
@@ -54413,7 +54413,7 @@
           "1": {
             "title": "Skillnad från baslinjen i den genomsnittliga temperaturen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan medeltemperaturen för [month] och medeltemperaturen för basperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat",
             "xAxis": {
               "bott": "År",
@@ -55081,7 +55081,7 @@
           "1": {
             "title": "Annual Average Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly average precipitation and the average precipitation for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly average precipitation and the average precipitation ([baselineValue]) for the baseline period, typically [baselineLower] to [baselineUpper].",
             "yAxis": {
               "left": "Precipitation [mm]",
               "right": "[X-AXIS]"
@@ -55299,7 +55299,7 @@
               "bott": "År",
               "top": "[Y-AXIS]"
             },
-            "caption": "Skillnad mellan den årliga genomsnittliga nederbörden och den genomsnittliga nederbörden för baslinjeperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan den årliga genomsnittliga nederbörden och den genomsnittliga nederbörden för baslinjeperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "legend": "Klimat"
           },
           "2": {
@@ -55655,7 +55655,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly average temperature and the average temperature for the baseline period, typically [baselineLower] to [baselineUpper].",
+            "caption": "Difference between the yearly average temperature and the average temperature ([baselineValue]) for the baseline period, typically [baselineLower] to [baselineUpper].",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -55894,7 +55894,7 @@
           "1": {
             "title": "Temperaturskillnaden från baslinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden, vanligtvis 1961 till 1990.",
+            "caption": "Skillnad mellan den årliga medeltemperaturen och medeltemperaturen för baslinjeperioden ([baselineValue]), vanligtvis 1961 till 1990.",
             "yAxis": {
               "left": "Temperatur [°C]",
               "right": "[X-AXIS]"
@@ -56257,7 +56257,7 @@
           "1": {
             "title": "Winter Average Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the winter (December-February) seasonal averages and the average for the baseline period, [baseline].",
+            "caption": "Difference between the winter (December-February) seasonal averages and the average for the baseline period ([baselineValue]), [baseline].",
             "yAxis": {
               "left": "Average Precipitation [mm]",
               "right": "[X-AXIS]"
@@ -56422,7 +56422,7 @@
           "1": {
             "title": "Skillnad från baslinjen för vinterns genomsnittliga nederbörd",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan vinterns (december till februari) säsongsgenomsnitt och genomsnittet för basperioden [baseline].",
+            "caption": "Skillnad mellan vinterns (december till februari) säsongsgenomsnitt och genomsnittet ([baselineValue]) för basperioden [baseline].",
             "yAxis": {
               "left": "Genomsnittlig nederbörd [mm]",
               "right": "[X-AXIS]"

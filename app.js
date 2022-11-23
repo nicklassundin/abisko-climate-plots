@@ -127,6 +127,8 @@ app.use('/data/:server/:params', function(req, res) {
     }).then(async (result) => {
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify(result.data));
+    }).catch(err => {
+        res.status(err.status)
     })
 });
 

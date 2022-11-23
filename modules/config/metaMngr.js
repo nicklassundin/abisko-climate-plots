@@ -198,9 +198,17 @@ exports.meta = {
                     "[baselineUpper]",
                     `<input id=${id}uppLabel type=text class=input value=${baselineUpper} maxlength=4 onclick=selectText(this) onchange=renderInterface.updatePlot(${id},${baselineLower},this.value)></input>`,
                 );
+                // TODO introduce in text
+                console.log('meta', meta)
+                res = res.replaceAll(
+                    //"([baselineValue])",
+
+                    "[baselineValue]",
+                  ''
+                  //  `<u class=baselineValue></u>`,
+                );
                 res = res.replaceAll(
                     "[baseline]",
-
                     `${baselineLower} - ${baselineUpper}`
                 );
                 res = res.replaceAll(
