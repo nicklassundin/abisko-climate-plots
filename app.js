@@ -17,7 +17,6 @@ app.use('*', cors({
 */
 const hbs = require("hbs");
 
-const config = require('./static/server.config.json')
 
 
 /* Open file access
@@ -120,6 +119,7 @@ const { setupCache } = require('axios-cache-interceptor');
 
 const axios = setupCache(Axios);
 
+const config = require('./static/server.config.json')
 app.use('/data/:server/:params', function(req, res) {
     let url = `https://${config[req.params.server]}${req['_parsedUrl'].search}`
     axios.get(url, {

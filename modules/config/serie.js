@@ -4,7 +4,6 @@ const stats = require('vizchange-stats')
 
 
 const configs = JSON.parse(JSON.stringify(stats.configs.production));
-configs.url = `${window.origin}/data/production/url`;
 configs.dates.start = global.startYear;
 configs.dates.end = global.endYear;
 
@@ -15,7 +14,8 @@ class Serie {
 		this.key = key
 		this.id = id
 		this.callback = callback
-		this.specs = configs
+		this.specs = JSON.parse(JSON.stringify(configs))
+		this.specs.url = `${hostUrl}/data/production/url`;
 		switch(type){
 			case "avg":
 				this.station = meta.stationDef.station
@@ -168,7 +168,6 @@ class Serie {
 		let complete = () => {
 			const incomp = {};
 			$.extend(true, incomp, preset)
-			console.log('meta', meta)
 			if(config.group !== undefined) incomp.visible = (meta.groups[config.group].prime === undefined ? false : meta.groups[config.group].prime) && config.visible;
 			if(meta.period) incomp.visible = meta.period
 			incomp.promises.then((promises) => {
