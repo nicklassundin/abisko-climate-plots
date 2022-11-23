@@ -107,6 +107,7 @@ class Serie {
 				switch (sr[0]) {
 					case 'snow':
 					case 'rain':
+						// TODO hotfix tags to series insted in config
 						sr.unshift(tags[0])
 						tags = sr;
 						break;
