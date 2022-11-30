@@ -56,6 +56,7 @@ lib = {
 			} else {
 				hostUrl = window.location.origin;
 			}
+			console.log('hostUrl', hostUrl)
 		}
 		meta.getMeta(type).then((cfg) => {
 			$(() => {
