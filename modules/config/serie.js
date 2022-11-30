@@ -71,6 +71,7 @@ class Serie {
 				break;
 				 */
 			case "extreme":
+
 				this.station = meta.stationDef.station
 				if (meta.extreme) {
 					this.tags = Object.values(meta.tag.data).concat([meta.extreme.type, meta.extreme.lim, 'shortValues']);
@@ -151,6 +152,7 @@ class Serie {
 		specs.baseline.end = global.baselineUpper
 
 		let params = [type].concat(tags)
+
 		//console.log('serie.tags', tags)
 
 		console.log('serie.params', params)
@@ -227,7 +229,6 @@ class Serie {
 				})
 			default:
 				return stats.getByParams(specs, params).then(result => {
-					//console.log('data', result)
 					result = result.map(each => {
 						if(typeof each.then === 'function'){
 							return each
@@ -253,10 +254,6 @@ class Serie {
 
 	}
 	'preset' (config, serie, meta) {
-		//console.log('--------------------')
-		//console.log(serie)
-		//console.log(config)
-		//console.log('meta', meta)
 		const preset = {
 			"label": false,
 			"lineWidth": 0,
@@ -268,11 +265,6 @@ class Serie {
 			}
 		};
 		$.extend(true, preset, serie, config);
-		/*
-		console.log('meta', meta)
-		console.log('preset', preset)
-		console.log('config', config)
-		 */
 
 		if(config.name !== undefined) preset.name = config.name;
 		preset.className = config.className;
@@ -300,17 +292,20 @@ class Serie {
 						$(`#${this.id}`).highcharts().series[this.callback].update(incomp)
 					})
 				}else{
+					let len = promises.length;
 					promises.forEach((each, index) => {
 						each.then(point => {
 							if(point === undefined || isNaN(point.y)){
 							}else{
+								len -= 1;
 								switch (meta.period) {
 									case true:
 										point = point.y
 										$(`#${this.id}`).highcharts().series[this.callback].data[11-index].update(point)
 										break;
 									default:
-										$(`#${this.id}`).highcharts().series[this.callback].addPoint(point)
+										let toUpdate = (len === 0) || (index % promises.length === 30)
+										$(`#${this.id}`).highcharts().series[this.callback].addPoint(point, toUpdate)
 								}
 							}
 						})
@@ -358,7 +353,6 @@ class Serie {
 			}else{
 				tag += '-high'
 			}
-			//console.log(tag, Object.keys(meta.series), meta.series[tag])
 			return this.preset(
 				meta.series[tag],
 				{
