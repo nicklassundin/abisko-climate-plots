@@ -67,7 +67,7 @@
     "unique-commit-id": "^1.0.0",
     "utils": "^0.3.1",
     "vizchange-stats": "^1.7.46",
-    "webpack": "^4.43.0"
+    "webpack": "^4.46.0"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^4.31.2",
