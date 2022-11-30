@@ -51,7 +51,6 @@ module.exports = [
             "path": `${dir}/client`
         },
         "plugins": [
-
             /*
              * New webpack.ProvidePlugin({
              * $: "jquery",

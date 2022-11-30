@@ -7,7 +7,7 @@
     "climate-plots-config": "*"
   },
   "dependencies": {
-    "axios": "^1.1.3",
+    "axios-cache-adapter": "^2.7.3",
     "axios-cache-interceptor": "^0.10.7",
     "body-parser": "^1.19.0",
     "chai-http": "^4.3.0",
@@ -52,6 +52,7 @@
     "query-string": "^7.0.0",
     "r-script": "^0.0.4",
     "readline": "^1.3.0",
+    "redis": "^4.5.1",
     "regression": "^2.0.1",
     "remarkable": "^2.0.1",
     "require.async": "^0.1.1",
@@ -65,7 +66,7 @@
     "uniq": "^1.0.1",
     "unique-commit-id": "^1.0.0",
     "utils": "^0.3.1",
-    "vizchange-stats": "^1.1.5",
+    "vizchange-stats": "^1.7.46",
     "webpack": "^4.43.0"
   },
   "devDependencies": {
@@ -116,6 +117,7 @@
       "client/*.js",
       "docs/*",
       "css/*",
+      "cache/*",
       "temp/*",
       "static/*",
       "cms/*",

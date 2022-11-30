@@ -1,11 +1,15 @@
-// Series definitions/configuration
 
 const stats = require('vizchange-stats')
+
+
+const config = require("../../static/server.config.json");
 
 
 const configs = JSON.parse(JSON.stringify(stats.configs.production));
 configs.dates.start = global.startYear;
 configs.dates.end = global.endYear;
+
+const http = require('http');
 
 class Serie {
 	constructor(meta, type, key, id, callback){
@@ -15,7 +19,12 @@ class Serie {
 		this.id = id
 		this.callback = callback
 		this.specs = JSON.parse(JSON.stringify(configs))
+		// TODO for redirect but not precalc
 		this.specs.url = `${hostUrl}/data/production/url`;
+		// TODO for redirect and precalc
+		this.specs['url_calc'] = `${hostUrl}`
+		//this.specs.url = `${hostUrl}`;
+
 		switch(type){
 			case "avg":
 				this.station = meta.stationDef.station
@@ -82,7 +91,7 @@ class Serie {
 	get 'serie' () {
 		return this[this.type](this.meta, this.type, this.key, this.id)
 	}
-	'data' (st, tgs, ...sr) {
+	async 'data' (st, tgs, ...sr) {
 		let station = this.station;
 		let tags = this.tags
 		let specs = JSON.parse(JSON.stringify(this.specs));
@@ -92,10 +101,12 @@ class Serie {
 		//console.log('sr',sr)
 		tags = Object.values(tags)
 		let type = tags.shift();
-
 		switch (type) {
 			case 'temperatures':
 				type = 'temperature' // TODO hotfix
+				if(tags[0] === 'monthly') {
+					tags.shift()
+				}
 				break;
 			case 'growingSeason':
 				// outdated TODO
@@ -116,6 +127,9 @@ class Serie {
 
 						break;
 					default:
+						if(tags[0] === 'monthly') {
+							tags.shift()
+						}
 				}
 			default:
 		}
@@ -138,21 +152,105 @@ class Serie {
 
 		let params = [type].concat(tags)
 		//console.log('serie.tags', tags)
-		//console.log('serie.params', params)
-		//console.log('serie.specs', specs.dates)
+
+		console.log('serie.params', params)
+		//console.log('serie.specs', specs)
 		//console.log('serie.tags', tags)
-		return stats.getByParams(specs, params).then(result => {
-			return result
-		}).then(result => {
-			result[result.length-10].then(each => {
-				if(each.baseline){
-					global.baselineValue = Math.round(each.baseline);
-				}
-			})
-			return result.map(each => {
-				return each
-			})
-		})
+
+
+
+		// TODO switch between pre calc
+		//console.log(`${specs.url}/precalculated/${specs.station}/${specs.type}/${params.join('/')}`)
+		//return stats.getByParamsPreCalculated(specs, params).then(result => {
+		//switch (params[3]+params[4]){
+		let key = params[3]
+		if(specs.baseline.start !== 1961 || specs.baseline.end !== 1990){
+			//key += params[4]
+		}
+		key += params[4]
+		switch (key){
+			case 'lastshortValues':
+			case 'firstshortValues':
+			case 'last':
+			case 'first':
+				specs.url = specs['url_calc']
+				return stats.getByParamsPreCalculated(specs, params).then(result => {
+					if(Array.isArray(result.data)) result = result.data
+					result = result.map(each => {
+						if(typeof each.then === 'function'){
+							return each
+						}else {
+							return Promise.resolve(each)
+						}
+					})
+					return result
+				}).then(result => {
+					if(result.length > 12){
+						result[result.length-10].then(each => {
+							if(each.baseline){
+								global.baselineValue = Math.floor(each.baseline*100)/100;
+							}
+						})
+					}
+					return result.map(each => {
+						return each
+					})
+				})
+			case 'firstdifference':
+			case 'lastdifference':
+				specs.url = specs['url_calc']
+				let params1 = JSON.parse(JSON.stringify(params));
+
+
+				params.pop()
+				params.push('baseline')
+				params.push('y')
+
+				return stats.getByParamsPreCalculated(specs, params).then(baseline => {
+					params1.pop()
+					params1.push('shortValues')
+					baseline = baseline.data
+					let specs1 = JSON.parse(JSON.stringify(this.specs))
+					specs1.url = this.specs['url_calc']
+					specs1.station = station;
+					specs1.type = type;
+					global.baselineValue = Math.floor(baseline*100)/100;
+					return stats.getByParamsPreCalculated(specs1, params1).then(result => {
+						return result.data.map(value => {
+
+							if(value === undefined) return Promise.resolve(undefined)
+							value.y -= baseline;
+							value.baseline = baseline;
+							return Promise.resolve(value)
+						})
+					})
+				})
+			default:
+				return stats.getByParams(specs, params).then(result => {
+					//console.log('data', result)
+					result = result.map(each => {
+						if(typeof each.then === 'function'){
+							return each
+						}else {
+							return Promise.resolve(each)
+						}
+					})
+					return result
+				}).then(result => {
+					if(result.length > 12){
+						result[result.length-10].then(each => {
+							if(each.baseline){
+								global.baselineValue = Math.floor(each.baseline*100)/100;
+							}
+						})
+					}
+					return result.map(each => {
+						return each
+					})
+				})
+		}
+
+
 	}
 	'preset' (config, serie, meta) {
 		//console.log('--------------------')

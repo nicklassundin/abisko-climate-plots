@@ -1,7 +1,15 @@
 
+hashCode = function(s) {
+    let h = 0, l = s.length, i = 0;
+    if ( l > 0 )
+        while (i < l)
+            h = (h << 5) - h + s.charCodeAt(i++) | 0;
+    return h;
+};
+
 // Pre-setup
 require("jquery");
-require("fs");
+const fs = require("fs");
 require("request");
 const express = require("express"),
 
@@ -114,24 +122,8 @@ exports.custom = custom;
  * }
  */
 
-const Axios = require('axios')
-const { setupCache } = require('axios-cache-interceptor');
 
-const axios = setupCache(Axios);
 
-const config = require('./static/server.config.json')
-app.use('/data/:server/:params', function(req, res) {
-    let url = `https://${config[req.params.server]}${req['_parsedUrl'].search}`
-    axios.get(url, {
-        ttl: 1000*60*60*24*14,
-        staleIfError: true
-    }).then(async (result) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify(result.data));
-    }).catch(err => {
-        res.status(err.status)
-    })
-});
 
 hbs.registerPartials(`${__dirname}/views/partials`);
 const station_static = require("./static/charts/stations.json");
@@ -173,5 +165,125 @@ custom.then((chart_list) => {
     );
 
 });
+
+const axios = require('axios')
+
+const { setupCache } = require('axios-cache-adapter');
+
+const config = require('./static/server.config.json')
+
+const zlib = require('zlib')
+
+
+setupCache(axios, {
+    cache: {
+        ttl: 1000*60*60*24*14
+    }
+})
+app.use('/data/:server/:params', async function(req, res) {
+    let url = `https://${config[req.params.server]}${req['_parsedUrl'].search}`
+
+    let filePath = `./cache/api/${req.params.server}${req['_parsedUrl'].search}.json`
+
+
+    if (fs.existsSync(filePath)) {
+        fs.readFile(filePath, 'utf8', function(error, output) {
+           console.log('cached:', filePath)
+            res.send(output)
+        })
+    }else{
+        const { data } = await axios.get(url, {
+            cache: {
+                ttl: 1000*60*60*24*14
+            }
+        })
+        res.setHeader('Content-Type', 'application/json')
+        res.send(data)
+        fs.writeFileSync(filePath, JSON.stringify(data))
+
+        /*
+        zlib.gunzip(data, function (_err, output) {
+            res.setHeader('Content-Type', 'application/json')
+            res.send(output)
+            console.log(output)
+            try{
+                fs.writeFileSync(filePath, JSON.stringify(output))
+            }catch(error){
+                console.log(typeof output)
+                //throw error
+            }
+        })
+
+         */
+    }
+/*
+    axios.get(url, {
+        ttl: 1000*60*60*24*14,
+    }).then((result) => {
+        console.log('redirect url:', url)
+        console.log(result.headers)
+        res.writeHead(200, result.headers);
+        res.end(JSON.stringify(result.data));
+        console.log('success:', req.params, req['_parsedUrl'].search)
+    }).catch(err => {
+        console.log('failure:', req.params, err)
+        res.end(JSON.stringify([]))
+       // res.status(err.status)
+    })
+ */
+});
+
+let stats = require('vizchange-stats')
+const configs = JSON.parse(JSON.stringify(stats.configs['production_redirect']));
+app.get('/precalculated/:station/:type/*', (req, res) => {
+    let specs = JSON.parse(JSON.stringify(configs))
+    specs.station = req.params.station;
+    specs.type = req.params.type
+    req.params['0'] = req.params['0'].split('/')
+    // TODO recreate req.params so no need for unshift
+    req.params['0'].unshift(req.params.type)
+
+    let search = req.query
+    if(!search) search = {}
+    Object.keys(search).forEach(key => {
+        switch (key) {
+            case 'baselineStart':
+                specs.baseline.start = Number(search[key])
+                break;
+            case 'baselineEnd':
+                specs.baseline.end = Number(search[key])
+                break;
+            case 'start':
+            case 'end':
+                specs.dates[key] = Number(search[key])
+                break;
+            default:
+                specs[key] = search[key];
+        }
+    })
+
+    let filePath = `./cache/${specs.station}_${specs.type}_${req.params['0'].join('_')}${req['_parsedUrl'].search}.json`
+
+
+   //console.log('specs', specs, filePath)
+    if (fs.existsSync(filePath)) {
+        fs.readFile(filePath, 'utf8', function(error, data) {
+            res.send(data)
+        })
+    }else{
+        const result = stats.getByParams(specs, req.params['0'])
+        console.log(stats.cache)
+        result.then((resolved) => {
+            if(Array.isArray(resolved) && typeof resolved[0].then === 'function'){
+                return Promise.all(resolved).then(all => all)
+            }else{
+                return resolved
+            }
+        }).then(result => {
+            fs.writeFileSync(filePath, JSON.stringify(result))
+            res.send(result)
+        })
+    }
+})
 
 exports.app = app;
