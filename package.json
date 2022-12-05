@@ -87,7 +87,7 @@
     "prepublish": "npm-auto-version",
     "publish": "npm publish --access public",
     "postpublish": "git push origin --tags",
-    "update": "npm update climate-plots-config && npm update climate-plots-glimworks-reader",
+    "update": "npm update climate-plots-config && npm update climate-plots-glimworks-reader && npm update vizchange-stats",
     "test": "git submodule update && npm run test-unit",
     "test-respons": "artillery quick --count 10 -n 20 https://localhost/charts",
     "test-unit": "mocha './modules/**/*.spec.js' --delay",
