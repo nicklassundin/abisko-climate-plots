@@ -16,9 +16,7 @@ exports.setup = function (app) {
     hbs.registerPartials(
         `${__dirname}/views/partials`,
         (err) => {
-
             custom.then((chrts) => {
-
                 const stations = Object.keys(stati).map((st) => {
 
                         if (st === "smhi") {
@@ -31,7 +29,6 @@ exports.setup = function (app) {
 
                     }),
                     sets = stati;
-	    	console.log("version", version)
                 app.render(
                     "browse-release.hbs",
                     {sets,
@@ -39,7 +36,7 @@ exports.setup = function (app) {
                         stations,
                         version},
                     (err, str) => {
-
+                        console.log(str)
                         if (err) {
 
                             throw err;
