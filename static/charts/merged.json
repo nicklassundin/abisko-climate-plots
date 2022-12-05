@@ -432,9 +432,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -917,9 +917,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -1402,9 +1402,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -1887,9 +1887,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -2264,9 +2264,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -2680,9 +2680,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -3095,9 +3095,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -3514,9 +3514,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -3937,9 +3937,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -4399,9 +4399,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -4857,9 +4857,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -5401,9 +5401,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -5945,9 +5945,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -6572,9 +6572,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -7081,9 +7081,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -7590,9 +7590,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -8044,9 +8044,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -8676,9 +8676,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -9231,9 +9231,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -9869,9 +9869,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -10378,9 +10378,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -10777,9 +10777,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -11176,9 +11176,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -11590,9 +11590,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -11655,7 +11655,7 @@
           "data": [
             "precipitation",
             "yrly",
-            "max"
+            "maxAvg"
           ]
         },
         "config": {
@@ -11757,7 +11757,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period ([baselineValue]), typically 1961 to 1990.\n The baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [mm].",
+            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period, baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [mm].",
             "yAxis": {
               "left": "Precipitation [mm]",
               "right": "[X-AXIS]"
@@ -11942,7 +11942,7 @@
           "1": {
             "title": "Nederbörd Differans Från Baselinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] nederbörden och den genomsnittliga extrema [interval] nederbörden för baslinjeperioden, vanligtvis 1961 till 1990. \n Baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [mm].",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] nederbörden och den genomsnittliga extrema [interval] nederbörden för baslinjeperioden, baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [mm].",
             "yAxis": {
               "left": "Nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -12057,9 +12057,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -12224,7 +12224,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period ([baselineValue]), typically 1961 to 1990.\n The baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [mm].",
+            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period, baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [mm].",
             "yAxis": {
               "left": "Precipitation [mm]",
               "right": "[X-AXIS]"
@@ -12409,7 +12409,7 @@
           "1": {
             "title": "Nederbörd Differans Från Baselinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] nederbörden och den genomsnittliga extrema [interval] nederbörden för baslinjeperioden, vanligtvis 1961 till 1990. \n Baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [mm].",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] nederbörden och den genomsnittliga extrema [interval] nederbörden för baslinjeperioden, baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [mm].",
             "yAxis": {
               "left": "Nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -12524,9 +12524,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -12589,7 +12589,7 @@
           "data": [
             "precipitation",
             "months",
-            "max"
+            "maxAvg"
           ]
         },
         "config": {
@@ -12691,7 +12691,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period ([baselineValue]), typically 1961 to 1990.\n The baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [mm].",
+            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period, baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [mm].",
             "yAxis": {
               "left": "Precipitation [mm]",
               "right": "[X-AXIS]"
@@ -12876,7 +12876,7 @@
           "1": {
             "title": "Nederbörd Differans Från Baselinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] nederbörden och den genomsnittliga extrema [interval] nederbörden för baslinjeperioden, vanligtvis 1961 till 1990. \n Baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [mm].",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] nederbörden och den genomsnittliga extrema [interval] nederbörden för baslinjeperioden, baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [mm].",
             "yAxis": {
               "left": "Nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -12991,9 +12991,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -13056,7 +13056,7 @@
           "data": [
             "precipitation",
             "months",
-            "min"
+            "minAvg"
           ]
         },
         "config": {
@@ -13158,7 +13158,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period ([baselineValue]), typically 1961 to 1990.\n The baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [mm].",
+            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period, baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [mm].",
             "yAxis": {
               "left": "Precipitation [mm]",
               "right": "[X-AXIS]"
@@ -13343,7 +13343,7 @@
           "1": {
             "title": "Nederbörd Differans Från Baselinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] nederbörden och den genomsnittliga extrema [interval] nederbörden för baslinjeperioden, vanligtvis 1961 till 1990. \n Baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [mm].",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] nederbörden och den genomsnittliga extrema [interval] nederbörden för baslinjeperioden, baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [mm].",
             "yAxis": {
               "left": "Nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -13458,9 +13458,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -13625,7 +13625,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period ([baselineValue]), typically 1961 to 1990.\n The baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [mm].",
+            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period, baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [mm].",
             "yAxis": {
               "left": "Precipitation [mm]",
               "right": "[X-AXIS]"
@@ -13810,7 +13810,7 @@
           "1": {
             "title": "Nederbörd Differans Från Baselinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] nederbörden och den genomsnittliga extrema [interval] nederbörden för baslinjeperioden, vanligtvis 1961 till 1990. \n Baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [mm].",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] nederbörden och den genomsnittliga extrema [interval] nederbörden för baslinjeperioden, baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [mm].",
             "yAxis": {
               "left": "Nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -13925,9 +13925,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -14092,7 +14092,7 @@
           "1": {
             "title": "Precipitation Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period ([baselineValue]), typically 1961 to 1990.\n The baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [mm].",
+            "caption": "Difference between the yearly extreme [interval] precipitation and the average extreme [interval] precipitation for the baseline period, baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [mm].",
             "yAxis": {
               "left": "Precipitation [mm]",
               "right": "[X-AXIS]"
@@ -14277,7 +14277,7 @@
           "1": {
             "title": "Nederbörd Differans Från Baselinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] nederbörden och den genomsnittliga extrema [interval] nederbörden för baslinjeperioden, vanligtvis 1961 till 1990. \n Baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [mm].",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] nederbörden och den genomsnittliga extrema [interval] nederbörden för baslinjeperioden, baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [mm].",
             "yAxis": {
               "left": "Nederbörd [mm]",
               "right": "[X-AXIS]"
@@ -14392,9 +14392,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -14457,7 +14457,7 @@
           "data": [
             "temperatures",
             "yrly",
-            "max"
+            "maxAvg"
           ]
         },
         "config": {
@@ -14560,7 +14560,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period, typically 1961 to 1990.\n The baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [°C].",
+            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period, baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [°C].",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -14745,7 +14745,7 @@
           "1": {
             "title": "Temperatur Skillnad från Baselinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] temperaturen och den genomsnittliga extrema [interval] temperaturen för baslinjeperioden, vanligtvis 1961 till 1990. \n Baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [°C].",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] temperaturen och den genomsnittliga extrema [interval] temperaturen för baslinjeperioden, baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [°C].",
             "yAxis": {
               "left": "Temperatur [°C]",
               "right": "[X-AXIS]"
@@ -14860,9 +14860,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -15509,9 +15509,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -15574,7 +15574,7 @@
           "data": [
             "temperatures",
             "yrly",
-            "min"
+            "minAvg"
           ]
         },
         "config": {
@@ -15677,7 +15677,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period, typically 1961 to 1990.\n The baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [°C].",
+            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period, baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [°C].",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -15862,7 +15862,7 @@
           "1": {
             "title": "Temperatur Skillnad från Baselinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] temperaturen och den genomsnittliga extrema [interval] temperaturen för baslinjeperioden, vanligtvis 1961 till 1990. \n Baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [°C].",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] temperaturen och den genomsnittliga extrema [interval] temperaturen för baslinjeperioden, baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [°C].",
             "yAxis": {
               "left": "Temperatur [°C]",
               "right": "[X-AXIS]"
@@ -15977,9 +15977,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -16626,9 +16626,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -16691,7 +16691,7 @@
           "data": [
             "temperatures",
             "months",
-            "max"
+            "maxAvg"
           ]
         },
         "config": {
@@ -16794,7 +16794,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period, typically 1961 to 1990.\n The baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [°C].",
+            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period, baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [°C].",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -16979,7 +16979,7 @@
           "1": {
             "title": "Temperatur Skillnad från Baselinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] temperaturen och den genomsnittliga extrema [interval] temperaturen för baslinjeperioden, vanligtvis 1961 till 1990. \n Baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [°C].",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] temperaturen och den genomsnittliga extrema [interval] temperaturen för baslinjeperioden, baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [°C].",
             "yAxis": {
               "left": "Temperatur [°C]",
               "right": "[X-AXIS]"
@@ -17094,9 +17094,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -17262,7 +17262,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period, typically 1961 to 1990.\n The baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [°C].",
+            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period, baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [°C].",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -17447,7 +17447,7 @@
           "1": {
             "title": "Temperatur Skillnad från Baselinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] temperaturen och den genomsnittliga extrema [interval] temperaturen för baslinjeperioden, vanligtvis 1961 till 1990. \n Baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [°C].",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] temperaturen och den genomsnittliga extrema [interval] temperaturen för baslinjeperioden, baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [°C].",
             "yAxis": {
               "left": "Temperatur [°C]",
               "right": "[X-AXIS]"
@@ -17562,9 +17562,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -17730,7 +17730,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period, typically 1961 to 1990.\n The baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [°C].",
+            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period, baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [°C].",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -17915,7 +17915,7 @@
           "1": {
             "title": "Temperatur Skillnad från Baselinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] temperaturen och den genomsnittliga extrema [interval] temperaturen för baslinjeperioden, vanligtvis 1961 till 1990. \n Baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [°C].",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] temperaturen och den genomsnittliga extrema [interval] temperaturen för baslinjeperioden, baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [°C].",
             "yAxis": {
               "left": "Temperatur [°C]",
               "right": "[X-AXIS]"
@@ -18030,9 +18030,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -18094,8 +18094,8 @@
           ],
           "data": [
             "temperatures",
-            "weeks",
-            "min"
+            "weekly",
+            "minAvg"
           ]
         },
         "config": {
@@ -18198,7 +18198,7 @@
           "1": {
             "title": "Temperature Difference From Baseline",
             "subTitle": "[stationName]",
-            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period, typically 1961 to 1990.\n The baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [°C].",
+            "caption": "Difference between the yearly extreme average [interval] temperature  and the average extreme [interval] temperature for the baseline period, baseline value calculated for the period [baselineLower] to [baselineUpper] is [baselineValue] [°C].",
             "yAxis": {
               "left": "Temperature [°C]",
               "right": "[X-AXIS]"
@@ -18383,7 +18383,7 @@
           "1": {
             "title": "Temperatur Skillnad från Baselinjen",
             "subTitle": "[stationName]",
-            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] temperaturen och den genomsnittliga extrema [interval] temperaturen för baslinjeperioden, vanligtvis 1961 till 1990. \n Baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [°C].",
+            "caption": "Skillnad mellan den årliga extremaste genomsnittliga [interval] temperaturen och den genomsnittliga extrema [interval] temperaturen för baslinjeperioden, baslinje värde beräknat för perioden [baselineLower] till [baselineUpper] är [baselineValue] [°C].",
             "yAxis": {
               "left": "Temperatur [°C]",
               "right": "[X-AXIS]"
@@ -18498,9 +18498,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -19007,9 +19007,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -19406,9 +19406,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -19806,9 +19806,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -20206,9 +20206,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -20605,9 +20605,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -21041,9 +21041,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -21461,9 +21461,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -21970,9 +21970,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -22479,9 +22479,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -22988,9 +22988,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -23497,9 +23497,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -24006,9 +24006,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -24515,9 +24515,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -25024,9 +25024,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -25464,9 +25464,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -25942,9 +25942,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -26420,9 +26420,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -26898,9 +26898,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -27376,9 +27376,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -27854,9 +27854,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -28332,9 +28332,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -28810,9 +28810,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -29288,9 +29288,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -29766,9 +29766,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -30244,9 +30244,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -30722,9 +30722,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -31200,9 +31200,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -31678,9 +31678,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -32156,9 +32156,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -32634,9 +32634,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -33112,9 +33112,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -33590,9 +33590,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -34068,9 +34068,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -34546,9 +34546,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -35024,9 +35024,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -35502,9 +35502,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -35980,9 +35980,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -36458,9 +36458,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -36936,9 +36936,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -37445,9 +37445,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -37899,9 +37899,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -38301,9 +38301,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -38703,9 +38703,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -39119,9 +39119,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -39534,9 +39534,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -39951,9 +39951,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -40406,9 +40406,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -40892,9 +40892,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -41436,9 +41436,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -41890,9 +41890,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -42344,9 +42344,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -42971,9 +42971,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -43456,9 +43456,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -43941,9 +43941,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -44426,9 +44426,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -44911,9 +44911,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -45365,9 +45365,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -45819,9 +45819,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -46273,9 +46273,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -46900,9 +46900,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -47401,9 +47401,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -47902,9 +47902,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -48403,9 +48403,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -48912,9 +48912,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -49421,9 +49421,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -49930,9 +49930,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -50439,9 +50439,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -50948,9 +50948,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -51457,9 +51457,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -51966,9 +51966,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -52475,9 +52475,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -52984,9 +52984,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -53493,9 +53493,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -54002,9 +54002,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -54511,9 +54511,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -54882,9 +54882,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -55431,9 +55431,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -56063,9 +56063,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
@@ -56517,9 +56517,9 @@
             "interval": "veckovis"
           },
           "month": {
-            "plural": "",
-            "singular": "",
-            "interval": ""
+            "plural": "månader",
+            "singular": "månad",
+            "interval": "månadsvis"
           }
         },
         "time": {
