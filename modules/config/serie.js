@@ -346,7 +346,7 @@ class Serie {
 
 	}
 	get "extreme" () {
-		return (meta) => {
+		return (meta, s, k) => {
 			let tag = "extreme";
 			if (meta.extreme) {
 				tag += meta.extreme.type;
@@ -354,7 +354,7 @@ class Serie {
 				tag += '-high'
 			}
 			return this.preset(
-				meta.series[tag],
+				meta.series[k],
 				{
 					"promises": this.data(meta.stationDef.station,meta.tag.data)
 				},
