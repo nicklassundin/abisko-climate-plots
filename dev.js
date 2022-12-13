@@ -36,11 +36,8 @@ exports.setup = function (app) {
                         stations,
                         version},
                     (err, str) => {
-                        console.log(str)
                         if (err) {
-
                             throw err;
-
                         }
                         fs.writeFile(
                             "index.html",

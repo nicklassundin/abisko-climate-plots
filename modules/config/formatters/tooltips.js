@@ -119,11 +119,12 @@ exports.formatters = function (meta) {
                     }</b><br/>`;
 			(Array.isArray(point.point.subX) ? point.point.subX.forEach((date) => {
 
-			console.log(date)
                         tooltip += `${dateFormats.MMDD(new Date(date))}</b><br/>`;
 
                     }) : null)
                     tooltip += "<br/>";
+                    tooltip += (point.point.options.date ? `<b>${dateFormats.MMDD(point.point.options.date, true)}</b><br/>` : '')
+
                 });
                 return tooltip;
             } catch (error) {
@@ -143,12 +144,12 @@ exports.formatters = function (meta) {
                     }: <b>${
                         point.y.toFixed(dec)
                     }</b><br/>`;
-			(Array.isArray(point.point.subX) ? point.point.subX.forEach((date) => {
 
+                    (Array.isArray(point.point.subX) ? point.point.subX.forEach((date) => {
                         tooltip += `v ${date}</b><br/>`;
-
                     }) : null)
                     tooltip += "<br/>";
+                    tooltip += (point.point.options.week ? `<b>${meta.units[meta.unitType].singular} ${point.point.options.week}</b><br/>` : '')
                 });
                 return tooltip;
             } catch (error) {
@@ -173,6 +174,7 @@ exports.formatters = function (meta) {
 
                     }) : null)
                     tooltip += "<br/>";
+                    tooltip += (point.point.options.monthName ? `<b>${point.point.options.monthName}</b><br/>` : '')
                 });
                 return tooltip;
             } catch (error) {
