@@ -284,6 +284,7 @@ class Serie {
 			incomp.promises.then((promises) => {
 				Promise.allSettled(promises).then(() => {
 					$(`#${this.id}`).highcharts().hideLoading();
+					$(`#${this.id}`).highcharts().redraw()
 				})
 				if(meta.tag.data[1] === 'all'){
 					Promise.allSettled(promises).then(all => {
@@ -356,7 +357,7 @@ class Serie {
 			return this.preset(
 				meta.series[k],
 				{
-					"promises": this.data(meta.stationDef.station,meta.tag.data)
+					"promises": this.data(meta.stationDef.station,meta.tag.data),
 				},
 				meta
 			);

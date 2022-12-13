@@ -272,7 +272,7 @@ app.get('/precalculated/:station/:type/*', (req, res) => {
         })
     }else{
         const result = stats.getByParams(specs, req.params['0'])
-        console.log(stats.cache)
+      //  console.log(stats.cache)
         result.then((resolved) => {
             if(Array.isArray(resolved) && typeof resolved[0].then === 'function'){
                 return Promise.all(resolved).then(all => all)

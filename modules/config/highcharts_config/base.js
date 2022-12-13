@@ -10,7 +10,6 @@ const helper = require('climate-plots-helper')
 
 exports.plotLines = {
     "baseline" (id) {
-
         return plotLines = [
             {
                 "color": "rgb(160, 160, 160)",
@@ -23,8 +22,7 @@ exports.plotLines = {
                     "y": 12
                 },
                 "zIndex": 1
-            },
-            {
+            }, {
                 "color": "rgb(160, 160, 160)",
                 "value": baselineLower,
                 "width": 1,
