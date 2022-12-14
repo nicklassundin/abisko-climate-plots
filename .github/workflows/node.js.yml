@@ -34,3 +34,9 @@ jobs:
       run: npm install --save-dev @semantic-release/changelog @semantic-release/git
     - run: npm run build --if-present
     - run: npm test
+    - run: git fetch --tags --force
+    - name: Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: npx semantic-release
