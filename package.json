@@ -44,7 +44,7 @@
     "multer": "^1.4.2",
     "node-highcharts": "0.0.2",
     "node-libcurl": "^2.3.3",
-    "nodemon": "^2.0.12",
+    "nodemon": "^2.0px semantic-release.12",
     "npm-auto-version": "^1.0.0",
     "papaparse": "^5.2.0",
     "pem": "^1.14.4",
