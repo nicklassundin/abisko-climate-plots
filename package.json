@@ -60,8 +60,6 @@
     "shelljs": "^0.8.4",
     "tedious": "^6.7.0",
     "textarea-markdown": "^1.2.7",
-    "topo": "^3.0.3",
-    "topojson-client": "^3.1.0",
     "uniq": "^1.0.1",
     "unique-commit-id": "^1.0.0",
     "utils": "^0.3.1",
