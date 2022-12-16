@@ -6,9 +6,9 @@ name: Unit test
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ development ]
+    branches: [ master, beta ]
   pull_request:
-    branches: [ development ]
+    branches: [ master, beta ]
 jobs:
   build:
 
