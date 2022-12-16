@@ -1,6 +1,6 @@
 {
   "name": "vizchange-climate-plots",
-  "version": "1.0.0",
+  "version": "1..0",
   "description": "Original work from https://github.com/antoneri/abisko-climate-plots",
   "main": "abisko-climate-plots-lib.js",
   "devdependencies": {
