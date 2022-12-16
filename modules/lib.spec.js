@@ -1,7 +1,13 @@
-// var lib = require('./lib.js');
+// Var lib = require('./lib.js');
 
-describe('lib.js', function(){
-	// it('renderSets', function * (){
-		//TODO
-	// })
-})
+describe(
+    "lib.js",
+    () => {
+
+    /*
+     * It('renderSets', function * (){
+     * TODO
+     * })
+     */
+    }
+);

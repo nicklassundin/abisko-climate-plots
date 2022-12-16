@@ -1,0 +1,80 @@
+
+.series-diff {
+}
+/* Precipitation */
+.series-snow {
+	fill: #CDD8F0;
+	stroke-width: 0;
+}
+.series-snowAvg {
+	fill: #DEE9F1;
+	stroke-width: 10;
+}
+.series-rain {
+	fill: #1000FB;
+	stroke-width: 0;
+}
+.series-prec-extreme {
+}
+/* Snow Period */
+.series-period {
+ 	/* stroke: #a4edba; */
+	stroke-width: 2px;
+}
+/* Perma */
+.series-perma {
+	fill: #bb9999;
+}
+/* Temperature */
+.series-temp-max {
+	fill: #ff0000;
+	stroke-width: 0;
+}
+.series-temp-min {
+	fill: #0000ff;
+	stroke-width: 0;
+}
+.series-temp-avg {
+	/* opacity: 0.1; */
+	fill: #888888;
+	stroke-width: 0;
+}
+.series-temp-extreme {
+	fill: #ff0000;
+	stroke-width: 0;
+}
+.series-temp-high-extreme {
+	fill: #ff0000;
+	stroke-width: 0;
+}
+.series-temp-low-extreme {
+	fill: #0000ff;
+	stroke-width: 0;
+}
+/* GrowingSeason */
+.series-grow-avg {
+}
+/* GrowingSeasonFirst */
+.series-growfirst-avg {
+}
+/* GrowingSeasonLast */
+.series-growlast-avg {
+}
+/* CO2 */
+.series-co2 {
+}
+/* Ice */
+.series-freeze {
+	fill: #CDD8F0;
+	borderColour: #5F7CB9;
+}
+.series-breakup {
+	fill: #f48c9d;
+	borderColour: #ee0000,
+}
+.series-iceThick {
+	fill: #0000ee;
+}
+.series-iceTime {
+	fill: #00bb00
+}

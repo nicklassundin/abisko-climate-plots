@@ -1,0 +1,4 @@
+{
+  "production": "vischange.k8s.glimworks.se/data/query/v1",
+  "staged":  "vischange.k8s.glimworks.se/data/query/v1"
+}

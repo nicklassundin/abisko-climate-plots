@@ -31,7 +31,7 @@
     "annualTemperatures"
   ],
   "tempAvgSlide": [
-    "slideTemperature"
+    "slideTemperatures"
   ],
   "tempSeason": [
     "TemperaturesSummer",
@@ -101,7 +101,7 @@
     "monthlyPrecipitationPolar"
   ],
   "tempClimateWeather": [
-    "slideTemperature"
+    "slideTemperatures"
   ],
   "growingSeasonAll": [
     "growingSeasonWeeks",
@@ -119,13 +119,13 @@
     "slideMonthlyPrecipitation"
   ],
   "slideTemp": [
-    "slideTemperature"
+    "slideTemperatures"
   ],
   "slidePrec": [
     "slidePrecipitation"
   ],
   "slideTempMin": [
-    "slideTemperature",
+    "slideTemperatures",
     "slideTemperaturesSpring",
     "slideTemperaturesSummer",
     "slideTemperaturesAutumn",
@@ -212,11 +212,20 @@
     "iceThicknessDate",
     "weeklyCO2",
     "permaHistogramCALM",
-    "slideTemperature",
+    "slideTemperatures",
     "dailyExtremeTemperature",
+    "extremeTempDaily",
+    "extremeTempDailyHighLim",
+    "extremeTempDailyLowLim",
     "weeklyExtremeTemperature",
+    "extremeTempWeekly",
+    "extremeTempWeeklyLim",
     "dailyExtremePrecipitation",
+    "extremePrecDaily",
+    "extremePrecDailyHighLim",
+    "extremePrecDailyLowLim",
     "weeklyExtremePrecipitation",
+    "extremePrecWeekly",
     "growingSeasonFrostFirst",
     "growingSeasonFrostLast",
     "slideMonthlyTemperatures",
@@ -231,7 +240,9 @@
     "slideWinterPrecipitation",
     "slideSpringPrecipitation",
     "abiskoLakeIceBreakup",
+    "slideLakeIceBreakup",
     "abiskoLakeIceFreezeup",
+    "slideLakeIceFreezeup",
     "annualAvgSnowDepth",
     "avgTemperaturesByYear",
     "slideLakeIceTime",
@@ -241,174 +252,9 @@
     "slideGrowingSeasonDays",
     "slideGrowingSeasonWeeks",
     "jan_temperatures",
-    "precipitation_jan"
-  ],
-  "sqrt-IceThick": {
-    "iceThicknessYear": {
-      "station": "abisko",
-      "plot": "iceThicknessYear"
-    },
-    "iceThicknessDate": {
-      "station": "abisko",
-      "plot": "iceThicknessDate"
-    }
-  },
-  "sqrt-temp": {
-    "temperatureDifference": {
-      "station": "abisko",
-      "plot": "temperatureDifference"
-    },
-    "temperature_64n90n": {
-      "station": "64n-90n",
-      "plot": "temperature_zonal"
-    },
-    "temperature_nhem": {
-      "station": "nhem",
-      "plot": "temperature_zonal"
-    },
-    "temperature_glob": {
-      "station": "glob",
-      "plot": "temperature_zonal"
-    }
-  },
-  "sqrt-season-temp": [
-    "annualTemperatures",
-    "TemperaturesSpring",
-    "TemperaturesSummer",
-    "TemperaturesAutumn",
-    "TemperaturesWinter"
-  ],
-  "sqrt-growing": [
-    "growingSeasonWeeks",
-    "diffGrowingSeasonWeeks",
-    "growingSeasonDays",
-    "diffGrowingSeasonDays"
-  ],
-  "sqrt-mTemp": [
-    "jan_temperatures",
-    "feb_temperatures",
-    "mar_temperatures",
-    "apr_temperatures",
-    "may_temperatures",
-    "jun_temperatures",
-    "jul_temperatures",
-    "aug_temperatures",
-    "sep_temperatures",
-    "oct_temperatures",
-    "nov_temperatures",
-    "dec_temperatures"
-  ],
-  "sqrt-prec": [
-    "annualPrecipitation",
-    "springPrecipitation",
-    "summerPrecipitation",
-    "autumnPrecipitation",
-    "winterPrecipitation"
-  ],
-  "sqrt-mPrec": [
     "precipitation_jan",
-    "precipitation_feb",
-    "precipitation_mar",
-    "precipitation_apr",
-    "precipitation_may",
-    "precipitation_jun",
-    "precipitation_jul",
-    "precipitation_aug",
-    "precipitation_sep",
-    "precipitation_oct",
-    "precipitation_nov",
-    "precipitation_dec"
-  ],
-  "sqrt-snowDepth": [
-    "abiskoSnowDepthPeriodMeans",
-    "abiskoSnowDepthPeriodMeans2"
-  ],
-  "sqrt-lakeIce": [
-    "abiskoLakeIce",
-    "abiskoLakeIceTime",
-    "diffLakeIceTime",
-    "iceThicknessYear",
-    "iceThicknessDate"
-  ],
-  "sqrt-perma": {
-    "permaHistogramCALM": {
-      "station": "CALM",
-      "plot": "permaHistogramCALM"
-    }
-  },
-  "sqrt-carbon": {
-    "weeklyCO2": {
-      "station": "glob",
-      "plot": "weeklyCO2"
-    }
-  },
-  "sqrt-temp-climate-weather-v2": [
-    "slideTemperature"
-  ],
-  "sqrt-temp-extreme-v2": [
-    "dailyExtremeTemperature",
-    "weeklyExtremeTemperature"
-  ],
-  "sqrt-prec-extreme-v2": [
-    "dailyExtremePrecipitation",
-    "weeklyExtremePrecipitation"
-  ],
-  "sqrt-growingSeason-v2": [
-    "growingSeasonWeeks",
-    "diffGrowingSeasonWeeks",
-    "growingSeasonDays",
-    "diffGrowingSeasonDays",
-    "growingSeasonFrostFirst",
-    "growingSeasonFrostLast"
-  ],
-  "sqrt-temp-v2": [
-    "slideTemperature",
-    "slideTemperaturesSpring",
-    "slideTemperaturesSummer",
-    "slideTemperaturesAutumn",
-    "slideTemperaturesWinter",
-    "slideMonthlyTemperatures"
-  ],
-  "sqrt-prec-v2": [
-    "slidePrecipitation",
-    "slideWinterPrecipitation",
-    "slideSpringPrecipitation",
-    "slideSummerPrecipitation",
-    "slideAutumnPrecipitation",
-    "slideMonthlyPrecipitation"
-  ],
-  "sqrt-snowDepth-v2": [
-    "annualAvgSnowDepth",
-    "abiskoSnowDepthPeriodMeans",
-    "abiskoSnowDepthPeriodMeans2"
-  ],
-  "sqrt-lakeIce-v2": [
-    "abiskoLakeIceBreakup",
-    "abiskoLakeIceFreezeup",
-    "abiskoLakeIceTime",
-    "iceThicknessYear",
-    "iceThicknessDate"
-  ],
-  "squarespace": [
-    "sqrt-IceThick",
-    "sqrt-temp",
-    "sqrt-season-temp",
-    "sqrt-growing",
-    "sqrt-mTemp",
-    "sqrt-prec",
-    "sqrt-mPrec",
-    "sqrt-snowDepth",
-    "sqrt-lakeIce",
-    "sqrt-perma",
-    "sqrt-carbon",
-    "sqrt-temp-climate-weather-v2",
-    "sqrt-temp-extreme-v2",
-    "sqrt-prec-extreme-v2",
-    "sqrt-growingSeason-v2",
-    "sqrt-temp-v2",
-    "sqrt-prec-v2",
-    "sqrt-snowDepth-v2",
-    "sqrt-lakeIce-v2"
+    "temperatures_jan_slide",
+    "precipitation_jan_slide"
   ],
   "v1": [
     "v1"
@@ -424,17 +270,31 @@
     }
   },
   "viz-grow-weeks": {
-    "growingSeasonWeeks": {
+    "slideGrowingSeasonWeeks": {
       "context": false,
       "station": "abisko",
       "plot": "slideGrowingSeasonWeeks"
     }
   },
   "viz-grow-days": {
-    "growingSeasonDays": {
+    "slideGrowingSeasonDays": {
       "context": false,
       "station": "abisko",
       "plot": "slideGrowingSeasonDays"
+    }
+  },
+  "viz-grow-first": {
+    "growingSeasonFrostFirst": {
+      "context": false,
+      "station": "abisko",
+      "plot": "growingSeasonFrostFirst"
+    }
+  },
+  "viz-grow-last": {
+    "growingSeasonFrostLast": {
+      "context": false,
+      "station": "abisko",
+      "plot": "growingSeasonFrostLast"
     }
   },
   "viz-spring-prec": {
@@ -466,87 +326,117 @@
     }
   },
   "viz-jan-prec": {
-    "precipitation_jan": {
+    "precipitation_jan_slide": {
       "context": false,
       "station": "abisko",
-      "plot": "precipitation_jan"
+      "plot": "precipitation_jan_slide"
     }
   },
   "viz-feb-prec": {
-    "precipitation_feb": {
+    "precipitation_feb_slide": {
       "context": false,
       "station": "abisko",
-      "plot": "precipitation_feb"
+      "plot": "precipitation_feb_slide"
     }
   },
   "viz-mar-prec": {
-    "precipitation_mar": {
+    "precipitation_mar_slide": {
       "context": false,
       "station": "abisko",
-      "plot": "precipitation_mar"
+      "plot": "precipitation_mar_slide"
     }
   },
   "viz-apr-prec": {
-    "precipitation_apr": {
+    "precipitation_apr_slide": {
       "context": false,
       "station": "abisko",
-      "plot": "precipitation_apr"
+      "plot": "precipitation_apr_slide"
     }
   },
   "viz-may-prec": {
-    "precipitation_may": {
+    "precipitation_may_slide": {
       "context": false,
       "station": "abisko",
-      "plot": "precipitation_may"
+      "plot": "precipitation_may_slide"
     }
   },
   "viz-jun-prec": {
-    "precipitation_jun": {
+    "precipitation_jun_slide": {
       "context": false,
       "station": "abisko",
-      "plot": "precipitation_jun"
+      "plot": "precipitation_jun_slide"
     }
   },
   "viz-jul-prec": {
-    "precipitation_jul": {
+    "precipitation_jule_slide": {
       "context": false,
       "station": "abisko",
-      "plot": "precipitation_jul"
+      "plot": "precipitation_jul_slide"
     }
   },
   "viz-aug-prec": {
-    "precipitation_aug": {
+    "precipitation_aug_slide": {
       "context": false,
       "station": "abisko",
-      "plot": "precipitation_aug"
+      "plot": "precipitation_aug_slide"
     }
   },
   "viz-sep-prec": {
-    "precipitation_sep": {
+    "precipitation_sep_slide": {
       "context": false,
       "station": "abisko",
-      "plot": "precipitation_sep"
+      "plot": "precipitation_sep_slide"
     }
   },
   "viz-oct-prec": {
-    "precipitation_oct": {
+    "precipitation_oct_slide": {
       "context": false,
       "station": "abisko",
-      "plot": "precipitation_oct"
+      "plot": "precipitation_oct_slide"
     }
   },
   "viz-nov-prec": {
-    "precipitation_nov": {
+    "precipitation_nov_slide": {
       "context": false,
       "station": "abisko",
-      "plot": "precipitation_nov"
+      "plot": "precipitation_nov_slide"
     }
   },
   "viz-dec-prec": {
-    "precipitation_dec": {
+    "precipitation_dec_slide": {
       "context": false,
       "station": "abisko",
-      "plot": "precipitation_dec"
+      "plot": "precipitation_dec_slide"
+    }
+  },
+  "viz-annual-temp-glob": {
+    "temperature_zonal_slide": {
+      "override": {
+        "axislim": false
+      },
+      "context": false,
+      "station": "glob",
+      "plot": "temperature_glob"
+    }
+  },
+  "viz-annual-temp-nhem": {
+    "temperature_zonal_slide": {
+      "override": {
+        "axislim": false
+      },
+      "context": false,
+      "station": "nhem",
+      "plot": "temperature_nhem"
+    }
+  },
+  "viz-annual-temp-64n-90n": {
+    "temperature_zonal_slide": {
+      "override": {
+        "axislim": false
+      },
+      "context": false,
+      "station": "64n-90n",
+      "plot": "temperature_64n-90n"
     }
   },
   "viz-annual-temp": {
@@ -585,87 +475,123 @@
     }
   },
   "viz-jan-temp": {
-    "jan_temperatures": {
+    "temperatures_jan_slide": {
+      "override": {
+        "axislim": false
+      },
       "context": false,
       "station": "abisko",
-      "plot": "jan_temperatures"
+      "plot": "temperatures_jan_slide"
     }
   },
   "viz-feb-temp": {
-    "feb_temperatures": {
+    "temperatures_feb_slide": {
+      "override": {
+        "axislim": false
+      },
       "context": false,
       "station": "abisko",
-      "plot": "feb_temperatures"
+      "plot": "temperatures_feb_slide"
     }
   },
   "viz-mar-temp": {
-    "mar_temperatures": {
+    "temperatures_mar_slide": {
+      "override": {
+        "axislim": false
+      },
       "context": false,
       "station": "abisko",
-      "plot": "mar_temperatures"
+      "plot": "temperatures_mar_slide"
     }
   },
   "viz-apr-temp": {
-    "apr_temperatures": {
+    "temperatures_apr_slide": {
+      "override": {
+        "axislim": false
+      },
       "context": false,
       "station": "abisko",
-      "plot": "apr_temperatures"
+      "plot": "temperatures_apr_slide"
     }
   },
   "viz-may-temp": {
-    "may_temperatures": {
+    "temperatures_may_slide": {
+      "override": {
+        "axislim": false
+      },
       "context": false,
       "station": "abisko",
-      "plot": "may_temperatures"
+      "plot": "temperatures_may_slide"
     }
   },
   "viz-jun-temp": {
-    "jun_temperatures": {
+    "temperatures_jun_slide": {
+      "override": {
+        "axislim": false
+      },
       "context": false,
       "station": "abisko",
-      "plot": "jun_temperatures"
+      "plot": "temperatures_jun_slide"
     }
   },
   "viz-jul-temp": {
-    "jul_temperatures": {
+    "temperatures_jul_slide": {
+      "override": {
+        "axislim": false
+      },
       "context": false,
       "station": "abisko",
-      "plot": "jul_temperatures"
+      "plot": "temperatures_jul_slide"
     }
   },
   "viz-aug-temp": {
-    "aug_temperatures": {
+    "temperatures_aug_slide": {
+      "override": {
+        "axislim": false
+      },
       "context": false,
       "station": "abisko",
-      "plot": "aug_temperatures"
+      "plot": "temperatures_aug_slide"
     }
   },
   "viz-sep-temp": {
-    "sep_temperatures": {
+    "temperatures_sep_slide": {
+      "override": {
+        "axislim": false
+      },
       "context": false,
       "station": "abisko",
-      "plot": "sep_temperatures"
+      "plot": "temperatures_sep_slide"
     }
   },
   "viz-oct-temp": {
-    "oct_temperatures": {
+    "temperatures_oct_slide": {
+      "override": {
+        "axislim": false
+      },
       "context": false,
       "station": "abisko",
-      "plot": "oct_temperatures"
+      "plot": "temperatures_oct_slide"
     }
   },
   "viz-nov-temp": {
-    "nov_temperatures": {
+    "temperatures_nov_slide": {
+      "override": {
+        "axislim": false
+      },
       "context": false,
       "station": "abisko",
-      "plot": "nov_temperatures"
+      "plot": "temperatures_nov_slide"
     }
   },
   "viz-dec-temp": {
-    "dec_temperatures": {
+    "temperatures_dec_slide": {
+      "override": {
+        "axislim": false
+      },
       "context": false,
       "station": "abisko",
-      "plot": "dec_temperatures"
+      "plot": "temperatures_dec_slide"
     }
   },
   "viz-perma": {
@@ -682,10 +608,221 @@
       "plot": "slideLakeIceTime"
     }
   },
+  "viz-lake-freeze": {
+    "slideLakeIceFreezeup": {
+      "context": false,
+      "station": "abisko",
+      "plot": "slideLakeIceFreezeup"
+    }
+  },
+  "viz-lake-break": {
+    "slideLakeIceBreakeup": {
+      "context": false,
+      "station": "abisko",
+      "plot": "slideLakeIceBreakup"
+    }
+  },
+  "viz-lake-thick": {
+    "iceThicknessYear": {
+      "context": false,
+      "station": "abisko",
+      "plot": "iceThicknessYear",
+      "startYear": 1950
+    }
+  },
+  "viz-snowdepth-period": {
+    "abioskoSnowDepthPeriodMeans": {
+      "context": false,
+      "station": "abisko",
+      "plot": "abiskoSnowDepthPeriodMeans"
+    }
+  },
+  "viz-snowdepth-decade": {
+    "abioskoSnowDepthPeriodMeans2": {
+      "context": false,
+      "station": "abisko",
+      "plot": "abiskoSnowDepthPeriodMeans2"
+    }
+  },
+  "viz-snowdepth-annual": {
+    "annualAvgSnowDepth": {
+      "context": false,
+      "station": "abisko",
+      "plot": "annualAvgSnowDepth"
+    }
+  },
+  "viz-carbon": {
+    "weeklyCO2": {
+      "context": false,
+      "station": "glob",
+      "plot": "weeklyCO2",
+      "startYear": 1958
+    }
+  },
+  "viz-extreme-temp-high-20": {
+    "extremeTempDailyHighLim": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremeTempDailyHighLim",
+      "override": {
+        "axislim": false
+      },
+      "config": {
+        "files": {
+          "set": {
+            "extreme": {
+              "lim": 20
+            }
+          }
+        }
+      }
+    }
+  },
+  "viz-extreme-temp-low-10": {
+    "extremeTempDailyLowLim": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremeTempDailyLowLim",
+      "override": {
+        "axislim": false
+      },
+      "config": {
+        "files": {
+          "set": {
+            "extreme": {
+              "lim": -10
+            }
+          }
+        }
+      }
+    }
+  },
+  "viz-extreme-temp-high-daily": {
+    "extremeTempDaily": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremeTempDailyHigh",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
+  "viz-extreme-temp-low-daily": {
+    "extremeTempDaily": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremeTempDailyLow",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
+  "viz-extreme-temp-high-weekly": {
+    "extremeTempWeekly": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremeTempWeeklyHigh",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
+  "viz-extreme-temp-low-weekly": {
+    "extremeTempDaily": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremeTempWeeklyLow",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
+  "viz-extreme-temp-high-monthly": {
+    "extremeTempMonthly": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremeTempMonthlyHigh",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
+  "viz-extreme-temp-low-monthly": {
+    "extremeTempMonth": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremeTempMonthlyLow",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
+  "viz-extreme-prec-high-daily": {
+    "extremePrecDaily": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremePrecDailyHigh",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
+  "viz-extreme-prec-low-daily": {
+    "extremePrecDaily": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremePrecDailyLow",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
+  "viz-extreme-prec-high-weekly": {
+    "extremePrecWeekly": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremePrecWeeklyHigh",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
+  "viz-extreme-prec-low-weekly": {
+    "extremePrecWeekly": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremePrecWeeklyLow",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
+  "viz-extreme-prec-high-monthly": {
+    "extremePrecMonthly": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremePrecMonthlyHigh",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
+  "viz-extreme-prec-low-monthly": {
+    "extremePrecMonthly": {
+      "context": false,
+      "station": "abisko",
+      "plot": "extremePrecMonthlyLow",
+      "override": {
+        "axislim": false
+      }
+    }
+  },
   "vizchange": [
     "viz-annual-prec",
     "viz-grow-weeks",
     "viz-grow-days",
+    "viz-grow-first",
+    "viz-grow-last",
     "viz-spring-prec",
     "viz-summer-prec",
     "viz-autumn-prec",
@@ -702,6 +839,9 @@
     "viz-oct-prec",
     "viz-nov-prec",
     "viz-dec-prec",
+    "viz-annual-temp-glob",
+    "viz-annual-temp-nhem",
+    "viz-annual-temp-64n-90n",
     "viz-annual-temp",
     "viz-spring-temp",
     "viz-summer-temp",
@@ -720,6 +860,27 @@
     "viz-nov-temp",
     "viz-dec-temp",
     "viz-perma",
-    "viz-lakeice"
+    "viz-lakeice",
+    "viz-lake-freeze",
+    "viz-lake-break",
+    "viz-lake-thick",
+    "viz-snowdepth-period",
+    "viz-snowdepth-decade",
+    "viz-snowdepth-annual",
+    "viz-carbon",
+    "viz-extreme-temp-high-20",
+    "viz-extreme-temp-low-10",
+    "viz-extreme-temp-high-daily",
+    "viz-extreme-temp-low-daily",
+    "viz-extreme-temp-high-weekly",
+    "viz-extreme-temp-low-weekly",
+    "viz-extreme-temp-high-monthly",
+    "viz-extreme-temp-low-monthly",
+    "viz-extreme-prec-high-daily",
+    "viz-extreme-prec-low-daily",
+    "viz-extreme-prec-high-weekly",
+    "viz-extreme-prec-low-weekly",
+    "viz-extreme-prec-high-monthly",
+    "viz-extreme-prec-low-monthly"
   ]
 }
