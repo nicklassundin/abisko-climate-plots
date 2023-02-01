@@ -92,7 +92,7 @@
     "start-no-update": "node server.js",
     "start": "npm run update && git submodule update && node server.js",
     "start-dev": "npm run update && npx nodemon -x \"clear;node server.js d\"",
-    "start-dev-no-update": "npx nodemon -x \"clear;node server.js d\"",
+    "start-dev-no-update": "npx nodemon -x \"clear;sudo node server.js d\"",
     "start-inspect": "npx nodemon -x \"clear;node --inspect server.js d\"",
     "start-full": "npm run update && git submodule update && npm test && npx nodemon server.js",
     "static": "cp client/bundle.js static/bundle.js",
