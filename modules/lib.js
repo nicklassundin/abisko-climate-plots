@@ -25,9 +25,7 @@ global.variables = {
 		24
 	),
 	"dateStr" () {
-
 		return `${this.date.getYear() + 1900}-${this.date.getMonth() + 1}-${this.date.getDate()}`;
-
 	},
 	"metas": {}
 };
@@ -40,31 +38,64 @@ const {meta} = require("./config/metaMngr.js");
 
 const stationTypeMap = require("../static/charts/stationTypeMap.json");
 lib = {
-	"chart" (element) {
-		this.renderSets(element, element.set, element.station, element.url)		
+	renderFromData (id, config_id) {
+		let config_element = document.querySelector(config_id)
+		let config = {}
+		config.set = config_element.dataset.set;
+
+		if(config.set === undefined) config.set = document.getElementById("set").value
+		config.station = config_element.dataset.name;
+		config.id = config_element.dataset.id;
+		config.coordinates = {}
+		config.coordinates.latitude = Number(config_element.dataset.latitude)
+		config.coordinates.longitude = Number(config_element.dataset.longitude)
+
+		config.hostUrl = config_element.dataset.hostUrl
+		if(config.hostUrl === undefined) config.hostUrl = window.location.origin
+
+		this.render(document.getElementById(id), config)
 	},
-	"renderChart" (div, type, url = window.location.origin) {
-		// if (type.startYear) {
-			// console.log(type.startYear)
+	render (element, config) {
+		global.hostUrl = config.hostUrl
 
-// 			startYear = null;
+		config.plot = sets[config.set]
+			? sets[config.set]
+			: [config.set];
+		config.plot = config.plot.pop();
 
-		// }
-		if (hostUrl) {
-			if (url) {
-				hostUrl = url;
-			} else {
-				hostUrl = window.location.origin;
+		config.id = `${config.station}_${config.plot}`
+		let stationType = stationTypeMap[config.station];
+		if(stationType === undefined) {
+			stationType = {
+				'stationName': config.station,
+				'stationType': {
+					'data': config.id,
+					'config': config.station
+				}
 			}
-			console.log('hostUrl', hostUrl)
 		}
-		meta.getMeta(type).then((cfg) => {
+		$.extend(
+			true,
+			config,
+			stationType
+		);
+
+
+		const container = document.createElement("div");
+		container.setAttribute(
+			"id",
+			`mark_${config.id}`
+		);
+		element.appendChild(container);
+
+		// TODO stream line preconfig by merging and standardizing configuration
+		meta.getMeta(config).then((cfg) => {
 			$(() => {
-				cfg.files.config.contex = type.context === undefined
+				cfg.files.config.contex = config.context === undefined
 					? true
-					: type.context;
-				if (type.override
-					? !type.override.axislim
+					: config.context;
+				if (config.override
+					? !config.override.axislim
 					: false) {
 					Object.keys(cfg.files.config.groups).forEach((key) => {
 						if (!cfg.files.config.groups[key].yAxis) {
@@ -74,91 +105,12 @@ lib = {
 						cfg.files.config.groups[key].yAxis.max = undefined;
 					});
 				}
-				const chrt = charts.build(
+				charts.build(
 					cfg,
-					div
+					container
 				);
 			});
 		});
-	},
-	"renderSets" (
-		div,
-		set = new URL(window.location.href).searchParams.get("set"),
-		id = new URL(window.location.href).searchParams.get("station"),
-		url = window.location.origin
-	) {
-		if (url) {
-			hostUrl = url;
-		} else {
-			hostUrl = window.location.origin;
-		}
-		variables.debug = new URL(window.location.href).searchParams.get("debug") == "true";
-		if (variables.debug) {
-			const debug = document.createElement("div");
-			debug.setAttribute(
-				"class",
-				"debug"
-			);
-			debug.innerHTML = `set: ${set}</br> station: ${id}`;
-			div.appendChild(debug);
-
-		}
-		let ids = sets[set]
-			? sets[set]
-			: [set];
-		if (!Array.isArray(ids)) {
-			ids = Object.values(ids);
-		} else {
-			ids = ids.map((each) => ({
-				"station": id,
-				"plot": each
-			}));
-		}
-		ids.forEach((type) => {
-			const container = document.createElement("div");
-			type.id = `${type.station}_${type.plot}`;
-			$.extend(
-				true,
-				type,
-				stationTypeMap[type.station]
-			);
-			container.setAttribute(
-				"id",
-				`mark_${type.id}`
-			);
-			if (variables.debug) {
-				const debug = document.createElement("div");
-				debug.setAttribute(
-					"class",
-					"debug"
-				);
-				debug.setAttribute(
-					"id",
-					`debug_${type}`
-				);
-				debug.innerHTML = `type: ${type}</br> station: ${id}`;
-				const table = document.createElement("table");
-				table.setAttribute(
-					"class",
-					"debug"
-				);
-				table.setAttribute(
-					"id",
-					`debug_table_${type.id}`
-				);
-				debug.appendChild(table);
-				container.appendChild(debug);
-
-			}
-			div.appendChild(container);
-			this.renderChart(
-				container,
-				type,
-				url
-			);
-
-		});
-
 	}
 };
 

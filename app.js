@@ -76,7 +76,11 @@ app.use(
 
 // SMHI DB connection
 const TYPE = "corrected-archive";
-require("./modules/server/smhi").init(
+let smhi = require('vizchange-smhi');
+smhi.stations.getStations().then(result => {
+  // console.log(result)
+})
+smhi.init(
     app,
     TYPE
 );
@@ -132,38 +136,40 @@ let version = require("./package.json").version;
 
 custom.then((chart_list) => {
     const sets = station_static
-    let stations = Object.keys(station_static).map((st) => {
 
-            if (st === "smhi") {
+    smhi.stations.getStations().then((smhiStations) => {
+        let stations = {
+            smhi: smhiStations,
+            fixed: Object.keys(station_static).map(value => {
+                return {
+                    id: value
+                }
+            })
+        }
+        // TODO remove and standardize
+        app.get(
+            "/browse",
+            (req, res) => {
+                console.log("/browse")
+                console.log('remote Address:',req.ip)
+                console.log("version", version)
 
-                return "53430";
+                version = `${version}`
+
+                res.render(
+                    "browse.hbs",
+                    {
+                        sets,
+                        chrts: chart_list,
+                        stations,
+                        version
+                    }
+                );
 
             }
+        );
 
-            return st;
-
-        });
-    app.get(
-        "/browse",
-        (req, res) => {
-	    console.log("/browse")
-        console.log('remote Address:',req.ip)
-	    console.log("version", version)
-
-            version = `${version}`
-            res.render(
-                "browse.hbs",
-                {
-                    sets,
-                    chrts: chart_list,
-                    stations,
-                    version
-                }
-            );
-
-        }
-    );
-
+    })
 });
 
 const axios = require('axios')

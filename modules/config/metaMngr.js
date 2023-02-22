@@ -30,8 +30,7 @@ exports.meta = {
      * },
      */
     "getMeta" (type) {
-        const st = type.stationType.config,
-		 id = type.plot,
+		let id = type.plot,
 		 metaRef = new Promise((res, rej) => {
 
                 $.getJSON(
