@@ -29,50 +29,6 @@ exports.setup = function (app) {
 
                     }),
                     sets = stati;
-                app.render(
-                    "browse-release.hbs",
-                    {sets,
-                        chrts,
-                        stations,
-                        version},
-                    (err, str) => {
-                        if (err) {
-                            throw err;
-                        }
-                        fs.writeFile(
-                            "index.html",
-                            str,
-                            (err) => {
-
-                                if (err) {
-
-                                    console.error(err);
-
-
-                                }
-
-                            }
-                        );
-
-                    }
-                );
-                app.get(
-                    "/github",
-                    (req, res) => {
-
-                        res.render(
-                            "browse-release.hbs",
-                            {
-                                sets,
-                                chrts,
-                                stations,
-                                version
-                            }
-                        );
-
-                    }
-                );
-
             });
 
         }

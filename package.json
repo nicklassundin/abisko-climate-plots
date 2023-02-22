@@ -1,6 +1,6 @@
 {
   "name": "vizchange-climate-plots",
-  "version": "1.3.0",
+  "version": "1.3.5",
   "description": "Original work from https://github.com/antoneri/abisko-climate-plots",
   "main": "abisko-climate-plots-lib.js",
   "devdependencies": {
@@ -34,6 +34,7 @@
     "highcharts": "^8.2.2",
     "highcharts-more": "^0.1.7",
     "highcharts-more-node": "^5.0.13",
+    "https-browserify": "^1.0.0",
     "jquery": "^3.5.1",
     "jquery-contextmenu": "^2.9.2",
     "json2csv": "^4.5.4",
@@ -50,6 +51,7 @@
     "pug": "^3.0.2",
     "query-string": "^7.0.0",
     "r-script": "^0.0.4",
+    "react-scripts": "^5.0.1",
     "readline": "^1.3.0",
     "redis": "^4.5.1",
     "regression": "^2.0.1",
@@ -58,13 +60,16 @@
     "requirejs-plugins": "^1.0.2",
     "run-async": "^2.4.1",
     "shelljs": "^0.8.4",
+    "stream-http": "^3.2.0",
     "tedious": "^6.7.0",
     "textarea-markdown": "^1.2.7",
     "uniq": "^1.0.1",
     "unique-commit-id": "^1.0.0",
+    "url": "^0.11.0",
     "utils": "^0.3.1",
-    "vizchange-stats": "^1.7.46",
-    "webpack": "^4.43.0"
+    "vizchange-smhi": "^1.0.1",
+    "vizchange-stats": "1.17.*",
+    "webpack": "^5.75.0"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^4.31.2",
@@ -76,8 +81,7 @@
     "mocha": "^6.2.3",
     "mocha-lcov-reporter": "^1.3.0",
     "sinon": "^7.5.0",
-    "uglifyjs-webpack-plugin": "^2.2.0",
-    "webpack-cli": "^3.3.12",
+    "webpack-cli": "^5.0.1",
     "xxxxx": "^1.0.3"
   },
   "scripts": {
@@ -92,7 +96,7 @@
     "start-no-update": "node server.js",
     "start": "npm run update && git submodule update && node server.js",
     "start-dev": "npm run update && npx nodemon -x \"clear;node server.js d\"",
-    "start-dev-no-update": "npx nodemon -x \"clear;sudo node server.js d\"",
+    "start-dev-no-update": "npx nodemon -x \"clear;node server.js d\"",
     "start-inspect": "npx nodemon -x \"clear;node --inspect server.js d\"",
     "start-full": "npm run update && git submodule update && npm test && npx nodemon server.js",
     "static": "cp client/bundle.js static/bundle.js",
@@ -121,6 +125,7 @@
       "node_modules/*",
       "index.html"
     ],
+    "ext": "js,json,hbs",
     "events": {
       "start": "clear;webpack --mode=development"
     }

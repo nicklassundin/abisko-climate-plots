@@ -1,5 +1,6 @@
 // Const $ = require("jquery");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+//const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const webpack = require("webpack");
 const dir = __dirname;
 module.exports = [
@@ -28,22 +29,27 @@ module.exports = [
             ]
         },
         "node": {
+            /*
             "child_process": "empty",
             "console": true,
             "fs": "empty",
             "net": "empty",
             "tls": "empty"
+
+             */
+        },
+        "resolve": {
+          "fallback": {
+              "http":  require.resolve("stream-http"),
+              "url": require.resolve("url/"),
+              "https": require.resolve("https-browserify"),
+              "fs": false
+          }
         },
         "optimization": {
             "minimize": true,
             "minimizer": [
-                new UglifyJsPlugin({
-                    "uglifyOptions": {
-                        "output": {
-                            "comments": false
-                        }
-                    }
-                })
+                new TerserPlugin()
             ]
         },
         "output": {

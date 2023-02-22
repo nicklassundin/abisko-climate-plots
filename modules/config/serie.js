@@ -19,6 +19,8 @@ class Serie {
 		this.id = id
 		this.callback = callback
 		this.specs = JSON.parse(JSON.stringify(configs))
+		this.specs.coordinates = meta.stationDef.coordinates
+		console.log(this.specs.coordinates)
 		// TODO for redirect but not precalc
 		this.specs.url = `${hostUrl}/data/production/url`;
 		// TODO for redirect and precalc
@@ -100,6 +102,7 @@ class Serie {
 		//console.log('station',station)
 		//console.log('tags',tags)
 		//console.log('sr',sr)
+		console.log(specs)
 		tags = Object.values(tags)
 		let type = tags.shift();
 		switch (type) {
@@ -155,7 +158,7 @@ class Serie {
 
 		//console.log('serie.tags', tags)
 
-		console.log('serie.params', params)
+		//console.log('serie.params', params)
 		//console.log('serie.specs', specs)
 		//console.log('serie.tags', tags)
 
