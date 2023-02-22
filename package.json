@@ -31,7 +31,7 @@
     "formidable": "^1.2.2",
     "handlebars": "^4.7.6",
     "hbs": "^4.1.1",
-    "highcharts": "^8.2.2",
+    "highcharts": "^9.0.0",
     "highcharts-more": "^0.1.7",
     "highcharts-more-node": "^5.0.13",
     "https-browserify": "^1.0.0",
