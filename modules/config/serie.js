@@ -102,7 +102,6 @@ class Serie {
 		//console.log('station',station)
 		//console.log('tags',tags)
 		//console.log('sr',sr)
-		console.log(specs)
 		tags = Object.values(tags)
 		let type = tags.shift();
 		switch (type) {
@@ -179,6 +178,7 @@ class Serie {
 			case 'last':
 			case 'first':
 				specs.url = specs['url_calc']
+				console.log(specs)
 				return stats.getByParamsPreCalculated(specs, params).then(result => {
 					if(Array.isArray(result.data)) result = result.data
 					result = result.map(each => {
