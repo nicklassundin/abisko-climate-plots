@@ -288,6 +288,8 @@ app.get('/precalculated/:station/:type/*', (req, res) => {
         }).then(result => {
             fs.writeFileSync(filePath, JSON.stringify(result))
             res.send(result)
+        }).catch(err => {
+            console.log(err)
         })
     }
 })

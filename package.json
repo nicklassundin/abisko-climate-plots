@@ -67,6 +67,7 @@
     "unique-commit-id": "^1.0.0",
     "url": "^0.11.0",
     "utils": "^0.3.1",
+    "vizchange-plot-builder": "^1.0.9",
     "vizchange-smhi": "^1.0.1",
     "vizchange-stats": "1.17.*",
     "webpack": "^5.75.0"
@@ -89,10 +90,6 @@
     "publish": "npm publish --access public",
     "postpublish": "git push origin --tags",
     "update": "npm update climate-plots-config && npm update climate-plots-glimworks-reader && npm update vizchange-stats",
-    "test": "git submodule update && npm run test-unit",
-    "test-respons": "artillery quick --count 10 -n 20 https://localhost/charts",
-    "test-unit": "mocha './modules/**/*.spec.js' --delay",
-    "test-dev": "mocha  './modules/**/*.spec.js' '*.spec.dev.js' 'modules/**/*.spec.dev.js' --delay",
     "start-no-update": "node server.js",
     "start": "npm run update && git submodule update && node server.js",
     "start-dev": "npm run update && npx nodemon -x \"clear;node server.js d\"",
