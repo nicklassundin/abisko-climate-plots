@@ -36,15 +36,15 @@ exports.meta = {
                 $.getJSON(
                     `${hostUrl}/static/charts/stationType/${id}.json`,
                     (result) => {
-			    // console.log(result)
+			    // //console.log(result)
                         res(result);
                     }
                 );
 
             }).catch((error) => {
 
-                console.log(id);
-                console.log(error);
+                //console.log(id);
+                //console.log(error);
                 throw error;
 
             }),
@@ -97,8 +97,8 @@ exports.meta = {
 
                                     });
 				    }catch(error){
-					    console.log("obj",obj);
-					    console.log("meta")
+					    //console.log("obj",obj);
+					    //console.log("meta")
 					    throw error
 				    }
                                     return res;
@@ -148,8 +148,8 @@ exports.meta = {
 
         } catch (ERROR) {
 
-            console.log(files);
-            console.log(define);
+            //console.log(files);
+            //console.log(define);
             throw ERROR;
 
         }

@@ -19,7 +19,7 @@ exports.webserver = {
             return http
         } catch (err) {
 
-            console.log(err);
+            //console.log(err);
             return err;
 
         }
@@ -31,7 +31,7 @@ exports.webserver = {
             https.createServer(app).listen(config.https.port);
             return https
         } catch (err) {
-            console.log(err);
+            //console.log(err);
             return err;
 
         }

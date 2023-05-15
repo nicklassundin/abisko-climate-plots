@@ -20,7 +20,7 @@ class Serie {
 		this.callback = callback
 		this.specs = JSON.parse(JSON.stringify(configs))
 		this.specs.coordinates = meta.stationDef.coordinates
-		console.log(this.specs.coordinates)
+		//console.log(this.specs.coordinates)
 		// TODO for redirect but not precalc
 		this.specs.url = `${hostUrl}/data/production/url`;
 		// TODO for redirect and precalc
@@ -99,9 +99,9 @@ class Serie {
 		let tags = this.tags
 		let specs = JSON.parse(JSON.stringify(this.specs));
 		//let ser = this.ser
-		//console.log('station',station)
-		//console.log('tags',tags)
-		//console.log('sr',sr)
+		////console.log('station',station)
+		////console.log('tags',tags)
+		////console.log('sr',sr)
 		tags = Object.values(tags)
 		let type = tags.shift();
 		switch (type) {
@@ -155,16 +155,16 @@ class Serie {
 
 		let params = [type].concat(tags)
 
-		//console.log('serie.tags', tags)
+		////console.log('serie.tags', tags)
 
-		//console.log('serie.params', params)
-		//console.log('serie.specs', specs)
-		//console.log('serie.tags', tags)
+		////console.log('serie.params', params)
+		////console.log('serie.specs', specs)
+		////console.log('serie.tags', tags)
 
 
 
 		// TODO switch between pre calc
-		//console.log(`${specs.url}/precalculated/${specs.station}/${specs.type}/${params.join('/')}`)
+		////console.log(`${specs.url}/precalculated/${specs.station}/${specs.type}/${params.join('/')}`)
 		//return stats.getByParamsPreCalculated(specs, params).then(result => {
 		//switch (params[3]+params[4]){
 		let key = params[3]
@@ -178,7 +178,7 @@ class Serie {
 			case 'last':
 			case 'first':
 				specs.url = specs['url_calc']
-				console.log(specs)
+				//console.log(specs)
 				return stats.getByParamsPreCalculated(specs, params).then(result => {
 					if(Array.isArray(result.data)) result = result.data
 					result = result.map(each => {

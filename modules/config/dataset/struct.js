@@ -52,8 +52,8 @@ var tagApply = function (data, tags) {
 	}).catch((error) => {
 
 		/*
-		 * Console.log(tags)
-		 * Console.log(data)
+		 * //console.log(tags)
+		 * //console.log(data)
 		 */
 		throw error;
 
@@ -164,8 +164,8 @@ const container = {},
 		"create" (id, config) {
 
 			/*
-			 * Console.log(id)
-			 * Console.log(config)
+			 * //console.log(id)
+			 * //console.log(config)
 			 */
 			if (!this.metaRef[id]) {
 
@@ -181,7 +181,7 @@ const container = {},
 				{file} = cfg,
 				{preset} = cfg,
 				{local} = cfg,
-				// Console.log(file)
+				// //console.log(file)
 				res = this.clone();
 			res.metRef = this.metaRef[id];
 			const station = config.files.stationDef.stationType.data;

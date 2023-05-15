@@ -97,11 +97,11 @@ exports.baseline = {
                 switch (a) {
 
                 case "baselineLower":
-                    // Console.log("Lower")
+                    // //console.log("Lower")
                     baselineLower = b;
                     break;
                 case "baselineUpper":
-                    // Console.log("Upper")
+                    // //console.log("Upper")
                     baselineUpper = b;
                     break;
                 default:

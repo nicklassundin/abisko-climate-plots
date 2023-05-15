@@ -179,7 +179,7 @@ class Chart {
 
                                     } catch (error) {
 
-                                        console.log(meta);
+                                        //console.log(meta);
                                         throw error;
 
                                     }
@@ -251,9 +251,9 @@ class Chart {
 
         } catch (error) {
 
-            console.log(gID);
-            console.log(this.meta);
-            console.log(this);
+            //console.log(gID);
+            //console.log(this.meta);
+            //console.log(this);
             throw error;
 
         }
@@ -314,10 +314,10 @@ class Chart {
                 })
                  */
             } catch (error) {
-                // console.log("meta",meta)
-                // console.log("data",data);
-                // console.log("key",key);
-                // console.log("series",series);
+                // //console.log("meta",meta)
+                // //console.log("data",data);
+                // //console.log("key",key);
+                // //console.log("series",series);
                 throw error;
 
             }
@@ -354,7 +354,7 @@ class Chart {
             return 0
             return a
         }).map((each) => {
-            console.log(meta.groups[each].legend)
+            //console.log(meta.groups[each].legend)
             const index = parseInt(each);
             if (index == active) {
 
@@ -383,8 +383,8 @@ class Chart {
 
         /*
          * }
-         * Console.log(this.data)
-         * Console.log(this.meta)
+         * //console.log(this.data)
+         * //console.log(this.meta)
          */
 
         var groups = Object.keys(meta.groups).filter((s) => (meta.groups[s].enabled == undefined ? false : meta.groups[s].enabled)).
@@ -410,7 +410,7 @@ class Chart {
 
         /*
          * TODO clean up
-         * Console.log(meta.series)
+         * //console.log(meta.series)
          */
         this.updateSeries()
         if (Object.keys(meta.groups).map((key) => meta.groups[key].enabled).
@@ -428,7 +428,7 @@ class Chart {
         if (meta.extreme) {
             $(`.ext_menu_${id}`).click((e) => {
                 $(`.ext_menu_${id}`).toggleClass("active");
-                //console.log(renderInterface.charts[id])
+                ////console.log(renderInterface.charts[id])
                 renderInterface.charts[id].metaRef.files.set.extreme.lim = parseInt(e.target.value);
                 renderInterface.updatePlot(id);
                 return false;
@@ -492,12 +492,12 @@ class Chart {
             }).
             forEach((key, index) => {
                 /*
-                 * Console.log({key, index})
-                 * Console.log(meta.series[key])
+                 * //console.log({key, index})
+                 * //console.log(meta.series[key])
                  */
                 try {
                     if (meta.series[key].group == gID) {
-                        //console.log(meta.series[key])
+                        ////console.log(meta.series[key])
                         $(`#${id}`).highcharts().series[index].update(
                             {
                                 "visible": meta.series[key].visible,
@@ -516,10 +516,10 @@ class Chart {
                         );
                     }
                 } catch (error) {
-                    console.log(key);
-                    console.log(meta.series[key]);
-                    console.log(index);
-                    console.log($(`#${id}`).highcharts().series);
+                    //console.log(key);
+                    //console.log(meta.series[key]);
+                    //console.log(index);
+                    //console.log($(`#${id}`).highcharts().series);
                     throw error;
                 }
             });
@@ -605,7 +605,7 @@ class Chart {
             "xAxis": baseline(group)
         });
         if (group.tooltip) {
-            console.log('tooltip', group.tooltip.type
+            //console.log('tooltip', group.tooltip.type
                 ? group.tooltip.type
                 : "default")
             this.chart.update({
@@ -617,10 +617,10 @@ class Chart {
             });
         }
         try {
-            //console.log('meta', meta)
-            //console.log('group', group)
-            //console.log(group.xAxis.categories)
-            //console.log('meta.period', meta.period)
+            ////console.log('meta', meta)
+            ////console.log('group', group)
+            ////console.log(group.xAxis.categories)
+            ////console.log('meta.period', meta.period)
             this.chart.update({
                 "title": {
                     "text": title,
@@ -687,8 +687,8 @@ class Chart {
                 }
             });
         } catch (error) {
-            console.log(group);
-            console.log(this.chart);
+            //console.log(group);
+            //console.log(this.chart);
             throw error;
         }
         if (group.pointSelect) {
@@ -766,8 +766,8 @@ class Chart {
                                 "select" (e) {
 
                                     /*
-                                     * Console.log(e)
-                                     * Console.log(this)
+                                     * //console.log(e)
+                                     * //console.log(this)
                                      */
                                 }
                             }
@@ -801,11 +801,11 @@ var render = {
                 meta,
                 old
             );
-            // Console.log(this.charts[id])
+            // //console.log(this.charts[id])
 
         } catch (error) {
 
-            console.log(id);
+            //console.log(id);
             throw error;
 
         }
@@ -861,7 +861,7 @@ var render = {
     },
     "initiate" (id, data) {
         try {
-            //console.log('id', id)
+            ////console.log('id', id)
             this.charts[id].initiate(data);
             // .then((result) => {
 
@@ -935,7 +935,7 @@ var render = {
             }
             this.charts[id].chart.destroy()
         } catch (error) {
-            console.log(id);
+            //console.log(id);
             throw error;
         }
         const cont = this;

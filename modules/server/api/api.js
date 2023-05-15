@@ -10,7 +10,7 @@ exports.lang = function (app, dirname, dir) {
 
             if (err) {
 
-                return console.log(`Unable to scan directory: ${err}`);
+                return //console.log(`Unable to scan directory: ${err}`);
 
             }
             files.forEach((file) => {
@@ -18,7 +18,7 @@ exports.lang = function (app, dirname, dir) {
                 const path = `${dir}/${file}`;
                 if (lstatSync(dirname + path).isDirectory()) {
 
-                    console.log(path);
+                    //console.log(path);
                     app.use(
                         path,
                         express.static(dirname + path)
