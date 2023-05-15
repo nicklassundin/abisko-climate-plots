@@ -30,7 +30,7 @@ const hbs = require("hbs");
 /* Open file access
 const cors = require('cors');
 const server-config = require('vizchange-stats').configs;
-console.log(server-config.live.url);
+//console.log(server-config.live.url);
 app.use(cors({}))
 
 app.use(function(req, res, next) {
@@ -78,7 +78,7 @@ app.use(
 const TYPE = "corrected-archive";
 let smhi = require('vizchange-smhi');
 smhi.stations.getStations().then(result => {
-  // console.log(result)
+  // //console.log(result)
 })
 smhi.init(
     app,
@@ -150,9 +150,9 @@ custom.then((chart_list) => {
         app.get(
             "/browse",
             (req, res) => {
-                console.log("/browse")
-                console.log('remote Address:',req.ip)
-                console.log("version", version)
+                //console.log("/browse")
+                //console.log('remote Address:',req.ip)
+                //console.log("version", version)
 
                 version = `${version}`
 
@@ -194,7 +194,7 @@ app.use('/data/:server/:params', async function(req, res) {
 
     if (fs.existsSync(filePath)) {
         fs.readFile(filePath, 'utf8', function(error, output) {
-           console.log('cached:', filePath)
+           //console.log('cached:', filePath)
             res.send(output)
         })
     }else{
@@ -211,11 +211,11 @@ app.use('/data/:server/:params', async function(req, res) {
         zlib.gunzip(data, function (_err, output) {
             res.setHeader('Content-Type', 'application/json')
             res.send(output)
-            console.log(output)
+            //console.log(output)
             try{
                 fs.writeFileSync(filePath, JSON.stringify(output))
             }catch(error){
-                console.log(typeof output)
+                //console.log(typeof output)
                 //throw error
             }
         })
@@ -226,13 +226,13 @@ app.use('/data/:server/:params', async function(req, res) {
     axios.get(url, {
         ttl: 1000*60*60*24*14,
     }).then((result) => {
-        console.log('redirect url:', url)
-        console.log(result.headers)
+        //console.log('redirect url:', url)
+        //console.log(result.headers)
         res.writeHead(200, result.headers);
         res.end(JSON.stringify(result.data));
-        console.log('success:', req.params, req['_parsedUrl'].search)
+        //console.log('success:', req.params, req['_parsedUrl'].search)
     }).catch(err => {
-        console.log('failure:', req.params, err)
+        //console.log('failure:', req.params, err)
         res.end(JSON.stringify([]))
        // res.status(err.status)
     })
@@ -271,14 +271,14 @@ app.get('/precalculated/:station/:type/*', (req, res) => {
     let filePath = `./cache/${specs.station}_${specs.type}_${req.params['0'].join('_')}${req['_parsedUrl'].search}.json`
 
 
-   //console.log('specs', specs, filePath)
+   ////console.log('specs', specs, filePath)
     if (fs.existsSync(filePath)) {
         fs.readFile(filePath, 'utf8', function(error, data) {
             res.send(data)
         })
     }else{
         const result = stats.getByParams(specs, req.params['0'])
-      //  console.log(stats.cache)
+      //  //console.log(stats.cache)
         result.then((resolved) => {
             if(Array.isArray(resolved) && typeof resolved[0].then === 'function'){
                 return Promise.all(resolved).then(all => all)
@@ -289,7 +289,7 @@ app.get('/precalculated/:station/:type/*', (req, res) => {
             fs.writeFileSync(filePath, JSON.stringify(result))
             res.send(result)
         }).catch(err => {
-            console.log(err)
+            //console.log(err)
         })
     }
 })

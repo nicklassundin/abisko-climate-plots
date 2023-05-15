@@ -15,7 +15,7 @@ var formats = {
 
     },
     "MMDD": (date, shrt = false) => {
-        // console.log(date)
+        // //console.log(date)
 	try {
 
             return `${formats.MM(
@@ -27,7 +27,7 @@ var formats = {
             )}`;
 
         } catch (error) {
-		console.log(error)
+		//console.log(error)
             return "";
 
         }

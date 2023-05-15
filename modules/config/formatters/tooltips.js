@@ -20,7 +20,7 @@ exports.formatters = function (meta) {
 
             } catch (error) {
 
-                console.log(error);
+                //console.log(error);
                 return undefined;
 
             }
@@ -45,7 +45,7 @@ exports.formatters = function (meta) {
 
             } catch (error) {
 
-                console.log(error);
+                //console.log(error);
                 return undefined;
 
             }
@@ -73,7 +73,7 @@ exports.formatters = function (meta) {
 
             } catch (error) {
 
-                console.log(error);
+                //console.log(error);
                 return undefined;
 
             }
@@ -99,7 +99,7 @@ exports.formatters = function (meta) {
 
             } catch (error) {
 
-                console.log(error);
+                //console.log(error);
                 return undefined;
 
             }
@@ -128,7 +128,7 @@ exports.formatters = function (meta) {
                 });
                 return tooltip;
             } catch (error) {
-                console.log(error);
+                //console.log(error);
                 return undefined;
             }
         },
@@ -153,7 +153,7 @@ exports.formatters = function (meta) {
                 });
                 return tooltip;
             } catch (error) {
-                console.log(error);
+                //console.log(error);
                 return undefined;
             }
         },
@@ -178,7 +178,7 @@ exports.formatters = function (meta) {
                 });
                 return tooltip;
             } catch (error) {
-                console.log(error);
+                //console.log(error);
                 return undefined;
             }
         },
@@ -207,7 +207,7 @@ exports.formatters = function (meta) {
 
             } catch (error) {
 
-                console.log(error);
+                //console.log(error);
                 return undefined;
 
             }
@@ -238,7 +238,7 @@ exports.formatters = function (meta) {
 
             } catch (error) {
 
-                console.log(error);
+                //console.log(error);
                 return undefined;
 
             }
