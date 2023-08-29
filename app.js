@@ -270,7 +270,6 @@ app.get('/precalculated/:station/:type/*', (req, res) => {
 
     let filePath = `./cache/${specs.station}_${specs.type}_${req.params['0'].join('_')}${req['_parsedUrl'].search}.json`
 
-
    ////console.log('specs', specs, filePath)
     if (fs.existsSync(filePath)) {
         fs.readFile(filePath, 'utf8', function(error, data) {
