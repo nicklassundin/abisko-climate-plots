@@ -91,13 +91,14 @@
     "postpublish": "git push origin --tags",
     "update": "npm update climate-plots-config && npm update climate-plots-glimworks-reader && npm update vizchange-stats",
     "start-no-update": "node run.js",
-    "start": "npm run update && git submodule update && node run.js",
-    "start-dev": "clear; npm run update && npx nodemon -x NODE_ENV=development node run.js",
-    "start-dev-no-update": "clear; npx nodemon -x NODE_ENV=development node run.js",
-    "start-inspect": "clear; npx nodemon -x node --inspect NODE_ENV=develoment node run.js d",
+    "start": "webpack --mode=production && npm run update && git submodule update && node run.js",
     "start-full": "npm run update && git submodule update && npm test && npx nodemon run.js",
+    "dev": "clear; npm run update && npx nodemon -x NODE_ENV=development node run.js",
+    "dev-no-update": "clear; npx nodemon -x NODE_ENV=development node run.js",
+    "dev-inspect": "clear; npx nodemon -x node --inspect NODE_ENV=develoment run.js",
     "static": "cp client/bundle.js static/bundle.js",
-    "webpack": "webpack --mode=development"
+    "webpack": "webpack --mode=development",
+    "build": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
