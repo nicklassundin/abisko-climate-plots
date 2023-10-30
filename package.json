@@ -90,12 +90,12 @@
     "publish": "npm publish --access public",
     "postpublish": "git push origin --tags",
     "update": "npm update climate-plots-config && npm update climate-plots-glimworks-reader && npm update vizchange-stats",
-    "start-no-update": "node server.js",
-    "start": "npm run update && git submodule update && node server.js",
-    "start-dev": "npm run update && npx nodemon -x \"clear;node server.js d\"",
-    "start-dev-no-update": "npx nodemon -x \"clear;node server.js d\"",
-    "start-inspect": "npx nodemon -x \"clear;node --inspect server.js d\"",
-    "start-full": "npm run update && git submodule update && npm test && npx nodemon server.js",
+    "start-no-update": "node run.js",
+    "start": "npm run update && git submodule update && node run.js",
+    "start-dev": "clear; npm run update && npx nodemon -x NODE_ENV=development node run.js",
+    "start-dev-no-update": "clear; npx nodemon -x NODE_ENV=development node run.js",
+    "start-inspect": "clear; npx nodemon -x node --inspect NODE_ENV=develoment node run.js d",
+    "start-full": "npm run update && git submodule update && npm test && npx nodemon run.js",
     "static": "cp client/bundle.js static/bundle.js",
     "webpack": "webpack --mode=development"
   },
@@ -124,7 +124,7 @@
     ],
     "ext": "js,json,hbs",
     "events": {
-      "start": "clear;webpack --mode=development"
+      "start": "clear; webpack --mode=development"
     }
   }
 }

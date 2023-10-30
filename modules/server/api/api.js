@@ -3,7 +3,6 @@ const fs = require("fs");
 const {lstatSync, readdirSync} = require("fs");
 
 exports.lang = function (app, dirname, dir) {
-
     const files = fs.readdir(
         dirname + dir,
         (err, files) => {
