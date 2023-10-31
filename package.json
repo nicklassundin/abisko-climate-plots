@@ -74,6 +74,7 @@
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^4.31.2",
+    "arkit": "^1.6.4",
     "chai": "^4.2.0",
     "coveralls": "^3.1.0",
     "csv-loader": "^3.0.3",
@@ -98,7 +99,8 @@
     "dev-inspect": "clear; npx nodemon -x node --inspect NODE_ENV=develoment run.js",
     "static": "cp client/bundle.js static/bundle.js",
     "webpack": "webpack --mode=development",
-    "build": "webpack --mode=production"
+    "build": "webpack --mode=production",
+    "arkit": "npx arkit"
   },
   "repository": {
     "type": "git",
@@ -126,6 +128,48 @@
     "ext": "js,json,hbs",
     "events": {
       "start": "clear; webpack --mode=development"
+    }
+  },
+  "arkit": {
+    "$schema": "https://arkit.pro/schema.json",
+    "components": [{
+      "type": "Entry",
+      "patterns": ["run.js", "server.js"]
+    },{
+      "type": "Webpack",
+      "patterns": ["webpack.config.js"]
+    },{
+      "type": "Client",
+      "patterns": ["client/*.js"]
+    },{
+      "type": "Static",
+      "patterns": ["static/*", "static/*.js"],
+      "excludePatterns": ["**/**.LICENSE"]
+    },{
+      "type": "Component",
+      "patterns": ["modules/*.js", "modules/**/*.js"],
+      "excludePatterns": ["**/*.dev.js", "**/**/*.dev.js"]
+    },{
+      "type": "Dependency",
+      "patterns": ["node_modules/*"]
+    }],
+    "output": {
+      "path": [
+        "docs/arkit.svg",
+        "docs/arkit.png"
+      ],
+      "groups": [{
+        "first": true,
+        "type": "Components",
+        "components": ["Entry", "Component", "Static"],
+        "patterns": ["*.js"]
+      },{
+        "type": "Dependency",
+        "components": ["Dependency"]
+      },{
+        "type": "Webpack",
+        "components": ["Client"]
+      }]
     }
   }
 }

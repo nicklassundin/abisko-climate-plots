@@ -4,7 +4,8 @@ require('jquery');
 // Cache requirements
 const fs = require('fs');   // write files to cache etc TODO make obsolete
 const axios = require('axios');
-const { setupCache } = require('axios-cache-adapter');
+const { setupCache } = require('axios-cache-interceptor');
+const { buildStorage } = require('axios-cache-interceptor');
 // precalculated
 let stats = require('vizchange-stats');
 const stats_configs = JSON.parse(JSON.stringify(stats.configs['production_redirect']));
@@ -24,6 +25,42 @@ const plots_config = require('climate-plots-config');
 // Getting smhi server list
 let smhi = require('vizchange-smhi');
 const config = require("./static/server.config.json");
+
+const storage = buildStorage({
+    find(key) {
+        return new Promise((resolve, reject) => {
+            if(!fs.existsSync(`./cache/storage/${key}.json`)){
+                resolve(undefined)
+            }else{
+                fs.readFile(`./cache/storage/${key}.json`, 'utf8', function(error, data) {
+                    if(error) reject(error);
+                    if(JSON.parse(data).length <= 0){
+                        resolve(undefined)
+                    }else{
+                        resolve(JSON.parse(data))
+                    }
+                })
+            }
+        })
+    },
+    set(key, value, req) {
+        try{
+            fs.writeFileSync(`./cache/storage/${key}.json`, JSON.stringify(value))
+        }catch(error){
+            throw error;
+        }
+    },
+    remove(key) {
+        //fs.unlink(`./cache/storage/${key}.json`);
+    }
+})
+setupCache(axios, {
+    cache: {
+        ttl: 1000*60*60*24*365
+    },
+    storage    // TODO make storage work
+})
+
 
 class Server {
     constructor(debug = false) {
@@ -100,29 +137,11 @@ class Server {
     setupCache(){
         // setup cache
         const config = require('./static/server.config.json');
-        setupCache(axios, {
-            cache: {
-                ttl: 1000*60*60*24*14
-            }
-        })
         this.app.use('/data/:server/:params', async function(req, res) {
             let url = `https://${config[req.params.server]}${req['_parsedUrl'].search}`
-            let filePath = `./cache/api/${req.params.server}${req['_parsedUrl'].search}.json`
-
-            if (fs.existsSync(filePath)) {
-                fs.readFile(filePath, 'utf8', function(error, output) {
-                    res.send(output)
-                })
-            }else{
-                const { data } = await axios.get(url, {
-                    cache: {
-                        ttl: 1000*60*60*24*14
-                    }
-                })
-                res.setHeader('Content-Type', 'application/json')
-                res.send(data)
-                fs.writeFileSync(filePath, JSON.stringify(data))
-            }
+            const { data } = await axios.get(url)
+            res.setHeader('Content-Type', 'application/json')
+            res.send(data)
         })
     }
     precalculation() {
@@ -162,7 +181,6 @@ class Server {
                 })
             }else{
                 const result = stats.getByParams(specs, req.params['0'])
-                //  //console.log(stats.cache)
                 result.then((resolved) => {
                     if(Array.isArray(resolved) && typeof resolved[0].then === 'function'){
                         return Promise.all(resolved).then(all => all)
