@@ -22,6 +22,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 // Plot modules
 const plots_config = require('climate-plots-config');
+const web = require('./modules/server/web.js');
+const STATIC_STATIONS = require('./static/charts/stations.json');
 // Getting smhi server list
 let smhi = require('vizchange-smhi');
 const config = require("./static/server.config.json");
@@ -54,6 +56,9 @@ const storage = buildStorage({
         //fs.unlink(`./cache/storage/${key}.json`);
     }
 })
+/**
+ * Axios Cache
+ */
 setupCache(axios, {
     cache: {
         ttl: 1000*60*60*24*365
@@ -61,14 +66,24 @@ setupCache(axios, {
     storage    // TODO make storage work
 })
 
-
+/**
+ * Class representing Server instance
+ */
 class Server {
+    /**
+     * Initialize server class and create webserver
+     * @param debug {boolean} defines if it is debug launch on local machine or live.
+     */
     constructor(debug = false) {
         this.debug = debug;
-        this.webserver = require('./modules/server/web.js').webserver;
+        this.webserver = web.webserver;
     }
+
+    /**
+     * Create app and forward resources for clients
+     * @returns {*|Express} return this instance of app;
+     */
     createApp(){
-        // Create App instance
         this.app = express();
         // Define open paths
         this.app.use('/css', express.static(`${__dirname}/css`));
@@ -97,16 +112,20 @@ class Server {
         this.app.use(cors({
             origin: ['*']
         }));
+        this.createAPI();
         return this.app;
     }
+    /**
+     * Host Preview site
+     */
     setupServerPreview() {
-        const STATIC_STATIONS = this.STATIC_STATIONS;
+        const STATIONS = this.STATIC_STATIONS;
         this.app.get('/browse', (req, res) => {
             this.plotList.then((chart_list) => {
                 this.stationList.then((stations) => {
                     res.render('browse.hbs',
                         {
-                            STATIC_STATIONS,
+                            STATIONS,
                             chrts: chart_list,
                             stations: stations,
                             version
@@ -115,12 +134,26 @@ class Server {
             })
         })
     }
+
+    /**
+     * get list of plots form plot config
+     * @returns {Promise} promise of resolved JSON file of all plots
+     */
     get plotList() {
         return plots_config.custom;
     }
+    /**
+     *
+     * @returns {{abisko: {}, CALM: {}, "64n-90n": {}, glob: {}, nhem: {}}}
+     */
     get STATIC_STATIONS() {
-        return require('./static/charts/stations.json');
+        return STATIC_STATIONS;
     }
+
+    /**
+     * get list of station from both pre-set list and smhi API list
+     * @returns {Promise}
+     */
     get stationList() {
         this.smhiAPI();
         return this.smhi_stations().then((smhiStations) => {
@@ -134,6 +167,9 @@ class Server {
             }
         })
     }
+    /**
+     * Setting up cache data api for request against server
+     */
     setupCache(){
         // setup cache
         const config = require('./static/server.config.json');
@@ -144,6 +180,9 @@ class Server {
             res.send(data)
         })
     }
+    /**
+     * get Precalculated data or generate it if not in registry
+     */
     precalculation() {
         this.app.get('/precalculated/:station/:type/*', (req, res) => {
             let specs = JSON.parse(JSON.stringify(stats_configs))
@@ -171,10 +210,11 @@ class Server {
                         specs[key] = search[key];
                 }
             })
-
+            /**
+             * file path for precalculated data
+             * @type {string}
+             */
             let filePath = `./cache/${specs.station}_${specs.type}_${req.params['0'].join('_')}${req['_parsedUrl'].search}.json`
-
-            ////console.log('specs', specs, filePath)
             if (fs.existsSync(filePath)) {
                 fs.readFile(filePath, 'utf8', function(error, data) {
                     res.send(data)
