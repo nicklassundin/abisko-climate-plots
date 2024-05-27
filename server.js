@@ -220,6 +220,7 @@ class Server {
                     res.send(data)
                 })
             }else{
+                console.error('No cache file found')
                 const result = stats.getByParams(specs, req.params['0'])
                 result.then((resolved) => {
                     if(Array.isArray(resolved) && typeof resolved[0].then === 'function'){
