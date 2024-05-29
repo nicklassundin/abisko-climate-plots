@@ -44,7 +44,7 @@
     "merge": "^2.1.1",
     "multer": "^1.4.2",
     "node-highcharts": "0.0.2",
-    "node-libcurl": "^2.3.3",
+    "node-libcurl": "^4.x.x",
     "npm-auto-version": "^1.0.0",
     "papaparse": "^5.2.0",
     "pem": "^1.14.4",
