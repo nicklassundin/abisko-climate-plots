@@ -1,9 +1,25 @@
 // Const $ = require("jquery");
-const TerserPlugin = require("terser-webpack-plugin");
+//const TerserPlugin = require("terser-webpack-plugin");
+import TerserPlugin from "terser-webpack-plugin";
 //const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const webpack = require("webpack");
-const dir = __dirname;
-module.exports = [
+//const webpack = require("webpack");
+import webpack from "webpack";
+// Workaround to use require in an ES module
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
+// Importing packages using dynamic import
+const streamHttp = require.resolve('stream-http');
+const url = require.resolve('url/');
+const httpsBrowserify = require.resolve('https-browserify');
+
+import path from "path";
+import { fileURLToPath } from "url";
+// Get the __filename equivalent
+const __filename = fileURLToPath(import.meta.url);
+// Get the __dirname equivalent
+const __dirname = path.dirname(__filename);
+export default [
     {
         "entry": {
             "bundle": "./modules/lib.js"
@@ -40,9 +56,9 @@ module.exports = [
         },
         "resolve": {
           "fallback": {
-              "http":  require.resolve("stream-http"),
-              "url": require.resolve("url/"),
-              "https": require.resolve("https-browserify"),
+              "http":  streamHttp,
+              "url": url,
+              "https": httpsBrowserify,
               "fs": false
           }
         },
@@ -54,7 +70,7 @@ module.exports = [
         },
         "output": {
             "filename": "./bundle.js",
-            "path": `${dir}/client`
+            "path": `${__dirname}/client`
         },
         "plugins": [
             /*

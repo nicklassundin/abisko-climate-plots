@@ -1,26 +1,32 @@
 <script type="text/javascript">
-    let init = function(start = true) {
-        let search = queryString.parse(location.search);
-        let stationName = start ? (search.station ? search.station : document.getElementById("station").value) : document.getElementById("station").value
-        let config_element = document.querySelector(`#station-${stationName}`)
-        let station = start ? (search.station ? search.station : config_element.dataset.station) : config_element.dataset.station;
-        let q = queryString.parse(location.search);
-
-        let set = start ? (search.set ? search.set : document.getElementById("set").value) : document.getElementById("set").value
-        q.set = set;
-        q.station = stationName
-
-        window.history.replaceState(null, null,'?'+queryString.stringify(q));
-        let station_config_id = `#station-${station}`
-        document.querySelector(station_config_id).setAttribute('data-set', set)
-        lib.renderFromData("mark", station_config_id)
-    }
 	$("select").change(function() {
 		document.getElementById("mark").innerHTML = "";
         init(false);
     });
 
-    $(function() {
-        init()
-    });
+    window.onload = function() {
+        let init = function(start = true) {
+            let search = queryString.parse(location.search);
+            let stationName = start ? (search.station ? search.station : document.getElementById("station").value) : document.getElementById("station").value
+            let config_element = document.querySelector(`#station-${stationName}`)
+            let station = start ? (search.station ? search.station : config_element.dataset.station) : config_element.dataset.station;
+            let q = queryString.parse(location.search);
+
+            let set = start ? (search.set ? search.set : document.getElementById("set").value) : document.getElementById("set").value
+            q.set = set;
+            q.station = stationName
+
+            window.history.replaceState(null, null,'?'+queryString.stringify(q));
+            let station_config_id = `#station-${station}`
+            document.querySelector(station_config_id).setAttribute('data-set', set)
+            lib.renderFromData("mark", station_config_id)
+        }
+        let queryString = window.queryString;
+        let lib = window.lib;
+        console.log('local.hbs-window.queryString',window.queryString)
+        console.log('local.hbs-window.lib',window.lib)
+        $(function() {
+            init()
+        });
+    }
 </script>

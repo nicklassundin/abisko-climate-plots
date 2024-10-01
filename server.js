@@ -1,32 +1,45 @@
-const cors = require('cors'); // Cors setup
-const health = require('express-healthcheck'); // Health Check
-require('jquery');
+import cors from 'cors';
+import health from 'express-healthcheck';
 // Cache requirements
-const fs = require('fs');   // write files to cache etc TODO make obsolete
-const axios = require('axios');
-const { setupCache } = require('axios-cache-interceptor');
-const { buildStorage } = require('axios-cache-interceptor');
+import fs from 'fs';
+//const axios = require('axios');
+import axios from 'axios';
+import { setupCache } from 'axios-cache-interceptor';
+import { buildStorage } from 'axios-cache-interceptor';
 // precalculated
-let stats = require('vizchange-stats');
+import stats from 'vizchange-stats';
 const stats_configs = JSON.parse(JSON.stringify(stats.configs['production_redirect']));
-// general express requirements
-require('request');
-const express = require('express');
-const http = require('http');
-const {version} = require('./package.json');
+// TODO make this right the url is undefined?position etc.....?
+import request from 'request';
+import express from 'express';
+import http from 'http';
+const {version} = await import('./package.json', {
+    assert: { type: "json" }
+});
 // Handle bar formatting
-const hbs = require('hbs');
-const session = require('express-session');
-const bodyParser = require('body-parser');
+import hbs from 'hbs';
+import session from 'express-session';
+import bodyParser from 'body-parser';
 // Pathing
-const path = require('path');
+import path from 'path';
 // Plot modules
-const plots_config = require('climate-plots-config');
-const web = require('./modules/server/web.js');
-const STATIC_STATIONS = require('./static/charts/stations.json');
+import plots_config from 'climate-plots-config';
+import web from './modules/server/web.js';
+const STATIC_STATIONS = await import('./static/charts/stations.json', {
+    assert: { type: "json" }
+});
 // Getting smhi server list
-let smhi = require('vizchange-smhi');
-const config = require("./static/server.config.json");
+//let smhi = require('vizchange-smhi');
+import smhi from 'vizchange-smhi'
+//const config = require("./static/server.config.json");
+const config = await import("./static/server.config.json", {
+    assert: { type: "json" }
+});
+import { fileURLToPath } from "url";
+// Get the __filename equivalent
+const __filename = fileURLToPath(import.meta.url);
+// Get the __dirname equivalent
+const __dirname = path.dirname(__filename);
 
 const storage = buildStorage({
     find(key) {
@@ -69,14 +82,13 @@ setupCache(axios, {
 /**
  * Class representing Server instance
  */
-class Server {
+export default class Server {
     /**
      * Initialize server class and create webserver
      * @param debug {boolean} defines if it is debug launch on local machine or live.
      */
     constructor(debug = false) {
         this.debug = debug;
-        this.webserver = web.webserver;
     }
 
     /**
@@ -84,6 +96,7 @@ class Server {
      * @returns {*|Express} return this instance of app;
      */
     createApp(){
+        console.log('Creating app...')
         this.app = express();
         // Define open paths
         this.app.use('/css', express.static(`${__dirname}/css`));
@@ -147,7 +160,7 @@ class Server {
      * @returns {{abisko: {}, CALM: {}, "64n-90n": {}, glob: {}, nhem: {}}}
      */
     get STATIC_STATIONS() {
-        return STATIC_STATIONS;
+        return STATIC_STATIONS.default;
     }
 
     /**
@@ -155,7 +168,8 @@ class Server {
      * @returns {Promise}
      */
     get stationList() {
-        this.smhiAPI();
+        // TODO problem with smhi API list
+        //this.smhiAPI();
         return this.smhi_stations().then((smhiStations) => {
             return {
                 smhi: smhiStations,
@@ -172,9 +186,8 @@ class Server {
      */
     setupCache(){
         // setup cache
-        const config = require('./static/server.config.json');
         this.app.use('/data/:server/:params', async function(req, res) {
-            let url = `https://${config[req.params.server]}${req['_parsedUrl'].search}`
+            let url = `https://${config.default[req.params.server]}${req['_parsedUrl'].search}`
             const { data } = await axios.get(url)
             res.setHeader('Content-Type', 'application/json')
             res.send(data)
@@ -244,7 +257,8 @@ class Server {
         return smhi.stations.getStations();
     }
     createAPI(){
-        this.webserver.http(this.app);
+        console.log('Creating API...')
+        web.http(this.app);
         this.app.get('/', function(req, res) {
             res.send('Lets do this');
         })
@@ -252,4 +266,3 @@ class Server {
         return this.app;
     }
 }
-module.exports = Server;
