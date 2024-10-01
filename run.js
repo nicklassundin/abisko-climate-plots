@@ -18,7 +18,6 @@ import Server from './server.js';
 	}
 })()
 
-
 import { spawn } from 'child_process';
 
 // Start the Python Flask server

@@ -8,6 +8,8 @@ app = Flask(__name__)
 # Helper functions to calculate the frost and temperature statistics
 def first_frost_autumn(df):
     """Find the first frost in autumn (from September onwards)."""
+    if df.empty:
+        return None
     autumn_df = df[df['date'].dt.month >= 9]  # Filter dates from September onwards
     frosts = autumn_df[autumn_df['avg_temperature'] <= 0]
     if not frosts.empty:
@@ -16,6 +18,8 @@ def first_frost_autumn(df):
 
 def last_frost_spring(df, year):
     """Find the last frost in spring (up until March of the next year)."""
+    if df.empty:
+        return None
     spring_df = df[(df['date'].dt.year == year) & (df['date'].dt.month <= 3)]  # Filter January to March of the following year
     frosts = spring_df[spring_df['avg_temperature'] <= 0]
     if not frosts.empty:
@@ -23,6 +27,8 @@ def last_frost_spring(df, year):
     return None
 
 def growing_season_weeks(df):
+    if df.empty:
+        return None
     df = df.sort_values(by='date')  # Ensure data is sorted by date
     df['above_zero'] = df['avg_temperature'] > 0
     df['week'] = pd.to_datetime(df['date']).dt.isocalendar().week
@@ -30,52 +36,51 @@ def growing_season_weeks(df):
     return weekly_avg.max()
 
 def growing_season_days(df):
+    if df.empty:
+        return None
     df = df.sort_values(by='date')  # Ensure data is sorted by date
     df['above_zero'] = df['avg_temperature'] > 0
     return df['above_zero'].astype(int).groupby((df['above_zero'] != df['above_zero'].shift()).cumsum()).sum().max()
 
 def warmest(df, period):
+    if df.empty:
+        return None
     return df.groupby(df['date'].dt.to_period(period))['avg_temperature'].mean().idxmax()
 
 def coldest(df, period):
+    if df.empty:
+        return None
     return df.groupby(df['date'].dt.to_period(period))['avg_temperature'].mean().idxmin()
 
 def warmest_day(df):
+    if df.empty:
+        return None
     return df.groupby(df['date'].dt.isocalendar().day)['avg_temperature'].mean().idxmax()
 def coldest_day(df):
+    if df.empty:
+        return None
     return df.groupby(df['date'].dt.isocalendar().day)['avg_temperature'].mean().idxmin()
 
 # New helper functions to calculate coldest/warmest months and weeks
 def coldest_month(df):
+    if df.empty:
+        return None
     return df.groupby(df['date'].dt.month)['avg_temperature'].mean().idxmin()
 
 def warmest_month(df):
+    if df.empty:
+        return None
     return df.groupby(df['date'].dt.month)['avg_temperature'].mean().idxmax()
 
 def coldest_week(df):
+    if df.empty:
+        return None
     return df.groupby(df['date'].dt.isocalendar().week)['avg_temperature'].mean().idxmin()
 
 def warmest_week(df):
+    if df.empty:
+        return None
     return df.groupby(df['date'].dt.isocalendar().week)['avg_temperature'].mean().idxmax()
-
-# SMHI definition of seasons
-def find_spring(df):
-    """Find the spring period based on SMHI's rules: 7 consecutive days with avg temp between 0°C and 10°C."""
-    df = df.sort_values(by='date')  # Ensure data is sorted by date
-    df['is_spring'] = df['avg_temperature'].between(0.0, 10.0)
-    df['spring_period'] = df['is_spring'].rolling(window=7).sum() >= 7
-    spring_start = df[df['spring_period']].iloc[0]['date'] if df['spring_period'].any() else None
-    return spring_start
-
-def filter_spring_data(df):
-    """Filter data for spring season using SMHI's definition."""
-    spring_start = find_spring(df)
-    if spring_start is not None:
-        # Filter out data from the start of spring onwards
-        spring_df = df[df['date'] >= spring_start]
-        spring_df = spring_df[spring_df['avg_temperature'].between(0.0, 10.0)]
-        return spring_df
-    return pd.DataFrame()  # Return empty DataFrame if no spring is found
 
 # Map statistic types to required raw data types based on the available database types
 STATISTICS_TO_DATA_TYPES = {
@@ -205,6 +210,9 @@ def weather_stats():
     # Assuming the data is in JSON format and contains the necessary raw data types
     try:
         data = response.json()
+        if not data:  # Handle cases where no data is returned
+            return jsonify({'error': 'No data available for the requested range.'}), 400
+
         # Convert the JSON data into a DataFrame
         weather_data = pd.DataFrame(data)
         weather_data['date'] = pd.to_datetime(weather_data['date'])
@@ -229,41 +237,42 @@ def weather_stats():
         # Filter data for the current year
         yearly_data = weather_data[weather_data['date'].dt.year == year]
         if yearly_data.empty:
+            results[year] = {'error': 'No data available for this year.'}
             continue
 
         year_stats = {}
 
         # Compute requested statistics
         if 'first_frost_autumn' in requested_stats:
-            year_stats['first_frost_autumn'] = int(first_frost_autumn(yearly_data))
+            year_stats['first_frost_autumn'] = int(first_frost_autumn(yearly_data)) if first_frost_autumn(yearly_data) else None
 
         if 'last_frost_spring' in requested_stats:
             last_frost = last_frost_spring(yearly_data, year)
             year_stats['last_frost_spring'] = int(last_frost) if last_frost else None
 
         if 'growing_season_weeks' in requested_stats:
-            year_stats['growing_season_weeks'] = int(growing_season_weeks(yearly_data)) if not pd.isna(growing_season_weeks(yearly_data)) else None
+            year_stats['growing_season_weeks'] = int(growing_season_weeks(yearly_data)) if growing_season_weeks(yearly_data) else None
 
         if 'growing_season_days' in requested_stats:
-            year_stats['growing_season_days'] = int(growing_season_days(yearly_data)) if not pd.isna(growing_season_days(yearly_data)) else None
+            year_stats['growing_season_days'] = int(growing_season_days(yearly_data)) if growing_season_days(yearly_data) else None
 
         if 'coldest_day' in requested_stats:
-            year_stats['coldest_day'] = int(coldest_day(yearly_data))
+            year_stats['coldest_day'] = int(coldest_day(yearly_data)) if coldest_day(yearly_data) else None
 
         if 'warmest_day' in requested_stats:
-            year_stats['warmest_day'] = int(warmest_day(yearly_data))
+            year_stats['warmest_day'] = int(warmest_day(yearly_data)) if warmest_day(yearly_data) else None
 
         if 'coldest_month' in requested_stats:
-            year_stats['coldest_month'] = coldest_month(yearly_data)  # Return abbreviation
+            year_stats['coldest_month'] = coldest_month(yearly_data) if coldest_month(yearly_data) else None
 
         if 'warmest_month' in requested_stats:
-            year_stats['warmest_month'] = warmest_month(yearly_data)  # Return abbreviation
+            year_stats['warmest_month'] = warmest_month(yearly_data) if warmest_month(yearly_data) else None
 
         if 'coldest_week' in requested_stats:
-            year_stats['coldest_week'] = int(coldest_week(yearly_data))
+            year_stats['coldest_week'] = int(coldest_week(yearly_data)) if coldest_week(yearly_data) else None
 
         if 'warmest_week' in requested_stats:
-            year_stats['warmest_week'] = int(warmest_week(yearly_data))
+            year_stats['warmest_week'] = int(warmest_week(yearly_data)) if warmest_week(yearly_data) else None
 
         if 'snow_sum' in requested_stats:
             year_stats['snow_sum'] = yearly_data[yearly_data['avg_temperature'] <= 0]['precipitation'].sum()
@@ -298,4 +307,4 @@ def weather_stats():
     return jsonify(results)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
