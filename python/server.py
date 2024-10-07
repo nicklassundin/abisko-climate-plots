@@ -1,9 +1,45 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # Import the CORS library
 import requests
 import pandas as pd
 import numpy as np
 
+import stations
+
 app = Flask(__name__)
+
+# Enable CORS for all routes
+CORS(app)
+
+import redis
+import json
+import hashlib
+
+# Initialize Redis connection
+cache = redis.StrictRedis(host='localhost', port=6379, db=0)
+
+def generate_cache_key(params):
+    """Generate a unique cache key based on the request parameters."""
+    key_string = json.dumps(params, sort_keys=True)  # Sorting to ensure key uniqueness
+    return hashlib.md5(key_string.encode('utf-8')).hexdigest()
+
+def get_weather_stats_cached(params):
+    """Fetch cached weather stats from Redis if available."""
+    cache_key = generate_cache_key(params)
+    cached_data = cache.get(cache_key)
+    if cached_data:
+        return json.loads(cached_data)  # Return the cached data if available
+    return None
+
+def set_weather_stats_cache(params, data):
+    """Cache the weather stats result in Redis."""
+    cache_key = generate_cache_key(params)
+    cache.set(cache_key, json.dumps(data), ex=3600)  # Cache for 1 hour
+
+def clear_weather_stats_cache(params):
+    """Clear the cache for a specific set of parameters."""
+    cache_key = generate_cache_key(params)
+    cache.delete(cache_key)
 
 # Helper functions to calculate the frost and temperature statistics
 def first_frost_autumn(df):
@@ -30,7 +66,7 @@ def growing_season_weeks(df):
     if df.empty:
         return None
     df = df.sort_values(by='date')  # Ensure data is sorted by date
-    df['above_zero'] = df['avg_temperature'] > 0
+    df['above_zero'] = df['min_temperature'] > 0
     df['week'] = pd.to_datetime(df['date']).dt.isocalendar().week
     weekly_avg = df.groupby('week')['above_zero'].mean()
     return weekly_avg.max()
@@ -39,7 +75,7 @@ def growing_season_days(df):
     if df.empty:
         return None
     df = df.sort_values(by='date')  # Ensure data is sorted by date
-    df['above_zero'] = df['avg_temperature'] > 0
+    df['above_zero'] = df['min_temperature'] > 0
     return df['above_zero'].astype(int).groupby((df['above_zero'] != df['above_zero'].shift()).cumsum()).sum().max()
 
 def warmest(df, period):
@@ -82,12 +118,30 @@ def warmest_week(df):
         return None
     return df.groupby(df['date'].dt.isocalendar().week)['avg_temperature'].mean().idxmax()
 
+def annual_temperature(df):
+    """Calculate the annual average temperature."""
+    if df.empty:
+        return None
+    return df['avg_temperature'].mean()
+def max_annual_temperature(df):
+    """Calculate the annual average temperature."""
+    if df.empty:
+        return None
+    return df.groupby(df['date'].dt.year)['avg_temperature'].max().mean()
+
+def min_annual_temperature(df):
+    """Calculate the annual average temperature."""
+    if df.empty:
+        return None
+    return df.groupby(df['date'].dt.year)['avg_temperature'].min().mean()
+
 # Map statistic types to required raw data types based on the available database types
 STATISTICS_TO_DATA_TYPES = {
+    'annual_temperature': ['avg_temperature'],
     'first_frost_autumn': ['avg_temperature'],
     'last_frost_spring': ['avg_temperature'],
-    'growing_season_days': ['avg_temperature'],
-    'growing_season_weeks': ['avg_temperature'],
+    'growing_season_days': ['min_temperature'],
+    'growing_season_weeks': ['min_temperature'],
     'coldest_day': ['min_temperature'],
     'warmest_day': ['max_temperature'],
     'coldest_month': ['avg_temperature'],
@@ -124,6 +178,8 @@ def calculate_baseline_stats(weather_data, baseline_start, baseline_end, request
     for stat in requested_stats:
         if stat == 'growing_season_weeks':
             baseline_stats['growing_season_weeks'] = int(growing_season_weeks(baseline_data))
+        elif stat == 'annual_temperature':
+            baseline_stats['annual_temperature'] = annual_temperature(baseline_data)
         elif stat == 'growing_season_days':
             baseline_stats['growing_season_days'] = int(growing_season_days(baseline_data))
         elif stat == 'coldest_day':
@@ -164,7 +220,11 @@ def calculate_difference_from_baseline(year_stats, baseline_stats):
 
     return differences
 
-@app.route('/weather_stats', methods=['GET'])
+@app.route('/', methods=['GET'])
+def status():
+    return jsonify({'status': 'ok'})
+
+@app.route('/data', methods=['GET'])
 def weather_stats():
     # Retrieve the query parameters for year range, coordinates, and filtering options
     start_year = request.args.get('start_year')
@@ -175,6 +235,20 @@ def weather_stats():
 
     # Parse baseline interval
     baseline_start, baseline_end = map(int, baseline.split(','))
+
+        # Combine the request parameters into a dict for caching
+    params = {
+             'start_year': start_year,
+             'end_year': end_year,
+             'coordinates': coordinates,
+             'requested_stats': requested_stats,
+             'baseline': baseline
+    }
+
+    # Check the cache for an existing result
+    cached_result = get_weather_stats_cached(params)
+    if cached_result:
+       return jsonify(cached_result)
 
     # Validate input parameters
     if not start_year or not end_year or not coordinates or not requested_stats:
@@ -243,6 +317,11 @@ def weather_stats():
         year_stats = {}
 
         # Compute requested statistics
+        if 'annual_temperature' in requested_stats:
+            year_stats['annual_temperature'] = annual_temperature(yearly_data)
+            year_stats['max_annual_temperature'] = max_annual_temperature(yearly_data)
+            year_stats['min_annual_temperature'] = min_annual_temperature(yearly_data)
+
         if 'first_frost_autumn' in requested_stats:
             year_stats['first_frost_autumn'] = int(first_frost_autumn(yearly_data)) if first_frost_autumn(yearly_data) else None
 
@@ -304,7 +383,30 @@ def weather_stats():
 
     results = {year: {k: convert_np_types(v) for k, v in stats.items()} for year, stats in results.items()}
 
+
+    # Cache the result
+    set_weather_stats_cache(params, results)
     return jsonify(results)
+
+@app.route('/station', methods=['GET'])
+def station_stats():
+    year = request.args.get('year')
+    lat = request.args.get('lat')
+    lng = request.args.get('lng')
+
+    # Validate the parameters
+    if not year or not lat or not lng:
+        return jsonify({"error": "Missing 'year', 'lat', or 'lng' parameter"}), 400
+
+    coordinates = (float(lat), float(lng))
+
+    # List of all possible data types to check for
+    data_types = ['avg_temperature', 'precipitation', 'min_temperature', 'max_temperature', 'snowdepth_meter', 'co2_weekly', 'freezeup', 'breakup']
+
+    # Get available statistics for the station at the provided coordinates
+    station_stats = stations.get_weather_stats_for_station(coordinates, year, data_types)
+
+    return jsonify(station_stats)
 
 if __name__ == '__main__':
     app.run(debug=False)

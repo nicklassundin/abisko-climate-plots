@@ -35,7 +35,9 @@
         {{#each stations.fixed}}
             <option href="#" id="station-{{this.id}}"
                     data-station="{{this.id}}"
-                    data-name="{{this.id}}">{{this.id}}</option>
+                    data-longitude="{{this.position.long}}"
+                    data-latitude="{{this.position.lat}}"
+                    data-name="{{this.name}}">{{this.name}}</option>
         {{/each}}
     </optgroup>
     <optgroup label="smhi">

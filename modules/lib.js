@@ -5,7 +5,5 @@ import lib from '../../renderer/lib.js';
 import queryString from 'query-string';
 window.lib = await lib;
 window.queryString = await queryString;
-console.log('lib-window.queryString', window.queryString);
-console.log('lib-windos.lib',window.lib);
 
 //if(process.env.NODE_ENV === 'development') lib = require('../../renderer/lib');

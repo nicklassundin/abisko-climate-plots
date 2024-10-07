@@ -1,0 +1,122 @@
+{
+  "abisko": {
+    "id": "abisko",
+    "position": {
+      "long": 18.8166,
+      "lat": 68.3538
+    },
+    "name": "Abisko"
+  },
+  "pavlopetri": {
+    "id": "pavlopetri",
+    "position": {
+      "long": 22.98865,
+      "lat": 36.51698
+    },
+    "name": "Pavlopetri"
+  },
+  "glob": {
+    "id": "glob",
+    "position": {
+      "long": 22.98865,
+      "lat": 36.51698
+    },
+    "name": "Glob"
+  },
+  "nhem": {
+    "id": "nhem",
+    "position": {
+      "long": 22.98865,
+      "lat": 36.51698
+    },
+    "name": "Nhem"
+  },
+  "calm": {
+    "id": "calm",
+    "position": {
+      "long": 18.33333333,
+      "lat": 68.4263889
+    },
+    "name": "Calm"
+  },
+  "64n-90n": {
+    "id": "64n-90n",
+    "position": {
+      "long": 36.51698,
+      "lat": 22.98865
+    },
+    "name": "64n-90n"
+  },
+  "tornetrask": {
+    "id": "tornetrask",
+    "position": {
+      "long": 19.723333333333333,
+      "lat": 68.22555555555556
+    },
+    "name": "Tornetrask"
+  },
+  "heliport": {
+    "id": "heliport",
+    "position": {
+      "long": 18.795555555555556,
+      "lat": 68.3644444
+    },
+    "name": "Heliport"
+  },
+  "katterjokk": {
+    "id": "katterjokk",
+    "position": {
+      "long": 18.1747222222222,
+      "lat": 68.4252778
+    },
+    "name": "Katterjokk"
+  },
+  "kursflaket": {
+    "id": "kursflaket",
+    "position": {
+      "long": 18.878333333333334,
+      "lat": 68.3513889
+    },
+    "name": "Kursflaket"
+  },
+  "lakta": {
+    "id": "lakta",
+    "position": {
+      "long": 18.33333333,
+      "lat": 68.4263889
+    },
+    "name": "Lakta"
+  },
+  "mellanflaket": {
+    "id": "mellanflaket",
+    "position": {
+      "long": 18.964166666667,
+      "lat": 68.3480556
+    },
+    "name": "Mellanflaket"
+  },
+  "narkevaere": {
+    "id": "narkevaere",
+    "position": {
+      "long": 19.76583333333,
+      "lat": 68.1977778
+    },
+    "name": "Narkeväre"
+  },
+  "storflaket": {
+    "id": "storflaket",
+    "position": {
+      "long": 18.96527777778,
+      "lat": 68.3475
+    },
+    "name": "Storflaket"
+  },
+  "bergfors": {
+    "id": "bergfors",
+    "position": {
+      "long": 19.762777777778,
+      "lat": 68.1455556
+    },
+    "name": "Bergfors"
+  }
+}

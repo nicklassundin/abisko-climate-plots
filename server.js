@@ -25,7 +25,7 @@ import path from 'path';
 // Plot modules
 import plots_config from 'climate-plots-config';
 import web from './modules/server/web.js';
-const STATIC_STATIONS = await import('./static/charts/stations.json', {
+const STATIC_STATIONS = await import('./static/stations.json', {
     assert: { type: "json" }
 });
 // Getting smhi server list
@@ -160,7 +160,7 @@ export default class Server {
      * @returns {{abisko: {}, CALM: {}, "64n-90n": {}, glob: {}, nhem: {}}}
      */
     get STATIC_STATIONS() {
-        return STATIC_STATIONS.default;
+        return STATIC_STATIONS.default
     }
 
     /**
@@ -169,14 +169,12 @@ export default class Server {
      */
     get stationList() {
         // TODO problem with smhi API list
-        //this.smhiAPI();
+        //this.smhiAPI()
         return this.smhi_stations().then((smhiStations) => {
             return {
                 smhi: smhiStations,
-                fixed: Object.keys(this.STATIC_STATIONS).map(value => {
-                    return {
-                        id: value
-                    }
+                fixed: Object.values(this.STATIC_STATIONS).map(value => {
+                    return value
                 })
             }
         })
