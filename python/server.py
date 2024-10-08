@@ -3,6 +3,7 @@ from flask_cors import CORS  # Import the CORS library
 import requests
 import pandas as pd
 import numpy as np
+import calendar
 
 import stations
 
@@ -56,7 +57,7 @@ def last_frost_spring(df, year):
     """Find the last frost in spring (up until March of the next year)."""
     if df.empty:
         return None
-    spring_df = df[(df['date'].dt.year == year) & (df['date'].dt.month <= 3)]  # Filter January to March of the following year
+    spring_df = annual_spring(df)
     frosts = spring_df[spring_df['avg_temperature'] <= 0]
     if not frosts.empty:
         return int(frosts.iloc[-1]['date'].dayofyear)
@@ -118,6 +119,30 @@ def warmest_week(df):
         return None
     return df.groupby(df['date'].dt.isocalendar().week)['avg_temperature'].mean().idxmax()
 
+def annual_spring(df):
+    """Calculate the annual average temperature during spring (March to May)."""
+    if df.empty:
+        return None
+    return df[(df['date'].dt.month >= 3) & (df['date'].dt.month <= 5)]  # Filter March to May
+
+def annual_summer(df):
+    """Calculate the annual average temperature during summer (June to August)."""
+    if df.empty:
+        return None
+    return df[(df['date'].dt.month >= 6) & (df['date'].dt.month <= 8)]  # Filter June to August
+
+def annual_autumn(df):
+    """Calculate the annual average temperature during autumn (September to November)."""
+    if df.empty:
+        return None
+    return df[(df['date'].dt.month >= 9) & (df['date'].dt.month <= 11)]  # Filter September to November
+
+def annual_winter(df):
+    """Calculate the annual average temperature during winter (December to February)."""
+    if df.empty:
+        return None
+    return df[(df['date'].dt.month >= 12) | (df['date'].dt.month <= 2)]  # Filter December to February
+
 def annual_temperature(df):
     """Calculate the annual average temperature."""
     if df.empty:
@@ -135,9 +160,203 @@ def min_annual_temperature(df):
         return None
     return df.groupby(df['date'].dt.year)['avg_temperature'].min().mean()
 
+def annual_spring_temperature(df):
+    """Calculate the annual average temperature during spring (March to May)."""
+    spring_df = annual_spring(df)
+    if spring_df.empty:
+        return None
+    return spring_df['avg_temperature'].mean()
+def max_annual_spring_temperature(df):
+    """Calculate the annual average temperature during spring (March to May)."""
+    spring_df = annual_spring(df)
+    if spring_df.empty:
+        return None
+    return spring_df['avg_temperature'].max()
+def min_annual_spring_temperature(df):
+    """Calculate the annual average temperature during spring (March to May)."""
+    spring_df = annual_spring(df)
+    if spring_df.empty:
+        return None
+    return spring_df['avg_temperature'].min()
+
+def annual_summer_temperature(df):
+    """Calculate the annual average temperature during summer (June to August)."""
+    summer_df = annual_summer(df)
+    if summer_df.empty:
+        return None
+    return summer_df['avg_temperature'].mean()
+def min_annual_summer_temperature(df):
+    """Calculate the annual average temperature during summer (June to August)."""
+    summer_df = annual_summer(df)
+    if summer_df.empty:
+        return None
+    return summer_df['avg_temperature'].min()
+def max_annual_summer_temperature(df):
+    """Calculate the annual average temperature during summer (June to August)."""
+    summer_df = annual_summer(df)
+    if summer_df.empty:
+        return None
+    return summer_df['avg_temperature'].max()
+def annual_autumn_temperature(df):
+    """Calculate the annual average temperature during autumn (September to November)."""
+    autumn_df = annual_autumn(df)
+    if autumn_df.empty:
+        return None
+    return autumn_df['avg_temperature'].mean()
+def min_annual_autumn_temperature(df):
+    """Calculate the annual average temperature during autumn (September to November)."""
+    autumn_df = annual_autumn(df)
+    if autumn_df.empty:
+        return None
+    return autumn_df['avg_temperature'].min()
+def max_annual_autumn_temperature(df):
+    """Calculate the annual average temperature during autumn (September to November)."""
+    autumn_df = annual_autumn(df)
+    if autumn_df.empty:
+        return None
+    return autumn_df['avg_temperature'].max()
+def annual_winter_temperature(df):
+    """Calculate the annual average temperature during winter (December to February)."""
+    winter_df = annual_winter(df)
+    if winter_df.empty:
+        return None
+    return winter_df['avg_temperature'].mean()
+def max_annual_winter_temperature(df):
+    """Calculate the annual average temperature during winter (December to February)."""
+    winter_df = annual_winter(df)
+    if winter_df.empty:
+        return None
+    return winter_df['avg_temperature'].max()
+def min_annual_winter_temperature(df):
+    """Calculate the annual average temperature during winter (December to February)."""
+    winter_df = annual_winter(df)
+    if winter_df.empty:
+        return None
+    return winter_df['avg_temperature'].min()
+
+def annual_spring_precipitation(df):
+    """Calculate the annual average precipitation during spring (March to May)."""
+    spring_df = annual_spring(df)
+    if spring_df.empty:
+        return None
+    return spring_df['precipitation'].sum()
+def snow_annual_spring_precipitation(df):
+    """Calculate the annual average snowfall during spring (March to May)."""
+    snowfall_spring_df = annual_spring(df)
+    if snowfall_spring_df.empty:
+        return None
+    return snowfall_spring_df[snowfall_spring_df['avg_temperature'] <= 0]['precipitation'].sum()
+def rain_annual_spring_precipitation(df):
+    """Calculate the annual average rainfall during spring (March to May)."""
+    rainfall_spring_df = annual_spring(df)
+    if rainfall_spring_df.empty:
+        return None
+    return rainfall_spring_df[rainfall_spring_df['avg_temperature'] > 0]['precipitation'].sum()
+def annual_summer_precipitation(df):
+    """Calculate the annual average precipitation during summer (June to August)."""
+    summer_df = annual_summer(df)
+    if summer_df.empty:
+        return None
+    return summer_df['precipitation'].sum()
+def snow_annual_summer_precipitation(df):
+    """Calculate the annual average snowfall during summer (June to August)."""
+    snowfall_summer_df = annual_summer(df)
+    if snowfall_summer_df.empty:
+        return None
+    return snowfall_summer_df[snowfall_summer_df['avg_temperature'] <= 0]['precipitation'].sum()
+def rain_annual_summer_precipitation(df):
+    """Calculate the annual average rainfall during summer (June to August)."""
+    rainfall_summer_df = annual_summer(df)
+    if rainfall_summer_df.empty:
+        return None
+    return rainfall_summer_df[rainfall_summer_df['avg_temperature'] > 0]['precipitation'].sum()
+def annual_autumn_precipitation(df):
+    """Calculate the annual average precipitation during autumn (September to November)."""
+    autumn_df = annual_autumn(df)
+    if autumn_df.empty:
+        return None
+    return autumn_df['precipitation'].sum()
+def snow_annual_autumn_precipitation(df):
+    """Calculate the annual average snowfall during autumn (September to November)."""
+    snowfall_autumn_df = annual_autumn(df)
+    if snowfall_autumn_df.empty:
+        return None
+    return snowfall_autumn_df[snowfall_autumn_df['precipitation'] > 0]['precipitation'].sum()
+def rain_annual_autumn_precipitation(df):
+    """Calculate the annual average rainfall during autumn (September to November)."""
+    rainfall_autumn_df = annual_autumn(df)
+    if rainfall_autumn_df.empty:
+        return None
+    return rainfall_autumn_df[rainfall_autumn_df['avg_temperature'] > 0]['precipitation'].sum()
+def annual_winter_precipitation(df):
+    """Calculate the annual average precipitation during winter (December to February)."""
+    winter_df = annual_winter(df)
+    if winter_df.empty:
+        return None
+    return winter_df['precipitation'].sum()
+def snow_annual_winter_precipitation(df):
+    """Calculate the annual average snowfall during winter (December to February)."""
+    snowfall_winter_df = annual_winter(df)
+    if snowfall_winter_df.empty:
+        return None
+    return snowfall_winter_df[snowfall_winter_df['avg_temperature'] <= 0]['precipitation'].sum()
+def rain_annual_winter_precipitation(df):
+    """Calculate the annual average rainfall during winter (December to February)."""
+    rainfall_winter_df = annual_winter(df)
+    if rainfall_winter_df.empty:
+        return None
+    return rainfall_winter_df[rainfall_winter_df['avg_temperature'] > 0]['precipitation'].sum()
+
+def annual_month(df, month):
+    """Return the monthly data for the specified month."""
+    return df[df['date'].dt.month == month].copy()
+def annual_month_temperature(df, month):
+    """Calculate the annual average temperature for the specified month."""
+    month_df = annual_month(df, month)
+    if month_df.empty:
+        return None
+    return month_df['avg_temperature'].mean()
+def max_annual_month_temperature(df, month):
+    """Calculate the annual maximum temperature for the specified month."""
+    month_df = annual_month(df, month)
+    if month_df.empty:
+        return None
+    return month_df['avg_temperature'].max()
+def min_annual_month_temperature(df, month):
+    """Calculate the annual minimum temperature for the specified month."""
+    month_df = annual_month(df, month)
+    if month_df.empty:
+        return None
+    return month_df['avg_temperature'].min()
+def annual_month_precipitation(df, month):
+    """Calculate the annual average precipitation for the specified month."""
+    month_df = annual_month(df, month)
+    if month_df.empty:
+        return None
+    return month_df['precipitation'].sum()
+def rain_annual_month_precipitation(df, month):
+    """Calculate the annual average rainfall for the specified month."""
+    rainfall_month_df = annual_month(df, month)
+    if rainfall_month_df.empty:
+        return None
+    return rainfall_month_df[rainfall_month_df['avg_temperature'] > 0]['precipitation'].sum()
+def snow_annual_month_precipitation(df, month):
+    """Calculate the annual average snowfall for the specified month."""
+    snowfall_month_df = annual_month(df, month)
+    if snowfall_month_df.empty:
+        return None
+    return snowfall_month_df[snowfall_month_df['avg_temperature'] <= 0]['precipitation'].sum()
+
+
 # Map statistic types to required raw data types based on the available database types
 STATISTICS_TO_DATA_TYPES = {
     'annual_temperature': ['avg_temperature'],
+    'annual_spring_temperature': ['avg_temperature'],
+    'annual_summer_temperature': ['avg_temperature'],
+    'annual_autumn_temperature': ['avg_temperature'],
+    'annual_winter_temperature': ['avg_temperature'],
+    'annual_winter_temperature': ['avg_temperature'],
+    'annual_month_temperature': ['avg_temperature'],
     'first_frost_autumn': ['avg_temperature'],
     'last_frost_spring': ['avg_temperature'],
     'growing_season_days': ['min_temperature'],
@@ -148,9 +367,12 @@ STATISTICS_TO_DATA_TYPES = {
     'warmest_month': ['avg_temperature'],
     'coldest_week': ['avg_temperature'],
     'warmest_week': ['avg_temperature'],
-    'snow_sum': ['avg_temperature', 'precipitation'],
-    'rain_sum': ['avg_temperature', 'precipitation'],
-    'precipitation': ['precipitation'],  # Total precipitation for the year
+    'annual_precipitation': ['avg_temperature', 'precipitation'],
+    'annual_spring_precipitation': ['avg_temperature','precipitation'],
+    'annual_summer_precipitation': ['avg_temperature','precipitation'],
+    'annual_autumn_precipitation': ['avg_temperature','precipitation'],
+    'annual_winter_precipitation': ['avg_temperature','precipitation'],
+    'annual_month_precipitation': ['avg_temperature','precipitation'],
     'freezeup': ['freezeup'],
     'breakup': ['breakup'],
     'co2_weekly': ['co2_weekly'],
@@ -180,6 +402,44 @@ def calculate_baseline_stats(weather_data, baseline_start, baseline_end, request
             baseline_stats['growing_season_weeks'] = int(growing_season_weeks(baseline_data))
         elif stat == 'annual_temperature':
             baseline_stats['annual_temperature'] = annual_temperature(baseline_data)
+        elif stat == 'annual_spring_temperature':
+            baseline_stats['annual_spring_temperature'] = annual_spring_temperature(baseline_data)
+        elif stat == 'annual_summer_temperature':
+            baseline_stats['annual_summer_temperature'] = annual_summer_temperature(baseline_data)
+        elif stat == 'annual_autumn_temperature':
+            baseline_stats['annual_autumn_temperature'] = annual_autumn_temperature(baseline_data)
+        elif stat == 'annual_winter_temperature':
+            baseline_stats['annual_winter_temperature'] = annual_winter_temperature(baseline_data)
+        elif stat == 'annual_spring_precipitation':
+            baseline_stats['annual_spring_precipitation'] = annual_spring_precipitation(baseline_data)/ (baseline_end - baseline_start + 1)
+            baseline_stats['snow_annual_spring_precipitation'] = snow_annual_spring_precipitation(baseline_data)/ (baseline_end - baseline_start + 1)
+            baseline_stats['rain_annual_spring_precipitation'] = rain_annual_spring_precipitation(baseline_data)/ (baseline_end - baseline_start + 1)
+        elif stat == 'annual_summer_precipitation':
+            baseline_stats['annual_summer_precipitation'] = annual_summer_precipitation(baseline_data)/ (baseline_end - baseline_start + 1)
+            baseline_stats['snow_annual_summer_precipitation'] = snow_annual_summer_precipitation(baseline_data)/ (baseline_end - baseline_start + 1)
+            baseline_stats['rain_annual_summer_precipitation'] = rain_annual_summer_precipitation(baseline_data)/ (baseline_end - baseline_start + 1)
+        elif stat == 'annual_autumn_precipitation':
+            baseline_stats['annual_autumn_precipitation'] = annual_autumn_precipitation(baseline_data)/ (baseline_end - baseline_start + 1)
+            baseline_stats['snow_annual_autumn_precipitation'] = snow_annual_autumn_precipitation(baseline_data)/ (baseline_end - baseline_start + 1)
+            baseline_stats['rain_annual_autumn_precipitation'] = rain_annual_autumn_precipitation(baseline_data)/ (baseline_end - baseline_start + 1)
+        elif stat == 'annual_winter_precipitation':
+            baseline_stats['annual_winter_precipitation'] = annual_winter_precipitation(baseline_data)/ (baseline_end - baseline_start + 1)
+            baseline_stats['snow_annual_winter_precipitation'] = snow_annual_winter_precipitation(baseline_data)/ (baseline_end - baseline_start + 1)
+            baseline_stats['rain_annual_winter_precipitation'] = rain_annual_winter_precipitation(baseline_data)/ (baseline_end - baseline_start + 1)
+        elif stat == 'annual_month_precipitation':
+            # iterate over month index
+            for month in range(1, 13):
+                # get month __name__ from
+                month_name = calendar.month_abbr[month]
+                baseline_stats[f'annual_month_precipitation_{month_name}'] = annual_month_precipitation(baseline_data, month)/ (baseline_end - baseline_start + 1)
+                baseline_stats[f'snow_annual_month_temperature_{month_name}'] = snow_annual_month_precipitation(df, month) / (baseline_end - baseline_start + 1)
+                baseline_stats[f'rain_annual_month_temperature_{month_name}'] = rain_annual_month_precipitation(df, month) / (baseline_end - baseline_start + 1)
+        elif stat == 'annual_month_temperature':
+            for month in range(1, 13):
+                month_name = calendar.month_abbr[month]
+                baseline_stats[f'annual_month_temperature_{month_name}'] = annual_month_temperature(baseline_data, month)
+                baseline_stats[f'min_annual_month_temperature_{month_name}'] = min_annual_month_temperature(df, month)
+                baseline_stats[f'max_annual_month_temperature_{month_name}'] = max_annual_month_temperature(df, month)
         elif stat == 'growing_season_days':
             baseline_stats['growing_season_days'] = int(growing_season_days(baseline_data))
         elif stat == 'coldest_day':
@@ -194,12 +454,10 @@ def calculate_baseline_stats(weather_data, baseline_start, baseline_end, request
             baseline_stats['coldest_week'] = int(coldest_week(baseline_data))
         elif stat == 'warmest_week':
             baseline_stats['warmest_week'] = int(warmest_week(baseline_data))
-        elif stat == 'snow_sum':
-            baseline_stats['snow_sum'] = baseline_data[baseline_data['avg_temperature'] <= 0]['precipitation'].sum() / (baseline_end - baseline_start + 1)
-        elif stat == 'rain_sum':
-            baseline_stats['rain_sum'] = baseline_data[baseline_data['avg_temperature'] > 0]['precipitation'].sum() / (baseline_end - baseline_start + 1)
-        elif stat == 'precipitation':
-            baseline_stats['precipitation'] = baseline_data['precipitation'].sum() / (baseline_end - baseline_start + 1)
+        elif stat == 'annual_precipitation':
+            baseline_stats['annual_precipitation'] = baseline_data['precipitation'].sum() / (baseline_end - baseline_start + 1)
+            baseline_stats['snow_annual_precipitation'] = baseline_data[baseline_data['avg_temperature'] <= 0]['precipitation'].sum() / (baseline_end - baseline_start + 1)
+            baseline_stats['rain_annual_precipitation'] = baseline_data[baseline_data['avg_temperature'] > 0]['precipitation'].sum() / (baseline_end - baseline_start + 1)
         elif stat == 'first_frost_autumn':
             baseline_stats['first_frost_autumn'] = first_frost_autumn(baseline_data)
         elif stat == 'last_frost_spring':
@@ -214,9 +472,9 @@ def calculate_difference_from_baseline(year_stats, baseline_stats):
     for stat in year_stats:
         if stat in baseline_stats and isinstance(baseline_stats[stat], (int, float)):
             # For numeric values, calculate the difference
-            differences[stat + '_difference'] = year_stats[stat] - baseline_stats[stat]
+            differences['diff_' + stat] = year_stats[stat] - baseline_stats[stat]
         else:
-            differences[stat + '_difference'] = None  # Handle non-numeric or unavailable data
+            differences['diff_' + stat] = None  # Handle non-numeric or unavailable data
 
     return differences
 
@@ -244,6 +502,16 @@ def weather_stats():
              'requested_stats': requested_stats,
              'baseline': baseline
     }
+    # Reset
+    reset = request.args.get('reset')
+    if reset is not None:
+        if reset.lower() == 'true':
+            clear_weather_stats_cache(params)
+    # flush
+    flush = request.args.get('flush')
+    if flush is not None:
+        if flush.lower() == 'true':
+            cache.flushdb()
 
     # Check the cache for an existing result
     cached_result = get_weather_stats_cached(params)
@@ -322,6 +590,55 @@ def weather_stats():
             year_stats['max_annual_temperature'] = max_annual_temperature(yearly_data)
             year_stats['min_annual_temperature'] = min_annual_temperature(yearly_data)
 
+        # create winter data for year covering spring to winther month
+        winter_year_data = weather_data[((weather_data['date'].dt.year == year) & (weather_data['date'].dt.month <= 3)) | ((weather_data['date'].dt.year == year+1) & (weather_data['date'].dt.month <= 2))]
+        if 'annual_spring_temperature' in requested_stats:
+            year_stats['annual_spring_temperature'] = annual_spring_temperature(winter_year_data)
+            year_stats['max_annual_spring_temperature'] = max_annual_spring_temperature(winter_year_data)
+            year_stats['min_annual_spring_temperature'] = min_annual_spring_temperature(winter_year_data)
+        if 'annual_summer_temperature' in requested_stats:
+            year_stats['annual_summer_temperature'] = annual_summer_temperature(yearly_data)
+            year_stats['max_annual_summer_temperature'] = max_annual_summer_temperature(yearly_data)
+            year_stats['min_annual_summer_temperature'] = min_annual_summer_temperature(yearly_data)
+        if 'annual_autumn_temperature' in requested_stats:
+            year_stats['annual_autumn_temperature'] = annual_autumn_temperature(yearly_data)
+            year_stats['max_annual_autumn_temperature'] = max_annual_autumn_temperature(yearly_data)
+            year_stats['min_annual_autumn_temperature'] = min_annual_autumn_temperature(yearly_data)
+        if 'annual_winter_temperature' in requested_stats:
+            year_stats['annual_winter_temperature'] = annual_winter_temperature(yearly_data)
+            year_stats['max_annual_winter_temperature'] = max_annual_winter_temperature(yearly_data)
+            year_stats['min_annual_winter_temperature'] = min_annual_winter_temperature(yearly_data)
+        if 'annual_spring_precipitation' in requested_stats:
+            year_stats['annual_spring_precipitation'] = annual_spring_precipitation(yearly_data)
+            year_stats['snow_annual_spring_precipitation'] = snow_annual_spring_precipitation(yearly_data)
+            year_stats['rain_annual_spring_precipitation'] = rain_annual_spring_precipitation(yearly_data)
+        if 'annual_summer_precipitation' in requested_stats:
+            year_stats['annual_summer_precipitation'] = annual_summer_precipitation(yearly_data)
+            year_stats['snow_annual_summer_precipitation'] = snow_annual_summer_precipitation(yearly_data)
+            year_stats['rain_annual_summer_precipitation'] = rain_annual_summer_precipitation(yearly_data)
+        if 'annual_autumn_precipitation' in requested_stats:
+            year_stats['annual_autumn_precipitation'] = annual_autumn_precipitation(yearly_data)
+            year_stats['snow_annual_autumn_precipitation'] = snow_annual_autumn_precipitation(yearly_data)
+            year_stats['rain_annual_autumn_precipitation'] = rain_annual_autumn_precipitation(yearly_data)
+        if 'annual_winter_precipitation' in requested_stats:
+            year_stats['annual_winter_precipitation'] = annual_winter_precipitation(yearly_data)
+            year_stats['snow_annual_winter_precipitation'] = snow_annual_winter_precipitation(yearly_data)
+            year_stats['rain_annual_winter_precipitation'] = rain_annual_winter_precipitation(yearly_data)
+
+        if 'annual_month_precipitation' in requested_stats:
+            for month in range(1, 13):
+                month_name = calendar.month_abbr[month]
+                year_stats[f'annual_{month_name}_precipitation'] = annual_month_precipitation(yearly_data, month)
+                year_stats[f'snow_annual_{month_name}_precipitation'] = snow_annual_month_precipitation(yearly_data, month)
+                year_stats[f'rain_annual_{month_name}_precipitation'] = rain_annual_month_precipitation(yearly_data, month)
+
+        if 'annual_month_temperature' in requested_stats:
+            for month in range(1, 13):
+                month_name = calendar.month_abbr[month]
+                year_stats[f'annual_{month_name}_temperature'] = annual_month_temperature(yearly_data, month)
+                year_stats[f'max_annual_{month_name}_temperature'] = max_annual_month_temperature(yearly_data, month)
+                year_stats[f'min_annual_{month_name}_temperature'] = min_annual_month_temperature(yearly_data, month)
+
         if 'first_frost_autumn' in requested_stats:
             year_stats['first_frost_autumn'] = int(first_frost_autumn(yearly_data)) if first_frost_autumn(yearly_data) else None
 
@@ -353,15 +670,13 @@ def weather_stats():
         if 'warmest_week' in requested_stats:
             year_stats['warmest_week'] = int(warmest_week(yearly_data)) if warmest_week(yearly_data) else None
 
-        if 'snow_sum' in requested_stats:
-            year_stats['snow_sum'] = yearly_data[yearly_data['avg_temperature'] <= 0]['precipitation'].sum()
+        if 'annual_precipitation' in requested_stats:
+            year_stats['snow_annual_precipitation'] = yearly_data[yearly_data['avg_temperature'] <= 0]['precipitation'].sum()
+            year_stats['rain_annual_precipitation'] = yearly_data[yearly_data['avg_temperature'] > 0]['precipitation'].sum()
+            year_stats['annual_precipitation'] = yearly_data['precipitation'].sum()
 
-        if 'rain_sum' in requested_stats:
-            year_stats['rain_sum'] = yearly_data[yearly_data['avg_temperature'] > 0]['precipitation'].sum()
-
-        if 'precipitation' in requested_stats:
-            # Total precipitation for the filtered month (if applicable) or year
-            year_stats['precipitation'] = yearly_data['precipitation'].sum()
+        if 'annual_spring_precipitation' in requested_stats:
+            year_stats['annual_spring_precipitation'] = winter_year_data['precipitation'].sum()
 
         if year_stats:  # Only add stats if any calculations were made
             results[year] = year_stats
