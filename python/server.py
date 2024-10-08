@@ -351,12 +351,26 @@ def snow_annual_month_precipitation(df, month):
 # Map statistic types to required raw data types based on the available database types
 STATISTICS_TO_DATA_TYPES = {
     'annual_temperature': ['avg_temperature'],
+    'global_temperature': ['glob_temp'],
+    'northern_hemisphere_temperature': ['nhem_temp'],
+    '64n90n_temperature': ['64n-90n_temp'],
     'annual_spring_temperature': ['avg_temperature'],
     'annual_summer_temperature': ['avg_temperature'],
     'annual_autumn_temperature': ['avg_temperature'],
     'annual_winter_temperature': ['avg_temperature'],
     'annual_winter_temperature': ['avg_temperature'],
-    'annual_month_temperature': ['avg_temperature'],
+    'annual_jan_temperature': ['avg_temperature'],
+    'annual_feb_temperature': ['avg_temperature'],
+    'annual_mar_temperature': ['avg_temperature'],
+    'annual_apr_temperature': ['avg_temperature'],
+    'annual_may_temperature': ['avg_temperature'],
+    'annual_jun_temperature': ['avg_temperature'],
+    'annual_jul_temperature': ['avg_temperature'],
+    'annual_aug_temperature': ['avg_temperature'],
+    'annual_sep_temperature': ['avg_temperature'],
+    'annual_oct_temperature': ['avg_temperature'],
+    'annual_nov_temperature': ['avg_temperature'],
+    'annual_dec_temperature': ['avg_temperature'],
     'first_frost_autumn': ['avg_temperature'],
     'last_frost_spring': ['avg_temperature'],
     'growing_season_days': ['min_temperature'],
@@ -372,7 +386,18 @@ STATISTICS_TO_DATA_TYPES = {
     'annual_summer_precipitation': ['avg_temperature','precipitation'],
     'annual_autumn_precipitation': ['avg_temperature','precipitation'],
     'annual_winter_precipitation': ['avg_temperature','precipitation'],
-    'annual_month_precipitation': ['avg_temperature','precipitation'],
+    'annual_jan_precipitation': ['avg_temperature','precipitation'],
+    'annual_feb_precipitation': ['avg_temperature','precipitation'],
+    'annual_mar_precipitation': ['avg_temperature','precipitation'],
+    'annual_apr_precipitation': ['avg_temperature','precipitation'],
+    'annual_may_precipitation': ['avg_temperature','precipitation'],
+    'annual_jun_precipitation': ['avg_temperature','precipitation'],
+    'annual_jul_precipitation': ['avg_temperature','precipitation'],
+    'annual_aug_precipitation': ['avg_temperature','precipitation'],
+    'annual_sep_precipitation': ['avg_temperature','precipitation'],
+    'annual_oct_precipitation': ['avg_temperature','precipitation'],
+    'annual_nov_precipitation': ['avg_temperature','precipitation'],
+    'annual_dec_precipitation': ['avg_temperature','precipitation'],
     'freezeup': ['freezeup'],
     'breakup': ['breakup'],
     'co2_weekly': ['co2_weekly'],
@@ -381,7 +406,8 @@ STATISTICS_TO_DATA_TYPES = {
     'complete_ice_cover': ['complete_ice_cover'],
     'glob_temp': ['glob_temp'],
     'nhem_temp': ['nhem_temp'],
-    'icetime': ['icetime']
+    'icetime': ['icetime'],
+    'perma': ['perma']
 }
 
 # List of all available statistics
@@ -398,10 +424,26 @@ def calculate_baseline_stats(weather_data, baseline_start, baseline_end, request
 
     # Compute baseline values for each requested statistic
     for stat in requested_stats:
+        for month in range(1, 13):
+            month_name = calendar.month_abbr[month].lower()
+            if stat == f'annual_{month_name}_precipitation':
+                baseline_stats[f'annual_{month_name}_precipitation'] = annual_month_precipitation(baseline_data, month) / (baseline_end - baseline_start + 1)
+                baseline_stats[f'snow_annual_{month_name}_precipitation'] = snow_annual_month_precipitation(baseline_data, month) / (baseline_end - baseline_start + 1)
+                baseline_stats[f'rain_annual_{month_name}_precipitation'] = rain_annual_month_precipitation(baseline_data, month) / (baseline_end - baseline_start + 1)
+            elif stat == f'annual_{month_name}_temperature':
+                baseline_stats[f'annual_{month_name}_temperature'] = annual_month_temperature(baseline_data, month)
+                baseline_stats[f'max_annual_{month_name}_temperature'] = max_annual_month_temperature(baseline_data, month)
+                baseline_stats[f'min_annual_{month_name}_temperature'] = min_annual_month_temperature(baseline_data, month)
         if stat == 'growing_season_weeks':
             baseline_stats['growing_season_weeks'] = int(growing_season_weeks(baseline_data))
         elif stat == 'annual_temperature':
             baseline_stats['annual_temperature'] = annual_temperature(baseline_data)
+        elif stat == 'global_temperature':
+            baseline_stats['global_temperature'] = baseline_data['glob_temp'].mean()
+        elif stat == 'northern_hemisphere_temperature':
+            baseline_stats['northern_hemisphere_temperature'] = baseline_data['nhem_temp'].mean()
+        elif stat == '64n90n_temperature':
+            baseline_stats['64n90n_temperature'] = baseline_data['64n-90n_temp'].mean()
         elif stat == 'annual_spring_temperature':
             baseline_stats['annual_spring_temperature'] = annual_spring_temperature(baseline_data)
         elif stat == 'annual_summer_temperature':
@@ -426,20 +468,6 @@ def calculate_baseline_stats(weather_data, baseline_start, baseline_end, request
             baseline_stats['annual_winter_precipitation'] = annual_winter_precipitation(baseline_data)/ (baseline_end - baseline_start + 1)
             baseline_stats['snow_annual_winter_precipitation'] = snow_annual_winter_precipitation(baseline_data)/ (baseline_end - baseline_start + 1)
             baseline_stats['rain_annual_winter_precipitation'] = rain_annual_winter_precipitation(baseline_data)/ (baseline_end - baseline_start + 1)
-        elif stat == 'annual_month_precipitation':
-            # iterate over month index
-            for month in range(1, 13):
-                # get month __name__ from
-                month_name = calendar.month_abbr[month]
-                baseline_stats[f'annual_month_precipitation_{month_name}'] = annual_month_precipitation(baseline_data, month)/ (baseline_end - baseline_start + 1)
-                baseline_stats[f'snow_annual_month_temperature_{month_name}'] = snow_annual_month_precipitation(df, month) / (baseline_end - baseline_start + 1)
-                baseline_stats[f'rain_annual_month_temperature_{month_name}'] = rain_annual_month_precipitation(df, month) / (baseline_end - baseline_start + 1)
-        elif stat == 'annual_month_temperature':
-            for month in range(1, 13):
-                month_name = calendar.month_abbr[month]
-                baseline_stats[f'annual_month_temperature_{month_name}'] = annual_month_temperature(baseline_data, month)
-                baseline_stats[f'min_annual_month_temperature_{month_name}'] = min_annual_month_temperature(df, month)
-                baseline_stats[f'max_annual_month_temperature_{month_name}'] = max_annual_month_temperature(df, month)
         elif stat == 'growing_season_days':
             baseline_stats['growing_season_days'] = int(growing_season_days(baseline_data))
         elif stat == 'coldest_day':
@@ -490,6 +518,8 @@ def weather_stats():
     coordinates = request.args.get('coordinates')  # Coordinates in the format "lat,lng"
     requested_stats = request.args.getlist('types')  # List of requested statistics (e.g., coldest_day, growing_season_days)
     baseline = request.args.get('baseline', '1961,1990')  # Default to 1961-1990 baseline
+    radius = request.args.get('radius', 30)  # Default to 30 km radius (for future use)
+    station = request.args.get('station', 'all')
 
     # Parse baseline interval
     baseline_start, baseline_end = map(int, baseline.split(','))
@@ -500,7 +530,9 @@ def weather_stats():
              'end_year': end_year,
              'coordinates': coordinates,
              'requested_stats': requested_stats,
-             'baseline': baseline
+             'baseline': baseline,
+             'radius': radius,
+             'station': station
     }
     # Reset
     reset = request.args.get('reset')
@@ -538,7 +570,7 @@ def weather_stats():
 
     # Build the URL dynamically based on the required raw data types
     base_url = 'https://vischange.k8s.glimworks.se/data/query/v1'
-    query_url = f"{base_url}?position={coordinates}&radius=30&date={start_year}0101-{end_year}1231&types={required_data_types}"
+    query_url = f"{base_url}?position={coordinates}&radius={radius}&date={start_year}0101-{end_year}1231&types={required_data_types}"
 
     # Debugging - Print the final URL to check its format
     print(f"Final URL: {query_url}")
@@ -572,7 +604,10 @@ def weather_stats():
 
     # Calculate baseline statistics from the resulting statistics over the baseline period
     baseline_stats = calculate_baseline_stats(weather_data, baseline_start, baseline_end, requested_stats)
-
+    weather_data['station'] = weather_data['station'].str.lower()
+    print(weather_data['station'].unique())
+    if station != 'all':
+        weather_data = weather_data[weather_data['station'] == station]
     # Perform necessary calculations based on the requested statistics
     results = {}
     for year in range(int(start_year), int(end_year)):
@@ -589,7 +624,12 @@ def weather_stats():
             year_stats['annual_temperature'] = annual_temperature(yearly_data)
             year_stats['max_annual_temperature'] = max_annual_temperature(yearly_data)
             year_stats['min_annual_temperature'] = min_annual_temperature(yearly_data)
-
+        if 'global_temperature' in requested_stats:
+            year_stats['global_temperature'] = yearly_data['glob_temp'].mean()
+        if 'northern_hemisphere_temperature' in requested_stats:
+            year_stats['northern_hemisphere_temperature'] = yearly_data['nhem_temp'].mean()
+        if '64n90n_temperature' in requested_stats:
+            year_stats['64n90n_temperature'] = yearly_data['64n-90n_temp'].mean()
         # create winter data for year covering spring to winther month
         winter_year_data = weather_data[((weather_data['date'].dt.year == year) & (weather_data['date'].dt.month <= 3)) | ((weather_data['date'].dt.year == year+1) & (weather_data['date'].dt.month <= 2))]
         if 'annual_spring_temperature' in requested_stats:
@@ -624,20 +664,18 @@ def weather_stats():
             year_stats['annual_winter_precipitation'] = annual_winter_precipitation(yearly_data)
             year_stats['snow_annual_winter_precipitation'] = snow_annual_winter_precipitation(yearly_data)
             year_stats['rain_annual_winter_precipitation'] = rain_annual_winter_precipitation(yearly_data)
-
-        if 'annual_month_precipitation' in requested_stats:
-            for month in range(1, 13):
-                month_name = calendar.month_abbr[month]
-                year_stats[f'annual_{month_name}_precipitation'] = annual_month_precipitation(yearly_data, month)
-                year_stats[f'snow_annual_{month_name}_precipitation'] = snow_annual_month_precipitation(yearly_data, month)
-                year_stats[f'rain_annual_{month_name}_precipitation'] = rain_annual_month_precipitation(yearly_data, month)
-
-        if 'annual_month_temperature' in requested_stats:
-            for month in range(1, 13):
-                month_name = calendar.month_abbr[month]
+        if 'perma' in requested_stats:
+            year_stats['perma'] = yearly_data['perma'].mean()
+        for month in range(1, 13):
+            month_name = calendar.month_abbr[month].lower()
+            if f'annual_{month_name}_temperature' in requested_stats:
                 year_stats[f'annual_{month_name}_temperature'] = annual_month_temperature(yearly_data, month)
                 year_stats[f'max_annual_{month_name}_temperature'] = max_annual_month_temperature(yearly_data, month)
                 year_stats[f'min_annual_{month_name}_temperature'] = min_annual_month_temperature(yearly_data, month)
+            if f'annual_{month_name}_precipitation' in requested_stats:
+                year_stats[f'annual_{month_name}_precipitation'] = annual_month_precipitation(yearly_data, month)
+                year_stats[f'snow_annual_{month_name}_precipitation'] = snow_annual_month_precipitation(yearly_data, month)
+                year_stats[f'rain_annual_{month_name}_precipitation'] = rain_annual_month_precipitation(yearly_data, month)
 
         if 'first_frost_autumn' in requested_stats:
             year_stats['first_frost_autumn'] = int(first_frost_autumn(yearly_data)) if first_frost_autumn(yearly_data) else None
@@ -678,8 +716,12 @@ def weather_stats():
         if 'annual_spring_precipitation' in requested_stats:
             year_stats['annual_spring_precipitation'] = winter_year_data['precipitation'].sum()
 
+        if weather_data['station'].nunique() == 1:
+            year_stats['station'] = weather_data['station'].iloc[0]
+
         if year_stats:  # Only add stats if any calculations were made
             results[year] = year_stats
+
 
         # Calculate the difference from the baseline statistics
         differences = calculate_difference_from_baseline(year_stats, baseline_stats)
@@ -716,7 +758,7 @@ def station_stats():
     coordinates = (float(lat), float(lng))
 
     # List of all possible data types to check for
-    data_types = ['avg_temperature', 'precipitation', 'min_temperature', 'max_temperature', 'snowdepth_meter', 'co2_weekly', 'freezeup', 'breakup']
+    data_types = ['avg_temperature', 'precipitation', 'min_temperature', 'max_temperature', 'snowdepth_meter', 'co2_weekly', 'freezeup', 'breakup', 'perma']
 
     # Get available statistics for the station at the provided coordinates
     station_stats = stations.get_weather_stats_for_station(coordinates, year, data_types)

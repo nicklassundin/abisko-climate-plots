@@ -18,16 +18,16 @@
   "glob": {
     "id": "glob",
     "position": {
-      "long": 22.98865,
-      "lat": 36.51698
+      "long": 36.51698,
+      "lat": 22.98865
     },
     "name": "Glob"
   },
   "nhem": {
     "id": "nhem",
     "position": {
-      "long": 22.98865,
-      "lat": 36.51698
+      "long": 36.51698,
+      "lat": 22.98865
     },
     "name": "Nhem"
   },
