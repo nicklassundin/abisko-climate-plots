@@ -346,6 +346,67 @@ def snow_annual_month_precipitation(df, month):
     if snowfall_month_df.empty:
         return None
     return snowfall_month_df[snowfall_month_df['avg_temperature'] <= 0]['precipitation'].sum()
+def icetime_annual(df):
+    """Calculate the annual average ice time."""
+    if df.empty:
+        return None
+    return df['icetime'].mean()
+def annual_freezeup(df):
+    """Calculate the annual average freezeup date."""
+    if df.empty:
+        return None
+    threshold = 90  # You can adjust this threshold based on your use case
+    days_in_previous_year = 365  # You can adjust this for leap years if needed
+    # and number of days of previous year to the freezeup number
+    df['adjusted_freezeup'] = df['freezeup'].apply(lambda x: x + days_in_previous_year if x <= threshold else x)
+    return df['adjusted_freezeup'].mean()
+def annual_breakup(df):
+    """Calculate the annual average breakup date."""
+    if df.empty:
+        return None
+    return df['breakup'].mean()
+def annual_ice_thickness(df):
+    """Calculate the annual average ice thickness."""
+    if df.empty:
+        return None
+    return df['complete_ice_cover'].max()
+
+def period_month_snowdepth(df, month):
+    """Calculate the annual average snow depth."""
+    month_df = annual_month(df, month)
+    if month_df.empty:
+        return None
+    return month_df['snowdepth_single'].mean()
+
+def calculate_time_interval_stats(weather_data, start_year, end_year, step, requested_stats, stat_name, stat_function):
+    """Calculate statistics over a specified time interval (e.g., decades or periods)."""
+    time_interval_results = {}
+
+    # Loop over the time intervals
+    for start in range(int(start_year), int(end_year), step):
+        # Filter the data for the current time interval
+        time_interval_data = weather_data[(weather_data['date'].dt.year >= start) &
+                                          (weather_data['date'].dt.year < start + step)]
+
+        if time_interval_data.empty:
+            time_interval_results[start] = {'error': f'No data available for this interval.'}
+            continue
+
+        # Initialize the stats for this time interval
+        interval_stats = {}
+
+        # Loop through each month to calculate stats if required
+        for month in range(1, 13):
+            if stat_name in requested_stats:
+                interval_stats[month] = {}
+                interval_stats[month][stat_name] = stat_function(time_interval_data, month)
+
+        # Store the stats for this time interval
+        if interval_stats:
+            time_interval_results[start] = interval_stats
+
+    return time_interval_results
+
 
 
 # Map statistic types to required raw data types based on the available database types
@@ -398,16 +459,30 @@ STATISTICS_TO_DATA_TYPES = {
     'annual_oct_precipitation': ['avg_temperature','precipitation'],
     'annual_nov_precipitation': ['avg_temperature','precipitation'],
     'annual_dec_precipitation': ['avg_temperature','precipitation'],
-    'freezeup': ['freezeup'],
-    'breakup': ['breakup'],
+    'annual_freezeup': ['freezeup'],
+    'annual_breakup': ['breakup'],
+    'annual_ice_time': ['icetime'],
+    'annual_ice_thickness': ['complete_ice_cover'],
     'co2_weekly': ['co2_weekly'],
     'snowdepth_meter': ['snowdepth_meter'],
+    'period_snowdepth': ['snowdepth_single'],
     'snowdepth_single': ['snowdepth_single'],
-    'complete_ice_cover': ['complete_ice_cover'],
     'glob_temp': ['glob_temp'],
     'nhem_temp': ['nhem_temp'],
-    'icetime': ['icetime'],
-    'perma': ['perma']
+    'perma': ['perma'],
+}
+DATA_TYPES_TO_TYPE = {
+    'avg_temperature': 'numeric',
+    'glob_temp': 'numeric',
+    'nhem_temp': 'numeric',
+    '64n-90n_temp': 'numeric',
+    'avg_temperature': 'numeric',
+    'precipitation': 'numeric',
+    'freezeup': 'date',
+    'breakup': 'date',
+    'icetime': 'numeric',
+    'snowdepth_single': 'numeric',
+    'snowdepth_meter': 'numeric',
 }
 
 # List of all available statistics
@@ -490,6 +565,14 @@ def calculate_baseline_stats(weather_data, baseline_start, baseline_end, request
             baseline_stats['first_frost_autumn'] = first_frost_autumn(baseline_data)
         elif stat == 'last_frost_spring':
             baseline_stats['last_frost_spring'] = last_frost_spring(baseline_data, baseline_end)
+        elif stat == 'annual_ice_time':
+            baseline_stats['annual_ice_time'] = icetime_annual(baseline_data)
+        elif stat == 'annual_freezeup':
+            baseline_stats['annual_freezeup'] = annual_freezeup(baseline_data)
+        elif stat == 'annual_breakup':
+            baseline_stats['annual_breakup'] = annual_breakup(baseline_data)
+        elif stat == 'annual_ice_thickness':
+            baseline_stats['annual_ice_thickness'] = annual_ice_thickness(baseline_data)
 
     return baseline_stats
 
@@ -587,25 +670,28 @@ def weather_stats():
         if not data:  # Handle cases where no data is returned
             return jsonify({'error': 'No data available for the requested range.'}), 400
 
-        # Convert the JSON data into a DataFrame
         weather_data = pd.DataFrame(data)
         weather_data['date'] = pd.to_datetime(weather_data['date'])
 
         # Filter out times that are not midnight (00:00:00)
-        weather_data = weather_data[weather_data['date'].dt.time == pd.Timestamp("00:00:00").time()]
+        # TODO does this need to be here?
+        # disabled for annomaly data in breakup 2022
+        # weather_data = weather_data[weather_data['date'].dt.time == pd.Timestamp("00:00:00").time()]
 
         # Ensure necessary columns are in numeric format
         for data_type in required_data_types.split(','):
             if data_type in weather_data.columns:
-                weather_data[data_type] = pd.to_numeric(weather_data[data_type], errors='coerce')
-
+                if data_type in DATA_TYPES_TO_TYPE:
+                    if DATA_TYPES_TO_TYPE[data_type] == 'date':
+                        weather_data[data_type] = pd.to_datetime(weather_data[data_type], errors='coerce')
+                        weather_data[data_type] = weather_data[data_type].dt.dayofyear
+                    weather_data[data_type] = pd.to_numeric(weather_data[data_type], errors='coerce')
     except Exception as e:
         return jsonify({'error': 'Failed to parse JSON data'}), 400
 
     # Calculate baseline statistics from the resulting statistics over the baseline period
     baseline_stats = calculate_baseline_stats(weather_data, baseline_start, baseline_end, requested_stats)
     weather_data['station'] = weather_data['station'].str.lower()
-    print(weather_data['station'].unique())
     if station != 'all':
         weather_data = weather_data[weather_data['station'] == station]
     # Perform necessary calculations based on the requested statistics
@@ -716,19 +802,38 @@ def weather_stats():
         if 'annual_spring_precipitation' in requested_stats:
             year_stats['annual_spring_precipitation'] = winter_year_data['precipitation'].sum()
 
+        if 'annual_ice_time' in requested_stats:
+            year_stats['annual_ice_time'] = icetime_annual(yearly_data)
+
+        if 'annual_freezeup' in requested_stats:
+            year_stats['annual_freezeup'] = annual_freezeup(yearly_data)
+        if 'annual_breakup' in requested_stats:
+            year_stats['annual_breakup'] = annual_breakup(yearly_data)
+        if 'annual_ice_thickness' in requested_stats:
+            year_stats['annual_ice_thickness'] = int(annual_ice_thickness(yearly_data))
+
+
         if weather_data['station'].nunique() == 1:
             year_stats['station'] = weather_data['station'].iloc[0]
 
         if year_stats:  # Only add stats if any calculations were made
             results[year] = year_stats
-
-
         # Calculate the difference from the baseline statistics
         differences = calculate_difference_from_baseline(year_stats, baseline_stats)
         year_stats.update(differences)
 
-    # Convert all numpy types (int64, float64) in the results to native Python types before returning JSON
+    # TODO built into single function
+
+    # Calculate stats for decades
+    decade_start = 1961
+    decade_results = calculate_time_interval_stats(weather_data, decade_start, end_year, 10, requested_stats, 'period_snowdepth', period_month_snowdepth)
+
+    # Calculate stats for periods (e.g., 30-year intervals)
+    period_start = 1931
+    period_results = calculate_time_interval_stats(weather_data, period_start, end_year, 30, requested_stats, 'period_snowdepth', period_month_snowdepth)
+    # Now embed the results into the final results dictionary
     def convert_np_types(obj):
+        """Helper function to convert numpy types to native Python types."""
         if isinstance(obj, np.integer):
             return int(obj)
         elif isinstance(obj, np.floating):
@@ -738,8 +843,11 @@ def weather_stats():
         else:
             return obj
 
-    results = {year: {k: convert_np_types(v) for k, v in stats.items()} for year, stats in results.items()}
-
+    results = {
+        'annual': {year: {k: convert_np_types(v) for k, v in stats.items()} for year, stats in results.items()},
+        'decades': {decade: {k: convert_np_types(v) for k, v in stats.items()} for decade, stats in decade_results.items()},
+        'periods': {period: {k: convert_np_types(v) for k, v in stats.items()} for period, stats in period_results.items()}
+    }
 
     # Cache the result
     set_weather_stats_cache(params, results)
@@ -758,7 +866,7 @@ def station_stats():
     coordinates = (float(lat), float(lng))
 
     # List of all possible data types to check for
-    data_types = ['avg_temperature', 'precipitation', 'min_temperature', 'max_temperature', 'snowdepth_meter', 'co2_weekly', 'freezeup', 'breakup', 'perma']
+    data_types = ['avg_temperature', 'precipitation', 'min_temperature', 'max_temperature', 'snowdepth_meter', 'co2_weekly', 'freezeup', 'breakup', 'perma', 'icetime']
 
     # Get available statistics for the station at the provided coordinates
     station_stats = stations.get_weather_stats_for_station(coordinates, year, data_types)
