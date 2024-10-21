@@ -63,14 +63,15 @@ def last_frost_spring(df, year):
         return int(frosts.iloc[-1]['date'].dayofyear)
     return None
 
+import pandas as pd
+
 def growing_season_weeks(df):
+    # Check if the DataFrame is empty
     if df.empty:
         return None
-    df = df.sort_values(by='date')  # Ensure data is sorted by date
     df['above_zero'] = df['min_temperature'] > 0
-    df['week'] = pd.to_datetime(df['date']).dt.isocalendar().week
-    weekly_avg = df.groupby('week')['above_zero'].mean()
-    return weekly_avg.max()
+    weeks_above_zero = df.groupby(df['date'].dt.isocalendar().week)['above_zero'].max()
+    return weeks_above_zero.sum()
 
 def growing_season_days(df):
     if df.empty:
@@ -400,11 +401,15 @@ def calculate_time_interval_stats(weather_data, start_year, end_year, step, requ
             if stat_name in requested_stats:
                 interval_stats[month] = {}
                 interval_stats[month][stat_name] = stat_function(time_interval_data, month)
-
         # Store the stats for this time interval
         if interval_stats:
             time_interval_results[start] = interval_stats
-
+    time_interval_results['allTime'] = {}
+    time_allTime_data = weather_data[(weather_data['date'].dt.year >= int(start_year)) & (weather_data['date'].dt.year <= int(end_year))]
+    for month in range(1, 13):
+        if stat_name in requested_stats:
+            time_interval_results['allTime'][month] = {}
+            time_interval_results['allTime'][month][stat_name] = stat_function(time_allTime_data, month)
     return time_interval_results
 
 
@@ -463,10 +468,10 @@ STATISTICS_TO_DATA_TYPES = {
     'annual_breakup': ['breakup'],
     'annual_ice_time': ['icetime'],
     'annual_ice_thickness': ['complete_ice_cover'],
-    'co2_weekly': ['co2_weekly'],
-    'snowdepth_meter': ['snowdepth_meter'],
+    'weekly_co2': ['co2_weekly'],
+    'annual_snowdepth_meter': ['snowdepth_meter'],
+    'annual_snowdepth_single': ['snowdepth_single'],
     'period_snowdepth': ['snowdepth_single'],
-    'snowdepth_single': ['snowdepth_single'],
     'glob_temp': ['glob_temp'],
     'nhem_temp': ['nhem_temp'],
     'perma': ['perma'],
@@ -573,6 +578,10 @@ def calculate_baseline_stats(weather_data, baseline_start, baseline_end, request
             baseline_stats['annual_breakup'] = annual_breakup(baseline_data)
         elif stat == 'annual_ice_thickness':
             baseline_stats['annual_ice_thickness'] = annual_ice_thickness(baseline_data)
+        elif stat == 'annual_snowdepth_meter':
+            baseline_stats['annual_snowdepth_meter'] = baseline_data['snowdepth_meter'].mean()
+        elif stat == 'annual_snowdepth_single':
+            baseline_stats['annual_snowdepth_single'] = baseline_data['snowdepth_single'].mean()
 
     return baseline_stats
 
@@ -685,7 +694,7 @@ def weather_stats():
                     if DATA_TYPES_TO_TYPE[data_type] == 'date':
                         weather_data[data_type] = pd.to_datetime(weather_data[data_type], errors='coerce')
                         weather_data[data_type] = weather_data[data_type].dt.dayofyear
-                    weather_data[data_type] = pd.to_numeric(weather_data[data_type], errors='coerce')
+                weather_data[data_type] = pd.to_numeric(weather_data[data_type], errors='coerce')
     except Exception as e:
         return jsonify({'error': 'Failed to parse JSON data'}), 400
 
@@ -811,7 +820,10 @@ def weather_stats():
             year_stats['annual_breakup'] = annual_breakup(yearly_data)
         if 'annual_ice_thickness' in requested_stats:
             year_stats['annual_ice_thickness'] = int(annual_ice_thickness(yearly_data))
-
+        if 'annual_snowdepth_meter' in requested_stats:
+            year_stats['annual_snowdepth_meter'] = yearly_data['snowdepth_meter'].mean()
+        if 'annual_snowdepth_single' in requested_stats:
+            year_stats['annual_snowdepth_single'] = yearly_data['snowdepth_single'].mean()
 
         if weather_data['station'].nunique() == 1:
             year_stats['station'] = weather_data['station'].iloc[0]
@@ -831,6 +843,15 @@ def weather_stats():
     # Calculate stats for periods (e.g., 30-year intervals)
     period_start = 1931
     period_results = calculate_time_interval_stats(weather_data, period_start, end_year, 30, requested_stats, 'period_snowdepth', period_month_snowdepth)
+
+    # raw
+    raw_stats = {}
+    if 'weekly_co2' in requested_stats:
+        # Create a list of dictionaries with weekly_co2 and corresponding date
+        raw_stats['weekly_co2'] = [
+            {'weekly_co2': co2, 'date': int(pd.Timestamp(date).timestamp() * 1000)}
+            for co2, date in zip(weather_data['co2_weekly'].astype(float), weather_data['date'])
+        ]
     # Now embed the results into the final results dictionary
     def convert_np_types(obj):
         """Helper function to convert numpy types to native Python types."""
@@ -845,10 +866,16 @@ def weather_stats():
 
     results = {
         'annual': {year: {k: convert_np_types(v) for k, v in stats.items()} for year, stats in results.items()},
-        'decades': {decade: {k: convert_np_types(v) for k, v in stats.items()} for decade, stats in decade_results.items()},
-        'periods': {period: {k: convert_np_types(v) for k, v in stats.items()} for period, stats in period_results.items()}
+        'decades': {str(decade): {k: convert_np_types(v) for k, v in stats.items()} for decade, stats in decade_results.items()},
+        'periods': {str(period): {k: convert_np_types(v) for k, v in stats.items()} for period, stats in period_results.items()},
+         'raw': {
+                stat_type: [
+                    {k: convert_np_types(v) for k, v in stat_item.items()}
+                    for stat_item in stat_list
+                ]
+                for stat_type, stat_list in raw_stats.items()
+         }
     }
-
     # Cache the result
     set_weather_stats_cache(params, results)
     return jsonify(results)
@@ -866,7 +893,7 @@ def station_stats():
     coordinates = (float(lat), float(lng))
 
     # List of all possible data types to check for
-    data_types = ['avg_temperature', 'precipitation', 'min_temperature', 'max_temperature', 'snowdepth_meter', 'co2_weekly', 'freezeup', 'breakup', 'perma', 'icetime']
+    data_types = ['avg_temperature', 'precipitation', 'min_temperature', 'max_temperature', 'snowdepth_single', 'snowdepth_meter', 'co2_weekly', 'freezeup', 'breakup', 'perma', 'icetime']
 
     # Get available statistics for the station at the provided coordinates
     station_stats = stations.get_weather_stats_for_station(coordinates, year, data_types)
