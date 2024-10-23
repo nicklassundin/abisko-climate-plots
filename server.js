@@ -104,6 +104,7 @@ export default class Server {
         this.app.use('/config', express.static(`${__dirname}/config`));
         this.app.use('/client', express.static(`${__dirname}/client`));
         this.app.use('/static', express.static(`${__dirname}/static`));
+        this.app.use('/res', express.static(`${__dirname}/res`));
         // Generate plot config files in local directory
         plots_config.genStaticFiles(path.join(__dirname, '/')).then();
         // Parse and page builder from Handlebars templates
@@ -117,6 +118,8 @@ export default class Server {
         hbs.registerPartials(`${__dirname}/views/partials`);
         // Setup Browse preview on server
         this.setupServerPreview();
+        // Setup Map preview on server
+        this.setupServerMapPreview();
         // setup Cache
         this.setupCache();
         // setup pre-calculated values TODO make obsolete
@@ -144,6 +147,13 @@ export default class Server {
                             version
                         })
                 })
+            })
+        })
+    }
+    setupServerMapPreview() {
+        this.app.get('/map', (req, res) => {
+            res.render('map.hbs', {
+                // TODO
             })
         })
     }
@@ -263,4 +273,5 @@ export default class Server {
         this.app.use('/health', health());
         return this.app;
     }
+
 }

@@ -81,6 +81,68 @@ export default [
              * })
              */
         ]
+    },
+    {
+        "entry": {
+            "bundle": "./modules/map.index.js"
+        },
+        "module": {
+            "rules": [
+                {
+                    "loader": "raw-loader",
+                    "test": /\.txt$/u
+                },
+                {
+                    "loader": "csv-loader",
+                    "test": /\.csv$/u
+
+                    /*
+                     * Options: {
+                     * Header: true,
+                     * Download: true,
+                     * SkipEmptyLines: true
+                     * }
+                     */
+                }
+            ]
+        },
+        "node": {
+            /*
+            "child_process": "empty",
+            "console": true,
+            "fs": "empty",
+            "net": "empty",
+            "tls": "empty"
+
+             */
+        },
+        "resolve": {
+            "fallback": {
+                "http":  streamHttp,
+                "url": url,
+                "https": httpsBrowserify,
+                "fs": false
+            }
+        },
+        "optimization": {
+            "minimize": true,
+            "minimizer": [
+                new TerserPlugin()
+            ]
+        },
+        "output": {
+            "filename": "./map.index.js",
+            "path": `${__dirname}/client`
+        },
+        "plugins": [
+            /*
+             * New webpack.ProvidePlugin({
+             * $: "jquery",
+             * JQuery: "jquery",
+             * "window.jQuery": "jquery"
+             * })
+             */
+        ]
     }
 ];
 

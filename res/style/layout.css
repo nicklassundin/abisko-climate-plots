@@ -1,0 +1,71 @@
+/* General layout styling */
+.main-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 1 fraction for map, 1 for plot area */
+    grid-template-rows: 80vh; /* Map and plot will take up 80% of the viewport height */
+    gap: 10px;
+    margin: 20px;
+}
+
+/* Map container styling */
+.map-container {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Plot area */
+.plotArea {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.plotField {
+    flex: 1;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Controls below both map and plot area */
+.plot-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.plot-button {
+    flex: 1;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.plot-button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-layout {
+        grid-template-columns: 1fr; /* Stack map and plot area vertically on small screens */
+        grid-template-rows: auto auto;
+    }
+
+    .map-container, .plotArea {
+        height: 50vh; /* Each takes 50% height on small screens */
+    }
+}

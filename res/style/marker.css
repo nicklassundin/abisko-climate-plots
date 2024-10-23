@@ -1,0 +1,27 @@
+.icon-container {
+    align-content: center;
+}
+
+.icon {
+    height: 0px!important;
+    width: 0px!important;
+    border-style: solid;
+    border-color: darkred;
+    border-width: 5px;
+
+    border-radius: 50%;
+    display: inline-block;
+    transition-duration: 500ms;
+}
+.hidden {
+    mouse-events: none;
+    visibility: hidden;
+}
+.icon:hover:not(.active) {
+    transform: scale(3)!important;
+    /*
+    height: 16px!important;
+    width: 16px!important;
+     */
+}
+

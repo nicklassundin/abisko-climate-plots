@@ -6,41 +6,14 @@ import numpy as np
 import calendar
 
 import stations
+from cache import get_cached, set_cache, clear_cache
 
 app = Flask(__name__)
 
 # Enable CORS for all routes
 CORS(app)
 
-import redis
 import json
-import hashlib
-
-# Initialize Redis connection
-cache = redis.StrictRedis(host='localhost', port=6379, db=0)
-
-def generate_cache_key(params):
-    """Generate a unique cache key based on the request parameters."""
-    key_string = json.dumps(params, sort_keys=True)  # Sorting to ensure key uniqueness
-    return hashlib.md5(key_string.encode('utf-8')).hexdigest()
-
-def get_weather_stats_cached(params):
-    """Fetch cached weather stats from Redis if available."""
-    cache_key = generate_cache_key(params)
-    cached_data = cache.get(cache_key)
-    if cached_data:
-        return json.loads(cached_data)  # Return the cached data if available
-    return None
-
-def set_weather_stats_cache(params, data):
-    """Cache the weather stats result in Redis."""
-    cache_key = generate_cache_key(params)
-    cache.set(cache_key, json.dumps(data), ex=3600)  # Cache for 1 hour
-
-def clear_weather_stats_cache(params):
-    """Clear the cache for a specific set of parameters."""
-    cache_key = generate_cache_key(params)
-    cache.delete(cache_key)
 
 # Helper functions to calculate the frost and temperature statistics
 def first_frost_autumn(df):
@@ -69,16 +42,18 @@ def growing_season_weeks(df):
     # Check if the DataFrame is empty
     if df.empty:
         return None
-    df['above_zero'] = df['min_temperature'] > 0
+    df = df.copy()
+    df['above_zero'] = (df['min_temperature'] > 0) | (df['avg_temperature'] > 0)
     weeks_above_zero = df.groupby(df['date'].dt.isocalendar().week)['above_zero'].max()
-    return weeks_above_zero.sum()
+    return int(weeks_above_zero.sum())
 
 def growing_season_days(df):
     if df.empty:
         return None
+    df = df.copy()
     df = df.sort_values(by='date')  # Ensure data is sorted by date
-    df['above_zero'] = df['min_temperature'] > 0
-    return df['above_zero'].astype(int).groupby((df['above_zero'] != df['above_zero'].shift()).cumsum()).sum().max()
+    df['above_zero'] = (df['min_temperature'] > 0) | (df['avg_temperature'] > 0)
+    return int(df['above_zero'].astype(int).groupby((df['above_zero'] != df['above_zero'].shift()).cumsum()).sum().max())
 
 def warmest(df, period):
     if df.empty:
@@ -439,8 +414,8 @@ STATISTICS_TO_DATA_TYPES = {
     'annual_dec_temperature': ['avg_temperature'],
     'first_frost_autumn': ['avg_temperature'],
     'last_frost_spring': ['avg_temperature'],
-    'growing_season_days': ['min_temperature'],
-    'growing_season_weeks': ['min_temperature'],
+    'growing_season_days': ['min_temperature', 'avg_temperature'],
+    'growing_season_weeks': ['min_temperature', 'avg_temperature'],
     'coldest_day': ['min_temperature'],
     'warmest_day': ['max_temperature'],
     'coldest_month': ['avg_temperature'],
@@ -515,7 +490,7 @@ def calculate_baseline_stats(weather_data, baseline_start, baseline_end, request
                 baseline_stats[f'max_annual_{month_name}_temperature'] = max_annual_month_temperature(baseline_data, month)
                 baseline_stats[f'min_annual_{month_name}_temperature'] = min_annual_month_temperature(baseline_data, month)
         if stat == 'growing_season_weeks':
-            baseline_stats['growing_season_weeks'] = int(growing_season_weeks(baseline_data))
+            baseline_stats['growing_season_weeks'] = growing_season_weeks(baseline_data)
         elif stat == 'annual_temperature':
             baseline_stats['annual_temperature'] = annual_temperature(baseline_data)
         elif stat == 'global_temperature':
@@ -602,6 +577,23 @@ def calculate_difference_from_baseline(year_stats, baseline_stats):
 def status():
     return jsonify({'status': 'ok'})
 
+
+def fetch_data(params, required_data_types):
+    """Fetch the raw weather data from the API based on the specified parameters."""
+    coordinates = params['coordinates']
+    start_year = params['start_year']
+    end_year = params['end_year']
+
+    radius = params['radius']
+    # Build the URL dynamically based on the required raw data types
+    base_url = 'https://vischange.k8s.glimworks.se/data/query/v1'
+    query_url = f"{base_url}?position={coordinates}&radius={radius}&date={start_year}0101-{end_year}1231&types={required_data_types}"
+
+    # Debugging - Print the final URL to check its format
+    print(f"Final URL: {query_url}")
+
+    # Fetch the data from the given URL
+    return requests.get(query_url)
 @app.route('/data', methods=['GET'])
 def weather_stats():
     # Retrieve the query parameters for year range, coordinates, and filtering options
@@ -612,6 +604,8 @@ def weather_stats():
     baseline = request.args.get('baseline', '1961,1990')  # Default to 1961-1990 baseline
     radius = request.args.get('radius', 30)  # Default to 30 km radius (for future use)
     station = request.args.get('station', 'all')
+    knKod = request.args.get('knKod')
+    LnKod = request.args.get('LnKod')
 
     # Parse baseline interval
     baseline_start, baseline_end = map(int, baseline.split(','))
@@ -630,15 +624,16 @@ def weather_stats():
     reset = request.args.get('reset')
     if reset is not None:
         if reset.lower() == 'true':
-            clear_weather_stats_cache(params)
+            clear_cache(params)
     # flush
     flush = request.args.get('flush')
     if flush is not None:
         if flush.lower() == 'true':
-            cache.flushdb()
+            clear_cache(params)
+
 
     # Check the cache for an existing result
-    cached_result = get_weather_stats_cached(params)
+    cached_result = get_cached(params)
     if cached_result:
        return jsonify(cached_result)
 
@@ -661,14 +656,15 @@ def weather_stats():
     required_data_types = ','.join(required_data_types)  # Prepare data types for the query
 
     # Build the URL dynamically based on the required raw data types
-    base_url = 'https://vischange.k8s.glimworks.se/data/query/v1'
-    query_url = f"{base_url}?position={coordinates}&radius={radius}&date={start_year}0101-{end_year}1231&types={required_data_types}"
+    # base_url = 'https://vischange.k8s.glimworks.se/data/query/v1'
+    # query_url = f"{base_url}?position={coordinates}&radius={radius}&date={start_year}0101-{end_year}1231&types={required_data_types}"
 
     # Debugging - Print the final URL to check its format
-    print(f"Final URL: {query_url}")
+    # print(f"Final URL: {query_url}")
 
     # Fetch the data from the given URL
-    response = requests.get(query_url)
+    # response = requests.get(query_url)
+    response = fetch_data(params, required_data_types)
     if response.status_code != 200:
         print(f"Error fetching data: {response.status_code}, {response.text}")
         return jsonify({'error': 'Failed to fetch data from URL'}), 400
@@ -681,7 +677,6 @@ def weather_stats():
 
         weather_data = pd.DataFrame(data)
         weather_data['date'] = pd.to_datetime(weather_data['date'])
-
         # Filter out times that are not midnight (00:00:00)
         # TODO does this need to be here?
         # disabled for annomaly data in breakup 2022
@@ -877,7 +872,7 @@ def weather_stats():
          }
     }
     # Cache the result
-    set_weather_stats_cache(params, results)
+    set_cache(params, results)
     return jsonify(results)
 
 @app.route('/station', methods=['GET'])
@@ -899,6 +894,25 @@ def station_stats():
     station_stats = stations.get_weather_stats_for_station(coordinates, year, data_types)
 
     return jsonify(station_stats)
+
+# Flask route to serve all SMHI stations
+@app.route('/stations', methods=['GET'])
+def get_all_stations():
+    flush = request.args.get('flush')
+    if flush == 'true':
+        clear_cache('allstations')
+    # check if cached
+    allstations = get_cached('allstations')
+    if allstations:
+        return jsonify({"stations": allstations})
+
+    allstations = stations.fetch_all_stations()
+    # Cache the result
+    set_cache('allstations', allstations)
+    if stations is not None:
+        return jsonify({"stations": allstations})
+    else:
+        return jsonify({"error": "Could not fetch stations"}), 500
 
 if __name__ == '__main__':
     app.run(debug=False)

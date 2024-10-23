@@ -1,0 +1,45 @@
+{{!-- extends default --}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{title}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {{!-- Stylesheets --}}
+    <link rel="stylesheet" href="res/style/leaflet.css">
+    <link rel="stylesheet" href="res/style/style.css">
+    <link rel="stylesheet" href="res/style/marker.css">
+    <link rel="stylesheet" href="res/style/plotarea.css">
+    <link rel="stylesheet" href="res/style/layout.css"> <!-- New CSS for layout -->
+    <link rel="stylesheet" type="text/css" href="https://nicklassundin.github.io/abisko-climate-plots/css/highcharts.css">
+    <link rel="stylesheet" type="text/css" href="https://nicklassundin.github.io/abisko-climate-plots/css/series.css">
+    <link rel="stylesheet" type="text/css" href="https://nicklassundin.github.io/abisko-climate-plots/css/custom-highcharts.css">
+
+    {{!-- jQuery --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+</head>
+<body>
+
+<div class="main-layout">
+    <div id="map" class="map-container"></div>
+
+    <div class="plotArea">
+        <div id="plotField" class="plotField">
+            <div id="mark"></div>
+        </div>
+    </div>
+</div>
+
+<div class="plot-controls">
+    <button class="plot-button active" id="temperatureButton" data-set="annualTemperatures">Temperature</button>
+    <button class="plot-button" id="precipitationButton" data-set="annualPrecipitation">Precipitation</button>
+    <button class="plot-button" id="snowDepthButton" data-set="annualSnowdepth">Snow Depth</button>
+</div>
+
+{{!-- Scripts --}}
+<script src="/client/map.index.js"></script>
+
+</body>
+</html>

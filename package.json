@@ -20,11 +20,12 @@
     "hbs": "^4.2.0",
     "https-browserify": "^1.0.0",
     "jquery": "^3.7.1",
+    "leaflet": "^1.9.4",
     "npm-auto-version": "^1.0.0",
     "request": "^2.88.2",
     "stream-http": "^3.2.0",
     "terser-webpack-plugin": "^5.3.10",
-    "vizchange-plot-builder": "^1.1.0",
+    "vizchange-plot-builder": "^1.2.0",
     "vizchange-smhi": "^1.2.3",
     "vizchange-stats": "^1.17.20",
     "webpack": "^5.91.0"
