@@ -5,8 +5,15 @@
     <title>{{title}}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="description">
 
     {{!-- Stylesheets --}}
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/highcharts.css">
+    <link rel="stylesheet" type="text/css" href="css/series.css">
+    <link rel="stylesheet" type="text/css" href="css/custom-highcharts.css">
+    <link rel="stylesheet" type="text/css" href="css/experiment.css">
+
     <link rel="stylesheet" href="res/style/leaflet.css">
     <link rel="stylesheet" href="res/style/style.css">
     <link rel="stylesheet" href="res/style/marker.css">
@@ -33,9 +40,9 @@
 </div>
 
 <div class="plot-controls">
-    <button class="plot-button active" id="temperatureButton" data-set="annualTemperatures">Temperature</button>
-    <button class="plot-button" id="precipitationButton" data-set="annualPrecipitation">Precipitation</button>
-    <button class="plot-button" id="snowDepthButton" data-set="annualSnowdepth">Snow Depth</button>
+    <button class="plot-button active" id="temperatureButton" data-set="slideTemperatures">Temperature</button>
+    <button class="plot-button" id="precipitationButton" data-set="slidePrecipitation">Precipitation</button>
+    <button class="plot-button" id="snowDepthButton" data-set="annualAvgSnowDepth">Snow Depth</button>
 </div>
 
 {{!-- Scripts --}}

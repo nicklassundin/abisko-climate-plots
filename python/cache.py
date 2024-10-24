@@ -20,7 +20,7 @@ def get_cached(params):
 def set_cache(params, data):
     """Cache the weather stats result in Redis."""
     cache_key = generate_cache_key(params)
-    cache.set(cache_key, json.dumps(data), ex=3600)  # Cache for 1 hour
+    cache.set(cache_key, json.dumps(data), ex=3600*24*265)  # Cache for 1 year
 
 def clear_cache(params):
     """Clear the cache for a specific set of parameters."""

@@ -106,10 +106,11 @@ data-hosturl="http://vizchange.hopto.org">
                 $(`#plotField`).removeClass('show')
                 $(`#plotField`).toggleClass('show')
 
-                $('#plotConfig').attr('data-longitude', point.longitude)
-                $('#plotConfig').attr('data-latitude', point.latitude)
-                let configId = event.target.options.icon.options.configId;
-                lib.renderFromData("mark", configId)
+                $('#description').attr('data-longitude', point.longitude)
+                $('#description').attr('data-latitude', point.latitude)
+                $('#description').attr('data-set', $('.plot-button.active').attr('data-set'))
+                $('#description').attr('data-baseline', $('.plot-button.active').attr('data-baseline'))
+                lib.renderFromData("mark", '#description')
             })
             marker.bindPopup(`<b>${point.name}</b><br>${point.params}`)
             marker.on('mouseover', function (e) {

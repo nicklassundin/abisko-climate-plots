@@ -79,7 +79,7 @@
       "node_modules/*",
       "index.html"
     ],
-    "ext": "js,json,hbs",
+    "ext": "js,json,hbs,py",
     "events": {
       "start": "clear; webpack --mode=development"
     }

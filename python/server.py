@@ -604,7 +604,7 @@ def weather_stats():
     baseline = request.args.get('baseline', '1961,1990')  # Default to 1961-1990 baseline
     radius = request.args.get('radius', 30)  # Default to 30 km radius (for future use)
     station = request.args.get('station', 'all')
-    knKod = request.args.get('knKod')
+    KnKod = request.args.get('KnKod')
     LnKod = request.args.get('LnKod')
 
     # Parse baseline interval
@@ -633,6 +633,7 @@ def weather_stats():
 
 
     # Check the cache for an existing result
+    # TODO return cache exist still reevaluate baseline cache seperately
     cached_result = get_cached(params)
     if cached_result:
        return jsonify(cached_result)
@@ -655,15 +656,11 @@ def weather_stats():
 
     required_data_types = ','.join(required_data_types)  # Prepare data types for the query
 
-    # Build the URL dynamically based on the required raw data types
-    # base_url = 'https://vischange.k8s.glimworks.se/data/query/v1'
-    # query_url = f"{base_url}?position={coordinates}&radius={radius}&date={start_year}0101-{end_year}1231&types={required_data_types}"
-
-    # Debugging - Print the final URL to check its format
-    # print(f"Final URL: {query_url}")
-
+    # TODO fetch stations
+    # if KnKod is not None:
+    #    allstations = get_stations(flush == 'true')
+    #    allstations = np.array(allstations)
     # Fetch the data from the given URL
-    # response = requests.get(query_url)
     response = fetch_data(params, required_data_types)
     if response.status_code != 200:
         print(f"Error fetching data: {response.status_code}, {response.text}")
@@ -895,21 +892,25 @@ def station_stats():
 
     return jsonify(station_stats)
 
-# Flask route to serve all SMHI stations
-@app.route('/stations', methods=['GET'])
-def get_all_stations():
-    flush = request.args.get('flush')
-    if flush == 'true':
-        clear_cache('allstations')
+
+def get_stations(flush=False):
+    if flush:
+        clear_cache('stations')
     # check if cached
-    allstations = get_cached('allstations')
+    allstations = get_cached('stations')
     if allstations:
-        return jsonify({"stations": allstations})
+        return allstations
 
     allstations = stations.fetch_all_stations()
     # Cache the result
-    set_cache('allstations', allstations)
-    if stations is not None:
+    set_cache('stations', allstations)
+    return allstations
+# Flask route to serve all SMHI stations
+@app.route('/stations', methods=['GET'])
+def get_all_stations():
+    flush = request.args.get('flush') == 'true'
+    allstations = get_stations(flush)
+    if allstations is not None:
         return jsonify({"stations": allstations})
     else:
         return jsonify({"error": "Could not fetch stations"}), 500
