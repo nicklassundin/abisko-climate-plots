@@ -44,7 +44,6 @@ async function fetchStations() {
 
         // Parse the response as JSON
         const data = await response.json();
-
         return data.stations;
 
     } catch (error) {
@@ -75,6 +74,22 @@ function fetchStationsFromHTML() {
 let markers = new L.FeatureGroup();
 
 
+function renderPlot(longitude, latitude, name) {
+    $(`.plotArea`).removeClass('active')
+    map.flyTo(event.target['_latlng'])
+    $(`.plotArea`).toggleClass('active')
+
+    $(`#plotField`).removeClass('show')
+    $(`#plotField`).toggleClass('show')
+
+    $('#description').attr('data-longitude', longitude)
+    $('#description').attr('data-latitude', latitude)
+    $('#description').attr('data-set', $('.plot-button.active').attr('data-set'))
+    $('#description').attr('data-baseline', $('.plot-button.active').attr('data-baseline'))
+    $('#description').attr('data-name', name)
+    console.log($('#description').attr('data-set'))
+    lib.renderFromData("mark", '#description')
+}
 function addStations (points) {
         points.forEach((point) => {
             let icon = L.divIcon({
@@ -99,18 +114,8 @@ data-hosturl="http://vizchange.hopto.org">
             })
 
             marker.on('click', (event) => {
-                $(`.plotArea`).removeClass('active')
-                map.flyTo(event.target['_latlng'])
-                $(`.plotArea`).toggleClass('active')
 
-                $(`#plotField`).removeClass('show')
-                $(`#plotField`).toggleClass('show')
-
-                $('#description').attr('data-longitude', point.longitude)
-                $('#description').attr('data-latitude', point.latitude)
-                $('#description').attr('data-set', $('.plot-button.active').attr('data-set'))
-                $('#description').attr('data-baseline', $('.plot-button.active').attr('data-baseline'))
-                lib.renderFromData("mark", '#description')
+                renderPlot(point.longitude, point.latitude, point.name)
             })
             marker.bindPopup(`<b>${point.name}</b><br>${point.params}`)
             marker.on('mouseover', function (e) {
@@ -223,26 +228,18 @@ window.onload = async () => {
 
 }
 
-document.getElementById('temperatureButton').addEventListener('click', function() {
-    // Render the temperature plot
-    console.log("Temperature plot selected");
-    $('.plot-button').removeClass('active')
-    $('#temperatureButton').toggleClass('active')
-    //lib.renderFromData("mark", "#station-temperature");
-});
 
-document.getElementById('precipitationButton').addEventListener('click', function() {
-    // Render the precipitation plot
-    console.log("Precipitation plot selected");
-    $('.plot-button').removeClass('active')
-    $('#precipitationButton').toggleClass('active')
-    //lib.renderFromData("mark", "#station-precipitation");
-});
+// Generic event listener for all plot buttons
+document.querySelectorAll('.plot-button').forEach(button => {
+    button.addEventListener('click', function() {
+        // Get the data-set attribute to determine which plot to render
+        const dataSet = this.getAttribute('data-set');
 
-document.getElementById('snowDepthButton').addEventListener('click', function() {
-    // Render the snow depth plot
-    console.log("Snow Depth plot selected");
-    $('.plot-button').removeClass('active')
-    $('#snowDepthButton').toggleClass('active')
-    //lib.renderFromData("mark", "#station-snowdepth");
+        // Log the selected plot (for debugging or confirmation)
+        console.log(`${dataSet} plot selected`);
+        // Remove 'active' class from all buttons, then add it to the clicked button
+        document.querySelectorAll('.plot-button').forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+
+    });
 });

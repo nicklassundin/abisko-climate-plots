@@ -39,12 +39,88 @@
     </div>
 </div>
 
-<div class="plot-controls">
-    <button class="plot-button active" id="temperatureButton" data-set="slideTemperatures">Temperature</button>
-    <button class="plot-button" id="precipitationButton" data-set="slidePrecipitation">Precipitation</button>
-    <button class="plot-button" id="snowDepthButton" data-set="annualAvgSnowDepth">Snow Depth</button>
+
+<!-- Main Tab structure with buttons -->
+<div class="plot-tabs">
+    <ul class="tab-list">
+        <li class="tab active" data-tab="temperatureTab">Temperature</li>
+        <li class="tab" data-tab="precipitationTab">Precipitation</li>
+        <li class="tab" data-tab="snowDepthTab">Snow Depth</li>
+        <li class="tab" data-tab="growingSeasonTab">Growing Season</li>
+        <li class="tab" data-tab="atmosphereTab">Atmosphere</li>
+        <li class="tab" data-tab="lakesTab">Lakes</li>
+        <li class="tab" data-tab="permafrostTab">Permafrost</li>
+        <li class="tab" data-tab="extremeWeatherTab">Extreme Weather</li>
+    </ul>
+
+    <!-- Main Tab Content with action buttons at the end -->
+    <div id="tabContent">
+        <!-- Temperature Tab Content -->
+        <div id="temperatureTab" class="tab-content active">
+            <ul class="sub-tabs">
+                <li class="sub-tab active" data-subtab="annualTemp">Annual Temperature</li>
+                <li class="sub-tab" data-subtab="monthlyTemp">Monthly Temperature</li>
+            </ul>
+            <!-- Sub-tab content for Annual Temperature -->
+            <div class="sub-tab-content active" id="annualTemp">
+                <button class="plot-button active" data-set="slideTemperatures">Annual Temperature</button>
+            </div>
+            <!-- Sub-tab content for Monthly Temperature -->
+            <div class="sub-tab-content" id="monthlyTemp">
+                <button class="plot-button" data-set="janTemperature">January</button>
+                <button class="plot-button" data-set="febtemperature">February</button>
+                <button class="plot-button" data-set="marTemperature">March</button>
+                <!-- Add more monthly buttons as needed -->
+            </div>
+        </div>
+
+        <!-- Example Precipitation Tab Content -->
+        <div id="precipitationTab" class="tab-content">
+            <button class="plot-button" data-set="annualPrecip">Annual Precipitation</button>
+            <button class="plot-button" data-set="monthlyPrecip">Monthly Precipitation</button>
+        </div>
+
+        <!-- Additional tabs follow the same structure -->
+    </div>
 </div>
 
+<!-- Scripts -->
+<script>
+    $(document).ready(function() {
+        // Handle main tab click events
+        $('.tab').click(function() {
+            const tabId = $(this).data('tab');
+
+            // Set active class for clicked tab
+            $('.tab').removeClass('active');
+            $(this).addClass('active');
+
+            // Hide all main tab content and show selected
+            $('.tab-content').removeClass('active');
+            $('#' + tabId).addClass('active');
+
+            // Reset sub-tab visibility to show the first sub-tab by default
+            $('#' + tabId).find('.sub-tab').removeClass('active');
+            $('#' + tabId).find('.sub-tab:first').addClass('active');
+            $('#' + tabId).find('.sub-tab-content').removeClass('active');
+            $('#' + tabId).find('.sub-tab-content:first').addClass('active');
+        });
+
+        // Handle sub-tab click events within each main tab
+        $('.sub-tab').click(function() {
+            const subTabId = $(this).data('subtab');
+            const parentTab = $(this).closest('.tab-content');
+
+            // Set active class for clicked sub-tab
+            parentTab.find('.sub-tab').removeClass('active');
+            $(this).addClass('active');
+
+            // Hide all sub-tab content within parent tab and show selected
+            parentTab.find('.sub-tab-content').removeClass('active');
+            $('#' + subTabId).addClass('active');
+        });
+    });
+</script>
 {{!-- Scripts --}}
 <script src="/client/map.index.js"></script>
 

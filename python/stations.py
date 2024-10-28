@@ -2,56 +2,51 @@ import pandas as pd
 import requests
 
 BASE_URL = 'https://vischange.k8s.glimworks.se/data/query/v1'
-
+from generate import generate_random_weather_data
 # Helper function to query data for a specific station by coordinates and year
-def fetch_data_for_coordinates(coordinates, year, data_types):
+def fetch_data_for_coordinates(coordinates, year, data_types, slump = False):
     query_url = f"{BASE_URL}?position={coordinates[0]},{coordinates[1]}&radius=30&date={year}0101-{year}1231&types={','.join(data_types)}"
-    response = requests.get(query_url)
 
-    if response.status_code == 200:
-        data = response.json()
-        df = pd.DataFrame(data)
-        if not df.empty:
-            df['date'] = pd.to_datetime(df['date'])
-        return df
+    if slump:
+        return generate_random_weather_data(year, year)
     else:
-        return None
+        response = requests.get(query_url)
+        if response.status_code == 200:
+            data = response.json()
+            df = pd.DataFrame(data)
+            if not df.empty:
+                df['date'] = pd.to_datetime(df['date'])
+            return df
+        else:
+            return None
 
 # Define the statistics that can be calculated
-def calculate_available_statistics(df):
+def calculate_available_statistics(df, types):
     available_stats = {}
-
-    # Check for each statistic if it can be calculated based on the data
-    if 'avg_temperature' in df.columns and not df['avg_temperature'].isnull().all():
-        available_stats['avg_temperature'] = True
-    if 'precipitation' in df.columns and not df['precipitation'].isnull().all():
-        available_stats['precipitation'] = True
-    if 'min_temperature' in df.columns and not df['min_temperature'].isnull().all():
-        available_stats['min_temperature'] = True
-    if 'max_temperature' in df.columns and not df['max_temperature'].isnull().all():
-        available_stats['max_temperature'] = True
-    if 'snowdepth_meter' in df.columns and not df['snowdepth_meter'].isnull().all():
-        available_stats['snowdepth_meter'] = True
-    if 'co2_weekly' in df.columns and not df['co2_weekly'].isnull().all():
-        available_stats['co2_weekly'] = True
-    if 'freezeup' in df.columns and not df['freezeup'].isnull().all():
-        available_stats['freezeup'] = True
-    if 'breakup' in df.columns and not df['breakup'].isnull().all():
-        available_stats['breakup'] = True
-
+    for data_type in types:
+        available_stats[data_type] = data_type in df.columns and not df[data_type].isnull().all()
     return available_stats
 
+from server import STATISTICS_TO_DATA_TYPES
 # Main function to get available statistics for a specific station at given coordinates and year
-def get_weather_stats_for_station(coordinates, year, data_types):
+def get_weather_stats_for_station(coordinates, year, data_types, slump = False):
     # Fetch data for the specific station at given coordinates
-    station_data = fetch_data_for_coordinates(coordinates, year, data_types)
+    station_data = fetch_data_for_coordinates(coordinates, year, data_types, slump)
 
     if station_data is not None and not station_data.empty:
         # Calculate available statistics based on the fetched data
-        available_statistics = calculate_available_statistics(station_data)
+        available_statistics = calculate_available_statistics(station_data, data_types)
+        available_statistics_data_types = {
+        }
+        for stat, data_types in STATISTICS_TO_DATA_TYPES.items():
+            # set to true if all available statistics and check if available_statistics contains
+            print(stat, data_types)
+            print(available_statistics)
+            available_statistics_data_types[stat] = all([available_statistics.get(data_type, False) for data_type in data_types])
         return {
             "coordinates": coordinates,
-            "available_statistics": available_statistics
+            "available_statistics": available_statistics,
+            "available_statistics_data_types": available_statistics_data_types,
         }
     else:
         return {
@@ -112,7 +107,6 @@ def fetch_all_stations():
         for station in stations:
             geodata = reverse_geocode(station['latitude'], station['longitude'])
             station['geodata'] = geodata
-
         return stations
     except requests.exceptions.RequestException as e:
         print(f"Error fetching stations: {e}")

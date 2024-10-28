@@ -7,6 +7,7 @@ import calendar
 
 import stations
 from cache import get_cached, set_cache, clear_cache
+from generate import generate_random_weather_data
 
 app = Flask(__name__)
 
@@ -606,6 +607,7 @@ def weather_stats():
     station = request.args.get('station', 'all')
     KnKod = request.args.get('KnKod')
     LnKod = request.args.get('LnKod')
+    slump = request.args.get('random')
 
     # Parse baseline interval
     baseline_start, baseline_end = map(int, baseline.split(','))
@@ -618,7 +620,8 @@ def weather_stats():
              'requested_stats': requested_stats,
              'baseline': baseline,
              'radius': radius,
-             'station': station
+             'station': station,
+             'slump': slump,
     }
     # Reset
     reset = request.args.get('reset')
@@ -630,6 +633,7 @@ def weather_stats():
     if flush is not None:
         if flush.lower() == 'true':
             clear_cache(params)
+
 
 
     # Check the cache for an existing result
@@ -661,34 +665,34 @@ def weather_stats():
     #    allstations = get_stations(flush == 'true')
     #    allstations = np.array(allstations)
     # Fetch the data from the given URL
-    response = fetch_data(params, required_data_types)
-    if response.status_code != 200:
-        print(f"Error fetching data: {response.status_code}, {response.text}")
-        return jsonify({'error': 'Failed to fetch data from URL'}), 400
+    response = None
+    if slump == 'true':
+        response = generate_random_weather_data(start_year, end_year)
+        weather_data = response
+    else:
+        response = fetch_data(params, required_data_types)
+        if response.status_code != 200:
+            print(f"Error fetching data: {response.status_code}, {response.text}")
+            return jsonify({'error': 'Failed to fetch data from URL'}), 400
 
-    # Assuming the data is in JSON format and contains the necessary raw data types
-    try:
-        data = response.json()
-        if not data:  # Handle cases where no data is returned
-            return jsonify({'error': 'No data available for the requested range.'}), 400
+        # Assuming the data is in JSON format and contains the necessary raw data types
+        try:
+            data = response.json()
+            if not data:  # Handle cases where no data is returned
+                return jsonify({'error': 'No data available for the requested range.'}), 400
 
-        weather_data = pd.DataFrame(data)
-        weather_data['date'] = pd.to_datetime(weather_data['date'])
-        # Filter out times that are not midnight (00:00:00)
-        # TODO does this need to be here?
-        # disabled for annomaly data in breakup 2022
-        # weather_data = weather_data[weather_data['date'].dt.time == pd.Timestamp("00:00:00").time()]
-
-        # Ensure necessary columns are in numeric format
-        for data_type in required_data_types.split(','):
-            if data_type in weather_data.columns:
-                if data_type in DATA_TYPES_TO_TYPE:
-                    if DATA_TYPES_TO_TYPE[data_type] == 'date':
-                        weather_data[data_type] = pd.to_datetime(weather_data[data_type], errors='coerce')
-                        weather_data[data_type] = weather_data[data_type].dt.dayofyear
-                weather_data[data_type] = pd.to_numeric(weather_data[data_type], errors='coerce')
-    except Exception as e:
-        return jsonify({'error': 'Failed to parse JSON data'}), 400
+            weather_data = pd.DataFrame(data)
+            weather_data['date'] = pd.to_datetime(weather_data['date'])
+            # Ensure necessary columns are in numeric format
+            for data_type in required_data_types.split(','):
+                if data_type in weather_data.columns:
+                    if data_type in DATA_TYPES_TO_TYPE:
+                        if DATA_TYPES_TO_TYPE[data_type] == 'date':
+                            weather_data[data_type] = pd.to_datetime(weather_data[data_type], errors='coerce')
+                            weather_data[data_type] = weather_data[data_type].dt.dayofyear
+                    weather_data[data_type] = pd.to_numeric(weather_data[data_type], errors='coerce')
+        except Exception as e:
+            return jsonify({'error': 'Failed to parse JSON data'}), 400
 
     # Calculate baseline statistics from the resulting statistics over the baseline period
     baseline_stats = calculate_baseline_stats(weather_data, baseline_start, baseline_end, requested_stats)
@@ -877,6 +881,7 @@ def station_stats():
     year = request.args.get('year')
     lat = request.args.get('lat')
     lng = request.args.get('lng')
+    slump = request.args.get('random')
 
     # Validate the parameters
     if not year or not lat or not lng:
@@ -888,7 +893,7 @@ def station_stats():
     data_types = ['avg_temperature', 'precipitation', 'min_temperature', 'max_temperature', 'snowdepth_single', 'snowdepth_meter', 'co2_weekly', 'freezeup', 'breakup', 'perma', 'icetime']
 
     # Get available statistics for the station at the provided coordinates
-    station_stats = stations.get_weather_stats_for_station(coordinates, year, data_types)
+    station_stats = stations.get_weather_stats_for_station(coordinates, year, data_types, slump == 'true')
 
     return jsonify(station_stats)
 
