@@ -1,0 +1,271 @@
+/* General layout styling */
+.main-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 1 fraction for map, 1 for plot area */
+    grid-template-rows: 80vh; /* Map and plot will take up 80% of the viewport height */
+    gap: 10px;
+    margin: 20px;
+}
+
+/* Map container styling */
+.map-container {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Plot area */
+.plotArea {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.plotField {
+    flex: 1;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Controls below both map and plot area */
+.plot-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.plot-button {
+    flex: 1;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.plot-button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-layout {
+        grid-template-columns: 1fr; /* Stack map and plot area vertically on small screens */
+        grid-template-rows: auto auto;
+    }
+
+    .map-container, .plotArea {
+        height: 50vh; /* Each takes 50% height on small screens */
+    }
+}
+
+/* Tabs styling */
+.plot-tabs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.tab-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: 2px solid #ddd;
+}
+
+.tab {
+    flex: 1;
+    padding: 10px 15px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    color: #333;
+    border-top: 2px solid transparent;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: none;
+    transition: background-color 0.3s ease, border-top 0.3s ease;
+}
+
+.tab:first-child {
+    border-left: none;
+}
+
+.tab:hover {
+    background-color: #e6e6e6;
+}
+
+.tab.active {
+    background-color: white;
+    border-top: 2px solid #007BFF;
+    color: #007BFF;
+    font-weight: bold;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-top: none;
+    background-color: #ffffff;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Plot buttons inside each tab */
+.plot-button {
+    width: 100%;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.plot-button:hover {
+    background-color: #0056b3;
+}
+
+
+/* Main tab styling */
+.plot-tabs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.tab-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: 2px solid #ddd;
+}
+
+.tab {
+    flex: 1;
+    padding: 10px 15px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    color: #333;
+    border-top: 2px solid transparent;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: none;
+    transition: background-color 0.3s ease, border-top 0.3s ease;
+}
+
+.tab:first-child {
+    border-left: none;
+}
+
+.tab.active {
+    background-color: white;
+    border-top: 2px solid #007BFF;
+    color: #007BFF;
+    font-weight: bold;
+}
+
+/* Hide all tab content by default, only display when active */
+.tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-top: none;
+    background-color: #ffffff;
+}
+
+.tab-content.active {
+    display: block; /* Show only active tab content */
+}
+
+/* Sub-tabs styling */
+.sub-tabs {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-top: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.sub-tab {
+    flex: 1;
+    padding: 8px 12px;
+    cursor: pointer;
+    text-align: center;
+    background-color: #f9f9f9;
+    color: #555;
+    border-top: 2px solid transparent;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sub-tab.active {
+    background-color: white;
+    color: #007BFF;
+    font-weight: bold;
+    border-top: 2px solid #007BFF;
+}
+
+/* Hide all sub-tab content by default, only display when active */
+.sub-tab-content {
+    display: none;
+    padding: 15px;
+    border: 1px solid #ddd;
+    background-color: #ffffff;
+}
+
+.sub-tab-content.active {
+    display: block; /* Show only active sub-tab content */
+}
+
+/* Plot buttons styling */
+.plot-button {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 10px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.plot-button:hover {
+    background-color: #0056b3;
+}
+
+.plot-button.active {
+    background-color: #0056b3; /* Darker color for active button */
+}
+.deactivate{
+    opacity: 0.5; /* Dimmed */
+    pointer-events: none; /* Make non-interactable */
+}

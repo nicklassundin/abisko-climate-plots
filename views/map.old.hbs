@@ -1,0 +1,45 @@
+{{!-- extends default --}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{title}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {{!-- Stylesheets --}}
+    <link rel="stylesheet" href="res/style/leaflet.css">
+    <link rel="stylesheet" href="res/style/style.css">
+    <link rel="stylesheet" href="res/style/marker.css">
+    <link rel="stylesheet" href="res/style/plotarea.css">
+    <link rel="stylesheet" type="text/css" href="https://nicklassundin.github.io/abisko-climate-plots/css/highcharts.css">
+    <link rel="stylesheet" type="text/css" href="https://nicklassundin.github.io/abisko-climate-plots/css/series.css">
+    <link rel="stylesheet" type="text/css" href="https://nicklassundin.github.io/abisko-climate-plots/css/custom-highcharts.css">
+
+    {{!-- jQuery --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+</head>
+<body>
+<ul id="station-list" style="display:none">
+    <!-- Stations will be dynamically inserted here -->
+</ul>
+<filter id="filter" height="2" width="2">
+    <feTurbulence baseFrequency="0.2" numOctaves="3" type="fractalNoise" />
+    <feDisplacementMap  scale="80"  xChannelSelector="R" in="SourceGraphic" />
+</filter>
+
+<div id="map"></div>
+
+<div class="plotArea icon">
+    {{!-- Options can be rendered dynamically here --}}
+    <option href="#" id="set" value="52230"></option>
+</div>
+
+<div id="plotField" class="plotField">
+    <div id="mark"></div>
+</div>
+
+{{!-- Scripts --}}
+<script src="/client/map.index.js"></script>
+</body>
+</html>

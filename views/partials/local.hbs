@@ -20,7 +20,11 @@
         init(false);
     });
 
-    $(function() {
-        init()
-    });
+    window.onload = function() {
+        let queryString = window.queryString;
+        let lib = window.lib;
+        $(function() {
+            init()
+        });
+    }
 </script>
