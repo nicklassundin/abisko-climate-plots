@@ -4,7 +4,6 @@ flask
 pandas
 requests
 numpy
-calendar
 flask_cors
 hashlib
 redis
