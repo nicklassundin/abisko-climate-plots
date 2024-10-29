@@ -1,6 +1,6 @@
 // Vizchange map start point
-//import lib from 'vizchange-plot-builder';
-import lib from '../../renderer/lib.js';
+import lib from 'vizchange-plot-builder';
+//import lib from '../../renderer/lib.js';
 
 
 // Initialize leaflet.js
