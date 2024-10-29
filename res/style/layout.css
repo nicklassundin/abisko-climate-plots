@@ -265,7 +265,7 @@
 .plot-button.active {
     background-color: #0056b3; /* Darker color for active button */
 }
-.disabled {
+.deactivate{
     opacity: 0.5; /* Dimmed */
     pointer-events: none; /* Make non-interactable */
 }

@@ -116,6 +116,17 @@ export default class Server {
             saveUninitialized: true
         }))
         hbs.registerPartials(`${__dirname}/views/partials`);
+        hbs.registerHelper('json', function(context) {
+            context = context.map((value) => {
+                let res = {}
+                res.id = value.id
+                res.latitude = value.position.latitude
+                res.longitude = value.position.longitude
+                res.name = value.name
+                return res
+            })
+            return JSON.stringify(context);
+        });
         // Setup Browse preview on server
         this.setupServerPreview();
         // Setup Map preview on server
@@ -139,6 +150,7 @@ export default class Server {
         this.app.get('/browse', (req, res) => {
             this.plotList.then((chart_list) => {
                 this.stationList.then((stations) => {
+                    console.log(stations)
                     res.render('browse.hbs',
                         {
                             STATIONS,
@@ -153,7 +165,8 @@ export default class Server {
     setupServerMapPreview() {
         this.app.get('/map', (req, res) => {
             res.render('map.hbs', {
-                // TODO
+                "months": [{"full": "January", "short": "jan"}, {"full": "February", "short": "feb"}, {"full": "March", "short": "mar"}, {"full": "April", "short": "apr"}, {"full": "May", "short": "may"}, {"full": "June", "short": "jun"}, {"full": "July", "short": "jul"}, {"full": "August", "short": "aug"}, {"full": "September", "short": "sep"}, {"full": "October", "short": "oct"}, {"full": "November", "short": "nov"}, {"full": "December", "short": "dec"}],
+                "stations": Object.values(this.STATIC_STATIONS),
             })
         })
     }
@@ -273,5 +286,4 @@ export default class Server {
         this.app.use('/health', health());
         return this.app;
     }
-
 }

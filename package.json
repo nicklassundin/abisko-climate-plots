@@ -25,7 +25,7 @@
     "request": "^2.88.2",
     "stream-http": "^3.2.0",
     "terser-webpack-plugin": "^5.3.10",
-    "vizchange-plot-builder": "^1.2.0",
+    "vizchange-plot-builder": "^1.2.2",
     "vizchange-smhi": "^1.2.3",
     "vizchange-stats": "^1.17.20",
     "webpack": "^5.91.0"

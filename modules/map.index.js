@@ -1,5 +1,6 @@
 // Vizchange map start point
-import lib from 'vizchange-plot-builder';
+//import lib from 'vizchange-plot-builder';
+import lib from '../../renderer/lib.js';
 
 
 // Initialize leaflet.js
@@ -19,81 +20,113 @@ import landskap from '../res/geojson/lan.json';
 //layerControl = L.control.layers({}, null, { collapsed: false }).addTo(map);
 
 
-let size = 2
-let greenIcon = L.icon({
-    iconUrl: 'resources/leaf-green.png',
-    /*
-    shadowUrl: 'resources/leaf-shadow.png',
+$(document).ready(function() {
+    let size = 2
+    let greenIcon = L.icon({
+        iconUrl: 'resources/leaf-green.png',
+        /*
+        shadowUrl: 'resources/leaf-shadow.png',
 
-     */
+         */
 
-    iconSize:     [38/size, 95/size], // size of the icon
-    shadowSize:   [50/size, 64/size], // size of the shadow
-    iconAnchor:   [22/size, 94/size], // point of the icon which will correspond to marker's location
-    shadowAnchor: [4/size, 62/size],  // the same for the shadow
-    popupAnchor:  [-3/size, -76/size] // point from which the popup should open relative to the iconAnchor
-});
-
-// Kommuner layer
-async function fetchStations() {
-    try {
-        const response = await fetch('/python/stations'); // Adjust the URL if needed
-        if (!response) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        // Parse the response as JSON
-        const data = await response.json();
-        return data.stations;
-
-    } catch (error) {
-        console.error("Error fetching stations:", error);
-    }
-}
-
-// Function to fetch stations from HTML
-/**
-function fetchStationsFromHTML() {
-    const stations = [];
-    const stationElements = document.querySelectorAll('#station-list li');
-    stationElements.forEach(station => {
-        stations.push({
-            id: station.getAttribute('data-id'),
-            name: station.getAttribute('data-name'),
-            latitude: parseFloat(station.getAttribute('data-latitude')),
-            longitude: parseFloat(station.getAttribute('data-longitude')),
-
-        });
+        iconSize:     [38/size, 95/size], // size of the icon
+        shadowSize:   [50/size, 64/size], // size of the shadow
+        iconAnchor:   [22/size, 94/size], // point of the icon which will correspond to marker's location
+        shadowAnchor: [4/size, 62/size],  // the same for the shadow
+        popupAnchor:  [-3/size, -76/size] // point from which the popup should open relative to the iconAnchor
     });
 
-    return stations;
-}
- */
+// Kommuner layer
+    async function fetchStations() {
+        try {
+            const response = await fetch('/python/stations'); // Adjust the URL if needed
+            if (!response) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            // Parse the response as JSON
+            const data = await response.json();
+            return data.stations;
 
+        } catch (error) {
+            console.error("Error fetching stations:", error);
+        }
+    }
 
-let markers = new L.FeatureGroup();
+    let markers = new L.FeatureGroup();
 
+    function updateParentDisabledState() {
+        $('.tab').each(function() {
+            const $tabContent = $('#' + $(this).data('tab'));
+            // Check if any child within this tab is not disabled
+            if ($tabContent.find('.plot-button:not(.deactivate)').length > 0) {
+                $(this).removeClass('deactivate'); // Remove disabled if any child is enabled
+            } else {
+                $(this).addClass('deactivate'); // Keep disabled if all children are disabled
+            }
+        });
+    }
 
-function renderPlot(longitude, latitude, name) {
-    $(`.plotArea`).removeClass('active')
-    map.flyTo(event.target['_latlng'])
-    $(`.plotArea`).toggleClass('active')
+    // Initial state check
+    updateParentDisabledState();
 
-    $(`#plotField`).removeClass('show')
-    $(`#plotField`).toggleClass('show')
+    // Re-check when any plot-button is clicked or dynamically updated
+    $('.plot-button').on('click', function() {
+        updateParentDisabledState();
+    });
 
-    $('#description').attr('data-longitude', longitude)
-    $('#description').attr('data-latitude', latitude)
-    $('#description').attr('data-set', $('.plot-button.active').attr('data-set'))
-    $('#description').attr('data-baseline', $('.plot-button.active').attr('data-baseline'))
-    $('#description').attr('data-name', name)
-    console.log($('#description').attr('data-set'))
-    lib.renderFromData("mark", '#description')
-}
-function addStations (points) {
+    async function updateDescription(event, longitude, latitude, name, lnkod, knkod) {
+        $(`.plotArea`).removeClass('active')
+        if (event.target['_latlng']) {
+            map.flyTo(event.target['_latlng'])
+        }
+        $(`.plotArea`).toggleClass('active')
+        $(`#plotField`).removeClass('show')
+        $(`#plotField`).toggleClass('show')
+        if(longitude){
+            $('#description').attr('data-longitude', longitude)
+            $('#description').attr('data-latitude', latitude)
+        }
+        $('#description').attr('data-lnkod', lnkod)
+        $('#description').attr('data-knkod', knkod)
+        $('#description').attr('data-set', $('.plot-button.active').attr('data-set'))
+        $('#description').attr('data-baseline', $('.plot-button.active').attr('data-baseline'))
+        $('#description').attr('data-name', name)
+
+        //const response = await fetch(`/python/station?year=2000&lng=${longitude}&lat=${latitude}&random=true`)
+        let url = `/python/station`
+        if(longitude){
+            url += `?lng=${longitude}&lat=${latitude}`
+            url += '&'
+        }else{
+            url += `?`
+        }
+        if(lnkod){
+            url += `LnKod=${lnkod}`
+        }
+        if(knkod){
+            url += `&KnKod=${knkod}`
+        }
+        //url += 'reset=true'
+
+        console.log(url)
+        const response = await fetch(url)
+        const datatypes = await response.json()
+        console.log(datatypes)
+        document.querySelectorAll('.plot-button').forEach(button => {
+            let datatype = button.getAttribute('data-type')
+            if (datatypes['available_statistics_data_types'][datatype]) {
+                button.classList.remove('deactivate')
+            } else {
+                button.classList.add('deactivate')
+            }
+        })
+        console.log('Update response done')
+        updateParentDisabledState()
+    }
+    function addStations (points) {
         points.forEach((point) => {
             let icon = L.divIcon({
-                html: `<a class="icon KnKod-${point.geodata.KnKod}" id="${point.id}">
+                html: `<a class="icon knkod-${point.geodata.KnKod}" id="${point.id}">
 <div class="icon-content"></div><options id="station-${point.id}"
 data-longitude=${point.longitude} 
 data-latitude=${point.latitude} 
@@ -104,7 +137,7 @@ data-hosturl="http://vizchange.hopto.org">
 <!-- data-hosturl="https://acp.k8s.glimworks.se" -->
 
 </options><a>`,
-                className: 'icon-container hide KnKod-'+ point.geodata.KnKod + ' LnKod-' + point.geodata.LnKod,
+                className: 'icon-container hide knkod-'+ point.geodata.knkod + ' lnkod-' + point.geodata.lnkod,
                 childId: point.id,
                 configId: `#station-${point.id}`
             });
@@ -113,11 +146,10 @@ data-hosturl="http://vizchange.hopto.org">
                 icon: icon,
             })
 
-            marker.on('click', (event) => {
-
-                renderPlot(point.longitude, point.latitude, point.name)
+            marker.on('click', async (event) => {
+                await updateDescription(event, point.longitude, point.latitude, point.name)
             })
-            marker.bindPopup(`<b>${point.name}</b><br>${point.params}`)
+            marker.bindPopup(`<b>${point.name}</b><br>${point.geodata.KnNamn}<br>${point.geodata.LnNamn}`)
             marker.on('mouseover', function (e) {
                 this.openPopup();
             });
@@ -131,115 +163,125 @@ data-hosturl="http://vizchange.hopto.org">
 
             map.addLayer(markers)
         })
-}
-/*
-map.addLayer(markers)
- */
+    }
+    /*
+    map.addLayer(markers)
+     */
 ////
 
 
 // Zoom feature
-function zoomToFeature(e, zoom) {
-    let bounds = e.target.getBounds();
-    //$(`.plotArea`).removeClass('active')
-    //$(`#plotField`).removeClass('show')
-    map.fitBounds(bounds);
-    /*
-    if(zoom){
-        zoomLevel = map.getZoom()
-    }else{
-        zoomLevel = 10
+    function zoomToFeature(e, zoom) {
+        let bounds = e.target.getBounds();
+        //$(`.plotArea`).removeClass('active')
+        //$(`#plotField`).removeClass('show')
+        map.fitBounds(bounds);
+        /*
+        if(zoom){
+            zoomLevel = map.getZoom()
+        }else{
+            zoomLevel = 10
+        }
+         */
     }
-     */
-}
-function onEachFeature(feature, layer) {
-    layer.on({
-        click: (e) => {
-            let LnKod = feature.properties.LnKod;
-            let KnKod = Number(feature.properties.KnKod);
-            zoomToFeature(e, isNaN(Number(KnKod ? KnKod : LnKod)));
+    function onEachFeature(feature, layer) {
+        layer.on({
+            click: async (e) => {
+                let lnkod = feature.properties.LnKod;
+                let knkod = Number(feature.properties.KnKod);
+                zoomToFeature(e, isNaN(Number(knkod ? knkod : lnkod)));
 
-            if (KnKod) {
-                // Remove the 'show' class from all icons and add it to the relevant ones
-                //$(`.icon-container`).removeClass('show');
-                $(`.icon-container`).removeClass('show');
-                $(`.icon-container.KnKod-${KnKod}`).toggleClass('show');
-                //$(`.kommun.KnKod-${KnKod}`).toggleClass('show');
-            } else {
-                // Handle landskap click if no KnKod (province)
-                $(`.kommun`).removeClass('show');
-                $(`.LnKod-${LnKod}`).removeClass('show');
-                $(`.LnKod-${LnKod}`).toggleClass('active');
-                $(`.kommun`).removeClass('show active');
-                $(`.kommun.LnKod-${LnKod}`).toggleClass('show active');
+                if (knkod) {
+                    // Remove the 'show' class from all icons and add it to the relevant ones
+                    //$(`.icon-container`).removeClass('show');
+                    $(`.icon-container`).removeClass('show');
+                    $(`.icon-container.knkod-${knkod}`).toggleClass('show');
+                    //$(`.kommun.knkod-${knkod}`).toggleClass('show');
+                } else {
+                    // Handle landskap click if no knkod (province)
+                    $(`.kommun`).removeClass('show');
+                    $(`.lnkod-${lnkod}`).removeClass('show');
+                    $(`.lnkod-${lnkod}`).toggleClass('active');
+                    $(`.kommun`).removeClass('show active');
+                    $(`.kommun.lnkod-${lnkod}`).toggleClass('show active');
+                }
+                $('#description').attr('data-knkod', knkod)
+                $('#description').attr('data-lnkod', lnkod)
+                let namn = feature.properties.LnNamn ? feature.properties.LnNamn : feature.properties.KnNamn
+                await updateDescription(e, null, null, namn, lnkod, knkod)
+            },
+            dblclick: (e) => {
+                /*
+                console.log('double click', e)
+                addKommuns(300)
+                map.setZoom(1)
+                 */
             }
-        },
-        dblclick: (e) => {
-            /*
-            console.log('double click', e)
-            addKommuns(300)
-            map.setZoom(1)
-             */
-        }
-    });
-}
+        });
+    }
 
 
-let kommun_layer = undefined
-function addKommuns() {
-    kommun_layer.addTo(map);
-}
+    let kommun_layer = undefined
+    function addKommuns() {
+        kommun_layer.addTo(map);
+    }
 
-window.onload = async () => {
-    const stations = await fetchStations()
-    addStations(stations)
-    kommun_layer = L.geoJSON(kommuner, {
-        onEachFeature: onEachFeature,
-        style: (feature) => {
-            let kod = feature.properties.KnKod;
-            // take first two numbers in KnKod
-            let land = Math.floor(feature.properties.KnKod / 100)
-            land = ""+land
-            land = land.length === 1 ? "0"+land : land
-            return {
-                className: `kommun KnKod-${kod} LnKod-${land}`,
-            };
-        },
-        zoom: 1,
-    })
-    await kommun_layer.addTo(map);
-    let land_layer = L.geoJSON(landskap, {
-        onEachFeature: onEachFeature,
-        style: (feature) => {
-            return {
-                className: 'landskap LnKod-' + feature.properties.LnKod + ' show'
-            };
-        }
-    })
-    await land_layer.addTo(map);
+    window.onload = async () => {
+        const stations = await fetchStations()
+        addStations(stations)
+        console.log(stations)
+        const static_stations = JSON.parse(document.getElementById("stations-data").textContent);
+        console.log(static_stations)
+        kommun_layer = L.geoJSON(kommuner, {
+            onEachFeature: onEachFeature,
+            style: (feature) => {
+                let kod = feature.properties.KnKod;
+                // take first two numbers in knkod
+                let land = Math.floor(feature.properties.KnKod / 100)
+                land = ""+land
+                land = land.length === 1 ? "0"+land : land
+                return {
+                    className: `kommun knkod-${kod} lnkod-${land}`,
+                };
+            },
+            zoom: 1,
+        })
+        await kommun_layer.addTo(map);
+        let land_layer = L.geoJSON(landskap, {
+            onEachFeature: onEachFeature,
+            style: (feature) => {
+                return {
+                    className: 'landskap lnkod-' + feature.properties.LnKod + ' show'
+                };
+            }
+        })
+        await land_layer.addTo(map);
 
-    map.setMaxBounds(land_layer.getBounds());
+        map.setMaxBounds(land_layer.getBounds());
 
-    map.fitBounds(land_layer.getBounds(), {
-        duration: 0,
-        animation: false
-    });
-    console.log('Map loaded')
+        map.fitBounds(land_layer.getBounds(), {
+            duration: 0,
+            animation: false
+        });
+        console.log('Map loaded')
 
-}
+    }
 
 
 // Generic event listener for all plot buttons
-document.querySelectorAll('.plot-button').forEach(button => {
-    button.addEventListener('click', function() {
-        // Get the data-set attribute to determine which plot to render
-        const dataSet = this.getAttribute('data-set');
+    document.querySelectorAll('.plot-button').forEach(button => {
+        button.addEventListener('click', function() {
+            // Get the data-set attribute to determine which plot to render
+            const dataSet = this.getAttribute('data-set');
 
-        // Log the selected plot (for debugging or confirmation)
-        console.log(`${dataSet} plot selected`);
-        // Remove 'active' class from all buttons, then add it to the clicked button
-        document.querySelectorAll('.plot-button').forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
-
+            // Log the selected plot (for debugging or confirmation)
+            $('#description').attr('data-set', dataSet)
+            $('#description').attr('data-type', this.getAttribute('data-type'))
+            $('#description').attr('data-cat', this.getAttribute('data-cat'))
+            // Remove 'active' class from all buttons, then add it to the clicked button
+            document.querySelectorAll('.plot-button').forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            lib.renderFromData("mark", '#description')
+        });
     });
 });

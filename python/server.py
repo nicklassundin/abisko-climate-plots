@@ -6,7 +6,7 @@ import numpy as np
 import calendar
 
 import stations
-from cache import get_cached, set_cache, clear_cache
+from cache import get_cached, set_cache, clear_cache, clear_all_cache
 from generate import generate_random_weather_data
 
 app = Flask(__name__)
@@ -50,11 +50,18 @@ def growing_season_weeks(df):
 
 def growing_season_days(df):
     if df.empty:
-        return None
+        return 0  # Return 0 for an empty DataFrame
+    # Ensure data is sorted by date
     df = df.copy()
-    df = df.sort_values(by='date')  # Ensure data is sorted by date
+    df = df.sort_values(by='date')
+    # Create a new column 'above_zero' indicating if the day was frost-free
     df['above_zero'] = (df['min_temperature'] > 0) | (df['avg_temperature'] > 0)
-    return int(df['above_zero'].astype(int).groupby((df['above_zero'] != df['above_zero'].shift()).cumsum()).sum().max())
+    # Group by each day (ignoring multiple records within a day) and take the maximum of 'above_zero'
+    days_above_zero = df.groupby(df['date'].dt.date)['above_zero'].max()
+    # Count the frost-free days by summing the True values (1 for frost-free, 0 for frosty)
+    frost_free_days = int(days_above_zero.sum())
+    return frost_free_days
+
 
 def warmest(df, period):
     if df.empty:
@@ -579,22 +586,72 @@ def status():
     return jsonify({'status': 'ok'})
 
 
-def fetch_data(params, required_data_types):
+def fetch_data(params, required_data_types, slump):
     """Fetch the raw weather data from the API based on the specified parameters."""
     coordinates = params['coordinates']
     start_year = params['start_year']
     end_year = params['end_year']
+    # if coordinates is array
+    weather_data = None
+    if isinstance(coordinates, list):
+        coordinates = [f"{point['lat']},{point['lng']}" for point in coordinates]
+        # fetch data for each point and combine them
+        for point in coordinates:
+            params_sub = params.copy()
+            params_sub['coordinates'] = point
+            sub_data = fetch_data(params_sub.copy(), required_data_types, slump)
 
-    radius = params['radius']
-    # Build the URL dynamically based on the required raw data types
-    base_url = 'https://vischange.k8s.glimworks.se/data/query/v1'
-    query_url = f"{base_url}?position={coordinates}&radius={radius}&date={start_year}0101-{end_year}1231&types={required_data_types}"
+            # combinde sub_data to weather_data
+            if weather_data is None:
+                weather_data = sub_data
+            else:
+                # check if sub_data is empty
+                if not sub_data is None and len(sub_data) != 0:
+                    weather_data = pd.concat([weather_data, sub_data], ignore_index=True)
+        return weather_data
 
-    # Debugging - Print the final URL to check its format
-    print(f"Final URL: {query_url}")
+    response = None
+    if slump == 'true':
+        response = generate_random_weather_data(start_year, end_year)
+        weather_data = response
+    else:
+        radius = params['radius']
+        # Build the URL dynamically based on the required raw data types
+        base_url = 'https://vischange.k8s.glimworks.se/data/query/v1'
+        query_url = f"{base_url}?position={coordinates}&radius={radius}&date={start_year}0101-{end_year}1231&types={required_data_types}"
+        response = None
+        #print(f"Final URL: {query_url}")
+        response = requests.get(query_url)
+        try:
+            data = response.json()
+            if not data:  # Handle cases where no data is returned
+                return None
+        except Exception as e:
+            return None
+        # Debugging - Print the final URL to check its format
+        if response.status_code != 200:
+            print(f"Error fetching data: {response.status_code}, {response.text}")
+            return None
+
+        # Assuming the data is in JSON format and contains the necessary raw data types
+        try:
+
+            weather_data = pd.DataFrame(data)
+            weather_data['date'] = pd.to_datetime(weather_data['date'])
+            # Ensure necessary columns are in numeric format
+            for data_type in required_data_types.split(','):
+                if data_type in weather_data.columns:
+                    if data_type in DATA_TYPES_TO_TYPE:
+                        if DATA_TYPES_TO_TYPE[data_type] == 'date':
+                            weather_data[data_type] = pd.to_datetime(weather_data[data_type], errors='coerce')
+                            weather_data[data_type] = weather_data[data_type].dt.dayofyear
+                    weather_data[data_type] = pd.to_numeric(weather_data[data_type], errors='coerce')
+        except Exception as e:
+            return None
+
 
     # Fetch the data from the given URL
-    return requests.get(query_url)
+    return weather_data
 @app.route('/data', methods=['GET'])
 def weather_stats():
     # Retrieve the query parameters for year range, coordinates, and filtering options
@@ -613,7 +670,7 @@ def weather_stats():
     baseline_start, baseline_end = map(int, baseline.split(','))
 
         # Combine the request parameters into a dict for caching
-    params = {
+    params_in = {
              'start_year': start_year,
              'end_year': end_year,
              'coordinates': coordinates,
@@ -622,7 +679,10 @@ def weather_stats():
              'radius': radius,
              'station': station,
              'slump': slump,
+             'LnKod': LnKod,
+             'KnKod': KnKod
     }
+    params = params_in.copy()
     # Reset
     reset = request.args.get('reset')
     if reset is not None:
@@ -633,6 +693,7 @@ def weather_stats():
     if flush is not None:
         if flush.lower() == 'true':
             clear_cache(params)
+            clear_all_cache()
 
 
 
@@ -640,7 +701,7 @@ def weather_stats():
     # TODO return cache exist still reevaluate baseline cache seperately
     cached_result = get_cached(params)
     if cached_result:
-       return jsonify(cached_result)
+        return jsonify(cached_result)
 
     # Validate input parameters
     if not start_year or not end_year or not coordinates or not requested_stats:
@@ -661,39 +722,31 @@ def weather_stats():
     required_data_types = ','.join(required_data_types)  # Prepare data types for the query
 
     # TODO fetch stations
-    # if KnKod is not None:
-    #    allstations = get_stations(flush == 'true')
-    #    allstations = np.array(allstations)
+    stations = []
+    if KnKod is not None or LnKod is not None:
+        coords = []
+        allstations = get_stations()
+        allstations = np.array(allstations)
+        # Filter the stations based on the given KnKod and LnKod
+        # convert to dataframe
+        code = False
+        for point in allstations:
+            if not KnKod or KnKod != 'NaN':
+                code = str(point['geodata']['knkod']) == KnKod
+            else:
+                if not LnKod or LnKod != 'NaN':
+                    code = str(point['geodata']['lnkod']) == LnKod
+            if code:
+                stations.append(point)
+                coord = {
+                    'lat': point['latitude'],
+                    'lng': point['longitude']
+                }
+                coords.append(coord)
+        # map latitude and longitude into a object
+        params['coordinates'] = coords
     # Fetch the data from the given URL
-    response = None
-    if slump == 'true':
-        response = generate_random_weather_data(start_year, end_year)
-        weather_data = response
-    else:
-        response = fetch_data(params, required_data_types)
-        if response.status_code != 200:
-            print(f"Error fetching data: {response.status_code}, {response.text}")
-            return jsonify({'error': 'Failed to fetch data from URL'}), 400
-
-        # Assuming the data is in JSON format and contains the necessary raw data types
-        try:
-            data = response.json()
-            if not data:  # Handle cases where no data is returned
-                return jsonify({'error': 'No data available for the requested range.'}), 400
-
-            weather_data = pd.DataFrame(data)
-            weather_data['date'] = pd.to_datetime(weather_data['date'])
-            # Ensure necessary columns are in numeric format
-            for data_type in required_data_types.split(','):
-                if data_type in weather_data.columns:
-                    if data_type in DATA_TYPES_TO_TYPE:
-                        if DATA_TYPES_TO_TYPE[data_type] == 'date':
-                            weather_data[data_type] = pd.to_datetime(weather_data[data_type], errors='coerce')
-                            weather_data[data_type] = weather_data[data_type].dt.dayofyear
-                    weather_data[data_type] = pd.to_numeric(weather_data[data_type], errors='coerce')
-        except Exception as e:
-            return jsonify({'error': 'Failed to parse JSON data'}), 400
-
+    weather_data = fetch_data(params.copy(), required_data_types, slump)
     # Calculate baseline statistics from the resulting statistics over the baseline period
     baseline_stats = calculate_baseline_stats(weather_data, baseline_start, baseline_end, requested_stats)
     weather_data['station'] = weather_data['station'].str.lower()
@@ -873,29 +926,9 @@ def weather_stats():
          }
     }
     # Cache the result
-    set_cache(params, results)
+    set_cache(params_in, results)
     return jsonify(results)
 
-@app.route('/station', methods=['GET'])
-def station_stats():
-    year = request.args.get('year')
-    lat = request.args.get('lat')
-    lng = request.args.get('lng')
-    slump = request.args.get('random')
-
-    # Validate the parameters
-    if not year or not lat or not lng:
-        return jsonify({"error": "Missing 'year', 'lat', or 'lng' parameter"}), 400
-
-    coordinates = (float(lat), float(lng))
-
-    # List of all possible data types to check for
-    data_types = ['avg_temperature', 'precipitation', 'min_temperature', 'max_temperature', 'snowdepth_single', 'snowdepth_meter', 'co2_weekly', 'freezeup', 'breakup', 'perma', 'icetime']
-
-    # Get available statistics for the station at the provided coordinates
-    station_stats = stations.get_weather_stats_for_station(coordinates, year, data_types, slump == 'true')
-
-    return jsonify(station_stats)
 
 
 def get_stations(flush=False):
@@ -920,5 +953,75 @@ def get_all_stations():
     else:
         return jsonify({"error": "Could not fetch stations"}), 500
 
+
+DATA_TYPES = ['avg_temperature', 'precipitation', 'min_temperature', 'max_temperature', 'snowdepth_single', 'snowdepth_meter', 'co2_weekly', 'freezeup', 'breakup', 'perma', 'icetime']
+@app.route('/station', methods=['GET'])
+def station_stats():
+    year = request.args.get('year')
+    lat = request.args.get('lat')
+    lng = request.args.get('lng')
+    KnKod = request.args.get('KnKod')
+    LnKod = request.args.get('LnKod')
+    slump = request.args.get('random')
+    flush = request.args.get('flush')
+    reset = request.args.get('reset')
+
+    # Validate the parameters
+    if (not lat or not lng) and (not KnKod and not LnKod):
+        return jsonify({'error': 'Missing required parameters: lat, lng, or KnKod/LnKod'}), 400
+
+
+    # List of all possible data types to check for
+
+    params = {
+        'lat': lat,
+        'lng': lng,
+        'knkod': KnKod,
+        'lnkod': LnKod,
+    }
+    if flush is not None:
+        if flush.lower() == 'true':
+            clear_all_cache()
+    if reset is not None:
+        if reset.lower() == 'true':
+            clear_cache(params)
+
+    cached_result = get_cached(params)
+    if cached_result:
+        return jsonify(cached_result)
+    # Get available statistics for the station at the provided coordinates
+    kod = None
+    if KnKod is not None:
+        kod = 'knkod'
+    else:
+        if LnKod is not None:
+            kod = 'lnkod'
+    if kod is None:
+        coordinates = (float(lat), float(lng))
+        station_stats = stations.get_weather_stats_for_station(coordinates, DATA_TYPES, slump == 'true')
+        set_cache(params, station_stats)
+        return jsonify(station_stats)
+    else:
+        data_types = None
+        allstations = get_stations()
+        i = 0
+        for point in allstations:
+            i = i + 1
+            if str(point['geodata'][kod]) == KnKod or str(point['geodata'][kod]) == LnKod:
+                data_stats = stations.get_weather_stats_for_station((point['latitude'], point['longitude']), DATA_TYPES)
+                if isinstance(data_stats['available_statistics'], str):
+                    continue
+                if data_types is None:
+                    # check if data_stats is string
+                    data_types = data_stats['available_statistics']
+                else:
+                    # only for loop for data_types when False
+                    for key, value in data_stats.items():
+                        data_types[key] = value or data_types[key]
+        print('Done')
+        set_cache(params, data_types)
+        return jsonify(data_types)
+
+    return jsonify(data_types)
 if __name__ == '__main__':
     app.run(debug=False)

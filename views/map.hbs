@@ -1,7 +1,7 @@
 {{!-- extends default --}}
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<meta>
     <title>{{title}}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +12,6 @@
     <link rel="stylesheet" type="text/css" href="css/highcharts.css">
     <link rel="stylesheet" type="text/css" href="css/series.css">
     <link rel="stylesheet" type="text/css" href="css/custom-highcharts.css">
-    <link rel="stylesheet" type="text/css" href="css/experiment.css">
-
     <link rel="stylesheet" href="res/style/leaflet.css">
     <link rel="stylesheet" href="res/style/style.css">
     <link rel="stylesheet" href="res/style/marker.css">
@@ -26,6 +24,10 @@
     {{!-- jQuery --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+<script type="application/json" id="stations-data">
+    {{{json stations}}}
+</script>
 </head>
 <body>
 
@@ -43,7 +45,7 @@
 <!-- Main Tab structure with buttons -->
 <div class="plot-tabs">
     <ul class="tab-list">
-        <li class="tab active" data-tab="temperatureTab">Temperature</li>
+        <li class="tab" data-tab="temperatureTab">Temperature</li>
         <li class="tab" data-tab="precipitationTab">Precipitation</li>
         <li class="tab" data-tab="snowDepthTab">Snow Depth</li>
         <li class="tab" data-tab="growingSeasonTab">Growing Season</li>
@@ -56,31 +58,53 @@
     <!-- Main Tab Content with action buttons at the end -->
     <div id="tabContent">
         <!-- Temperature Tab Content -->
-        <div id="temperatureTab" class="tab-content active">
+        <div id="temperatureTab" class="tab-content">
             <ul class="sub-tabs">
-                <li class="sub-tab active" data-subtab="annualTemp">Annual Temperature</li>
+                <li class="sub-tab" data-subtab="annualTemp">Annual Temperature</li>
                 <li class="sub-tab" data-subtab="monthlyTemp">Monthly Temperature</li>
             </ul>
             <!-- Sub-tab content for Annual Temperature -->
-            <div class="sub-tab-content active" id="annualTemp">
-                <button class="plot-button active" data-set="slideTemperatures">Annual Temperature</button>
+            <div class="sub-tab-content" id="annualTemp">
+                <button class="plot-button deactivate" data-set="slideTemperatures" data-type="annual_temperature">Annual Temperature</button>
             </div>
             <!-- Sub-tab content for Monthly Temperature -->
             <div class="sub-tab-content" id="monthlyTemp">
-                <button class="plot-button" data-set="janTemperature">January</button>
-                <button class="plot-button" data-set="febtemperature">February</button>
-                <button class="plot-button" data-set="marTemperature">March</button>
-                <!-- Add more monthly buttons as needed -->
+                {{#each months}}
+                    <button class="plot-button deactivate" data-set="slideMonthlyTemperatures" data-type="annual_{{this.short}}_temperature" data-cat="{{this.short}}">{{this.full}}</button>
+                {{/each}}
             </div>
         </div>
 
         <!-- Example Precipitation Tab Content -->
         <div id="precipitationTab" class="tab-content">
-            <button class="plot-button" data-set="annualPrecip">Annual Precipitation</button>
-            <button class="plot-button" data-set="monthlyPrecip">Monthly Precipitation</button>
+            <button class="plot-button deactivate" data-set="annualPrecipitation" data-type="annual_precipitation">Annual Precipitation</button>
+            <div class="sub-tab-content" id="monthlyTemp">
+                {{#each months}}
+                    <button class="plot-button deactivate" data-set="viz-{{this.short}}-temp" data-type="annual_{{this.short}}_precipitation" data-cat="{{this.short}}">{{this.full}}</button>
+                {{/each}}
+            </div>
         </div>
 
-        <!-- Additional tabs follow the same structure -->
+        <div id="growingSeasonTab" class="tab-content">
+            <button class="plot-button deactivate" data-set="slideGrowingSeasonWeeks" data-type="growing_season_weeks">Growing Season Weeks</button>
+            <button class="plot-button deactivate" data-set="slideGrowingSeasonDays" data-type="growing_season_days">Growing Season Days</button>
+        </div>
+        <div id="atmosphereTab" class="tab-content">
+            <button class="plot-button deactivate" data-set="annualAtmosphere" data-type="annual_atmosphere">Annual Atmosphere</button>
+        </div>
+        <div id="lakesTab" class="tab-content">
+            <button class="plot-button deactivate" data-set="slideLakeIceTime" data-type="annual_ice_time">Annual Lakes</button>
+            <button class="plot-button deactivate" data-set="slideLakeIceFreezeup" data-type="annual_freezeup">Annual Lakes</button>
+            <button class="plot-button deactivate" data-set="slideLakeIceBreakup" data-type="annual_breakup">Annual Lakes</button>
+        </div>
+        <div id="permafrostTab" class="tab-content">
+            <button class="plot-button deactivate" data-set="annualPermafrost" data-type="annual_permafrost">Annual Permafrost</button>
+        </div>
+        <div id="snowDepthTab" class="tab-content">
+            <button class="plot-button deactivate" data-set="annualAvgSnowDepth" data-type="annual_snowdepth_meter">Annual Snow Depth</button>
+            <button class="plot-button deactivate" data-set="abiskoSnowDepthPeriodMeans" data-type="period_snowdepth">30 year period Snow Depth</button>
+            <button class="plot-button deactivate" data-set="abiskoSnowDepthPeriodMeans2" data-type="period_snowdepth">Decade Snow Depth</button>
+        </div>
     </div>
 </div>
 
@@ -120,6 +144,7 @@
             $('#' + subTabId).addClass('active');
         });
     });
+
 </script>
 {{!-- Scripts --}}
 <script src="/client/map.index.js"></script>
