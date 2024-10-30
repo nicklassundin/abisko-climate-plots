@@ -77,8 +77,14 @@
 
         <!-- Example Precipitation Tab Content -->
         <div id="precipitationTab" class="tab-content">
-            <button class="plot-button deactivate" data-set="annualPrecipitation" data-type="annual_precipitation">Annual Precipitation</button>
-            <div class="sub-tab-content" id="monthlyTemp">
+            <ul class="sub-tabs">
+                <li class="sub-tab" data-subtab="annualPrec">Annual Precipitation</li>
+                <li class="sub-tab" data-subtab="monthlyPrec">Monthly Precipitation</li>
+            </ul>
+            <div class="sub-tab-content" id="annualPrec">
+                <button class="plot-button deactivate" data-set="slidePrecipitation" data-type="annual_precipitation">Annual Precipitation</button>
+            </div>
+            <div class="sub-tab-content" id="monthlyPrec">
                 {{#each months}}
                     <button class="plot-button deactivate" data-set="viz-{{this.short}}-temp" data-type="annual_{{this.short}}_precipitation" data-cat="{{this.short}}">{{this.full}}</button>
                 {{/each}}
@@ -116,18 +122,18 @@
             const tabId = $(this).data('tab');
 
             // Set active class for clicked tab
-            $('.tab').removeClass('active');
-            $(this).addClass('active');
+            $('.tab').removeClass('target');
+            $(this).addClass('target');
 
             // Hide all main tab content and show selected
-            $('.tab-content').removeClass('active');
-            $('#' + tabId).addClass('active');
+            $('.tab-content').removeClass('target');
+            $('#' + tabId).addClass('target');
 
             // Reset sub-tab visibility to show the first sub-tab by default
-            $('#' + tabId).find('.sub-tab').removeClass('active');
-            $('#' + tabId).find('.sub-tab:first').addClass('active');
-            $('#' + tabId).find('.sub-tab-content').removeClass('active');
-            $('#' + tabId).find('.sub-tab-content:first').addClass('active');
+            $('#' + tabId).find('.sub-tab').removeClass('target');
+            $('#' + tabId).find('.sub-tab:first').addClass('target');
+            $('#' + tabId).find('.sub-tab-content').removeClass('target');
+            $('#' + tabId).find('.sub-tab-content:first').addClass('target');
         });
 
         // Handle sub-tab click events within each main tab
@@ -136,12 +142,12 @@
             const parentTab = $(this).closest('.tab-content');
 
             // Set active class for clicked sub-tab
-            parentTab.find('.sub-tab').removeClass('active');
-            $(this).addClass('active');
+            parentTab.find('.sub-tab').removeClass('target');
+            $(this).addClass('target');
 
             // Hide all sub-tab content within parent tab and show selected
-            parentTab.find('.sub-tab-content').removeClass('active');
-            $('#' + subTabId).addClass('active');
+            parentTab.find('.sub-tab-content').removeClass('target');
+            $('#' + subTabId).addClass('target');
         });
     });
 

@@ -109,7 +109,7 @@
     background-color: #e6e6e6;
 }
 
-.tab.active {
+.tab.target{
     background-color: white;
     border-top: 2px solid #007BFF;
     color: #007BFF;
@@ -124,7 +124,7 @@
     background-color: #ffffff;
 }
 
-.tab-content.active {
+.tab-content.target {
     display: block;
 }
 
@@ -183,7 +183,7 @@
     border-left: none;
 }
 
-.tab.active {
+.tab.target{
     background-color: white;
     border-top: 2px solid #007BFF;
     color: #007BFF;
@@ -199,7 +199,7 @@
     background-color: #ffffff;
 }
 
-.tab-content.active {
+.tab-content.target {
     display: block; /* Show only active tab content */
 }
 
@@ -224,7 +224,7 @@
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.sub-tab.active {
+.sub-tab.target {
     background-color: white;
     color: #007BFF;
     font-weight: bold;
@@ -239,7 +239,7 @@
     background-color: #ffffff;
 }
 
-.sub-tab-content.active {
+.sub-tab-content.target {
     display: block; /* Show only active sub-tab content */
 }
 
@@ -262,7 +262,7 @@
     background-color: #0056b3;
 }
 
-.plot-button.active {
+.plot-button.target {
     background-color: #0056b3; /* Darker color for active button */
 }
 .deactivate{

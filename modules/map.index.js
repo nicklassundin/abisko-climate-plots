@@ -75,11 +75,11 @@ $(document).ready(function() {
     });
 
     async function updateDescription(event, longitude, latitude, name, lnkod, knkod) {
-        $(`.plotArea`).removeClass('active')
+        $(`.plotArea`).removeClass('target')
         if (event.target['_latlng']) {
             map.flyTo(event.target['_latlng'])
         }
-        $(`.plotArea`).toggleClass('active')
+        $(`.plotArea`).toggleClass('target')
         $(`#plotField`).removeClass('show')
         $(`#plotField`).toggleClass('show')
         if(longitude){
@@ -88,8 +88,8 @@ $(document).ready(function() {
         }
         $('#description').attr('data-lnkod', lnkod)
         $('#description').attr('data-knkod', knkod)
-        $('#description').attr('data-set', $('.plot-button.active').attr('data-set'))
-        $('#description').attr('data-baseline', $('.plot-button.active').attr('data-baseline'))
+        $('#description').attr('data-set', $('.plot-button.target').attr('data-set'))
+        $('#description').attr('data-baseline', $('.plot-button.target').attr('data-baseline'))
         $('#description').attr('data-name', name)
 
         //const response = await fetch(`/python/station?year=2000&lng=${longitude}&lat=${latitude}&random=true`)
@@ -201,9 +201,9 @@ data-hosturl="http://vizchange.hopto.org">
                     // Handle landskap click if no knkod (province)
                     $(`.kommun`).removeClass('show');
                     $(`.lnkod-${lnkod}`).removeClass('show');
-                    $(`.lnkod-${lnkod}`).toggleClass('active');
-                    $(`.kommun`).removeClass('show active');
-                    $(`.kommun.lnkod-${lnkod}`).toggleClass('show active');
+                    $(`.lnkod-${lnkod}`).toggleClass('target');
+                    $(`.kommun`).removeClass('show target');
+                    $(`.kommun.lnkod-${lnkod}`).toggleClass('show target');
                 }
                 $('#description').attr('data-knkod', knkod)
                 $('#description').attr('data-lnkod', lnkod)
@@ -229,9 +229,6 @@ data-hosturl="http://vizchange.hopto.org">
     window.onload = async () => {
         const stations = await fetchStations()
         addStations(stations)
-        console.log(stations)
-        const static_stations = JSON.parse(document.getElementById("stations-data").textContent);
-        console.log(static_stations)
         kommun_layer = L.geoJSON(kommuner, {
             onEachFeature: onEachFeature,
             style: (feature) => {
@@ -242,6 +239,8 @@ data-hosturl="http://vizchange.hopto.org">
                 land = land.length === 1 ? "0"+land : land
                 return {
                     className: `kommun knkod-${kod} lnkod-${land}`,
+                    fillOpacity: 0.5,
+                    color: 'red',
                 };
             },
             zoom: 1,
@@ -279,8 +278,8 @@ data-hosturl="http://vizchange.hopto.org">
             $('#description').attr('data-type', this.getAttribute('data-type'))
             $('#description').attr('data-cat', this.getAttribute('data-cat'))
             // Remove 'active' class from all buttons, then add it to the clicked button
-            document.querySelectorAll('.plot-button').forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
+            document.querySelectorAll('.plot-button').forEach(btn => btn.classList.remove('target'));
+            this.classList.add('target');
             lib.renderFromData("mark", '#description')
         });
     });
