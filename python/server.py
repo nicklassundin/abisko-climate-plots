@@ -538,6 +538,8 @@ def calculate_difference_from_baseline(year_stats, baseline_stats):
     differences = {}
 
     for stat in year_stats:
+        if  'diff' in stat.split('_'):
+            continue
         if stat in baseline_stats and isinstance(baseline_stats[stat], (int, float)):
             # For numeric values, calculate the difference
             differences['diff_' + stat] = year_stats[stat] - baseline_stats[stat]
@@ -585,8 +587,8 @@ def fetch_data(params, required_data_types, slump):
         base_url = 'https://vischange.k8s.glimworks.se/data/query/v1'
         query_url = f"{base_url}?position={coordinates}&radius={radius}&date={start_year}0101-{end_year}1231&types={required_data_types}"
         response = None
-        #print(f"Final URL: {query_url}")
-        response = requests.get(query_url)
+        print(f"Final URL: {query_url}")
+        response = requests.get(query_url, timeout=(30, 90))
         try:
             data = response.json()
             if not data:  # Handle cases where no data is returned
@@ -640,12 +642,23 @@ def weather_stats():
              'end_year': end_year,
              'coordinates': coordinates,
              'requested_stats': requested_stats,
-             'baseline': baseline,
+           #  'baseline': baseline,
              'radius': radius,
              'station': station,
              'slump': slump,
              'LnKod': LnKod,
              'KnKod': KnKod
+    }
+    params_baseline = {
+        'start_year': start_year,
+        'end_year': end_year,
+        'coordinates': coordinates,
+        'requested_stats': requested_stats,
+        'baseline': baseline,
+        'LnKod': LnKod,
+        'KnKod': KnKod,
+        'slump': slump
+
     }
     params = params_in.copy()
     # Reset
@@ -664,8 +677,35 @@ def weather_stats():
 
     # Check the cache for an existing result
     # TODO return cache exist still reevaluate baseline cache seperately
+    #cached_result = get_cached(params)
+    #if cached_result:
+    #    return jsonify(cached_result)
     cached_result = get_cached(params)
     if cached_result:
+        # If cached, check if the baseline matches
+        cached_baseline = cached_result.get('baseline')
+        if cached_baseline != baseline:
+            # If baseline differs, calculate the new baseline stats and update the results
+            baseline_stats = cached_result.get('annual')
+            # data frame to
+            baseline_stats = pd.DataFrame(baseline_stats)
+            baseline = baseline.split(',')
+            baseline_start = int(baseline[0])
+            baseline_end = int(baseline[1])
+            # get columns from start to end year where column name is year string
+            baseline_stats = baseline_stats.loc[:, [col for col in baseline_stats.columns if baseline_start <= int(col) <= baseline_end]]
+
+            # mean of each row
+            baseline_stats = baseline_stats.mean(axis=1)
+            # baseline_stats = calculate_baseline_stats(cached_result['annual'], baseline_start, baseline_end, requested_stats)
+            for year, year_stats in cached_result['annual'].items():
+                differences = calculate_difference_from_baseline(year_stats, baseline_stats)
+                year_stats.update(differences)
+
+            # Update cache with new baseline result
+            cached_result['baseline'] = baseline
+            set_cache(params_in, cached_result)
+
         return jsonify(cached_result)
 
     # Validate input parameters
@@ -890,13 +930,14 @@ def weather_stats():
         'annual': {year: {k: convert_np_types(v) for k, v in stats.items()} for year, stats in results.items()},
         'decades': {str(decade): {k: convert_np_types(v) for k, v in stats.items()} for decade, stats in decade_results.items()},
         'periods': {str(period): {k: convert_np_types(v) for k, v in stats.items()} for period, stats in period_results.items()},
-         'raw': {
+        'raw': {
                 stat_type: [
                     {k: convert_np_types(v) for k, v in stat_item.items()}
                     for stat_item in stat_list
                 ]
                 for stat_type, stat_list in raw_stats.items()
-         }
+        },
+        'baslines': baseline
     }
     # Cache the result
     set_cache(params_in, results)
