@@ -6,6 +6,7 @@ import numpy as np
 import calendar
 
 import stations
+from stations import fetch_data_for_coordinates
 from cache import get_cached, set_cache, clear_cache, clear_all_cache
 from generate import generate_random_weather_data
 
@@ -432,107 +433,6 @@ DATA_TYPES_TO_TYPE = {
 # List of all available statistics
 ALL_STATISTICS = list(STATISTICS_TO_DATA_TYPES.keys())
 
-def calculate_baseline_stats(weather_data, baseline_start, baseline_end, requested_stats):
-    """Calculate baseline statistics from the resulting statistics over a baseline period."""
-    baseline_data = weather_data[
-        (weather_data['date'].dt.year >= baseline_start) &
-        (weather_data['date'].dt.year <= baseline_end)
-    ]
-
-    baseline_stats = {}
-
-    # Compute baseline values for each requested statistic
-    for stat in requested_stats:
-        for month in range(1, 13):
-            month_name = calendar.month_abbr[month].lower()
-            if stat == f'annual_{month_name}_precipitation':
-                baseline_stats[f'annual_{month_name}_precipitation'] = annual_month_precipitation(baseline_data, month) / (baseline_end - baseline_start + 1)
-                baseline_stats[f'snow_annual_{month_name}_precipitation'] = snow_annual_month_precipitation(baseline_data, month) / (baseline_end - baseline_start + 1)
-                baseline_stats[f'rain_annual_{month_name}_precipitation'] = rain_annual_month_precipitation(baseline_data, month) / (baseline_end - baseline_start + 1)
-            elif stat == f'annual_{month_name}_temperature':
-                baseline_stats[f'annual_{month_name}_temperature'] = annual_month_temperature(baseline_data, month)
-                baseline_stats[f'max_annual_{month_name}_temperature'] = max_annual_month_temperature(baseline_data, month)
-                baseline_stats[f'min_annual_{month_name}_temperature'] = min_annual_month_temperature(baseline_data, month)
-        if stat == 'growing_season_weeks':
-            baseline_stats['growing_season_weeks'] = growing_season_weeks(baseline_data)
-        elif stat == 'annual_temperature':
-            baseline_stats['annual_temperature'] = annual_temperature(baseline_data)
-        elif stat == 'global_temperature':
-            baseline_stats['global_temperature'] = baseline_data['glob_temp'].mean()
-        elif stat == 'northern_hemisphere_temperature':
-            baseline_stats['northern_hemisphere_temperature'] = baseline_data['nhem_temp'].mean()
-        elif stat == '64n90n_temperature':
-            baseline_stats['64n90n_temperature'] = baseline_data['64n-90n_temp'].mean()
-        elif stat == 'annual_spring_temperature':
-            baseline_stats['annual_spring_temperature'] = annual_spring_temperature(baseline_data)
-        elif stat == 'annual_summer_temperature':
-            baseline_stats['annual_summer_temperature'] = annual_summer_temperature(baseline_data)
-        elif stat == 'annual_autumn_temperature':
-            baseline_stats['annual_autumn_temperature'] = annual_autumn_temperature(baseline_data)
-        elif stat == 'annual_winter_temperature':
-            baseline_stats['annual_winter_temperature'] = annual_winter_temperature(baseline_data)
-        elif stat == 'annual_spring_precipitation':
-            spring_stats = annual_spring(baseline_data)
-            spring_stats = precipitation_stats(spring_stats)
-            baseline_stats['annual_spring_precipitation'] = spring_stats['total'] / (baseline_end - baseline_start + 1)
-            baseline_stats['snow_annual_spring_precipitation'] = spring_stats['snow'] / (baseline_end - baseline_start + 1)
-            baseline_stats['rain_annual_spring_precipitation'] = spring_stats['rain'] / (baseline_end - baseline_start + 1)
-        elif stat == 'annual_summer_precipitation':
-            summer_stats = annual_summer(baseline_data)
-            summer_stats = precipitation_stats(summer_stats)
-            baseline_stats['annual_summer_precipitation'] = summer_stats['total'] / (baseline_end - baseline_start + 1)
-            baseline_stats['snow_annual_summer_precipitation'] = summer_stats['snow'] / (baseline_end - baseline_start + 1)
-            baseline_stats['rain_annual_summer_precipitation'] = summer_stats['rain'] / (baseline_end - baseline_start + 1)
-        elif stat == 'annual_autumn_precipitation':
-            autumn_stats = annual_autumn(baseline_data)
-            autumn_stats = precipitation_stats(autumn_stats)
-            baseline_stats['annual_autumn_precipitation'] = autumn_stats['total'] / (baseline_end - baseline_start + 1)
-            baseline_stats['snow_annual_autumn_precipitation'] = autumn_stats['snow'] / (baseline_end - baseline_start + 1)
-            baseline_stats['rain_annual_autumn_precipitation'] = autumn_stats['rain'] / (baseline_end - baseline_start + 1)
-        elif stat == 'annual_winter_precipitation':
-            winter_stats = annual_winter(baseline_data)
-            winter_stats = precipitation_stats(winter_stats)
-            baseline_stats['annual_winter_precipitation'] = winter_stats['total'] / (baseline_end - baseline_start + 1)
-            baseline_stats['snow_annual_winter_precipitation'] = winter_stats['snow'] / (baseline_end - baseline_start + 1)
-            baseline_stats['rain_annual_winter_precipitation'] = winter_stats['rain'] / (baseline_end - baseline_start + 1)
-        elif stat == 'growing_season_days':
-            baseline_stats['growing_season_days'] = int(growing_season_days(baseline_data))
-        elif stat == 'coldest_day':
-            baseline_stats['coldest_day'] = int(coldest_day(baseline_data))
-        elif stat == 'warmest_day':
-            baseline_stats['warmest_day'] = int(warmest_day(baseline_data))
-        elif stat == 'coldest_month':
-            baseline_stats['coldest_month'] = int(coldest_month(baseline_data))
-        elif stat == 'warmest_month':
-            baseline_stats['warmest_month'] = int(warmest_month(baseline_data))
-        elif stat == 'coldest_week':
-            baseline_stats['coldest_week'] = int(coldest_week(baseline_data))
-        elif stat == 'warmest_week':
-            baseline_stats['warmest_week'] = int(warmest_week(baseline_data))
-        elif stat == 'annual_precipitation':
-            prec_stats = precipitation_stats(baseline_data)
-            baseline_stats['annual_precipitation'] = prec_stats['total'] / (baseline_end - baseline_start + 1)
-            baseline_stats['snow_annual_precipitation'] = prec_stats['snow'] / (baseline_end - baseline_start + 1)
-            baseline_stats['rain_annual_precipitation'] = prec_stats['rain'] / (baseline_end - baseline_start + 1)
-        elif stat == 'first_frost_autumn':
-            baseline_stats['first_frost_autumn'] = first_frost_autumn(baseline_data)
-        elif stat == 'last_frost_spring':
-            baseline_stats['last_frost_spring'] = last_frost_spring(baseline_data, baseline_end)
-        elif stat == 'annual_ice_time':
-            baseline_stats['annual_ice_time'] = icetime_annual(baseline_data)
-        elif stat == 'annual_freezeup':
-            baseline_stats['annual_freezeup'] = annual_freezeup(baseline_data)
-        elif stat == 'annual_breakup':
-            baseline_stats['annual_breakup'] = annual_breakup(baseline_data)
-        elif stat == 'annual_ice_thickness':
-            baseline_stats['annual_ice_thickness'] = annual_ice_thickness(baseline_data)
-        elif stat == 'annual_snowdepth_meter':
-            baseline_stats['annual_snowdepth_meter'] = baseline_data['snowdepth_meter'].mean()
-        elif stat == 'annual_snowdepth_single':
-            baseline_stats['annual_snowdepth_single'] = baseline_data['snowdepth_single'].mean()
-
-    return baseline_stats
-
 def calculate_difference_from_baseline(year_stats, baseline_stats):
     """Calculate the difference between the yearly statistics and the baseline statistics."""
     differences = {}
@@ -582,28 +482,14 @@ def fetch_data(params, required_data_types, slump):
         response = generate_random_weather_data(start_year, end_year)
         weather_data = response
     else:
-        radius = params['radius']
-        # Build the URL dynamically based on the required raw data types
-        base_url = 'https://vischange.k8s.glimworks.se/data/query/v1'
-        query_url = f"{base_url}?position={coordinates}&radius={radius}&date={start_year}0101-{end_year}1231&types={required_data_types}"
-        response = None
-        print(f"Final URL: {query_url}")
-        response = requests.get(query_url, timeout=(30, 90))
-        try:
-            data = response.json()
-            if not data:  # Handle cases where no data is returned
-                return None
-        except Exception as e:
-            return None
-        # Debugging - Print the final URL to check its format
-        if response.status_code != 200:
-            print(f"Error fetching data: {response.status_code}, {response.text}")
-            return None
+        coordinates = coordinates.split(',')
+        long = coordinates[0]
+        lat = coordinates[1]
+        data_types = required_data_types.split(',')
+        weather_data = fetch_data_for_coordinates(long, lat, start_year, end_year, data_types)
 
         # Assuming the data is in JSON format and contains the necessary raw data types
         try:
-
-            weather_data = pd.DataFrame(data)
             weather_data['date'] = pd.to_datetime(weather_data['date'])
             # Ensure necessary columns are in numeric format
             for data_type in required_data_types.split(','):
@@ -694,7 +580,6 @@ def weather_stats():
             baseline_end = int(baseline[1])
             # get columns from start to end year where column name is year string
             baseline_stats = baseline_stats.loc[:, [col for col in baseline_stats.columns if baseline_start <= int(col) <= baseline_end]]
-
             # mean of each row
             baseline_stats = baseline_stats.mean(axis=1)
             # baseline_stats = calculate_baseline_stats(cached_result['annual'], baseline_start, baseline_end, requested_stats)
@@ -753,7 +638,9 @@ def weather_stats():
     # Fetch the data from the given URL
     weather_data = fetch_data(params.copy(), required_data_types, slump)
     # Calculate baseline statistics from the resulting statistics over the baseline period
-    baseline_stats = calculate_baseline_stats(weather_data, baseline_start, baseline_end, requested_stats)
+    #print(weather_data)
+    #print(requested_stats)
+    #baseline_stats = calculate_baseline_stats(weather_data, baseline_start, baseline_end, requested_stats)
     weather_data['station'] = weather_data['station'].str.lower()
     if station != 'all':
         weather_data = weather_data[weather_data['station'] == station]
@@ -893,8 +780,8 @@ def weather_stats():
         if year_stats:  # Only add stats if any calculations were made
             results[year] = year_stats
         # Calculate the difference from the baseline statistics
-        differences = calculate_difference_from_baseline(year_stats, baseline_stats)
-        year_stats.update(differences)
+        #differences = calculate_difference_from_baseline(year_stats, baseline_stats)
+        #year_stats.update(differences)
 
     # TODO built into single function
 
@@ -939,6 +826,19 @@ def weather_stats():
         },
         'baslines': baseline
     }
+    # get columns from start to end year where column name is year string
+    baseline_stats = results.get('annual')
+    baseline_stats = pd.DataFrame(baseline_stats)
+    baseline = baseline.split(',')
+    baseline_start = int(baseline[0])
+    baseline_end = int(baseline[1])
+    baseline_stats = baseline_stats.loc[:, [col for col in baseline_stats.columns if baseline_start <= int(col) <= baseline_end]]
+    # mean of each row
+    baseline_stats = baseline_stats.mean(axis=1)
+    for year, year_stats in results['annual'].items():
+          differences = calculate_difference_from_baseline(year_stats, baseline_stats)
+          year_stats.update(differences)
+
     # Cache the result
     set_cache(params_in, results)
     return jsonify(results)
@@ -1027,7 +927,7 @@ def station_stats():
         print('Fetching data for stations...', len(filtered_stations))
         for point in filtered_stations:
             i = i + 1
-            data_stats = stations.get_weather_stats_for_station((point['latitude'], point['longitude']), DATA_TYPES)
+            data_stats = stations.get_weather_stats_for_station(point['latitude'], point['longitude'], DATA_TYPES)
             if isinstance(data_stats['available_statistics'], str):
                  continue
             if data_types is None:
