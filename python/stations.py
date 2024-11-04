@@ -5,21 +5,57 @@ BASE_URL = 'https://vischange.k8s.glimworks.se/data/query/v1'
 from generate import generate_random_weather_data
 from cache import get_cached, set_cache, clear_cache
 import json
-# Helper function to query data for a specific station by coordinates and year
-def fetch_data_for_coordinates(coordinates, start_year, end_year, data_types, slump = False):
-    query_url = f"{BASE_URL}?position={coordinates[0]},{coordinates[1]}&radius=30&date={start_year}0101-{end_year}1231&sort=year&types={','.join(data_types)}"
+from ratelimit import limits, sleep_and_retry
+
+from requests.exceptions import HTTPError, Timeout, RequestException
+
+@sleep_and_retry
+@limits(calls=10, period=60)
+def fetch_data_for_coordinates(coordinates, start_year, end_year, data_types, slump=False):
+    params = {
+        'data_types': data_types,
+        'coordinates': coordinates,
+        'slump': slump,
+        'type': 'rawdata'
+    }
+
+    # Check cache first
+    cache_results = get_cached(params)
+    if cache_results:
+        print("Using cached results")
+        return pd.DataFrame(json.loads(cache_results))
+
+    query_url = (
+        f"{BASE_URL}?position={coordinates[0]},{coordinates[1]}"
+        f"&radius=30&date={start_year}0101-{end_year}1231&sort=year&types={','.join(data_types)}"
+    )
+    print(query_url)
+
     if slump:
-        return generate_random_weather_data(year, year)
-    else:
-        response = requests.get(query_url)
-        if response.status_code == 200:
-            data = response.json()
-            df = pd.DataFrame(data)
-            if not df.empty:
-                df['date'] = pd.to_datetime(df['date'])
-            return df
-        else:
-            return None
+        return generate_random_weather_data(start_year, end_year)
+
+    # Fetch data with error handling
+    try:
+        response = requests.get(query_url, timeout=(10, 60))
+        response.raise_for_status()  # Will raise HTTPError for bad responses (4xx or 5xx)
+        data = response.json()
+        df = pd.DataFrame(data)
+
+        if not df.empty:
+            df['date'] = pd.to_datetime(df['date'])
+            set_cache(params, df.to_json(orient="records"))
+
+        return df
+
+    except HTTPError as http_err:
+        print(f"HTTP error occurred: {http_err}")
+    except Timeout:
+        print("The request timed out.")
+    except RequestException as err:
+        print(f"An error occurred: {err}")
+
+    # Return empty DataFrame or None as a fallback
+    return pd.DataFrame()
 
 # Define the statistics that can be calculated
 def calculate_available_statistics(df, types):

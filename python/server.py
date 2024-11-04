@@ -978,19 +978,24 @@ def station_stats():
         data_types = None
         allstations = get_stations()
         i = 0
-        for point in allstations:
+        # allstations filter by KnKod or LnKod
+        filtered_stations = [
+            point for point in allstations
+            if str(point['geodata'][kod]) == KnKod or str(point['geodata'][kod]) == LnKod
+        ]
+        print('Fetching data for stations...', len(filtered_stations))
+        for point in filtered_stations:
             i = i + 1
-            if str(point['geodata'][kod]) == KnKod or str(point['geodata'][kod]) == LnKod:
-                data_stats = stations.get_weather_stats_for_station((point['latitude'], point['longitude']), DATA_TYPES)
-                if isinstance(data_stats['available_statistics'], str):
-                    continue
-                if data_types is None:
-                    # check if data_stats is string
-                    data_types = data_stats['available_statistics']
-                else:
-                    # only for loop for data_types when False
-                    for key, value in data_stats.items():
-                        data_types[key] = value or data_types[key]
+            data_stats = stations.get_weather_stats_for_station((point['latitude'], point['longitude']), DATA_TYPES)
+            if isinstance(data_stats['available_statistics'], str):
+                 continue
+            if data_types is None:
+                 # check if data_stats is string
+                 data_types = data_stats['available_statistics']
+            else:
+                 # only for loop for data_types when False
+                 for key, value in data_stats.items():
+                    data_types[key] = value or data_types[key]
         print('Done')
         set_cache(params, data_types)
         return jsonify(data_types)
