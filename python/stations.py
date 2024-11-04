@@ -9,7 +9,7 @@ from ratelimit import limits, sleep_and_retry
 from requests.exceptions import HTTPError, Timeout, RequestException
 
 @sleep_and_retry
-@limits(calls=30, period=60)
+@limits(calls=15, period=60)
 def fetch_data_for_coordinates(long, lat, start_year, end_year, data_types, slump=False, calculate=False):
     coordinates = f"{long},{lat}"
     params = {
@@ -26,7 +26,7 @@ def fetch_data_for_coordinates(long, lat, start_year, end_year, data_types, slum
         return pd.DataFrame(json.loads(cache_results))
 
     query_url = (
-        f"{BASE_URL}?position={long},{lat}"
+        f"{BASE_URL}?position={lat},{long}"
         f"&radius=30&date={start_year}0101-{end_year}1231&types={','.join(data_types)}"
     )
     if calculate:
@@ -74,14 +74,14 @@ def calculate_available_statistics(df, types):
 
 from server import STATISTICS_TO_DATA_TYPES
 # Main function to get available statistics for a specific station at given coordinates and year
-def get_weather_stats_for_station(long, lat, data_types, slump = False):
-    coordinates = f"{long},{lat}"
+def get_weather_stats_for_station(lat, long, data_types, slump = False):
+    coordinates = f"{lat},{long}"
     params = {'data_types': data_types, 'coordinates': coordinates, 'slump': slump, 'type': 'weather_stats'}
     cache_results = get_cached(params)
     if cache_results:
         return cache_results
     # Fetch data for the specific station at given coordinates
-    station_data = fetch_data_for_coordinates(long, lat, 1985, 1990, data_types, slump)
+    station_data = fetch_data_for_coordinates(lat, long, 1985, 1990, data_types, slump)
     result = None
     if station_data is not None and not station_data.empty:
         # Calculate available statistics based on the fetched data

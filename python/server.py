@@ -569,7 +569,7 @@ def weather_stats():
     cached_result = get_cached(params)
     if cached_result:
         # If cached, check if the baseline matches
-        cached_baseline = cached_result.get('baseline')
+        cached_baseline = cached_result.get('baselines')
         if cached_baseline != baseline:
             # If baseline differs, calculate the new baseline stats and update the results
             baseline_stats = cached_result.get('annual')
@@ -581,6 +581,7 @@ def weather_stats():
             # get columns from start to end year where column name is year string
             baseline_stats = baseline_stats.loc[:, [col for col in baseline_stats.columns if baseline_start <= int(col) <= baseline_end]]
             # mean of each row
+            #baseline_stats = baseline_stats.drop(['error', 'station'], axis=0)
             baseline_stats = baseline_stats.mean(axis=1)
             # baseline_stats = calculate_baseline_stats(cached_result['annual'], baseline_start, baseline_end, requested_stats)
             for year, year_stats in cached_result['annual'].items():
@@ -594,8 +595,8 @@ def weather_stats():
         return jsonify(cached_result)
 
     # Validate input parameters
-    if not start_year or not end_year or not coordinates or not requested_stats:
-        return jsonify({'error': 'Missing required parameters: start_year, end_year, coordinates, or types'}), 400
+    if not start_year or not end_year or not coordinates or not requested_stats or not baseline:
+        return jsonify({'error': 'Missing required parameters: start_year, end_year, coordinates, types or baseline'}), 400
 
     # Check if 'all' is requested
     if 'all' in requested_stats:
@@ -779,9 +780,6 @@ def weather_stats():
 
         if year_stats:  # Only add stats if any calculations were made
             results[year] = year_stats
-        # Calculate the difference from the baseline statistics
-        #differences = calculate_difference_from_baseline(year_stats, baseline_stats)
-        #year_stats.update(differences)
 
     # TODO built into single function
 
@@ -824,7 +822,7 @@ def weather_stats():
                 ]
                 for stat_type, stat_list in raw_stats.items()
         },
-        'baslines': baseline
+        'baslines': convert_np_types(baseline)
     }
     # get columns from start to end year where column name is year string
     baseline_stats = results.get('annual')
@@ -833,6 +831,8 @@ def weather_stats():
     baseline_start = int(baseline[0])
     baseline_end = int(baseline[1])
     baseline_stats = baseline_stats.loc[:, [col for col in baseline_stats.columns if baseline_start <= int(col) <= baseline_end]]
+    # remove row error and station
+    #baseline_stats = baseline_stats.drop(['error', 'station'], axis=0)
     # mean of each row
     baseline_stats = baseline_stats.mean(axis=1)
     for year, year_stats in results['annual'].items():
@@ -914,8 +914,7 @@ def station_stats():
         if LnKod is not None:
             kod = 'lnkod'
     if kod is None:
-        coordinates = (float(lat), float(lng))
-        station_stats = stations.get_weather_stats_for_station(coordinates, DATA_TYPES, slump == 'true')
+        station_stats = stations.get_weather_stats_for_station(lat, lng, DATA_TYPES, slump == 'true')
         set_cache(params, station_stats)
         return jsonify(station_stats)
     else:

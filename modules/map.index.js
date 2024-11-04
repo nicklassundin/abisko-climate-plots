@@ -96,12 +96,11 @@ $(document).ready(function() {
         let url = `/python/station`
         if(longitude){
             url += `?lng=${longitude}&lat=${latitude}`
-            url += '&'
         }else{
             url += `?`
         }
         if(lnkod){
-            url += `LnKod=${lnkod}`
+            url += `&LnKod=${lnkod}`
         }
         if(knkod){
             url += `&KnKod=${knkod}`
