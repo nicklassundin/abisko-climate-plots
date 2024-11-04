@@ -36,7 +36,8 @@ def fetch_data_for_coordinates(coordinates, start_year, end_year, data_types, sl
 
     # Fetch data with error handling
     try:
-        response = requests.get(query_url, timeout=(10, 60))
+        # timeout=(10, 60) means 10 seconds to connect and 60 seconds to read the response
+        response = requests.get(query_url, timeout=(60, 90))
         response.raise_for_status()  # Will raise HTTPError for bad responses (4xx or 5xx)
         data = response.json()
         df = pd.DataFrame(data)
@@ -52,6 +53,7 @@ def fetch_data_for_coordinates(coordinates, start_year, end_year, data_types, sl
     except Timeout:
         print("The request timed out.")
     except RequestException as err:
+        print('premature end of file')
         print(f"An error occurred: {err}")
 
     # Return empty DataFrame or None as a fallback

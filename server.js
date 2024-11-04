@@ -14,7 +14,7 @@ import request from 'request';
 import express from 'express';
 import http from 'http';
 const {version} = await import('./package.json', {
-    assert: { type: "json" }
+    assert: {type: "json"}
 });
 // Handle bar formatting
 import hbs from 'hbs';
