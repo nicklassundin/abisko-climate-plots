@@ -6,12 +6,11 @@ from generate import generate_random_weather_data
 from cache import get_cached, set_cache, clear_cache
 import json
 from ratelimit import limits, sleep_and_retry
-
 from requests.exceptions import HTTPError, Timeout, RequestException
 
 @sleep_and_retry
-@limits(calls=10, period=60)
-def fetch_data_for_coordinates(long, lat, start_year, end_year, data_types, slump=False):
+@limits(calls=30, period=60)
+def fetch_data_for_coordinates(long, lat, start_year, end_year, data_types, slump=False, calculate=False):
     coordinates = f"{long},{lat}"
     params = {
         'data_types': data_types,
@@ -19,6 +18,7 @@ def fetch_data_for_coordinates(long, lat, start_year, end_year, data_types, slum
         'slump': slump,
         'type': 'rawdata'
     }
+
     # Check cache first
     cache_results = get_cached(params)
     if cache_results:
@@ -27,25 +27,30 @@ def fetch_data_for_coordinates(long, lat, start_year, end_year, data_types, slum
 
     query_url = (
         f"{BASE_URL}?position={long},{lat}"
-        f"&radius=30&date={start_year}0101-{end_year}1231&sort=year&types={','.join(data_types)}"
+        f"&radius=30&date={start_year}0101-{end_year}1231&types={','.join(data_types)}"
     )
-    print(query_url)
+    if calculate:
+        query_url += "&calculate=true&sort=year"
 
     if slump:
         return generate_random_weather_data(start_year, end_year)
 
     # Fetch data with error handling
     try:
-        # timeout=(10, 60) means 10 seconds to connect and 60 seconds to read the response
+        # Adjust timeouts as needed (60 seconds to connect, 90 seconds to read)
         response = requests.get(query_url, timeout=(60, 90))
-        response.raise_for_status()  # Will raise HTTPError for bad responses (4xx or 5xx)
+        response.raise_for_status()  # Raises HTTPError for bad responses
         data = response.json()
         df = pd.DataFrame(data)
 
         if not df.empty:
-            df['date'] = pd.to_datetime(df['date'])
-            set_cache(params, df.to_json(orient="records"))
+            # Convert date to datetime if 'date' column exists
+            if 'date' in df.columns:
+                df['date'] = pd.to_datetime(df['date'])
 
+            # Cache the fetched data
+            set_cache(params, df.to_json(orient="records"))
+            print('Complete:', query_url)
         return df
 
     except HTTPError as http_err:
@@ -53,11 +58,12 @@ def fetch_data_for_coordinates(long, lat, start_year, end_year, data_types, slum
     except Timeout:
         print("The request timed out.")
     except RequestException as err:
-        print('premature end of file')
+        print('Discarded:', query_url)
         print(f"An error occurred: {err}")
 
-    # Return empty DataFrame or None as a fallback
+    # Return an empty DataFrame as a fallback if an error occurs
     return pd.DataFrame()
+
 
 # Define the statistics that can be calculated
 def calculate_available_statistics(df, types):
@@ -75,7 +81,7 @@ def get_weather_stats_for_station(long, lat, data_types, slump = False):
     if cache_results:
         return cache_results
     # Fetch data for the specific station at given coordinates
-    station_data = fetch_data_for_coordinates(long, lat, 1900, 2025, data_types, slump)
+    station_data = fetch_data_for_coordinates(long, lat, 1985, 1990, data_types, slump)
     result = None
     if station_data is not None and not station_data.empty:
         # Calculate available statistics based on the fetched data

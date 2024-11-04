@@ -879,6 +879,9 @@ def station_stats():
     slump = request.args.get('random')
     flush = request.args.get('flush')
     reset = request.args.get('reset')
+    data_types = request.args.get('types')
+    if data_types is None:
+        data_types = DATA_TYPES
 
     # Validate the parameters
     if (not lat or not lng) and (not KnKod and not LnKod):
