@@ -49,6 +49,7 @@
     "start-full": "npm run update && git submodule update && npm test && npx nodemon run.js",
     "dev": "clear; npm run update && npx nodemon -x NODE_ENV=development node run.js",
     "dev-no-update": "clear; npx nodemon -x NODE_ENV=development node run.js",
+    "start-aws": "node run.js --port=3000",
     "dev-inspect": "clear; npx nodemon -x node --inspect NODE_ENV=develoment run.js",
     "static": "cp client/bundle.js static/bundle.js",
     "webpack": "webpack --mode=development",
