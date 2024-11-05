@@ -486,6 +486,7 @@ def fetch_data(params, required_data_types, slump):
         long = coordinates[0]
         lat = coordinates[1]
         data_types = required_data_types.split(',')
+        print(long, lat, start_year, end_year, data_types)
         weather_data = fetch_data_for_coordinates(long, lat, start_year, end_year, data_types)
 
         # Assuming the data is in JSON format and contains the necessary raw data types
@@ -569,6 +570,7 @@ def weather_stats():
     cached_result = get_cached(params)
     if cached_result:
         # If cached, check if the baseline matches
+        print(cached_result)
         cached_baseline = cached_result.get('baselines')
         if cached_baseline != baseline:
             # If baseline differs, calculate the new baseline stats and update the results

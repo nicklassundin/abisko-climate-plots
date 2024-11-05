@@ -1,14 +1,23 @@
 .icon-container {
     align-content: center;
+    display: flex!important;
+    flex-wrap: wrap!important; /* Allows items to wrap onto multiple lines if needed */
+    gap: 30px!important;       /* Space between items to prevent overlap */
+    align-content: flex-start!important; /* Controls alignment of wrapped rows */
 }
 
+
+
+
 .icon {
+    flex: 5 5 100px!important; /* Grow, shrink, and have a minimum width of 100px */
     height: 0px!important;
+    margin: 10px!important;
     width: 0px!important;
     border-style: solid;
     border-color: darkred;
-    border-width: 10px;
-
+    border-width: 12px;
+    color: darkred!important;
     border-radius: 50%;
     display: inline-block;
     transition-duration: 500ms;
