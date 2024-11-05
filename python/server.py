@@ -716,8 +716,11 @@ def weather_stats():
     baseline_stats = baseline_stats.loc[:, [col for col in baseline_stats.columns if baseline_start <= int(col) <= baseline_end]]
     # remove row error and station
     # mean of each row
-    baseline_stats = baseline_stats.drop(['error', 'station'], axis=0)
-    #print(baseline_stats)
+    print(baseline_stats)
+    if 'error' in baseline_stats.head():
+        baseline_stats = baseline_stats.drop('error', axis=0)
+    if 'station' in baseline_stats.head():
+        baseline_stats = baseline_stats.drop('station', axis=0)
     baseline_stats = baseline_stats.mean(axis=1)
     for year, year_stats in results['annual'].items():
           differences = calculate_difference_from_baseline(year_stats, baseline_stats)
