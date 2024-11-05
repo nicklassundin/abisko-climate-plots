@@ -486,7 +486,6 @@ def fetch_data(params, required_data_types, slump):
         long = coordinates[0]
         lat = coordinates[1]
         data_types = required_data_types.split(',')
-        print(long, lat, start_year, end_year, data_types)
         weather_data = fetch_data_for_coordinates(long, lat, start_year, end_year, data_types)
 
         # Assuming the data is in JSON format and contains the necessary raw data types
@@ -570,7 +569,6 @@ def weather_stats():
     cached_result = get_cached(params)
     if cached_result:
         # If cached, check if the baseline matches
-        print(cached_result)
         cached_baseline = cached_result.get('baselines')
         if cached_baseline != baseline:
             # If baseline differs, calculate the new baseline stats and update the results
@@ -583,7 +581,7 @@ def weather_stats():
             # get columns from start to end year where column name is year string
             baseline_stats = baseline_stats.loc[:, [col for col in baseline_stats.columns if baseline_start <= int(col) <= baseline_end]]
             # mean of each row
-            #baseline_stats = baseline_stats.drop(['error', 'station'], axis=0)
+            baseline_stats = baseline_stats.drop(['error', 'station'], axis=0)
             baseline_stats = baseline_stats.mean(axis=1)
             # baseline_stats = calculate_baseline_stats(cached_result['annual'], baseline_start, baseline_end, requested_stats)
             for year, year_stats in cached_result['annual'].items():
@@ -620,8 +618,8 @@ def weather_stats():
         coords = []
         allstations = get_stations()
         allstations = np.array(allstations)
-        # Filter the stations based on the given KnKod and LnKod
-        # convert to dataframe
+        # filter out same coordinates
+        #allstations = allstations[~pd.DataFrame(allstations).duplicated(subset=['latitude', 'longitude'])]
         code = False
         for point in allstations:
             if not KnKod or KnKod != 'NaN':
@@ -641,14 +639,17 @@ def weather_stats():
     # Fetch the data from the given URL
     weather_data = fetch_data(params.copy(), required_data_types, slump)
     # Calculate baseline statistics from the resulting statistics over the baseline period
-    #print(weather_data)
-    #print(requested_stats)
     #baseline_stats = calculate_baseline_stats(weather_data, baseline_start, baseline_end, requested_stats)
     weather_data['station'] = weather_data['station'].str.lower()
     if station != 'all':
         weather_data = weather_data[weather_data['station'] == station]
     # Perform necessary calculations based on the requested statistics
     results = {}
+    print(np.unique(weather_data['station']))
+    print(weather_data)
+    # print rows where date is None
+    #if 'date' in weather_data.columns:
+    #    weather_data['date'] = pd.to_datetime(weather_data['date'])
     for year in range(int(start_year), int(end_year)):
         # Filter data for the current year
         yearly_data = weather_data[weather_data['date'].dt.year == year]
@@ -834,8 +835,9 @@ def weather_stats():
     baseline_end = int(baseline[1])
     baseline_stats = baseline_stats.loc[:, [col for col in baseline_stats.columns if baseline_start <= int(col) <= baseline_end]]
     # remove row error and station
-    #baseline_stats = baseline_stats.drop(['error', 'station'], axis=0)
     # mean of each row
+    baseline_stats = baseline_stats.drop(['error', 'station'], axis=0)
+    #print(baseline_stats)
     baseline_stats = baseline_stats.mean(axis=1)
     for year, year_stats in results['annual'].items():
           differences = calculate_difference_from_baseline(year_stats, baseline_stats)

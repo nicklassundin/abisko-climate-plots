@@ -8,8 +8,6 @@ import json
 from ratelimit import limits, sleep_and_retry
 from requests.exceptions import HTTPError, Timeout, RequestException
 
-@sleep_and_retry
-@limits(calls=15, period=60)
 def fetch_data_for_coordinates(long, lat, start_year, end_year, data_types, slump=False, calculate=False):
     coordinates = f"{long},{lat}"
     params = {
@@ -23,10 +21,14 @@ def fetch_data_for_coordinates(long, lat, start_year, end_year, data_types, slum
     cache_results = get_cached(params)
     if cache_results:
         print("Using cached results")
-        return pd.DataFrame(json.loads(cache_results))
+        df = pd.DataFrame(json.loads(cache_results))
+        if 'date' in df.columns:
+            df['date'] = pd.to_datetime(df['date'])
+        return df
 
+    # Construct the query URL order most be long,lat for API
     query_url = (
-        f"{BASE_URL}?position={lat},{long}"
+        f"{BASE_URL}?position={long},{lat}"
         f"&radius=30&date={start_year}0101-{end_year}1231&types={','.join(data_types)}"
     )
     if calculate:
