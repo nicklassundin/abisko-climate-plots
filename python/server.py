@@ -6,9 +6,10 @@ import numpy as np
 import calendar
 
 import stations
-from stations import fetch_data_for_coordinates
+from stations import fetch_data
 from cache import get_cached, set_cache, clear_cache, clear_all_cache
 from generate import generate_random_weather_data
+from datatypes import STATISTICS_TO_DATA_TYPES, ALL_STATISTICS
 
 app = Flask(__name__)
 
@@ -354,84 +355,7 @@ def calculate_time_interval_stats(weather_data, start_year, end_year, step, requ
 
 
 
-# Map statistic types to required raw data types based on the available database types
-STATISTICS_TO_DATA_TYPES = {
-    'annual_temperature': ['avg_temperature'],
-    'global_temperature': ['glob_temp'],
-    'northern_hemisphere_temperature': ['nhem_temp'],
-    '64n90n_temperature': ['64n-90n_temp'],
-    'annual_spring_temperature': ['avg_temperature'],
-    'annual_summer_temperature': ['avg_temperature'],
-    'annual_autumn_temperature': ['avg_temperature'],
-    'annual_winter_temperature': ['avg_temperature'],
-    'annual_winter_temperature': ['avg_temperature'],
-    'annual_jan_temperature': ['avg_temperature'],
-    'annual_feb_temperature': ['avg_temperature'],
-    'annual_mar_temperature': ['avg_temperature'],
-    'annual_apr_temperature': ['avg_temperature'],
-    'annual_may_temperature': ['avg_temperature'],
-    'annual_jun_temperature': ['avg_temperature'],
-    'annual_jul_temperature': ['avg_temperature'],
-    'annual_aug_temperature': ['avg_temperature'],
-    'annual_sep_temperature': ['avg_temperature'],
-    'annual_oct_temperature': ['avg_temperature'],
-    'annual_nov_temperature': ['avg_temperature'],
-    'annual_dec_temperature': ['avg_temperature'],
-    'first_frost_autumn': ['avg_temperature'],
-    'last_frost_spring': ['avg_temperature'],
-    'growing_season_days': ['min_temperature', 'avg_temperature'],
-    'growing_season_weeks': ['min_temperature', 'avg_temperature'],
-    'coldest_day': ['min_temperature'],
-    'warmest_day': ['max_temperature'],
-    'coldest_month': ['avg_temperature'],
-    'warmest_month': ['avg_temperature'],
-    'coldest_week': ['avg_temperature'],
-    'warmest_week': ['avg_temperature'],
-    'annual_precipitation': ['avg_temperature', 'precipitation'],
-    'annual_spring_precipitation': ['avg_temperature','precipitation'],
-    'annual_summer_precipitation': ['avg_temperature','precipitation'],
-    'annual_autumn_precipitation': ['avg_temperature','precipitation'],
-    'annual_winter_precipitation': ['avg_temperature','precipitation'],
-    'annual_jan_precipitation': ['avg_temperature','precipitation'],
-    'annual_feb_precipitation': ['avg_temperature','precipitation'],
-    'annual_mar_precipitation': ['avg_temperature','precipitation'],
-    'annual_apr_precipitation': ['avg_temperature','precipitation'],
-    'annual_may_precipitation': ['avg_temperature','precipitation'],
-    'annual_jun_precipitation': ['avg_temperature','precipitation'],
-    'annual_jul_precipitation': ['avg_temperature','precipitation'],
-    'annual_aug_precipitation': ['avg_temperature','precipitation'],
-    'annual_sep_precipitation': ['avg_temperature','precipitation'],
-    'annual_oct_precipitation': ['avg_temperature','precipitation'],
-    'annual_nov_precipitation': ['avg_temperature','precipitation'],
-    'annual_dec_precipitation': ['avg_temperature','precipitation'],
-    'annual_freezeup': ['freezeup'],
-    'annual_breakup': ['breakup'],
-    'annual_ice_time': ['icetime'],
-    'annual_ice_thickness': ['complete_ice_cover'],
-    'weekly_co2': ['co2_weekly'],
-    'annual_snowdepth_meter': ['snowdepth_meter'],
-    'annual_snowdepth_single': ['snowdepth_single'],
-    'period_snowdepth': ['snowdepth_single'],
-    'glob_temp': ['glob_temp'],
-    'nhem_temp': ['nhem_temp'],
-    'perma': ['perma'],
-}
-DATA_TYPES_TO_TYPE = {
-    'avg_temperature': 'numeric',
-    'glob_temp': 'numeric',
-    'nhem_temp': 'numeric',
-    '64n-90n_temp': 'numeric',
-    'avg_temperature': 'numeric',
-    'precipitation': 'numeric',
-    'freezeup': 'date',
-    'breakup': 'date',
-    'icetime': 'numeric',
-    'snowdepth_single': 'numeric',
-    'snowdepth_meter': 'numeric',
-}
 
-# List of all available statistics
-ALL_STATISTICS = list(STATISTICS_TO_DATA_TYPES.keys())
 
 def calculate_difference_from_baseline(year_stats, baseline_stats):
     """Calculate the difference between the yearly statistics and the baseline statistics."""
@@ -453,58 +377,6 @@ def status():
     return jsonify({'status': 'ok'})
 
 
-def fetch_data(params, required_data_types, slump):
-    """Fetch the raw weather data from the API based on the specified parameters."""
-    coordinates = params['coordinates']
-    start_year = params['start_year']
-    end_year = params['end_year']
-    # if coordinates is array
-    weather_data = None
-    if isinstance(coordinates, list):
-        coordinates = [f"{point['lat']},{point['lng']}" for point in coordinates]
-        # fetch data for each point and combine them
-        for point in coordinates:
-            params_sub = params.copy()
-            params_sub['coordinates'] = point
-            sub_data = fetch_data(params_sub.copy(), required_data_types, slump)
-
-            # combinde sub_data to weather_data
-            if weather_data is None:
-                weather_data = sub_data
-            else:
-                # check if sub_data is empty
-                if not sub_data is None and len(sub_data) != 0:
-                    weather_data = pd.concat([weather_data, sub_data], ignore_index=True)
-        return weather_data
-
-    response = None
-    if slump == 'true':
-        response = generate_random_weather_data(start_year, end_year)
-        weather_data = response
-    else:
-        coordinates = coordinates.split(',')
-        long = coordinates[0]
-        lat = coordinates[1]
-        data_types = required_data_types.split(',')
-        weather_data = fetch_data_for_coordinates(long, lat, start_year, end_year, data_types)
-
-        # Assuming the data is in JSON format and contains the necessary raw data types
-        try:
-            weather_data['date'] = pd.to_datetime(weather_data['date'])
-            # Ensure necessary columns are in numeric format
-            for data_type in required_data_types.split(','):
-                if data_type in weather_data.columns:
-                    if data_type in DATA_TYPES_TO_TYPE:
-                        if DATA_TYPES_TO_TYPE[data_type] == 'date':
-                            weather_data[data_type] = pd.to_datetime(weather_data[data_type], errors='coerce')
-                            weather_data[data_type] = weather_data[data_type].dt.dayofyear
-                    weather_data[data_type] = pd.to_numeric(weather_data[data_type], errors='coerce')
-        except Exception as e:
-            return None
-
-
-    # Fetch the data from the given URL
-    return weather_data
 @app.route('/data', methods=['GET'])
 def weather_stats():
     # Retrieve the query parameters for year range, coordinates, and filtering options
@@ -647,12 +519,20 @@ def weather_stats():
     results = {}
     print(np.unique(weather_data['station']))
     print(weather_data)
+    # Ensure 'date' column is in datetime format, with invalid values coerced to NaT
+    if 'date' in weather_data.columns:
+         weather_data['date'] = pd.to_datetime(weather_data['date'], errors='coerce')
     # print rows where date is None
     #if 'date' in weather_data.columns:
     #    weather_data['date'] = pd.to_datetime(weather_data['date'])
     for year in range(int(start_year), int(end_year)):
         # Filter data for the current year
         yearly_data = weather_data[weather_data['date'].dt.year == year]
+        if 'date' in weather_data.columns and pd.api.types.is_datetime64_any_dtype(weather_data['date']):
+            yearly_data = weather_data[weather_data['date'].dt.year == year]
+        else:
+            results[year] = {'error': 'No valid date data available.'}
+            continue
         if yearly_data.empty:
             results[year] = {'error': 'No data available for this year.'}
             continue

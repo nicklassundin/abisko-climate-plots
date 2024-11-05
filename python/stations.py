@@ -8,62 +8,103 @@ import json
 from ratelimit import limits, sleep_and_retry
 from requests.exceptions import HTTPError, Timeout, RequestException
 
-def fetch_data_for_coordinates(long, lat, start_year, end_year, data_types, slump=False, calculate=False):
-    coordinates = f"{long},{lat}"
-    params = {
-        'data_types': data_types,
-        'coordinates': coordinates,
-        'slump': slump,
-        'type': 'rawdata'
-    }
+import pandas as pd
+import requests
+import json
+import time
+from requests.exceptions import HTTPError, Timeout, RequestException
+# import DATA_TYPES_TO_TYPE
+from datatypes import DATA_TYPES_TO_TYPE
 
-    # Check cache first
-    cache_results = get_cached(params)
-    if cache_results:
-        print("Using cached results")
-        df = pd.DataFrame(json.loads(cache_results))
-        if 'date' in df.columns:
-            df['date'] = pd.to_datetime(df['date'])
-        return df
+# Helper function for date conversion
+def convert_to_datetime(df, column_name='date'):
+    if column_name in df.columns:
+        df[column_name] = pd.to_datetime(df[column_name], errors='coerce')
+    return df
 
-    # Construct the query URL order most be long,lat for API
+def fetch_data(params, required_data_types, slump=False, calculate=False, timeout=(60, 90), retries=3):
+    """
+    Fetch the raw weather data from the API based on the specified parameters.
+    Handles both single and multiple coordinates.
+    """
+    start_year = params.get('start_year')
+    end_year = params.get('end_year')
+    coordinates = params.get('coordinates')
+    data_types = required_data_types.split(',')
+    weather_data = None
+
+    # Check if coordinates is a list (multiple points)
+    if isinstance(coordinates, list):
+        for point in coordinates:
+            sub_params = params.copy()
+            sub_params['coordinates'] = f"{point['lat']},{point['lng']}"
+            sub_data = fetch_data(sub_params, required_data_types, slump, calculate)
+
+            if weather_data is None:
+                weather_data = sub_data
+            elif sub_data is not None and not sub_data.empty:
+                weather_data = pd.concat([weather_data, sub_data], ignore_index=True)
+        return weather_data
+
+    # Single coordinate processing
+    coordinates_str = coordinates if isinstance(coordinates, str) else f"{coordinates['lat']},{coordinates['lng']}"
     query_url = (
-        f"{BASE_URL}?position={long},{lat}"
+        f"{BASE_URL}?position={coordinates_str}"
         f"&radius=30&date={start_year}0101-{end_year}1231&types={','.join(data_types)}"
     )
     if calculate:
         query_url += "&calculate=true&sort=year"
 
-    if slump:
-        return generate_random_weather_data(start_year, end_year)
-
-    # Fetch data with error handling
-    try:
-        # Adjust timeouts as needed (60 seconds to connect, 90 seconds to read)
-        response = requests.get(query_url, timeout=(60, 90))
-        response.raise_for_status()  # Raises HTTPError for bad responses
-        data = response.json()
-        df = pd.DataFrame(data)
-
-        if not df.empty:
-            # Convert date to datetime if 'date' column exists
-            if 'date' in df.columns:
-                df['date'] = pd.to_datetime(df['date'])
-
-            # Cache the fetched data
-            set_cache(params, df.to_json(orient="records"))
-            print('Complete:', query_url)
+    # Check cache
+    cache_results = get_cached(params)
+    if cache_results:
+        print("Using cached results")
+        df = pd.DataFrame(json.loads(cache_results))
+        if 'date' in df.columns:
+            df['date'] = pd.to_datetime(df['date'], errors='coerce')  # Ensure date is datetime
         return df
 
-    except HTTPError as http_err:
-        print(f"HTTP error occurred: {http_err}")
-    except Timeout:
-        print("The request timed out.")
-    except RequestException as err:
-        print('Discarded:', query_url)
-        print(f"An error occurred: {err}")
+    # Handle slump (mock data generation)
+    if slump == 'true':
+        df = generate_random_weather_data(start_year, end_year)
+        if 'date' in df.columns:
+            df['date'] = pd.to_datetime(df['date'], errors='coerce')  # Ensure date is datetime
+        return df
 
-    # Return an empty DataFrame as a fallback if an error occurs
+    # Attempt data fetching with retries
+    for attempt in range(retries):
+        try:
+            response = requests.get(query_url, timeout=timeout)
+            response.raise_for_status()
+            data = response.json()
+            df = pd.DataFrame(data)
+
+            # Ensure date is in datetime format only if 'date' column exists
+            if 'date' in df.columns:
+                df['date'] = pd.to_datetime(df['date'], errors='coerce')
+
+            # Convert columns to numeric or datetime as needed
+            for data_type in data_types:
+                if data_type in df.columns:
+                    if DATA_TYPES_TO_TYPE.get(data_type) == 'date':
+                        df[data_type] = pd.to_datetime(df[data_type], errors='coerce').dt.dayofyear
+                    else:
+                        df[data_type] = pd.to_numeric(df[data_type], errors='coerce')
+
+            if not df.empty:
+                set_cache(params, df.to_json(orient="records"))
+                print('Complete:', query_url)
+            return df
+
+        except (HTTPError, Timeout) as err:
+            print(f"Attempt {attempt + 1} - Error: {err}")
+            time.sleep(2 ** attempt)
+
+        except RequestException as err:
+            print(f"RequestException - Discarded: {query_url}\nError: {err}")
+            break
+
+    print(f"Failed to fetch data after {retries} attempts.")
     return pd.DataFrame()
 
 
@@ -83,7 +124,7 @@ def get_weather_stats_for_station(lat, long, data_types, slump = False):
     if cache_results:
         return cache_results
     # Fetch data for the specific station at given coordinates
-    station_data = fetch_data_for_coordinates(lat, long, 1985, 1990, data_types, slump)
+    station_data = fetch_data(lat, long, 1985, 1990, data_types, slump)
     result = None
     if station_data is not None and not station_data.empty:
         # Calculate available statistics based on the fetched data
