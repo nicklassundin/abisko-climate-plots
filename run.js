@@ -40,6 +40,7 @@ function startPythonServer(app) {
 	// When the Python server exits
 	pythonProcess.on('close', (code) => {
 		console.log(`Python Server Process exited with code ${code}`);
+		startPythonServer()
 	});
 
 	process.on('exit', () => {
