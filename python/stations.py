@@ -47,14 +47,18 @@ def fetch_data(params, required_data_types, slump=False, calculate=False, timeou
         return weather_data
 
     # Single coordinate processing
-    coordinates_str = coordinates if isinstance(coordinates, str) else f"{coordinates['lat']},{coordinates['lng']}"
+    coordinates_str = coordinates if isinstance(coordinates, str) else f"{coordinates['lng']},{coordinates['lat']}"
+    data_types_str = data_types
+    if isinstance(data_types, list):
+        data_types_str = ','.join(data_types_str)
     query_url = (
         f"{BASE_URL}?position={coordinates_str}"
-        f"&radius=30&date={start_year}0101-{end_year}1231&types={','.join(data_types)}"
+        f"&radius=30&date={start_year}0101-{end_year}1231&types={data_types_str}"
     )
     if calculate:
         query_url += "&calculate=true&sort=year"
 
+    print(f"URL", query_url)
     # Check cache
     cache_results = get_cached(params)
     if cache_results:
@@ -95,9 +99,9 @@ def fetch_data(params, required_data_types, slump=False, calculate=False, timeou
                 set_cache(params, df.to_json(orient="records"))
                 print('Complete:', query_url)
             return df
-
         except (HTTPError, Timeout) as err:
             print(f"Attempt {attempt + 1} - Error: {err}")
+            print(f"URL", query_url)
             time.sleep(2 ** attempt)
 
         except RequestException as err:

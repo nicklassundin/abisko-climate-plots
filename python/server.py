@@ -512,6 +512,8 @@ def weather_stats():
     weather_data = fetch_data(params.copy(), required_data_types, slump)
     # Calculate baseline statistics from the resulting statistics over the baseline period
     #baseline_stats = calculate_baseline_stats(weather_data, baseline_start, baseline_end, requested_stats)
+    if weather_data.empty:
+        return jsonify({'error': 'No data available for the given parameters.'}), 404
     weather_data['station'] = weather_data['station'].str.lower()
     if station != 'all':
         weather_data = weather_data[weather_data['station'] == station]
