@@ -30,7 +30,7 @@ def fetch_data(params, required_data_types, slump=False, calculate=False, timeou
     start_year = params.get('start_year')
     end_year = params.get('end_year')
     coordinates = params.get('coordinates')
-    data_types = required_data_types.split(',')
+    data_types = required_data_types
     weather_data = None
 
     # Check if coordinates is a list (multiple points)
@@ -119,12 +119,12 @@ from server import STATISTICS_TO_DATA_TYPES
 # Main function to get available statistics for a specific station at given coordinates and year
 def get_weather_stats_for_station(lat, long, data_types, slump = False):
     coordinates = f"{lat},{long}"
-    params = {'data_types': data_types, 'coordinates': coordinates, 'slump': slump, 'type': 'weather_stats'}
+    params = {'start_year': 1985, 'end_year': 1990, 'data_types': data_types, 'coordinates': coordinates, 'slump': slump, 'type': 'weather_stats'}
     cache_results = get_cached(params)
     if cache_results:
         return cache_results
     # Fetch data for the specific station at given coordinates
-    station_data = fetch_data(lat, long, 1985, 1990, data_types, slump)
+    station_data = fetch_data(params, data_types, slump)
     result = None
     if station_data is not None and not station_data.empty:
         # Calculate available statistics based on the fetched data
