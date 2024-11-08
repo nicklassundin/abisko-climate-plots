@@ -23,6 +23,7 @@ def convert_to_datetime(df, column_name='date'):
     return df
 
 def fetch_data(params, required_data_types, slump=False, calculate=False, timeout=(60, 90), retries=3):
+    #print(params)
     """
     Fetch the raw weather data from the API based on the specified parameters.
     Handles both single and multiple coordinates.
@@ -58,7 +59,7 @@ def fetch_data(params, required_data_types, slump=False, calculate=False, timeou
     if calculate:
         query_url += "&calculate=true&sort=year"
 
-    print(f"URL", query_url)
+    #print(f"URL", query_url)
     # Check cache
     cache_results = get_cached(params)
     if cache_results:
