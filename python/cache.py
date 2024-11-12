@@ -50,7 +50,7 @@ def get_cached_result(params, params_baseline):
     # Cache keys for combined and individual params
     # Retrieve the cached data for combined key
     combined_cached_data = {
-        'annual': get_cached(params, 'annual'),
+        'annual': get_cached(combined_params, 'annual'),
         'decades': get_cached(params, 'decades'),
         'periods': get_cached(params, 'periods'),
         'raw': get_cached(params, 'raw')
@@ -65,7 +65,7 @@ def get_cached_result(params, params_baseline):
     }
     baseline_cached_data = get_cached(params_baseline, 'baseline')
 
-    combined_cached_data = combined_cached_data if any(combined_cached_data.values()) else None
+    combined_cached_data = combined_cached_data if all(combined_cached_data.values()) else None
     params_cached_data = params_cached_data if any(params_cached_data.values()) else None
     baseline_cached_data = baseline_cached_data if baseline_cached_data else None
     return  combined_cached_data, params_cached_data, baseline_cached_data

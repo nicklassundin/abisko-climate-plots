@@ -3,11 +3,11 @@ from flask_cors import CORS  # Import the CORS library
 import requests
 import pandas as pd
 import numpy as np
-import calendar
 
 import stations
 from stations import fetch_data
 from cache import get_cached, set_cache, clear_cache, clear_all_cache, get_cached_result, set_cache_result
+from weatherstats import weather_yearly, calculate_time_interval_stats, period_month_snowdepth, calculate_difference_from_baseline, calculate_baseline
 from generate import generate_random_weather_data
 from datatypes import STATISTICS_TO_DATA_TYPES, ALL_STATISTICS
 
@@ -17,365 +17,38 @@ app = Flask(__name__)
 CORS(app)
 
 import json
-
-# Helper functions to calculate the frost and temperature statistics
-def first_frost_autumn(df):
-    """Find the first frost in autumn (from September onwards)."""
-    if df.empty:
-        return None
-    autumn_df = df[df['date'].dt.month >= 9]  # Filter dates from September onwards
-    frosts = autumn_df[autumn_df['avg_temperature'] <= 0]
-    if not frosts.empty:
-        return int(frosts.iloc[0]['date'].dayofyear)
-    return None
-
-def last_frost_spring(df, year):
-    """Find the last frost in spring (up until March of the next year)."""
-    if df.empty:
-        return None
-    spring_df = annual_spring(df)
-    frosts = spring_df[spring_df['avg_temperature'] <= 0]
-    if not frosts.empty:
-        return int(frosts.iloc[-1]['date'].dayofyear)
-    return None
-
 import pandas as pd
 
-def growing_season_weeks(df):
-    # Check if the DataFrame is empty
-    if df.empty:
-        return None
-    df = df.copy()
-    df['above_zero'] = (df['min_temperature'] > 0) | (df['avg_temperature'] > 0)
-    weeks_above_zero = df.groupby(df['date'].dt.isocalendar().week)['above_zero'].max()
-    return int(weeks_above_zero.sum())
+def process_and_calculate_differences(stats, baseline_range):
+    # Convert 'annual' data to a DataFrame
+    baseline_stats = stats.get('annual')
+    baseline_stats = pd.DataFrame(baseline_stats)
 
-def growing_season_days(df):
-    if df.empty:
-        return 0  # Return 0 for an empty DataFrame
-    # Ensure data is sorted by date
-    df = df.copy()
-    df = df.sort_values(by='date')
-    # Create a new column 'above_zero' indicating if the day was frost-free
-    df['above_zero'] = (df['min_temperature'] > 0) | (df['avg_temperature'] > 0)
-    # Group by each day (ignoring multiple records within a day) and take the maximum of 'above_zero'
-    days_above_zero = df.groupby(df['date'].dt.date)['above_zero'].max()
-    # Count the frost-free days by summing the True values (1 for frost-free, 0 for frosty)
-    frost_free_days = int(days_above_zero.sum())
-    return frost_free_days
+    # Parse baseline range
+    baseline = baseline_range.split(',')
+    baseline_start = int(baseline[0])
+    baseline_end = int(baseline[1])
 
+    # Filter columns within the specified year range
+    baseline_stats = baseline_stats.loc[:, [col for col in baseline_stats.columns if baseline_start <= int(col) <= baseline_end]]
 
-def warmest(df, period):
-    if df.empty:
-        return None
-    return df.groupby(df['date'].dt.to_period(period))['avg_temperature'].mean().idxmax()
+    # Remove specified rows if present
+    if 'error' in baseline_stats.head():
+        baseline_stats = baseline_stats.drop('error', axis=0)
+    if 'station' in baseline_stats.head():
+        baseline_stats = baseline_stats.drop('station', axis=0)
 
-def coldest(df, period):
-    if df.empty:
-        return None
-    return df.groupby(df['date'].dt.to_period(period))['avg_temperature'].mean().idxmin()
+    # Convert data to numeric and calculate the mean of each row
+    baseline_stats = baseline_stats.apply(pd.to_numeric, errors='coerce')
+    baseline_stats_mean = baseline_stats.mean(axis=1)
 
-def warmest_day(df):
-    if df.empty:
-        return None
-    return df.groupby(df['date'].dt.isocalendar().day)['avg_temperature'].mean().idxmax()
-def coldest_day(df):
-    if df.empty:
-        return None
-    return df.groupby(df['date'].dt.isocalendar().day)['avg_temperature'].mean().idxmin()
+    # Calculate differences from the baseline for each year
+    for year, year_stats in stats.items():
+        differences = calculate_difference_from_baseline(year_stats, baseline_stats_mean)
+        stats[year].update(differences)
 
-# New helper functions to calculate coldest/warmest months and weeks
-def coldest_month(df):
-    if df.empty:
-        return None
-    return df.groupby(df['date'].dt.month)['avg_temperature'].mean().idxmin()
+    return stats
 
-def warmest_month(df):
-    if df.empty:
-        return None
-    return df.groupby(df['date'].dt.month)['avg_temperature'].mean().idxmax()
-
-def coldest_week(df):
-    if df.empty:
-        return None
-    return df.groupby(df['date'].dt.isocalendar().week)['avg_temperature'].mean().idxmin()
-
-def warmest_week(df):
-    if df.empty:
-        return None
-    return df.groupby(df['date'].dt.isocalendar().week)['avg_temperature'].mean().idxmax()
-
-def annual_spring(df):
-    """Calculate the annual average temperature during spring (March to May)."""
-    if df.empty:
-        return None
-    return df[(df['date'].dt.month >= 3) & (df['date'].dt.month <= 5)]  # Filter March to May
-
-def annual_summer(df):
-    """Calculate the annual average temperature during summer (June to August)."""
-    if df.empty:
-        return None
-    return df[(df['date'].dt.month >= 6) & (df['date'].dt.month <= 8)]  # Filter June to August
-
-def annual_autumn(df):
-    """Calculate the annual average temperature during autumn (September to November)."""
-    if df.empty:
-        return None
-    return df[(df['date'].dt.month >= 9) & (df['date'].dt.month <= 11)]  # Filter September to November
-
-def annual_winter(df):
-    """Calculate the annual average temperature during winter (December to February)."""
-    if df.empty:
-        return None
-    return df[(df['date'].dt.month >= 12) | (df['date'].dt.month <= 2)]  # Filter December to February
-
-def annual_temperature(df):
-    """Calculate the annual average temperature."""
-    if df.empty:
-        return None
-    return df['avg_temperature'].mean()
-def max_annual_temperature(df):
-    """Calculate the annual average temperature."""
-    if df.empty:
-        return None
-    return df.groupby(df['date'].dt.year)['avg_temperature'].max().mean()
-
-def min_annual_temperature(df):
-    """Calculate the annual average temperature."""
-    if df.empty:
-        return None
-    return df.groupby(df['date'].dt.year)['avg_temperature'].min().mean()
-
-def annual_spring_temperature(df):
-    """Calculate the annual average temperature during spring (March to May)."""
-    spring_df = annual_spring(df)
-    if spring_df.empty:
-        return None
-    return spring_df['avg_temperature'].mean()
-def max_annual_spring_temperature(df):
-    """Calculate the annual average temperature during spring (March to May)."""
-    spring_df = annual_spring(df)
-    if spring_df.empty:
-        return None
-    return spring_df['avg_temperature'].max()
-def min_annual_spring_temperature(df):
-    """Calculate the annual average temperature during spring (March to May)."""
-    spring_df = annual_spring(df)
-    if spring_df.empty:
-        return None
-    return spring_df['avg_temperature'].min()
-
-def annual_summer_temperature(df):
-    """Calculate the annual average temperature during summer (June to August)."""
-    summer_df = annual_summer(df)
-    if summer_df.empty:
-        return None
-    return summer_df['avg_temperature'].mean()
-def min_annual_summer_temperature(df):
-    """Calculate the annual average temperature during summer (June to August)."""
-    summer_df = annual_summer(df)
-    if summer_df.empty:
-        return None
-    return summer_df['avg_temperature'].min()
-def max_annual_summer_temperature(df):
-    """Calculate the annual average temperature during summer (June to August)."""
-    summer_df = annual_summer(df)
-    if summer_df.empty:
-        return None
-    return summer_df['avg_temperature'].max()
-def annual_autumn_temperature(df):
-    """Calculate the annual average temperature during autumn (September to November)."""
-    autumn_df = annual_autumn(df)
-    if autumn_df.empty:
-        return None
-    return autumn_df['avg_temperature'].mean()
-def min_annual_autumn_temperature(df):
-    """Calculate the annual average temperature during autumn (September to November)."""
-    autumn_df = annual_autumn(df)
-    if autumn_df.empty:
-        return None
-    return autumn_df['avg_temperature'].min()
-def max_annual_autumn_temperature(df):
-    """Calculate the annual average temperature during autumn (September to November)."""
-    autumn_df = annual_autumn(df)
-    if autumn_df.empty:
-        return None
-    return autumn_df['avg_temperature'].max()
-def annual_winter_temperature(df):
-    """Calculate the annual average temperature during winter (December to February)."""
-    winter_df = annual_winter(df)
-    if winter_df.empty:
-        return None
-    return winter_df['avg_temperature'].mean()
-def max_annual_winter_temperature(df):
-    """Calculate the annual average temperature during winter (December to February)."""
-    winter_df = annual_winter(df)
-    if winter_df.empty:
-        return None
-    return winter_df['avg_temperature'].max()
-def min_annual_winter_temperature(df):
-    """Calculate the annual average temperature during winter (December to February)."""
-    winter_df = annual_winter(df)
-    if winter_df.empty:
-        return None
-    return winter_df['avg_temperature'].min()
-def annual_month(df, month):
-    """Return the monthly data for the specified month."""
-    return df[df['date'].dt.month == month].copy()
-def annual_month_temperature(df, month):
-    """Calculate the annual average temperature for the specified month."""
-    month_df = annual_month(df, month)
-    if month_df.empty:
-        return None
-    return month_df['avg_temperature'].mean()
-def max_annual_month_temperature(df, month):
-    """Calculate the annual maximum temperature for the specified month."""
-    month_df = annual_month(df, month)
-    if month_df.empty:
-        return None
-    return month_df['avg_temperature'].max()
-def min_annual_month_temperature(df, month):
-    """Calculate the annual minimum temperature for the specified month."""
-    month_df = annual_month(df, month)
-    if month_df.empty:
-        return None
-    return month_df['avg_temperature'].min()
-def annual_month_precipitation(df, month):
-    """Calculate the annual average precipitation for the specified month."""
-    month_df = annual_month(df, month)
-    if month_df.empty:
-        return None
-    return month_df['precipitation'].sum()
-def rain_annual_month_precipitation(df, month):
-    """Calculate the annual average rainfall for the specified month."""
-    rainfall_month_df = annual_month(df, month)
-    if rainfall_month_df.empty:
-        return None
-    return rainfall_month_df[rainfall_month_df['avg_temperature'] > 0]['precipitation'].sum()
-def snow_annual_month_precipitation(df, month):
-    """Calculate the annual average snowfall for the specified month."""
-    snowfall_month_df = annual_month(df, month)
-    if snowfall_month_df.empty:
-        return None
-    return snowfall_month_df[snowfall_month_df['avg_temperature'] <= 0]['precipitation'].sum()
-
-def precipitation_stats(df):
-    """Calculate the sum and average precipitation across stations for the year."""
-    if df.empty:
-        return {'rain': 0, 'snow': 0, 'total': 0}
-    df = df.copy()
-    # Ensure 'precipitation' and 'avg_temperature' columns are numeric
-    df['precipitation'] = pd.to_numeric(df['precipitation'], errors='coerce')
-    df['avg_temperature'] = pd.to_numeric(df['avg_temperature'], errors='coerce')
-
-    # Drop rows with NaN values in 'precipitation', 'avg_temperature', or 'station'
-    df = df.dropna(subset=['precipitation', 'avg_temperature', 'station'])
-
-    # Separate snow and rain data based on avg_temperature
-    snow_df = df[df['avg_temperature'] <= 0]
-    rain_df = df[df['avg_temperature'] > 0]
-
-    # Group by station to calculate precipitation sums for snow, rain, and total
-    snow_precipitation = snow_df.groupby('station')['precipitation'].sum()
-    rain_precipitation = rain_df.groupby('station')['precipitation'].sum()
-    total_precipitation = df.groupby('station')['precipitation'].sum()
-
-    # Calculate mean values across stations, handling empty groups by filling NaN with 0
-    return {
-        'rain': rain_precipitation.mean() if not rain_precipitation.empty else 0,
-        'snow': snow_precipitation.mean() if not snow_precipitation.empty else 0,
-        'total': total_precipitation.mean() if not total_precipitation.empty else 0
-    }
-
-
-def icetime_annual(df):
-    """Calculate the annual average ice time."""
-    if df.empty:
-        return None
-    return df['icetime'].mean()
-def annual_freezeup(df):
-    """Calculate the annual average freezeup date."""
-    if df.empty:
-        return None
-    threshold = 90  # You can adjust this threshold based on your use case
-    days_in_previous_year = 365  # You can adjust this for leap years if needed
-    # and number of days of previous year to the freezeup number
-    df['adjusted_freezeup'] = df['freezeup'].apply(lambda x: x + days_in_previous_year if x <= threshold else x)
-    return df['adjusted_freezeup'].mean()
-def annual_breakup(df):
-    """Calculate the annual average breakup date."""
-    if df.empty:
-        return None
-    return df['breakup'].mean()
-def annual_ice_thickness(df):
-    """Calculate the annual average ice thickness."""
-    if df.empty:
-        return None
-    return df['complete_ice_cover'].max()
-
-def period_month_snowdepth(df, month):
-    """Calculate the annual average snow depth."""
-    month_df = annual_month(df, month)
-    if month_df.empty:
-        return None
-    return month_df['snowdepth_single'].mean()
-
-def calculate_time_interval_stats(weather_data, start_year, end_year, step, requested_stats, stat_name, stat_function):
-    """Calculate statistics over a specified time interval (e.g., decades or periods)."""
-    time_interval_results = {}
-
-    # Loop over the time intervals
-    for start in range(int(start_year), int(end_year), step):
-        # Filter the data for the current time interval
-        time_interval_data = weather_data[(weather_data['date'].dt.year >= start) &
-                                          (weather_data['date'].dt.year < start + step)]
-
-        if time_interval_data.empty:
-            time_interval_results[start] = {'error': f'No data available for this interval.'}
-            continue
-
-        # Initialize the stats for this time interval
-        interval_stats = {}
-
-        # Loop through each month to calculate stats if required
-        for month in range(1, 13):
-            if stat_name in requested_stats:
-                interval_stats[month] = {}
-                interval_stats[month][stat_name] = stat_function(time_interval_data, month)
-        # Store the stats for this time interval
-        if interval_stats:
-            time_interval_results[start] = interval_stats
-    time_interval_results['allTime'] = {}
-    time_allTime_data = weather_data[(weather_data['date'].dt.year >= int(start_year)) & (weather_data['date'].dt.year <= int(end_year))]
-    for month in range(1, 13):
-        if stat_name in requested_stats:
-            time_interval_results['allTime'][month] = {}
-            time_interval_results['allTime'][month][stat_name] = stat_function(time_allTime_data, month)
-    return time_interval_results
-
-def calculate_difference_from_baseline(year_stats, baseline_stats):
-    """Calculate the difference between the yearly statistics and the baseline statistics."""
-    differences = {}
-
-    for stat in year_stats:
-        if 'diff' in stat.split('_'):
-            continue
-        year_value = year_stats.get(stat)
-        baseline_value = baseline_stats.get(stat) if isinstance(baseline_stats, dict) else baseline_stats
-
-        try:
-            # Convert values to float if they are not already
-            year_value = float(year_value) if year_value is not None else None
-            baseline_value = float(baseline_value) if baseline_value is not None else None
-
-            if year_value is not None and baseline_value is not None:
-                differences['diff_' + stat] = year_value - baseline_value
-            else:
-                differences['diff_' + stat] = None
-        except (ValueError, TypeError):
-            differences['diff_' + stat] = None  # Handle non-numeric data gracefully
-
-    return differences
 
 @app.route('/', methods=['GET'])
 def status():
@@ -399,7 +72,7 @@ def weather_stats():
         LnKod = None
     if KnKod is not None:
         LnKod = None
-    print(coordinates, KnKod, LnKod)
+    #print(coordinates, KnKod, LnKod)
     slump = request.args.get('random')
     # Parse baseline interval
     baseline_start, baseline_end = map(int, baseline.split(','))
@@ -452,42 +125,24 @@ def weather_stats():
 
     cached_combind, cached_result, cached_baseline = get_cached_result(params_in, params_baseline)
     if cached_combind:
-        return jsonify(combind)
+        print('retrieve cache - exactly the same')
+        return jsonify(cached_combind)
 
-    if cached_result and isinstance(cached_result, str):
+    if cached_result and isinstance(cached_result['annual'], str):
+        print('retrieve cache - loads if string')
         cached_result = json.loads(cached_result)
     if cached_result:
+        print('retrieve cache - result is cached')
         # If cached, check if the baseline matches
         # print cached_results
-        cached_baseline = get_cached(params_baseline)
-        if cached_baseline:
-            cached_baseline = json.loads(cached_baseline)
-            for year, year_stats in cached_result['annual'].items():
-                differences = calculate_difference_from_baseline(year_stats, cached_baseline)
-                year_stats.update(differences)
-        else:
-            # If baseline differs, calculate the new baseline stats and update the results
-            if isinstance(cached_result, str):
-                cached_result = json.loads(cached_result)
-            baseline_stats = cached_result.get('annual')
-            # data frame to
-            baseline_stats = pd.DataFrame(baseline_stats)
-            baseline = baseline.split(',')
-            baseline_start = int(baseline[0])
-            baseline_end = int(baseline[1])
-            # get columns from start to end year where column name is year string
-            baseline_stats = baseline_stats.loc[:, [col for col in baseline_stats.columns if baseline_start <= int(col) <= baseline_end]]
-            # mean of each row
-            baseline_stats = baseline_stats.drop(['error', 'station'], axis=0)
-            baseline_stats = baseline_stats.apply(pd.to_numeric, errors='coerce')
-            baseline_stats = baseline_stats.mean(axis=1)
-            # baseline_stats = calculate_baseline_stats(cached_result['annual'], baseline_start, baseline_end, requested_stats)
-            for year, year_stats in cached_result['annual'].items():
-                differences = calculate_difference_from_baseline(year_stats, baseline_stats)
-                year_stats.update(differences)
-
+        if not cached_baseline:
+            # todo sort out so calculate_difference_from_baseline always get data frames
+            print('retrieve cache - baseline is not cached')
+            tmp_result = pd.DataFrame(cached_result['annual'][0])
+            baseline_stats = calculate_baseline(tmp_result, baseline)
             # Update cache with new baseline result
-            set_cache(params_in, cached_result)
+            cached_result['annual'] = calculate_difference_from_baseline(tmp_result, baseline_stats)
+            cached_result['annual'] = serializablation(cached_result['annual'])
 
         return jsonify(cached_result)
 
@@ -535,7 +190,7 @@ def weather_stats():
         params['coordinates'] = coords
     # Fetch the data from the given URL
     weather_data = fetch_data(params.copy(), required_data_types, slump)
-    print(weather_data)
+    #print(weather_data)
     # Calculate baseline statistics from the resulting statistics over the baseline period
     #baseline_stats = calculate_baseline_stats(weather_data, baseline_start, baseline_end, requested_stats)
     if weather_data.empty:
@@ -557,151 +212,10 @@ def weather_stats():
     # print rows where date is None
     #if 'date' in weather_data.columns:
     #    weather_data['date'] = pd.to_datetime(weather_data['date'])
-    for year in range(int(start_year), int(end_year)):
-        # Filter data for the current year
-        yearly_data = weather_data[weather_data['date'].dt.year == year]
-        if 'date' in weather_data.columns and pd.api.types.is_datetime64_any_dtype(weather_data['date']):
-            yearly_data = weather_data[weather_data['date'].dt.year == year]
-        else:
-            results[year] = {'error': 'No valid date data available.'}
-            continue
-        if yearly_data.empty:
-            results[year] = {'error': 'No data available for this year.'}
-            continue
-
-        year_stats = {}
-
-        # Compute requested statistics
-        if 'annual_temperature' in requested_stats:
-            year_stats['annual_temperature'] = annual_temperature(yearly_data)
-            year_stats['max_annual_temperature'] = max_annual_temperature(yearly_data)
-            year_stats['min_annual_temperature'] = min_annual_temperature(yearly_data)
-        if 'global_temperature' in requested_stats:
-            year_stats['global_temperature'] = yearly_data['glob_temp'].mean()
-        if 'northern_hemisphere_temperature' in requested_stats:
-            year_stats['northern_hemisphere_temperature'] = yearly_data['nhem_temp'].mean()
-        if '64n90n_temperature' in requested_stats:
-            year_stats['64n90n_temperature'] = yearly_data['64n-90n_temp'].mean()
-        # create winter data for year covering spring to winther month
-        winter_year_data = weather_data[((weather_data['date'].dt.year == year) & (weather_data['date'].dt.month <= 3)) | ((weather_data['date'].dt.year == year+1) & (weather_data['date'].dt.month <= 2))]
-        if 'annual_spring_temperature' in requested_stats:
-            year_stats['annual_spring_temperature'] = annual_spring_temperature(winter_year_data)
-            year_stats['max_annual_spring_temperature'] = max_annual_spring_temperature(winter_year_data)
-            year_stats['min_annual_spring_temperature'] = min_annual_spring_temperature(winter_year_data)
-        if 'annual_summer_temperature' in requested_stats:
-            year_stats['annual_summer_temperature'] = annual_summer_temperature(yearly_data)
-            year_stats['max_annual_summer_temperature'] = max_annual_summer_temperature(yearly_data)
-            year_stats['min_annual_summer_temperature'] = min_annual_summer_temperature(yearly_data)
-        if 'annual_autumn_temperature' in requested_stats:
-            year_stats['annual_autumn_temperature'] = annual_autumn_temperature(yearly_data)
-            year_stats['max_annual_autumn_temperature'] = max_annual_autumn_temperature(yearly_data)
-            year_stats['min_annual_autumn_temperature'] = min_annual_autumn_temperature(yearly_data)
-        if 'annual_winter_temperature' in requested_stats:
-            year_stats['annual_winter_temperature'] = annual_winter_temperature(yearly_data)
-            year_stats['max_annual_winter_temperature'] = max_annual_winter_temperature(yearly_data)
-            year_stats['min_annual_winter_temperature'] = min_annual_winter_temperature(yearly_data)
-        if 'annual_spring_precipitation' in requested_stats:
-            spring_stats = annual_spring(yearly_data)
-            spring_stats = precipitation_stats(spring_stats)
-            year_stats['annual_spring_precipitation'] = spring_stats['total']
-            year_stats['snow_annual_spring_precipitation'] = spring_stats['snow']
-            year_stats['rain_annual_spring_precipitation'] = spring_stats['rain']
-        if 'annual_summer_precipitation' in requested_stats:
-            summer_stats = annual_summer(yearly_data)
-            summer_stats = precipitation_stats(summer_stats)
-            year_stats['annual_summer_precipitation'] = summer_stats['total']
-            year_stats['snow_annual_summer_precipitation'] = summer_stats['snow']
-            year_stats['rain_annual_summer_precipitation'] = summer_stats['rain']
-        if 'annual_autumn_precipitation' in requested_stats:
-            autumn_stats = annual_autumn(yearly_data)
-            autumn_stats = precipitation_stats(autumn_stats)
-            year_stats['annual_autumn_precipitation'] = autumn_stats['total']
-            year_stats['snow_annual_autumn_precipitation'] = autumn_stats['snow']
-            year_stats['rain_annual_autumn_precipitation'] = autumn_stats['rain']
-        if 'annual_winter_precipitation' in requested_stats:
-            winter_stats = annual_winter(yearly_data)
-            winter_stats = precipitation_stats(winter_stats)
-            year_stats['annual_winter_precipitation'] = winter_stats['total']
-            year_stats['snow_annual_winter_precipitation'] = winter_stats['snow']
-            year_stats['rain_annual_winter_precipitation'] = winter_stats['rain']
-        if 'perma' in requested_stats:
-            year_stats['perma'] = yearly_data['perma'].mean()
-        for month in range(1, 13):
-            month_name = calendar.month_abbr[month].lower()
-            if f'annual_{month_name}_temperature' in requested_stats:
-                year_stats[f'annual_{month_name}_temperature'] = annual_month_temperature(yearly_data, month)
-                year_stats[f'max_annual_{month_name}_temperature'] = max_annual_month_temperature(yearly_data, month)
-                year_stats[f'min_annual_{month_name}_temperature'] = min_annual_month_temperature(yearly_data, month)
-            if f'annual_{month_name}_precipitation' in requested_stats:
-                year_stats[f'annual_{month_name}_precipitation'] = annual_month_precipitation(yearly_data, month)
-                year_stats[f'snow_annual_{month_name}_precipitation'] = snow_annual_month_precipitation(yearly_data, month)
-                year_stats[f'rain_annual_{month_name}_precipitation'] = rain_annual_month_precipitation(yearly_data, month)
-
-        if 'first_frost_autumn' in requested_stats:
-            year_stats['first_frost_autumn'] = int(first_frost_autumn(yearly_data)) if first_frost_autumn(yearly_data) else None
-
-        if 'last_frost_spring' in requested_stats:
-            last_frost = last_frost_spring(yearly_data, year)
-            year_stats['last_frost_spring'] = int(last_frost) if last_frost else None
-
-        if 'growing_season_weeks' in requested_stats:
-            year_stats['growing_season_weeks'] = int(growing_season_weeks(yearly_data)) if growing_season_weeks(yearly_data) else None
-
-        if 'growing_season_days' in requested_stats:
-            year_stats['growing_season_days'] = int(growing_season_days(yearly_data)) if growing_season_days(yearly_data) else None
-
-        if 'coldest_day' in requested_stats:
-            year_stats['coldest_day'] = int(coldest_day(yearly_data)) if coldest_day(yearly_data) else None
-
-        if 'warmest_day' in requested_stats:
-            year_stats['warmest_day'] = int(warmest_day(yearly_data)) if warmest_day(yearly_data) else None
-
-        if 'coldest_month' in requested_stats:
-            year_stats['coldest_month'] = coldest_month(yearly_data) if coldest_month(yearly_data) else None
-
-        if 'warmest_month' in requested_stats:
-            year_stats['warmest_month'] = warmest_month(yearly_data) if warmest_month(yearly_data) else None
-
-        if 'coldest_week' in requested_stats:
-            year_stats['coldest_week'] = int(coldest_week(yearly_data)) if coldest_week(yearly_data) else None
-
-        if 'warmest_week' in requested_stats:
-            year_stats['warmest_week'] = int(warmest_week(yearly_data)) if warmest_week(yearly_data) else None
-
-        if 'annual_precipitation' in requested_stats:
-            station_precipitation_stats = precipitation_stats(yearly_data)
-            year_stats['snow_annual_precipitation'] = station_precipitation_stats['snow']
-            year_stats['rain_annual_precipitation'] = station_precipitation_stats['rain']
-            year_stats['annual_precipitation'] = yearly_data['precipitation'].sum()
-
-        if 'annual_spring_precipitation' in requested_stats:
-            year_stats['annual_spring_precipitation'] = winter_year_data['precipitation'].sum()
-        if 'annual_ice_time' in requested_stats:
-            year_stats['annual_ice_time'] = icetime_annual(yearly_data)
-
-        if 'annual_freezeup' in requested_stats:
-            year_stats['annual_freezeup'] = annual_freezeup(yearly_data)
-        if 'annual_breakup' in requested_stats:
-            year_stats['annual_breakup'] = annual_breakup(yearly_data)
-        if 'annual_ice_thickness' in requested_stats:
-            year_stats['annual_ice_thickness'] = int(annual_ice_thickness(yearly_data))
-        if 'annual_snowdepth_meter' in requested_stats:
-            year_stats['annual_snowdepth_meter'] = yearly_data['snowdepth_meter'].mean()
-        if 'annual_snowdepth_single' in requested_stats:
-            year_stats['annual_snowdepth_single'] = yearly_data['snowdepth_single'].mean()
-
-        if weather_data['station'].nunique() == 1:
-            year_stats['station'] = weather_data['station'].iloc[0]
-
-        if year_stats:  # Only add stats if any calculations were made
-            results[year] = year_stats
-
-    # TODO built into single function
-
+    results, baseline_stats = weather_yearly(weather_data, start_year, end_year, requested_stats, baseline)
     # Calculate stats for decades
     decade_start = 1961
     decade_results = calculate_time_interval_stats(weather_data, decade_start, end_year, 10, requested_stats, 'period_snowdepth', period_month_snowdepth)
-
     # Calculate stats for periods (e.g., 30-year intervals)
     period_start = 1931
     period_results = calculate_time_interval_stats(weather_data, period_start, end_year, 30, requested_stats, 'period_snowdepth', period_month_snowdepth)
@@ -715,21 +229,14 @@ def weather_stats():
             for co2, date in zip(weather_data['co2_weekly'].astype(float), weather_data['date'])
         ]
     # Now embed the results into the final results dictionary
-    def convert_np_types(obj):
-        """Helper function to convert numpy types to native Python types."""
-        if isinstance(obj, np.integer):
-            return int(obj)
-        elif isinstance(obj, np.floating):
-            return float(obj)
-        elif isinstance(obj, pd.Timestamp):
-            return str(obj)
-        else:
-            return obj
 
-    results = {
-        'annual': {year: {k: convert_np_types(v) for k, v in stats.items()} for year, stats in results.items()},
-        'decades': {str(decade): {k: convert_np_types(v) for k, v in stats.items()} for decade, stats in decade_results.items()},
-        'periods': {str(period): {k: convert_np_types(v) for k, v in stats.items()} for period, stats in period_results.items()},
+    results_sanatized = {
+        #'annual': {year: {k: convert_np_types(v) for k, v in stats.items()} for year, stats in results.items()},
+        'annual': serializablation(results),
+        #'decades': {str(decade): {k: convert_np_types(v) for k, v in stats.items()} for decade, stats in decade_results.items()},
+        'decades': serializablation(decade_results),
+        #'periods': {str(period): {k: convert_np_types(v) for k, v in stats.items()} for period, stats in period_results.items()},
+        'periods': serializablation(period_results),
         'raw': {
                 stat_type: [
                     {k: convert_np_types(v) for k, v in stat_item.items()}
@@ -738,29 +245,30 @@ def weather_stats():
                 for stat_type, stat_list in raw_stats.items()
         },
     }
-    # get columns from start to end year where column name is year string
-    baseline_stats = results.get('annual')
-    baseline_stats = pd.DataFrame(baseline_stats)
-    baseline = baseline.split(',')
-    baseline_start = int(baseline[0])
-    baseline_end = int(baseline[1])
-    baseline_stats = baseline_stats.loc[:, [col for col in baseline_stats.columns if baseline_start <= int(col) <= baseline_end]]
-    # remove row error and station
-    # mean of each row
-    if 'error' in baseline_stats.head():
-        baseline_stats = baseline_stats.drop('error', axis=0)
-    if 'station' in baseline_stats.head():
-        baseline_stats = baseline_stats.drop('station', axis=0)
-    baseline_stats = baseline_stats.apply(pd.to_numeric, errors='coerce')
-    baseline_stats = baseline_stats.mean(axis=1)
-    for year, year_stats in results['annual'].items():
-          differences = calculate_difference_from_baseline(year_stats, baseline_stats)
-          year_stats.update(differences)
+#    stats = process_and_calculate_differences(results_sanatized['annual'], baseline)
+    # serielized
+    baseline_sanatized = {k: convert_np_types(v) for k, v in baseline_stats.items()}
+    set_cache_result(params, params_baseline, results_sanatized, baseline_sanatized)
+    return jsonify(results_sanatized)
 
-    # Cache the result
-    # cache annual
-    #set_cache_result(params, params_baseline, results, baseline_stats)
-    return jsonify(results)
+def convert_np_types(obj):
+    # Check for NaN-like values safely
+    if isinstance(obj, (int, float)) and np.isnan(obj):
+        return None
+    elif isinstance(obj, np.integer):
+        return int(obj)
+    elif isinstance(obj, np.floating):
+        return float(obj)
+    elif isinstance(obj, pd.Timestamp):
+        return str(obj)
+    elif isinstance(obj, str):
+        return obj  # Return as-is if it's a string
+    elif pd.isna(obj):  # Handles pandas' NaT, None, and np.nan
+        return None
+    else:
+        return obj
+def serializablation(result):
+    return {time: {k: convert_np_types(v) for k, v in stats.items()} for time, stats in result.items()},
 
 
 
@@ -861,7 +369,7 @@ def station_stats():
                  for key, value in data_stats.items():
                     data_types[key] = value or data_types[key]
         print('Done')
-        #set_cache(params, data_types)
+        set_cache(params, data_types)
         return jsonify(data_types)
 
     return jsonify(data_types)
