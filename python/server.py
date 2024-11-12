@@ -11,6 +11,17 @@ from weatherstats import weather_yearly, calculate_time_interval_stats, period_m
 from generate import generate_random_weather_data
 from datatypes import STATISTICS_TO_DATA_TYPES, ALL_STATISTICS
 
+import logging
+
+# Configure logging
+logging.basicConfig(
+    filename='server_error.log',  # Log file name
+    level=logging.ERROR,  # Only log errors and above (e.g., ERROR, CRITICAL)
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',  # Log format
+    datefmt='%Y-%m-%d %H:%M:%S'  # Date format
+)
+
+
 app = Flask(__name__)
 
 # Enable CORS for all routes
@@ -67,7 +78,7 @@ def weather_stats():
     coordinates = request.args.get('coordinates')  # Coordinates in the format "lat,lng"
     KnKod = request.args.get('KnKod')
     LnKod = request.args.get('LnKod')
-    if coordinates is not None:
+    if coordinates is not None and coordinates != 'NaN,NaN':
         KnKod = None
         LnKod = None
     if KnKod is not None:
@@ -148,6 +159,7 @@ def weather_stats():
 
     # Validate input parameters
     if not start_year or not end_year or not coordinates or not requested_stats or not baseline:
+        logging.error('Mossing required parameters: start_year, end_year, coordinates, baseline, or types')
         return jsonify({'error': 'Missing required parameters: start_year, end_year, coordinates, types or baseline'}), 400
 
     # Check if 'all' is requested
@@ -160,12 +172,14 @@ def weather_stats():
         if stat in STATISTICS_TO_DATA_TYPES:
             array_required_data_types.update(STATISTICS_TO_DATA_TYPES[stat])
         else:
+            logging.error(f"Unknown statistic type: {stat}")
             return jsonify({'error': f"Unknown statistic type: {stat}"}), 400
 
     required_data_types = ','.join(array_required_data_types)  # Prepare data types for the query
 
     # TODO fetch stations
     stations = []
+
     if KnKod is not None or LnKod is not None:
         coords = []
         allstations = get_stations()
@@ -229,14 +243,23 @@ def weather_stats():
             for co2, date in zip(weather_data['co2_weekly'].astype(float), weather_data['date'])
         ]
     # Now embed the results into the final results dictionary
-
+    # TODO temporarly use [0] but expand so multiple type requests can be made
     results_sanatized = {
         #'annual': {year: {k: convert_np_types(v) for k, v in stats.items()} for year, stats in results.items()},
-        'annual': serializablation(results),
+        'annual': serializablation(results)[0],
         #'decades': {str(decade): {k: convert_np_types(v) for k, v in stats.items()} for decade, stats in decade_results.items()},
-        'decades': serializablation(decade_results),
+        'decades': serializablation(decade_results)[0],
         #'periods': {str(period): {k: convert_np_types(v) for k, v in stats.items()} for period, stats in period_results.items()},
-        'periods': serializablation(period_results),
+        'periods': serializablation(period_results)[0],
+        #'annual': {
+        #    f'{requested_stats[0]}': serializablation(results)[0],
+        #},
+        #'decades': {
+        #    f'{requested_stats[0]}': serializablation(decade_results)[0],
+        #},
+        #'periods': {
+        #    f'{requested_stats[0]}': serializablation(period_results)[0],
+        #},
         'raw': {
                 stat_type: [
                     {k: convert_np_types(v) for k, v in stat_item.items()}
@@ -269,8 +292,6 @@ def convert_np_types(obj):
         return obj
 def serializablation(result):
     return {time: {k: convert_np_types(v) for k, v in stats.items()} for time, stats in result.items()},
-
-
 
 def get_stations(flush=False):
     if flush:
@@ -315,6 +336,7 @@ def station_stats():
 
     # Validate the parameters
     if (not lat or not lng) and (not KnKod and not LnKod):
+        logging.error('Missing required parameters: lat, lng, or KnKod/LnKod')
         return jsonify({'error': 'Missing required parameters: lat, lng, or KnKod/LnKod'}), 400
 
 

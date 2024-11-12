@@ -38,13 +38,15 @@ def fetch_data(params, required_data_types, slump=False, calculate=False, timeou
     if isinstance(coordinates, list):
         for point in coordinates:
             sub_params = params.copy()
-            sub_params['coordinates'] = f"{point['lat']},{point['lng']}"
+            sub_params['coordinates'] = f"{point['lng']},{point['lat']}"
             sub_data = fetch_data(sub_params, required_data_types, slump, calculate)
 
+            print('sub', np.unique(sub_data['station']))
             if weather_data is None:
                 weather_data = sub_data
             elif sub_data is not None and not sub_data.empty:
                 weather_data = pd.concat([weather_data, sub_data], ignore_index=True)
+            print('total', np.unique(weather_data['station']))
         return weather_data
 
     # Single coordinate processing
@@ -61,7 +63,7 @@ def fetch_data(params, required_data_types, slump=False, calculate=False, timeou
 
     #print(f"URL", query_url)
     # Check cache
-    cache_results = get_cached(params)
+    cache_results = get_cached(params, None, True)
     if cache_results:
         print("Using cached results")
         df = pd.DataFrame(json.loads(cache_results))
@@ -197,7 +199,16 @@ SMHI_STATION_NAME_URLS = [
 def fetch_all_stations():
     # Check if the data is cached
     try:
-        response = requests.get(SMHI_STATION_NAME_URLS[0])
+        # TODO fix so cache fo smhi doesn't effect
+        url = SMHI_STATION_NAME_URLS[0]
+        response = None
+        #response = get_cached(url, None, True)
+        if response is not None:
+           response = json.loads(response)
+        else:
+            response = requests.get(url)
+            #set_cached(url, response, None, protected=True)
+
         response.raise_for_status()  # Raise an error for bad responses (e.g., 4xx, 5xx)
         data = response.json()
         stations = data.get('station', [])
@@ -216,7 +227,6 @@ def fetch_all_stations():
                 "geodata": reverse_geocode(existing_stations[key]['position']['lat'], existing_stations[key]['position']['long'])
             }
             stations.append(station)
-
         return stations
     except requests.exceptions.RequestException as e:
         print(f"Error fetching stations: {e}")

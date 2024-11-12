@@ -467,7 +467,8 @@ def weather_yearly(weather_data, start_year, end_year, requested_stats, baseline
 
         # Calculate the differences
     results = pd.DataFrame(results)
-    results = results.drop(index=['error'])
+    if 'error' in results.index:
+        results = results.drop(index=['error'])
     baseline_stats = calculate_baseline(results, baseline)
     results = calculate_difference_from_baseline(results, baseline_stats)
     return results, baseline_stats

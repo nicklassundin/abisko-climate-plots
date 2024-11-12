@@ -3,34 +3,50 @@ import redis
 import hashlib
 import json
 # Initialize Redis connection
+
+lua_script = """
+local keys = redis.call('KEYS', '*')
+for i, key in ipairs(keys) do
+    if not key:match('^protected:') then
+        redis.call('DEL', key)
+    end
+end
+return 'Done'
+"""
 cache = redis.StrictRedis(host='localhost', port=6379, db=0)
+cache.eval(lua_script, 0)
 
 def generate_cache_key(params):
     """Generate a unique cache key based on the request parameters."""
     key_string = json.dumps(params, sort_keys=True)  # Sorting to ensure key uniqueness
     return hashlib.md5(key_string.encode('utf-8')).hexdigest()
 
-def get_cached(params, key=None):
+def get_cached(params, key=None, protected=False):
     params = params.copy()  # Copy the params to avoid modifying the original dict
     # add key to params
     if key is not None:
         params['key'] = key
     """Retrieve the weather stats from the cache."""
     cache_key = generate_cache_key(params)
-    #print('Retrieving cache', cache_key, params)
+    if protected:
+        # Check if the cache key is protected
+        cache_key = f'protected:{cache_key}'
+    cached_data = None
     cached_data = cache.get(cache_key)
     if cached_data:
         return json.loads(cached_data)  # Return the cached data if available
     return None
 
-def set_cache(params, data, key=None):
+def set_cache(params, data, key=None, protected=False):
     """Cache the weather stats result in Redis."""
     params = params.copy()  # Copy the params to avoid modifying the original dict
     # add key to params
     if key is not None:
         params['key'] = key
-
     cache_key = generate_cache_key(params)
+    if protected:
+        # Add protected prefix to the cache key
+        cache_key = f'protected:{cache_key}'
     #print('Setting cache', cache_key, params)
     cache.set(cache_key, json.dumps(data), ex=3600*24*265)  # Cache for 1 year
 
