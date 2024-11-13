@@ -76,13 +76,13 @@ def weather_stats():
     radius = request.args.get('radius', 30)  # Default to 30 km radius (for future use)
     station = request.args.get('station', 'all')
     coordinates = request.args.get('coordinates')  # Coordinates in the format "lat,lng"
+    # check coordinates validity
+    if coordinates is not None:
+        coordinates = coordinates.split(',')
+        if len(coordinates) != 2:
+            coordinates = None
     KnKod = request.args.get('KnKod')
     LnKod = request.args.get('LnKod')
-    if coordinates is not None and coordinates != 'NaN,NaN':
-        KnKod = None
-        LnKod = None
-    if KnKod is not None:
-        LnKod = None
     #print(coordinates, KnKod, LnKod)
     slump = request.args.get('random')
     # Parse baseline interval
@@ -92,7 +92,6 @@ def weather_stats():
     params_in = {
              'start_year': start_year,
              'end_year': end_year,
-             'coordinates': coordinates,
              'requested_stats': requested_stats,
            #  'baseline': baseline,
              'radius': radius,
@@ -104,13 +103,15 @@ def weather_stats():
     params_baseline = {
         'start_year': start_year,
         'end_year': end_year,
-        'coordinates': coordinates,
         'requested_stats': requested_stats,
         'baseline': baseline,
         'LnKod': LnKod,
         'KnKod': KnKod,
         'slump': slump
     }
+    if coordinates is not None:
+        params_in['coordinates'] = ','.join(coordinates)
+        params_baseline['coordinates'] = ','.join(coordinates)
 
     params = params_in.copy()
     # Reset
@@ -124,16 +125,6 @@ def weather_stats():
         if flush.lower() == 'true':
             clear_cache(params)
             clear_all_cache()
-
-
-
-    # Check the cache for an existing result
-    # TODO return cache exist still reevaluate baseline cache seperately
-    #cached_result = get_cached(params)
-    #if cached_result:
-    #    return jsonify(cached_result)
-
-
     cached_combind, cached_result, cached_baseline = get_cached_result(params_in, params_baseline)
     if cached_combind:
         print('retrieve cache - exactly the same')
@@ -158,7 +149,8 @@ def weather_stats():
         return jsonify(cached_result)
 
     # Validate input parameters
-    if not start_year or not end_year or not coordinates or not requested_stats or not baseline:
+    print(not start_year, not end_year, not coordinates, not KnKod, not LnKod, not requested_stats, not baseline)
+    if not start_year or not end_year or (not coordinates and not KnKod and not LnKod) or not requested_stats or not baseline:
         logging.error('Mossing required parameters: start_year, end_year, coordinates, baseline, or types')
         return jsonify({'error': 'Missing required parameters: start_year, end_year, coordinates, types or baseline'}), 400
 
@@ -179,8 +171,7 @@ def weather_stats():
 
     # TODO fetch stations
     stations = []
-
-    if KnKod is not None or LnKod is not None:
+    if coordinates is None:
         coords = []
         allstations = get_stations()
         allstations = np.array(allstations)
@@ -245,21 +236,9 @@ def weather_stats():
     # Now embed the results into the final results dictionary
     # TODO temporarly use [0] but expand so multiple type requests can be made
     results_sanatized = {
-        #'annual': {year: {k: convert_np_types(v) for k, v in stats.items()} for year, stats in results.items()},
         'annual': serializablation(results)[0],
-        #'decades': {str(decade): {k: convert_np_types(v) for k, v in stats.items()} for decade, stats in decade_results.items()},
         'decades': serializablation(decade_results)[0],
-        #'periods': {str(period): {k: convert_np_types(v) for k, v in stats.items()} for period, stats in period_results.items()},
         'periods': serializablation(period_results)[0],
-        #'annual': {
-        #    f'{requested_stats[0]}': serializablation(results)[0],
-        #},
-        #'decades': {
-        #    f'{requested_stats[0]}': serializablation(decade_results)[0],
-        #},
-        #'periods': {
-        #    f'{requested_stats[0]}': serializablation(period_results)[0],
-        #},
         'raw': {
                 stat_type: [
                     {k: convert_np_types(v) for k, v in stat_item.items()}
@@ -267,6 +246,18 @@ def weather_stats():
                 ]
                 for stat_type, stat_list in raw_stats.items()
         },
+        'meta': {
+            'baseline': baseline,
+            'start_year': start_year,
+            'end_year': end_year,
+            'coordinates': coordinates,
+            'requested_stats': requested_stats,
+            'radius': radius,
+            'station': station,
+            'slump': slump,
+            'LnKod': LnKod,
+            'KnKod': KnKod
+        }
     }
 #    stats = process_and_calculate_differences(results_sanatized['annual'], baseline)
     # serielized
@@ -294,19 +285,21 @@ def serializablation(result):
     return {time: {k: convert_np_types(v) for k, v in stats.items()} for time, stats in result.items()},
 
 def get_stations(flush=False):
-    if flush:
-        clear_cache('stations')
     # check if cached
     params = {
         'stations': 'all'
     }
+    if flush:
+        clear_cache(params)
     allstations = get_cached(params)
     if allstations:
+        logging.info('Retrieved all stations from cache')
         return allstations
 
     allstations = stations.fetch_all_stations()
     # Cache the result
     set_cache(params, allstations)
+    logging.info('Fetched all stations from SMHI API')
     return allstations
 # Flask route to serve all SMHI stations
 @app.route('/stations', methods=['GET'])
@@ -322,6 +315,7 @@ def get_all_stations():
 DATA_TYPES = ['avg_temperature', 'precipitation', 'min_temperature', 'max_temperature', 'snowdepth_single', 'snowdepth_meter', 'co2_weekly', 'freezeup', 'breakup', 'perma', 'icetime']
 @app.route('/station', methods=['GET'])
 def station_stats():
+    # print time it takes to run
     year = request.args.get('year')
     lat = request.args.get('lat')
     lng = request.args.get('lng')
@@ -360,11 +354,12 @@ def station_stats():
         return jsonify(cached_result)
     # Get available statistics for the station at the provided coordinates
     kod = None
-    if KnKod is not None:
-        kod = 'knkod'
-    else:
-        if LnKod is not None:
-            kod = 'lnkod'
+    if lat and lon is not None:
+        if KnKod is not None:
+            kod = 'knkod'
+        else:
+            if LnKod is not None:
+                kod = 'lnkod'
     if kod is None:
         station_stats = stations.get_weather_stats_for_station(lat, lng, DATA_TYPES, slump == 'true')
         set_cache(params, station_stats)

@@ -8,6 +8,8 @@ import json
 from ratelimit import limits, sleep_and_retry
 from requests.exceptions import HTTPError, Timeout, RequestException
 
+import logging
+logging.basicConfig(level=logging.INFO)
 import pandas as pd
 import requests
 import json
@@ -22,8 +24,31 @@ def convert_to_datetime(df, column_name='date'):
         df[column_name] = pd.to_datetime(df[column_name], errors='coerce')
     return df
 
+
+CALLS = 10
+PERIOD = 30
+
+@sleep_and_retry
+@limits(calls=CALLS, period=PERIOD)
+def requestAPI(url):
+    response = requests.get(url)
+    response.raise_for_status()
+    return response.json()
+def getAPI(url):
+    """
+    Get data from the API using the provided URL.
+    Caches the response for 5 minutes.
+    """
+    response = get_cached({'url': url}, None, True)
+    if response is not None:
+        logging.info(f"Data fetched from cache for {url}")
+        return response
+    logging.info(f"Fetching data from API: {url}")
+    response = requestAPI(url)
+    set_cache({'url': url}, response, None, True)
+    return response
+
 def fetch_data(params, required_data_types, slump=False, calculate=False, timeout=(60, 90), retries=3):
-    #print(params)
     """
     Fetch the raw weather data from the API based on the specified parameters.
     Handles both single and multiple coordinates.
@@ -33,85 +58,83 @@ def fetch_data(params, required_data_types, slump=False, calculate=False, timeou
     coordinates = params.get('coordinates')
     data_types = required_data_types
     weather_data = None
+    try:
+        # check if array of coordinates {lat: x, lng: y} or [lat, lng]
+        if isinstance(coordinates, list):
+            # Remove duplicates in coordinates list
+            coordinates = [dict(t) for t in {tuple(d.items()) for d in coordinates}]
 
-    # Check if coordinates is a list (multiple points)
-    if isinstance(coordinates, list):
-        for point in coordinates:
-            sub_params = params.copy()
-            sub_params['coordinates'] = f"{point['lng']},{point['lat']}"
-            sub_data = fetch_data(sub_params, required_data_types, slump, calculate)
+            for point in coordinates:
+                sub_params = params.copy()
+                sub_params['coordinates'] = point
+                try:
+                    sub_data = fetch_data(sub_params, required_data_types, slump, calculate)
+                    if sub_data is not None and not sub_data.empty:
+                        weather_data = pd.concat([weather_data, sub_data], ignore_index=True) if weather_data is not None else sub_data
+                except Exception as e:
+                    logging.error(f"Error fetching data for {sub_params}: {e}", exc_info=True)
+            return weather_data
 
-            print('sub', np.unique(sub_data['station']))
-            if weather_data is None:
-                weather_data = sub_data
-            elif sub_data is not None and not sub_data.empty:
-                weather_data = pd.concat([weather_data, sub_data], ignore_index=True)
-            print('total', np.unique(weather_data['station']))
-        return weather_data
-
-    # Single coordinate processing
-    coordinates_str = coordinates if isinstance(coordinates, str) else f"{coordinates['lng']},{coordinates['lat']}"
-    data_types_str = data_types
-    if isinstance(data_types, list):
-        data_types_str = ','.join(data_types_str)
-    query_url = (
-        f"{BASE_URL}?position={coordinates_str}"
-        f"&radius=30&date={start_year}0101-{end_year}1231&types={data_types_str}"
-    )
-    if calculate:
-        query_url += "&calculate=true&sort=year"
-
-    #print(f"URL", query_url)
-    # Check cache
-    cache_results = get_cached(params, None, True)
-    if cache_results:
-        print("Using cached results")
-        df = pd.DataFrame(json.loads(cache_results))
-        if 'date' in df.columns:
-            df['date'] = pd.to_datetime(df['date'], errors='coerce')  # Ensure date is datetime
-        return df
-
-    # Handle slump (mock data generation)
-    if slump == 'true':
-        df = generate_random_weather_data(start_year, end_year)
-        if 'date' in df.columns:
-            df['date'] = pd.to_datetime(df['date'], errors='coerce')  # Ensure date is datetime
-        return df
-
-    # Attempt data fetching with retries
-    for attempt in range(retries):
+        coordinates_str = coordinates if isinstance(coordinates, str) else f"{coordinates['lat']},{coordinates['lng']}"
+        data_types_str = ','.join(data_types) if isinstance(data_types, list) else data_types
+        query_url = (
+            f"{BASE_URL}?position={coordinates_str}"
+            f"&radius=30&date={start_year}0101-{end_year}1231&types={data_types_str}"
+        )
+        if calculate:
+            query_url += "&calculate=true&sort=year"
+        # Check cache
         try:
-            response = requests.get(query_url, timeout=timeout)
-            response.raise_for_status()
-            data = response.json()
-            df = pd.DataFrame(data)
+            cache_results = get_cached(params, None, True)
+            if cache_results:
+                logging.info("Using cached results")
+                df = pd.DataFrame(json.loads(cache_results))
+                if 'date' in df.columns:
+                    df['date'] = pd.to_datetime(df['date'], errors='coerce')
+                return df
+        except Exception as e:
+            logging.warning(f"Cache retrieval error: {e}", exc_info=True)
 
-            # Ensure date is in datetime format only if 'date' column exists
+        # Handle slump case
+        if slump == 'true':
+            df = generate_random_weather_data(start_year, end_year)
             if 'date' in df.columns:
                 df['date'] = pd.to_datetime(df['date'], errors='coerce')
-
-            # Convert columns to numeric or datetime as needed
-            for data_type in data_types:
-                if data_type in df.columns:
-                    if DATA_TYPES_TO_TYPE.get(data_type) == 'date':
-                        df[data_type] = pd.to_datetime(df[data_type], errors='coerce').dt.dayofyear
-                    else:
-                        df[data_type] = pd.to_numeric(df[data_type], errors='coerce')
-
-            if not df.empty:
-                set_cache(params, df.to_json(orient="records"))
-                print('Complete:', query_url)
             return df
-        except (HTTPError, Timeout) as err:
-            print(f"Attempt {attempt + 1} - Error: {err}")
-            print(f"URL", query_url)
-            time.sleep(2 ** attempt)
 
-        except RequestException as err:
-            print(f"RequestException - Discarded: {query_url}\nError: {err}")
-            break
+        # Fetch data with retries
+        for attempt in range(retries):
+            try:
+                data = getAPI(query_url)
+                try:
+                    df = pd.DataFrame(data)
+                except json.JSONDecodeError as e:
+                    logging.error(f"Failed to decode JSON response: {e}", exc_info=True)
+                    return pd.DataFrame()
 
-    print(f"Failed to fetch data after {retries} attempts.")
+                if 'date' in df.columns:
+                    df['date'] = pd.to_datetime(df['date'], errors='coerce')
+
+                for data_type in data_types:
+                    if data_type in df.columns:
+                        if DATA_TYPES_TO_TYPE.get(data_type) == 'date':
+                            df[data_type] = pd.to_datetime(df[data_type], errors='coerce').dt.dayofyear
+                        else:
+                            df[data_type] = pd.to_numeric(df[data_type], errors='coerce')
+
+                return df
+            except (HTTPError, Timeout, ConnectionError, TooManyRedirects) as err:
+                logging.warning(f"Attempt {attempt + 1} - Network Error: {err}")
+                logging.warning(f"URL: {query_url}")
+                time.sleep(2 ** attempt)  # Exponential backoff
+            except RequestException as err:
+                logging.error(f"Request failed: {err}", exc_info=True)
+                break
+
+    except Exception as e:
+        logging.critical(f"Unexpected error in fetch_data: {e}", exc_info=True)
+
+    logging.error(f"Failed to fetch data after {retries} attempts.")
     return pd.DataFrame()
 
 
@@ -125,7 +148,10 @@ def calculate_available_statistics(df, types):
 from server import STATISTICS_TO_DATA_TYPES
 # Main function to get available statistics for a specific station at given coordinates and year
 def get_weather_stats_for_station(lat, long, data_types, slump = False):
-    coordinates = f"{lat},{long}"
+    coordinates = {
+        "lat": lat,
+        "lng": long
+    }
     params = {'start_year': 1985, 'end_year': 1990, 'data_types': data_types, 'coordinates': coordinates, 'slump': slump, 'type': 'weather_stats'}
     cache_results = get_cached(params)
     if cache_results:
@@ -201,16 +227,7 @@ def fetch_all_stations():
     try:
         # TODO fix so cache fo smhi doesn't effect
         url = SMHI_STATION_NAME_URLS[0]
-        response = None
-        #response = get_cached(url, None, True)
-        if response is not None:
-           response = json.loads(response)
-        else:
-            response = requests.get(url)
-            #set_cached(url, response, None, protected=True)
-
-        response.raise_for_status()  # Raise an error for bad responses (e.g., 4xx, 5xx)
-        data = response.json()
+        data = getAPI(url)
         stations = data.get('station', [])
         for station in stations:
             geodata = reverse_geocode(station['latitude'], station['longitude'])

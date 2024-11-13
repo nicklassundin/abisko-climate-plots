@@ -3522,3 +3522,219 @@ Traceback (most recent call last):
 NameError: name 'np' is not defined
 2024-11-12 12:34:17 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2024 12:34:17] "[35m[1mGET /data?start_year=1913&end_year=2024&coordinates=NaN,NaN&types=annual_temperature&baseline=1961,1990&LnKod=25&KnKod=2584 HTTP/1.1[0m" 500 -
 2024-11-12 12:34:33 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2024 12:34:33] "GET /data?start_year=1913&end_year=2024&coordinates=18.8166,68.3538&types=annual_temperature&baseline=1961,1990 HTTP/1.1" 200 -
+2024-11-13 07:07:17 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-11-13 07:07:17 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-11-13 07:09:34 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-11-13 07:09:34 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-11-13 07:09:55 - werkzeug - INFO - 127.0.0.1 - - [13/Nov/2024 07:09:55] "GET /data?start_year=1913&end_year=2024&coordinates=18.8166,68.3538&types=annual_temperature&baseline=1961,1990&LnKod=25&KnKod=2584 HTTP/1.1" 200 -
+2024-11-13 07:11:34 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-11-13 07:11:34 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-11-13 07:11:41 - werkzeug - INFO - 127.0.0.1 - - [13/Nov/2024 07:11:41] "GET /data?start_year=1913&end_year=2024&coordinates=18.8166,68.3538&types=annual_temperature&baseline=1961,1990&LnKod=25&KnKod=2584&flush=true HTTP/1.1" 200 -
+2024-11-13 07:11:45 - werkzeug - INFO - 127.0.0.1 - - [13/Nov/2024 07:11:45] "GET /data?start_year=1913&end_year=2024&coordinates=18.8166,68.3538&types=annual_temperature&baseline=1961,1990 HTTP/1.1" 200 -
+2024-11-13 07:13:24 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-11-13 07:13:24 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-11-13 07:13:38 - werkzeug - INFO - 127.0.0.1 - - [13/Nov/2024 07:13:38] "GET /data?start_year=1913&end_year=2024&coordinates=18.8166,68.3538&types=annual_temperature&baseline=1961,1990&LnKod=25&KnKod=2584&flush=true HTTP/1.1" 200 -
+2024-11-13 07:14:30 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-11-13 07:14:30 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-11-13 07:14:39 - werkzeug - INFO - 127.0.0.1 - - [13/Nov/2024 07:14:39] "GET /data?start_year=1913&end_year=2024&coordinates=18.8166,68.3538&types=annual_temperature&baseline=1961,1990&LnKod=25&KnKod=2584&flush=true HTTP/1.1" 200 -
+2024-11-13 07:16:13 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-11-13 07:16:13 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-11-13 07:16:29 - server - ERROR - Exception on /data [GET]
+Traceback (most recent call last):
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/masema/workspace/vizchange/plots/python/server.py", line 200, in weather_stats
+    weather_data = fetch_data(params.copy(), required_data_types, slump)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/masema/workspace/vizchange/plots/python/stations.py", line 45, in fetch_data
+    print('sub', np.unique(sub_data['station']))
+                 ^^
+NameError: name 'np' is not defined
+2024-11-13 07:16:29 - werkzeug - INFO - 127.0.0.1 - - [13/Nov/2024 07:16:29] "[35m[1mGET /data?start_year=1913&end_year=2024&coordinates=18.8166,68.3538&types=annual_temperature&baseline=1961,1990&LnKod=25&KnKod=2584&flush=true HTTP/1.1[0m" 500 -
+2024-11-13 07:17:00 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-11-13 07:17:00 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-11-13 07:17:22 - server - ERROR - Exception on /data [GET]
+Traceback (most recent call last):
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/masema/workspace/vizchange/plots/python/server.py", line 200, in weather_stats
+    weather_data = fetch_data(params.copy(), required_data_types, slump)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/masema/workspace/vizchange/plots/python/stations.py", line 45, in fetch_data
+    print('sub', np.unique(sub_data['station']))
+                 ^^
+NameError: name 'np' is not defined
+2024-11-13 07:17:22 - werkzeug - INFO - 127.0.0.1 - - [13/Nov/2024 07:17:22] "[35m[1mGET /data?start_year=1913&end_year=2024&coordinates=18.8166,68.3538&types=annual_temperature&baseline=1961,1990&LnKod=25&KnKod=2584 HTTP/1.1[0m" 500 -
+2024-11-13 07:29:28 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-11-13 07:29:28 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-11-13 07:29:45 - server - ERROR - Exception on /data [GET]
+Traceback (most recent call last):
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/masema/workspace/vizchange/plots/python/server.py", line 200, in weather_stats
+    weather_data = fetch_data(params.copy(), required_data_types, slump)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/masema/workspace/vizchange/plots/python/stations.py", line 52, in fetch_data
+    print('total', np.unique(weather_data['station']))
+                   ^^
+NameError: name 'np' is not defined
+2024-11-13 07:29:45 - werkzeug - INFO - 127.0.0.1 - - [13/Nov/2024 07:29:45] "[35m[1mGET /data?start_year=1913&end_year=2024&coordinates=18.8166,68.3538&types=annual_temperature&baseline=1961,1990&LnKod=25&KnKod=2584 HTTP/1.1[0m" 500 -
+2024-11-13 07:30:00 - server - ERROR - Exception on /data [GET]
+Traceback (most recent call last):
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/masema/workspace/vizchange/plots/python/server.py", line 200, in weather_stats
+    weather_data = fetch_data(params.copy(), required_data_types, slump)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/masema/workspace/vizchange/plots/python/stations.py", line 52, in fetch_data
+    print('total', np.unique(weather_data['station']))
+                   ^^
+NameError: name 'np' is not defined
+2024-11-13 07:30:00 - werkzeug - INFO - 127.0.0.1 - - [13/Nov/2024 07:30:00] "[35m[1mGET /data?start_year=1913&end_year=2024&coordinates=18.8166,68.3538&types=annual_temperature&baseline=1961,1990&LnKod=25&KnKod=2584&flush=true HTTP/1.1[0m" 500 -
+2024-11-13 07:31:14 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-11-13 07:31:14 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-11-13 07:31:27 - server - ERROR - Exception on /data [GET]
+Traceback (most recent call last):
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/masema/workspace/vizchange/plots/python/server.py", line 200, in weather_stats
+    weather_data = fetch_data(params.copy(), required_data_types, slump)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/masema/workspace/vizchange/plots/python/stations.py", line 55, in fetch_data
+    print('total', np.unique(weather_data['station']))
+                   ^^
+NameError: name 'np' is not defined
+2024-11-13 07:31:27 - werkzeug - INFO - 127.0.0.1 - - [13/Nov/2024 07:31:27] "[35m[1mGET /data?start_year=1913&end_year=2024&coordinates=18.8166,68.3538&types=annual_temperature&baseline=1961,1990&LnKod=25&KnKod=2584&flush=true HTTP/1.1[0m" 500 -
+2024-11-13 07:40:38 - root - ERROR - Mossing required parameters: start_year, end_year, coordinates, baseline, or types
+2024-11-13 07:40:38 - werkzeug - INFO - 127.0.0.1 - - [13/Nov/2024 07:40:38] "[31m[1mGET /data?start_year=1913&end_year=2024&geometry=18.8166,68.3538&types=annual_temperature&baseline=1961,1990&LnKod=25&KnKod=2584&flush=true HTTP/1.1[0m" 400 -
+2024-11-13 07:40:56 - werkzeug - INFO - 127.0.0.1 - - [13/Nov/2024 07:40:56] "GET /data?start_year=1913&end_year=2024&coordinates=18.8166,68.3538&types=annual_temperature&baseline=1961,1990 HTTP/1.1" 200 -
+2024-11-13 07:41:44 - server - ERROR - Exception on /data [GET]
+Traceback (most recent call last):
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/masema/workspace/vizchange/plots/python/server.py", line 200, in weather_stats
+    weather_data = fetch_data(params.copy(), required_data_types, slump)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/masema/workspace/vizchange/plots/python/stations.py", line 55, in fetch_data
+    coordinates_str = coordinates if isinstance(coordinates, str) else f"{coordinates['lng']},{coordinates['lat']}"
+                           ^^
+NameError: name 'np' is not defined
+2024-11-13 07:41:44 - werkzeug - INFO - 127.0.0.1 - - [13/Nov/2024 07:41:44] "[35m[1mGET /data?start_year=1913&end_year=2024&coordinates=18.8166,68.3538&types=annual_temperature&baseline=1961,1990&LnKod=25&KnKod=2584&flush=true HTTP/1.1[0m" 500 -
+2024-11-13 07:41:49 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-11-13 07:41:49 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-11-13 07:42:03 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-11-13 07:42:03 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-11-13 07:42:16 - server - ERROR - Exception on /data [GET]
+Traceback (most recent call last):
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.6_1/lib/python3.11/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/masema/workspace/vizchange/plots/python/server.py", line 200, in weather_stats
+    weather_data = fetch_data(params.copy(), required_data_types, slump)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/masema/workspace/vizchange/plots/python/stations.py", line 52, in fetch_data
+    print('total', np.unique(weather_data['station']))
+                   ^^
+NameError: name 'np' is not defined
+2024-11-13 07:42:16 - werkzeug - INFO - 127.0.0.1 - - [13/Nov/2024 07:42:16] "[35m[1mGET /data?start_year=1913&end_year=2024&coordinates=18.8166,68.3538&types=annual_temperature&baseline=1961,1990&LnKod=25&KnKod=2584&flush=true HTTP/1.1[0m" 500 -

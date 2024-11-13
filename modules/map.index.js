@@ -75,6 +75,8 @@ $(document).ready(function() {
     });
 
     async function updateDescription(event, longitude, latitude, name, lnkod, knkod) {
+        //$('.plot-button').remove('.deactivate')
+        //$('.plot-button').addClass('deactivate')
         $(`.plotArea`).removeClass('target')
         if (event.target['_latlng']) {
             map.flyTo(event.target['_latlng'])
@@ -92,7 +94,7 @@ $(document).ready(function() {
         $('#description').attr('data-baseline', $('.plot-button.target').attr('data-baseline'))
         $('#description').attr('data-name', name)
 
-        //const response = await fetch(`/python/station?year=2000&lng=${longitude}&lat=${latitude}&random=true`)
+        // construct url
         let url = `/python/station`
         if(longitude){
             url += `?lng=${longitude}&lat=${latitude}`
@@ -107,16 +109,14 @@ $(document).ready(function() {
         }
         //url += 'reset=true'
 
-        console.log(url)
+        //console.log(url)
         const response = await fetch(url)
         const datatypes = await response.json()
-        console.log(datatypes)
+        //console.log(datatypes)
         document.querySelectorAll('.plot-button').forEach(button => {
             let datatype = button.getAttribute('data-type')
             if (datatypes['available_statistics_data_types'][datatype]) {
                 button.classList.remove('deactivate')
-            } else {
-                button.classList.add('deactivate')
             }
         })
         console.log('Update response done')

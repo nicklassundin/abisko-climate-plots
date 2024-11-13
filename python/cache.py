@@ -4,6 +4,8 @@ import hashlib
 import json
 # Initialize Redis connection
 
+import logging
+logging.basicConfig(level=logging.INFO)
 lua_script = """
 local keys = redis.call('KEYS', '*')
 for i, key in ipairs(keys) do
@@ -14,7 +16,6 @@ end
 return 'Done'
 """
 cache = redis.StrictRedis(host='localhost', port=6379, db=0)
-cache.eval(lua_script, 0)
 
 def generate_cache_key(params):
     """Generate a unique cache key based on the request parameters."""
@@ -34,7 +35,9 @@ def get_cached(params, key=None, protected=False):
     cached_data = None
     cached_data = cache.get(cache_key)
     if cached_data:
+        logging.info(f'Cache hit for {cache_key}')
         return json.loads(cached_data)  # Return the cached data if available
+    logging.info(f'Cache miss for {cache_key}')
     return None
 
 def set_cache(params, data, key=None, protected=False):
@@ -48,16 +51,19 @@ def set_cache(params, data, key=None, protected=False):
         # Add protected prefix to the cache key
         cache_key = f'protected:{cache_key}'
     #print('Setting cache', cache_key, params)
+    logging.info(f'Setting cache for {cache_key}')
     cache.set(cache_key, json.dumps(data), ex=3600*24*265)  # Cache for 1 year
 
 def clear_cache(params):
     """Clear the cache for a specific set of parameters."""
     cache_key = generate_cache_key(params)
+    logging.info(f'Clearing cache for {cache_key}')
     cache.delete(cache_key)
 def clear_all_cache():
     """Clear the entire cache."""
-    print('Clearing cache')
-    cache.flushall()
+    logging.info('Clearing all cache')
+    cache.eval(lua_script, 0)
+    #cache.flushall()
 
 def get_cached_result(params, params_baseline):
     # Generate individual and combined cache keys
