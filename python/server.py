@@ -347,47 +347,43 @@ def station_stats():
             clear_all_cache()
     if reset is not None:
         if reset.lower() == 'true':
+            logging.info('Resetting cache')
             clear_cache(params)
 
     cached_result = get_cached(params)
     if cached_result:
         return jsonify(cached_result)
     # Get available statistics for the station at the provided coordinates
-    kod = None
-    if lat and lon is not None:
-        if KnKod is not None:
-            kod = 'knkod'
-        else:
-            if LnKod is not None:
-                kod = 'lnkod'
-    if kod is None:
+    if lat is not None and lng is not None:
         station_stats = stations.get_weather_stats_for_station(lat, lng, DATA_TYPES, slump == 'true')
         set_cache(params, station_stats)
         return jsonify(station_stats)
+    kod = None
+    if KnKod is not None:
+        kod = 'knkod'
     else:
-        data_types = None
-        allstations = get_stations()
-        i = 0
-        # allstations filter by KnKod or LnKod
-        filtered_stations = [
-            point for point in allstations
-            if str(point['geodata'][kod]) == KnKod or str(point['geodata'][kod]) == LnKod
-        ]
-        for point in filtered_stations:
-            i = i + 1
-            data_stats = stations.get_weather_stats_for_station(point['latitude'], point['longitude'], DATA_TYPES)
-            if isinstance(data_stats['available_statistics'], str):
-                 continue
-            if data_types is None:
-                 # check if data_stats is string
-                 data_types = data_stats['available_statistics']
-            else:
-                 # only for loop for data_types when False
-                 for key, value in data_stats.items():
-                    data_types[key] = value or data_types[key]
-        print('Done')
-        set_cache(params, data_types)
-        return jsonify(data_types)
+        if LnKod is not None:
+            kod = 'lnkod'
+    data_types = None
+    allstations = get_stations()
+    i = 0
+    # allstations filter by KnKod or LnKod
+    filtered_stations = [point for point in allstations if str(point['geodata'][kod]) == KnKod or str(point['geodata'][kod]) == LnKod]
+    for point in filtered_stations:
+        i = i + 1
+        data_stats = stations.get_weather_stats_for_station(point['latitude'], point['longitude'], DATA_TYPES)
+        if isinstance(data_stats['available_statistics'], str):
+           continue
+        if data_types is None:
+           # check if data_stats is string
+           data_types = data_stats['available_statistics']
+        else:
+           # only for loop for data_types when False
+           for key, value in data_stats.items():
+                data_types[key] = value or data_types[key]
+    print('Done')
+    set_cache(params, data_types)
+    return jsonify(data_types)
 
     return jsonify(data_types)
 if __name__ == '__main__':
