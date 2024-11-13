@@ -79,11 +79,12 @@ def weather_stats():
     # check coordinates validity
     if coordinates is not None:
         coordinates = coordinates.split(',')
-        if len(coordinates) != 2:
+        # coarce coordinates to float if possible else None
+        coordinates = [float(coord) if coord.replace('.', '', 1).isdigit() else None for coord in coordinates]
+        if coordinates is not None:
             coordinates = None
     KnKod = request.args.get('KnKod')
     LnKod = request.args.get('LnKod')
-    #print(coordinates, KnKod, LnKod)
     slump = request.args.get('random')
     # Parse baseline interval
     baseline_start, baseline_end = map(int, baseline.split(','))
@@ -127,19 +128,14 @@ def weather_stats():
             clear_all_cache()
     cached_combind, cached_result, cached_baseline = get_cached_result(params_in, params_baseline)
     if cached_combind:
-        print('retrieve cache - exactly the same')
         return jsonify(cached_combind)
 
     if cached_result and isinstance(cached_result['annual'], str):
-        print('retrieve cache - loads if string')
         cached_result = json.loads(cached_result)
     if cached_result:
-        print('retrieve cache - result is cached')
         # If cached, check if the baseline matches
-        # print cached_results
         if not cached_baseline:
             # todo sort out so calculate_difference_from_baseline always get data frames
-            print('retrieve cache - baseline is not cached')
             tmp_result = pd.DataFrame(cached_result['annual'][0])
             baseline_stats = calculate_baseline(tmp_result, baseline)
             # Update cache with new baseline result
@@ -149,7 +145,6 @@ def weather_stats():
         return jsonify(cached_result)
 
     # Validate input parameters
-    print(not start_year, not end_year, not coordinates, not KnKod, not LnKod, not requested_stats, not baseline)
     if not start_year or not end_year or (not coordinates and not KnKod and not LnKod) or not requested_stats or not baseline:
         logging.error('Mossing required parameters: start_year, end_year, coordinates, baseline, or types')
         return jsonify({'error': 'Missing required parameters: start_year, end_year, coordinates, types or baseline'}), 400
@@ -179,10 +174,10 @@ def weather_stats():
         #allstations = allstations[~pd.DataFrame(allstations).duplicated(subset=['latitude', 'longitude'])]
         code = False
         for point in allstations:
-            if not KnKod or KnKod != 'NaN':
+            if KnKod is not None:
                 code = str(point['geodata']['knkod']) == KnKod
             else:
-                if not LnKod or LnKod != 'NaN':
+                if LnKod is not None:
                     code = str(point['geodata']['lnkod']) == LnKod
             if code:
                 stations.append(point)
@@ -195,13 +190,11 @@ def weather_stats():
         params['coordinates'] = coords
     # Fetch the data from the given URL
     weather_data = fetch_data(params.copy(), required_data_types, slump)
-    #print(weather_data)
     # Calculate baseline statistics from the resulting statistics over the baseline period
     #baseline_stats = calculate_baseline_stats(weather_data, baseline_start, baseline_end, requested_stats)
     if weather_data.empty:
         return jsonify({'error': 'No data available for the given parameters.'}), 404
     else:
-        # Convert relevant columns to numeric
         for data_type in array_required_data_types:
             if data_type in weather_data.columns:
                 weather_data[data_type] = pd.to_numeric(weather_data[data_type], errors='coerce')
@@ -214,7 +207,6 @@ def weather_stats():
     # Ensure 'date' column is in datetime format, with invalid values coerced to NaT
     if 'date' in weather_data.columns:
          weather_data['date'] = pd.to_datetime(weather_data['date'], errors='coerce')
-    # print rows where date is None
     #if 'date' in weather_data.columns:
     #    weather_data['date'] = pd.to_datetime(weather_data['date'])
     results, baseline_stats = weather_yearly(weather_data, start_year, end_year, requested_stats, baseline)
@@ -262,7 +254,7 @@ def weather_stats():
 #    stats = process_and_calculate_differences(results_sanatized['annual'], baseline)
     # serielized
     baseline_sanatized = {k: convert_np_types(v) for k, v in baseline_stats.items()}
-    set_cache_result(params, params_baseline, results_sanatized, baseline_sanatized)
+    set_cache_result(params_in, params_baseline, results_sanatized, baseline_sanatized)
     return jsonify(results_sanatized)
 
 def convert_np_types(obj):
@@ -315,7 +307,6 @@ def get_all_stations():
 DATA_TYPES = ['avg_temperature', 'precipitation', 'min_temperature', 'max_temperature', 'snowdepth_single', 'snowdepth_meter', 'co2_weekly', 'freezeup', 'breakup', 'perma', 'icetime']
 @app.route('/station', methods=['GET'])
 def station_stats():
-    # print time it takes to run
     year = request.args.get('year')
     lat = request.args.get('lat')
     lng = request.args.get('lng')
@@ -381,7 +372,6 @@ def station_stats():
            # only for loop for data_types when False
            for key, value in data_stats.items():
                 data_types[key] = value or data_types[key]
-    print('Done')
     set_cache(params, data_types)
     return jsonify(data_types)
 
