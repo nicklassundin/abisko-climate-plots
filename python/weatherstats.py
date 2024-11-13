@@ -47,200 +47,195 @@ def growing_season_days(df):
     frost_free_days = int(days_above_zero.sum())
     return frost_free_days
 
+def calculate_period(df, period_function, stats_function, column='avg_temperature'):
+    """
+    Generalized function to calculate statistics for a specific period.
 
-def warmest(df, period):
-    if df.empty:
-        return None
-    return df.groupby(df['date'].dt.to_period(period))['avg_temperature'].mean().idxmax()
+    Parameters:
+    - df: DataFrame with temperature data.
+    - period_function: Function to filter the DataFrame to the desired period (e.g., annual_spring).
+    - stats_function: Function to calculate the desired statistic (e.g., max, min, mean).
+    - column: Column on which to apply the statistics (default is 'avg_temperature').
 
-def coldest(df, period):
+    Returns:
+    - The calculated statistic or None if the DataFrame is empty.
+    """
+    df = period_function(df)
     if df.empty:
         return None
-    return df.groupby(df['date'].dt.to_period(period))['avg_temperature'].mean().idxmin()
+    return stats_function(df[column])
 
-def warmest_day(df):
-    if df.empty:
-        return None
-    return df.groupby(df['date'].dt.isocalendar().day)['avg_temperature'].mean().idxmax()
-def coldest_day(df):
-    if df.empty:
-        return None
-    return df.groupby(df['date'].dt.isocalendar().day)['avg_temperature'].mean().idxmin()
+# Generalized functions for mean, max, min calculations
+def mean_temperature(df, period_func):
+    return calculate_period(df, period_func, lambda x: x.mean())
 
-# New helper functions to calculate coldest/warmest months and weeks
-def coldest_month(df):
-    if df.empty:
-        return None
-    return df.groupby(df['date'].dt.month)['avg_temperature'].mean().idxmin()
+def max_temperature(df, period_func):
+    return calculate_period(df, period_func, lambda x: x.max())
 
-def warmest_month(df):
-    if df.empty:
-        return None
-    return df.groupby(df['date'].dt.month)['avg_temperature'].mean().idxmax()
-
-def coldest_week(df):
-    if df.empty:
-        return None
-    return df.groupby(df['date'].dt.isocalendar().week)['avg_temperature'].mean().idxmin()
-
-def warmest_week(df):
-    if df.empty:
-        return None
-    return df.groupby(df['date'].dt.isocalendar().week)['avg_temperature'].mean().idxmax()
+def min_temperature(df, period_func):
+    return calculate_period(df, period_func, lambda x: x.min())
 
 def annual_spring(df):
-    """Calculate the annual average temperature during spring (March to May)."""
+    """Filter data for spring (March to May)."""
     if df.empty:
-        return None
-    return df[(df['date'].dt.month >= 3) & (df['date'].dt.month <= 5)]  # Filter March to May
+        return df  # Return as-is if DataFrame is empty
+    return df[(df['date'].dt.month >= 3) & (df['date'].dt.month <= 5)]
 
 def annual_summer(df):
-    """Calculate the annual average temperature during summer (June to August)."""
+    """Filter data for summer (June to August)."""
     if df.empty:
-        return None
-    return df[(df['date'].dt.month >= 6) & (df['date'].dt.month <= 8)]  # Filter June to August
+        return df
+    return df[(df['date'].dt.month >= 6) & (df['date'].dt.month <= 8)]
 
 def annual_autumn(df):
-    """Calculate the annual average temperature during autumn (September to November)."""
+    """Filter data for autumn (September to November)."""
     if df.empty:
-        return None
-    return df[(df['date'].dt.month >= 9) & (df['date'].dt.month <= 11)]  # Filter September to November
+        return df
+    return df[(df['date'].dt.month >= 9) & (df['date'].dt.month <= 11)]
 
 def annual_winter(df):
-    """Calculate the annual average temperature during winter (December to February)."""
+    """Filter data for winter (December to February)."""
     if df.empty:
-        return None
-    return df[(df['date'].dt.month >= 12) | (df['date'].dt.month <= 2)]  # Filter December to February
+        return df
+    return df[(df['date'].dt.month >= 12) | (df['date'].dt.month <= 2)]
 
-def annual_temperature(df):
-    """Calculate the annual average temperature."""
+def annual_month(df, month):
+    """Filter data for the specified month."""
     if df.empty:
-        return None
-    return df['avg_temperature'].mean()
-def max_annual_temperature(df):
-    """Calculate the annual average temperature."""
-    if df.empty:
-        return None
-    return df.groupby(df['date'].dt.year)['avg_temperature'].max().mean()
+        return df
+    return df[df['date'].dt.month == month].copy()
 
-def min_annual_temperature(df):
-    """Calculate the annual average temperature."""
-    if df.empty:
-        return None
-    return df.groupby(df['date'].dt.year)['avg_temperature'].min().mean()
-
+# Seasonal functions using the generalized calculate_period
 def annual_spring_temperature(df):
-    """Calculate the annual average temperature during spring (March to May)."""
-    spring_df = annual_spring(df)
-    if spring_df.empty:
-        return None
-    return spring_df['avg_temperature'].mean()
+    return mean_temperature(df, annual_spring)
+
 def max_annual_spring_temperature(df):
-    """Calculate the annual average temperature during spring (March to May)."""
-    spring_df = annual_spring(df)
-    if spring_df.empty:
-        return None
-    return spring_df['avg_temperature'].max()
+    return max_temperature(df, annual_spring)
+
 def min_annual_spring_temperature(df):
-    """Calculate the annual average temperature during spring (March to May)."""
-    spring_df = annual_spring(df)
-    if spring_df.empty:
-        return None
-    return spring_df['avg_temperature'].min()
+    return min_temperature(df, annual_spring)
 
 def annual_summer_temperature(df):
-    """Calculate the annual average temperature during summer (June to August)."""
-    summer_df = annual_summer(df)
-    if summer_df.empty:
-        return None
-    return summer_df['avg_temperature'].mean()
-def min_annual_summer_temperature(df):
-    """Calculate the annual average temperature during summer (June to August)."""
-    summer_df = annual_summer(df)
-    if summer_df.empty:
-        return None
-    return summer_df['avg_temperature'].min()
+    return mean_temperature(df, annual_summer)
+
 def max_annual_summer_temperature(df):
-    """Calculate the annual average temperature during summer (June to August)."""
-    summer_df = annual_summer(df)
-    if summer_df.empty:
-        return None
-    return summer_df['avg_temperature'].max()
+    return max_temperature(df, annual_summer)
+
+def min_annual_summer_temperature(df):
+    return min_temperature(df, annual_summer)
+
 def annual_autumn_temperature(df):
-    """Calculate the annual average temperature during autumn (September to November)."""
-    autumn_df = annual_autumn(df)
-    if autumn_df.empty:
-        return None
-    return autumn_df['avg_temperature'].mean()
-def min_annual_autumn_temperature(df):
-    """Calculate the annual average temperature during autumn (September to November)."""
-    autumn_df = annual_autumn(df)
-    if autumn_df.empty:
-        return None
-    return autumn_df['avg_temperature'].min()
+    return mean_temperature(df, annual_autumn)
+
 def max_annual_autumn_temperature(df):
-    """Calculate the annual average temperature during autumn (September to November)."""
-    autumn_df = annual_autumn(df)
-    if autumn_df.empty:
-        return None
-    return autumn_df['avg_temperature'].max()
+    return max_temperature(df, annual_autumn)
+
+def min_annual_autumn_temperature(df):
+    return min_temperature(df, annual_autumn)
+
 def annual_winter_temperature(df):
-    """Calculate the annual average temperature during winter (December to February)."""
-    winter_df = annual_winter(df)
-    if winter_df.empty:
-        return None
-    return winter_df['avg_temperature'].mean()
+    return mean_temperature(df, annual_winter)
+
 def max_annual_winter_temperature(df):
-    """Calculate the annual average temperature during winter (December to February)."""
-    winter_df = annual_winter(df)
-    if winter_df.empty:
-        return None
-    return winter_df['avg_temperature'].max()
+    return max_temperature(df, annual_winter)
+
 def min_annual_winter_temperature(df):
-    """Calculate the annual average temperature during winter (December to February)."""
-    winter_df = annual_winter(df)
-    if winter_df.empty:
-        return None
-    return winter_df['avg_temperature'].min()
-def annual_month(df, month):
-    """Return the monthly data for the specified month."""
-    return df[df['date'].dt.month == month].copy()
+    return min_temperature(df, annual_winter)
+
+# Month-based calculations using the generalized approach
 def annual_month_temperature(df, month):
-    """Calculate the annual average temperature for the specified month."""
-    month_df = annual_month(df, month)
-    if month_df.empty:
-        return None
-    return month_df['avg_temperature'].mean()
+    return calculate_period(df, lambda df: annual_month(df, month), lambda x: x.mean())
+
 def max_annual_month_temperature(df, month):
-    """Calculate the annual maximum temperature for the specified month."""
-    month_df = annual_month(df, month)
-    if month_df.empty:
-        return None
-    return month_df['avg_temperature'].max()
+    return calculate_period(df, lambda df: annual_month(df, month), lambda x: x.max())
+
 def min_annual_month_temperature(df, month):
-    """Calculate the annual minimum temperature for the specified month."""
-    month_df = annual_month(df, month)
-    if month_df.empty:
-        return None
-    return month_df['avg_temperature'].min()
+    return calculate_period(df, lambda df: annual_month(df, month), lambda x: x.min())
+
 def annual_month_precipitation(df, month):
-    """Calculate the annual average precipitation for the specified month."""
-    month_df = annual_month(df, month)
-    if month_df.empty:
-        return None
-    return month_df['precipitation'].sum()
+    return calculate_period(df, lambda df: annual_month(df, month), lambda x: x.sum(), column='precipitation')
+
 def rain_annual_month_precipitation(df, month):
-    """Calculate the annual average rainfall for the specified month."""
-    rainfall_month_df = annual_month(df, month)
-    if rainfall_month_df.empty:
-        return None
-    return rainfall_month_df[rainfall_month_df['avg_temperature'] > 0]['precipitation'].sum()
+    return calculate_period(
+        df,
+        lambda df: annual_month(df, month),
+        lambda x: x.sum(),
+        column='precipitation'
+    )[df['avg_temperature'] > 0]
+
 def snow_annual_month_precipitation(df, month):
-    """Calculate the annual average snowfall for the specified month."""
-    snowfall_month_df = annual_month(df, month)
-    if snowfall_month_df.empty:
+    return calculate_period(
+        df,
+        lambda df: annual_month(df, month),
+        lambda x: x.sum(),
+        column='precipitation'
+    )[df['avg_temperature'] <= 0]
+
+# Generalized function for calculating annual temperature statistics
+def calculate_annual_stat(df, stat_func):
+    """
+    Generalized function to calculate an annual statistic using a given function.
+
+    Parameters:
+    - df: DataFrame with temperature data.
+    - stat_func: Function to calculate a statistic (e.g., max, min).
+
+    Returns:
+    - The calculated statistic or None if the DataFrame is empty.
+    """
+    if df.empty:
         return None
-    return snowfall_month_df[snowfall_month_df['avg_temperature'] <= 0]['precipitation'].sum()
+    return stat_func(df.groupby(df['date'].dt.year)['avg_temperature'])
+
+def annual_temperature(df):
+    return df['avg_temperature'].mean() if not df.empty else None
+
+def max_annual_temperature(df):
+    return calculate_annual_stat(df, lambda x: x.max().mean())
+
+def min_annual_temperature(df):
+    return calculate_annual_stat(df, lambda x: x.min().mean())
+
+# Generalized function for finding warmest/coldest periods
+def find_extreme_period(df, period_func, stat_func):
+    """
+    Generalized function to find the period (e.g., month, day, week) with the max/min average temperature.
+
+    Parameters:
+    - df: DataFrame with temperature data.
+    - period_func: Function to extract the period for grouping (e.g., month, week).
+    - stat_func: Function to calculate a statistic (e.g., idxmax, idxmin).
+
+    Returns:
+    - The period with the extreme value or None if the DataFrame is empty.
+    """
+    if df.empty:
+        return None
+    return df.groupby(period_func(df))['avg_temperature'].mean().agg(stat_func)
+
+def warmest(df, period):
+    return find_extreme_period(df, lambda df: df['date'].dt.to_period(period), 'idxmax')
+
+def coldest(df, period):
+    return find_extreme_period(df, lambda df: df['date'].dt.to_period(period), 'idxmin')
+
+def warmest_day(df):
+    return find_extreme_period(df, lambda df: df['date'].dt.isocalendar().day, 'idxmax')
+
+def coldest_day(df):
+    return find_extreme_period(df, lambda df: df['date'].dt.isocalendar().day, 'idxmin')
+
+def warmest_month(df):
+    return find_extreme_period(df, lambda df: df['date'].dt.month, 'idxmax')
+
+def coldest_month(df):
+    return find_extreme_period(df, lambda df: df['date'].dt.month, 'idxmin')
+
+def warmest_week(df):
+    return find_extreme_period(df, lambda df: df['date'].dt.isocalendar().week, 'idxmax')
+
+def coldest_week(df):
+    return find_extreme_period(df, lambda df: df['date'].dt.isocalendar().week, 'idxmin')
 
 def precipitation_stats(df):
     """Calculate the sum and average precipitation across stations for the year."""

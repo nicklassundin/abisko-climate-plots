@@ -1,6 +1,6 @@
 // Vizchange map start point
-//import lib from 'vizchange-plot-builder';
-import lib from '../../renderer/lib.js';
+import lib from 'vizchange-plot-builder';
+//import lib from '../../renderer/lib.js';
 
 
 // Initialize leaflet.js
@@ -210,11 +210,10 @@ data-hosturl="http://vizchange.hopto.org">
                 await updateDescription(e, null, null, namn, lnkod, knkod)
             },
             dblclick: (e) => {
-                /*
-                console.log('double click', e)
-                addKommuns(300)
-                map.setZoom(1)
-                 */
+                map.flyToBounds(land_layer.getBounds(), {
+                    duration: 0,
+                    animation: false
+                });
             }
         });
     }
@@ -260,6 +259,19 @@ data-hosturl="http://vizchange.hopto.org">
         map.fitBounds(land_layer.getBounds(), {
             duration: 0,
             animation: false
+        });
+        // listen after double click and reset camera
+        map.on('movestart', () => {
+            document.querySelectorAll('.path-element').forEach(el => {
+                el.style.transition = 'none';
+            });
+        });
+
+        // Re-enable transitions after map movements complete
+        map.on('moveend', () => {
+            document.querySelectorAll('.path-element').forEach(el => {
+                el.style.transition = ''; // Restore to default CSS behavior
+            });
         });
         console.log('Map loaded')
 

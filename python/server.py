@@ -77,14 +77,24 @@ def weather_stats():
     station = request.args.get('station', 'all')
     coordinates = request.args.get('coordinates')  # Coordinates in the format "lat,lng"
     # check coordinates validity
+    print(coordinates)
     if coordinates is not None:
         coordinates = coordinates.split(',')
-        # coarce coordinates to float if possible else None
         coordinates = [float(coord) if coord.replace('.', '', 1).isdigit() else None for coord in coordinates]
-        if coordinates is not None:
+        print(coordinates)
+        if None in coordinates:
             coordinates = None
     KnKod = request.args.get('KnKod')
+    try:
+        KnKod = int(KnKod)
+    except:
+        KnKod = None
     LnKod = request.args.get('LnKod')
+    try:
+        LnKod = int(LnKod)
+    except:
+        LnKod = None
+    # force KnKod and LnKod to numerical
     slump = request.args.get('random')
     # Parse baseline interval
     baseline_start, baseline_end = map(int, baseline.split(','))
@@ -111,8 +121,9 @@ def weather_stats():
         'slump': slump
     }
     if coordinates is not None:
-        params_in['coordinates'] = ','.join(coordinates)
-        params_baseline['coordinates'] = ','.join(coordinates)
+        # joint coordinates list with ','
+        params_in['coordinates'] = ','.join(str(coord) for coord in coordinates)
+        params_baseline['coordinates'] = params_in['coordinates']
 
     params = params_in.copy()
     # Reset
@@ -164,7 +175,6 @@ def weather_stats():
 
     required_data_types = ','.join(array_required_data_types)  # Prepare data types for the query
 
-    # TODO fetch stations
     stations = []
     if coordinates is None:
         coords = []
@@ -175,10 +185,10 @@ def weather_stats():
         code = False
         for point in allstations:
             if KnKod is not None:
-                code = str(point['geodata']['knkod']) == KnKod
+                code = point['geodata']['knkod'] == KnKod
             else:
                 if LnKod is not None:
-                    code = str(point['geodata']['lnkod']) == LnKod
+                    code = point['geodata']['lnkod'] == LnKod
             if code:
                 stations.append(point)
                 coord = {
@@ -367,11 +377,14 @@ def station_stats():
            continue
         if data_types is None:
            # check if data_stats is string
-           data_types = data_stats['available_statistics']
+           data_types = data_stats
         else:
            # only for loop for data_types when False
-           for key, value in data_stats.items():
-                data_types[key] = value or data_types[key]
+           for key, value in data_stats['available_statistics'].items():
+                data_types['available_statistics'][key] = value or data_types['available_statistics'][key]
+           for key, value in data_stats['available_statistics_data_types'].items():
+                data_types['available_statistics_data_types'][key] = value or data_types['available_statistics_data_types'][key]
+
     set_cache(params, data_types)
     return jsonify(data_types)
 
