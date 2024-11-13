@@ -8,3 +8,4 @@ numpy
 flask_cors
 redis
 ratelimit
+tqdm

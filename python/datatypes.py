@@ -75,4 +75,9 @@ DATA_TYPES_TO_TYPE = {
 }
 
 # List of all available statistics
-ALL_STATISTICS = list(STATISTICS_TO_DATA_TYPES.keys())
+ALL_STATISTICS_ = list(STATISTICS_TO_DATA_TYPES.keys())
+# filter out nhem_temp, 64n-90n_temp, glob_temp, co2_weekly
+ALL_STATISTICS = [stat for stat in ALL_STATISTICS_ if stat not in ['nhem_temp', '64n-90n_temp', 'glob_temp', 'co2_weekly']]
+
+# get all data types from STATISTICS_TO_DATA_TYPES
+ALL_DATA_TYPES = list(set([item for sublist in STATISTICS_TO_DATA_TYPES.values() for item in sublist]))

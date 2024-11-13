@@ -10,13 +10,14 @@ from requests.exceptions import HTTPError, Timeout, RequestException
 
 import logging
 logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger()
 import pandas as pd
 import requests
 import json
 import time
 from requests.exceptions import HTTPError, Timeout, RequestException
 # import DATA_TYPES_TO_TYPE
-from datatypes import DATA_TYPES_TO_TYPE
+from datatypes import DATA_TYPES_TO_TYPE, STATISTICS_TO_DATA_TYPES, ALL_DATA_TYPES
 
 # Helper function for date conversion
 def convert_to_datetime(df, column_name='date'):
@@ -25,8 +26,8 @@ def convert_to_datetime(df, column_name='date'):
     return df
 
 
-CALLS = 10
-PERIOD = 30
+CALLS = 15
+PERIOD = 10
 
 @sleep_and_retry
 @limits(calls=CALLS, period=PERIOD)
@@ -153,12 +154,12 @@ def get_weather_stats_for_station(lat, long, data_types, slump = False):
         "lng": long
     }
     params = {'start_year': 1985, 'end_year': 1990, 'data_types': data_types, 'coordinates': coordinates, 'slump': slump, 'type': 'weather_stats'}
-    cache_results = get_cached(params)
+    cache_results = get_cached(params, 'weather_stats')
     if cache_results:
         return cache_results
     # Fetch data for the specific station at given coordinates
-    station_data = fetch_data(params, data_types, slump)
     result = None
+    station_data = fetch_data(params, data_types)
     if station_data is not None and not station_data.empty:
         # Calculate available statistics based on the fetched data
         available_statistics = calculate_available_statistics(station_data, data_types)
@@ -177,7 +178,7 @@ def get_weather_stats_for_station(lat, long, data_types, slump = False):
             "coordinates": coordinates,
             "available_statistics": "No data available for this year"
         }
-    set_cache(params, result)
+    set_cache(params, result, 'weather_stats')
     return result
 # Load GeoJSON data using GeoPandas
 import geopandas as gpd
@@ -221,11 +222,12 @@ SMHI_STATION_NAME_URLS = [
       "https://opendata-download-metobs.smhi.se/api/version/latest/parameter/11.json", # global irredians
       ]
 
+from tqdm import tqdm
+import time
 # Helper function to fetch all SMHI stations
 def fetch_all_stations():
     # Check if the data is cached
     try:
-        # TODO fix so cache fo smhi doesn't effect
         url = SMHI_STATION_NAME_URLS[0]
         data = getAPI(url)
         stations = data.get('station', [])
@@ -244,7 +246,15 @@ def fetch_all_stations():
                 "geodata": reverse_geocode(existing_stations[key]['position']['lat'], existing_stations[key]['position']['long'])
             }
             stations.append(station)
-        return stations
+
+        logger.disabled = True  # Disable logging while fetching weather stats
+        for station in tqdm(stations):
+            url = 'http://localhost:5000/station?' + f'lat={station["latitude"]}&lng={station["longitude"]}'
+            station['available_statistics'] = getAPI(url)
+            #station['available_statistics'] = get_weather_stats_for_station(station['latitude'], station['longitude'], ALL_DATA_TYPES)
+            yield station
+        logger.disabled = False # Re-enable logging
+
     except requests.exceptions.RequestException as e:
-        print(f"Error fetching stations: {e}")
-        return None
+        logging.error(f"Error fetching stations: {e}")
+        yield None

@@ -36,6 +36,48 @@ $(document).ready(function() {
         popupAnchor:  [-3/size, -76/size] // point from which the popup should open relative to the iconAnchor
     });
 
+    async function fetchStationsWithProgress() {
+        try {
+            const response = await fetch('/python/stations');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const reader = response.body.getReader();
+            let receivedLength = 0;
+            let chunks = [];
+            const decoder = new TextDecoder("utf-8");
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+
+                chunks.push(value);
+                receivedLength += value.length;
+
+                // Update the progress bar if needed
+                const percentComplete = (receivedLength / (response.headers.get('Content-Length') || receivedLength)) * 100;
+                document.getElementById('progress-bar').style.width = percentComplete + "%";
+            }
+
+            // Combine all chunks into one string
+            let rawData = chunks.reduce((acc, chunk) => acc + decoder.decode(chunk, { stream: true }), "");
+            rawData += decoder.decode(); // Finalize the stream
+
+            // Split the raw data into separate JSON strings (assuming they are newline-delimited)
+            const jsonObjects = rawData.trim().split('\n').map(str => str.trim()).filter(str => str);
+
+            // Parse each object and collect results
+            const data = jsonObjects.map(jsonStr => JSON.parse(jsonStr));
+            return data; // This will be an array of parsed objects
+        } catch (error) {
+            console.error("Error fetching stations with progress:", error);
+        } finally {
+            // Hide progress bar when completed
+            document.getElementById('loading-container').style.display = 'none';
+        }
+    }
+
 // Kommuner layer
     async function fetchStations() {
         try {
@@ -225,7 +267,8 @@ data-hosturl="http://vizchange.hopto.org">
     }
 
     window.onload = async () => {
-        const stations = await fetchStations()
+        //const stations = await fetchStations()
+        const stations = await fetchStationsWithProgress()
         addStations(stations)
         kommun_layer = L.geoJSON(kommuner, {
             onEachFeature: onEachFeature,

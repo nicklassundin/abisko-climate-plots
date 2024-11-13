@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response, stream_with_context
 from flask_cors import CORS  # Import the CORS library
 import requests
 import pandas as pd
@@ -77,11 +77,9 @@ def weather_stats():
     station = request.args.get('station', 'all')
     coordinates = request.args.get('coordinates')  # Coordinates in the format "lat,lng"
     # check coordinates validity
-    print(coordinates)
     if coordinates is not None:
         coordinates = coordinates.split(',')
         coordinates = [float(coord) if coord.replace('.', '', 1).isdigit() else None for coord in coordinates]
-        print(coordinates)
         if None in coordinates:
             coordinates = None
     KnKod = request.args.get('KnKod')
@@ -179,6 +177,7 @@ def weather_stats():
     if coordinates is None:
         coords = []
         allstations = get_stations()
+        allstations = list(allstations)
         allstations = np.array(allstations)
         # filter out same coordinates
         #allstations = allstations[~pd.DataFrame(allstations).duplicated(subset=['latitude', 'longitude'])]
@@ -296,22 +295,32 @@ def get_stations(flush=False):
     allstations = get_cached(params)
     if allstations:
         logging.info('Retrieved all stations from cache')
-        return allstations
+        # Yield cached stations one by one
+        for station in allstations:
+            yield station
+        return
 
     allstations = stations.fetch_all_stations()
     # Cache the result
-    set_cache(params, allstations)
+    cached_stations = []
+    for station in allstations:
+        cached_stations.append(station)  # Build cache as we go
+        yield station  # Yield station one by one
+
+    # Cache all stations after complete processing
+    set_cache(params, cached_stations)
     logging.info('Fetched all stations from SMHI API')
-    return allstations
-# Flask route to serve all SMHI stations
 @app.route('/stations', methods=['GET'])
 def get_all_stations():
     flush = request.args.get('flush') == 'true'
-    allstations = get_stations(flush)
-    if allstations is not None:
-        return jsonify({"stations": allstations})
-    else:
-        return jsonify({"error": "Could not fetch stations"}), 500
+    stations_generator = get_stations(flush)
+
+    def generate():
+        for station in stations_generator:
+            yield jsonify(station).data.decode('utf-8') + '\n'  # Convert to JSON string and add newline for streaming
+
+    return Response(stream_with_context(generate()), content_type='application/json')
+
 
 
 DATA_TYPES = ['avg_temperature', 'precipitation', 'min_temperature', 'max_temperature', 'snowdepth_single', 'snowdepth_meter', 'co2_weekly', 'freezeup', 'breakup', 'perma', 'icetime']

@@ -50,7 +50,6 @@ def set_cache(params, data, key=None, protected=False):
     if protected:
         # Add protected prefix to the cache key
         cache_key = f'protected:{cache_key}'
-    #print('Setting cache', cache_key, params)
     logging.info(f'Setting cache for {cache_key}')
     cache.set(cache_key, json.dumps(data), ex=3600*24*265)  # Cache for 1 year
 

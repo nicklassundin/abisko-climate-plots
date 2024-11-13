@@ -318,7 +318,6 @@ def weather_yearly(weather_data, start_year, end_year, requested_stats, baseline
     #yearly_stats = None
     #if 'annual_temperature' in requested_stats:
     #    yearly_stats = weather_group_year.agg({'avg_temperature': [annual_temperature, max_annual_temperature, min_annual_temperature]})
-    #    print(yearly_stats)
 
     results = {}
     for year in range(int(start_year), int(end_year)):
