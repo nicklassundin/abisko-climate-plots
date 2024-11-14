@@ -68,6 +68,7 @@ def status():
 
 @app.route('/data', methods=['GET'])
 def weather_stats():
+    # TODO make to stream
     # Retrieve the query parameters for year range, coordinates, and filtering options
     start_year = request.args.get('start_year')
     end_year = request.args.get('end_year')
@@ -143,14 +144,17 @@ def weather_stats():
         cached_result = json.loads(cached_result)
     if cached_result:
         # If cached, check if the baseline matches
-        if not cached_baseline:
-            # todo sort out so calculate_difference_from_baseline always get data frames
-            tmp_result = pd.DataFrame(cached_result['annual'][0])
-            baseline_stats = calculate_baseline(tmp_result, baseline)
-            # Update cache with new baseline result
-            cached_result['annual'] = calculate_difference_from_baseline(tmp_result, baseline_stats)
-            cached_result['annual'] = serializablation(cached_result['annual'])
-
+        # check if cached_result['annual'][0] exists
+        try:
+            if not cached_baseline and cached_result['annual'][0]:
+                # todo sort out so calculate_difference_from_baseline always get data frames
+                tmp_result = pd.DataFrame(cached_result['annual'][0])
+                baseline_stats = calculate_baseline(tmp_result, baseline)
+                # Update cache with new baseline result
+                cached_result['annual'] = calculate_difference_from_baseline(tmp_result, baseline_stats)
+                cached_result['annual'] = serializablation(cached_result['annual'])
+        except Exception as e:
+            logging.error(f"Error calculating baseline: {e}")
         return jsonify(cached_result)
 
     # Validate input parameters
