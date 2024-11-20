@@ -53,6 +53,7 @@
     "static": "cp client/bundle.js static/bundle.js",
     "webpack": "webpack --mode=development",
     "setup-python": "bash setup-env.sh",
+    "setup-python-env": "bash setup-env.sh",
     "build": "webpack --mode=production && npx arkit",
     "arkit": "npx arkit",
     "docs": "jsdoc -c docs/jsdoc.json"
