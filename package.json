@@ -52,6 +52,7 @@
     "dev-inspect": "clear; npx nodemon -x node --inspect NODE_ENV=develoment run.js",
     "static": "cp client/bundle.js static/bundle.js",
     "webpack": "webpack --mode=development",
+    "setup-python": "bash setup-env.sh",
     "build": "webpack --mode=production && npx arkit",
     "arkit": "npx arkit",
     "docs": "jsdoc -c docs/jsdoc.json"
