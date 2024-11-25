@@ -130,6 +130,7 @@ def weather_stats():
     if reset is not None:
         if reset.lower() == 'true':
             clear_cache(params)
+            clear_cache(params_baseline)
     # flush
     flush = request.args.get('flush')
     if flush is not None:
@@ -146,15 +147,17 @@ def weather_stats():
         # If cached, check if the baseline matches
         # check if cached_result['annual'][0] exists
         try:
-            if not cached_baseline and cached_result['annual'][0]:
+            if not cached_baseline and cached_result['annual']:
                 # todo sort out so calculate_difference_from_baseline always get data frames
-                tmp_result = pd.DataFrame(cached_result['annual'][0])
+                print(cached_result['annual'])
+                tmp_result = pd.DataFrame(cached_result['annual'])
                 baseline_stats = calculate_baseline(tmp_result, baseline)
                 # Update cache with new baseline result
                 cached_result['annual'] = calculate_difference_from_baseline(tmp_result, baseline_stats)
                 cached_result['annual'] = serializablation(cached_result['annual'])
         except Exception as e:
             logging.error(f"Error calculating baseline: {e}")
+            return jsonify({'error': f"Error calculating baseline: {e}"}), 500
         return jsonify(cached_result)
 
     # Validate input parameters
