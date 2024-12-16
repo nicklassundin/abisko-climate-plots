@@ -3,7 +3,6 @@ import redis
 import hashlib
 import json
 # Initialize Redis connection
-
 import logging
 logging.basicConfig(level=logging.INFO)
 lua_script = """

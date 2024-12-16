@@ -25,7 +25,7 @@ import { spawn } from 'child_process';
 
 function startPythonServer(app) {
 	// Start the Python Flask server
-	const pythonProcess = spawn('python3', ['python/server.py']); // Adjust the path to your Python server script
+	const pythonProcess = spawn('python3', ['python/server.py'], {stdio: 'pipe'}); // Adjust the path to your Python server script
 
 	// Listen for Python server output
 	pythonProcess.stdout.on('data', (data) => {
