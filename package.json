@@ -34,7 +34,7 @@
     "csv-loader": "^3.0.5",
     "jsdoc": "^4.0.3",
     "query-string": "^9.0.0",
-    "vizchange-plot-builder": "^1.2.4",
+    "vizchange-plot-builder": "^1.2.5",
     "webpack-cli": "^5.1.4"
   },
   "scripts": {
