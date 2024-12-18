@@ -321,8 +321,9 @@ def get_stations(flush=False):
 def get_all_stations():
     flush = request.args.get('flush') == 'true'
     stations_generator = get_stations(flush)
-
+    total_stations = sum(1 for _ in stations_generator)  # Count the total number of stations
     def generate():
+        yield jsonify({'total_stations': total_stations}).data.decode('utf-8') + '\n'  # Convert to JSON string and add newline for streaming
         for station in stations_generator:
             yield jsonify(station).data.decode('utf-8') + '\n'  # Convert to JSON string and add newline for streaming
 
