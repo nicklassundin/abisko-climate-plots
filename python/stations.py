@@ -11,6 +11,8 @@ from requests.exceptions import HTTPError, Timeout, RequestException
 import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
+wz_logger = logging.getLogger('werkzeug')
+wz_logger.setLevel(logging.ERROR)
 import pandas as pd
 import requests
 import json

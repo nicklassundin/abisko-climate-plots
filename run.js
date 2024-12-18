@@ -13,8 +13,12 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 		 * @type {Server}
 		 */
 		let server = new Server(process.argv.includes("d"));
-		server.createApp();
-		startPythonServer(server.app)
+		server.createApp()
+		if (!server.app) {
+			throw new Error("Server not started");
+		}else{
+			startPythonServer(server.app)
+		}
 		return server;
 	}catch (error) {
 		throw error;
@@ -40,7 +44,12 @@ function startPythonServer(app) {
 	// When the Python server exits
 	pythonProcess.on('close', (code) => {
 		console.log(`Python Server Process exited with code ${code}`);
-		startPythonServer()
+		if (code !== 0) {
+			console.error('Python Server crashed, restarting...');
+            setTimeout(() => {
+                startPythonServer(app);
+            }, 5000); // Restart after 5 seconds
+		}
 	});
 
 	process.on('exit', () => {

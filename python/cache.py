@@ -16,6 +16,29 @@ return 'Done'
 """
 cache = redis.StrictRedis(host='localhost', port=6379, db=0)
 
+import zlib
+def compress_data(data):
+    """Compress the data using zlib."""
+    return zlib.compress(data.encode('utf-8'))
+def decompress_data(data):
+    """Decompress the data using zlib."""
+    return zlib.decompress(data).decode('utf-8')
+
+def get_cache_memory_usage():
+    """Get the memory usage of the cache."""
+    return cache.info('memory')['used_memory_human']
+def get_largest_memory_usage_entry():
+    """Get the largest memory usage entry in the cache."""
+    keys = cache.keys()
+    largest_key = None
+    largest_size = 0
+    for key in keys:
+        size = cache.memory_usage(key)
+        if size > largest_size:
+            largest_key = key
+            largest_size = size
+    return largest_key, largest_size
+
 def generate_cache_key(params):
     """Generate a unique cache key based on the request parameters."""
     key_string = json.dumps(params, sort_keys=True)  # Sorting to ensure key uniqueness
@@ -34,9 +57,10 @@ def get_cached(params, key=None, protected=False):
     cached_data = None
     cached_data = cache.get(cache_key)
     if cached_data:
-        logging.info(f'Cache hit for {cache_key}')
-        return json.loads(cached_data)  # Return the cached data if available
-    logging.info(f'Cache miss for {cache_key}')
+        logging.info(f'Cache hit for {cache_key}, size {get_cache_memory_usage()}')
+        #return json.loads(cached_data)  # Return the cached data if available
+        return json.loads(decompress_data(cached_data))  # Return the cached data if available
+    logging.info(f'Cache miss for {cache_key}, size {get_cache_memory_usage()}')
     return None
 
 def set_cache(params, data, key=None, protected=False):
@@ -49,8 +73,9 @@ def set_cache(params, data, key=None, protected=False):
     if protected:
         # Add protected prefix to the cache key
         cache_key = f'protected:{cache_key}'
-    logging.info(f'Setting cache for {cache_key}')
-    cache.set(cache_key, json.dumps(data), ex=3600*24*265)  # Cache for 1 year
+    logging.info(f'Setting cache for {cache_key}, size {get_cache_memory_usage()}')
+    cache.set(cache_key, compress_data(json.dumps(data)), ex=3600*24*265)  # Cache for 1 year
+    #cache.set(cache_key, json.dumps(data), ex=3600*24*265)  # Cache for 1 year
 
 def clear_cache(params):
     """Clear the cache for a specific set of parameters."""
