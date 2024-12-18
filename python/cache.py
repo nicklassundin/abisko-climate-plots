@@ -5,6 +5,10 @@ import json
 # Initialize Redis connection
 import logging
 logging.basicConfig(level=logging.INFO)
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
+
+
 lua_script = """
 local keys = redis.call('KEYS', '*')
 for i, key in ipairs(keys) do
