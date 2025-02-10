@@ -1,8 +1,7 @@
 //const Server = require('./server.js');
 import Server from './server.js';
-import startPythonServer from './submodules/python.server/startPythonServer.js';
+import startPythonServer from 'python.server'
 
-import { createProxyMiddleware } from 'http-proxy-middleware';
 /**
  Initiate server instance when running project
  */

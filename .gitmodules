@@ -1,6 +1,6 @@
 [submodule "submodules/python.server"]
 	path = submodules/python.server
 	url = https://github.com/nicklassundin/vizchange.python.server.git
-[submodule "submodules/plot.render"]
-	path = submodules/plot.render
+[submodule "submodules/vizchange-plot-builder"]
+	path = submodules/vizchange-plot-builder
 	url = https://github.com/nicklassundin/vizchange-plot-render.git
