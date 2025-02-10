@@ -2,6 +2,9 @@
 import Server from './server.js';
 import startPythonServer from 'python.server'
 
+
+const redisHost = process.env.REDIS_HOST || 'localhost';
+const redisPort = process.env.REDIS_PORT || 6379;
 /**
  Initiate server instance when running project
  */
@@ -17,7 +20,7 @@ import startPythonServer from 'python.server'
 		if (!server.app) {
 			throw new Error("Server not started");
 		}else{
-			startPythonServer(server.app)
+			startPythonServer(server.app, {host: redisHost, port: redisPort});
 		}
 		return server;
 	}catch (error) {

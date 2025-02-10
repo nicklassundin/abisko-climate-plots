@@ -45,6 +45,7 @@
     "postpublish": "git push origin --tags",
     "update": "npm update climate-plots-config && npm update climate-plots-glimworks-reader && npm update vizchange-stats",
     "start-no-update": "node run.js",
+    "glimworks-start": "REDIS_HOST=localhost REDIS_PORT=6379 node run.js",
     "start": "webpack --mode=production && npm run update && git submodule update && node run.js",
     "start-full": "npm run update && git submodule update && npm test && npx nodemon run.js",
     "dev": "clear; npm run update && npx nodemon -x NODE_ENV=development node run.js",
