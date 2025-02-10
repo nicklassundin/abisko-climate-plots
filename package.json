@@ -12,7 +12,6 @@
     "axios-cache-interceptor": "^0.10.7",
     "body-parser": "^1.19.0",
     "chai-http": "^4.4.0",
-    "climate-plots-config": "^0.6.0-beta.40",
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "express-healthcheck": "^0.1.0",
@@ -25,8 +24,9 @@
     "request": "^2.88.2",
     "stream-http": "^3.2.0",
     "terser-webpack-plugin": "^5.3.10",
-    "vizchange-smhi": "^1.2.3",
     "webpack": "^5.91.0",
+    "climate-plots-config": "file:submodules/climate-plots-config",
+    "vizchange-smhi": "file:submodules/vizchange-smhi",
     "python.server": "file:submodules/python.server"
   },
   "devDependencies": {

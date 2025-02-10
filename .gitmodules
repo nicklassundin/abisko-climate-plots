@@ -4,3 +4,9 @@
 [submodule "submodules/vizchange-plot-builder"]
 	path = submodules/vizchange-plot-builder
 	url = https://github.com/nicklassundin/vizchange-plot-render.git
+[submodule "submodules/vizchange-smhi"]
+	path = submodules/vizchange-smhi
+	url = https://github.com/nicklassundin/vizchange-smhi.git
+[submodule "submodules/cliamte-plots-config"]
+	path = submodules/cliamte-plots-config
+	url = https://github.com/nicklassundin/abisko-climate-plots-config.git
