@@ -8,5 +8,5 @@
 	path = submodules/vizchange-smhi
 	url = https://github.com/nicklassundin/vizchange-smhi.git
 [submodule "submodules/climate-plots-config"]
-	path = submodules/cliamte-plots-config
+	path = submodules/climate-plots-config
 	url = https://github.com/nicklassundin/abisko-climate-plots-config.git
