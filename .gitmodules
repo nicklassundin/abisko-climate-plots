@@ -1,3 +1,6 @@
 [submodule "config"]
 	path = config
 	url = https://github.com/nicklassundin/abisko-climate-plots-config.git
+[submodule "modules/plot-render"]
+	path = modules/plot-render
+	url = https://github.com/nicklassundin/vizchange-plot-render.git
