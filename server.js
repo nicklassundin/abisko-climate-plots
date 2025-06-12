@@ -282,7 +282,7 @@ class Server {
 		if(station == 'CALM') {
 			name = "CALM"
 		}
-		if(type == 'icetime') {
+		if(type == 'icetime' || type == 'freezeup' || type == 'breakup') {
 			name = "Tornetrask_lake_data"
 		}
 		if(type == 'snowdepth_single') {
