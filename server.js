@@ -1,13 +1,14 @@
 const cors = require('cors'); // Cors setup
 const health = require('express-healthcheck'); // Health Check
 require('jquery');
+const { parse  } = require('csv-parse/sync');
 // Cache requirements
 const fs = require('fs');   // write files to cache etc TODO make obsolete
 const axios = require('axios');
 const { setupCache } = require('axios-cache-interceptor');
 const { buildStorage } = require('axios-cache-interceptor');
 // precalculated
-let stats = require('vizchange-stats');
+let stats = require('./modules/plot-render/modules/stats/module.js');
 const stats_configs = JSON.parse(JSON.stringify(stats.configs['production_redirect']));
 // general express requirements
 require('request');
@@ -155,17 +156,27 @@ class Server {
      * @returns {Promise}
      */
     get stationList() {
-        this.smhiAPI();
-        return this.smhi_stations().then((smhiStations) => {
-            return {
-                smhi: smhiStations,
-                fixed: Object.keys(this.STATIC_STATIONS).map(value => {
-                    return {
-                        id: value
-                    }
-                })
-            }
-        })
+	    return Promise.resolve().then(() => {
+	    return {
+		    fixed: Object.keys(this.STATIC_STATIONS).map(value => {
+			    return {
+				    id: value,
+			    }
+			
+	    	})
+	    }
+	    })
+        // this.smhiAPI();
+        // return this.smhi_stations().then((smhiStations) => {
+        //     return {
+        //         smhi: smhiStations,
+        //         fixed: Object.keys(this.STATIC_STATIONS).map(value => {
+        //             return {
+        //                 id: value
+        //             }
+        //         })
+        //     }
+        // })
     }
     /**
      * Setting up cache data api for request against server
@@ -249,6 +260,67 @@ class Server {
             res.send('Lets do this');
         })
         this.app.use('/health', health());
+
+	// API to /data
+	this.app.get('/data', (req, res) => {
+		// arguments station and types=['temperature', 'precipitation',..]	
+		let params = req.query;
+		let station = params.station;
+		let types = params.types.split(',').map(type => type.trim());
+		let type = params.type;
+
+		console.log(params);
+		// if types contain 'temperature' or 'precipitation' 
+		var name = "ANS_AWS_combined";
+		if ('temperature' in types || 'precipitation' in types) {
+			name = "ANS_AWS_combined"	
+		}
+		// check if types contain part of string co2
+		if(types.some(type => type.includes('glob'))){
+			name = "zon"
+		}
+		if(station == 'CALM') {
+			name = "CALM"
+		}
+		if(type = 'icetime') {
+			name = "Tornetrask_lake_data"
+		}
+		let dataPath = path.join(__dirname, 'data', name+ '.csv');
+		// check that file exists
+		if (!fs.existsSync(dataPath)) {
+			console.error('Data file not found:', dataPath);
+			return res.status(404).json({ error: 'Data file not found' });
+		}
+		console.log('Data path:', dataPath);
+		// read csv file
+		let data = fs.readFileSync(dataPath, 'utf8');
+		// parse CSV data to JSON with header
+		// convert to numbers where possible
+		let data_json = parse(data, {
+			columns: true,
+			skip_empty_lines: true,
+			trim: true,
+			// convert to numbers where possible
+			cast: (value, context) => {
+				if (!isNaN(value)) {
+					return Number(value);
+				}
+				return value;
+			}
+		});
+		// let data_json = parse(data, {
+		// 	columns: true,
+		// 	skip_empty_lines: true
+		// });
+
+		// console.log size of data in bytes
+		console.log('Data size:', JSON.stringify(data).length, 'bytes');
+		// console example data
+		
+		res.json(data_json);
+	})
+
+
         return this.app;
     }
 }
