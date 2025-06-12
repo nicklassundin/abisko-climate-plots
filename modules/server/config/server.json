@@ -1,6 +1,6 @@
 {
 	"hostname": "94.254.62.48",
-	"port": 5000,
+	"port": 3000,
 	"serverURL": "http://vizchange.hopto.org",
 	"domain": "localhost",
 	"protocol": "https",
