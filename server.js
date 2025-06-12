@@ -282,10 +282,14 @@ class Server {
 		if(station == 'CALM') {
 			name = "CALM"
 		}
-		if(type = 'icetime') {
+		if(type == 'icetime') {
 			name = "Tornetrask_lake_data"
 		}
+		if(type == 'snowdepth_single') {
+			name = "SnowDepth"
+		}
 		let dataPath = path.join(__dirname, 'data', name+ '.csv');
+		console.log('Data path:', dataPath);
 		// check that file exists
 		if (!fs.existsSync(dataPath)) {
 			console.error('Data file not found:', dataPath);
