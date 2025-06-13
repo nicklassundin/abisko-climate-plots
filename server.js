@@ -143,10 +143,13 @@ class Server {
 		if(types.some(type => type.includes('glob'))){
 			name = "zon"
 		}
+		if (types.some(type => type.includes('co2'))) {
+			name = "co2";
+		}
 		if(station == 'CALM') {
 			name = "CALM"
 		}
-		if(type == 'icetime' || type == 'freezeup' || type == 'breakup') {
+		if(type == 'icetime' || type == 'freezeup' || type == 'breakup' || type == 'max_thickness') {
 			name = "Tornetrask_lake_data"
 		}
 		if(type == 'snowdepth_single') {
