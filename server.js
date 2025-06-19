@@ -130,43 +130,62 @@ class Server {
 		// arguments station and types=['temperature', 'precipitation',..]	
 		let params = req.query;
 		let station = params.station;
-		let types = params.types.split(',').map(type => type.trim());
-		let type = params.type;
+		let types = params.type.split(',')
+		let specs = params.specs ? params.specs : '';
+		let subtype = params.subtype ? params.subtype : '';
+		// console.log(params)
+			
+		var name = "ANS_AWS_annual";
+		switch (types[1]) {
+			case 'yrly':
+				name = 'ANS_AWS_annual';
+				break;
+			default:
+		}
+		switch (types[2]) {
+			case 'growingSeason':
+				name = 'ANS_AWS_annual';
+				break;
+			default:
+		}
+		// check if types contain spring, summer, autumn or winter 
+		if (types.includes('spring') || types.includes('summer') || types.includes('autumn') || types.includes('winter')) {
+			name = 'ANS_AWS_season';
+		}
+		// check if types contain 'jan', feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'
+		if (types.includes('jan') || types.includes('feb') || types.includes('mar') || 
+		    types.includes('apr') || types.includes('may') || types.includes('jun') || 
+		    types.includes('jul') || types.includes('aug') || types.includes('sep') || 
+		    types.includes('oct') || types.includes('nov') || types.includes('dec')) {
+			name = 'ANS_AWS_month_'+types[2];
+		}
+		if (['glob', 'nhem', '64n-90n'].includes(station)){
+			name = 'Zon_'+station
+		}
+		if (types.includes('perma')){
+			name = 'CALM_'+station;
+		}
 
-		console.log(params);
-		// if types contain 'temperature' or 'precipitation' 
-		var name = "ANS_AWS_combined";
-		if ('temperature' in types || 'precipitation' in types) {
-			name = "ANS_AWS_combined"	
+		if(['icetime', 'freezeup', 'breakup', 'complete_ice_cover'].includes(types[0])) {
+			name = 'Tornetrask_lake_data'
 		}
-		// check if types contain part of string co2
-		if(types.some(type => type.includes('glob'))){
-			name = "zon"
+
+		if (types.includes('snowdepth_single') || types.includes('snowdepth_deci')){
+			name = 'SnowDepth'
 		}
-		if (types.some(type => type.includes('co2'))) {
-			name = "co2";
+
+		if (specs == 'decadeMeans'){
+			name = 'snowDecade' + subtype;
 		}
-		if(station == 'CALM') {
-			name = "CALM"
+		if (specs == 'periodMeans'){
+			name = 'snowPeriod' + subtype;
 		}
-		if(type == 'icetime' || type == 'freezeup' || type == 'breakup' || type == 'max_thickness') {
-			name = "Tornetrask_lake_data"
-		}
-		if(type == 'snowdepth_single') {
-			name = "SnowDepth"
+			
+		if (types.includes('co2_weekly')){
+			name = 'co2'
 		}
 		let dataPath = path.join(__dirname, 'data', name+ '.csv');
-		console.log('Data path:', dataPath);
-		// check that file exists
-		if (!fs.existsSync(dataPath)) {
-			console.error('Data file not found:', dataPath);
-			return res.status(404).json({ error: 'Data file not found' });
-		}
-		console.log('Data path:', dataPath);
-		// read csv file
 		let data = fs.readFileSync(dataPath, 'utf8');
-		// parse CSV data to JSON with header
-		// convert to numbers where possible
 		let data_json = parse(data, {
 			columns: true,
 			skip_empty_lines: true,
@@ -179,14 +198,7 @@ class Server {
 				return value;
 			}
 		});
-		// let data_json = parse(data, {
-		// 	columns: true,
-		// 	skip_empty_lines: true
-		// });
-
-		// console.log size of data in bytes
-		console.log('Data size:', JSON.stringify(data).length, 'bytes');
-		// console example data
+		console.log(name, 'Data size:', JSON.stringify(data).length, 'bytes');
 		
 		res.json(data_json);
 	})
